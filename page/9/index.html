@@ -3,11 +3,20 @@
 
 
 
+
+
+
+
+
+
+
+
+
 <html class="theme-next mist" lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
 <meta name="theme-color" content="#222">
 
 
@@ -18,17 +27,6 @@
 
 
 
-<meta http-equiv="Cache-Control" content="no-transform">
-<meta http-equiv="Cache-Control" content="no-siteapp">
-
-
-
-
-
-
-
-
-
 
 
 
@@ -38,7 +36,7 @@
 
   
   
-  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
 
 
 
@@ -46,27 +44,21 @@
 
 
 
-<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
 
-<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
-
-
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
 
 
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
 
 
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
 
 
-  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
 
 
-
-
-
-  <meta name="keywords" content="Hexo, NexT">
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
 
 
 
@@ -74,33 +66,20 @@
 
 
 
-
-
-
-<meta property="og:type" content="website">
-<meta property="og:title" content="Shane&#39;s Blog">
-<meta property="og:url" content="http://BillyStudio.github.io/page/9/index.html">
-<meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:locale" content="en">
-<meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Shane&#39;s Blog">
-
-
-
-<script type="text/javascript" id="hexo.configurations">
+<script id="hexo.configurations">
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
     scheme: 'Mist',
-    version: '5.1.4',
+    version: '7.2.0',
     sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    back2top: ,
+    back2top_sidebar: ,
     fancybox: true,
+    fastclick: ,
+    lazyload: ,
     tabs: true,
     motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
-    duoshuo: {
-      userId: '0',
-      author: 'Author'
-    },
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -112,14 +91,36 @@
 </script>
 
 
+  
 
+
+
+
+  <meta property="og:type" content="website">
+<meta property="og:title" content="Shane&#39;s Blog">
+<meta property="og:url" content="http://BillyStudio.github.io/page/9/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:locale" content="en">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shane&#39;s Blog">
+
+
+
+
+
+  
+  
   <link rel="canonical" href="http://BillyStudio.github.io/page/9/">
 
 
 
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
 
-
-  <title>Shane's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  <title>Shane's Blog</title>
   
 
 
@@ -128,6 +129,35 @@
 
 
 
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
 
 </head>
 
@@ -144,7 +174,7 @@
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
-  <div class="site-meta ">
+  <div class="site-meta">
     
 
     <div class="custom-logo-site-title">
@@ -154,13 +184,12 @@
         <span class="logo-line-after"><i></i></span>
       </a>
     </div>
-      
-        <p class="site-subtitle"></p>
-      
+    
+    
   </div>
 
   <div class="site-nav-toggle">
-    <button>
+    <button aria-label="Toggle navigation bar">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -168,55 +197,77 @@
   </div>
 </div>
 
-<nav class="site-nav">
-  
 
+
+<nav class="site-nav">
   
     <ul id="menu" class="menu">
       
         
-        <li class="menu-item menu-item-home">
-          <a href="/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Home
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-about">
-          <a href="/about/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
-            
-            About
-          </a>
-        </li>
-      
         
-        <li class="menu-item menu-item-tags">
-          <a href="/tags/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Tags
-          </a>
-        </li>
-      
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+
+    
+
+    <a href="/" rel="section">Home</a>
+
+  </li>
         
-        <li class="menu-item menu-item-categories">
-          <a href="/categories/" rel="section">
-            
-              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
-            
-            Categories
-          </a>
-        </li>
-      
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+
+    
+
+    <a href="/about/" rel="section">About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+
+    
+
+    <a href="/tags/" rel="section">Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+
+    
+
+    <a href="/categories/" rel="section">Categories</a>
+
+  </li>
 
       
+      
     </ul>
+  
+
+  
+    
+
   
 
   
@@ -224,12 +275,20 @@
 
 
 
- </div>
+  
+
+
+
+</div>
     </header>
+
+    
+
 
     <main id="main" class="main">
       <div class="main-inner">
         <div class="content-wrap">
+          
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
@@ -240,6 +299,8 @@
 
   
   
+  
+
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -266,32 +327,43 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/31/2018-05-31-golang-map-usage/" itemprop="url">Go语言map数据类型使用注意</a></h1>
+                
+                <a href="/2018/05/31/2018-05-31-golang-map-usage/" class="post-title-link" itemprop="url">Go语言map数据类型使用注意</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-            
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-31T22:44:08+08:00">
-                2018-05-31
-              </time>
-            
 
-            
+              
+                
+              
 
-            
-          </span>
+              <time title="Created: 2018-05-31 22:44:08" itemprop="dateCreated datePublished" datetime="2018-05-31T22:44:08+08:00">2018-05-31</time>
+            </span>
+          
+
+          
 
           
 
           
             
+            
           
 
           
@@ -299,6 +371,25 @@
 
           
 
+          
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+              <span title="Symbols count in article"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+              <span title="Reading time"></span>
+            </span>
           
 
           
@@ -324,12 +415,18 @@
         
       
     </div>
+
+    
+
     
     
     
 
     
 
+    
+      
+    
     
 
     
@@ -360,6 +457,8 @@
 
   
   
+  
+
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -386,32 +485,43 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/29/golang-android-api-server/" itemprop="url">使用go语言框架Beego搭建安卓API服务</a></h1>
+                
+                <a href="/2018/05/29/golang-android-api-server/" class="post-title-link" itemprop="url">使用go语言框架Beego搭建安卓API服务</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-            
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-29T15:45:49+08:00">
-                2018-05-29
-              </time>
-            
 
-            
+              
+                
+              
 
-            
-          </span>
+              <time title="Created: 2018-05-29 15:45:49" itemprop="dateCreated datePublished" datetime="2018-05-29T15:45:49+08:00">2018-05-29</time>
+            </span>
+          
+
+          
 
           
 
           
             
+            
           
 
           
@@ -419,6 +529,25 @@
 
           
 
+          
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+              <span title="Symbols count in article"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+              <span title="Reading time"></span>
+            </span>
           
 
           
@@ -439,21 +568,23 @@
         
           <p>先在本地配置好，然后部署到服务器上。不过这里有个前提，就是服务器端和本地的环境配置都相同，这里包括数据库的用户名和密码应该相同，应该有相同的建表语句。
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/29/golang-android-api-server/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
     </p></div>
+
+    
+
     
     
     
 
     
 
+    
+      
+    
     
 
     
@@ -484,6 +615,8 @@
 
   
   
+  
+
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -510,32 +643,43 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/29/heap-overflow/" itemprop="url">heap-overflow</a></h1>
+                
+                <a href="/2018/05/29/heap-overflow/" class="post-title-link" itemprop="url">heap-overflow</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-            
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-29T13:55:33+08:00">
-                2018-05-29
-              </time>
-            
 
-            
+              
+                
+              
 
-            
-          </span>
+              <time title="Created: 2018-05-29 13:55:33" itemprop="dateCreated datePublished" datetime="2018-05-29T13:55:33+08:00">2018-05-29</time>
+            </span>
+          
+
+          
 
           
 
           
             
+            
           
 
           
@@ -543,6 +687,25 @@
 
           
 
+          
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+              <span title="Symbols count in article"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+              <span title="Reading time"></span>
+            </span>
           
 
           
@@ -563,21 +726,23 @@
         
           <p>new和malloc都是分配地址，不同的是new分配在堆中能改变缓冲区大小，malloc不能改变缓冲区，分配在栈中。<br>
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/29/heap-overflow/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
     </p></div>
+
+    
+
     
     
     
 
     
 
+    
+      
+    
     
 
     
@@ -608,6 +773,8 @@
 
   
   
+  
+
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -634,33 +801,40 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/23/2018-05-30-generate-reverberation-using-MATLAB-or-Python/" itemprop="url">Computer emulation of reverberation using MATLAB or Python</a></h1>
+                
+                <a href="/2018/05/23/2018-05-30-generate-reverberation-using-MATLAB-or-Python/" class="post-title-link" itemprop="url">Computer emulation of reverberation using MATLAB or Python</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-            
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-23T13:28:53+08:00">
-                2018-05-23
-              </time>
-            
 
-            
+              
+                
+              
 
-            
-          </span>
+              <time title="Created: 2018-05-23 13:28:53" itemprop="dateCreated datePublished" datetime="2018-05-23T13:28:53+08:00">2018-05-23</time>
+            </span>
+          
 
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
+
+          
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
@@ -668,11 +842,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/音频处理/" itemprop="url" rel="index">
-                    <span itemprop="name">音频处理</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/音频处理/" itemprop="url" rel="index"><span itemprop="name">音频处理</span></a></span>
 
                 
                 
@@ -682,6 +852,7 @@
 
           
             
+            
           
 
           
@@ -689,6 +860,25 @@
 
           
 
+          
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+              <span title="Symbols count in article"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+              <span title="Reading time"></span>
+            </span>
           
 
           
@@ -709,21 +899,23 @@
         
           <p><strong>Abstract:</strong> Reverberation, in psychoacoustics and acoustics, is a persistence of sound after the sound is produced<sup>[1]<sup><a href="#fn_Definition" id="reffn_Definition">Definition</a></sup></sup>. It is a common sense that reverberation in the nature is usually accompanyed with other forms of background noise. In order to academically analyse this phenomenon better, Methods of generating reverberation by computer techniques are explored in this article.
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/23/2018-05-30-generate-reverberation-using-MATLAB-or-Python/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
     </p></div>
+
+    
+
     
     
     
 
     
 
+    
+      
+    
     
 
     
@@ -754,6 +946,8 @@
 
   
   
+  
+
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -780,32 +974,43 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/22/bonc-centos-install/" itemprop="url">BONC虚拟机使用说明</a></h1>
+                
+                <a href="/2018/05/22/bonc-centos-install/" class="post-title-link" itemprop="url">BONC虚拟机使用说明</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-            
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-22T16:06:01+08:00">
-                2018-05-22
-              </time>
-            
 
-            
+              
+                
+              
 
-            
-          </span>
+              <time title="Created: 2018-05-22 16:06:01" itemprop="dateCreated datePublished" datetime="2018-05-22T16:06:01+08:00">2018-05-22</time>
+            </span>
+          
+
+          
 
           
 
           
             
+            
           
 
           
@@ -813,6 +1018,25 @@
 
           
 
+          
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+              <span title="Symbols count in article"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+              <span title="Reading time"></span>
+            </span>
           
 
           
@@ -833,21 +1057,23 @@
         
           <h2 id="一、加载镜像文件"><a href="#一、加载镜像文件" class="headerlink" title="一、加载镜像文件"></a>一、加载镜像文件</h2><p>学员在收到镜像文件之后，需要通过VMware Workstation创建虚拟机加载该镜像：<br>
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/22/bonc-centos-install/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
     </p></div>
+
+    
+
     
     
     
 
     
 
+    
+      
+    
     
 
     
@@ -878,6 +1104,8 @@
 
   
   
+  
+
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -904,32 +1132,43 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/21/matlab-conjugate-transpose/" itemprop="url">Algebra | 共轭转置与 Hermite 矩阵</a></h1>
+                
+                <a href="/2018/05/21/matlab-conjugate-transpose/" class="post-title-link" itemprop="url">Algebra | 共轭转置与 Hermite 矩阵</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-            
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-21T11:47:24+08:00">
-                2018-05-21
-              </time>
-            
 
-            
+              
+                
+              
 
-            
-          </span>
+              <time title="Created: 2018-05-21 11:47:24" itemprop="dateCreated datePublished" datetime="2018-05-21T11:47:24+08:00">2018-05-21</time>
+            </span>
+          
+
+          
 
           
 
           
             
+            
           
 
           
@@ -937,6 +1176,25 @@
 
           
 
+          
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+              <span title="Symbols count in article"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+              <span title="Reading time"></span>
+            </span>
           
 
           
@@ -957,21 +1215,23 @@
         
           <p>介绍代数中共轭转置和 Hermite 矩阵以及在 Python 和 MATLAB 中的函数.
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/21/matlab-conjugate-transpose/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
     </p></div>
+
+    
+
     
     
     
 
     
 
+    
+      
+    
     
 
     
@@ -1002,6 +1262,8 @@
 
   
   
+  
+
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -1028,32 +1290,43 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/20/config-after-install-ubuntu-18/" itemprop="url">WSL installation and configuration for Deep Learning</a></h1>
+                
+                <a href="/2018/05/20/config-after-install-ubuntu-18/" class="post-title-link" itemprop="url">WSL installation and configuration for Deep Learning</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-            
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-20T18:53:47+08:00">
-                2018-05-20
-              </time>
-            
 
-            
+              
+                
+              
 
-            
-          </span>
+              <time title="Created: 2018-05-20 18:53:47" itemprop="dateCreated datePublished" datetime="2018-05-20T18:53:47+08:00">2018-05-20</time>
+            </span>
+          
+
+          
 
           
 
           
             
+            
           
 
           
@@ -1061,6 +1334,25 @@
 
           
 
+          
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+              <span title="Symbols count in article"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+              <span title="Reading time"></span>
+            </span>
           
 
           
@@ -1081,21 +1373,23 @@
         
           <p>Take Ubuntu as an example.
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/20/config-after-install-ubuntu-18/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
     </p></div>
+
+    
+
     
     
     
 
     
 
+    
+      
+    
     
 
     
@@ -1126,6 +1420,8 @@
 
   
   
+  
+
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -1152,32 +1448,43 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/18/proof-det-block-triangular-matrix/" itemprop="url">线代启示录 | 关于分块上下三角矩阵一个性质的证明</a></h1>
+                
+                <a href="/2018/05/18/proof-det-block-triangular-matrix/" class="post-title-link" itemprop="url">线代启示录 | 关于分块上下三角矩阵一个性质的证明</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-            
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-18T17:01:29+08:00">
-                2018-05-18
-              </time>
-            
 
-            
+              
+                
+              
 
-            
-          </span>
+              <time title="Created: 2018-05-18 17:01:29" itemprop="dateCreated datePublished" datetime="2018-05-18T17:01:29+08:00">2018-05-18</time>
+            </span>
+          
+
+          
 
           
 
           
             
+            
           
 
           
@@ -1185,6 +1492,25 @@
 
           
 
+          
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+              <span title="Symbols count in article"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+              <span title="Reading time"></span>
+            </span>
           
 
           
@@ -1205,21 +1531,23 @@
         
           <p>今天在论文中看到一句话，“the determinant of a block triangular matrix is given by the product of the determinants of the diagonal submatrices”，翻译过来就是“分块上下三角矩阵的行列式等于对角线子矩阵行列式的乘积”。<br>
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/18/proof-det-block-triangular-matrix/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
     </p></div>
+
+    
+
     
     
     
 
     
 
+    
+      
+    
     
 
     
@@ -1250,6 +1578,8 @@
 
   
   
+  
+
   
 
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
@@ -1276,33 +1606,40 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/16/Command-of-the-day-May-sixteenth-2018/" itemprop="url">Linux built-in command</a></h1>
+                
+                <a href="/2018/05/16/Command-of-the-day-May-sixteenth-2018/" class="post-title-link" itemprop="url">Linux built-in command</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-            
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-16T17:02:38+08:00">
-                2018-05-16
-              </time>
-            
 
-            
+              
+                
+              
 
-            
-          </span>
+              <time title="Created: 2018-05-16 17:02:38" itemprop="dateCreated datePublished" datetime="2018-05-16T17:02:38+08:00">2018-05-16</time>
+            </span>
+          
 
           
-            <span class="post-category">
-            
-              <span class="post-meta-divider">|</span>
-            
+
+          
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
               </span>
@@ -1310,11 +1647,7 @@
                 <span class="post-meta-item-text">In</span>
               
               
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Linux-shell/" itemprop="url" rel="index">
-                    <span itemprop="name">Linux shell</span>
-                  </a>
-                </span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux-shell/" itemprop="url" rel="index"><span itemprop="name">Linux shell</span></a></span>
 
                 
                 
@@ -1324,6 +1657,7 @@
 
           
             
+            
           
 
           
@@ -1331,6 +1665,25 @@
 
           
 
+          
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+              <span title="Symbols count in article"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+              <span title="Reading time"></span>
+            </span>
           
 
           
@@ -1351,21 +1704,23 @@
         
           <p>This article will list dozens of common linux commands that run on most of the Linux distributions.
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/16/Command-of-the-day-May-sixteenth-2018/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
     </p></div>
+
+    
+
     
     
     
 
     
 
+    
+      
+    
     
 
     
@@ -1398,6 +1753,8 @@
   
   
 
+  
+
   <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
   
   
@@ -1422,32 +1779,43 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/05/14/MATLAB2017-mex/" itemprop="url">MATLAB2017a 与 VS2017 mex交叉编译</a></h1>
+                
+                <a href="/2018/05/14/MATLAB2017-mex/" class="post-title-link" itemprop="url">MATLAB2017a 与 VS2017 mex交叉编译</a>
+              
+            
+          </h1>
         
 
         <div class="post-meta">
-          <span class="post-time">
-            
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-calendar-o"></i>
               </span>
               
                 <span class="post-meta-item-text">Posted on</span>
               
-              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-05-14T15:18:35+08:00">
-                2018-05-14
-              </time>
-            
 
-            
+              
+                
+              
 
-            
-          </span>
+              <time title="Created: 2018-05-14 15:18:35" itemprop="dateCreated datePublished" datetime="2018-05-14T15:18:35+08:00">2018-05-14</time>
+            </span>
+          
+
+          
 
           
 
           
             
+            
           
 
           
@@ -1455,6 +1823,25 @@
 
           
 
+          
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+              <span title="Symbols count in article"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+              <span title="Reading time"></span>
+            </span>
           
 
           
@@ -1475,21 +1862,23 @@
         
           <p>很多时候MATLAB需要调用其他语言编写的程序，这就是mex交叉编译。<br>
           <!--noindex-->
-          <div class="post-button text-center">
-            <a class="btn" href="/2018/05/14/MATLAB2017-mex/#more" rel="contents">
-              Read more &raquo;
-            </a>
-          </div>
+          
           <!--/noindex-->
         
       
     </p></div>
+
+    
+
     
     
     
 
     
 
+    
+      
+    
     
 
     
@@ -1518,15 +1907,12 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right" aria-label="Next page"></i></a>
   </nav>
 
 
 
           </div>
-          
-
-
           
 
         </div>
@@ -1542,57 +1928,25 @@
   </div>
 
   <aside id="sidebar" class="sidebar">
-    
     <div class="sidebar-inner">
 
       
 
       
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
               <p class="site-author-name" itemprop="name">Shane Wang</p>
-              <p class="site-description motion-element" itemprop="description"></p>
+              <div class="site-description motion-element" itemprop="description"></div>
           </div>
 
-          <nav class="site-state motion-element">
+          
 
-            
-              <div class="site-state-item site-state-posts">
-              
-                <a href="/archives">
-              
-                  <span class="site-state-item-count">91</span>
-                  <span class="site-state-item-name">posts</span>
-                </a>
-              </div>
-            
+          
 
-            
-              
-              
-              <div class="site-state-item site-state-categories">
-                <a href="/categories/index.html">
-                  <span class="site-state-item-count">3</span>
-                  <span class="site-state-item-name">categories</span>
-                </a>
-              </div>
-            
-
-            
-              
-              
-              <div class="site-state-item site-state-tags">
-                <a href="/tags/index.html">
-                  <span class="site-state-item-count">98</span>
-                  <span class="site-state-item-name">tags</span>
-                </a>
-              </div>
-            
-
-          </nav>
+          
 
           
 
@@ -1602,12 +1956,12 @@
           
 
           
+            
           
-
           
 
         </div>
-      </section>
+      </div>
 
       
 
@@ -1615,6 +1969,7 @@
 
     </div>
   </aside>
+  
 
 
         
@@ -1624,29 +1979,42 @@
     <footer id="footer" class="footer">
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
-  <span class="with-love">
-    <i class="fa fa-user"></i>
+  <span class="with-love" id="animate">
+    <i class="fa fa-"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Shane Wang</span>
 
   
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total"></span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total"></span>
+  
 </div>
 
 
-  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
 
 
 
-  <span class="post-meta-divider">|</span>
 
-
-
-  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.2.0</div>
 
 
 
 
         
+
 
 
 
@@ -1659,19 +2027,17 @@
     </footer>
 
     
-      <div class="back-to-top">
-        <i class="fa fa-arrow-up"></i>
-        
-      </div>
-    
 
     
 
+    
+
+    
   </div>
 
   
 
-<script type="text/javascript">
+<script>
   if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
     window.Promise = null;
   }
@@ -1685,88 +2051,6 @@
 
 
 
-  
-
-
-
-
-
-
-
-
-
-
-
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-
-  
-
-
-  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
-
-  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
-
-
-
-  
-  
-
-  
-
-  
-
-
-  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
-
-
-
-  
-
-
-  
-
-
-
-
-	
-
-
-
-
-
-  
-
-
 
 
 
@@ -1783,42 +2067,46 @@
 
 
 
-  
-
-
 
 
 
   
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
+
+
+  
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
 
   
 
   
 
-  
-  
 
-  
-  
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-        tex2jax: {
-          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
-          processEscapes: true,
-          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-        }
-      });
-    </script>
-
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Queue(function() {
-        var all = MathJax.Hub.getAllJax(), i;
-        for (i=0; i < all.length; i += 1) {
-          all[i].SourceElement().parentNode.className += ' has-jax';
-        }
-      });
-    </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  <script src="/js/next-boot.js?v=7.2.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -1836,8 +2124,46 @@
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
+
+
   
 
+  
+
+  
+
+  
+
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
 
   
 
