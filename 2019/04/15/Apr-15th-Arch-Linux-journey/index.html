@@ -1,0 +1,793 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux,Arch Linux,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="I have long heard about the fame and reputation of Arch Linux. But not until after I have commenced to explore on this distro did I really feel the enjoyness that Linux brings to me.">
+<meta name="keywords" content="Linux,Arch Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Arch Linux journey">
+<meta property="og:url" content="http://BillyStudio.github.io/2019/04/15/Apr-15th-Arch-Linux-journey/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="I have long heard about the fame and reputation of Arch Linux. But not until after I have commenced to explore on this distro did I really feel the enjoyness that Linux brings to me.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://billystudio.github.io/2019/04/15/Apr-15th-Arch-Linux-journey/select_to_clipboard.png">
+<meta property="og:updated_time" content="2019-07-07T00:50:38.611Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Arch Linux journey">
+<meta name="twitter:description" content="I have long heard about the fame and reputation of Arch Linux. But not until after I have commenced to explore on this distro did I really feel the enjoyness that Linux brings to me.">
+<meta name="twitter:image" content="http://billystudio.github.io/2019/04/15/Apr-15th-Arch-Linux-journey/select_to_clipboard.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://BillyStudio.github.io/2019/04/15/Apr-15th-Arch-Linux-journey/">
+
+
+
+
+
+  <title>Arch Linux journey | Shane's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shane's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2019/04/15/Apr-15th-Arch-Linux-journey/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shane Wang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shane's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Arch Linux journey</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2019-04-15T00:15:15+08:00">
+                2019-04-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>I have long heard about the fame and reputation of Arch Linux. But not until after I have commenced to explore on this distro did I really feel the enjoyness that Linux brings to me. <a id="more"></a></p>
+<p>This article mainly aims to record the problems that I faced during my hunting journey as well as the solutions that are suitable to solve them. It is not going to just drop down every step that I followed, neither will it explains every concept and mechanism lying in those procedures, commands and scripts. Because the more detailed and thorough explanations can be easily found on ArchWiki and Web. What this article tries to do is to strip down my thoughts and to help to improve my and the readers’ understanding of Arch, of Linux, and hopefully, of Operating Systems. I just hope what I have written here would save my time if I face the similar problems again and help more people to save our precious time.</p>
+<h1 id="Preparation"><a href="#Preparation" class="headerlink" title="Preparation"></a>Preparation</h1><p>The preparation process for those who ever installed some other Linux distribution versions is a comparatively easy job which may cause less problems. Note that UltraISO is not suggested for write Arch Linux installation image.</p>
+<h2 id="Installation-media"><a href="#Installation-media" class="headerlink" title="Installation media"></a>Installation media</h2><h3 id="How-can-I-write-image-into-flash-disk"><a href="#How-can-I-write-image-into-flash-disk" class="headerlink" title="How can I write image into flash disk?"></a>How can I write image into flash disk?</h3><p>After writing, you cannot find it by Windows or Linux file system. Keeping this in mind, don’t be worry.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd bs=4M if=Downloads/archlinux-2019.06.01-x86_64.iso of=/dev/sdx status=progress oflag=sync</span><br></pre></td></tr></table></figure>
+<h2 id="Network-support"><a href="#Network-support" class="headerlink" title="Network support"></a>Network support</h2><h3 id="How-do-I-maintain-the-network-connection-which-requires-webpage-user-login-for-example-a-campus-net-environment"><a href="#How-do-I-maintain-the-network-connection-which-requires-webpage-user-login-for-example-a-campus-net-environment" class="headerlink" title="How do I maintain the network connection which requires webpage user login for example a campus-net environment?"></a>How do I maintain the network connection which requires webpage user login for example a campus-net environment?</h3><p>In this case, a hotspot generated by your cellphone mobile data is recommended, even though it is a little slow without a proxy.</p>
+<h1 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">gdisk -l /dev/sda</span><br><span class="line">gdisk /dev/sda # swap</span><br><span class="line">fdisk -l</span><br><span class="line">mkswap -L &quot;Linux Swap&quot; /dev/sda3</span><br><span class="line">swapon /dev/sda3</span><br><span class="line">free -m # Verify if swap is turned on</span><br><span class="line">mkfs.ext4 -L &quot;Arch Linux&quot; /dev/sda2</span><br><span class="line"></span><br><span class="line">ip link set wlp2s0 up</span><br><span class="line">wifi-menu</span><br><span class="line">iw dev wlp2s0 link</span><br><span class="line">pacstrap /mnt base base-devel gnome</span><br><span class="line"></span><br><span class="line">mkdir -p /mnt/boot/efi</span><br><span class="line">mount /dev/sda1 /mnt/boot/efi</span><br><span class="line">genfstab -p /mnt &gt;&gt; /mnt/etc/fstab</span><br><span class="line">arch-chroot /mnt</span><br><span class="line">passwd root # hahaha</span><br><span class="line">ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">mkinitcpio -p linux</span><br><span class="line">sudo pacman -Syu grub efibootmgr</span><br><span class="line">mkdir /boot/grub</span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br><span class="line">grub-install /dev/sda</span><br><span class="line">ls -l /boot/efi/EFI/arch</span><br><span class="line">pacman -Syu gnome-desktop</span><br><span class="line">useradd -G wheel -s /bin/bash -m -c &quot;Shane&quot; shane</span><br><span class="line">passwd shane # 190701</span><br><span class="line">pacman -Syu xterm vim</span><br><span class="line">pacman -Syu gdm</span><br><span class="line">systemctl enable gdm</span><br><span class="line">exit</span><br><span class="line">umount -R /mnt</span><br></pre></td></tr></table></figure>
+<p>The installtion mainly consists of serveral parts. They are partitioning and formatting, installing new systems, finally change from live image system to the newly installed systems and do later configurating.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sda2 /mnt</span><br><span class="line">arch-chroot /mnt</span><br><span class="line">pacman -Syu networkmanager</span><br><span class="line">exit</span><br><span class="line">umount -R /mnt</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/sda2 /mnt</span><br><span class="line">arch-chroot /mnt</span><br><span class="line">pacman -Syu iw dialog wpa_supplicant</span><br><span class="line">exit</span><br><span class="line">umount -R /mnt</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start NetworkManager</span><br></pre></td></tr></table></figure>
+<h2 id="Why-I-cannot-find-the-disk-file-system-when-using-fdisk-l"><a href="#Why-I-cannot-find-the-disk-file-system-when-using-fdisk-l" class="headerlink" title="Why I cannot find the disk file system when using fdisk -l"></a>Why I cannot find the disk file system when using <code>fdisk -l</code></h2><p>Analyse: I face this problem because I am using Dell XPS-13 with SDD. I should go into BIOS setup and change the integrated SATA hard drive controller from ‘RAID ON’ to ‘AHCI’. After that, reboot windows using diagonotics.</p>
+<h2 id="The-wireless-network-support-for-live-system-and-newly-installed-system"><a href="#The-wireless-network-support-for-live-system-and-newly-installed-system" class="headerlink" title="The wireless network support for live system and newly-installed system?"></a>The wireless network support for live system and newly-installed system?</h2><p>I didn’t choose to install Arch Linux last month because the installation process requires network connection and at that time, I only had campus Wi-Fi. But campus Wi-Fi needs username and passwords to get Internet access, which is not supported by command-line Live system. I also didn’t have much data usage so I cannot open hotspot. For a cellphone, it have only one wireless card, so it cannot functioned as both the Wi-Fi user and the hotspot at the same time. And this month I changed my operating service providers so I can use hotspot for my computer now. If using a hotspot from cellphone, don’t be afraid if cannot use <code>ping</code> command.</p>
+<p>At my first installation, I just run <code>pacstrap /mnt base</code> learned from the video, which causes me having no internet connection later. Actually, this video is strongly recommended and I will pick some discrepencies later. <a href="https://www.bilibili.com/video/av5462824/?redirectFrom=h5" target="_blank" rel="noopener">https://www.bilibili.com/video/av5462824/?redirectFrom=h5</a></p>
+<p><code>pacstrap /mnt base base-devel wireless_tools</code><br>For gnome users, networkmanager is recommended, install it by <code>pacman -Syu networkmanager</code> and reboot to see the effects. If I want to use <code>wifi-menu</code> to setup network, I should <code>pacman -Syu iw dialog wpa_supplicant</code>. Don’t worry if one or some packages were lost during the installation process. If that could happen, just reboot go back to live system and install and chroot to newly-installed system.</p>
+<h3 id="Restore-the-flash-USB-after-installing-process"><a href="#Restore-the-flash-USB-after-installing-process" class="headerlink" title="Restore the flash USB after installing process"></a>Restore the flash USB after installing process</h3><h1 id="Dual-systems"><a href="#Dual-systems" class="headerlink" title="Dual systems"></a>Dual systems</h1><p>grub to replace windows EFI starter</p>
+<h3 id="how-can-I-get-write-access-to-Windows-NTFS-filesystem"><a href="#how-can-I-get-write-access-to-Windows-NTFS-filesystem" class="headerlink" title="how can I get write access to Windows NTFS filesystem?"></a>how can I get write access to Windows NTFS filesystem?</h3><p>Install the open source version of NTFS, i.e., <code>ntfs-3g</code>.<br>The proper way is to create a /mnt/win10 folder that is owned by your current user.<br>And then write the configuration in /etc/fstab like<br><code>UUID=FED8CDDDD8CD93F5   mnt/win10       ntfs-3g         defaults        0      0</code><br>UUID can be found by <code>blkid</code> of root.</p>
+<h2 id="Q-why-the-times-are-incompatible"><a href="#Q-why-the-times-are-incompatible" class="headerlink" title="Q: why the times are incompatible?"></a>Q: why the times are incompatible?</h2><p>Because windows just take the machine time as the time of current timezone. But Linux defaultly take it as UTC+0, and change to current timezone.</p>
+<h2 id="S"><a href="#S" class="headerlink" title="S"></a>S</h2><p>Considering that modifying Windows settings is more complex, we change Linux settings by take machine time as the time of current timezone.</p>
+<h3 id="If-I-don’t-use-Windows-OS-for-a-while-it-will-go-into-Hibernate-Mode-And-when-I-open-again-boot-defaultly-enter-Arch-Linux-Then-I-cannot-edit-files-under-Windows-filesystem-because-they-are-in-read-only-state-How-can-I-prevent-this-situation"><a href="#If-I-don’t-use-Windows-OS-for-a-while-it-will-go-into-Hibernate-Mode-And-when-I-open-again-boot-defaultly-enter-Arch-Linux-Then-I-cannot-edit-files-under-Windows-filesystem-because-they-are-in-read-only-state-How-can-I-prevent-this-situation" class="headerlink" title="If I don’t use Windows OS for a while, it will go into Hibernate Mode. And when I open again, boot defaultly enter Arch Linux. Then I cannot edit files under Windows filesystem because they are in read-only state. How can I prevent this situation?"></a>If I don’t use Windows OS for a while, it will go into Hibernate Mode. And when I open again, boot defaultly enter Arch Linux. Then I cannot edit files under Windows filesystem because they are in read-only state. How can I prevent this situation?</h3><p>In Sleep Mode, the system won’t restart. So you need to change the power settings in control panel. Just go to advanced setting &gt; Hibernate after this time &gt; Never.<br>I think that will be fine.</p>
+<h1 id="Sharpening"><a href="#Sharpening" class="headerlink" title="Sharpening"></a>Sharpening</h1><h2 id="Q-setttings-of-desktop-environment"><a href="#Q-setttings-of-desktop-environment" class="headerlink" title="Q: setttings of desktop environment?"></a>Q: setttings of desktop environment?</h2><p>For gnome, there are sereral things to install.<br>gnome-desktop<br>gdm<br>gnome-settings<br>gnome-tweak-tool<br>gnome-extensions-shell</p>
+<p>Or simply <code>pacstrap /mnt gnome</code></p>
+<h2 id="International-language-support"><a href="#International-language-support" class="headerlink" title="International language support"></a>International language support</h2><p>set locale<br>install new fonts</p>
+<h2 id="Printer-service"><a href="#Printer-service" class="headerlink" title="Printer service"></a>Printer service</h2><h3 id="How-can-I-print-through-the-network-HP-printer"><a href="#How-can-I-print-through-the-network-HP-printer" class="headerlink" title="How can I print through the network HP printer?"></a>How can I print through the network HP printer?</h3><ol>
+<li>Install the Linux print service<br><code>pacman -S cups</code><br>In this step, you should check if this service is started after installation. You can type <code>localhost:631</code> to check. If cannot be opened, start the service by<br><code>systemctl enable org.cups.cupsd</code> or <code>/etc/rc.d/cups start</code></li>
+</ol>
+<p>If there is still some problem, try add your current user to <code>lp</code> group<br><code>sudo gpasswd -a [username] lp</code> </p>
+<ol>
+<li><p>Install the HP Linux imaging and printing driver<br><code>pacman -S hplip</code><br>then install hplip-plugin by aur.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone [git addr]</span><br><span class="line">cd hplip-plugin/</span><br><span class="line">makepkg -si</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>Find the IP address of network printer, and run<br><code>sudo hp-setup -i [ip addr]</code></p>
+</li>
+</ol>
+<p>If it needs some authentification, enter username as root and provide root pass.</p>
+<p>If the plugin is not successfully detected by hp-setup program, then follow these steps:<br>Step 1: Go to <a href="https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins" target="_blank" rel="noopener">https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins</a>.<br>Step 2: Download the plugin files (both ‘run’ and ‘run.asc’) for the hplip version that you are using.<br>Step 3: Run hp-setup -g. Choose to specify a path to the plugin and use the path to the ‘run’ file that you downloaded in step 2. It may give you some errors, but install it anyway.<br>Now you should have a working printer <a href="https://bugs.launchpad.net/ubuntu/+source/hplip/+bug/1749690" target="_blank" rel="noopener">hplip_plugin</a>.</p>
+<h2 id="terminal-console"><a href="#terminal-console" class="headerlink" title="terminal console"></a>terminal console</h2><h3 id="grant-sudo-previlige-to-common-user"><a href="#grant-sudo-previlige-to-common-user" class="headerlink" title="grant sudo previlige to common user"></a>grant sudo previlige to common user</h3><p>Install <code>sudo</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/sudoers /etc/sudoers.edit</span><br><span class="line">visudo /etc/sudoers.edit</span><br></pre></td></tr></table></figure></p>
+<p>The file should be opened by default text editor. Mine is vim. Then uncomment the specification for <code>wheel</code> group because my user is already in <code>wheel</code> group.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">visudo -c -f /etc/sudoers.edit # check</span><br><span class="line">mv /etc/sudoers.edit /etc/sudoers</span><br></pre></td></tr></table></figure></p>
+<h3 id="Q-change-the-fonts-of-xterm"><a href="#Q-change-the-fonts-of-xterm" class="headerlink" title="Q: change the fonts of xterm"></a>Q: change the fonts of xterm</h3><p>create a file <code>~/.Xresources</code>, write the wildcard-form settings in it:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xterm*faceName: Source Code Pro</span><br><span class="line">xterm*faceSize: 12</span><br><span class="line">xterm*renderFont: true</span><br></pre></td></tr></table></figure></p>
+<p>Then add <code>[[ -f ~/.Xresources ]] &amp;&amp; xrdb -merge ~/.Xresources</code> to the file <code>~/.xprofile</code>. For the X-org based GNOME environment, it is ok now. But for the default GNOME 3 wayland based desktop environment, since it didn’t initialize and X11 configurations, we should use other ways for autostarting ‘.xprofile’.</p>
+<p>I found a way equivelent to audo starting every time logging in that is using xdg autostart files. After installing <code>xdg-user-dirs</code> I write a .desktop file under ‘~/.config/autostart/‘.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Type=Application</span><br><span class="line">Name=XTerm settings under wayland</span><br><span class="line">NoDisplay=true</span><br><span class="line">Exec=/home/shane/.xprofile</span><br></pre></td></tr></table></figure></p>
+<p>Note that the Exec item should be a fullpath filename and the relevant files including <code>.xprofile</code> are granted as user excutable permision(+x).</p>
+<h3 id="How-can-I-copy-and-paste-from-xterm"><a href="#How-can-I-copy-and-paste-from-xterm" class="headerlink" title="How can I copy and paste from xterm?"></a>How can I copy and paste from xterm?</h3><p>Since Ctrl+C is interpreted as an interrupting command, I might get confused as first. Actually there are very cool ways to do it because xterm has Ctrl function.</p>
+<p>Before doing it, understanding the concept of ‘PRIMARY’ and ‘CLIPBOARD’. the middle mouse key is served for PRIMARY buffer. If I want to select also for CLIPBOARD, just Ctrl+Mouse Middle Key, and then check ‘selection to clipboard’.</p>
+<p><img src="select_to_clipboard.png" alt="toClipboard"></p>
+<p>Just highlighting will select them for copy, Shift+Insert or using the mouse middle key for paste.</p>
+<h3 id="Add-a-keyboard-shortcut-for-xterm"><a href="#Add-a-keyboard-shortcut-for-xterm" class="headerlink" title="Add a keyboard shortcut for xterm"></a>Add a keyboard shortcut for xterm</h3><p>Set in GNOME control center &gt; Keyboard &gt; Add shortcut &gt; run <code>uxterm</code> by pressing ‘Alt + T’</p>
+<h3 id="GNOME3-How-can-I-automatically-change-the-wallpaers-which-are-selected-from-a-folder"><a href="#GNOME3-How-can-I-automatically-change-the-wallpaers-which-are-selected-from-a-folder" class="headerlink" title="GNOME3: How can I automatically change the wallpaers which are selected from a folder?"></a>GNOME3: How can I automatically change the wallpaers which are selected from a folder?</h3><p>It is not a big problem because the gnome community has offered a large amount of extensions. What you need to do is to find and then use them. Here, the GNOME extension <a href="https://extensions.gnome.org/extension/1225/wallpaper-changer/" target="_blank" rel="noopener">Wallpaper Changer</a> is suggested for you.</p>
+<h2 id="Those-common-used-software"><a href="#Those-common-used-software" class="headerlink" title="Those common-used software?"></a>Those common-used software?</h2><h3 id="pdf-viewer"><a href="#pdf-viewer" class="headerlink" title="pdf viewer"></a>pdf viewer</h3><p>Okular</p>
+<h3 id="Video-player"><a href="#Video-player" class="headerlink" title="Video player"></a>Video player</h3><p>VLC video viewer</p>
+<h3 id="System-monitor"><a href="#System-monitor" class="headerlink" title="System monitor"></a>System monitor</h3><p>gnome-system-monitor</p>
+<h3 id="Screen-cut"><a href="#Screen-cut" class="headerlink" title="Screen cut"></a>Screen cut</h3><p>gnome-screenshot</p>
+<h3 id="Chinese-input-method"><a href="#Chinese-input-method" class="headerlink" title="Chinese input method"></a>Chinese input method</h3><p>fcitx-sogoupinyin</p>
+<h1 id="Understanding"><a href="#Understanding" class="headerlink" title="Understanding"></a>Understanding</h1><h2 id="pacman"><a href="#pacman" class="headerlink" title="pacman"></a>pacman</h2><p>To see what packages belong to the gnome group, run:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Sg gnome</span><br></pre></td></tr></table></figure></p>
+<p>To install a package completely, use<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Rns [package_name]</span><br></pre></td></tr></table></figure></p>
+<p>where <code>-R</code> means remove the package, <code>-n</code> means not saving important configuration files, and <code>-s</code> means removing its dependencies which are note required by any other installed packages.</p>
+<p>Within the firewall, the speed is limited by v4. So I suggest v6. The differences are really distinguishable.</p>
+<ol>
+<li>get a v6 address</li>
+<li>get a v6 vps</li>
+<li><code># export all_proxy=&#39;socks5://127.0.0.1:1080&#39;</code></li>
+<li><code># pacman -Syu</code></li>
+</ol>
+<p>To retrieve a list of the files installed by a package, run:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Ql package_name</span><br></pre></td></tr></table></figure></p>
+<h3 id="Trouble-shooting"><a href="#Trouble-shooting" class="headerlink" title="Trouble shooting"></a>Trouble shooting</h3><blockquote>
+<p>:: Synchronizing package databases…<br>error: failed to update core (unable to lock database)<br>error: failed to update extra (unable to lock database)<br>…<br>error: failed to synchronize all databases</p>
+</blockquote>
+<p>It might because another process is running <code>pacman</code>. Just take a coffee and wait for it ^_-</p>
+<p>References:</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/Arch-Linux/" rel="tag"># Arch Linux</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/04/10/Apr-10th-Python-pickle-package/" rel="next" title="Python pickle package">
+                <i class="fa fa-chevron-left"></i> Python pickle package
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/04/17/Apr-24th-criminal-litigation-as-opposed-to-civil-litigation/" rel="prev" title="刑事诉讼与民事诉讼的区别">
+                刑事诉讼与民事诉讼的区别 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Shane Wang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">91</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">98</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Preparation"><span class="nav-number">1.</span> <span class="nav-text">Preparation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation-media"><span class="nav-number">1.1.</span> <span class="nav-text">Installation media</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-can-I-write-image-into-flash-disk"><span class="nav-number">1.1.1.</span> <span class="nav-text">How can I write image into flash disk?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-support"><span class="nav-number">1.2.</span> <span class="nav-text">Network support</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-do-I-maintain-the-network-connection-which-requires-webpage-user-login-for-example-a-campus-net-environment"><span class="nav-number">1.2.1.</span> <span class="nav-text">How do I maintain the network connection which requires webpage user login for example a campus-net environment?</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Installation"><span class="nav-number">2.</span> <span class="nav-text">Installation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-I-cannot-find-the-disk-file-system-when-using-fdisk-l"><span class="nav-number">2.1.</span> <span class="nav-text">Why I cannot find the disk file system when using fdisk -l</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-wireless-network-support-for-live-system-and-newly-installed-system"><span class="nav-number">2.2.</span> <span class="nav-text">The wireless network support for live system and newly-installed system?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Restore-the-flash-USB-after-installing-process"><span class="nav-number">2.2.1.</span> <span class="nav-text">Restore the flash USB after installing process</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dual-systems"><span class="nav-number">3.</span> <span class="nav-text">Dual systems</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#how-can-I-get-write-access-to-Windows-NTFS-filesystem"><span class="nav-number">3.0.1.</span> <span class="nav-text">how can I get write access to Windows NTFS filesystem?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-why-the-times-are-incompatible"><span class="nav-number">3.1.</span> <span class="nav-text">Q: why the times are incompatible?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S"><span class="nav-number">3.2.</span> <span class="nav-text">S</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#If-I-don’t-use-Windows-OS-for-a-while-it-will-go-into-Hibernate-Mode-And-when-I-open-again-boot-defaultly-enter-Arch-Linux-Then-I-cannot-edit-files-under-Windows-filesystem-because-they-are-in-read-only-state-How-can-I-prevent-this-situation"><span class="nav-number">3.2.1.</span> <span class="nav-text">If I don’t use Windows OS for a while, it will go into Hibernate Mode. And when I open again, boot defaultly enter Arch Linux. Then I cannot edit files under Windows filesystem because they are in read-only state. How can I prevent this situation?</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Sharpening"><span class="nav-number">4.</span> <span class="nav-text">Sharpening</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-setttings-of-desktop-environment"><span class="nav-number">4.1.</span> <span class="nav-text">Q: setttings of desktop environment?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#International-language-support"><span class="nav-number">4.2.</span> <span class="nav-text">International language support</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Printer-service"><span class="nav-number">4.3.</span> <span class="nav-text">Printer service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-can-I-print-through-the-network-HP-printer"><span class="nav-number">4.3.1.</span> <span class="nav-text">How can I print through the network HP printer?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#terminal-console"><span class="nav-number">4.4.</span> <span class="nav-text">terminal console</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#grant-sudo-previlige-to-common-user"><span class="nav-number">4.4.1.</span> <span class="nav-text">grant sudo previlige to common user</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-change-the-fonts-of-xterm"><span class="nav-number">4.4.2.</span> <span class="nav-text">Q: change the fonts of xterm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#How-can-I-copy-and-paste-from-xterm"><span class="nav-number">4.4.3.</span> <span class="nav-text">How can I copy and paste from xterm?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-a-keyboard-shortcut-for-xterm"><span class="nav-number">4.4.4.</span> <span class="nav-text">Add a keyboard shortcut for xterm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GNOME3-How-can-I-automatically-change-the-wallpaers-which-are-selected-from-a-folder"><span class="nav-number">4.4.5.</span> <span class="nav-text">GNOME3: How can I automatically change the wallpaers which are selected from a folder?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Those-common-used-software"><span class="nav-number">4.5.</span> <span class="nav-text">Those common-used software?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pdf-viewer"><span class="nav-number">4.5.1.</span> <span class="nav-text">pdf viewer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Video-player"><span class="nav-number">4.5.2.</span> <span class="nav-text">Video player</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#System-monitor"><span class="nav-number">4.5.3.</span> <span class="nav-text">System monitor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Screen-cut"><span class="nav-number">4.5.4.</span> <span class="nav-text">Screen cut</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chinese-input-method"><span class="nav-number">4.5.5.</span> <span class="nav-text">Chinese input method</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Understanding"><span class="nav-number">5.</span> <span class="nav-text">Understanding</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pacman"><span class="nav-number">5.1.</span> <span class="nav-text">pacman</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Trouble-shooting"><span class="nav-number">5.1.1.</span> <span class="nav-text">Trouble shooting</span></a></li></ol></li></ol></li></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shane Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>

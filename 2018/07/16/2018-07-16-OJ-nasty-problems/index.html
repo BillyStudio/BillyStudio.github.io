@@ -1,0 +1,736 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform">
+<meta http-equiv="Cache-Control" content="no-siteapp">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css">
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css">
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="算法,OJ,">
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="在刷算法题的时候, 不仅需要算法正确, 还要注意一些小的坑点, 才能保证程序结果的准确无误.">
+<meta name="keywords" content="算法,OJ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法笔记 —— OJ中的坑题">
+<meta property="og:url" content="http://BillyStudio.github.io/2018/07/16/2018-07-16-OJ-nasty-problems/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="在刷算法题的时候, 不仅需要算法正确, 还要注意一些小的坑点, 才能保证程序结果的准确无误.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://billystudio.github.io/2018/07/16/2018-07-16-OJ-nasty-problems/PAT1038.png">
+<meta property="og:updated_time" content="2019-07-07T00:50:38.608Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法笔记 —— OJ中的坑题">
+<meta name="twitter:description" content="在刷算法题的时候, 不仅需要算法正确, 还要注意一些小的坑点, 才能保证程序结果的准确无误.">
+<meta name="twitter:image" content="http://billystudio.github.io/2018/07/16/2018-07-16-OJ-nasty-problems/PAT1038.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: 'Author'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://BillyStudio.github.io/2018/07/16/2018-07-16-OJ-nasty-problems/">
+
+
+
+
+
+  <title>数据结构与算法笔记 —— OJ中的坑题 | Shane's Blog</title><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shane's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            Home
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br>
+            
+            About
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            Tags
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-question-circle"></i> <br>
+            
+            Categories
+          </a>
+        </li>
+      
+
+      
+    </ul>
+  
+
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2018/07/16/2018-07-16-OJ-nasty-problems/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shane Wang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shane's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构与算法笔记 —— OJ中的坑题</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+              <time title="Post created" itemprop="dateCreated datePublished" datetime="2018-07-16T23:07:25+08:00">
+                2018-07-16
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>在刷算法题的时候, 不仅需要算法正确, 还要注意一些小的坑点, 才能保证程序结果的准确无误. <a id="more"></a></p>
+<h1 id="输入输出类"><a href="#输入输出类" class="headerlink" title="输入输出类"></a>输入输出类</h1><p>这是最容易犯的一类错误.</p>
+<p>比如OJ上面说输入是 a seperate line, 即使在样例输入中的字符串中间没有空格, 也不能保证 OJ 上的例子中字符串中间也是没有空格的. 所以这个时候千万不能用 scanf 读取, 应该用 fgets 或者是 getline.</p>
+<p>例: UVA-10405: <a href="https://vjudge.net/problem/UVA-10405" target="_blank" rel="noopener">https://vjudge.net/problem/UVA-10405</a></p>
+<h1 id="合法数据类"><a href="#合法数据类" class="headerlink" title="合法数据类"></a>合法数据类</h1><p>牛客网上有一道求树的高度的题, 明明说是一棵合法的二叉树, 可是在输入数据中却包含了不合法的多叉树情况. 这是需要忽略三叉之后的情况.</p>
+<p><a href="https://www.nowcoder.com/activity/oj?title=%E6%A0%91%E7%9A%84%E9%AB%98%E5%BA%A6&amp;page=1" target="_blank" rel="noopener">https://www.nowcoder.com/activity/oj?title=%E6%A0%91%E7%9A%84%E9%AB%98%E5%BA%A6&amp;page=1</a></p>
+<h1 id="读题不仔细类"><a href="#读题不仔细类" class="headerlink" title="读题不仔细类"></a>读题不仔细类</h1><p>PAT Advanced 1002: A+B for polynomials</p>
+<p>题目中明确说了NK到N1的指数范围是非负的, 但是我误以为系数a的范围也是非负的. 导致第二个测试点一直过不去… 其实系数的范围可正也可负.</p>
+<h1 id="生活常识类"><a href="#生活常识类" class="headerlink" title="生活常识类"></a>生活常识类</h1><h2 id="排名问题"><a href="#排名问题" class="headerlink" title="排名问题"></a>排名问题</h2><p>PAT Advanced 1012: The Best Rank<br>给A B C三人排名时如果分数 A = B &gt; C, 那么排名为 1,1,3</p>
+<h1 id="题目描述不清类"><a href="#题目描述不清类" class="headerlink" title="题目描述不清类"></a>题目描述不清类</h1><h3 id="PAT-1032-Sharing"><a href="#PAT-1032-Sharing" class="headerlink" title="PAT 1032 Sharing"></a>PAT 1032 Sharing</h3><p>题目中明明说了, The address of a node is a 5-digit positive integer. 可是实际上包含五位全部为 0 的合法地址… 也就是说在判定链表是否结束的时候, 使用 <code>(next &gt; 0)</code> 是不行的, 要用 <code>(next &gt;= 0)</code>. 也许是出题人理解的 positive integer 和我们有点不太一样…</p>
+<h3 id="PAT-1038-Recover-the-Smallest-Number"><a href="#PAT-1038-Recover-the-Smallest-Number" class="headerlink" title="PAT 1038 Recover the Smallest Number"></a>PAT 1038 Recover the Smallest Number</h3><p>题目中说最后结果不能是0, 实际上有0的数据. 我在代码里写了一行测试<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">For(i,N)&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>, segments[i]);</span><br><span class="line">    <span class="keyword">if</span> (atoi(segments[i]) == <span class="number">0</span>) &#123;--i;--N;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (N==<span class="number">0</span>) &#123;<span class="built_in">puts</span>(<span class="string">"0"</span>); <span class="keyword">return</span> <span class="number">1</span>;&#125;</span><br></pre></td></tr></table></figure></p>
+<p>结果果然产生了非零返回… 让我很是气愤.<br><img src="PAT1038.png" alt="Angry"></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/算法/" rel="tag"># 算法</a>
+          
+            <a href="/tags/OJ/" rel="tag"># OJ</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/15/2018-07-15-OOP-note-1/" rel="next" title="面向对象程序设计笔记整理-1">
+                <i class="fa fa-chevron-left"></i> 面向对象程序设计笔记整理-1
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/17/2017-07-17-minimal-spanning-tree/" rel="prev" title="数据结构与算法笔记 —— Kruskal 算法与并查集">
+                数据结构与算法笔记 —— Kruskal 算法与并查集 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Shane Wang</p>
+              <p class="site-description motion-element" itemprop="description"></p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives">
+              
+                  <span class="site-state-item-count">91</span>
+                  <span class="site-state-item-name">posts</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">3</span>
+                  <span class="site-state-item-name">categories</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">98</span>
+                  <span class="site-state-item-name">tags</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+
+          
+
+          
+          
+
+          
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#输入输出类"><span class="nav-number">1.</span> <span class="nav-text">输入输出类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#合法数据类"><span class="nav-number">2.</span> <span class="nav-text">合法数据类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读题不仔细类"><span class="nav-number">3.</span> <span class="nav-text">读题不仔细类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生活常识类"><span class="nav-number">4.</span> <span class="nav-text">生活常识类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#排名问题"><span class="nav-number">4.1.</span> <span class="nav-text">排名问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目描述不清类"><span class="nav-number">5.</span> <span class="nav-text">题目描述不清类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PAT-1032-Sharing"><span class="nav-number">5.0.1.</span> <span class="nav-text">PAT 1032 Sharing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PAT-1038-Recover-the-Smallest-Number"><span class="nav-number">5.0.2.</span> <span class="nav-text">PAT 1038 Recover the Smallest Number</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shane Wang</span>
+
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a class="theme-link" target="_blank" href="https://hexo.io">Hexo</a></div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme &mdash; <a class="theme-link" target="_blank" href="https://github.com/iissnan/hexo-theme-next">NexT.Mist</a> v5.1.4</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+
+  
+
+  
+
+</body>
+</html>
