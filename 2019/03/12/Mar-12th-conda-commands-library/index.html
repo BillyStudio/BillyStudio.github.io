@@ -97,16 +97,16 @@
 
 
   <meta name="description" content="Conda(including both Anaconda and miniconda) is a well-known Python package manager for machine learning. This essay simply compares it with other Python package managers such as pip and apt and then">
-<meta name="keywords" content="Python,Conda,pip">
+<meta name="keywords" content="Python,Conda,pip,apt,pacman">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Conda notes and commands">
+<meta property="og:title" content="Understanding Python package installation from pip or conda or Linux distro package manager">
 <meta property="og:url" content="http://BillyStudio.github.io/2019/03/12/Mar-12th-conda-commands-library/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="Conda(including both Anaconda and miniconda) is a well-known Python package manager for machine learning. This essay simply compares it with other Python package managers such as pip and apt and then">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-07-07T00:50:38.621Z">
+<meta property="og:updated_time" content="2019-07-08T14:09:01.338Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Conda notes and commands">
+<meta name="twitter:title" content="Understanding Python package installation from pip or conda or Linux distro package manager">
 <meta name="twitter:description" content="Conda(including both Anaconda and miniconda) is a well-known Python package manager for machine learning. This essay simply compares it with other Python package managers such as pip and apt and then">
 
 
@@ -125,7 +125,7 @@
   };
 </script>
 
-  <title>Conda notes and commands | Shane's Blog</title>
+  <title>Understanding Python package installation from pip or conda or Linux distro package manager | Shane's Blog</title>
   
 
 
@@ -329,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Conda notes and commands
+          <h1 class="post-title" itemprop="name headline">Understanding Python package installation from pip or conda or Linux distro package manager
 
               
             
@@ -410,8 +410,8 @@
 
       
         <p>Conda(including both Anaconda and miniconda) is a well-known Python package manager for machine learning. This essay simply compares it with other Python package managers such as pip and apt and then takes down some frequently-used conda commands that might not be directly found on the main tutorials.<br>Both pip and conda have a good mechanism for installing and upgrading the packages and their indepences, and also vitual running environment like virtualenv and conda env.<br>I make the preference because conda not only includes all the python packages, but also some other very useful tools that Python uses. Besides, it has no need for the access of super-user privilege.</p>
-<h1 id="conda-install-pip-install-and-sudo-apt-install"><a href="#conda-install-pip-install-and-sudo-apt-install" class="headerlink" title="conda install, pip install and sudo apt install"></a>conda install, pip install and sudo apt install</h1><p>Generally speaking, conda is superber than pip and ‘apt install’ is used for installing python packages for the system because sometimes there are system programs that are based on Python.</p>
-<p>To activate this environment(<code>myenv</code> for example), use:</p>
+<h1 id="conda-install-pip-install-and-sudo-install"><a href="#conda-install-pip-install-and-sudo-install" class="headerlink" title="conda install, pip install and sudo install"></a>conda install, pip install and sudo install</h1><p>Generally speaking, conda is superber than pip and ‘apt install’(apt is for Ubuntu, pacman is for Arch Linux, yum is for CentOS…). <code>apt install</code> is used for installing python packages for the system because sometimes there are system programs that are based on Python. When in a virtual Python environment, you can use <code>pip</code> of this virtual environment to install packages of specific versions independent from those of the OS. Especially in conda virtual environment, both <code>pip</code> and <code>conda</code> are ok. In general, <code>pip</code> is for simple packages or packages that cannot be found in conda. <code>conda install</code> is more ‘intelligent’ because it detects conflicts and removing or upgrading other packages when installing.</p>
+<h1 id="Conda-basic-commands"><a href="#Conda-basic-commands" class="headerlink" title="Conda basic commands"></a>Conda basic commands</h1><p>To activate this environment(<code>myenv</code> for example), use:</p>
 <blockquote>
 <p>source activate myenv</p>
 </blockquote>
@@ -451,6 +451,10 @@
             <a href="/tags/Conda/" rel="tag"># Conda</a>
           
             <a href="/tags/pip/" rel="tag"># pip</a>
+          
+            <a href="/tags/apt/" rel="tag"># apt</a>
+          
+            <a href="/tags/pacman/" rel="tag"># pacman</a>
           
         </div>
       
@@ -569,7 +573,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#conda-install-pip-install-and-sudo-apt-install"><span class="nav-number">1.</span> <span class="nav-text">conda install, pip install and sudo apt install</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#conda-install-pip-install-and-sudo-install"><span class="nav-number">1.</span> <span class="nav-text">conda install, pip install and sudo install</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Conda-basic-commands"><span class="nav-number">2.</span> <span class="nav-text">Conda basic commands</span></a></li></ol></div>
             
 
           </div>
