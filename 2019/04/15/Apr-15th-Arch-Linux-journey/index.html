@@ -11,8 +11,10 @@
 
 
 
+  
 
-<html class="theme-next mist" lang="en">
+
+<html class="theme-next muse use-motion" lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,10 +35,6 @@
 
 
 
-
-  
-  
-  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
 
 
 
@@ -70,16 +68,16 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Muse',
     version: '7.2.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    back2top: ,
-    back2top_sidebar: ,
-    fancybox: true,
-    fastclick: ,
-    lazyload: ,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
     tabs: true,
-    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -89,10 +87,6 @@
     }
   };
 </script>
-
-
-  
-
 
 
 
@@ -105,7 +99,7 @@
 <meta property="og:description" content="I have long heard about the fame and reputation of Arch Linux. But not until after I have commenced to explore on this distro did I really feel the enjoyness that Linux brings to me.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://billystudio.github.io/2019/04/15/Apr-15th-Arch-Linux-journey/select_to_clipboard.png">
-<meta property="og:updated_time" content="2019-07-10T09:47:31.422Z">
+<meta property="og:updated_time" content="2019-07-12T08:45:18.216Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Arch Linux journey">
 <meta name="twitter:description" content="I have long heard about the fame and reputation of Arch Linux. But not until after I have commenced to explore on this distro did I really feel the enjoyness that Linux brings to me.">
@@ -175,7 +169,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -217,10 +211,12 @@
 
     
     
+      
+    
 
     
 
-    <a href="/" rel="section">Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
         
@@ -231,10 +227,12 @@
 
     
     
+      
+    
 
     
 
-    <a href="/about/" rel="section">About</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
 
   </li>
         
@@ -245,10 +243,12 @@
 
     
     
+      
+    
 
     
 
-    <a href="/tags/" rel="section">Tags</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
 
   </li>
         
@@ -259,10 +259,12 @@
 
     
     
+      
+    
 
     
 
-    <a href="/categories/" rel="section">Categories</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
 
@@ -278,10 +280,6 @@
 
   
 </nav>
-
-
-
-  
 
 
 
@@ -362,6 +360,20 @@
           
 
           
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-12 16:45:18" itemprop="dateModified" datetime="2019-07-12T16:45:18+08:00">2019-07-12</time>
+              </span>
+            
+          
 
           
 
@@ -376,11 +388,15 @@
           
 
           
+
+          <br>
           
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
               
               <span title="Symbols count in article"></span>
             </span>
@@ -391,6 +407,8 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               
               <span title="Reading time"></span>
             </span>
@@ -450,9 +468,9 @@
 <h2 id="terminal-console"><a href="#terminal-console" class="headerlink" title="terminal console"></a>terminal console</h2><h3 id="grant-sudo-previlige-to-common-user"><a href="#grant-sudo-previlige-to-common-user" class="headerlink" title="grant sudo previlige to common user"></a>grant sudo previlige to common user</h3><p>Install <code>sudo</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/sudoers /etc/sudoers.edit</span><br><span class="line">visudo /etc/sudoers.edit</span><br></pre></td></tr></table></figure></p>
 <p>The file should be opened by default text editor. Mine is vim. Then uncomment the specification for <code>wheel</code> group because my user is already in <code>wheel</code> group.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">visudo -c -f /etc/sudoers.edit # check</span><br><span class="line">mv /etc/sudoers.edit /etc/sudoers</span><br></pre></td></tr></table></figure></p>
 <h3 id="Q-change-the-fonts-of-xterm"><a href="#Q-change-the-fonts-of-xterm" class="headerlink" title="Q: change the fonts of xterm"></a>Q: change the fonts of xterm</h3><p>create a file <code>~/.Xresources</code>, write the wildcard-form settings in it:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xterm*faceName:Consolas:antialias=True</span><br><span class="line">xterm*faceNameDoublesize:Microsoft YaHei:antialias=True</span><br><span class="line">xterm*faceSize: 12</span><br><span class="line">xterm*renderFont: true</span><br><span class="line">xterm*utf8: 2</span><br><span class="line">xterm*utf8Title: true</span><br><span class="line">xterm*titleModes: 2</span><br><span class="line">xterm*selectToClipboard: true</span><br></pre></td></tr></table></figure></p>
-<p>Then add <code>[[ -f ~/.Xresources ]] &amp;&amp; xrdb -merge ~/.Xresources</code> to the file <code>~/.xprofile</code>. For the X-org based GNOME environment, it is ok now. But for the default GNOME 3 wayland based desktop environment, since it didn’t initialize and X11 configurations, we should use other ways for autostarting ‘.xprofile’.</p>
+<p>Then add <code>[[ -f ~/.Xresources ]] &amp;&amp; xrdb -merge ~/.Xresources</code> to the file .xprofile. For the X-org based GNOME environment, it is ok now. But for the default GNOME 3 wayland based desktop environment, since it didn’t initialize and X11 configurations, we should use other ways for autostarting. Here I suggest to rename .xprofile as .autostart_scripts.</p>
 <p>I found a way equivelent to audo starting every time logging in that is using xdg autostart files. After installing <code>xdg-user-dirs</code> I write a .desktop file under ‘~/.config/autostart/‘.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Type=Application</span><br><span class="line">Name=XTerm settings under wayland</span><br><span class="line">NoDisplay=true</span><br><span class="line">Exec=/home/shane/.xprofile</span><br></pre></td></tr></table></figure></p>
-<p>Note that the Exec item should be a fullpath filename and the relevant files including <code>.xprofile</code> are granted as user excutable permision(+x).</p>
+<p>Note that the Exec item should be a fullpath filename and the relevant files including <code>~/.autostart_scripts</code> are granted as user excutable permision(+x).</p>
 <h3 id="How-can-I-copy-and-paste-from-xterm"><a href="#How-can-I-copy-and-paste-from-xterm" class="headerlink" title="How can I copy and paste from xterm?"></a>How can I copy and paste from xterm?</h3><p>Since Ctrl+C is interpreted as an interrupting command, I might get confused as first. Actually there are very cool ways to do it because xterm has Ctrl function.</p>
 <p>Before doing it, understanding the concept of ‘PRIMARY’ and ‘CLIPBOARD’. the middle mouse key is served for PRIMARY buffer. If I want to select also for CLIPBOARD, just Ctrl+Mouse Middle Key, and then check ‘selection to clipboard’.</p>
 <p><img src="select_to_clipboard.png" alt="toClipboard"></p>
@@ -465,6 +483,7 @@
 <h3 id="Screen-cut"><a href="#Screen-cut" class="headerlink" title="Screen cut"></a>Screen cut</h3><p>gnome-screenshot</p>
 <h3 id="Chinese-input-method"><a href="#Chinese-input-method" class="headerlink" title="Chinese input method"></a>Chinese input method</h3><p>fcitx-sogoupinyin</p>
 <h3 id="Teamviewer"><a href="#Teamviewer" class="headerlink" title="Teamviewer"></a>Teamviewer</h3><p>aur <code>teamviewer</code> on xorg<br>If showing the message <code>Not ready. Please check your connection</code>, then the service should be enabled<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start teamviewerd.service</span><br></pre></td></tr></table></figure></p>
+<h3 id="WPS-Office"><a href="#WPS-Office" class="headerlink" title="WPS Office"></a>WPS Office</h3><p>ATTENTION: When you shut down wps, the wpsoffice process may still exist.<br>You can do ‘sudo chmod -x /usr/lib/office6/wpsoffice’ to fix it. But<br>this might bring you problem with signing in.</p>
 <h1 id="Understanding"><a href="#Understanding" class="headerlink" title="Understanding"></a>Understanding</h1><h2 id="pacman"><a href="#pacman" class="headerlink" title="pacman"></a>pacman</h2><p>To see what packages belong to the gnome group, run:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Sg gnome</span><br></pre></td></tr></table></figure></p>
 <p>To install a package completely, use<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Rns [package_name]</span><br></pre></td></tr></table></figure></p>
 <p>where <code>-R</code> means remove the package, <code>-n</code> means not saving important configuration files, and <code>-s</code> means removing its dependencies which are note required by any other installed packages.</p>
@@ -485,6 +504,10 @@
       
     </div>
 
+    
+
+    
+      
     
 
     
@@ -557,6 +580,10 @@
           
 
   
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
 
 
 
@@ -597,6 +624,49 @@
           </div>
 
           
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">93</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">98</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
 
           
 
@@ -610,10 +680,6 @@
           
 
           
-            
-          
-          
-
         </div>
       </div>
 
@@ -628,7 +694,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Preparation"><span class="nav-number">1.</span> <span class="nav-text">Preparation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation-media"><span class="nav-number">1.1.</span> <span class="nav-text">Installation media</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-can-I-write-image-into-flash-disk"><span class="nav-number">1.1.1.</span> <span class="nav-text">How can I write image into flash disk?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-support"><span class="nav-number">1.2.</span> <span class="nav-text">Network support</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-do-I-maintain-the-network-connection-which-requires-webpage-user-login-for-example-a-campus-net-environment"><span class="nav-number">1.2.1.</span> <span class="nav-text">How do I maintain the network connection which requires webpage user login for example a campus-net environment?</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Installation"><span class="nav-number">2.</span> <span class="nav-text">Installation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-I-cannot-find-the-disk-file-system-when-using-fdisk-l"><span class="nav-number">2.1.</span> <span class="nav-text">Why I cannot find the disk file system when using fdisk -l</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-wireless-network-support-for-live-system-and-newly-installed-system"><span class="nav-number">2.2.</span> <span class="nav-text">The wireless network support for live system and newly-installed system?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Restore-the-flash-USB-after-installing-process"><span class="nav-number">2.2.1.</span> <span class="nav-text">Restore the flash USB after installing process</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dual-systems"><span class="nav-number">3.</span> <span class="nav-text">Dual systems</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#how-can-I-get-write-access-to-Windows-NTFS-filesystem"><span class="nav-number">3.0.1.</span> <span class="nav-text">how can I get write access to Windows NTFS filesystem?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-why-the-times-are-incompatible"><span class="nav-number">3.1.</span> <span class="nav-text">Q: why the times are incompatible?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S"><span class="nav-number">3.2.</span> <span class="nav-text">S</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#If-I-don’t-use-Windows-OS-for-a-while-it-will-go-into-Hibernate-Mode-And-when-I-open-again-boot-defaultly-enter-Arch-Linux-Then-I-cannot-edit-files-under-Windows-filesystem-because-they-are-in-read-only-state-How-can-I-prevent-this-situation"><span class="nav-number">3.2.1.</span> <span class="nav-text">If I don’t use Windows OS for a while, it will go into Hibernate Mode. And when I open again, boot defaultly enter Arch Linux. Then I cannot edit files under Windows filesystem because they are in read-only state. How can I prevent this situation?</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Sharpening"><span class="nav-number">4.</span> <span class="nav-text">Sharpening</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-setttings-of-desktop-environment"><span class="nav-number">4.1.</span> <span class="nav-text">Q: setttings of desktop environment?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#International-language-support"><span class="nav-number">4.2.</span> <span class="nav-text">International language support</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Printer-service"><span class="nav-number">4.3.</span> <span class="nav-text">Printer service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-can-I-print-through-the-network-HP-printer"><span class="nav-number">4.3.1.</span> <span class="nav-text">How can I print through the network HP printer?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#terminal-console"><span class="nav-number">4.4.</span> <span class="nav-text">terminal console</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#grant-sudo-previlige-to-common-user"><span class="nav-number">4.4.1.</span> <span class="nav-text">grant sudo previlige to common user</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-change-the-fonts-of-xterm"><span class="nav-number">4.4.2.</span> <span class="nav-text">Q: change the fonts of xterm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#How-can-I-copy-and-paste-from-xterm"><span class="nav-number">4.4.3.</span> <span class="nav-text">How can I copy and paste from xterm?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-a-keyboard-shortcut-for-xterm"><span class="nav-number">4.4.4.</span> <span class="nav-text">Add a keyboard shortcut for xterm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GNOME3-How-can-I-automatically-change-the-wallpaers-which-are-selected-from-a-folder"><span class="nav-number">4.4.5.</span> <span class="nav-text">GNOME3: How can I automatically change the wallpaers which are selected from a folder?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Those-common-used-software"><span class="nav-number">4.5.</span> <span class="nav-text">Those common-used software?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pdf-viewer"><span class="nav-number">4.5.1.</span> <span class="nav-text">pdf viewer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Video-player"><span class="nav-number">4.5.2.</span> <span class="nav-text">Video player</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#System-monitor"><span class="nav-number">4.5.3.</span> <span class="nav-text">System monitor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Screen-cut"><span class="nav-number">4.5.4.</span> <span class="nav-text">Screen cut</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chinese-input-method"><span class="nav-number">4.5.5.</span> <span class="nav-text">Chinese input method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Teamviewer"><span class="nav-number">4.5.6.</span> <span class="nav-text">Teamviewer</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Understanding"><span class="nav-number">5.</span> <span class="nav-text">Understanding</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pacman"><span class="nav-number">5.1.</span> <span class="nav-text">pacman</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Trouble-shooting"><span class="nav-number">5.1.1.</span> <span class="nav-text">Trouble shooting</span></a></li></ol></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Preparation"><span class="nav-number">1.</span> <span class="nav-text">Preparation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation-media"><span class="nav-number">1.1.</span> <span class="nav-text">Installation media</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-can-I-write-image-into-flash-disk"><span class="nav-number">1.1.1.</span> <span class="nav-text">How can I write image into flash disk?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Network-support"><span class="nav-number">1.2.</span> <span class="nav-text">Network support</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-do-I-maintain-the-network-connection-which-requires-webpage-user-login-for-example-a-campus-net-environment"><span class="nav-number">1.2.1.</span> <span class="nav-text">How do I maintain the network connection which requires webpage user login for example a campus-net environment?</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Installation"><span class="nav-number">2.</span> <span class="nav-text">Installation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Why-I-cannot-find-the-disk-file-system-when-using-fdisk-l"><span class="nav-number">2.1.</span> <span class="nav-text">Why I cannot find the disk file system when using fdisk -l</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#The-wireless-network-support-for-live-system-and-newly-installed-system"><span class="nav-number">2.2.</span> <span class="nav-text">The wireless network support for live system and newly-installed system?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Restore-the-flash-USB-after-installing-process"><span class="nav-number">2.2.1.</span> <span class="nav-text">Restore the flash USB after installing process</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Dual-systems"><span class="nav-number">3.</span> <span class="nav-text">Dual systems</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#how-can-I-get-write-access-to-Windows-NTFS-filesystem"><span class="nav-number">3.0.1.</span> <span class="nav-text">how can I get write access to Windows NTFS filesystem?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-why-the-times-are-incompatible"><span class="nav-number">3.1.</span> <span class="nav-text">Q: why the times are incompatible?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#S"><span class="nav-number">3.2.</span> <span class="nav-text">S</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#If-I-don’t-use-Windows-OS-for-a-while-it-will-go-into-Hibernate-Mode-And-when-I-open-again-boot-defaultly-enter-Arch-Linux-Then-I-cannot-edit-files-under-Windows-filesystem-because-they-are-in-read-only-state-How-can-I-prevent-this-situation"><span class="nav-number">3.2.1.</span> <span class="nav-text">If I don’t use Windows OS for a while, it will go into Hibernate Mode. And when I open again, boot defaultly enter Arch Linux. Then I cannot edit files under Windows filesystem because they are in read-only state. How can I prevent this situation?</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Sharpening"><span class="nav-number">4.</span> <span class="nav-text">Sharpening</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Q-setttings-of-desktop-environment"><span class="nav-number">4.1.</span> <span class="nav-text">Q: setttings of desktop environment?</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#International-language-support"><span class="nav-number">4.2.</span> <span class="nav-text">International language support</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Printer-service"><span class="nav-number">4.3.</span> <span class="nav-text">Printer service</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#How-can-I-print-through-the-network-HP-printer"><span class="nav-number">4.3.1.</span> <span class="nav-text">How can I print through the network HP printer?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#terminal-console"><span class="nav-number">4.4.</span> <span class="nav-text">terminal console</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#grant-sudo-previlige-to-common-user"><span class="nav-number">4.4.1.</span> <span class="nav-text">grant sudo previlige to common user</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Q-change-the-fonts-of-xterm"><span class="nav-number">4.4.2.</span> <span class="nav-text">Q: change the fonts of xterm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#How-can-I-copy-and-paste-from-xterm"><span class="nav-number">4.4.3.</span> <span class="nav-text">How can I copy and paste from xterm?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Add-a-keyboard-shortcut-for-xterm"><span class="nav-number">4.4.4.</span> <span class="nav-text">Add a keyboard shortcut for xterm</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#GNOME3-How-can-I-automatically-change-the-wallpaers-which-are-selected-from-a-folder"><span class="nav-number">4.4.5.</span> <span class="nav-text">GNOME3: How can I automatically change the wallpaers which are selected from a folder?</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Those-common-used-software"><span class="nav-number">4.5.</span> <span class="nav-text">Those common-used software?</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#pdf-viewer"><span class="nav-number">4.5.1.</span> <span class="nav-text">pdf viewer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Video-player"><span class="nav-number">4.5.2.</span> <span class="nav-text">Video player</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#System-monitor"><span class="nav-number">4.5.3.</span> <span class="nav-text">System monitor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Screen-cut"><span class="nav-number">4.5.4.</span> <span class="nav-text">Screen cut</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Chinese-input-method"><span class="nav-number">4.5.5.</span> <span class="nav-text">Chinese input method</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Teamviewer"><span class="nav-number">4.5.6.</span> <span class="nav-text">Teamviewer</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#WPS-Office"><span class="nav-number">4.5.7.</span> <span class="nav-text">WPS Office</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Understanding"><span class="nav-number">5.</span> <span class="nav-text">Understanding</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#pacman"><span class="nav-number">5.1.</span> <span class="nav-text">pacman</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Trouble-shooting"><span class="nav-number">5.1.1.</span> <span class="nav-text">Trouble shooting</span></a></li></ol></li></ol></li></div>
             
 
           </div>
@@ -640,7 +706,7 @@
 
     </div>
   </aside>
-  
+  <div id="sidebar-dimmer"></div>
 
 
         
@@ -651,7 +717,7 @@
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
-    <i class="fa fa-"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Shane Wang</span>
 
@@ -675,11 +741,15 @@
 </div>
 
 
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
+  <span class="post-meta-divider">|</span>
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.2.0</div>
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
 
 
 
@@ -697,6 +767,11 @@
       </div>
     </footer>
 
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
     
@@ -723,11 +798,8 @@
 
 
 
-
-
   
-
-
+  
 
 
 
@@ -750,11 +822,7 @@
   
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-  
-  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
 
-
-  
 
 
   <script src="/js/utils.js?v=7.2.0"></script>
@@ -771,17 +839,53 @@
 
 
 
-
   
   <script src="/js/scrollspy.js?v=7.2.0"></script>
 <script src="/js/post-details.js?v=7.2.0"></script>
 
 
 
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+  
+
   
 
 
-  <script src="/js/next-boot.js?v=7.2.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '1b976dbc382f1d1e40ad',
+    clientSecret: '31090c96642b800a520a7fce87050edb2bcaaeb7',
+    repo: 'Blog-discuss-repo',
+    owner: 'BillyStudio',
+    admin: ['BillyStudio'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -800,16 +904,6 @@
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
 
-
-  
-
-  
-
-  
-
-  
-
-
   
 
 
@@ -823,12 +917,13 @@
   
 
   
+  
 
+  
   
 
   
 
-  
 
   
 
@@ -843,6 +938,15 @@
   
 
   
+
+  
+
+  
+
+  
+
+  
+
 
   
 

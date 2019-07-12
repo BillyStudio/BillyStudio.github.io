@@ -11,8 +11,10 @@
 
 
 
+  
 
-<html class="theme-next mist" lang="en">
+
+<html class="theme-next muse use-motion" lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,10 +35,6 @@
 
 
 
-
-  
-  
-  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
 
 
 
@@ -70,16 +68,16 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Muse',
     version: '7.2.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    back2top: ,
-    back2top_sidebar: ,
-    fancybox: true,
-    fastclick: ,
-    lazyload: ,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
     tabs: true,
-    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -89,10 +87,6 @@
     }
   };
 </script>
-
-
-  
-
 
 
 
@@ -168,7 +162,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right 
   page-home">
     <div class="headband"></div>
 
@@ -211,10 +205,12 @@
 
     
     
+      
+    
 
     
 
-    <a href="/" rel="section">Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
         
@@ -225,10 +221,12 @@
 
     
     
+      
+    
 
     
 
-    <a href="/about/" rel="section">About</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
 
   </li>
         
@@ -239,10 +237,12 @@
 
     
     
+      
+    
 
     
 
-    <a href="/tags/" rel="section">Tags</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
 
   </li>
         
@@ -253,10 +253,12 @@
 
     
     
+      
+    
 
     
 
-    <a href="/categories/" rel="section">Categories</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
 
@@ -275,10 +277,6 @@
 
 
 
-  
-
-
-
 </div>
     </header>
 
@@ -292,6 +290,186 @@
           <div id="content" class="content">
             
   <section id="posts" class="posts-expand">
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2018/06/02/2018-6-2-DNS-cheating-introduction/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shane Wang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shane's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/06/02/2018-6-2-DNS-cheating-introduction/" class="post-title-link" itemprop="url">DNS欺骗攻击</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-06-02 20:06:24" itemprop="dateCreated datePublished" datetime="2018-06-02T20:06:24+08:00">2018-06-02</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-07 08:50:38" itemprop="dateModified" datetime="2019-07-07T08:50:38+08:00">2019-07-07</time>
+              </span>
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span title="Symbols count in article"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              
+              <span title="Reading time"></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>DNS是有缓冲区的，<br>利用三级域名字符串模糊匹配。</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
     
       
 
@@ -358,6 +536,20 @@
           
 
           
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-07 08:50:38" itemprop="dateModified" datetime="2019-07-07T08:50:38+08:00">2019-07-07</time>
+              </span>
+            
+          
 
           
 
@@ -372,11 +564,15 @@
           
 
           
+
+          <br>
           
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
               
               <span title="Symbols count in article"></span>
             </span>
@@ -387,6 +583,8 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               
               <span title="Reading time"></span>
             </span>
@@ -411,10 +609,18 @@
           <p>不管是对于行向量、列向量，还是矩阵来说，都可以通过一行代码统一转化成列向量。如下：
           <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/06/01/2018-6-1-matlab-transformation-to-column-vector/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
           <!--/noindex-->
         
       
     </p></div>
+
+    
 
     
 
@@ -516,6 +722,20 @@
           
 
           
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-07 08:50:38" itemprop="dateModified" datetime="2019-07-07T08:50:38+08:00">2019-07-07</time>
+              </span>
+            
+          
 
           
 
@@ -530,11 +750,15 @@
           
 
           
+
+          <br>
           
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
               
               <span title="Symbols count in article"></span>
             </span>
@@ -545,6 +769,8 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               
               <span title="Reading time"></span>
             </span>
@@ -573,6 +799,8 @@
         
       
     </div>
+
+    
 
     
 
@@ -674,6 +902,20 @@
           
 
           
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-07 08:50:38" itemprop="dateModified" datetime="2019-07-07T08:50:38+08:00">2019-07-07</time>
+              </span>
+            
+          
 
           
 
@@ -688,11 +930,15 @@
           
 
           
+
+          <br>
           
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
               
               <span title="Symbols count in article"></span>
             </span>
@@ -703,6 +949,8 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               
               <span title="Reading time"></span>
             </span>
@@ -727,10 +975,18 @@
           <p>先在本地配置好，然后部署到服务器上。不过这里有个前提，就是服务器端和本地的环境配置都相同，这里包括数据库的用户名和密码应该相同，应该有相同的建表语句。
           <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/05/29/golang-android-api-server/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
           <!--/noindex-->
         
       
     </p></div>
+
+    
 
     
 
@@ -832,6 +1088,20 @@
           
 
           
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-07 08:50:38" itemprop="dateModified" datetime="2019-07-07T08:50:38+08:00">2019-07-07</time>
+              </span>
+            
+          
 
           
 
@@ -846,11 +1116,15 @@
           
 
           
+
+          <br>
           
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
               
               <span title="Symbols count in article"></span>
             </span>
@@ -861,6 +1135,8 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               
               <span title="Reading time"></span>
             </span>
@@ -885,10 +1161,18 @@
           <p>new和malloc都是分配地址，不同的是new分配在堆中能改变缓冲区大小，malloc不能改变缓冲区，分配在栈中。<br>
           <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/05/29/heap-overflow/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
           <!--/noindex-->
         
       
     </p></div>
+
+    
 
     
 
@@ -990,6 +1274,20 @@
           
 
           
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-07 08:50:38" itemprop="dateModified" datetime="2019-07-07T08:50:38+08:00">2019-07-07</time>
+              </span>
+            
+          
 
           
             <span class="post-meta-item">
@@ -1019,11 +1317,15 @@
           
 
           
+
+          <br>
           
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
               
               <span title="Symbols count in article"></span>
             </span>
@@ -1034,6 +1336,8 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               
               <span title="Reading time"></span>
             </span>
@@ -1058,10 +1362,18 @@
           <p><strong>Abstract:</strong> Reverberation, in psychoacoustics and acoustics, is a persistence of sound after the sound is produced<sup>[1]<sup><a href="#fn_Definition" id="reffn_Definition">Definition</a></sup></sup>. It is a common sense that reverberation in the nature is usually accompanyed with other forms of background noise. In order to academically analyse this phenomenon better, Methods of generating reverberation by computer techniques are explored in this article.
           <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/05/23/2018-05-30-generate-reverberation-using-MATLAB-or-Python/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
           <!--/noindex-->
         
       
     </p></div>
+
+    
 
     
 
@@ -1163,6 +1475,20 @@
           
 
           
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-07 08:50:38" itemprop="dateModified" datetime="2019-07-07T08:50:38+08:00">2019-07-07</time>
+              </span>
+            
+          
 
           
 
@@ -1177,11 +1503,15 @@
           
 
           
+
+          <br>
           
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
               
               <span title="Symbols count in article"></span>
             </span>
@@ -1192,6 +1522,8 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               
               <span title="Reading time"></span>
             </span>
@@ -1216,10 +1548,18 @@
           <h2 id="一、加载镜像文件"><a href="#一、加载镜像文件" class="headerlink" title="一、加载镜像文件"></a>一、加载镜像文件</h2><p>学员在收到镜像文件之后，需要通过VMware Workstation创建虚拟机加载该镜像：<br>
           <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/05/22/bonc-centos-install/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
           <!--/noindex-->
         
       
     </p></div>
+
+    
 
     
 
@@ -1321,6 +1661,20 @@
           
 
           
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-07 08:50:38" itemprop="dateModified" datetime="2019-07-07T08:50:38+08:00">2019-07-07</time>
+              </span>
+            
+          
 
           
 
@@ -1335,11 +1689,15 @@
           
 
           
+
+          <br>
           
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
               
               <span title="Symbols count in article"></span>
             </span>
@@ -1350,6 +1708,8 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               
               <span title="Reading time"></span>
             </span>
@@ -1374,10 +1734,18 @@
           <p>介绍代数中共轭转置和 Hermite 矩阵以及在 Python 和 MATLAB 中的函数.
           <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/05/21/matlab-conjugate-transpose/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
           <!--/noindex-->
         
       
     </p></div>
+
+    
 
     
 
@@ -1479,6 +1847,20 @@
           
 
           
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-07 08:50:38" itemprop="dateModified" datetime="2019-07-07T08:50:38+08:00">2019-07-07</time>
+              </span>
+            
+          
 
           
 
@@ -1493,11 +1875,15 @@
           
 
           
+
+          <br>
           
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
               
               <span title="Symbols count in article"></span>
             </span>
@@ -1508,6 +1894,8 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               
               <span title="Reading time"></span>
             </span>
@@ -1532,10 +1920,18 @@
           <p>Take Ubuntu as an example.
           <!--noindex-->
           
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/05/20/config-after-install-ubuntu-18/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          
           <!--/noindex-->
         
       
     </p></div>
+
+    
 
     
 
@@ -1637,6 +2033,20 @@
           
 
           
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-07 08:50:38" itemprop="dateModified" datetime="2019-07-07T08:50:38+08:00">2019-07-07</time>
+              </span>
+            
+          
 
           
 
@@ -1651,11 +2061,15 @@
           
 
           
+
+          <br>
           
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
               
               <span title="Symbols count in article"></span>
             </span>
@@ -1666,6 +2080,8 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               
               <span title="Reading time"></span>
             </span>
@@ -1690,183 +2106,18 @@
           <p>今天在论文中看到一句话，“the determinant of a block triangular matrix is given by the product of the determinants of the diagonal submatrices”，翻译过来就是“分块上下三角矩阵的行列式等于对角线子矩阵行列式的乘积”。<br>
           <!--noindex-->
           
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2018/05/16/Command-of-the-day-May-sixteenth-2018/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shane Wang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shane's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/05/16/Command-of-the-day-May-sixteenth-2018/" class="post-title-link" itemprop="url">Linux built-in command</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-05-16 17:02:38" itemprop="dateCreated datePublished" datetime="2018-05-16T17:02:38+08:00">2018-05-16</time>
-            </span>
-          
-
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Linux-shell/" itemprop="url" rel="index"><span itemprop="name">Linux shell</span></a></span>
-
-                
-                
-              
-            </span>
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-              <span title="Symbols count in article"></span>
-            </span>
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-              <span title="Reading time"></span>
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>This article will list dozens of common linux commands that run on most of the Linux distributions.
-          <!--noindex-->
+            <div class="post-button text-center">
+              <a class="btn" href="/2018/05/18/proof-det-block-triangular-matrix/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
           
           <!--/noindex-->
         
       
     </p></div>
+
+    
 
     
 
@@ -1943,6 +2194,49 @@
           </div>
 
           
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">93</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">98</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
 
           
 
@@ -1956,10 +2250,6 @@
           
 
           
-            
-          
-          
-
         </div>
       </div>
 
@@ -1969,7 +2259,7 @@
 
     </div>
   </aside>
-  
+  <div id="sidebar-dimmer"></div>
 
 
         
@@ -1980,7 +2270,7 @@
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
-    <i class="fa fa-"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Shane Wang</span>
 
@@ -2004,11 +2294,15 @@
 </div>
 
 
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
+  <span class="post-meta-divider">|</span>
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.2.0</div>
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
 
 
 
@@ -2026,6 +2320,11 @@
       </div>
     </footer>
 
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
     
@@ -2052,11 +2351,8 @@
 
 
 
-
-
   
-
-
+  
 
 
 
@@ -2079,11 +2375,7 @@
   
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-  
-  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
 
-
-  
 
 
   <script src="/js/utils.js?v=7.2.0"></script>
@@ -2100,13 +2392,99 @@
 
 
 
+  
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
 
   
 
   
 
+  
 
-  <script src="/js/next-boot.js?v=7.2.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  
+
+  
+
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -2125,20 +2503,8 @@
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
 
-
+    
   
-
-  
-
-  
-
-  
-
-
-
-  
-
-
 
 
   
@@ -2163,9 +2529,6 @@
 
   
 
-  
-
-  
 
   
 

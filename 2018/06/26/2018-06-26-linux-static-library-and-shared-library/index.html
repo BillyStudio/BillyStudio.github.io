@@ -11,8 +11,10 @@
 
 
 
+  
 
-<html class="theme-next mist" lang="en">
+
+<html class="theme-next muse use-motion" lang="en">
 <head><meta name="generator" content="Hexo 3.8.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -33,10 +35,6 @@
 
 
 
-
-  
-  
-  <link rel="stylesheet" href="/lib/fancybox/source/jquery.fancybox.css">
 
 
 
@@ -70,16 +68,16 @@
   var NexT = window.NexT || {};
   var CONFIG = {
     root: '/',
-    scheme: 'Mist',
+    scheme: 'Muse',
     version: '7.2.0',
-    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
-    back2top: ,
-    back2top_sidebar: ,
-    fancybox: true,
-    fastclick: ,
-    lazyload: ,
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
     tabs: true,
-    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
     algolia: {
       applicationID: '',
       apiKey: '',
@@ -91,18 +89,14 @@
 </script>
 
 
-  
 
-
-
-
-  <meta name="description" content="静态库(static library)Static library，又称为归档文件(archive). 在Linux系统中一般以.a作为后缀名.用以声明除了C语言标准库之外的库文件的目录. 这个声明是静态的,也就是说,当许多应用程序同时运行并且都是用来自同一个函数库的函数时,在内存中就会存有这个函数的多份拷贝.这将大量消耗内存和磁盘空间. 类似与Windows中的静态链接库.lib文件 共享库(s">
+  <meta name="description" content="This article mainly introduces the statics library and shared library on Linux and has done some experiments for better comprehension.">
 <meta name="keywords" content="Linux">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux系统静态库与共享库">
 <meta property="og:url" content="http://BillyStudio.github.io/2018/06/26/2018-06-26-linux-static-library-and-shared-library/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="静态库(static library)Static library，又称为归档文件(archive). 在Linux系统中一般以.a作为后缀名.用以声明除了C语言标准库之外的库文件的目录. 这个声明是静态的,也就是说,当许多应用程序同时运行并且都是用来自同一个函数库的函数时,在内存中就会存有这个函数的多份拷贝.这将大量消耗内存和磁盘空间. 类似与Windows中的静态链接库.lib文件 共享库(s">
+<meta property="og:description" content="This article mainly introduces the statics library and shared library on Linux and has done some experiments for better comprehension.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://billystudio.github.io/2018/06/26/2018-06-26-linux-static-library-and-shared-library/compile.png">
 <meta property="og:image" content="http://billystudio.github.io/2018/06/26/2018-06-26-linux-static-library-and-shared-library/soname.png">
@@ -112,10 +106,10 @@
 <meta property="og:image" content="http://billystudio.github.io/2018/06/26/2018-06-26-linux-static-library-and-shared-library/ldd.png">
 <meta property="og:image" content="http://billystudio.github.io/2018/06/26/2018-06-26-linux-static-library-and-shared-library/ldconfig-update.png">
 <meta property="og:image" content="http://billystudio.github.io/2018/06/26/2018-06-26-linux-static-library-and-shared-library/second-success.png">
-<meta property="og:updated_time" content="2019-07-07T12:27:04.000Z">
+<meta property="og:updated_time" content="2019-07-12T07:20:53.398Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux系统静态库与共享库">
-<meta name="twitter:description" content="静态库(static library)Static library，又称为归档文件(archive). 在Linux系统中一般以.a作为后缀名.用以声明除了C语言标准库之外的库文件的目录. 这个声明是静态的,也就是说,当许多应用程序同时运行并且都是用来自同一个函数库的函数时,在内存中就会存有这个函数的多份拷贝.这将大量消耗内存和磁盘空间. 类似与Windows中的静态链接库.lib文件 共享库(s">
+<meta name="twitter:description" content="This article mainly introduces the statics library and shared library on Linux and has done some experiments for better comprehension.">
 <meta name="twitter:image" content="http://billystudio.github.io/2018/06/26/2018-06-26-linux-static-library-and-shared-library/compile.png">
 
 
@@ -182,7 +176,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -224,10 +218,12 @@
 
     
     
+      
+    
 
     
 
-    <a href="/" rel="section">Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
 
   </li>
         
@@ -238,10 +234,12 @@
 
     
     
+      
+    
 
     
 
-    <a href="/about/" rel="section">About</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
 
   </li>
         
@@ -252,10 +250,12 @@
 
     
     
+      
+    
 
     
 
-    <a href="/tags/" rel="section">Tags</a>
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
 
   </li>
         
@@ -266,10 +266,12 @@
 
     
     
+      
+    
 
     
 
-    <a href="/categories/" rel="section">Categories</a>
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
 
   </li>
 
@@ -285,10 +287,6 @@
 
   
 </nav>
-
-
-
-  
 
 
 
@@ -369,6 +367,20 @@
           
 
           
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-12 15:20:53" itemprop="dateModified" datetime="2019-07-12T15:20:53+08:00">2019-07-12</time>
+              </span>
+            
+          
 
           
 
@@ -383,11 +395,15 @@
           
 
           
+
+          <br>
           
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-file-word-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
               
               <span title="Symbols count in article"></span>
             </span>
@@ -398,6 +414,8 @@
               <span class="post-meta-item-icon">
                 <i class="fa fa-clock-o"></i>
               </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
               
               <span title="Reading time"></span>
             </span>
@@ -418,7 +436,8 @@
       
 
       
-        <h1 id="静态库-static-library"><a href="#静态库-static-library" class="headerlink" title="静态库(static library)"></a>静态库(static library)</h1><p>Static library，又称为归档文件(archive). 在Linux系统中一般以.a作为后缀名.用以声明除了C语言标准库之外的库文件的目录. 这个声明是静态的,也就是说,当许多应用程序同时运行并且都是用来自同一个函数库的函数时,在内存中就会存有这个函数的多份拷贝.这将大量消耗内存和磁盘空间. 类似与Windows中的静态链接库.lib文件</p>
+        <p>This article mainly introduces the statics library and shared library on Linux and has done some experiments for better comprehension.<br><a id="more"></a></p>
+<h1 id="静态库-static-library"><a href="#静态库-static-library" class="headerlink" title="静态库(static library)"></a>静态库(static library)</h1><p>Static library，又称为归档文件(archive). 在Linux系统中一般以.a作为后缀名.用以声明除了C语言标准库之外的库文件的目录. 这个声明是静态的,也就是说,当许多应用程序同时运行并且都是用来自同一个函数库的函数时,在内存中就会存有这个函数的多份拷贝.这将大量消耗内存和磁盘空间. 类似与Windows中的静态链接库.lib文件</p>
 <h1 id="共享库-shared-library-dynamic-library"><a href="#共享库-shared-library-dynamic-library" class="headerlink" title="共享库(shared library / dynamic library)"></a>共享库(shared library / dynamic library)</h1><p>共享库克服了静态库的不足,典型的后缀名是.so。类似与Windows下的dll文件。</p>
 <p>In Arch Linux, the paths of shared library files are declared in <code>/etc/ld.so.conf</code>. You can add your specified path into this file and then using <code>sudo ldconfig</code> for generating their so-name files if there is update of these library files happening.</p>
 <h2 id="The-naming-suggestion-of-Linux-shared-library"><a href="#The-naming-suggestion-of-Linux-shared-library" class="headerlink" title="The naming suggestion of Linux shared library"></a>The naming suggestion of Linux shared library</h2><p>Every shared library has its filename and so-name(Short for shared Object name, 简单共享名). The following naming rules are commonly obeyed:<br>filename: libname.so.x.y.z<br>so-name: libname.so.x<br>x 代表了主版本号，主版本号之间不同通常是无法相互兼容的。<br>y 代表次版本号，可以向下兼容。<br>z 代表发布版本号，之间可以相互兼容。</p>
@@ -459,6 +478,10 @@
       
     </div>
 
+    
+
+    
+      
     
 
     
@@ -529,6 +552,10 @@
           
 
   
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
 
 
 
@@ -569,6 +596,49 @@
           </div>
 
           
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">93</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">98</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
 
           
 
@@ -582,10 +652,6 @@
           
 
           
-            
-          
-          
-
         </div>
       </div>
 
@@ -612,7 +678,7 @@
 
     </div>
   </aside>
-  
+  <div id="sidebar-dimmer"></div>
 
 
         
@@ -623,7 +689,7 @@
       <div class="footer-inner">
         <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
   <span class="with-love" id="animate">
-    <i class="fa fa-"></i>
+    <i class="fa fa-user"></i>
   </span>
   <span class="author" itemprop="copyrightHolder">Shane Wang</span>
 
@@ -647,11 +713,15 @@
 </div>
 
 
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
 
 
 
+  <span class="post-meta-divider">|</span>
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Mist</a> v7.2.0</div>
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
 
 
 
@@ -669,6 +739,11 @@
       </div>
     </footer>
 
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
     
 
     
@@ -695,11 +770,8 @@
 
 
 
-
-
   
-
-
+  
 
 
 
@@ -722,11 +794,7 @@
   
   <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
 
-  
-  <script src="/lib/fancybox/source/jquery.fancybox.pack.js"></script>
 
-
-  
 
 
   <script src="/js/utils.js?v=7.2.0"></script>
@@ -743,17 +811,53 @@
 
 
 
-
   
   <script src="/js/scrollspy.js?v=7.2.0"></script>
 <script src="/js/post-details.js?v=7.2.0"></script>
 
 
 
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+  
+
   
 
 
-  <script src="/js/next-boot.js?v=7.2.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '1b976dbc382f1d1e40ad',
+    clientSecret: '31090c96642b800a520a7fce87050edb2bcaaeb7',
+    repo: 'Blog-discuss-repo',
+    owner: 'BillyStudio',
+    admin: ['BillyStudio'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -772,16 +876,6 @@
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
 
-
-  
-
-  
-
-  
-
-  
-
-
   
 
 
@@ -795,12 +889,13 @@
   
 
   
+  
 
+  
   
 
   
 
-  
 
   
 
@@ -815,6 +910,15 @@
   
 
   
+
+  
+
+  
+
+  
+
+  
+
 
   
 
