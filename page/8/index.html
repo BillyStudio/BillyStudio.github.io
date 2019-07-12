@@ -308,6 +308,200 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2018/06/26/2018-06-26-linux-static-library-and-shared-library/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shane Wang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shane's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2018/06/26/2018-06-26-linux-static-library-and-shared-library/" class="post-title-link" itemprop="url">Linux系统静态库与共享库</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-06-26 15:00:41" itemprop="dateCreated datePublished" datetime="2018-06-26T15:00:41+08:00">2018-06-26</time>
+            </span>
+          
+
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+              <span title="Symbols count in article"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+              <span title="Reading time"></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="静态库-static-library"><a href="#静态库-static-library" class="headerlink" title="静态库(static library)"></a>静态库(static library)</h1><p>Static library，又称为归档文件(archive). 在Linux系统中一般以.a作为后缀名.用以声明除了C语言标准库之外的库文件的目录. 这个声明是静态的,也就是说,当许多应用程序同时运行并且都是用来自同一个函数库的函数时,在内存中就会存有这个函数的多份拷贝.这将大量消耗内存和磁盘空间. 类似与Windows中的静态链接库.lib文件</p>
+<h1 id="共享库-shared-library-dynamic-library"><a href="#共享库-shared-library-dynamic-library" class="headerlink" title="共享库(shared library / dynamic library)"></a>共享库(shared library / dynamic library)</h1><p>共享库克服了静态库的不足,典型的后缀名是.so。类似与Windows下的dll文件。</p>
+<p>In Arch Linux, the paths of shared library files are declared in <code>/etc/ld.so.conf</code>. You can add your specified path into this file and then using <code>sudo ldconfig</code> for generating their so-name files if there is update of these library files happening.</p>
+<h2 id="The-naming-suggestion-of-Linux-shared-library"><a href="#The-naming-suggestion-of-Linux-shared-library" class="headerlink" title="The naming suggestion of Linux shared library"></a>The naming suggestion of Linux shared library</h2><p>Every shared library has its filename and so-name(Short for shared Object name, 简单共享名). The following naming rules are commonly obeyed:<br>filename: libname.so.x.y.z<br>so-name: libname.so.x<br>x 代表了主版本号，主版本号之间不同通常是无法相互兼容的。<br>y 代表次版本号，可以向下兼容。<br>z 代表发布版本号，之间可以相互兼容。</p>
+<p>当运行 <code>ldconfig</code> 命令后，系统会为制定目录下面的动态库文件新建与 so-name 同名的软链接。当编译完程序需要链接的时候，查找的就是这些对应的 so-name。可以用环境变量 LD_LIBRARY_PATH 指定so-name files所在的目录。</p>
+<h2 id="First-experiment"><a href="#First-experiment" class="headerlink" title="First experiment"></a>First experiment</h2><p>Supposing that we want to create a shared library for calling function <code>hello</code> declared by <code>hello.h</code>, we start by writing our code here:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// hello.c</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">hello</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* name)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"hello %s!\n"</span>, name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// hello.h</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">hello</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* name)</span></span>;</span><br></pre></td></tr></table></figure>
+<p>Then we compile it by gcc to generate shared lib:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc hello.c -fPIC -shared -Wl,-soname,libhello.so.0 -o libhello.so.0.0.1</span><br></pre></td></tr></table></figure></p>
+<p>Let me explain every option of the above command. <code>-fPIC</code> means generating position independent code, i.e., address jumping is relative rather than absolute. This option is required in generating library file because lib file usually locates at some place and is called by programs from other places, or the program is generated at some place but is moved to other path. <code>-shared -o</code> indicates a shared library file <code>.so.x.y.z</code>. And <code>-Wl,-soname,libhello.so.0</code> specifies its so-name as ‘libhello.so.0’.</p>
+<p>Now we check our files and should see a new file like this picture:<br><img src="compile.png" alt="result after compilation"></p>
+<p>Next we update by ldconfig<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ldconfig -n shared-library/</span><br></pre></td></tr></table></figure></p>
+<p>Note that <code>-n</code> specifies the dir only being processed(Because we only created one lib file under shared-library, it has no need to update all). If you have added the path into <code>/etc/ld.so.conf</code>, you can also simply run <code>sudo ldconfig</code> and see the same change:<br><img src="soname.png" alt="after ldconfig"></p>
+<p>As we can see, the so-name symbolic link has been created. Now we can test this new lib by writing a test code:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.c</span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">"hello.h"</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">main</span><span class="params">()</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    hello(<span class="string">"handy"</span>);</span><br><span class="line">    <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Then we create a symbolic link to the so-name file in order for gcc compiler specification:<br><img src="link.png" alt="create link"></p>
+<p>Now we make these three stages of shared library prepared(.so, .so.x and .so.x.y.z), then we compile and link, with relevent paths specified:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc main.c -I /home/shane/Experiments/shared-library/ -L. -lhello -o main</span><br></pre></td></tr></table></figure></p>
+<p>where <code>-I</code> specifies the path of <code>hello.h</code>, <code>-L</code> for the path of <code>libhello.so</code>.<br><img src="first-run.png" alt="first run"></p>
+<p>Since we have specified the path of so-name to gcc compiler but have not done that for Linux executer(one of the features of shared library), an error of failing to find the so-name file appears when running the program. So we use <code>LD_LIBRARY_PATH</code> to set it and run again:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH="$HOME/Experiments/shared-library/"</span><br></pre></td></tr></table></figure></p>
+<p><img src="success.png" alt="specify env var"></p>
+<h3 id="More-exploration"><a href="#More-exploration" class="headerlink" title="More exploration"></a>More exploration</h3><p>用ldd查看其依赖的动态库:<br><img src="ldd.png" alt="check dependents"><br>我们发现main程序依赖的动态库名字是libhello.so.0，既不是libhello.so也不是libhello.so.0.0.1。其实在生成main程序的过程有如下几步：</p>
+<ol>
+<li>链接器通过编译命令-L. -lhello在当前目录查找libhello.so文件</li>
+<li>读取libhello.so链接指向的实际文件，这里是libhello.so.0.0.1</li>
+<li>读取libhello.so.0.0.1中的SONAME，这里是libhello.so.0</li>
+<li>将libhello.so.0记录到main程序的二进制数据里</li>
+</ol>
+<p>所以你看，程序并不知道 so-name file 在哪里，我们当然要在运行程序前 specify 一波了。</p>
+<h2 id="Second-experiment"><a href="#Second-experiment" class="headerlink" title="Second experiment"></a>Second experiment</h2><p>Now we emulate the situation of updating lib files. Suppose that we modify our code:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// hello.c</span></span><br><span class="line"><span class="meta"># <span class="meta-keyword">include</span> <span class="meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">hello</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* name)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="built_in">printf</span>(<span class="string">"hello %s, welcome to the world!\n"</span>, name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>Since the change is trivial, we keep the so-name when compiling:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc hello.c -fPIC -shared -Wl,-soname,libhello.so.0 -o libhello.so.0.0.2</span><br></pre></td></tr></table></figure></p>
+<p>Now there are two versions exist, we update by ldconfig and see the change:<br><img src="ldconfig-update.png" alt="modify the code"><br>The so-name file link to the new version of lib file. And we run the program and see the immediate change:<br><img src="second-success.png" alt="change"></p>
+<p>So you see, this is the significance or the essence of so-name mechanism. We don’t have to re-link the program after modifying the shared library code.</p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>In practical production, the compilation and execution are usually departed. Generally:</p>
+<ol>
+<li>specify the so-name when generating shared lib files</li>
+<li>Ensure the availability of libXXX.so file by <code>-L</code> and  <code>-l</code> when linking executable program</li>
+<li>Ensure the existence of shared lib file and use <code>LD_LIBRARY_PATH</code> to specify the directory of its so-name link when running program</li>
+</ol>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>Linux程序编译链接动态库版本的问题: <a href="https://blog.csdn.net/littlewhite1989/article/details/47726011" target="_blank" rel="noopener">https://blog.csdn.net/littlewhite1989/article/details/47726011</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2018/06/23/2018-06-23-hexo-next-mathjax-rendering/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -1680,164 +1874,6 @@
         
       
     </div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2018/06/01/2018-6-1-matlab-transformation-to-column-vector/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shane Wang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shane's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/06/01/2018-6-1-matlab-transformation-to-column-vector/" class="post-title-link" itemprop="url">MATLAB / Numpy 列向量的盲转化</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-06-01 14:04:59" itemprop="dateCreated datePublished" datetime="2018-06-01T14:04:59+08:00">2018-06-01</time>
-            </span>
-          
-
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-              <span title="Symbols count in article"></span>
-            </span>
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-              <span title="Reading time"></span>
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>不管是对于行向量、列向量，还是矩阵来说，都可以通过一行代码统一转化成列向量。如下：
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-    </p></div>
 
     
 

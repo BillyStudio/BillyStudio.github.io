@@ -96,13 +96,20 @@
 
 
 
-  <meta property="og:type" content="website">
-<meta property="og:title" content="Shane&#39;s Blog">
-<meta property="og:url" content="http://BillyStudio.github.io/page/10/index.html">
+  <meta name="description" content="Tmux is a terminal software for multi-windows.">
+<meta name="keywords" content="Linux,Tmux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Tmux settings and usage">
+<meta property="og:url" content="http://BillyStudio.github.io/2019/07/11/July-10th-2019-tmux-settings-and-usage/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="Tmux is a terminal software for multi-windows.">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="http://billystudio.github.io/2019/07/11/July-10th-2019-tmux-settings-and-usage/multi-user.target.png">
+<meta property="og:updated_time" content="2019-07-12T01:21:48.846Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Shane&#39;s Blog">
+<meta name="twitter:title" content="Tmux settings and usage">
+<meta name="twitter:description" content="Tmux is a terminal software for multi-windows.">
+<meta name="twitter:image" content="http://billystudio.github.io/2019/07/11/July-10th-2019-tmux-settings-and-usage/multi-user.target.png">
 
 
 
@@ -110,7 +117,7 @@
 
   
   
-  <link rel="canonical" href="http://BillyStudio.github.io/page/10/">
+  <link rel="canonical" href="http://BillyStudio.github.io/2019/07/11/July-10th-2019-tmux-settings-and-usage/">
 
 
 
@@ -120,7 +127,7 @@
   };
 </script>
 
-  <title>Shane's Blog</title>
+  <title>Tmux settings and usage | Shane's Blog</title>
   
 
 
@@ -168,8 +175,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left 
-  page-home">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -291,9 +297,9 @@
           
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -308,7 +314,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2018/05/14/MATLAB2017-mex/">
+    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2019/07/11/July-10th-2019-tmux-settings-and-usage/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shane Wang">
@@ -325,10 +331,8 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/05/14/MATLAB2017-mex/" class="post-title-link" itemprop="url">MATLAB2017a 与 VS2017 mex交叉编译</a>
+          <h1 class="post-title" itemprop="name headline">Tmux settings and usage
+
               
             
           </h1>
@@ -353,7 +357,7 @@
                 
               
 
-              <time title="Created: 2018-05-14 15:18:35" itemprop="dateCreated datePublished" datetime="2018-05-14T15:18:35+08:00">2018-05-14</time>
+              <time title="Created: 2019-07-11 11:17:14" itemprop="dateCreated datePublished" datetime="2019-07-11T11:17:14+08:00">2019-07-11</time>
             </span>
           
 
@@ -407,14 +411,14 @@
       
 
       
-        
-          <p>很多时候MATLAB需要调用其他语言编写的程序，这就是mex交叉编译。<br>
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
+        <p>Tmux is a terminal software for multi-windows. <a id="more"></a></p>
+<h2 id="An-experiment-of-autostart-tmux-service-under-systemd"><a href="#An-experiment-of-autostart-tmux-service-under-systemd" class="headerlink" title="An experiment of autostart tmux service under systemd"></a>An experiment of autostart tmux service under systemd</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Start tmux in detached session</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">User=%I</span><br><span class="line">ExecStart=/usr/bin/tmux new-session -s %u -d</span><br><span class="line">ExecStop=/usr/bin/tmux kill-session -t %u</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
+<p>Taking care of <code>multi-user.target</code>, a target is used for starting a group of units. That is to say, when starting a target, all units in this target will be started by systemd. We can check all the units included in <code>multi-user.target</code> by <code>systemctl list-dependencies multi-user.target</code><br><img src="multi-user.target.png" alt="multi-user.target"><br>We can see that almost every autostart service set by our own user is included in <code>multi-user.target</code>. So this is an important systemd target that is run default when starting Linux.</p>
+<p>Then create and edit the file <code>/etc/systemd/system/tmux@.service</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Start tmux in detached session</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">User=%I</span><br><span class="line">ExecStart=/usr/bin/tmux new-session -s %u -d</span><br><span class="line">ExecStop=/usr/bin/tmux kill-session -t %u</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure></p>
+<p>Then enable and start user service:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable tmux@shane.service</span><br><span class="line">systemctl start tmux@shane.service</span><br></pre></td></tr></table></figure></p>
+<h2 id="An-experiment-of-linking-with-zsh-automatically"><a href="#An-experiment-of-linking-with-zsh-automatically" class="headerlink" title="An experiment of linking with zsh automatically"></a>An experiment of linking with zsh automatically</h2>
       
-    </p></div>
+    </div>
 
     
 
@@ -433,172 +437,41 @@
 
     <footer class="post-footer">
       
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2018/05/14/Using-SSH-in-PuTTY/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shane Wang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shane's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
         
+          
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2018/05/14/Using-SSH-in-PuTTY/" class="post-title-link" itemprop="url">Using SSH rather than password</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
+        <div class="post-tags">
           
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
           
+            <a href="/tags/Tmux/" rel="tag"># Tmux</a>
           
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2018-05-14 11:42:39" itemprop="dateCreated datePublished" datetime="2018-05-14T11:42:39+08:00">2018-05-14</time>
-            </span>
-          
-
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-              <span title="Symbols count in article"></span>
-            </span>
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-              <span title="Reading time"></span>
-            </span>
-          
-
-          
-
         </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>SSH is a more secure way than password for logging into the server. If you are tired with inputing IP address and password every time you use the server. You are not alone.
-          <!--noindex-->
-          
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
       
 
       
       
-        <div class="post-eof"></div>
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/07/07/Transfering-blog-to-another-computer/" rel="next" title="Transfering Hexo blog files to another computer">
+                <i class="fa fa-chevron-left"></i> Transfering Hexo blog files to another computer
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
       
     </footer>
   </div>
@@ -608,18 +481,15 @@
   </article>
 
 
-    
-  </section>
-
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/9/"><i class="fa fa-angle-left" aria-label="Previous page"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/9/">9</a><span class="page-number current">10</span>
-  </nav>
-
+  </div>
 
 
           </div>
           
+
+  
+
+
 
         </div>
         
@@ -639,8 +509,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -669,6 +548,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#An-experiment-of-autostart-tmux-service-under-systemd"><span class="nav-number">1.</span> <span class="nav-text">An experiment of autostart tmux service under systemd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#An-experiment-of-linking-with-zsh-automatically"><span class="nav-number">2.</span> <span class="nav-text">An experiment of linking with zsh automatically</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -808,6 +704,10 @@
 
 
   
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
 
   
 
@@ -840,6 +740,8 @@
 
   
 
+
+  
 
 
   
