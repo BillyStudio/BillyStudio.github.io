@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="私钥签名，公钥验证。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-07-12T09:43:42.475Z">
+<meta property="og:updated_time" content="2019-07-14T00:28:20.417Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Digital Signature">
 <meta name="twitter:description" content="私钥签名，公钥验证。">
@@ -353,13 +353,23 @@
                 
               
 
-              <time title="Created: 2019-07-12 14:49:14 / Modified: 17:43:42" itemprop="dateCreated datePublished" datetime="2019-07-12T14:49:14+08:00">2019-07-12</time>
+              <time title="Created: 2019-07-12 14:49:14" itemprop="dateCreated datePublished" datetime="2019-07-12T14:49:14+08:00">2019-07-12</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-07-14 08:28:20" itemprop="dateModified" datetime="2019-07-14T08:28:20+08:00">2019-07-14</time>
+              </span>
             
           
 
@@ -423,8 +433,10 @@
 <li>(Non-repudiation) 签名方不能否认他们的签名，i.e., the signer cannot repudiate.</li>
 <li>其他人无法伪造签名</li>
 </ol>
-<p>给一串消息 m，签名方用私钥 sk 签名：</p>
-<script type="math/tex; mode=display">\sigma = Sig_{sk}(m)</script>
+<p>给一串消息 m，签名方用私钥 sk 签名，设签名算法为 Sig 函数：</p>
+<script type="math/tex; mode=display">\sigma = Sig_{sk}(m)</script><p>任何拥有公钥的接收方都可以使用公钥算法进行验证，验证结果应为永真：</p>
+<script type="math/tex; mode=display">Verify_{pk}(m,\sigma) = 1</script><p>而对于攻击者，既无法进行选择性伪造，即在得到m的情况下，无法计算出一个签名 $\sigma’$，使得 $Verify_{pk}(m, \sigma’)=1$；也无法进行存在性伪造，即计算出一对 m’ 和 $\sigma’$，使得 $Verify_{pk}(m,\sigma’)=1$.</p>
+
       
     </div>
 
@@ -557,7 +569,33 @@
               
 
               
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">98</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           

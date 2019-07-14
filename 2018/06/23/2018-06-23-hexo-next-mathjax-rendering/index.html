@@ -99,7 +99,7 @@
 <meta property="og:description" content="NexT主题支持MathJax渲染，只需要做一些简单的安装和配置。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://billystudio.github.io/2018/06/23/2018-06-23-hexo-next-mathjax-rendering/display_word.png">
-<meta property="og:updated_time" content="2019-07-07T00:50:38.605Z">
+<meta property="og:updated_time" content="2019-07-14T00:38:23.067Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Hexo NexT主题配置与美化">
 <meta name="twitter:description" content="NexT主题支持MathJax渲染，只需要做一些简单的安装和配置。">
@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-07 08:50:38" itemprop="dateModified" datetime="2019-07-07T08:50:38+08:00">2019-07-07</time>
+                <time title="Modified: 2019-07-14 08:38:23" itemprop="dateModified" datetime="2019-07-14T08:38:23+08:00">2019-07-14</time>
               </span>
             
           
@@ -435,7 +435,7 @@
 <p>将enable修改为true，然后在加入了LaTeX数学公式的文章开头加入声明mathjax: true</p>
 <h2 id="Markdown与MathJax冲突问题解决"><a href="#Markdown与MathJax冲突问题解决" class="headerlink" title="Markdown与MathJax冲突问题解决"></a>Markdown与MathJax冲突问题解决</h2><p>网上有些做法是在写LaTeX的时候加入逃逸字符，但是这样做使得LaTeX只能在Markdown上渲染，在tex文件中还是要改回正常的状态，这样不具备拓展性。可以通过更改渲染引擎达到解决冲突的目的。</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">npm uninstall hexo-renderer-marked --save</span><br><span class="line">npm install hexo-renderer-kramed --save</span><br></pre></td></tr></table></figure>
-<p><code>hexo-renderer-marked</code>是Hexo自带的默认渲染引擎（注意，如果使用了其他的渲染插件，请卸载对应的插件），没有针对MathJax的改进。而<code>hexo-renderer-kramed</code>这个渲染插件针对MathJax支持进行了改进，对于Markdown和MathJax会分别渲染，这样就不会造成冲突了。</p>
+<p><code>hexo-renderer-marked</code>是Hexo自带的默认渲染引擎（注意，如果使用了其他的渲染插件，请卸载对应的插件），没有针对MathJax的改进。而<code>hexo-renderer-kramed</code>这个渲染插件针对MathJax支持进行了改进，对于Markdown和MathJax会分别渲染。尽管如此，对于行内公式有时还是会出现误将下划线识别为 Markdown 语法的情况。这时需要参考官方文档修改 escape 字符：<a href="https://hexo-guide.readthedocs.io/zh_CN/latest/theme/[NexT]%E9%85%8D%E7%BD%AEMathJax.html" target="_blank" rel="noopener">https://hexo-guide.readthedocs.io/zh_CN/latest/theme/[NexT]%E9%85%8D%E7%BD%AEMathJax.html</a></p>
 <h1 id="NexT主题的配置"><a href="#NexT主题的配置" class="headerlink" title="NexT主题的配置"></a>NexT主题的配置</h1><h1 id="修改字体大小-修改文章页面宽度"><a href="#修改字体大小-修改文章页面宽度" class="headerlink" title="修改字体大小 / 修改文章页面宽度"></a>修改字体大小 / 修改文章页面宽度</h1><p>在next主题文件夹下, 进入 source/css/_variables/base.styl, 找到<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">// Font size</span><br><span class="line">$font-size-base           = 14px</span><br></pre></td></tr></table></figure></p>
 <p>将 14px 的大小修改为16或者18px.</p>
 <p>修改文章页面宽度<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$content-desktop                = 700px</span><br></pre></td></tr></table></figure></p>
@@ -594,7 +594,33 @@
               
 
               
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">3</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">98</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           
