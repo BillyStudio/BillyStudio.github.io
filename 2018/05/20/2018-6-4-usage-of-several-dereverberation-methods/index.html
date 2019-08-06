@@ -1,0 +1,1020 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <meta name="description" content="近期探索了一些去混响的开源项目，现将使用笔记整理如下，以备用。">
+<meta name="keywords" content="Dereverberation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="几种当前去混响方法开源项目的使用笔记">
+<meta property="og:url" content="http://BillyStudio.github.io/2018/05/20/2018-6-4-usage-of-several-dereverberation-methods/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="近期探索了一些去混响的开源项目，现将使用笔记整理如下，以备用。">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-06T08:38:55.592Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="几种当前去混响方法开源项目的使用笔记">
+<meta name="twitter:description" content="近期探索了一些去混响的开源项目，现将使用笔记整理如下，以备用。">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://BillyStudio.github.io/2018/05/20/2018-6-4-usage-of-several-dereverberation-methods/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>几种当前去混响方法开源项目的使用笔记 | Shane's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shane's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2018/05/20/2018-6-4-usage-of-several-dereverberation-methods/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shane Wang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shane's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">几种当前去混响方法开源项目的使用笔记
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2018-05-20 20:40:04" itemprop="dateCreated datePublished" datetime="2018-05-20T20:40:04+08:00">2018-05-20</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-08-06 16:38:55" itemprop="dateModified" datetime="2019-08-06T16:38:55+08:00">2019-08-06</time>
+              </span>
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span title="Symbols count in article"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              
+              <span title="Reading time"></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>近期探索了一些去混响的开源项目，现将使用笔记整理如下，以备用。 <a id="more"></a></p>
+<p>首先列出几种方法的适用情景:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>方法</th>
+<th>WPE</th>
+<th>Nara_WPE</th>
+<th>Wola</th>
+<th>Tawf</th>
+<th>CDR</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>适用场景</td>
+<td>多麦克风阵列/单麦克风</td>
+<td>多麦克风阵列/单麦克风</td>
+<td>单麦克风</td>
+<td>单麦克风</td>
+<td>双麦克风</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="方法理论介绍"><a href="#方法理论介绍" class="headerlink" title="方法理论介绍"></a>方法理论介绍</h1><h2 id="WPE方法"><a href="#WPE方法" class="headerlink" title="WPE方法"></a>WPE方法</h2><h3 id="来源"><a href="#来源" class="headerlink" title="来源"></a>来源</h3><p>这是日本公司的一个半开源的MATLAB项目。可以调用测试函数进行输入输出音频的测试, 但是算法部分打包成为.p文件，看不到源代码, 并且有一定的使用期限. 默认是 8 麦克风线性阵列. 调整配置文件后可以处理单麦克风的情况.</p>
+<p>项目网址：<a href="http://www.kecl.ntt.co.jp/icl/signal/wpe/" target="_blank" rel="noopener">http://www.kecl.ntt.co.jp/icl/signal/wpe/</a></p>
+<h3 id="使用注意"><a href="#使用注意" class="headerlink" title="使用注意"></a>使用注意</h3><p>1.32版本的目录如下所示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">wpe_v1.32/</span><br><span class="line">|-- settings</span><br><span class="line">|   |-- arrayname.lst</span><br><span class="line">|   |-- local.m</span><br><span class="line">|   `-- sample.scp</span><br><span class="line">|-- wav_sample</span><br><span class="line">|   |-- sample_ch1.wav</span><br><span class="line">|   |-- sample_ch2.wav</span><br><span class="line">|   |-- sample_ch3.wav</span><br><span class="line">|   |-- sample_ch4.wav</span><br><span class="line">|   |-- sample_ch5.wav</span><br><span class="line">|   |-- sample_ch6.wav</span><br><span class="line">|   |-- sample_ch7.wav</span><br><span class="line">|   `-- sample_ch8.wav</span><br><span class="line">|-- README</span><br><span class="line">|-- license.txt</span><br><span class="line">|-- wpe.p</span><br><span class="line">|-- wpe_test.m</span><br><span class="line">|-- wpe_test_wavio.m</span><br><span class="line">`-- wpe_wavio.p</span><br></pre></td></tr></table></figure>
+<p>其中wpe.p文件是输入矩阵形式的音频输出wav文件，而wpe_wavio的输入和输出都是wav文件。另外，<br>使用过程中还会产生-p，-v，res临时文件夹。</p>
+<p>主要的配置在 settings 文件夹中。settings/arrayname.lst 主要是一些为多通道模式准备的名称映射。wpe提供了两种模式，多通道模式和单通道模式。如果使用单通道模式，需要将 arrayname.lst 改名或在配置文件中注释掉。如果测试的是 8 通道模式，只需要修改 sample.scp 文件即可。</p>
+<p>settings/sample.scp 配置了 wpe_test.m 的输入和输出文件名。可以写入多行，其中每行的第一个字符串是输入文件，第二个字符串是输出文件。每个文件都应为单通道的文件. settings/local 文件中主要是对 wpe.p 文件的配置，设置了通道，频率，信号参数等。</p>
+<p>settings/local.m 中配置音频采样率, 通道数, 窗口大小等.</p>
+<p>wpe_test_wavio.m 文件中最主要的处理函数是 <code>wpe_wavio</code>, wpe_test.m 文件中最主要的处理函数是 <code>wpe</code>。</p>
+<h2 id="NARA-WPE方法"><a href="#NARA-WPE方法" class="headerlink" title="NARA_WPE方法"></a>NARA_WPE方法</h2><p>nara_wpe方法是对wpe的进一步改进，基于一篇2012年的IEEE论文。在Github上的网址为：<a href="https://github.com/fgnt/nara_wpe。相当于是" target="_blank" rel="noopener">https://github.com/fgnt/nara_wpe。相当于是</a> WPE 的开源版本.</p>
+<p>针对的是多声道。要求8个麦克风排布为线性阵列，间隔3cm。文件中有一个Jupyter notebook作为demo。我将其中的绘图部分删去并修改了文件输入输出路径，保存在nara_test.py文件中。</p>
+<h2 id="Tawf-Dereverb"><a href="#Tawf-Dereverb" class="headerlink" title="Tawf Dereverb"></a>Tawf Dereverb</h2><p>也是Github上的开源项目，项目地址为: <a href="https://github.com/luster/tawfDereverb" target="_blank" rel="noopener">https://github.com/luster/tawfDereverb</a> .但是近期好像没有人维护了，因为最后一次修改在4年前。运行Demo时绘制的图片不完全, 需要将自变量范围进行一些修改后，才能画出完整的图。另外，在使用Tawf方法的时候，需要原始音频和产生混响后的音频才能进行比较。</p>
+<h2 id="Wola-Dereverb"><a href="#Wola-Dereverb" class="headerlink" title="Wola Dereverb"></a>Wola Dereverb</h2><p>Demo 中给了一个约1分钟的音频，然后人工加上了混响，之后再去掉了混响。这是一个MATLAB项目，处理的音频是单声道的, 测试代码在 wola_test.m 文件中。输入文件名是 <code>FileName</code> 变量, 最后一行 <code>audiowrite</code> 函数决定输出文件存放路径. 暂时不清楚产生混响的方式是怎样的。不过，Wola中提供了原始的音频文件。将原始音频文件使用rir_generator产生八声道的混响音频后，可以再放到多通道处理的算法里面处理。</p>
+<p>另一方面，也可以将多声道的某个单独声道文件放到 Wola 中运行, 最后再将处理过的各个文件合并。</p>
+<h2 id="CDR-based-dereverb"><a href="#CDR-based-dereverb" class="headerlink" title="CDR-based dereverb"></a>CDR-based dereverb</h2><p>基于 CDR (coherent-to-diffuse power ratio 相干漫射功率比) 方法，地址：<a href="https://github.com/donchev7/MatlabCode/tree/master/cdr-demo" target="_blank" rel="noopener">https://github.com/donchev7/MatlabCode/tree/master/cdr-demo</a>. 测试程序写在 cdr_test.m, 项目自带的测试文件是 demo_cdr_dereverb.m. x 变量为输入, y 为输出.</p>
+<h2 id="BTK-Millennium-ASR-Manual"><a href="#BTK-Millennium-ASR-Manual" class="headerlink" title="BTK / Millennium ASR Manual"></a>BTK / Millennium ASR Manual</h2><p>这是一个比较大的项目，基于Linux平台的C++，同时提供了Python接口。其中的去混响部分（Dereverberation）也是基于多麦克风阵列的。网址：<a href="http://distantspeechrecognition.sourceforge.net/manual.htm" target="_blank" rel="noopener">http://distantspeechrecognition.sourceforge.net/manual.htm</a> . 安装了好几天没有成功, 后来就放弃了. 自我反思对 Linux 系统掌握还是不够.</p>
+<p>以下安装在Ubuntu 16.04 LTS平台上实现</p>
+<h3 id="安装Python库"><a href="#安装Python库" class="headerlink" title="安装Python库"></a>安装Python库</h3><p>sudo apt install python-dev</p>
+<h3 id="安装Numpy"><a href="#安装Numpy" class="headerlink" title="安装Numpy"></a>安装Numpy</h3><p>先装pip，然后pip安装，略。</p>
+<h3 id="安装GSL"><a href="#安装GSL" class="headerlink" title="安装GSL"></a>安装GSL</h3><p>安装方法：<br>传统的root用户下./configure &amp; make &amp; make install安装。</p>
+<p>编译方法：<br>首先写一个demo，用到gsl的库。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line">#include &lt;gsl/gsl_sf_bessel.h&gt;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">  double x = 5.0;</span><br><span class="line">  double y = gsl_sf_bessel_J0(x);</span><br><span class="line">  printf(&quot;J0(%g) = %.18e\n&quot;, x, y);</span><br><span class="line">  return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>编译的时候先生成.o文件<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -c hello_gsl.c</span><br></pre></td></tr></table></figure></p>
+<p>然后加入path，<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc -L/usr/local/lib hello_gsl.o -lgsl -lgslcblas -lm</span><br></pre></td></tr></table></figure></p>
+<p>链接动态链接库<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">LD_LIBRARY_PATH=/usr/local/lib</span><br><span class="line">export LD_LIBRARY_PATH</span><br></pre></td></tr></table></figure></p>
+<p>最后执行<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./a.out</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装SWIG"><a href="#安装SWIG" class="headerlink" title="安装SWIG"></a>安装SWIG</h3><h4 id="安装PCRE"><a href="#安装PCRE" class="headerlink" title="安装PCRE"></a>安装PCRE</h4><p>configure &amp; make &amp; make install 传统安装</p>
+<p>LEAVE：还需要添加PCRE的环境变量才能继续安装SWIG</p>
+<h1 id="测试"><a href="#测试" class="headerlink" title="测试"></a>测试</h1><p>我们主要是挑选了三个测试音频，第一个是摘自普通话测试标准音频的一段话，“这样枝枝叶叶”，时长为3秒；第二个是Wola中自带的一段时长约1分钟的话；第三个是自己使用Sony录音笔实际录制的混响音频。测试文件全部放在 <code>test</code> 文件夹下。模拟产生混响的代码在 <code>gen_test1_inputs.m</code> 文件中, 由于生成冲激函数速度较慢, 产生某种类型混响时, 将对应的一段代码复制到控制台运行即可.</p>
+<h2 id="数据预处理"><a href="#数据预处理" class="headerlink" title="数据预处理"></a>数据预处理</h2><p>我们需要首先对所有数据的最大值进行归一化处理。最大值均为0.95，类似于下面的处理方法<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">y = 0.95/max(abs(y))*y;   % normalize to 0.95</span><br></pre></td></tr></table></figure></p>
+<h2 id="室内混响场景模拟"><a href="#室内混响场景模拟" class="headerlink" title="室内混响场景模拟"></a>室内混响场景模拟</h2><p>用 <code>rir_generator</code> 模拟产生混响的房间的大小是长5米宽4米高6米。声源的位置在（2,3.5,2）处。对于单个麦克风，接收位置在（2,0.5,1.5）处。对于线性排布阵列，x坐标从2.00一直到2.21，中间相隔0.03米，一共8个麦克风，y和z保持0.5和1.5不变。对于双麦克风，接收位置在(2, 0.5, 1.5)和(2, 0.53, 1.5)位置处。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Test 1</th>
+<th>1_1</th>
+<th>1_2</th>
+<th>1_3</th>
+<th>1_4</th>
+<th>1_5</th>
+<th>1_6</th>
+<th>1_7</th>
+<th>1_8</th>
+<th>1_9</th>
+<th>1_10</th>
+<th>1_11</th>
+<th>1_12</th>
+<th>1_13</th>
+<th>1_14</th>
+<th>1_15</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>测试方法</td>
+<td>WPE</td>
+<td>Nara</td>
+<td>Tawf</td>
+<td>Wola</td>
+<td>CDR</td>
+<td>WPE</td>
+<td>Nara</td>
+<td>Tawf</td>
+<td>Wola</td>
+<td>CDR</td>
+<td>WPE</td>
+<td>Nara</td>
+<td>Tawf</td>
+<td>Wola</td>
+<td>CDR</td>
+</tr>
+<tr>
+<td>环境 </td><td colspan="5"> RIR模拟一般场景  </td><td colspan="5"> RIR模拟全向麦克风 </td> <td colspan="5"> RIR模拟超心型麦克风</td>
+</tr>
+<tr>
+<td>麦克风数 </td><td colspan="2">8 </td><td colspan="2">1</td>
+<td>2 </td><td colspan="2">8 </td><td colspan="2">1</td>
+<td>2 </td><td colspan="2"> 8 </td><td colspan="2">1</td>
+<td>2</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>另外每个小的测试点使用混响产生不同混响时间的文件。从0.4秒到2.5秒，0.1秒为一个间隔。</p>
+<p>测试结果1_1产生的是8个单声道的文件<code>*_ch1.wav</code> - <code>*_ch8.wav</code>，需要自己写一个函数合并8声道。放到WPE中运行有时候爆出<code>Warning: Matrix is close to singular or badly scaled. Results may be inaccurate.</code>，如果爆出这个错误，程序能输出结果文件，但是文件中没有声音。由于算法文件写成了.p文件，所以也无法查看具体是哪里的错误。但是我猜测，可能是由于各个通道之间数据的差距太小，在找出矩阵差异化的时候产生了<code>Singular matrix</code>，也就是有很多0或者常数的矩阵，导致无法求矩阵的逆。</p>
+<p>测试结果1_2产生的是单个8声道的文件，如<code>dereverb_nara_eight_omnidirect_0.4s.wav</code>，并且在nara_WPE中运行效果良好。但是nara有一个问题，就是仍然在不断更新。本次测试用的是一开始从github上面克隆的项目，但是最近的github项目并不能正常运行，还需要继续跟踪。</p>
+<h2 id="八声道两种方法比较"><a href="#八声道两种方法比较" class="headerlink" title="八声道两种方法比较"></a>八声道两种方法比较</h2><p>对比WPE的1_1、Nara的1_2与原始混响声可以发现，两个测试对于每个时间长度（0.4-2.5s）的音频都有比较显著的降混响的效果。WPE在低混响程度段（0.4-1.3s）得到的去混响声音比Nara更加清晰，但是声音强度较Nara弱。在1.3-2.5段WPE表现仍然良好，Nara在消混响后会保留一些背景噪音。</p>
+<p>对比WPE的1_6和Nara的1_7可以发现，WPE去混响后的音频声音更加清晰，Nara去混响后的音频声响更大。</p>
+<p>对比WPE的1_11和Nara的1_12可以发现，在1.0秒之后，WPE的去混响效果更好，Nara抑制混响的能力减弱。</p>
+<p>总体来说，多声道的去混响效果优于单声道。如果想要更好的声音清晰效果，使用WPE；如果想更多地保留声音的音量，使用Nara。</p>
+<h2 id="单声道两种方法比较"><a href="#单声道两种方法比较" class="headerlink" title="单声道两种方法比较"></a>单声道两种方法比较</h2><p>对比Tawf的1_3和Wola的1_4与原始混响声发现，Tawf对于非前期时间段的声音混响处理良好，Wola的处理效果则不明显。</p>
+<p>对比Tawf的1_8和Wola的1_9发现，Tawf对于每个时间段的声音混响处理程度不一致，但是整体还是做到了消混响的效果，而Wola的效果不明显。</p>
+<p>对比Tawf的1_13和Wola的1_14，发现Tawf声音中存在部分杂音，不过不影响声音辨识度，Wola的效果仍然不明显。</p>
+<p>总体来看，Tawf的处理效果较多声道还有差距，但是比Wola的效果明显。</p>
+<h2 id="双声道的CDR方法"><a href="#双声道的CDR方法" class="headerlink" title="双声道的CDR方法"></a>双声道的CDR方法</h2><p>处理效果介于单声道与八声道之间，但是音量衰减得比较厉害。</p>
+<p>挑选多声道效果最好的和单声道效果最好的进行极端情况下的测试。（参数全加，时间离奇，比如5秒）</p>
+<p>接下来是test2的音频。test2是一段实际录制的音频，只有双声道，所以Nara和WPE的方法就不适用了。并且由于混响时间没有办法准确测量，只能使用程度轻重来表示混响的程度。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th>Test 2</th>
+<th>2_1</th>
+<th>2_2</th>
+<th>2_3</th>
+<th>2_4</th>
+<th>2_5</th>
+<th>2_6</th>
+<th>2_7</th>
+<th>2_8</th>
+<th>2_9</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>测试方法</td>
+<td>CDR</td>
+<td>Tawf</td>
+<td>Wola</td>
+<td>CDR</td>
+<td>Tawf</td>
+<td>Wola</td>
+<td>CDR</td>
+<td>Tawf</td>
+<td>Wola </td>
+</tr>
+<tr>
+<td>环境 </td><td colspan="3"> 电梯间轻度混响  </td><td colspan="3">电梯间中度混响 </td><td colspan="3">楼道重度混响</td>
+</tr>
+<tr>
+<td>说明</td>
+<td>双麦克风  </td><td colspan="2">单麦克风</td>
+<td>双麦克风 </td><td colspan="2">单麦克风</td>
+<td>双麦克风 </td><td colspan="2">单麦克风</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>从2-1,2-4,2-7来看，CDR方法对音频音量损害较大，好像被捂住了一样。但是有一定的混响效果。</p>
+<p>从2-2,2-5,2-8来看，对于一段较长的音频，tawf处理的速度可能比较慢。而且会产生杂音。</p>
+<p>从test2的结果来看, WPE与CDR的差距没有那么大. 这是因为模拟混响的产生方法使用RIR, 也就是由一个房间冲激响应和原来的声音进行卷积运算产生混响. 而这种方法正是WPE方法所基于的假设, 所以在test1中WPE表现良好. 而CDR方法的思路是将原声和混响看做两个独立的信号.</p>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Dereverberation/" rel="tag"># Dereverberation</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/20/config-after-install-ubuntu-18/" rel="next" title="WSL installation and configuration for Deep Learning">
+                <i class="fa fa-chevron-left"></i> WSL installation and configuration for Deep Learning
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/21/matlab-conjugate-transpose/" rel="prev" title="Algebra | 共轭转置与 Hermite 矩阵">
+                Algebra | 共轭转置与 Hermite 矩阵 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Shane Wang</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">100</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#方法理论介绍"><span class="nav-number">1.</span> <span class="nav-text">方法理论介绍</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#WPE方法"><span class="nav-number">1.1.</span> <span class="nav-text">WPE方法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#来源"><span class="nav-number">1.1.1.</span> <span class="nav-text">来源</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#使用注意"><span class="nav-number">1.1.2.</span> <span class="nav-text">使用注意</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NARA-WPE方法"><span class="nav-number">1.2.</span> <span class="nav-text">NARA_WPE方法</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Tawf-Dereverb"><span class="nav-number">1.3.</span> <span class="nav-text">Tawf Dereverb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Wola-Dereverb"><span class="nav-number">1.4.</span> <span class="nav-text">Wola Dereverb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#CDR-based-dereverb"><span class="nav-number">1.5.</span> <span class="nav-text">CDR-based dereverb</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#BTK-Millennium-ASR-Manual"><span class="nav-number">1.6.</span> <span class="nav-text">BTK / Millennium ASR Manual</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Python库"><span class="nav-number">1.6.1.</span> <span class="nav-text">安装Python库</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装Numpy"><span class="nav-number">1.6.2.</span> <span class="nav-text">安装Numpy</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装GSL"><span class="nav-number">1.6.3.</span> <span class="nav-text">安装GSL</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装SWIG"><span class="nav-number">1.6.4.</span> <span class="nav-text">安装SWIG</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#安装PCRE"><span class="nav-number">1.6.4.1.</span> <span class="nav-text">安装PCRE</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#测试"><span class="nav-number">2.</span> <span class="nav-text">测试</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#数据预处理"><span class="nav-number">2.1.</span> <span class="nav-text">数据预处理</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#室内混响场景模拟"><span class="nav-number">2.2.</span> <span class="nav-text">室内混响场景模拟</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#八声道两种方法比较"><span class="nav-number">2.3.</span> <span class="nav-text">八声道两种方法比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#单声道两种方法比较"><span class="nav-number">2.4.</span> <span class="nav-text">单声道两种方法比较</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#双声道的CDR方法"><span class="nav-number">2.5.</span> <span class="nav-text">双声道的CDR方法</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shane Wang</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total"></span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total"></span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '1b976dbc382f1d1e40ad',
+    clientSecret: '31090c96642b800a520a7fce87050edb2bcaaeb7',
+    repo: 'Blog-discuss-repo',
+    owner: 'BillyStudio',
+    admin: ['BillyStudio'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>
