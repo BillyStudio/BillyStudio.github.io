@@ -70,7 +70,7 @@
     root: '/',
     scheme: 'Muse',
     version: '7.2.0',
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
     back2top: true,
     back2top_sidebar: false,
     fancybox: false,
@@ -98,10 +98,13 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="Arduino 开发板上的控制器芯片每秒可执行1600万条指令。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-07-30T02:55:18.911Z">
+<meta property="og:image" content="http://billystudio.github.io/2019/07/19/July-19-2019-Arduino-communicate-with-RPi/Arduino-output-0.png">
+<meta property="og:image" content="http://billystudio.github.io/2019/07/19/July-19-2019-Arduino-communicate-with-RPi/RPi-output-0.png">
+<meta property="og:updated_time" content="2019-09-12T12:38:40.307Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="树莓派与Arduino通信">
 <meta name="twitter:description" content="Arduino 开发板上的控制器芯片每秒可执行1600万条指令。">
+<meta name="twitter:image" content="http://billystudio.github.io/2019/07/19/July-19-2019-Arduino-communicate-with-RPi/Arduino-output-0.png">
 
 
 
@@ -368,7 +371,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-30 10:55:18" itemprop="dateModified" datetime="2019-07-30T10:55:18+08:00">2019-07-30</time>
+                <time title="Modified: 2019-09-12 20:38:40" itemprop="dateModified" datetime="2019-09-12T20:38:40+08:00">2019-09-12</time>
               </span>
             
           
@@ -428,13 +431,26 @@
 
       
         <p>Arduino 开发板上的控制器芯片每秒可执行1600万条指令。<br><a id="more"></a></p>
-<p>Arduino 使用基于C语言的Wiring库和基于Java的Processing库。<br>内存有2KB，闪存有32KB</p>
+<p>Arduino 使用基于C语言的Wiring库和基于Java的Processing库。<br>内存有2KB，闪存有32KB, and also 1kB of EEPROM for long-term storage.</p>
 <p>使用 AVR-GCC 进行编译的。</p>
+<p>In order to ensure the connection to Arduino, you need to have module <code>cdc_acm</code> loaded:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep acm # check, if not, use next command</span><br><span class="line">sudo modprobe cdc_acm</span><br></pre></td></tr></table></figure></p>
 <p>Raspberry 联网的Arch Linux指令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -o wlp2s0 -j MASQUERADE</span><br><span class="line">iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line">iptables -A FORWARD -i enp3s0f1 -o wlp2s0 -j ACCEPT</span><br></pre></td></tr></table></figure></p>
 <p>If there is error with iptables saying ‘sudo modprobe ip_tables<br>sudo echo ‘ip_tables’ &gt;&gt; /etc/modules’. Then Open nat:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo modprobe ip_tables</span><br><span class="line">sudo echo &apos;ip_tables&apos; &gt;&gt; /etc/modules</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p udp --dport 67 -i enp3s0f1 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p udp --dport 53 -s 192.168.137.0/24 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p tcp --dport 53 -s 192.168.137.0/24 -j ACCEPT</span><br></pre></td></tr></table></figure>
-
+<h2 id="Experiment-One-byte-IIC-transfer"><a href="#Experiment-One-byte-IIC-transfer" class="headerlink" title="Experiment: One byte IIC transfer"></a>Experiment: One byte IIC transfer</h2><p>Firstly ensure i2c interface is opened by raspberry pi.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install build-essentials i2c-tools</span><br></pre></td></tr></table></figure></p>
+<p>then check by<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo i2cdetect -y 1</span><br></pre></td></tr></table></figure></p>
+<p>If a problem happened showing ‘no i2c device found, /dev/i2c-1 or /dev/i2c/1’. You should edit <code>/boot/config.txt</code>, then open by uncomment<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># dtparam=i2c1=on</span><br></pre></td></tr></table></figure></p>
+<p>Then install python2.7 package ‘smbus2’. You may install python-setuptools first. Then you can download source code to install or use pip install.</p>
+<p>When connecting Arduino, check i2c pinout on your Pi by typing <code>pinout</code>. But this command might not be found on Raspbian Lite, so firstly you should install<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install python-gpiozero</span><br></pre></td></tr></table></figure></p>
+<p>Python program on RPi<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> smbus</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">bus = smbus.SMBus(<span class="number">1</span>)</span><br><span class="line">address = <span class="number">0x20</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">writeNumber</span><span class="params">(value)</span>:</span></span><br><span class="line"> bus.write_byte(address, value)</span><br><span class="line"> <span class="keyword">return</span> <span class="number">-1</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readNumber</span><span class="params">()</span>:</span></span><br><span class="line"> number = bus.read_byte(address)</span><br><span class="line"> <span class="keyword">return</span> number</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">  var=input(<span class="string">"Enter1–9:"</span>)</span><br><span class="line">  <span class="keyword">if</span> <span class="keyword">not</span> var:</span><br><span class="line">     <span class="keyword">continue</span></span><br><span class="line">  writeNumber(var)</span><br><span class="line">  <span class="keyword">print</span> <span class="string">"RPI: Hi Arduino, I sent you "</span>, var</span><br><span class="line">  <span class="comment"># sleep one second</span></span><br><span class="line">  time.sleep(<span class="number">1</span>)</span><br><span class="line">  number = readNumber()</span><br><span class="line">  <span class="keyword">print</span> <span class="string">"Arduino: Hey RPI,I received a digit"</span>, number</span><br><span class="line">  <span class="keyword">print</span> <span class="string">"======================================\n"</span></span><br></pre></td></tr></table></figure></p>
+<p>Arduino program:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Wire.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IIC_SLAVE_ADDR 0x20</span></span><br><span class="line">byte number = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    delay(<span class="number">100</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sendData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Wire.write(number);</span><br><span class="line">    Serial.print(<span class="string">"Data written: "</span>);</span><br><span class="line">    Serial.println(number);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">receiveData</span><span class="params">(<span class="keyword">int</span> byteCount)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(Wire.available())&#123;</span><br><span class="line">        number = Wire.read();</span><br><span class="line">        Serial.print(<span class="string">"data received: "</span>);</span><br><span class="line">        Serial.println(number);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Serial.begin(<span class="number">9600</span>); <span class="comment">// for serial debugging</span></span><br><span class="line">    Wire.begin(IIC_SLAVE_ADDR);</span><br><span class="line">    Wire.onReceive(receiveData);</span><br><span class="line">    Wire.onRequest(sendData);</span><br><span class="line">    Serial.println(<span class="string">"Ready"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="Experiment-block-of-bytes-I2C-transfer"><a href="#Experiment-block-of-bytes-I2C-transfer" class="headerlink" title="Experiment: block of bytes I2C transfer"></a>Experiment: block of bytes I2C transfer</h2><p>Python program on host<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="keyword">import</span> smbus</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line">bus = smbus.SMBus(<span class="number">1</span>)</span><br><span class="line">address = <span class="number">0x20</span></span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">readString</span><span class="params">(len)</span>:</span></span><br><span class="line">    tmp = bus.read_i2c_block_data(address, <span class="number">0</span>, len)</span><br><span class="line">    message = <span class="string">""</span>.join([chr(i) <span class="keyword">for</span> i <span class="keyword">in</span> tmp])</span><br><span class="line">    <span class="keyword">return</span> message</span><br><span class="line"></span><br><span class="line"><span class="keyword">while</span> <span class="literal">True</span>:</span><br><span class="line">    var=input(<span class="string">"Enter one byte to get a string:"</span>)</span><br><span class="line">    <span class="keyword">if</span> <span class="keyword">not</span> var:</span><br><span class="line">        <span class="keyword">continue</span></span><br><span class="line">    </span><br><span class="line">    <span class="keyword">print</span> <span class="string">"RPi: Hi Arduino, I sent you "</span>, var</span><br><span class="line">    writeNumber(var)</span><br><span class="line">    <span class="comment"># sleep one second</span></span><br><span class="line">    time.sleep(<span class="number">1</span>)</span><br><span class="line">    message = readString(<span class="number">14</span>)</span><br><span class="line">    <span class="keyword">print</span> <span class="string">"RPi: I receive the string: "</span>, message</span><br></pre></td></tr></table></figure></p>
+<p>Arduino program on guest transmitter:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;Wire.h&gt;</span></span></span><br><span class="line"><span class="meta">#<span class="meta-keyword">define</span> IIC_SLAVE_ADDR 0x20</span></span><br><span class="line">byte number = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">char</span> message[<span class="number">14</span>] = <span class="string">"short message"</span>;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">loop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    delay(<span class="number">100</span>);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">sendData</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Wire.write(message);</span><br><span class="line">    Serial.print(<span class="string">"Data written: "</span>);</span><br><span class="line">    Serial.println(message);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">receiveData</span><span class="params">(<span class="keyword">int</span> byteCount)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(Wire.available())&#123;</span><br><span class="line">        number = Wire.read();</span><br><span class="line">        Serial.print(<span class="string">"data received: "</span>);</span><br><span class="line">        Serial.println(number);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">setup</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    Serial.begin(<span class="number">9600</span>); <span class="comment">// for serial debugging</span></span><br><span class="line">    Wire.begin(IIC_SLAVE_ADDR);</span><br><span class="line">    Wire.onReceive(receiveData);</span><br><span class="line">    Wire.onRequest(sendData);</span><br><span class="line">    Serial.println(<span class="string">"Ready"</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>On Arduino you will see:<br><img src="Arduino-output-0.png" alt></p>
+<p>On RPi you will see:<br><img src="RPi-output-0.png" alt></p>
+<p>This suggests that these two kinds of IIC protocals are slightly different. Because everytime when Pi requires Arduino to send a block of data, Arduino takes it as not only a send command but also an invalid receive command. Also Arduino won’t send the ‘\0’ of a string.<br>Therefore, we can let Arduino take the receive data 0 as a signal of bytes transfer.</p>
+<h2 id="Experiment-write-random-numbers-into-EEPROM-of-Arduino-and-read-from-Pi"><a href="#Experiment-write-random-numbers-into-EEPROM-of-Arduino-and-read-from-Pi" class="headerlink" title="Experiment: write random numbers into EEPROM of Arduino and read from Pi"></a>Experiment: write random numbers into EEPROM of Arduino and read from Pi</h2>
       
     </div>
 
@@ -479,8 +495,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2019/07/17/July-17th-2019-Descent-to-Hades-Raspberry-Pi/" rel="next" title="July-17th-2019-Descent-to-Hades-Raspberry-Pi">
-                <i class="fa fa-chevron-left"></i> July-17th-2019-Descent-to-Hades-Raspberry-Pi
+              <a href="/2019/07/17/July-17th-2019-Descent-to-Hades-Raspberry-Pi/" rel="next" title="Descent to Hades of Raspberry Pi">
+                <i class="fa fa-chevron-left"></i> Descent to Hades of Raspberry Pi
               </a>
             
           </div>
@@ -539,8 +555,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -555,14 +580,40 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">100</span>
+                    <span class="site-state-item-count">109</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
               
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">115</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           
@@ -582,6 +633,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiment-One-byte-IIC-transfer"><span class="nav-number">1.</span> <span class="nav-text">Experiment: One byte IIC transfer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiment-block-of-bytes-I2C-transfer"><span class="nav-number">2.</span> <span class="nav-text">Experiment: block of bytes I2C transfer</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Experiment-write-random-numbers-into-EEPROM-of-Arduino-and-read-from-Pi"><span class="nav-number">3.</span> <span class="nav-text">Experiment: write random numbers into EEPROM of Arduino and read from Pi</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

@@ -70,7 +70,7 @@
     root: '/',
     scheme: 'Muse',
     version: '7.2.0',
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
     back2top: true,
     back2top_sidebar: false,
     fancybox: false,
@@ -93,14 +93,14 @@
   <meta name="description" content="Welcome to the computer world of Raspberry!">
 <meta name="keywords" content="Raspberry Pi,Raspbian">
 <meta property="og:type" content="article">
-<meta property="og:title" content="July-17th-2019-Descent-to-Hades-Raspberry-Pi">
+<meta property="og:title" content="Descent to Hades of Raspberry Pi">
 <meta property="og:url" content="http://BillyStudio.github.io/2019/07/17/July-17th-2019-Descent-to-Hades-Raspberry-Pi/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="Welcome to the computer world of Raspberry!">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-07-19T13:01:25.703Z">
+<meta property="og:updated_time" content="2019-08-30T08:24:32.503Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="July-17th-2019-Descent-to-Hades-Raspberry-Pi">
+<meta name="twitter:title" content="Descent to Hades of Raspberry Pi">
 <meta name="twitter:description" content="Welcome to the computer world of Raspberry!">
 
 
@@ -119,7 +119,7 @@
   };
 </script>
 
-  <title>July-17th-2019-Descent-to-Hades-Raspberry-Pi | Shane's Blog</title>
+  <title>Descent to Hades of Raspberry Pi | Shane's Blog</title>
   
 
 
@@ -327,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">July-17th-2019-Descent-to-Hades-Raspberry-Pi
+          <h1 class="post-title" itemprop="name headline">Descent to Hades of Raspberry Pi
 
               
             
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-19 21:01:25" itemprop="dateModified" datetime="2019-07-19T21:01:25+08:00">2019-07-19</time>
+                <time title="Modified: 2019-08-30 16:24:32" itemprop="dateModified" datetime="2019-08-30T16:24:32+08:00">2019-08-30</time>
               </span>
             
           
@@ -428,9 +428,18 @@
 
       
         <p>Welcome to the computer world of Raspberry! <a id="more"></a></p>
+<h1 id="OS-installation"><a href="#OS-installation" class="headerlink" title="OS installation"></a>OS installation</h1><p>Get the image from its offical website and extract it into the SD card by using the command <code>7za x file.zip</code>. On Linux, <code>dd</code> is the image writing tool:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd bs=4M if=2019-07-10-raspbian-buster.img of=/dev/sdX status=progress conv=fsync</span><br></pre></td></tr></table></figure></p>
+<p>For Pi3, there exists wireless card, so use <code>sudo raspi-config</code> to enable it.</p>
+<h2 id="change-source-list"><a href="#change-source-list" class="headerlink" title="change source list:"></a>change source list:</h2><p><a href="https://mirror.tuna.tsinghua.edu.cn/help/raspbian/" target="_blank" rel="noopener">https://mirror.tuna.tsinghua.edu.cn/help/raspbian/</a></p>
 <h2 id="Enable-WiFi-network"><a href="#Enable-WiFi-network" class="headerlink" title="Enable WiFi network"></a>Enable WiFi network</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install raspberry-headers</span><br><span class="line">git clone</span><br></pre></td></tr></table></figure>
-<h2 id="Share-network-to-RPi-by-ethenet"><a href="#Share-network-to-RPi-by-ethenet" class="headerlink" title="Share network to RPi by ethenet"></a>Share network to RPi by ethenet</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line">[root@inspiron-7537 shane]# iptables -S</span><br><span class="line">-P INPUT ACCEPT</span><br><span class="line">-P FORWARD ACCEPT</span><br><span class="line">-P OUTPUT ACCEPT</span><br><span class="line">-A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line">-A FORWARD -i enp3s0f1 -o internet0 -j ACCEPT</span><br><span class="line">[root@inspiron-7537 shane]# iptables -L</span><br><span class="line">Chain INPUT (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line"></span><br><span class="line">Chain FORWARD (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line">ACCEPT     all  --  anywhere             anywhere             ctstate RELATED,ESTABLISHED</span><br><span class="line">ACCEPT     all  --  anywhere             anywhere            </span><br><span class="line"></span><br><span class="line">Chain OUTPUT (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line">[root@inspiron-7537 shane]# ip a</span><br><span class="line">1: lo: &lt;LOOPBACK,UP,LOWER_UP&gt; mtu 65536 qdisc noqueue state UNKNOWN group default qlen 1000</span><br><span class="line">    link/loopback 00:00:00:00:00:00 brd 00:00:00:00:00:00</span><br><span class="line">    inet 127.0.0.1/8 scope host lo</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">    inet6 ::1/128 scope host </span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">2: enp3s0f1: &lt;NO-CARRIER,BROADCAST,MULTICAST,UP&gt; mtu 1500 qdisc fq_codel state DOWN group default qlen 1000</span><br><span class="line">    link/ether b8:2a:72:b9:b2:1d brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 192.168.137.1/24 scope global enp3s0f1</span><br><span class="line">       valid_lft forever preferred_lft forever</span><br><span class="line">3: wlp2s0: &lt;BROADCAST,MULTICAST,UP,LOWER_UP&gt; mtu 1500 qdisc noqueue state UP group default qlen 1000</span><br><span class="line">    link/ether 80:86:f2:d4:68:0e brd ff:ff:ff:ff:ff:ff</span><br><span class="line">    inet 222.28.66.104/26 brd 222.28.66.127 scope global dynamic noprefixroute wlp2s0</span><br><span class="line">       valid_lft 6959sec preferred_lft 6959sec</span><br><span class="line">    inet6 2001:da8:208:127:bba1:2d3a:20c:156b/64 scope global dynamic noprefixroute </span><br><span class="line">       valid_lft 2591858sec preferred_lft 604658sec</span><br><span class="line">    inet6 fe80::2d8b:ce26:c3a0:2879/64 scope link noprefixroute </span><br><span class="line">       valid_lft forever preferred_lft forever</span><br></pre></td></tr></table></figure>
+<h2 id="Share-network-to-RPi-by-ethenet"><a href="#Share-network-to-RPi-by-ethenet" class="headerlink" title="Share network to RPi by ethenet"></a>Share network to RPi by ethenet</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">[root@inspiron-7537 shane]# iptables -S</span><br><span class="line">-P INPUT ACCEPT</span><br><span class="line">-P FORWARD ACCEPT</span><br><span class="line">-P OUTPUT ACCEPT</span><br><span class="line">-A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line">-A FORWARD -i enp3s0f1 -o internet0 -j ACCEPT</span><br><span class="line">[root@inspiron-7537 shane]# iptables -L</span><br><span class="line">Chain INPUT (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line"></span><br><span class="line">Chain FORWARD (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination         </span><br><span class="line">ACCEPT     all  --  anywhere             anywhere             ctstate RELATED,ESTABLISHED</span><br><span class="line">ACCEPT     all  --  anywhere             anywhere            </span><br><span class="line"></span><br><span class="line">Chain OUTPUT (policy ACCEPT)</span><br><span class="line">target     prot opt source               destination</span><br></pre></td></tr></table></figure>
 <p>Then use <code>arp</code> we will find the address:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@inspiron-7537 shane]# arp</span><br><span class="line">Address                  HWtype  HWaddress           Flags Mask            Iface</span><br><span class="line">apollo.archlinux.org             (incomplete)                              enp3s0f1</span><br><span class="line">192.168.137.244          ether   b8:27:eb:80:22:52   C                     enp3s0f1</span><br><span class="line">_gateway                 ether   c4:ca:d9:38:48:e5   C                     wlp2s0</span><br></pre></td></tr></table></figure></p>
+<p>The IP of Pi is <code>192.168.137.244</code>.</p>
+<h2 id="Config-on-Host-Linux-computer"><a href="#Config-on-Host-Linux-computer" class="headerlink" title="Config on Host Linux computer"></a>Config on Host Linux computer</h2><p>First three commands<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -o wlp2s0 -j MASQUERADE</span><br><span class="line">iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line">iptables -A FORWARD -i enp3s0f1 -o wlp2s0 -j ACCEPT</span><br></pre></td></tr></table></figure></p>
+<p>If the first iptables is wrong, that’s because this arch has just upgraded its kernel so it needs reboot. But if it’s the problem of nat you might<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo modprobe ip_tables</span><br><span class="line">sudo echo &quot;ip_tables&quot; &gt;&gt; /etc/modules.</span><br></pre></td></tr></table></figure></p>
+<p>Second three commands<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p udp --dport 67 -i enp3s0f1 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p udp --dport 53 -s 192.168.137.0/24 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p tcp --dport 53 -s 192.168.137.0/24 -j ACCEPT</span><br></pre></td></tr></table></figure></p>
+<p>Now it should be ok.</p>
+<p>But sometimes we may face the problem of cannot connect to the wifi web. This is because the ip route takes ethernet as the default gateway. Check by <code>ip route</code>.<br>Then delete one: <code>sudo route del default gw 192.168.137.1 enp3s0f1</code></p>
 
       
     </div>
@@ -561,14 +570,40 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">100</span>
+                    <span class="site-state-item-count">109</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
               
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">115</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           
@@ -599,7 +634,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Enable-WiFi-network"><span class="nav-number">1.</span> <span class="nav-text">Enable WiFi network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Share-network-to-RPi-by-ethenet"><span class="nav-number">2.</span> <span class="nav-text">Share network to RPi by ethenet</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#OS-installation"><span class="nav-number">1.</span> <span class="nav-text">OS installation</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#change-source-list"><span class="nav-number">1.1.</span> <span class="nav-text">change source list:</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Enable-WiFi-network"><span class="nav-number">1.2.</span> <span class="nav-text">Enable WiFi network</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Share-network-to-RPi-by-ethenet"><span class="nav-number">1.3.</span> <span class="nav-text">Share network to RPi by ethenet</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Config-on-Host-Linux-computer"><span class="nav-number">1.4.</span> <span class="nav-text">Config on Host Linux computer</span></a></li></ol></li></ol></div>
             
 
           </div>

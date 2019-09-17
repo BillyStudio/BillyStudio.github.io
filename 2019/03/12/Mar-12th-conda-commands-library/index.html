@@ -70,7 +70,7 @@
     root: '/',
     scheme: 'Muse',
     version: '7.2.0',
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
     back2top: true,
     back2top_sidebar: false,
     fancybox: false,
@@ -90,18 +90,18 @@
 
 
 
-  <meta name="description" content="Conda(including both Anaconda and miniconda) is a well-known Python package manager for machine learning. This essay simply compares it with other Python package managers such as pip and apt and then">
+  <meta name="description" content="Conda(including both Anaconda and miniconda) is a well-known Python package manager for machine learning.">
 <meta name="keywords" content="Python,Conda,pip,apt,pacman">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Understanding Python package installation from pip or conda or Linux distro package manager">
 <meta property="og:url" content="http://BillyStudio.github.io/2019/03/12/Mar-12th-conda-commands-library/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="Conda(including both Anaconda and miniconda) is a well-known Python package manager for machine learning. This essay simply compares it with other Python package managers such as pip and apt and then">
+<meta property="og:description" content="Conda(including both Anaconda and miniconda) is a well-known Python package manager for machine learning.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-07-08T14:09:01.338Z">
+<meta property="og:updated_time" content="2019-08-30T15:43:00.946Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Understanding Python package installation from pip or conda or Linux distro package manager">
-<meta name="twitter:description" content="Conda(including both Anaconda and miniconda) is a well-known Python package manager for machine learning. This essay simply compares it with other Python package managers such as pip and apt and then">
+<meta name="twitter:description" content="Conda(including both Anaconda and miniconda) is a well-known Python package manager for machine learning.">
 
 
 
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-08 22:09:01" itemprop="dateModified" datetime="2019-07-08T22:09:01+08:00">2019-07-08</time>
+                <time title="Modified: 2019-08-30 23:43:00" itemprop="dateModified" datetime="2019-08-30T23:43:00+08:00">2019-08-30</time>
               </span>
             
           
@@ -427,8 +427,11 @@
       
 
       
-        <p>Conda(including both Anaconda and miniconda) is a well-known Python package manager for machine learning. This essay simply compares it with other Python package managers such as pip and apt and then takes down some frequently-used conda commands that might not be directly found on the main tutorials.<br>Both pip and conda have a good mechanism for installing and upgrading the packages and their indepences, and also vitual running environment like virtualenv and conda env.<br>I make the preference because conda not only includes all the python packages, but also some other very useful tools that Python uses. Besides, it has no need for the access of super-user privilege.</p>
-<h1 id="conda-install-pip-install-and-sudo-install"><a href="#conda-install-pip-install-and-sudo-install" class="headerlink" title="conda install, pip install and sudo install"></a>conda install, pip install and sudo install</h1><p>Generally speaking, conda is superber than pip and ‘apt install’(apt is for Ubuntu, pacman is for Arch Linux, yum is for CentOS…). <code>apt install</code> is used for installing python packages for the system because sometimes there are system programs that are based on Python. When in a virtual Python environment, you can use <code>pip</code> of this virtual environment to install packages of specific versions independent from those of the OS. Especially in conda virtual environment, both <code>pip</code> and <code>conda</code> are ok. In general, <code>pip</code> is for simple packages or packages that cannot be found in conda. <code>conda install</code> is more ‘intelligent’ because it detects conflicts and removing or upgrading other packages when installing.</p>
+        <p>Conda(including both Anaconda and miniconda) is a well-known Python package manager for machine learning. <a id="more"></a><br>This essay compares it with other Python package managers such as <code>pip</code> and <code>apt</code> and then takes down some frequently-used conda commands that might not be directly found on the main tutorials.<br>Both pip and conda have a good mechanism for installing and upgrading the packages and their indepences, and also vitual running environment like virtualenv and conda env.<br>I make the preference because conda not only includes all the python packages, but also some other very useful tools that Python uses.</p>
+<h1 id="conda-install-pip-install-and-sudo-install"><a href="#conda-install-pip-install-and-sudo-install" class="headerlink" title="conda install, pip install and sudo install"></a>conda install, pip install and sudo install</h1><p>Generally speaking, conda is superber than pip and ‘apt install’(apt is for Ubuntu, pacman is for Arch Linux, yum is for CentOS…) when handling dozens of virtual running environments. <code>apt install</code> is used for installing python packages for the system because sometimes there are system programs that are based on Python. By the way, it is not recommended to use <code>sudo pip install</code> in a Linux distro with package dependency structures like Arch or Debian due to confliction issues in /usr/local. Rather, one can use <code>pip install --user</code> to install for current user without super-user privilege.<br>When in a virtual Python environment, you can use <code>pip</code> of this virtual environment to install packages of specific versions independent from those of the OS. Especially in conda virtual environment, both <code>pip</code> and <code>conda</code> are ok. In general, <code>pip</code> is for simple packages or packages that cannot be found in conda. <code>conda install</code> is more ‘intelligent’ because it detects conflicts and removing or upgrading other packages when installing.</p>
+<p>To conclude, when you need virtual environment, use conda</p>
+<p>when you need to install for current user(which is usually enough), use pip install —user<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pip2 install --user -i https://pypi.tuna.tsinghua.edu.cn/simple ino</span><br></pre></td></tr></table></figure></p>
+<p>when you need to install system wide, use distro package manager.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S python2-pip</span><br></pre></td></tr></table></figure></p>
 <h1 id="Conda-basic-commands"><a href="#Conda-basic-commands" class="headerlink" title="Conda basic commands"></a>Conda basic commands</h1><p>To activate this environment(<code>myenv</code> for example), use:</p>
 <blockquote>
 <p>source activate myenv</p>
@@ -574,14 +577,40 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">100</span>
+                    <span class="site-state-item-count">109</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
               
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">115</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           

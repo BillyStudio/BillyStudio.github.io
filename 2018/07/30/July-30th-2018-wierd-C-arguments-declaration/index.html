@@ -70,7 +70,7 @@
     root: '/',
     scheme: 'Muse',
     version: '7.2.0',
-    sidebar: {"position":"right","display":"post","offset":12,"onmobile":false},
+    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
     back2top: true,
     back2top_sidebar: false,
     fancybox: false,
@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="今天看到一种比较另类的C语言函数参数声明的写法, 编译居然能通过, 记录一下.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-07-07T00:50:38.621Z">
+<meta property="og:updated_time" content="2019-08-24T07:23:06.503Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Wierd | 不常见的C语言写法">
 <meta name="twitter:description" content="今天看到一种比较另类的C语言函数参数声明的写法, 编译居然能通过, 记录一下.">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-07-07 08:50:38" itemprop="dateModified" datetime="2019-07-07T08:50:38+08:00">2019-07-07</time>
+                <time title="Modified: 2019-08-24 15:23:06" itemprop="dateModified" datetime="2019-08-24T15:23:06+08:00">2019-08-24</time>
               </span>
             
           
@@ -430,6 +430,7 @@
         <p>今天看到一种比较另类的C语言函数参数声明的写法, 编译居然能通过, 记录一下. <a id="more"></a></p>
 <h1 id="一种-C-语言参数声明写法"><a href="#一种-C-语言参数声明写法" class="headerlink" title="一种 C 语言参数声明写法"></a>一种 C 语言参数声明写法</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;stdio.h&gt;</span><br><span class="line"></span><br><span class="line">int main(argc, argv)</span><br><span class="line">int argc;</span><br><span class="line">char const *argv[];</span><br><span class="line">&#123;</span><br><span class="line">	for (int i=0; i&lt;argc; ++i) printf(&quot;%s%c&quot;, argv[i], i==argc-1?&apos;\n&apos;:&apos; &apos;);</span><br><span class="line">	return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>一种C语言Hello world的精简形式 (虽然会报出很多Warnings)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">main()&#123;printf(&quot;Hello, world!&quot;);&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="tmp-register"><a href="#tmp-register" class="headerlink" title="tmp register"></a>tmp register</h1><p>A very good way to control temperarily used memory.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">#define UNUSED(x) ((void)(x))</span><br><span class="line"></span><br><span class="line">#ifdef __cplusplus</span><br><span class="line">  #define   __I     volatile             /*!&lt; Defines &apos;read only&apos; permissions */</span><br><span class="line">#else</span><br><span class="line">  #define   __I     volatile const       /*!&lt; Defines &apos;read only&apos; permissions */</span><br><span class="line">#endif</span><br><span class="line">#define     __O     volatile             /*!&lt; Defines &apos;write only&apos; permissions */</span><br><span class="line">#define     __IO    volatile             /*!&lt; Defines &apos;read / write&apos; permissions */</span><br><span class="line"></span><br><span class="line">#define __HAL_RCC_USART1_CLK_ENABLE()   do &#123; \</span><br><span class="line">                                        __IO uint32_t tmpreg = 0x00U; \</span><br><span class="line">                                        SET_BIT(RCC-&gt;APB2ENR, RCC_APB2ENR_USART1EN);\</span><br><span class="line">                                        /* Delay after an RCC peripheral clock enabling */ \</span><br><span class="line">                                        tmpreg = READ_BIT(RCC-&gt;APB2ENR, RCC_APB2ENR_USART1EN);\</span><br><span class="line">                                        UNUSED(tmpreg); \</span><br><span class="line">                                          &#125; while(0)</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -558,14 +559,40 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">100</span>
+                    <span class="site-state-item-count">109</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
               
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">115</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           
@@ -596,7 +623,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一种-C-语言参数声明写法"><span class="nav-number">1.</span> <span class="nav-text">一种 C 语言参数声明写法</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一种-C-语言参数声明写法"><span class="nav-number">1.</span> <span class="nav-text">一种 C 语言参数声明写法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#tmp-register"><span class="nav-number">2.</span> <span class="nav-text">tmp register</span></a></li></ol></div>
             
 
           </div>
