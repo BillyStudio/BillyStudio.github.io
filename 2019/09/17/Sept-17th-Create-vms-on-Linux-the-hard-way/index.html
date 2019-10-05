@@ -90,19 +90,19 @@
 
 
 
-  <meta name="description" content="Two ways of using vms on Linux are introduced. One is using virt-manager GUI, another is using the raw qemu-system. 12pacman -S qemu bridge-utils iptables dnsmasqpacman -S libvirt check for module loa">
+  <meta name="description" content="Two ways of using vms on Linux are introduced.">
 <meta name="keywords" content="Linux,qemu,kvm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Creating virtual machiness on Linux --- the hard way">
 <meta property="og:url" content="http://BillyStudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="Two ways of using vms on Linux are introduced. One is using virt-manager GUI, another is using the raw qemu-system. 12pacman -S qemu bridge-utils iptables dnsmasqpacman -S libvirt check for module loa">
+<meta property="og:description" content="Two ways of using vms on Linux are introduced.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/check-module.png">
-<meta property="og:updated_time" content="2019-09-17T07:47:17.687Z">
+<meta property="og:updated_time" content="2019-10-05T14:53:09.009Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Creating virtual machiness on Linux --- the hard way">
-<meta name="twitter:description" content="Two ways of using vms on Linux are introduced. One is using virt-manager GUI, another is using the raw qemu-system. 12pacman -S qemu bridge-utils iptables dnsmasqpacman -S libvirt check for module loa">
+<meta name="twitter:description" content="Two ways of using vms on Linux are introduced.">
 <meta name="twitter:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/check-module.png">
 
 
@@ -355,13 +355,23 @@
                 
               
 
-              <time title="Created: 2019-09-17 15:27:41 / Modified: 15:47:17" itemprop="dateCreated datePublished" datetime="2019-09-17T15:27:41+08:00">2019-09-17</time>
+              <time title="Created: 2019-09-17 15:27:41" itemprop="dateCreated datePublished" datetime="2019-09-17T15:27:41+08:00">2019-09-17</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-10-05 22:53:09" itemprop="dateModified" datetime="2019-10-05T22:53:09+08:00">2019-10-05</time>
+              </span>
             
           
 
@@ -419,14 +429,18 @@
       
 
       
-        <p>Two ways of using vms on Linux are introduced. One is using virt-manager GUI, another is using the raw <code>qemu-system</code>.</p>
+        <p>Two ways of using vms on Linux are introduced.<a id="more"></a> One is using virt-manager GUI, another is using the raw <code>qemu-system</code>.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pacman -S qemu bridge-utils iptables dnsmasq</span><br><span class="line">pacman -S libvirt</span><br></pre></td></tr></table></figure>
 <p>check for module loading:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep kvm</span><br><span class="line">lsmod | grep virtio</span><br></pre></td></tr></table></figure></p>
 <p><img src="check-module.png" alt></p>
+<p>To auto load a module at boot, create a file like ‘/etc/modules-load.d/virtio.conf’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Load virtio at boot</span><br><span class="line">virtio</span><br></pre></td></tr></table></figure></p>
 <h2 id="for-GUI-user"><a href="#for-GUI-user" class="headerlink" title="for GUI user"></a>for GUI user</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S virt-manager ebtables</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod --append --groups libvirt $(whoami)</span><br><span class="line">sudo systemctl start libvirtd</span><br></pre></td></tr></table></figure>
 <p>check for nat:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo virsh net-list --all</span><br><span class="line"># sudo virsh net-start default</span><br></pre></td></tr></table></figure></p>
 <p>Then install using GUI.<br>if you want a raw image, create the img file by yourself<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create -f raw imgfile 20G</span><br></pre></td></tr></table></figure></p>
+<h2 id="Setting-socks5-proxy"><a href="#Setting-socks5-proxy" class="headerlink" title="Setting socks5 proxy"></a>Setting socks5 proxy</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install tsocks</span><br></pre></td></tr></table></figure>
+<p>edit /etc/tsocks.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">local = 192.168.122.0/255.255.255.0</span><br><span class="line">local = 10.0.0.0/255.0.0.0</span><br><span class="line"></span><br><span class="line">server = 192.168.122.1</span><br><span class="line"># Server type defaults to 4 so we need to specify it as 5 for this one</span><br><span class="line">server_type = 5</span><br><span class="line"># The port defaults to 1080 but I&apos;ve stated it here for clarity </span><br><span class="line">server_port = 1080</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo -s</span><br><span class="line">tsocks apt-get install -y package-name</span><br></pre></td></tr></table></figure>
 
       
     </div>
@@ -619,7 +633,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#for-GUI-user"><span class="nav-number">1.</span> <span class="nav-text">for GUI user</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#for-GUI-user"><span class="nav-number">1.</span> <span class="nav-text">for GUI user</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Setting-socks5-proxy"><span class="nav-number">2.</span> <span class="nav-text">Setting socks5 proxy</span></a></li></ol></div>
             
 
           </div>
