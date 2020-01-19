@@ -99,7 +99,7 @@
 <meta property="og:description" content="LevelDB is a kind of key-value C++ database developped by Google engineers.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://billystudio.github.io/2019/09/13/Sept-13th-cpp-examples-of-leveldb/check-dir.png">
-<meta property="og:updated_time" content="2019-09-13T12:51:34.853Z">
+<meta property="og:updated_time" content="2019-12-13T03:46:02.500Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++ examples of leveldb">
 <meta name="twitter:description" content="LevelDB is a kind of key-value C++ database developped by Google engineers.">
@@ -355,13 +355,23 @@
                 
               
 
-              <time title="Created: 2019-09-13 20:28:46 / Modified: 20:51:34" itemprop="dateCreated datePublished" datetime="2019-09-13T20:28:46+08:00">2019-09-13</time>
+              <time title="Created: 2019-09-13 20:28:46" itemprop="dateCreated datePublished" datetime="2019-09-13T20:28:46+08:00">2019-09-13</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-12-13 11:46:02" itemprop="dateModified" datetime="2019-12-13T11:46:02+08:00">2019-12-13</time>
+              </span>
             
           
 
@@ -421,10 +431,14 @@
       
         <p>LevelDB is a kind of key-value C++ database developped by Google engineers. <a id="more"></a></p>
 <p>My installation script is simple on Arch Linux:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu leveldb</span><br></pre></td></tr></table></figure></p>
-<h2 id="Example-1"><a href="#Example-1" class="headerlink" title="Example 1"></a>Example 1</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;assert.h&gt;</span><br><span class="line">#include &quot;leveldb/db.h&quot;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    leveldb::DB *db;</span><br><span class="line">    leveldb::Options options;</span><br><span class="line">    options.create_if_missing = true;</span><br><span class="line"></span><br><span class="line">    leveldb::Status status = leveldb::DB::Open(options, &quot;/tmp/testdb&quot;, &amp;db);</span><br><span class="line">    assert(status.ok());</span><br><span class="line"></span><br><span class="line">    delete db;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Example-1"><a href="#Example-1" class="headerlink" title="Example 1"></a>Example 1</h2><p>We create and then delete a leveldb database instance. Another important thing is to learn how to build with leveldb dynamic link library.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;assert.h&gt;</span><br><span class="line">#include &quot;leveldb/db.h&quot;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    leveldb::DB *db;</span><br><span class="line">    leveldb::Options options;</span><br><span class="line">    options.create_if_missing = true;</span><br><span class="line"></span><br><span class="line">    leveldb::Status status = leveldb::DB::Open(options, &quot;/tmp/testdb&quot;, &amp;db);</span><br><span class="line">    assert(status.ok());</span><br><span class="line"></span><br><span class="line">    delete db;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>compile and link: <code>g++ test-leveldb.cc -Iinclude -l:libleveldb.so</code></p>
-<h2 id="Example-2"><a href="#Example-2" class="headerlink" title="Example 2"></a>Example 2</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;assert.h&gt;</span><br><span class="line">#include &quot;leveldb/db.h&quot;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    leveldb::DB *db;</span><br><span class="line">    leveldb::Options options;</span><br><span class="line">    options.create_if_missing = true;</span><br><span class="line"></span><br><span class="line">    // open</span><br><span class="line">    leveldb::Status status = leveldb::DB::Open(options, &quot;/tmp/testdb&quot;, &amp;db);</span><br><span class="line">    assert(status.ok());</span><br><span class="line"></span><br><span class="line">    string key = &quot;name&quot;;</span><br><span class="line">    string value = &quot;shane&quot;;</span><br><span class="line"></span><br><span class="line">    // write</span><br><span class="line">    status = db-&gt;Put(leveldb::WriteOptions(), key, value);</span><br><span class="line">    assert(status.ok());</span><br><span class="line"></span><br><span class="line">    // read</span><br><span class="line">    status = db-&gt;Get(leveldb::ReadOptions(), key, &amp;value);</span><br><span class="line">    assert(status.ok());</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; value &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    // delete</span><br><span class="line">    status = db-&gt;Delete(leveldb::WriteOptions(), key);</span><br><span class="line">    assert(status.ok());</span><br><span class="line"></span><br><span class="line">    status = db-&gt;Get(leveldb::ReadOptions(), key, &amp;value);</span><br><span class="line">    if (!status.ok()) &#123;</span><br><span class="line">        cerr &lt;&lt; key &lt;&lt; &quot;    &quot; &lt;&lt; status.ToString() &lt;&lt; endl;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        cout &lt;&lt; key &lt;&lt; &quot;===&quot; &lt;&lt; value &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //close</span><br><span class="line">    delete db;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>-Iinclude</code> means searching <code>*.h</code> files under <code>/usr/include</code>, so that we can write the relevant referencing path as <code>#include &lt;leveldb/db.h&gt;</code> since the full path of the header file is <code>/usr/include/leveldb/db.h</code>. By default <code>/usr/include</code> is included by gcc. Therefore, omitting <code>-Iinclude</code> is also acceptable. </p>
+<p><code>-l:libleveldb.so</code> means searching for <code>libleveldb.so</code> under link library path, which by default is <code>/usr/lib/</code>. <code>-l:libleveldb.so</code> also has a shorten form: <code>-lleveldb</code>.</p>
+<h2 id="Example-2"><a href="#Example-2" class="headerlink" title="Example 2"></a>Example 2</h2><p>Create, Delete, Update, Query<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;assert.h&gt;</span><br><span class="line">#include &quot;leveldb/db.h&quot;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    leveldb::DB *db;</span><br><span class="line">    leveldb::Options options;</span><br><span class="line">    options.create_if_missing = true;</span><br><span class="line"></span><br><span class="line">    // open</span><br><span class="line">    leveldb::Status status = leveldb::DB::Open(options, &quot;/tmp/testdb&quot;, &amp;db);</span><br><span class="line">    assert(status.ok());</span><br><span class="line"></span><br><span class="line">    string key = &quot;name&quot;;</span><br><span class="line">    string value = &quot;shane&quot;;</span><br><span class="line"></span><br><span class="line">    // write</span><br><span class="line">    status = db-&gt;Put(leveldb::WriteOptions(), key, value);</span><br><span class="line">    assert(status.ok());</span><br><span class="line"></span><br><span class="line">    // read</span><br><span class="line">    status = db-&gt;Get(leveldb::ReadOptions(), key, &amp;value);</span><br><span class="line">    assert(status.ok());</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; value &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    // delete</span><br><span class="line">    status = db-&gt;Delete(leveldb::WriteOptions(), key);</span><br><span class="line">    assert(status.ok());</span><br><span class="line"></span><br><span class="line">    status = db-&gt;Get(leveldb::ReadOptions(), key, &amp;value);</span><br><span class="line">    if (!status.ok()) &#123;</span><br><span class="line">        cerr &lt;&lt; key &lt;&lt; &quot;    &quot; &lt;&lt; status.ToString() &lt;&lt; endl;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        cout &lt;&lt; key &lt;&lt; &quot;===&quot; &lt;&lt; value &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //close</span><br><span class="line">    delete db;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>compile and link as example 1 shows.<br>run <code>./a.out</code>. /tmp/testdb will appear:<br><img src="check-dir.png" alt></p>
+<p>Here we can notice that even though <code>db</code> is deleted, the files created under <code>/tmp/cduq-db</code> are still exist. If you want to delete this file, we can use <code>leveldb::DestroyDB</code>.</p>
 
       
     </div>
@@ -555,40 +569,14 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">109</span>
+                    <span class="site-state-item-count">122</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
               
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                      <a href="/categories/">
-                    
-                  
-                    <span class="site-state-item-count">4</span>
-                    <span class="site-state-item-name">categories</span>
-                  </a>
-                </div>
-              
 
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                      <a href="/tags/">
-                    
-                  
-                    <span class="site-state-item-count">115</span>
-                    <span class="site-state-item-name">tags</span>
-                  </a>
-                </div>
               
             </nav>
           
@@ -640,7 +628,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -800,7 +788,7 @@
   var gitalk = new Gitalk({
     clientID: '1b976dbc382f1d1e40ad',
     clientSecret: '31090c96642b800a520a7fce87050edb2bcaaeb7',
-    repo: 'Blog-discuss-repo',
+    repo: 'Blog-de-Shane',
     owner: 'BillyStudio',
     admin: ['BillyStudio'],
     id: md5(location.pathname),

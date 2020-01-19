@@ -1,0 +1,869 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <meta name="description" content="“安全即服务”作为基于微服务的云应用">
+<meta name="keywords" content="Academic">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Security-as-a-Service for Microservices-Based Cloud Applications">
+<meta property="og:url" content="http://BillyStudio.github.io/2019/11/21/Security-as-a-Service-for-Microservices-Based-Cloud-Applications/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="“安全即服务”作为基于微服务的云应用">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://billystudio.github.io/2019/11/21/Security-as-a-Service-for-Microservices-Based-Cloud-Applications/1a.png">
+<meta property="og:image" content="http://billystudio.github.io/2019/11/21/Security-as-a-Service-for-Microservices-Based-Cloud-Applications/1b.png">
+<meta property="og:image" content="http://billystudio.github.io/2019/11/21/Security-as-a-Service-for-Microservices-Based-Cloud-Applications/1c.png">
+<meta property="og:updated_time" content="2019-11-24T14:48:17.667Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Security-as-a-Service for Microservices-Based Cloud Applications">
+<meta name="twitter:description" content="“安全即服务”作为基于微服务的云应用">
+<meta name="twitter:image" content="http://billystudio.github.io/2019/11/21/Security-as-a-Service-for-Microservices-Based-Cloud-Applications/1a.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://BillyStudio.github.io/2019/11/21/Security-as-a-Service-for-Microservices-Based-Cloud-Applications/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>Security-as-a-Service for Microservices-Based Cloud Applications | Shane's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shane's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2019/11/21/Security-as-a-Service-for-Microservices-Based-Cloud-Applications/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shane Wang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shane's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Security-as-a-Service for Microservices-Based Cloud Applications
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2019-11-21 23:56:45" itemprop="dateCreated datePublished" datetime="2019-11-21T23:56:45+08:00">2019-11-21</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2019-11-24 22:48:17" itemprop="dateModified" datetime="2019-11-24T22:48:17+08:00">2019-11-24</time>
+              </span>
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span title="Symbols count in article"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              
+              <span title="Reading time"></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>“安全即服务”作为基于微服务的云应用 <a id="more"></a></p>
+<h2 id="Abstract"><a href="#Abstract" class="headerlink" title="Abstract"></a>Abstract</h2><p>Microservice architecture allows different parts of an application to be developed, deployed and scaled independently, therefore becoming a trend for developing cloud applications.<br>微服务架构使得我们能够独立地开发、部署和拓展一个应用中的不同部分，因而成为云应用开发的主流。<br>However, it comes with challenging security issues.<br>然而，安全问题的挑战随之而来。<br>First, the network complexity introduced by the large number of microservices greatly increases the difficulty in monitoring the security of the entire application.<br>首先，大量微服务带来的网络复杂度使得监控整个应用的安全性的难度大大增加。<br>Second, microservices are often designed to completely trust each other, therefore compromise of a single microservice may bring down the entire application.<br>第二，微服务设计为是相互之间完全信任的，所以存在单个微服务出现问题导致整体应用出现问题。<br>The problems are only exacerbated by the cloud, since applications no longer have complete control over their networks.<br>由于应用对网络不再有完全的操控能力，因此云是加剧该问题的唯一因素。<br>In this paper, we propose a design for security-as-a-service for microservices-based cloud applications.<br>本文提出了“安全即服务”设计理念用于基于微服务的云应用。<br>By adding a new API primitive <em>FlowTap</em> for the network hypervisor, we build a flexible monitoring and policy enforcement infrastructure for network traffic to secure cloud applications.<br>借助在网络监控器中添加一个全新的“水龙头“API, 本文于网络流量中构建了一个灵活的监控和策略执行机构来保证云应用的安全。<br>We demonstrate the effectiveness of our solution by deploying the Bro network monitor using FlowTap.<br>通过使用”水龙头“构建一个兄弟网络监控，我们证明了方案的有效性。<br>Results show that our solution is flexible enough to support various kinds of monitoring scenarios and policies and it incurs minimal overhead(~6%) for real world usage.<br>结果显示，此方案足够灵活支持各种监控情景和策略，在现实使用中产生的最小开销为6%。<br>As a result, cloud applications can leverage our solution to deploy network security monitors to flexibly detect and block threats both external and internal to their network.<br>所以，将我们的方案部署在云应用网络安全监控器上，可以从外部和内部灵活检测和阻碍威胁。</p>
+<p>Keywords: microservices 微服务； network monitoring 网络监控； security 安全；</p>
+<h2 id="Introduction"><a href="#Introduction" class="headerlink" title="Introduction"></a>Introduction</h2><p>There are multiple trends that are forcing modern cloud applications to evolve.<br>Users expect rich, interactive, and dynamic user experience on a wide variety of client devices.<br>Applications must be highly scalable, highly available, and must run on cloud environments.<br>Organizations want to roll out frequent update - sometimes, even multiple times a day.<br>Consequently, it is no longer adequate to develop monolithic web applications.<br>The predominant way to address this problem today is to use an alternate architecture - known as microservices architecture - that decomposes a monolithic application into a set of narrowly focussed, independently deployable services, called microservices.<br>The popularity of this architecture is evident from the report by the popular jobs portal indeed.com that the number of job openings on microservices-related technologies, such as JSON and REST, has grown more than 100 fold in the last six years, whereas jobs in similar technology areas like SOAP and XML have stayed nearly identical.</p>
+<p>The microservices architecture, due to its new design paradigm, introduces two major security challenges.<br>First, the microservices design creates many smaller applications interacting among themselves that results in complex network-activity.<br>This makes monitoring and securing networks for the overall application and individual microservices very challenging.<br>Second, the trusted computing base(TCB) for cloud applications usually includes all of the component microservices and compromise of one could result in the entire application’s compromise.<br>It gets even more challenging in the public cloud environment where the application administrator has limited access to the application network.</p>
+<p>One way to address these chellenges is to leverage the software defined networking (SDN) capabilities provided by modern cloud networking and program the networks in a way that monitors the complex network interactions and enforces policies on them.<br>For example, SDN provides the ability to scan through network packets at every forwarding element and control the forwarding as per the application requirements.<br>This also allows to control the granularity of the network flows(while processing) and even changing them dynamically based on attact patterns and application behaviors.<br>It also allows for passive monitoring (e.g. via copy-and-forward) and active rerouting (e.g. via changing the forwarding destination) that can be leveraged based on security requirements.</p>
+<p>In this paper, we propose the design, development, and evaluation of a security-as-service infrastructure for microservices-based cloud applications.<br>We propose a cloud-based network security framework that helps cloud application administrators/providers to construct a global view of their application, even when its components are distributed throughout the cloud.<br>The framework also enables application providers/administrators to flexibly implement their own security control over its services, thus preventing a compromised service from compromising the rest of the application or the cloud platform/hypervisor.<br>Our design is motivated by the micro-kernel design, where a security kernel monitors and mediates security critical operations performed by “server” (aka services) running atop, effectively removing the services from the TCB of the application.</p>
+<h2 id="Background-and-Problem"><a href="#Background-and-Problem" class="headerlink" title="Background and Problem"></a>Background and Problem</h2><p>In this section, we illustrate microservice architecture with an example application — an online DVD rental store, and discuss security challenges of this design paradigm.<br>该部分中，使用一个在线 DVD 出租平台应用实例来说明微服务体系结构，并讨论这种设计模式的安全挑战。<br>Other applications will have different service decomposition and interaction model but the challenges are similar.<br>虽然其他应用会有不同的服务组成和交互模型但是挑战类型是类似的。</p>
+<p>A. Microservice Architecture<br>Microservice architecture decomposes an application into a set of narrowly focused and independently deployable services, a.k.a. microservices, which may communicate among themselves using lightweight mechanisms, such as REST APIs.<br>微服务体系结构把应用分解为一系列专注于实现某一小部分功能的，可独立部署的服务，即微服务。这些微服务之间可以通过轻量化的机制，如 REST(REpresentation State Transfer) API 相互通信。<br>Some examples of popular online services using this design include Netflix, Ebay, and Gilt.<br>目前一些使用这种设计的在线服务的例子包括 Netflix, Ebay, Gilt(打折购物网上平台)<br>In contract, traditional internet applications are often designed using a three-tier model with a monolithic application implementing all of the business logic, as shown in Figure 1(a).<br>作为对比，传统的互联网应用通常设计为三层模式，在单个应用处理所有业务逻辑，如图1(a)所示。<br><img src="1a.png" alt="A monolithic DVD rental store"><br>In this example, all the logic for renting DVDs runs in a single process and is developed as a single executable(i.e. a WAR file).<br>在这个例子中，所有租赁 DVD 的逻辑在单一进程中运行并且部署为一个单一可执行文件（即一个 WAR 文件）。<br>For scalability, multiple application instances are deployed horizontally behind a load-balancer.<br>考虑到规模的拓展，多个应用实例平行地部署在一个负载均衡器后。</p>
+<p>There are three problems with monolithic applications.<br>单个应用存在三个问题。<br>First, different components of the application have different scaling requirements — for instance, creating new customers is less frequent than customers renting DVDs.<br>第一，应用中的不同部分有不同规模要求 — 比如，消费者租借DVD的操作比新建消费者用户的操作要频繁许多。<br>However, scaling a monolithic application requires the entire application to be replicated, which requires greater resources.<br>然而，扩大单一应用的规模使整个应用重复性地扩大，这会消耗更大的资源。<br>Second, monolithic architecture often meeans technology lock-in — it is difficult for application components to evolve separately and adopt new technologies (e.g. new databases, new programming languages).<br>第二，单个的体系结构通常意味着技术的封闭 — 独立升级和采用新的技术（如新的数据库和新的编程语言）对于应用各部分来说是比较难的。<br>Moreover, a small change made to the application requires the entire application to be re-built.<br>第三，对应用的一个小的改动会使得整个应用重新构建。<br>Finally, as the application becomes more complex, it is often difficult to separate out DevOps responsibilities, which results in slow development and deployment.<br>最后，随着应用变得更加复杂，通常难以对开发与运维的责任进行拆分，导致了开发与部署缓慢。</p>
+<p>Microservice architecture addresses these problems by decomposing a complex monolithic application into a set of small and autonomous services that work together.<br>微服务体系架构解决这些问题通过将一个复杂的单个应用分解为能自动化执行的小服务的集合。<br>In Figure 1(b), the DVD rental application is broken into many small and decoupled tasks, and each task is<br>在图 1(b) 中，DVD 租借应用分为许多小的任务集合。并且每个任务由一个小的服务来实现。<br><img src="1b.png" alt="A DVD rental store based on microservice architecture"><br>This decomposition allows different services to be built, deployed, managed, and scaled independently.<br>这种分解允许不同的服务独立地构建、部署、管理和扩大规模。<br>During this decomposition, all the function calls across components are replaced by inter-service communications that are implemented via well-defined API interfaces, as illustrated in the Figure 1(b) using connections.<br>在此分解过程中，各部件之间的函数调用被服务间通信的 API 实现所替代，如图 1(b) ，使用连接线来表示。</p>
+<p>B. Security Issues<br>Microservice architecture does not make an application any simpler, it only distributes the application logic into multiple smaller components, resulting in a much more complex network interaction model between components, which is evident even in this simplified example in Figure 1(b).<br>即使从图 1(b) 这个精简的例子中也可以发现，微服务对于简化应用没有丝毫帮助，它所起的作用是将单个应用的逻辑分布到多个小的部件中去，这会产生一个更加复杂的网络交互模型。<br>When a real world application is decomposed, it can easily create hundreds of microservices, as seen in the architecture overview of Hailo, an online cab reservation application, depicted in Figure 1(c).<br>当一个现实世界应用被分解时，很容易就能产生数以百计的微服务，如图 1(c) 中的在线打车应用 Hailo 所示。<br><img src="1c.png" alt="Microservice architecture for Hailo"><br>Around the circle are microservices and the lines are the communications between them.<br>圆圈是微服务，</p>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/Academic/" rel="tag"># Academic</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2019/11/12/Nov-12th-2019-Building-personal-budgets-and-bills-database-against-consumerism/" rel="next" title="Building personal budgets and bills database against consumerism">
+                <i class="fa fa-chevron-left"></i> Building personal budgets and bills database against consumerism
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2019/11/23/Nov-23rd-Translation-of-Bitcoin-notes/" rel="prev" title="Translation of Bitcoin notes">
+                Translation of Bitcoin notes <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Shane Wang</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">122</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Abstract"><span class="nav-number">1.</span> <span class="nav-text">Abstract</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Introduction"><span class="nav-number">2.</span> <span class="nav-text">Introduction</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Background-and-Problem"><span class="nav-number">3.</span> <span class="nav-text">Background and Problem</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shane Wang</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total"></span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total"></span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '1b976dbc382f1d1e40ad',
+    clientSecret: '31090c96642b800a520a7fce87050edb2bcaaeb7',
+    repo: 'Blog-de-Shane',
+    owner: 'BillyStudio',
+    admin: ['BillyStudio'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

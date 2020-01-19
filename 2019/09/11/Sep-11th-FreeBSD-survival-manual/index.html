@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="BSD is a very stable and secure UNIX operating system.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-09-13T11:18:11.400Z">
+<meta property="og:updated_time" content="2020-01-10T17:42:14.703Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="FreeBSD survival manual">
 <meta name="twitter:description" content="BSD is a very stable and secure UNIX operating system.">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-09-13 19:18:11" itemprop="dateModified" datetime="2019-09-13T19:18:11+08:00">2019-09-13</time>
+                <time title="Modified: 2020-01-11 01:42:14" itemprop="dateModified" datetime="2020-01-11T01:42:14+08:00">2020-01-11</time>
               </span>
             
           
@@ -427,8 +427,9 @@
       
 
       
-        <p>BSD is a very stable and secure UNIX operating system. <a id="more"></a></p>
-<h1 id="Virtual-machine-environment"><a href="#Virtual-machine-environment" class="headerlink" title="Virtual machine environment"></a>Virtual machine environment</h1><h2 id="Check-kvm-support"><a href="#Check-kvm-support" class="headerlink" title="Check kvm support"></a>Check kvm support</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsmod|grep kvm</span><br><span class="line">lsmod|grep virtio</span><br></pre></td></tr></table></figure>
+        <p>BSD is a very stable and secure UNIX operating system. <a id="more"></a> BUT:<br>(On Jan 11th 2020) FreeBSD doesn’t well support Docker. This disadvantage will deter the testing procedure and deployment procedure. Spending lots of time learning this OS is not suggested now. If there is some time left, going to explore Kali Linux, Black Arch, RHEL, MacOS is more valuable.</p>
+<h1 id="Virtual-machine-environment"><a href="#Virtual-machine-environment" class="headerlink" title="Virtual machine environment"></a>Virtual machine environment</h1><p>Try FreeBSD virtual machine on Linux.</p>
+<h2 id="Check-kvm-support"><a href="#Check-kvm-support" class="headerlink" title="Check kvm support"></a>Check kvm support</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsmod|grep kvm</span><br><span class="line">lsmod|grep virtio</span><br></pre></td></tr></table></figure>
 <p>If not started, use <code>sudo modprobe</code> to load module.</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">wget http://mirrors.ustc.edu.cn/freebsd/releases/VM-IMAGES/12.0-RELEASE/amd64/Latest/FreeBSD-12.0-RELEASE-amd64.qcow2.xz</span><br><span class="line">cp FreeBSD-12.0-RELEASE-amd64.raw.xz FreeBSD-12.0-RELEASE-amd64-copy.raw.xz</span><br><span class="line">xz -d FreeBSD-12.0-RELEASE-amd64.raw.xz</span><br><span class="line">xz -d FreeBSD-12.0-RELEASE-amd64-copy.raw.xz</span><br></pre></td></tr></table></figure>
 <p>create a shell scrpt for starting two virtual machines:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">qemu-system-x86_64 -enable-kvm \</span><br><span class="line">-m 1G -name FreeBSD \</span><br><span class="line">-drive file=FreeBSD-12.0-RELEASE-amd64.raw,index=1,media=disk,format=raw \</span><br><span class="line">-chardev socket,path=/tmp/port1,server,nowait,id=port1-char \</span><br><span class="line">-device virtio-serial \</span><br><span class="line">-device virtserialport,id=port1,chardev=port1-char,name=org.freebsd.port.1 \</span><br><span class="line">-net user,hostfwd=tcp::10022-:22 \</span><br><span class="line">-net nic</span><br><span class="line"></span><br><span class="line">qemu-system-x86_64 -enable-kvm \</span><br><span class="line">-m 1G -name FreeBSD2 \</span><br><span class="line">-drive file=FreeBSD-12.0-RELEASE-amd64-copy.raw,index=2,media=disk,format=raw \</span><br><span class="line">-chardev socket,path=/tmp/port2,server,nowait,id=port2-char \</span><br><span class="line">-device virtio-serial \</span><br><span class="line">-device virtserialport,id=port2,chardev=port2-char,name=org.freebsd.port.2 \</span><br><span class="line">-net user,hostfwd=tcp::20022-:22 \</span><br><span class="line">-net nic</span><br></pre></td></tr></table></figure></p>
@@ -569,40 +570,14 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">109</span>
+                    <span class="site-state-item-count">122</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
               
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                      <a href="/categories/">
-                    
-                  
-                    <span class="site-state-item-count">4</span>
-                    <span class="site-state-item-name">categories</span>
-                  </a>
-                </div>
-              
 
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                      <a href="/tags/">
-                    
-                  
-                    <span class="site-state-item-count">115</span>
-                    <span class="site-state-item-name">tags</span>
-                  </a>
-                </div>
               
             </nav>
           
@@ -654,7 +629,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -814,7 +789,7 @@
   var gitalk = new Gitalk({
     clientID: '1b976dbc382f1d1e40ad',
     clientSecret: '31090c96642b800a520a7fce87050edb2bcaaeb7',
-    repo: 'Blog-discuss-repo',
+    repo: 'Blog-de-Shane',
     owner: 'BillyStudio',
     admin: ['BillyStudio'],
     id: md5(location.pathname),

@@ -90,18 +90,26 @@
 
 
 
-  <meta name="description" content="实验室搬砖生涯的开始.">
-<meta name="keywords" content="Spring,Java">
+  <meta name="description" content="Create Spring Boot project">
+<meta name="keywords" content="Spring Boot,Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="创建第一个 Spring Boot 项目">
 <meta property="og:url" content="http://BillyStudio.github.io/2018/12/10/Dec-10th-First-Spring-Boot-Project/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="实验室搬砖生涯的开始.">
+<meta property="og:description" content="Create Spring Boot project">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-18T06:54:36.437Z">
+<meta property="og:image" content="http://billystudio.github.io/2018/12/10/Dec-10th-First-Spring-Boot-Project/snapshot1.png">
+<meta property="og:image" content="http://billystudio.github.io/2018/12/10/Dec-10th-First-Spring-Boot-Project/snapshot2.png">
+<meta property="og:image" content="http://billystudio.github.io/2018/12/10/Dec-10th-First-Spring-Boot-Project/result.png">
+<meta property="og:image" content="http://billystudio.github.io/2018/12/10/Dec-10th-First-Spring-Boot-Project/curl-str.png">
+<meta property="og:image" content="http://billystudio.github.io/2018/12/10/Dec-10th-First-Spring-Boot-Project/before-actuator.png">
+<meta property="og:image" content="http://billystudio.github.io/2018/12/10/Dec-10th-First-Spring-Boot-Project/after-actuator.png">
+<meta property="og:image" content="http://billystudio.github.io/2018/12/10/Dec-10th-First-Spring-Boot-Project/actuator-web.png">
+<meta property="og:updated_time" content="2019-11-09T06:10:41.846Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="创建第一个 Spring Boot 项目">
-<meta name="twitter:description" content="实验室搬砖生涯的开始.">
+<meta name="twitter:description" content="Create Spring Boot project">
+<meta name="twitter:image" content="http://billystudio.github.io/2018/12/10/Dec-10th-First-Spring-Boot-Project/snapshot1.png">
 
 
 
@@ -368,7 +376,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-18 14:54:36" itemprop="dateModified" datetime="2019-08-18T14:54:36+08:00">2019-08-18</time>
+                <time title="Modified: 2019-11-09 14:10:41" itemprop="dateModified" datetime="2019-11-09T14:10:41+08:00">2019-11-09</time>
               </span>
             
           
@@ -427,11 +435,46 @@
       
 
       
-        <p>实验室搬砖生涯的开始. <a id="more"></a><br>使用到的相关版本:<br>jdk 1.8<br>IDEA 2018.1<br>Spring Boot 2.1.1</p>
+        <p>Create Spring Boot project <a id="more"></a><br>使用到的相关版本:<br>jdk 1.8<br>IDE(VSCode or IDEA)<br>Spring Boot 2.1.1</p>
 <h1 id="使用-IDEA"><a href="#使用-IDEA" class="headerlink" title="使用 IDEA"></a>使用 IDEA</h1><p>新建 Spring Initializr 项目</p>
 <p>packing 要选 jar</p>
 <p>勾选 Web MySQL MyBatis 依赖</p>
-<h1 id="使用-Eclipse"><a href="#使用-Eclipse" class="headerlink" title="使用 Eclipse"></a>使用 Eclipse</h1>
+<p><img src="snapshot1.png" alt="pic1"></p>
+<p><img src="snapshot2.png" alt="pic2"></p>
+<h1 id="使用-VSCode"><a href="#使用-VSCode" class="headerlink" title="使用 VSCode"></a>使用 VSCode</h1><p>Install Extension: Java Development pack.</p>
+<p>Press Ctrl+Shift+P to call Spring Initializer. It will automatically guide you to set ArtifactId, GroupId, package name, etc. Here I use Maven and set groupId “com.wsd”, artifactId “springweb” and the default name is “demo”.</p>
+<h1 id="A-simple-Spring-Boot-Web-application"><a href="#A-simple-Spring-Boot-Web-application" class="headerlink" title="A simple Spring Boot Web application"></a>A simple Spring Boot Web application</h1><p>You will see <code>src/java/com/wsd/springweb/DemoApplication.java</code>, Edit it:</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.wsd.springweb;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.CommandLineRunner;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.ApplicationContext;</span><br><span class="line"><span class="keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(DemoApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Bean</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> CommandLineRunner <span class="title">commandLineRunner</span><span class="params">(ApplicationContext ctx)</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> args -&gt; &#123;</span><br><span class="line">			System.out.println(<span class="string">"Let's inspect the beans provided by Spring Boot"</span>);</span><br><span class="line"></span><br><span class="line">			String[] beanNames = ctx.getBeanDefinitionNames();</span><br><span class="line">			Arrays.sort(beanNames);</span><br><span class="line">			<span class="keyword">for</span> (String beanName : beanNames) &#123;</span><br><span class="line">				System.out.println(beanName);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>JavaBean 函数 commandLineRunner 的作用是通过运行一个匿名函数，输入Application中所有的 Bean（包括由当前App生成的和自动添加到Spring Boot中去的）</p>
+<p><code>src/java/com/wsd/springweb/DemoController.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.wsd.springweb;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RestController</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoController</span> </span>&#123;</span><br><span class="line">    <span class="meta">@RequestMapping</span>(<span class="string">"/"</span>)</span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">index</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"Greetings from Spring Boot!"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>src/java/com/wsd/springweb/application.properties</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server.port=8501</span><br></pre></td></tr></table></figure></p>
+<p>Maven compile and package</p>
+<p>Run the .jar</p>
+<p><img src="result.png" alt="result"></p>
+<p>And you can retrive the string by visiting the webpage</p>
+<p><img src="curl-str.png" alt="web"></p>
+<h2 id="Add-Unit-Test"><a href="#Add-Unit-Test" class="headerlink" title="Add Unit Test"></a>Add Unit Test</h2><p><code>src/java/com/wsd/springweb/DemoControllerTest.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.wsd.springweb;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.Matchers.equalTo;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.MediaType;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringRunner;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.MockMvc;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.web.servlet.request.MockMvcRequestBuilders;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span></span><br><span class="line"><span class="meta">@AutoConfigureMockMvc</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoControllerTest</span> </span>&#123;</span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> MockMvc mvc;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getHello</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        mvc.perform(MockMvcRequestBuilders.get(<span class="string">"/"</span>).accept(MediaType.APPLICATION_JSON))</span><br><span class="line">            .andExpect(status().isOk())</span><br><span class="line">            .andExpect(content().string(equalTo(<span class="string">"Greetings from Spring Boot!"</span>)));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>a MockMvc object will mimic a mvc controller accessing the specified URL, then check whether the result is right.</p>
+<p>注解 @RunWith(SpringRunner.class) 开启了 Run Test 功能。<br>注解 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) 搭建出了网络环境</p>
+<h2 id="随机端口测试"><a href="#随机端口测试" class="headerlink" title="随机端口测试"></a>随机端口测试</h2><p><code>src/java/com/wsd/springweb/DemoControllerIT.java</code></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.wsd.springweb;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.hamcrest.Matchers.equalTo;</span><br><span class="line"><span class="keyword">import</span> <span class="keyword">static</span> org.junit.Assert.*;</span><br><span class="line"><span class="keyword">import</span> java.net.URL;</span><br><span class="line"><span class="keyword">import</span> org.junit.Before;</span><br><span class="line"><span class="keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="keyword">import</span> org.junit.runner.RunWith;</span><br><span class="line"><span class="keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.test.web.client.TestRestTemplate;</span><br><span class="line"><span class="keyword">import</span> org.springframework.boot.web.server.LocalServerPort;</span><br><span class="line"><span class="keyword">import</span> org.springframework.http.ResponseEntity;</span><br><span class="line"><span class="keyword">import</span> org.springframework.test.context.junit4.SpringRunner;</span><br><span class="line"></span><br><span class="line"><span class="meta">@RunWith</span>(SpringRunner.class)</span><br><span class="line"><span class="meta">@SpringBootTest</span>(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DemoControllerIT</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@LocalServerPort</span></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">int</span> port;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> URL base;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Autowired</span></span><br><span class="line">    <span class="keyword">private</span> TestRestTemplate template;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Before</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">setUp</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.base = <span class="keyword">new</span> URL(<span class="string">"http://localhost:"</span> + port + <span class="string">"/"</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Test</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">getHello</span><span class="params">()</span> <span class="keyword">throws</span> Exception </span>&#123;</span><br><span class="line">        ResponseEntity&lt;String&gt; response = template.getForEntity(base.toString(), String.class);</span><br><span class="line">        assertThat(response.getBody(), equalTo(<span class="string">"Greetings from Spring Boot!"</span>));</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h1 id="Add-production-grade-services"><a href="#Add-production-grade-services" class="headerlink" title="Add production-grade services"></a>Add production-grade services</h1><p>Before adding</p>
+<p><img src="before-actuator.png" alt="before-actuator"></p>
+<p>After adding</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><p>into pom.xml file</p>
+<p><img src="after-actuator.png" alt="after-actuator"></p>
+<p>多了一行</p>
+<pre><code>2019-11-08 21:10:31.858  INFO 104665 --- [main] o.s.b.a.e.web.EndpointLinksResolver :
+Exposing 2 endpoint(s) beneath base path &#39;/actuator&#39;
+</code></pre><p>接下来便可以访问 <a href="http://localhost:8501/actuator" target="_blank" rel="noopener">http://localhost:8501/actuator</a></p>
+<p><img src="actuator-web.png" alt="actuator-web"></p>
+
       
     </div>
 
@@ -461,7 +504,7 @@
         
         <div class="post-tags">
           
-            <a href="/tags/Spring/" rel="tag"># Spring</a>
+            <a href="/tags/Spring-Boot/" rel="tag"># Spring Boot</a>
           
             <a href="/tags/Java/" rel="tag"># Java</a>
           
@@ -561,40 +604,14 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">109</span>
+                    <span class="site-state-item-count">122</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
               
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                      <a href="/categories/">
-                    
-                  
-                    <span class="site-state-item-count">4</span>
-                    <span class="site-state-item-name">categories</span>
-                  </a>
-                </div>
-              
 
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                      <a href="/tags/">
-                    
-                  
-                    <span class="site-state-item-count">115</span>
-                    <span class="site-state-item-name">tags</span>
-                  </a>
-                </div>
               
             </nav>
           
@@ -625,7 +642,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-IDEA"><span class="nav-number">1.</span> <span class="nav-text">使用 IDEA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-Eclipse"><span class="nav-number">2.</span> <span class="nav-text">使用 Eclipse</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-IDEA"><span class="nav-number">1.</span> <span class="nav-text">使用 IDEA</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用-VSCode"><span class="nav-number">2.</span> <span class="nav-text">使用 VSCode</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#A-simple-Spring-Boot-Web-application"><span class="nav-number">3.</span> <span class="nav-text">A simple Spring Boot Web application</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Add-Unit-Test"><span class="nav-number">3.1.</span> <span class="nav-text">Add Unit Test</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#随机端口测试"><span class="nav-number">3.2.</span> <span class="nav-text">随机端口测试</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Add-production-grade-services"><span class="nav-number">4.</span> <span class="nav-text">Add production-grade services</span></a></li></ol></div>
             
 
           </div>
@@ -646,7 +663,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2019</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -806,7 +823,7 @@
   var gitalk = new Gitalk({
     clientID: '1b976dbc382f1d1e40ad',
     clientSecret: '31090c96642b800a520a7fce87050edb2bcaaeb7',
-    repo: 'Blog-discuss-repo',
+    repo: 'Blog-de-Shane',
     owner: 'BillyStudio',
     admin: ['BillyStudio'],
     id: md5(location.pathname),

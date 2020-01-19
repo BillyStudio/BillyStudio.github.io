@@ -1,0 +1,22 @@
+\documentclass[
+    convert={density=300,outext=.png}
+]{standalone}
+\usepackage{graphicx}
+
+\usepackage{tikz}
+
+\usetikzlibrary{arrows,decorations.pathreplacing,backgrounds,positioning,fit,petri}
+
+\begin{document}
+\begin{tikzpicture}
+    [
+        Field1/.style={rectangle,minimum width=4cm,minimum height=20pt,draw, thick, text width=3.5cm, align=center},
+        TextBox1/.style={minimum width=4cm, minimum height=20pt, text width=3.5cm, align=center}
+    ]
+
+    \node[TextBox1] (stack) at (0,0pt) {\verb=stack=};
+    \node[Field1,label=right:OP\_CHECKSIG] ($x_1$) at (0,60pt) {$x_1$: public key};
+    \node[Field1] ($x_2$) at (0,40pt) {$x_2$: signature};
+    \node[Field1] (ellipsis) at (0,20pt) {$\cdots$};
+\end{tikzpicture}
+\end{document}
