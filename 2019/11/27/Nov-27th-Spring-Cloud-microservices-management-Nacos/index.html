@@ -90,20 +90,22 @@
 
 
 
-  <meta name="description" content="Nacos 与 Eureka 类似，也属于服务注册与发现组件。">
+  <meta name="description" content="Nacos 与 Eureka 都属于服务注册与发现组件。">
 <meta name="keywords" content="VS Code,Spring,Spring Cloud,Microservices,Nacos">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring Cloud microservices management -- Nacos">
+<meta property="og:title" content="Spring Cloud microservices registration and discovery.">
 <meta property="og:url" content="http://BillyStudio.github.io/2019/11/27/Nov-27th-Spring-Cloud-microservices-management-Nacos/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="Nacos 与 Eureka 类似，也属于服务注册与发现组件。">
+<meta property="og:description" content="Nacos 与 Eureka 都属于服务注册与发现组件。">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="http://billystudio.github.io/2019/11/27/Nov-27th-Spring-Cloud-microservices-management-Nacos/init-spring.png">
+<meta property="og:image" content="http://billystudio.github.io/2019/11/27/Nov-27th-Spring-Cloud-microservices-management-Nacos/eureka-server.png">
 <meta property="og:image" content="http://billystudio.github.io/2019/11/27/Nov-27th-Spring-Cloud-microservices-management-Nacos/nacos-default.png">
-<meta property="og:updated_time" content="2019-12-03T12:35:56.053Z">
+<meta property="og:updated_time" content="2020-04-10T03:02:39.607Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring Cloud microservices management -- Nacos">
-<meta name="twitter:description" content="Nacos 与 Eureka 类似，也属于服务注册与发现组件。">
-<meta name="twitter:image" content="http://billystudio.github.io/2019/11/27/Nov-27th-Spring-Cloud-microservices-management-Nacos/nacos-default.png">
+<meta name="twitter:title" content="Spring Cloud microservices registration and discovery.">
+<meta name="twitter:description" content="Nacos 与 Eureka 都属于服务注册与发现组件。">
+<meta name="twitter:image" content="http://billystudio.github.io/2019/11/27/Nov-27th-Spring-Cloud-microservices-management-Nacos/init-spring.png">
 
 
 
@@ -121,7 +123,7 @@
   };
 </script>
 
-  <title>Spring Cloud microservices management -- Nacos | Shane's Blog</title>
+  <title>Spring Cloud microservices registration and discovery. | Shane's Blog</title>
   
 
 
@@ -329,7 +331,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Spring Cloud microservices management -- Nacos
+          <h1 class="post-title" itemprop="name headline">Spring Cloud microservices registration and discovery.
 
               
             
@@ -370,7 +372,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-12-03 20:35:56" itemprop="dateModified" datetime="2019-12-03T20:35:56+08:00">2019-12-03</time>
+                <time title="Modified: 2020-04-10 11:02:39" itemprop="dateModified" datetime="2020-04-10T11:02:39+08:00">2020-04-10</time>
               </span>
             
           
@@ -429,8 +431,18 @@
       
 
       
-        <p>Nacos 与 Eureka 类似，也属于服务注册与发现组件。 <a id="more"></a></p>
-<p>Nacos 下载地址：<a href="https://github.com/alibaba/nacos/releases" target="_blank" rel="noopener">https://github.com/alibaba/nacos/releases</a></p>
+        <p>Nacos 与 Eureka 都属于服务注册与发现组件。<a id="more"></a>不同的是，Eureka已经闭源，而Nacos是阿里开发团队的开源产品。</p>
+<h1 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h1><p>VSCode<br>Spring Initilitzr<br>JDK</p>
+<h1 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h1><p>The first one is the server which needs only Eureka Server dependency.<br>Spring Initializr &gt; Generate a Maven Project &gt; Group: com.example &gt; Artifact: service-registration-and-discovery-service &gt; Dependencies: Eureka Server</p>
+<p>Then second one(a client) requires both Eureka Server and Eureka Discovery Client dependencies. </p>
+<p>SpringApplication 初始化代码：<br><img src="init-spring.png" alt="init-spring.png"></p>
+<h2 id="开启一个-Eureka-服务注册"><a href="#开启一个-Eureka-服务注册" class="headerlink" title="开启一个 Eureka 服务注册"></a>开启一个 Eureka 服务注册</h2><p><img src="eureka-server.png" alt="eureka-server.png"><br>简单地使用注解就可以了，另外需要在application.properties中进行配置</p>
+<h2 id="与注册中心对话"><a href="#与注册中心对话" class="headerlink" title="与注册中心对话"></a>与注册中心对话</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">package com.example.serviceregistrationanddiscoveryclient;</span><br><span class="line"></span><br><span class="line">import org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line">import org.springframework.boot.SpringApplication;</span><br><span class="line">import org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line">import org.springframework.cloud.client.ServiceInstance;</span><br><span class="line">import org.springframework.cloud.client.discovery.DiscoveryClient;</span><br><span class="line">import org.springframework.cloud.client.discovery.EnableDiscoveryClient;</span><br><span class="line">import org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line">import org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line">import org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line">import java.util.*;</span><br><span class="line"></span><br><span class="line">@SpringBootApplication</span><br><span class="line">@EnableDiscoveryClient</span><br><span class="line">public class DemoApplication &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line">		SpringApplication.run(DemoApplication.class, args);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@RestController</span><br><span class="line">class ServiceInstanceRestController &#123;</span><br><span class="line">	@Autowired</span><br><span class="line">	private DiscoveryClient discoveryClient;</span><br><span class="line"></span><br><span class="line">	@RequestMapping(&quot;/service-instances/&#123;applicationName&#125;&quot;)</span><br><span class="line">	public List&lt;ServiceInstance&gt; serviceInstancesByApplicationName(</span><br><span class="line">		@PathVariable String applicationName) &#123;</span><br><span class="line">			return this.discoveryClient.getInstances(applicationName);</span><br><span class="line">		&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这里通过注解EnableDiscoveryClient来继承注册微服务的接口</p>
+<p>在类中通过注解@RequestMapping(“/service-instances/{applicationName}”) 提供该client的访问接口</p>
+<h2 id="提供服务"><a href="#提供服务" class="headerlink" title="提供服务"></a>提供服务</h2><p>微服务有两种方法注册到 Eureka 中心，一种是本地启动的Spring Boot程序添加注解 @EnableDiscoveryClient；<br>第二种是在配置文件中添加 defaultZone: 后加Eureka中心的地址（<a href="http://localhost:8761/eureka）" target="_blank" rel="noopener">http://localhost:8761/eureka）</a></p>
+<p>要想从Eureka中心获取可用的微服务，默认的XML方式解析起来比较麻烦。我们可以通过在Eureka里写一个 discoveryClient 的 controller来实现。<br>配置里写 eureka.client.fetch-registry=true。<br>但同时又不想 eureka server 自己也被其他服务发现，这时需要配置 eureka.client.register-with-eureka=false</p>
+<h1 id="Nacos"><a href="#Nacos" class="headerlink" title="Nacos"></a>Nacos</h1><p>Nacos 下载地址：<a href="https://github.com/alibaba/nacos/releases" target="_blank" rel="noopener">https://github.com/alibaba/nacos/releases</a></p>
 <p>解压并启动<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">tar -xzvf nacos-server-1.1.0.tar.gz</span><br><span class="line">cd nacos/bin</span><br><span class="line">sh startup.sh -m standalone</span><br></pre></td></tr></table></figure></p>
 <p>打开网址 <a href="http://localhost:8848/nacos" target="_blank" rel="noopener">http://localhost:8848/nacos</a><br>初次登录会跳转到登录界面，默认用户名和密码都是 nacos<br>登录成功后会看到如下界面。</p>
 <p><img src="nacos-default.png" alt="nacos default page"></p>
@@ -548,8 +560,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -564,14 +585,40 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">123</span>
+                    <span class="site-state-item-count">127</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
               
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">134</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           
@@ -591,6 +638,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Eureka"><span class="nav-number">2.</span> <span class="nav-text">Eureka</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开启一个-Eureka-服务注册"><span class="nav-number">2.1.</span> <span class="nav-text">开启一个 Eureka 服务注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与注册中心对话"><span class="nav-number">2.2.</span> <span class="nav-text">与注册中心对话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提供服务"><span class="nav-number">2.3.</span> <span class="nav-text">提供服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Nacos"><span class="nav-number">3.</span> <span class="nav-text">Nacos</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
