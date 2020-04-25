@@ -93,7 +93,7 @@
   <meta name="description" content="Nacos 与 Eureka 都属于服务注册与发现组件。">
 <meta name="keywords" content="VS Code,Spring,Spring Cloud,Microservices,Nacos">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring Cloud microservices registration and discovery.">
+<meta property="og:title" content="Spring Cloud microservices registration and discovery">
 <meta property="og:url" content="http://BillyStudio.github.io/2019/11/27/Nov-27th-Spring-Cloud-microservices-management-Nacos/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="Nacos 与 Eureka 都属于服务注册与发现组件。">
@@ -101,9 +101,9 @@
 <meta property="og:image" content="http://billystudio.github.io/2019/11/27/Nov-27th-Spring-Cloud-microservices-management-Nacos/init-spring.png">
 <meta property="og:image" content="http://billystudio.github.io/2019/11/27/Nov-27th-Spring-Cloud-microservices-management-Nacos/eureka-server.png">
 <meta property="og:image" content="http://billystudio.github.io/2019/11/27/Nov-27th-Spring-Cloud-microservices-management-Nacos/nacos-default.png">
-<meta property="og:updated_time" content="2020-04-10T03:02:39.607Z">
+<meta property="og:updated_time" content="2020-04-21T07:41:39.027Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring Cloud microservices registration and discovery.">
+<meta name="twitter:title" content="Spring Cloud microservices registration and discovery">
 <meta name="twitter:description" content="Nacos 与 Eureka 都属于服务注册与发现组件。">
 <meta name="twitter:image" content="http://billystudio.github.io/2019/11/27/Nov-27th-Spring-Cloud-microservices-management-Nacos/init-spring.png">
 
@@ -123,7 +123,7 @@
   };
 </script>
 
-  <title>Spring Cloud microservices registration and discovery. | Shane's Blog</title>
+  <title>Spring Cloud microservices registration and discovery | Shane's Blog</title>
   
 
 
@@ -331,7 +331,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Spring Cloud microservices registration and discovery.
+          <h1 class="post-title" itemprop="name headline">Spring Cloud microservices registration and discovery
 
               
             
@@ -372,7 +372,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-04-10 11:02:39" itemprop="dateModified" datetime="2020-04-10T11:02:39+08:00">2020-04-10</time>
+                <time title="Modified: 2020-04-21 15:41:39" itemprop="dateModified" datetime="2020-04-21T15:41:39+08:00">2020-04-21</time>
               </span>
             
           
@@ -433,7 +433,7 @@
       
         <p>Nacos 与 Eureka 都属于服务注册与发现组件。<a id="more"></a>不同的是，Eureka已经闭源，而Nacos是阿里开发团队的开源产品。</p>
 <h1 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h1><p>VSCode<br>Spring Initilitzr<br>JDK</p>
-<h1 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h1><p>The first one is the server which needs only Eureka Server dependency.<br>Spring Initializr &gt; Generate a Maven Project &gt; Group: com.example &gt; Artifact: service-registration-and-discovery-service &gt; Dependencies: Eureka Server</p>
+<h1 id="Eureka"><a href="#Eureka" class="headerlink" title="Eureka"></a>Eureka</h1><p>The first one is the server which needs only Eureka Server dependency.<br>Spring Initializr &gt; Generate a Maven Project &gt; Group: com.ustb &gt; Artifact: service-registration-and-discovery-service &gt; Dependencies: Eureka Server</p>
 <p>Then second one(a client) requires both Eureka Server and Eureka Discovery Client dependencies. </p>
 <p>SpringApplication 初始化代码：<br><img src="init-spring.png" alt="init-spring.png"></p>
 <h2 id="开启一个-Eureka-服务注册"><a href="#开启一个-Eureka-服务注册" class="headerlink" title="开启一个 Eureka 服务注册"></a>开启一个 Eureka 服务注册</h2><p><img src="eureka-server.png" alt="eureka-server.png"><br>简单地使用注解就可以了，另外需要在application.properties中进行配置</p>
@@ -449,6 +449,7 @@
 <p>打开 VS Code，使用 Spring Initializr 创建一个 Maven 依赖项目，依赖项勾选 Spring Web.</p>
 <p>新建两个项目，一个是provider，一个是consumer，均在<dependencies>添加 Maven 依赖：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">    &lt;groupId&gt;org.springframework.cloud&lt;/groupId&gt;</span><br><span class="line">    &lt;artifactId&gt;spring-cloud-starter-alibaba-nacos-discovery&lt;/artifactId&gt;</span><br><span class="line">    &lt;version&gt;0.9.0.RELEASE&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure></dependencies></p>
 <p>配置 application.properties</p>
+<p>注意：Spring Cloud Gateway 依赖和 Spring Web不能同时添加</p>
 
       
     </div>
@@ -585,7 +586,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">127</span>
+                    <span class="site-state-item-count">125</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -615,7 +616,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">134</span>
+                    <span class="site-state-item-count">133</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

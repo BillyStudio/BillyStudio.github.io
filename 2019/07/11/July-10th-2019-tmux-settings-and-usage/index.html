@@ -99,7 +99,7 @@
 <meta property="og:description" content="Tmux is a terminal software for multi-windows.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://billystudio.github.io/2019/07/11/July-10th-2019-tmux-settings-and-usage/multi-user.target.png">
-<meta property="og:updated_time" content="2019-08-18T06:54:35.017Z">
+<meta property="og:updated_time" content="2020-04-25T00:51:01.016Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Tmux settings and usage">
 <meta name="twitter:description" content="Tmux is a terminal software for multi-windows.">
@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-18 14:54:35" itemprop="dateModified" datetime="2019-08-18T14:54:35+08:00">2019-08-18</time>
+                <time title="Modified: 2020-04-25 08:51:01" itemprop="dateModified" datetime="2020-04-25T08:51:01+08:00">2020-04-25</time>
               </span>
             
           
@@ -430,11 +430,22 @@
 
       
         <p>Tmux is a terminal software for multi-windows. <a id="more"></a></p>
+<h2 id="Tmux-basic-commands"><a href="#Tmux-basic-commands" class="headerlink" title="Tmux basic commands"></a>Tmux basic commands</h2><p>Prefix: <code>^B</code></p>
+<p>Short screen copy and paste has no difference with that in uxterm.</p>
+<h2 id="Long-screen-copy-and-paste"><a href="#Long-screen-copy-and-paste" class="headerlink" title="Long screen copy and paste"></a>Long screen copy and paste</h2><h3 id="Default"><a href="#Default" class="headerlink" title="Default"></a>Default</h3><p><code>^B + [</code> to enter copy mode<br>select and quit copy mode<br>Use <code>^B + ]</code> to paste</p>
+<h3 id="Use-vi-copy-mode"><a href="#Use-vi-copy-mode" class="headerlink" title="Use vi-copy mode"></a>Use vi-copy mode</h3><p>Add the lines into <code>~/.zshrc</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export EDITOR=vim</span><br><span class="line">export VISUAL=&quot;$EDITOR&quot;</span><br></pre></td></tr></table></figure></p>
+<p>Now you can use <code>Space</code> to start selection, <code>Enter</code> to end selection and <code>q</code> to quit copy mode.</p>
+<h3 id="To-system-clipboard"><a href="#To-system-clipboard" class="headerlink" title="To system clipboard"></a>To system clipboard</h3><p>For XTerm, add this line into <code>~/.Xresources</code> to enable:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xterm*disallowedWindowOps: 20,21,SetXprop</span><br></pre></td></tr></table></figure></p>
+<p>Now, you can use <code>^B + [</code> to enter copy mode, vi style to select and copy.Then go to anywhere to paste.</p>
 <h2 id="An-experiment-of-autostart-tmux-service-under-systemd"><a href="#An-experiment-of-autostart-tmux-service-under-systemd" class="headerlink" title="An experiment of autostart tmux service under systemd"></a>An experiment of autostart tmux service under systemd</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Start tmux in detached session</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">User=%I</span><br><span class="line">ExecStart=/usr/bin/tmux new-session -s %u -d</span><br><span class="line">ExecStop=/usr/bin/tmux kill-session -t %u</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure>
 <p>Taking care of <code>multi-user.target</code>, a target is used for starting a group of units. That is to say, when starting a target, all units in this target will be started by systemd. We can check all the units included in <code>multi-user.target</code> by <code>systemctl list-dependencies multi-user.target</code><br><img src="multi-user.target.png" alt="multi-user.target"><br>We can see that almost every autostart service set by our own user is included in <code>multi-user.target</code>. So this is an important systemd target that is run default when starting Linux.</p>
 <p>Then create and edit the file <code>/etc/systemd/system/tmux@.service</code><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">[Unit]</span><br><span class="line">Description=Start tmux in detached session</span><br><span class="line"></span><br><span class="line">[Service]</span><br><span class="line">Type=forking</span><br><span class="line">User=%I</span><br><span class="line">ExecStart=/usr/bin/tmux new-session -s %u -d</span><br><span class="line">ExecStop=/usr/bin/tmux kill-session -t %u</span><br><span class="line"></span><br><span class="line">[Install]</span><br><span class="line">WantedBy=multi-user.target</span><br></pre></td></tr></table></figure></p>
 <p>Then enable and start user service:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable tmux@shane.service</span><br><span class="line">systemctl start tmux@shane.service</span><br></pre></td></tr></table></figure></p>
-<h2 id="An-experiment-of-linking-with-zsh-automatically"><a href="#An-experiment-of-linking-with-zsh-automatically" class="headerlink" title="An experiment of linking with zsh automatically"></a>An experiment of linking with zsh automatically</h2>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><ol>
+<li>Scroll shell output with mouse in tmux: <a href="https://superuser.com/questions/210125/scroll-shell-output-with-mouse-in-tmux" target="_blank" rel="noopener">https://superuser.com/questions/210125/scroll-shell-output-with-mouse-in-tmux</a></li>
+<li>Tmux tutorial: <a href="https://github.com/tmux/tmux/wiki/Getting-Started#copy-and-paste" target="_blank" rel="noopener">https://github.com/tmux/tmux/wiki/Getting-Started#copy-and-paste</a> </li>
+</ol>
+
       
     </div>
 
@@ -564,7 +575,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">127</span>
+                    <span class="site-state-item-count">125</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -594,7 +605,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">134</span>
+                    <span class="site-state-item-count">133</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -628,7 +639,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#An-experiment-of-autostart-tmux-service-under-systemd"><span class="nav-number">1.</span> <span class="nav-text">An experiment of autostart tmux service under systemd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#An-experiment-of-linking-with-zsh-automatically"><span class="nav-number">2.</span> <span class="nav-text">An experiment of linking with zsh automatically</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Tmux-basic-commands"><span class="nav-number">1.</span> <span class="nav-text">Tmux basic commands</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Long-screen-copy-and-paste"><span class="nav-number">2.</span> <span class="nav-text">Long screen copy and paste</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Default"><span class="nav-number">2.1.</span> <span class="nav-text">Default</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Use-vi-copy-mode"><span class="nav-number">2.2.</span> <span class="nav-text">Use vi-copy mode</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#To-system-clipboard"><span class="nav-number">2.3.</span> <span class="nav-text">To system clipboard</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#An-experiment-of-autostart-tmux-service-under-systemd"><span class="nav-number">3.</span> <span class="nav-text">An experiment of autostart tmux service under systemd</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">4.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>

@@ -103,7 +103,7 @@
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/Screenshot-office16.png">
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/before-install.png">
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/after-install.png">
-<meta property="og:updated_time" content="2020-03-23T13:45:58.555Z">
+<meta property="og:updated_time" content="2020-04-21T03:26:08.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Creating virtual machiness on Linux --- the hard way">
 <meta name="twitter:description" content="Two ways of using vms on Linux are introduced.">
@@ -374,7 +374,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-03-23 21:45:58" itemprop="dateModified" datetime="2020-03-23T21:45:58+08:00">2020-03-23</time>
+                <time title="Modified: 2020-04-21 11:26:08" itemprop="dateModified" datetime="2020-04-21T11:26:08+08:00">2020-04-21</time>
               </span>
             
           
@@ -455,6 +455,10 @@
 <p>This is not enough. Because we just build a base on the server, but do nothing on the Windows guest. Look at this:<br><img src="before-install.png" alt="before-install.png"></p>
 <p>Next install <code>spice-guest-tools-latest.exe</code> downloaded from <a href="https://www.spice-space.org/download.html" target="_blank" rel="noopener">https://www.spice-space.org/download.html</a>.</p>
 <p><img src="after-install.png" alt="done installed qxl driver"></p>
+<p>比较不好的一个bug是虚拟机内部的复制粘贴不好用了，所以对于跨机的复制粘贴，还是采用原始的文件方式来实现。</p>
+<p>make sure sshd on host is on<br>open one term on host and type <code>tty</code> to get device name，say <code>/dev/pts/0</code></p>
+<p>ssh to host using PuTTY from win7 client<br><code>echo &quot;copied text&quot; &gt;&gt; /dev/pts/0</code></p>
+<p>You will see “copied text” on the host terminal.</p>
 
       
     </div>
@@ -512,8 +516,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/10/15/Oct-15th-Linux-mount-and-fstab/" rel="prev" title="Linux mount command and fstab file">
-                Linux mount command and fstab file <i class="fa fa-chevron-right"></i>
+              <a href="/2019/10/26/Oct-26th-Raspberry-Pi-parallel-computing-and-cluster-computing-experiment/" rel="prev" title="Raspberry Pi parallel computing and cluster computing experiment">
+                Raspberry Pi parallel computing and cluster computing experiment <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -587,7 +591,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">127</span>
+                    <span class="site-state-item-count">125</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -617,7 +621,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">134</span>
+                    <span class="site-state-item-count">133</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
