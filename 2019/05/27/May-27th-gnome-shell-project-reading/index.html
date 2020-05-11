@@ -436,7 +436,7 @@
 <p><code>gnome-extensions enable my-extension@wsd</code> to reload the extension</p>
 <p>Here I append the command for logout current desktop user:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pkill Xorg # Or sudo pkill Xwayland</span><br></pre></td></tr></table></figure></p>
 <h3 id="Reading-source-code-of-gnome-shell-extension-fullscreen-hotcorner"><a href="#Reading-source-code-of-gnome-shell-extension-fullscreen-hotcorner" class="headerlink" title="Reading source code of gnome shell extension: fullscreen-hotcorner"></a>Reading source code of gnome shell extension: fullscreen-hotcorner</h3><p><a href="https://github.com/soal/gnome-shell-fullscreen-hot-corner/blob/master/fullscreen-hot-corner%40sorrow.about.alice.pm.me/extension.js" target="_blank" rel="noopener">source page</a></p>
-<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">_removeHotCorners</span>(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.hotCorners.forEach(<span class="function"><span class="params">corner</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (corner)</span><br><span class="line">            corner.destroy();</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">this</span>.hotCorners = [];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> _removeHotCorners(<span class="params"></span>) </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.hotCorners.forEach(<span class="function"><span class="params">corner</span> =&gt;</span> &#123;</span><br><span class="line">        <span class="keyword">if</span> (corner)</span><br><span class="line">            corner.destroy();</span><br><span class="line">    &#125;);</span><br><span class="line">    <span class="keyword">this</span>.hotCorners = [];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>This code part uses arrow function. It is equivelent to </p>
 <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">this</span>.hotCorners.forEach(</span><br><span class="line">    func(corner)&#123;</span><br><span class="line">        <span class="keyword">if</span> (corner)</span><br><span class="line">            corner.destroy();</span><br><span class="line">        <span class="keyword">return</span> ;</span><br><span class="line">    &#125;</span><br><span class="line">);</span><br></pre></td></tr></table></figure>
 <p>So the aim of function _removeHotCorners is to clear all hot corners that exist.</p>
@@ -580,7 +580,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">126</span>
+                    <span class="site-state-item-count">127</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -610,7 +610,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">135</span>
+                    <span class="site-state-item-count">134</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
