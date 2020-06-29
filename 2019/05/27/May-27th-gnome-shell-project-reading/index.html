@@ -99,7 +99,7 @@
 <meta property="og:description" content="Gnome is an open source desktop environment under Linux.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://billystudio.github.io/2019/05/27/May-27th-gnome-shell-project-reading/position.jpg">
-<meta property="og:updated_time" content="2020-05-04T09:45:23.722Z">
+<meta property="og:updated_time" content="2020-06-26T10:26:01.881Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Gnome shell going through">
 <meta name="twitter:description" content="Gnome is an open source desktop environment under Linux.">
@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-05-04 17:45:23" itemprop="dateModified" datetime="2020-05-04T17:45:23+08:00">2020-05-04</time>
+                <time title="Modified: 2020-06-26 18:26:01" itemprop="dateModified" datetime="2020-06-26T18:26:01+08:00">2020-06-26</time>
               </span>
             
           
@@ -430,6 +430,20 @@
 
       
         <p>Gnome is an open source desktop environment under Linux. <a id="more"></a></p>
+<h1 id="Desktop-settings-GNOME"><a href="#Desktop-settings-GNOME" class="headerlink" title="Desktop settings: GNOME"></a>Desktop settings: GNOME</h1><h3 id="Themes-and-icons"><a href="#Themes-and-icons" class="headerlink" title="Themes and icons"></a>Themes and icons</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install gtk-theme-config</span><br></pre></td></tr></table></figure>
+<p>打开User Themes选项进行主题的选择。</p>
+<p>安装主题和图标有两种方法，一种是通过PPA源安装；另一种是将文件克隆到<code>~/.icons</code>下。</p>
+<h3 id="安装-OSX-Arc-主题（推荐）"><a href="#安装-OSX-Arc-主题（推荐）" class="headerlink" title="安装 OSX Arc 主题（推荐）"></a>安装 OSX Arc 主题（推荐）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:noobslab/themes</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install arc-theme</span><br></pre></td></tr></table></figure>
+<h3 id="安装-MacOS-High-Sierra主题（可选）"><a href="#安装-MacOS-High-Sierra主题（可选）" class="headerlink" title="安装 MacOS High Sierra主题（可选）"></a>安装 MacOS High Sierra主题（可选）</h3><p><a href="https://github.com/B00merang-Project/macOS-High-Sierra" target="_blank" rel="noopener">https://github.com/B00merang-Project/macOS-High-Sierra</a><br>下载安装之后<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">gsettings set org.gnome.desktop.interface gtk-theme &quot;macOS High Sierra&quot;</span><br><span class="line">gsettings set org.gnome.desktop.wm.preferences theme &quot;macOS High Sierra&quot;</span><br></pre></td></tr></table></figure></p>
+<h3 id="安装-Macbuntu主题（可选）"><a href="#安装-Macbuntu主题（可选）" class="headerlink" title="安装 Macbuntu主题（可选）"></a>安装 Macbuntu主题（可选）</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:noobslab/macbuntu</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt-get install macbuntu-os-icons-lts-v7</span><br><span class="line">sudo apt-get install macbuntu-os-ithemes-lts-v7</span><br></pre></td></tr></table></figure>
+<p>由于macbuntu还没出bionic的源，</p>
+<h2 id="Intall-Vivacious-Colors-GTK-Theme（可选）"><a href="#Intall-Vivacious-Colors-GTK-Theme（可选）" class="headerlink" title="Intall Vivacious Colors GTK Theme（可选）"></a>Intall Vivacious Colors GTK Theme（可选）</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:ravefinity-project/ppa</span><br><span class="line">sudo apt-get update</span><br><span class="line">sudo apt-get install vivacious-colors-gtk-dark</span><br><span class="line">sudo apt-get install vivacious-colors-gtk-light</span><br></pre></td></tr></table></figure>
+<h2 id="安装图标"><a href="#安装图标" class="headerlink" title="安装图标"></a>安装图标</h2><p>安装la-capitaine图标（推荐）<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo add-apt-repository ppa:dyatlov-igor/la-capitaine</span><br><span class="line">sudo apt update</span><br><span class="line">sudo apt install la-capitaine-icon-theme</span><br></pre></td></tr></table></figure></p>
+<h3 id="Nautilus-file-manager"><a href="#Nautilus-file-manager" class="headerlink" title="Nautilus file manager"></a>Nautilus file manager</h3><p>Drag-and-drop for move or copy?<br>Press Ctrl for Copy and Shift for Move.<br>Once I installed <code>nautilus</code> but it responsed very slowly.<br>So I use a terminal to open <code>nautilus</code> and I see lots of warnings like:</p>
+<p>(nautilus:4258): Gtk-WARNING **: 17:34:12.268: Duplicate child name in GtkStack: …</p>
+<p>Later I found this is because I had put too many files in ~/Templates, so I removed them and clear the cache<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -r ~/Templates/2，标准例程-HAL库版本</span><br><span class="line">sudo rm -r ~/Templates/2，标准例程-库函数版本</span><br><span class="line">sudo rm -r ~/Templates/mx-stm32f4</span><br><span class="line">rm -rf ~/.cache/tracker # Clear nautilus cache</span><br><span class="line">killall nautilus</span><br></pre></td></tr></table></figure></p>
+<p>and restart nautilus file manager, it’s ok.</p>
+<h3 id="Touchpad"><a href="#Touchpad" class="headerlink" title="Touchpad"></a>Touchpad</h3><p>For wayland, it’s ok.<br>For Xorg:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu libinput-gestures</span><br><span class="line">sudo gpasswd -a $USER input # Adding your user to group input</span><br><span class="line">sudo cp /etc/libinput-gestures.conf ~/.config/</span><br><span class="line">sudo chown $USER:$USER ~/.config/libinput-gestures.conf</span><br><span class="line">libinput-gestures-setup autostart</span><br></pre></td></tr></table></figure></p>
 <h1 id="The-way-for-debugging-gnome-shell-extension"><a href="#The-way-for-debugging-gnome-shell-extension" class="headerlink" title="The way for debugging gnome-shell extension"></a>The way for debugging gnome-shell extension</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">journalctl /usr/bin/gnome-shell -f</span><br></pre></td></tr></table></figure>
 <p><code>gnome-extensions disable my-extension@wsd</code> to disable the extension</p>
 <p><code>Alt+F2</code> and input <code>r</code> to restart.</p>
@@ -580,7 +594,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">127</span>
+                    <span class="site-state-item-count">132</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -610,7 +624,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">134</span>
+                    <span class="site-state-item-count">139</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -644,7 +658,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#The-way-for-debugging-gnome-shell-extension"><span class="nav-number">1.</span> <span class="nav-text">The way for debugging gnome-shell extension</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reading-source-code-of-gnome-shell-extension-fullscreen-hotcorner"><span class="nav-number">1.0.1.</span> <span class="nav-text">Reading source code of gnome shell extension: fullscreen-hotcorner</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Looking-glass-tool"><span class="nav-number">1.1.</span> <span class="nav-text">Looking glass tool</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Write-an-extension-on-your-own"><span class="nav-number">2.</span> <span class="nav-text">Write an extension on your own</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Transparent-panel"><span class="nav-number">2.1.</span> <span class="nav-text">Transparent panel</span></a></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Desktop-settings-GNOME"><span class="nav-number">1.</span> <span class="nav-text">Desktop settings: GNOME</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Themes-and-icons"><span class="nav-number">1.0.1.</span> <span class="nav-text">Themes and icons</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-OSX-Arc-主题（推荐）"><span class="nav-number">1.0.2.</span> <span class="nav-text">安装 OSX Arc 主题（推荐）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-MacOS-High-Sierra主题（可选）"><span class="nav-number">1.0.3.</span> <span class="nav-text">安装 MacOS High Sierra主题（可选）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#安装-Macbuntu主题（可选）"><span class="nav-number">1.0.4.</span> <span class="nav-text">安装 Macbuntu主题（可选）</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Intall-Vivacious-Colors-GTK-Theme（可选）"><span class="nav-number">1.1.</span> <span class="nav-text">Intall Vivacious Colors GTK Theme（可选）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#安装图标"><span class="nav-number">1.2.</span> <span class="nav-text">安装图标</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Nautilus-file-manager"><span class="nav-number">1.2.1.</span> <span class="nav-text">Nautilus file manager</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Touchpad"><span class="nav-number">1.2.2.</span> <span class="nav-text">Touchpad</span></a></li></ol></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#The-way-for-debugging-gnome-shell-extension"><span class="nav-number">2.</span> <span class="nav-text">The way for debugging gnome-shell extension</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Reading-source-code-of-gnome-shell-extension-fullscreen-hotcorner"><span class="nav-number">2.0.1.</span> <span class="nav-text">Reading source code of gnome shell extension: fullscreen-hotcorner</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Looking-glass-tool"><span class="nav-number">2.1.</span> <span class="nav-text">Looking glass tool</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Write-an-extension-on-your-own"><span class="nav-number">3.</span> <span class="nav-text">Write an extension on your own</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Transparent-panel"><span class="nav-number">3.1.</span> <span class="nav-text">Transparent panel</span></a></li></ol></li></div>
             
 
           </div>

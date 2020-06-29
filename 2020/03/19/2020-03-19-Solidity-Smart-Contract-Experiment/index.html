@@ -113,7 +113,7 @@
 <meta property="og:image" content="http://billystudio.github.io/2020/03/19/2020-03-19-Solidity-Smart-Contract-Experiment/transaction-with-event-logs.png">
 <meta property="og:image" content="http://billystudio.github.io/2020/03/19/2020-03-19-Solidity-Smart-Contract-Experiment/web3j-ethLogFlowable-subscribe.png">
 <meta property="og:image" content="http://billystudio.github.io/2020/03/19/2020-03-19-Solidity-Smart-Contract-Experiment/decode-events.png">
-<meta property="og:updated_time" content="2020-05-03T08:25:00.015Z">
+<meta property="og:updated_time" content="2020-06-02T07:46:12.151Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Solidity 智能合约实验">
 <meta name="twitter:description" content="以太坊开发团队开发了 Remix IDE 和配套的 Remix 一系列插件供智能合约实验用。当然也可以使用 Java 的 web3j 来实现这些功能">
@@ -384,7 +384,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-05-03 16:25:00" itemprop="dateModified" datetime="2020-05-03T16:25:00+08:00">2020-05-03</time>
+                <time title="Modified: 2020-06-02 15:46:12" itemprop="dateModified" datetime="2020-06-02T15:46:12+08:00">2020-06-02</time>
               </span>
             
           
@@ -495,6 +495,8 @@
 <p>Subscriber.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> rx.Subscription;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Subscriber</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> Web3j web3;</span><br><span class="line">    <span class="keyword">private</span> String CONTRACT_ADDRESS;</span><br><span class="line"></span><br><span class="line">    Subscriber(Web3j web3j, String contract_address) &#123;</span><br><span class="line">        web3 = web3j;</span><br><span class="line">        CONTRACT_ADDRESS = contract_address;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">newEventLogFilter</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        EthFilter filter = <span class="keyword">new</span> EthFilter(DefaultBlockParameterName.EARLIEST,</span><br><span class="line">                DefaultBlockParameterName.LATEST, CONTRACT_ADDRESS);</span><br><span class="line">        filter.addSingleTopic(EventEncoder.encode(StorageContract.LOGTOKEN_EVENT));</span><br><span class="line">        Subscription subscription = web3.ethLogObservable(filter).</span><br><span class="line">                subscribe(log -&gt; &#123;</span><br><span class="line">                    System.out.println(log);</span><br><span class="line">                &#125;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>DemoApplication.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="meta">@SpringBootApplication</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">GatewayApplication</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		SpringApplication.run(GatewayApplication.class, args);</span><br><span class="line"></span><br><span class="line">		Web3j web3 = Web3j.build(<span class="keyword">new</span> HttpService());</span><br><span class="line">		String contract_address = <span class="string">"0xcc87c4D1294bE775c0fD9726197F768DDCA45d56"</span>;</span><br><span class="line">		Subscriber subscriber = <span class="keyword">new</span> Subscriber(web3, contract_address);</span><br><span class="line">		subscriber.newEventLogFilter();</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>实验观察可知，同一个ABI event，它们的 topic 是相同的，故可以将 topic 和 event name 一一对应。（实际上topic值是event name 的hash，可以用EventEncoder.encode()获取topic值）</p>
+<p>接口测试命令：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -d &quot;call_address=/home/wsd/STEM/microservices/test-data&quot; http://localhost:7901/callKmeans</span><br><span class="line">curl http://localhost:7901/getResults</span><br></pre></td></tr></table></figure></p>
+<p>假设每次消费过程都是一次完整合约调用过程。但已知若合约代码不变，则部署的地址也不变。</p>
 <h1 id="几个问题和一些想法"><a href="#几个问题和一些想法" class="headerlink" title="几个问题和一些想法"></a>几个问题和一些想法</h1><ol>
 <li><p>分网关外部和网关内部来看 Solidity 智能合约与 Spring 微服务的关系<br>从内部来看，智能合约与微服务相对独立，智能合约更像是一个广义层面的微服务。<br>从外部来看，如果外部的调用请求每次都要先通过智能合约来交互，那么智能合约更像是微服务的整合。</p>
 </li>
@@ -640,7 +642,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">127</span>
+                    <span class="site-state-item-count">132</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -670,7 +672,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">134</span>
+                    <span class="site-state-item-count">139</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

@@ -90,18 +90,20 @@
 
 
 
-  <meta name="description" content="Spring是一个非常常用的Java框架, 由其衍生出的框架还有Spring MVC, SpringBoot等.对于需要通过开发关的本科生来说, 具有很大的学习意义.">
+  <meta name="description" content="Spring是一个非常常用的Java框架, 由其衍生出的框架还有Spring MVC, SpringBoot等。">
 <meta name="keywords" content="Java,Spring">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Spring MVC 学习笔记">
+<meta property="og:title" content="Spring 词汇表">
 <meta property="og:url" content="http://BillyStudio.github.io/2018/11/29/Nov-29th-Learning-Springg-MVC/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="Spring是一个非常常用的Java框架, 由其衍生出的框架还有Spring MVC, SpringBoot等.对于需要通过开发关的本科生来说, 具有很大的学习意义.">
+<meta property="og:description" content="Spring是一个非常常用的Java框架, 由其衍生出的框架还有Spring MVC, SpringBoot等。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-18T06:54:36.667Z">
+<meta property="og:image" content="http://billystudio.github.io/2018/11/29/Nov-29th-Learning-Springg-MVC/IOC.png">
+<meta property="og:updated_time" content="2020-06-17T11:26:57.811Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Spring MVC 学习笔记">
-<meta name="twitter:description" content="Spring是一个非常常用的Java框架, 由其衍生出的框架还有Spring MVC, SpringBoot等.对于需要通过开发关的本科生来说, 具有很大的学习意义.">
+<meta name="twitter:title" content="Spring 词汇表">
+<meta name="twitter:description" content="Spring是一个非常常用的Java框架, 由其衍生出的框架还有Spring MVC, SpringBoot等。">
+<meta name="twitter:image" content="http://billystudio.github.io/2018/11/29/Nov-29th-Learning-Springg-MVC/IOC.png">
 
 
 
@@ -119,7 +121,7 @@
   };
 </script>
 
-  <title>Spring MVC 学习笔记 | Shane's Blog</title>
+  <title>Spring 词汇表 | Shane's Blog</title>
   
 
 
@@ -327,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Spring MVC 学习笔记
+          <h1 class="post-title" itemprop="name headline">Spring 词汇表
 
               
             
@@ -368,7 +370,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-18 14:54:36" itemprop="dateModified" datetime="2019-08-18T14:54:36+08:00">2019-08-18</time>
+                <time title="Modified: 2020-06-17 19:26:57" itemprop="dateModified" datetime="2020-06-17T19:26:57+08:00">2020-06-17</time>
               </span>
             
           
@@ -427,10 +429,30 @@
       
 
       
-        <p>Spring是一个非常常用的Java框架, 由其衍生出的框架还有Spring MVC, SpringBoot等.<br>对于需要通过开发关的本科生来说, 具有很大的学习意义.</p>
-<a id="more"></a>
-<p>网站应用开发归纳起来两大块就是前端和后端.<br>在一种解决方案中, 使用jsp作为前端渲染界面, Servlet xml文件作为前端控制器, 配置用来控制的 DispatcherController 的Java代码.<br>dispatcher xml 文件中的 JavaBean 作为一种中间件写法, 将对应的前端访问页面请求调转到对应的后端 Java Controller 类中进行处理.<br>后端的 Controller 类只需要重写 handleRequest 方法, 就可以将新的 jsp 界面打包到 ModelAndView 类中返回.</p>
-<h3 id="基于注解的控制器"><a href="#基于注解的控制器" class="headerlink" title="基于注解的控制器"></a>基于注解的控制器</h3>
+        <p>Spring是一个非常常用的Java框架, 由其衍生出的框架还有Spring MVC, SpringBoot等。<a id="more"></a><br>可以说Spring系列几乎统治了现代Java领域。对于需要通过开发关的本科生来说, 具有很大的学习意义.</p>
+<p>网站应用开发归纳起来两大块就是前端和后端.</p>
+<p>在最初的解决方案中, 使用jsp作为前端渲染界面, Servlet xml文件作为前端控制器, 配置用来控制的 DispatcherController 的Java代码.<br>dispatcher xml 文件中的 JavaBean 作为一种中间件写法, 将对应的前端访问页面请求调转到对应的后端 Java Controller 类中进行处理.<br>后端的 Controller 类只需要重写 handleRequest 方法, 就可以将新的前端界面打包到 ModelAndView 类中返回.</p>
+<p>为了开发的方便，出现了框架。框架的三要素：约束性、支撑性、半成品。</p>
+<p>Spring bean： Spring框架在运行时管理的对象。Spring bean是任何Spring应用程序的基本构建块。你编写的大多数应用程序逻辑代码都将放在Spring bean中。</p>
+<p>Spring bean的管理包括：</p>
+<ul>
+<li>创建一个对象</li>
+<li>销毁一个对象</li>
+<li>提供依赖项（如其他bean、配置属性）</li>
+<li>拦截对象方法调用以提供额外的框架功能</li>
+</ul>
+<p>IOC：Inversion of Control(控制反转)，又称为DI：（依赖注入）。我们知道，如何降低系统之间、模块之间和对象之间的耦合度，是软件工程永远追求的目标之一。而IOC容器将对象之间的关联统一管理，如图所示。<br><img src="IOC.png" alt="IOC"><br>在去掉IOC的情况下对象就是解耦合状态。现在假设对象A中需要依赖对象B，在以往没有IOC的情况下是在A中主动创建出对象B。而出现了IOC后，A与B之间失去了直接联系，当A需要对象B的时候，由IOC容器主动创建一个对象B注入到对象A需要的地方，依赖注入因此得名。对象A创建对象B变成了被动的过程，“控制反转”因此得名。</p>
+<p>Spring是一个容器，包含并管理bean的生命周期.</p>
+<p>AOP: Aspect Oriented Programming. 面向切面编程，是对OOP缺点的完善和补充。</p>
+<h2 id="Spring-常用注解"><a href="#Spring-常用注解" class="headerlink" title="Spring 常用注解"></a>Spring 常用注解</h2><p><code>@Configuration</code> 表明是一个配置类，配置类也是一个组件<br><code>@Component</code></p>
+<h2 id="Spring-MVC-常用注解"><a href="#Spring-MVC-常用注解" class="headerlink" title="Spring MVC 常用注解"></a>Spring MVC 常用注解</h2><p><code>@RequestMapping()</code> 表示对应的路径</p>
+<p><code>@ResponseBody</code> 表示函数返回参数传递回前端</p>
+<p><code>@RequestParam</code> 用于注解controller中函数参数，表明该参数需要由前端传递。</p>
+<p>举例：</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@ResponseBody</span></span><br><span class="line"><span class="meta">@RequestMapping</span>(value = <span class="string">"/login.do"</span>, method = RequestMethod.POST)</span><br><span class="line"><span class="function"><span class="keyword">public</span> String <span class="title">login</span><span class="params">(@RequestParam String username, @RequestParam String password)</span> </span>&#123;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="Spring-Boot-常用注解"><a href="#Spring-Boot-常用注解" class="headerlink" title="Spring Boot 常用注解"></a>Spring Boot 常用注解</h2><p><code>@SpringBootApplication</code> 主配置类</p>
+<p><code>@SpringBootConfiguration</code></p>
+
       
     </div>
 
@@ -560,7 +582,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">127</span>
+                    <span class="site-state-item-count">132</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -590,7 +612,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">134</span>
+                    <span class="site-state-item-count">139</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -624,7 +646,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#基于注解的控制器"><span class="nav-number">1.</span> <span class="nav-text">基于注解的控制器</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-常用注解"><span class="nav-number">1.</span> <span class="nav-text">Spring 常用注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-MVC-常用注解"><span class="nav-number">2.</span> <span class="nav-text">Spring MVC 常用注解</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Spring-Boot-常用注解"><span class="nav-number">3.</span> <span class="nav-text">Spring Boot 常用注解</span></a></li></ol></div>
             
 
           </div>

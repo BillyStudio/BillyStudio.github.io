@@ -91,7 +91,7 @@
 
 
   <meta name="description" content="Two ways of using vms on Linux are introduced.">
-<meta name="keywords" content="Linux,qemu,kvm">
+<meta name="keywords" content="VM,Linux,qemu,kvm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Creating virtual machiness on Linux --- the hard way">
 <meta property="og:url" content="http://BillyStudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/index.html">
@@ -103,7 +103,9 @@
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/Screenshot-office16.png">
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/before-install.png">
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/after-install.png">
-<meta property="og:updated_time" content="2020-04-21T03:26:08.523Z">
+<meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/libvirt-uri.png">
+<meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/vm-name.png">
+<meta property="og:updated_time" content="2020-06-27T04:48:33.904Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Creating virtual machiness on Linux --- the hard way">
 <meta name="twitter:description" content="Two ways of using vms on Linux are introduced.">
@@ -374,7 +376,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-04-21 11:26:08" itemprop="dateModified" datetime="2020-04-21T11:26:08+08:00">2020-04-21</time>
+                <time title="Modified: 2020-06-27 12:48:33" itemprop="dateModified" datetime="2020-06-27T12:48:33+08:00">2020-06-27</time>
               </span>
             
           
@@ -459,6 +461,13 @@
 <p>make sure sshd on host is on<br>open one term on host and type <code>tty</code> to get device name，say <code>/dev/pts/0</code></p>
 <p>ssh to host using PuTTY from win7 client<br><code>echo &quot;copied text&quot; &gt;&gt; /dev/pts/0</code></p>
 <p>You will see “copied text” on the host terminal.</p>
+<h3 id="Win10-VM-Installation"><a href="#Win10-VM-Installation" class="headerlink" title="Win10 VM Installation"></a>Win10 VM Installation</h3><p>Because of two bugs of Win7 VM: the first is that copy-and-pasteing for office object always throws an error in VM; the second is that Office2016 on win7 cannot open remote-location file. I change to win10 vm, and I found that’s cool.</p>
+<h3 id="Launch-VM-as-a-desktop-program"><a href="#Launch-VM-as-a-desktop-program" class="headerlink" title="Launch VM as a desktop program"></a>Launch VM as a desktop program</h3><p>Go to Virt-manager &gt; Connection Details to find Libvirt URI, here mine is <code>qemu:///system</code></p>
+<p><img src="libvirt-uri.png" alt="libvirt-uri"></p>
+<p>Then open virtual machine, go to View &gt; Details to find the name of the virtual machine, here mine is <code>win10</code></p>
+<p><img src="vm-name.png" alt="vm-name"></p>
+<p>Now we can test the direct-open command:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virt-manager --connect qemu:///system --show-domain-console win10</span><br></pre></td></tr></table></figure></p>
+<p>Then create your desktop file under <code>~/.local/share/applications</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Version=1.0</span><br><span class="line">Type=Application</span><br><span class="line">Name=win10</span><br><span class="line">Comment=Start Win10 VM</span><br><span class="line">Exec=virt-manager --connect qemu:///system --show-domain-console win10</span><br><span class="line">Icon=your/logo/position/windows.svg</span><br><span class="line">Terminal=false</span><br><span class="line">StartupNotify=false</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -488,6 +497,8 @@
           
         
         <div class="post-tags">
+          
+            <a href="/tags/VM/" rel="tag"># VM</a>
           
             <a href="/tags/Linux/" rel="tag"># Linux</a>
           
@@ -591,7 +602,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">127</span>
+                    <span class="site-state-item-count">132</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -621,7 +632,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">134</span>
+                    <span class="site-state-item-count">139</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -655,7 +666,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#QEMU"><span class="nav-number">1.</span> <span class="nav-text">QEMU</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu-Setting-socks5-proxy"><span class="nav-number">1.1.</span> <span class="nav-text">Ubuntu Setting socks5 proxy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Virt-Manager"><span class="nav-number">2.</span> <span class="nav-text">Virt Manager</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Win7-VM-installation"><span class="nav-number">2.1.</span> <span class="nav-text">Win7 VM installation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Real-time-clock"><span class="nav-number">2.1.1.</span> <span class="nav-text">Real time clock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Office-2016-pack"><span class="nav-number">2.1.2.</span> <span class="nav-text">Office 2016 pack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QXL-Acceleration"><span class="nav-number">2.1.3.</span> <span class="nav-text">QXL Acceleration</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#QEMU"><span class="nav-number">1.</span> <span class="nav-text">QEMU</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu-Setting-socks5-proxy"><span class="nav-number">1.1.</span> <span class="nav-text">Ubuntu Setting socks5 proxy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Virt-Manager"><span class="nav-number">2.</span> <span class="nav-text">Virt Manager</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Win7-VM-installation"><span class="nav-number">2.1.</span> <span class="nav-text">Win7 VM installation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Real-time-clock"><span class="nav-number">2.1.1.</span> <span class="nav-text">Real time clock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Office-2016-pack"><span class="nav-number">2.1.2.</span> <span class="nav-text">Office 2016 pack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QXL-Acceleration"><span class="nav-number">2.1.3.</span> <span class="nav-text">QXL Acceleration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Win10-VM-Installation"><span class="nav-number">2.1.4.</span> <span class="nav-text">Win10 VM Installation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Launch-VM-as-a-desktop-program"><span class="nav-number">2.1.5.</span> <span class="nav-text">Launch VM as a desktop program</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
