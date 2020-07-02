@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="The MVC design pattern is broadly used in website development.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-05-21T01:48:23.793Z">
+<meta property="og:updated_time" content="2020-07-01T14:57:19.492Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Design patterns --- MVC">
 <meta name="twitter:description" content="The MVC design pattern is broadly used in website development.">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-05-21 09:48:23" itemprop="dateModified" datetime="2020-05-21T09:48:23+08:00">2020-05-21</time>
+                <time title="Modified: 2020-07-01 22:57:19" itemprop="dateModified" datetime="2020-07-01T22:57:19+08:00">2020-07-01</time>
               </span>
             
           
@@ -431,6 +431,8 @@
 <p>One of the successful implementation is Java Spring MVC.</p>
 <p>In Spring, if you want a class to be a controller you can use the annotation <code>@RestController</code> for this class.</p>
 <p>And in this class, use annotation <code>@RequestMapping</code> to show this is an RESTful API function.</p>
+<h2 id="Eureka-Server源码阅读"><a href="#Eureka-Server源码阅读" class="headerlink" title="Eureka Server源码阅读"></a>Eureka Server源码阅读</h2><p>MVC 模式<br>Model：业务逻辑层，包括 InstanceInfo.java EurekaServerConfig.java eureka-core的registry文件夹下的InstanceRegistry.java<br>View：bootstrap<br>Control：各种resource文件，包括Application(s)Resource.java Instance(s)Resource.java</p>
+<p>Register操作</p>
 
       
     </div>
@@ -534,8 +536,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -550,7 +561,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">132</span>
+                    <span class="site-state-item-count">133</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -580,7 +591,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">139</span>
+                    <span class="site-state-item-count">140</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -603,6 +614,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka-Server源码阅读"><span class="nav-number">1.</span> <span class="nav-text">Eureka Server源码阅读</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
