@@ -91,14 +91,14 @@
 
 
   <meta name="description" content="在遇到的项目中学习jsp.">
-<meta name="keywords" content="Java,JSP">
+<meta name="keywords" content="JSP,Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="JSP Head First">
 <meta property="og:url" content="http://BillyStudio.github.io/2020/07/02/2020-07-02-JSP-head-first/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="在遇到的项目中学习jsp.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-02T01:39:20.360Z">
+<meta property="og:updated_time" content="2020-07-04T02:33:56.597Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="JSP Head First">
 <meta name="twitter:description" content="在遇到的项目中学习jsp.">
@@ -353,13 +353,23 @@
                 
               
 
-              <time title="Created: 2020-07-02 07:54:11 / Modified: 09:39:20" itemprop="dateCreated datePublished" datetime="2020-07-02T07:54:11+08:00">2020-07-02</time>
+              <time title="Created: 2020-07-02 07:54:11" itemprop="dateCreated datePublished" datetime="2020-07-02T07:54:11+08:00">2020-07-02</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-07-04 10:33:56" itemprop="dateModified" datetime="2020-07-04T10:33:56+08:00">2020-07-04</time>
+              </span>
             
           
 
@@ -417,7 +427,8 @@
       
 
       
-        <p>在遇到的项目中学习jsp. <a id="more"></a><br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;li class="one"&gt;&lt;a href="jsp/status.jsp"&gt;Home&lt;/a&gt;&lt;/li&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class="sectionTitle"&gt;Instance Info&lt;/div&gt;</span><br><span class="line">&lt;table id=<span class="string">'instanceInfo'</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"stripeable"</span>&gt;</span><br><span class="line">    &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Value&lt;/th&gt;&lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;&lt;td&gt;ipAddr&lt;/td&gt;&lt;td&gt;192.168.1.104&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;status&lt;/td&gt;&lt;td&gt;UP&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+        <p>在遇到的项目中学习jsp. <a id="more"></a></p>
+<p>JSP是动态执行文件，由Tomcat生成java servlet执行文件。jsp中的内容被放到 <code>_jspService()</code> 方法体的 <code>try...catch</code> 代码块里执行<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;li class="one"&gt;&lt;a href="jsp/status.jsp"&gt;Home&lt;/a&gt;&lt;/li&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class="sectionTitle"&gt;Instance Info&lt;/div&gt;</span><br><span class="line">&lt;table id=<span class="string">'instanceInfo'</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"stripeable"</span>&gt;</span><br><span class="line">    &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Value&lt;/th&gt;&lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;&lt;td&gt;ipAddr&lt;/td&gt;&lt;td&gt;192.168.1.104&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;status&lt;/td&gt;&lt;td&gt;UP&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
 <p>那么，当前 Eureka Server 的 InstanceInfo 是如何获取的呢？</p>
 <p>status.jsp<br><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">146</span> StatusInfo statusInfo = (<span class="keyword">new</span> StatusUtil(serverContext)).getStatusInfo();</span><br></pre></td></tr></table></figure></p>
 <p>StatusUtil.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">29</span> <span class="keyword">this</span>.instanceInfo = server.getApplicationInfoManager().getInfo();</span><br></pre></td></tr></table></figure></p>
@@ -460,9 +471,9 @@
         
         <div class="post-tags">
           
-            <a href="/tags/Java/" rel="tag"># Java</a>
-          
             <a href="/tags/JSP/" rel="tag"># JSP</a>
+          
+            <a href="/tags/Java/" rel="tag"># Java</a>
           
         </div>
       
@@ -484,6 +495,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/07/2020-07-07-Docker-cheatsheet/" rel="prev" title="Docker词汇表">
+                Docker词汇表 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -547,7 +562,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">133</span>
+                    <span class="site-state-item-count">135</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -562,7 +577,7 @@
                       <a href="/categories/">
                     
                   
-                    <span class="site-state-item-count">5</span>
+                    <span class="site-state-item-count">6</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -577,7 +592,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">140</span>
+                    <span class="site-state-item-count">142</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
