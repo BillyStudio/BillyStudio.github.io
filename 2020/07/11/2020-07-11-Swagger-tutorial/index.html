@@ -90,23 +90,18 @@
 
 
 
-  <meta name="description" content="新建一个Spring Boot项目 添加Swagger-ui和Swagger依赖 @EnableSwagger2  git clone https://gitee.com/Shane1501/eureka.git IDEA 2019.2 之后的版本 ； gradle 6.5 ; Tomcat 8 IDEA 打开 eureka 项目导入 如果 gradle 速度慢，就用阿里云镜像1234567891">
+  <meta name="description" content="新建一个Spring Boot项目 添加Swagger-ui和Swagger依赖 @EnableSwagger2">
 <meta name="keywords" content="swagger">
 <meta property="og:type" content="article">
 <meta property="og:title" content="使用Swagger构建接口文档">
 <meta property="og:url" content="http://BillyStudio.github.io/2020/07/11/2020-07-11-Swagger-tutorial/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="新建一个Spring Boot项目 添加Swagger-ui和Swagger依赖 @EnableSwagger2  git clone https://gitee.com/Shane1501/eureka.git IDEA 2019.2 之后的版本 ； gradle 6.5 ; Tomcat 8 IDEA 打开 eureka 项目导入 如果 gradle 速度慢，就用阿里云镜像1234567891">
+<meta property="og:description" content="新建一个Spring Boot项目 添加Swagger-ui和Swagger依赖 @EnableSwagger2">
 <meta property="og:locale" content="en">
-<meta property="og:image" content="http://billystudio.github.io/2020/07/11/2020-07-11-Swagger-tutorial/import-gradle.png">
-<meta property="og:image" content="http://billystudio.github.io/2020/07/11/2020-07-11-Swagger-tutorial/tomcat1.png">
-<meta property="og:image" content="http://billystudio.github.io/2020/07/11/2020-07-11-Swagger-tutorial/tomcat2.png">
-<meta property="og:image" content="http://billystudio.github.io/2020/07/11/2020-07-11-Swagger-tutorial/eureka.png">
-<meta property="og:updated_time" content="2020-07-12T09:43:00.112Z">
+<meta property="og:updated_time" content="2020-07-14T14:12:25.215Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="使用Swagger构建接口文档">
-<meta name="twitter:description" content="新建一个Spring Boot项目 添加Swagger-ui和Swagger依赖 @EnableSwagger2  git clone https://gitee.com/Shane1501/eureka.git IDEA 2019.2 之后的版本 ； gradle 6.5 ; Tomcat 8 IDEA 打开 eureka 项目导入 如果 gradle 速度慢，就用阿里云镜像1234567891">
-<meta name="twitter:image" content="http://billystudio.github.io/2020/07/11/2020-07-11-Swagger-tutorial/import-gradle.png">
+<meta name="twitter:description" content="新建一个Spring Boot项目 添加Swagger-ui和Swagger依赖 @EnableSwagger2">
 
 
 
@@ -373,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-07-12 17:43:00" itemprop="dateModified" datetime="2020-07-12T17:43:00+08:00">2020-07-12</time>
+                <time title="Modified: 2020-07-14 22:12:25" itemprop="dateModified" datetime="2020-07-14T22:12:25+08:00">2020-07-14</time>
               </span>
             
           
@@ -435,22 +430,6 @@
         <p>新建一个Spring Boot项目</p>
 <p>添加Swagger-ui和Swagger依赖</p>
 <p>@EnableSwagger2</p>
-<ol>
-<li>git clone <a href="https://gitee.com/Shane1501/eureka.git" target="_blank" rel="noopener">https://gitee.com/Shane1501/eureka.git</a></li>
-<li>IDEA 2019.2 之后的版本 ； gradle 6.5 ; Tomcat 8</li>
-<li>IDEA 打开 eureka 项目导入</li>
-<li>如果 gradle 速度慢，就用阿里云镜像<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">allprojects&#123;</span><br><span class="line">    repositories &#123;</span><br><span class="line">        def ALIYUN_REPOSITORY_URL = &apos;https://maven.aliyun.com/repository/public/&apos;</span><br><span class="line">        def ALIYUN_JCENTER_URL = &apos;https://maven.aliyun.com/repository/jcenter/&apos;</span><br><span class="line">        def ALIYUN_GOOGLE_URL = &apos;https://maven.aliyun.com/repository/google/&apos;</span><br><span class="line">        def ALIYUN_GRADLE_PLUGIN_URL = &apos;https://maven.aliyun.com/repository/gradle-plugin/&apos;</span><br><span class="line">        all &#123; ArtifactRepository repo -&gt;</span><br><span class="line">            if(repo instanceof MavenArtifactRepository)&#123;</span><br><span class="line">                def url = repo.url.toString()</span><br><span class="line">                if (url.startsWith(&apos;https://repo1.maven.org/maven2/&apos;)) &#123;</span><br><span class="line">                    project.logger.lifecycle &quot;Repository $&#123;repo.url&#125; replaced by $ALIYUN_REPOSITORY_URL.&quot;</span><br><span class="line">                    remove repo</span><br><span class="line">                &#125;</span><br><span class="line">                if (url.startsWith(&apos;https://jcenter.bintray.com/&apos;)) &#123;</span><br><span class="line">                    project.logger.lifecycle &quot;Repository $&#123;repo.url&#125; replaced by $ALIYUN_JCENTER_URL.&quot;</span><br><span class="line">                    remove repo</span><br><span class="line">                &#125;</span><br><span class="line">                if (url.startsWith(&apos;https://dl.google.com/dl/android/maven2/&apos;)) &#123;</span><br><span class="line">                    project.logger.lifecycle &quot;Repository $&#123;repo.url&#125; replaced by $ALIYUN_GOOGLE_URL.&quot;</span><br><span class="line">                    remove repo</span><br><span class="line">                &#125;</span><br><span class="line">                if (url.startsWith(&apos;https://plugins.gradle.org/m2/&apos;)) &#123;</span><br><span class="line">                    project.logger.lifecycle &quot;Repository $&#123;repo.url&#125; replaced by $ALIYUN_GRADLE_PLUGIN_URL.&quot;</span><br><span class="line">                    remove repo</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        maven &#123; url ALIYUN_REPOSITORY_URL &#125;</span><br><span class="line">        maven &#123; url ALIYUN_JCENTER_URL &#125;</span><br><span class="line">        maven &#123; url ALIYUN_GOOGLE_URL &#125;</span><br><span class="line">        maven &#123; url ALIYUN_GRADLE_PLUGIN_URL &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
-</ol>
-<p>把上述文件保存成 init.gradle 放到 USER目录下的 .gradle 文件夹里</p>
-<p><img src="import-gradle.png" alt="import-gradle.png"></p>
-<ol>
-<li>配置 Tomcat<br><img src="tomcat1.png" alt="/home/wsd/Clouds/Hexo-blog/source/_posts/2020-07-11-Swagger-tutorial/tomcat1.png"></li>
-</ol>
-<p><img src="tomcat2.png" alt="/home/wsd/Clouds/Hexo-blog/source/_posts/2020-07-11-Swagger-tutorial/tomcat2.png"></p>
-<ol>
-<li>点击启动Tomcat，会弹出eureka界面<br><img src="eureka.png" alt="/home/wsd/Clouds/Hexo-blog/source/_posts/2020-07-11-Swagger-tutorial/eureka.png"></li>
-</ol>
 
       
     </div>
@@ -503,6 +482,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2020/07/14/2020-07-14-Design-patterns-Dynamic-proxy/" rel="prev" title="Design patterns --- Dynamic proxy">
+                Design patterns --- Dynamic proxy <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -566,7 +549,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">135</span>
+                    <span class="site-state-item-count">137</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -581,7 +564,7 @@
                       <a href="/categories/">
                     
                   
-                    <span class="site-state-item-count">6</span>
+                    <span class="site-state-item-count">1</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -596,7 +579,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">142</span>
+                    <span class="site-state-item-count">8</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
