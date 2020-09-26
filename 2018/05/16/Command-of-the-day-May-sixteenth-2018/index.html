@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="This article lists a Linux cheatsheet including lots of tools’ commands.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-06T08:19:33.785Z">
+<meta property="og:updated_time" content="2020-07-27T09:15:13.980Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux command of the day">
 <meta name="twitter:description" content="This article lists a Linux cheatsheet including lots of tools’ commands.">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-07-06 16:19:33" itemprop="dateModified" datetime="2020-07-06T16:19:33+08:00">2020-07-06</time>
+                <time title="Modified: 2020-07-27 17:15:13" itemprop="dateModified" datetime="2020-07-27T17:15:13+08:00">2020-07-27</time>
               </span>
             
           
@@ -455,7 +455,8 @@
 <h2 id="NAS-NFS-filesystem"><a href="#NAS-NFS-filesystem" class="headerlink" title="NAS NFS filesystem"></a>NAS NFS filesystem</h2><p><a href="https://wiki.archlinux.org/index.php/NFS" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/NFS</a></p>
 <h2 id="NAS-CIFS-filesystem"><a href="#NAS-CIFS-filesystem" class="headerlink" title="NAS CIFS filesystem"></a>NAS CIFS filesystem</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep cifs</span><br><span class="line"># if not, `sudo modprobe cifs` or add `cifs` into /etc/modules-load.d/cifs.conf</span><br><span class="line">smbclient -L nas -U%</span><br><span class="line">sudo mount -t cifs //nas/wangshengdian /mnt/lab-nas-wangshengdian -o username=[your username],password=[your password],workgroup=workgroup,iocharset=utf8,uid=shane,gid=shane</span><br></pre></td></tr></table></figure>
 <p><code>noauto</code></p>
-<h3 id="Mount-at-boot-up"><a href="#Mount-at-boot-up" class="headerlink" title="Mount at boot-up"></a>Mount at boot-up</h3><h1 id="Web-Downloader"><a href="#Web-Downloader" class="headerlink" title="Web Downloader"></a>Web Downloader</h1><p>Downloading from the web has many choices on Linux.</p>
+<h3 id="Mount-at-boot-up"><a href="#Mount-at-boot-up" class="headerlink" title="Mount at boot-up"></a>Mount at boot-up</h3><p>/etc/fstab</p>
+<h1 id="Web-Downloader"><a href="#Web-Downloader" class="headerlink" title="Web Downloader"></a>Web Downloader</h1><p>Downloading from the web has many choices on Linux.</p>
 <h2 id="aria2"><a href="#aria2" class="headerlink" title="aria2"></a>aria2</h2><p>For chrome extension, I use Camtd. Go to <a href="https://github.com/jae-jae/Camtd/releases" target="_blank" rel="noopener">https://github.com/jae-jae/Camtd/releases</a> and download the latest .crx file.<br>Then upload it to <a href="https://crxextractor.com/" target="_blank" rel="noopener">https://crxextractor.com/</a> for getting the .zip file and download it.<br>Then <code>unzip -d dir Camtd.zip</code>. And open chrome://extensions to load the unpacked directory.</p>
 <p>But sometimes you don’t need a browser to download file. You can directly download from your command line. Here are they:</p>
 <h2 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h2><p>If you want to download a file on Github, it’s easy to use wget. Let’s say</p>
@@ -468,7 +469,9 @@
 <h3 id="Test-and-run"><a href="#Test-and-run" class="headerlink" title="Test and run"></a>Test and run</h3><p>Step 1: Login with the campus network account on the desktop to get an external ip address and do not login on the laptop. Ensure the connection availability from your laptop to the desktop, and from the desktop to VPS server.<br>Step 2: start v2ray<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo v2ray --config=你的配置文件</span><br></pre></td></tr></table></figure></p>
 <p>or run in the backgroud<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start v2ray # or sudo service start v2ray</span><br></pre></td></tr></table></figure></p>
 <h3 id="How-to-Keep-user-proxy-settings-when-‘sudo’"><a href="#How-to-Keep-user-proxy-settings-when-‘sudo’" class="headerlink" title="How to Keep user proxy settings when ‘sudo’"></a>How to Keep user proxy settings when ‘sudo’</h3><p>Add ‘/etc/sudoers’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Defaults env_keep += &quot;all_proxy ftp_proxy http_proxy https_proxy no_proxy&quot;</span><br></pre></td></tr></table></figure></p>
-<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a href="https://blog.csdn.net/liuyanfeier/article/details/62422742" target="_blank" rel="noopener">https://blog.csdn.net/liuyanfeier/article/details/62422742</a></p>
+<h1 id="User-management"><a href="#User-management" class="headerlink" title="User management"></a>User management</h1><h2 id="add-user"><a href="#add-user" class="headerlink" title="add user"></a>add user</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adduser 用户名</span><br></pre></td></tr></table></figure>
+<h3 id="add-to-group"><a href="#add-to-group" class="headerlink" title="add to group"></a>add to group</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usermod -a -G 组名 用户名</span><br></pre></td></tr></table></figure>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://blog.csdn.net/liuyanfeier/article/details/62422742" target="_blank" rel="noopener">https://blog.csdn.net/liuyanfeier/article/details/62422742</a></p>
 <p><a href="https://wiki.archlinux.org/index.php/Samba" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Samba</a><br><a href="https://wiki.archlinux.org/index.php/Kernel_module" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Kernel_module</a></p>
 
       
@@ -598,7 +601,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">137</span>
+                    <span class="site-state-item-count">138</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -613,7 +616,7 @@
                       <a href="/categories/">
                     
                   
-                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -628,7 +631,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">143</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -662,7 +665,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-background-execute-command"><span class="nav-number">1.</span> <span class="nav-text">Linux background execute command</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sed"><span class="nav-number">2.</span> <span class="nav-text">sed</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mount"><span class="nav-number">3.</span> <span class="nav-text">mount</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#USB-FAT32-filesystem"><span class="nav-number">3.1.</span> <span class="nav-text">USB FAT32 filesystem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS-NFS-filesystem"><span class="nav-number">3.2.</span> <span class="nav-text">NAS NFS filesystem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS-CIFS-filesystem"><span class="nav-number">3.3.</span> <span class="nav-text">NAS CIFS filesystem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mount-at-boot-up"><span class="nav-number">3.3.1.</span> <span class="nav-text">Mount at boot-up</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web-Downloader"><span class="nav-number">4.</span> <span class="nav-text">Web Downloader</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#aria2"><span class="nav-number">4.1.</span> <span class="nav-text">aria2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wget"><span class="nav-number">4.2.</span> <span class="nav-text">wget</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#curl"><span class="nav-number">4.3.</span> <span class="nav-text">curl</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Campus-proxy"><span class="nav-number">5.</span> <span class="nav-text">Campus proxy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-configuration"><span class="nav-number">5.1.</span> <span class="nav-text">Sample configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-and-run"><span class="nav-number">5.1.1.</span> <span class="nav-text">Test and run</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#How-to-Keep-user-proxy-settings-when-‘sudo’"><span class="nav-number">5.1.2.</span> <span class="nav-text">How to Keep user proxy settings when ‘sudo’</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-number">5.2.</span> <span class="nav-text">References</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-background-execute-command"><span class="nav-number">1.</span> <span class="nav-text">Linux background execute command</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sed"><span class="nav-number">2.</span> <span class="nav-text">sed</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mount"><span class="nav-number">3.</span> <span class="nav-text">mount</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#USB-FAT32-filesystem"><span class="nav-number">3.1.</span> <span class="nav-text">USB FAT32 filesystem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS-NFS-filesystem"><span class="nav-number">3.2.</span> <span class="nav-text">NAS NFS filesystem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS-CIFS-filesystem"><span class="nav-number">3.3.</span> <span class="nav-text">NAS CIFS filesystem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mount-at-boot-up"><span class="nav-number">3.3.1.</span> <span class="nav-text">Mount at boot-up</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web-Downloader"><span class="nav-number">4.</span> <span class="nav-text">Web Downloader</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#aria2"><span class="nav-number">4.1.</span> <span class="nav-text">aria2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wget"><span class="nav-number">4.2.</span> <span class="nav-text">wget</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#curl"><span class="nav-number">4.3.</span> <span class="nav-text">curl</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Campus-proxy"><span class="nav-number">5.</span> <span class="nav-text">Campus proxy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-configuration"><span class="nav-number">5.1.</span> <span class="nav-text">Sample configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-and-run"><span class="nav-number">5.1.1.</span> <span class="nav-text">Test and run</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#How-to-Keep-user-proxy-settings-when-‘sudo’"><span class="nav-number">5.1.2.</span> <span class="nav-text">How to Keep user proxy settings when ‘sudo’</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#User-management"><span class="nav-number">6.</span> <span class="nav-text">User management</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#add-user"><span class="nav-number">6.1.</span> <span class="nav-text">add user</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#add-to-group"><span class="nav-number">6.1.1.</span> <span class="nav-text">add to group</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">7.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
