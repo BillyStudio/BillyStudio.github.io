@@ -91,7 +91,7 @@
 
 
   <meta name="description" content="Basic experiment docs">
-<meta name="keywords" content="Blockchain,Shellchain">
+<meta name="keywords" content="Smart Contracts,Blockchain,Shellchain">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Shellchain experiment">
 <meta property="og:url" content="http://BillyStudio.github.io/2018/09/08/multichain-experiment/index.html">
@@ -119,7 +119,8 @@
 <meta property="og:image" content="http://billystudio.github.io/2018/09/08/multichain-experiment/listunspent.png">
 <meta property="og:image" content="http://billystudio.github.io/2018/09/08/multichain-experiment/gettxout.png">
 <meta property="og:image" content="http://billystudio.github.io/2018/09/08/multichain-experiment/16.png">
-<meta property="og:updated_time" content="2020-09-26T12:28:03.944Z">
+<meta property="og:image" content="http://billystudio.github.io/2018/09/08/multichain-experiment/workflow.png">
+<meta property="og:updated_time" content="2020-10-09T08:29:52.353Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shellchain experiment">
 <meta name="twitter:description" content="Basic experiment docs">
@@ -390,11 +391,26 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-09-26 20:28:03" itemprop="dateModified" datetime="2020-09-26T20:28:03+08:00">2020-09-26</time>
+                <time title="Modified: 2020-10-09 16:29:52" itemprop="dateModified" datetime="2020-10-09T16:29:52+08:00">2020-10-09</time>
               </span>
             
           
 
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JuliuSC项目/" itemprop="url" rel="index"><span itemprop="name">JuliuSC项目</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -554,7 +570,9 @@ lpScript-&gt;Clear();
 <p>net/rest.cpp 负责提供rest接口</p>
 <p>structs/amount.h CAmount 类型即 int64_t类型</p>
 <p>阅读 createrawtransaction 1416-1576</p>
-<h2 id="DIY"><a href="#DIY" class="headerlink" title="DIY"></a>DIY</h2><h2 id="添加自定义接口contract"><a href="#添加自定义接口contract" class="headerlink" title="添加自定义接口contract"></a>添加自定义接口contract</h2><p>rpcserver.h 里声明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">extern json_spirit::Value sendcontract(const json_spirit::Array&amp; params, bool fHelp);</span><br><span class="line">extern json_spirit::Value sendcontractfrom(const json_spirit::Array&amp; params, bool fHelp);</span><br><span class="line"></span><br><span class="line">extern json_spirit::Value getcontract(const json_spirit::Array&amp; params, bool fHelp);</span><br><span class="line">extern json_spirit::Value getcontractfrom(const json_spirit::Array&amp; params, bool fHelp);</span><br></pre></td></tr></table></figure></p>
+<h2 id="DIY"><a href="#DIY" class="headerlink" title="DIY"></a>DIY</h2><p><img src="workflow.png" alt="workflow.png"></p>
+<p>再运行一次命令<br>./multichain-cli shellchain executecontract 1Ln9Tp1FCnKwSHw75BYBs74fyvp4LoaxzcHiqP addT 10<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"systemInput"</span>:&#123;</span><br><span class="line">        <span class="attr">"contractData"</span>:<span class="string">"aced00057372000f637573746f6d2e436f6e74726163745e7698d0be7e2a1a02000249000574696d65734c00046e616d657400124c6a6176612f6c616e672f537472696e673b7872001d7368656c6c436861696e2e5368656c6c436861696e436f6e7472616374e96530aec4a7108902000078700000000a7400263141633177415a41336a554833537964735435444b67697a41774e6f364d6e42437871365732"</span>,</span><br><span class="line">        <span class="attr">"fromAddress"</span>:<span class="string">"1Ac1wAZA3jUH3SydsT5DKgizAwNo6MnBCxq6W2"</span>,</span><br><span class="line">        <span class="attr">"funName"</span>:<span class="string">"addT"</span></span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"contractParams"</span>:&#123;</span><br><span class="line">        <span class="attr">"signature"</span>:<span class="string">""</span>,</span><br><span class="line">        <span class="attr">"partyForm"</span>:<span class="string">""</span>,</span><br><span class="line">        <span class="attr">"userParams"</span>:[<span class="string">"10"</span>]</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="添加自定义接口contract"><a href="#添加自定义接口contract" class="headerlink" title="添加自定义接口contract"></a>添加自定义接口contract</h2><p>rpcserver.h 里声明<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">extern json_spirit::Value sendcontract(const json_spirit::Array&amp; params, bool fHelp);</span><br><span class="line">extern json_spirit::Value sendcontractfrom(const json_spirit::Array&amp; params, bool fHelp);</span><br><span class="line"></span><br><span class="line">extern json_spirit::Value getcontract(const json_spirit::Array&amp; params, bool fHelp);</span><br><span class="line">extern json_spirit::Value getcontractfrom(const json_spirit::Array&amp; params, bool fHelp);</span><br></pre></td></tr></table></figure></p>
 <p>rpclist.cpp 里定义map的cli命令</p>
 <p>如果需要json转移，则在 rpcclient.cpp 中的 vRPCConvertParams 中定义</p>
 <p>接口测试<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sendcontract &apos;[&#123;&quot;txid&quot;:&quot;4026ce56d69e18a2e1bb93fb773536bff977ba10f9349ce658ee34bdff4a3e01&quot;,&quot;vout&quot;:0&#125;]&apos; &apos;&#123;&quot;1CQ9gPjQLUnebtZh73hZv7uNDx1ihtQRUxVt5L&quot;:&#123;&quot;asset1&quot;:20&#125;&#125;&apos; &apos;&#123;&quot;contractid&quot;:&quot;abcd1234&quot;, &quot;action&quot;:&#123;&quot;name&quot;:&quot;publishservice&quot;,&quot;args&quot;:[1]&#125;, &quot;state&quot;:&#123;&quot;data&quot;:&quot;somedata&quot;&#125;&#125;&apos;</span><br></pre></td></tr></table></figure></p>
@@ -622,6 +640,8 @@ lpScript-&gt;Clear();
           
         
         <div class="post-tags">
+          
+            <a href="/tags/Smart-Contracts/" rel="tag"># Smart Contracts</a>
           
             <a href="/tags/Blockchain/" rel="tag"># Blockchain</a>
           
@@ -730,33 +750,7 @@ lpScript-&gt;Clear();
               
 
               
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                      <a href="/categories/">
-                    
-                  
-                    <span class="site-state-item-count">7</span>
-                    <span class="site-state-item-name">categories</span>
-                  </a>
-                </div>
-              
 
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                      <a href="/tags/">
-                    
-                  
-                    <span class="site-state-item-count">144</span>
-                    <span class="site-state-item-name">tags</span>
-                  </a>
-                </div>
               
             </nav>
           

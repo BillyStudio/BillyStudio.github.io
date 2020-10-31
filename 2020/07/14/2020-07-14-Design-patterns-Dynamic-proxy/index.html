@@ -90,18 +90,18 @@
 
 
 
-  <meta name="description" content="动态代理模式 获取jar包执行方法并展示">
+  <meta name="description" content="动态代理模式 获取jar包执行方法并展示 123456789101112131415161718192021URLClassLoader contractCLassLoader = contractService.loadContractJar(contractJarName);Class clazz = Class.forName(contractRefName, false, contract">
 <meta name="keywords" content="设计模式,Java">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Design patterns --- Dynamic proxy">
 <meta property="og:url" content="http://BillyStudio.github.io/2020/07/14/2020-07-14-Design-patterns-Dynamic-proxy/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="动态代理模式 获取jar包执行方法并展示">
+<meta property="og:description" content="动态代理模式 获取jar包执行方法并展示 123456789101112131415161718192021URLClassLoader contractCLassLoader = contractService.loadContractJar(contractJarName);Class clazz = Class.forName(contractRefName, false, contract">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-14T14:35:14.182Z">
+<meta property="og:updated_time" content="2020-10-31T14:21:49.646Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Design patterns --- Dynamic proxy">
-<meta name="twitter:description" content="动态代理模式 获取jar包执行方法并展示">
+<meta name="twitter:description" content="动态代理模式 获取jar包执行方法并展示 123456789101112131415161718192021URLClassLoader contractCLassLoader = contractService.loadContractJar(contractJarName);Class clazz = Class.forName(contractRefName, false, contract">
 
 
 
@@ -353,13 +353,23 @@
                 
               
 
-              <time title="Created: 2020-07-14 22:11:44 / Modified: 22:35:14" itemprop="dateCreated datePublished" datetime="2020-07-14T22:11:44+08:00">2020-07-14</time>
+              <time title="Created: 2020-07-14 22:11:44" itemprop="dateCreated datePublished" datetime="2020-07-14T22:11:44+08:00">2020-07-14</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-10-31 22:21:49" itemprop="dateModified" datetime="2020-10-31T22:21:49+08:00">2020-10-31</time>
+              </span>
             
           
 
@@ -434,6 +444,8 @@
       
         <p>动态代理模式</p>
 <p>获取jar包执行方法并展示</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">URLClassLoader contractCLassLoader = contractService.loadContractJar(contractJarName);</span><br><span class="line">Class clazz = Class.forName(contractRefName, <span class="keyword">false</span>, contractCLassLoader);</span><br><span class="line">Object argObj = <span class="keyword">null</span>;</span><br><span class="line">String contractAddr = rand.nextString();</span><br><span class="line"></span><br><span class="line"><span class="comment">// select the constructor based on args to initialize,</span></span><br><span class="line"><span class="comment">// else the default constructor is used</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">null</span> != argsMap) &#123;</span><br><span class="line">    List&lt;Class&gt; argClasses = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    List&lt;Object&gt; argObjects = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (Map.Entry&lt;String, Object&gt; arg : argsMap.entrySet()) &#123;</span><br><span class="line">        Class argClazz = Class.forName(arg.getKey());</span><br><span class="line">        argClasses.add(argClazz);</span><br><span class="line">        argObjects.add(argClazz.cast(arg.getValue()));</span><br><span class="line">    &#125;</span><br><span class="line">    Constructor constructor = clazz.getConstructor(argClasses.toArray(<span class="keyword">new</span> Class[argClasses.size()]));</span><br><span class="line">    argObj = constructor.newInstance(argObjects.toArray(<span class="keyword">new</span> Object[argObjects.size()]));</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    Constructor constructor = clazz.getConstructor();</span><br><span class="line">    argObj = constructor.newInstance();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>注意 <code>clazz.getConstructor</code> 函数的参数由 <code>List</code> 转 <code>[]</code> 类型，不可以直接使用强制类型转换 <code>(Class[]) argClasses.toArray()</code>，不然会报错如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to [Ljava.lang.Class;</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -489,8 +501,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2020/07/16/2020-07-16-JuliuSC-experiments/" rel="prev" title="JuliuSC 智能合约平台实验">
-                JuliuSC 智能合约平台实验 <i class="fa fa-chevron-right"></i>
+              <a href="/2020/10/06/2020-10-06-System-maintainance-and-cleaning/" rel="prev" title="Operating System Maintainance and Cleaning">
+                Operating System Maintainance and Cleaning <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -562,33 +574,7 @@
               
 
               
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                      <a href="/categories/">
-                    
-                  
-                    <span class="site-state-item-count">7</span>
-                    <span class="site-state-item-name">categories</span>
-                  </a>
-                </div>
-              
 
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                      <a href="/tags/">
-                    
-                  
-                    <span class="site-state-item-count">144</span>
-                    <span class="site-state-item-name">tags</span>
-                  </a>
-                </div>
               
             </nav>
           
