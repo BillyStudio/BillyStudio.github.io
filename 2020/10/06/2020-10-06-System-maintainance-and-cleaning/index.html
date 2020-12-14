@@ -91,7 +91,7 @@
 
 
   <meta name="description" content="Win 10Clean log filesC:\\Windows\System32\winevt\Logs按Ctrl+A全选后使用 Shift + Delete 删除，一些正被services使用的文件无法被删除。 Open Administrator Powershell：12Get-EventLog -ListRemove-EventLog -LogName &amp;quot;some Log fr">
-<meta name="keywords" content="OS,Win10">
+<meta name="keywords" content="Linux,OS,Win10">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Operating System Maintainance and Cleaning">
 <meta property="og:url" content="http://BillyStudio.github.io/2020/10/06/2020-10-06-System-maintainance-and-cleaning/index.html">
@@ -99,7 +99,7 @@
 <meta property="og:description" content="Win 10Clean log filesC:\\Windows\System32\winevt\Logs按Ctrl+A全选后使用 Shift + Delete 删除，一些正被services使用的文件无法被删除。 Open Administrator Powershell：12Get-EventLog -ListRemove-EventLog -LogName &amp;quot;some Log fr">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://billystudio.github.io/2020/10/06/2020-10-06-System-maintainance-and-cleaning/ps-eventlog.png">
-<meta property="og:updated_time" content="2020-10-06T17:28:17.635Z">
+<meta property="og:updated_time" content="2020-11-02T16:15:44.001Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Operating System Maintainance and Cleaning">
 <meta name="twitter:description" content="Win 10Clean log filesC:\\Windows\System32\winevt\Logs按Ctrl+A全选后使用 Shift + Delete 删除，一些正被services使用的文件无法被删除。 Open Administrator Powershell：12Get-EventLog -ListRemove-EventLog -LogName &amp;quot;some Log fr">
@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-10-07 01:28:17" itemprop="dateModified" datetime="2020-10-07T01:28:17+08:00">2020-10-07</time>
+                <time title="Modified: 2020-11-03 00:15:44" itemprop="dateModified" datetime="2020-11-03T00:15:44+08:00">2020-11-03</time>
               </span>
             
           
@@ -432,6 +432,15 @@
         <h1 id="Win-10"><a href="#Win-10" class="headerlink" title="Win 10"></a>Win 10</h1><h2 id="Clean-log-files"><a href="#Clean-log-files" class="headerlink" title="Clean log files"></a>Clean log files</h2><p>C:\\Windows\System32\winevt\Logs<br>按Ctrl+A全选后使用 Shift + Delete 删除，一些正被services使用的文件无法被删除。</p>
 <p>Open Administrator Powershell：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Get-EventLog -List</span><br><span class="line">Remove-EventLog -LogName &quot;some Log from list&quot;</span><br></pre></td></tr></table></figure></p>
 <p><img src="ps-eventlog.png" alt="ps-eventlog.png"></p>
+<h1 id="Mapping-network-drive"><a href="#Mapping-network-drive" class="headerlink" title="Mapping network drive"></a>Mapping network drive</h1><h2 id="Win"><a href="#Win" class="headerlink" title="Win"></a>Win</h2><p>windows 支持 ftp、samba、nfs（win10新加入）等多种文件共享协议。在没有防火墙的情况下都是好用的。<br>hostname可在C:\Windows\System32\drivers\etc\hosts文件中配置</p>
+<h3 id="挂载nfs"><a href="#挂载nfs" class="headerlink" title="挂载nfs"></a>挂载nfs</h3><p>右键我的电脑-&gt;Map Network Drive(注意nfs协议不能是添加网络位置)-&gt;如<code>lab-nas:/mnt/HD/HD_a2/Public</code></p>
+<p>由于nfs默认没有用户认证，注意配置nfs的匿名uid和gid<br>BusyBox nfs: 编辑 /etc/exports 文件的 anonuid=500 和 anongid=1000（admin用户访问）<br>然后更新配置文件 <code>exportfs -rv</code></p>
+<p>Windows NFS Client: Ctrl+R管理员regedit进入注册表：Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default<br>设置用户AnonymousUid 和 组 AnonymousGid 的 Decimal 值和服务器对应用户相同（500和1000）</p>
+<p>注：nfs需要两机器时间尽量同步</p>
+<h3 id="挂载samba绕过"><a href="#挂载samba绕过" class="headerlink" title="挂载samba绕过"></a>挂载samba绕过</h3><p>在一些网络环境中比如校园网屏蔽了smb的445端口时，需要采用端口绕过的方式来配置。</p>
+<h4 id="Linux服务器Samba配置"><a href="#Linux服务器Samba配置" class="headerlink" title="Linux服务器Samba配置"></a>Linux服务器Samba配置</h4><p>在smb.conf文件中改变端口(避开2000以内的约定俗成端口)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smb ports = 2222 # 默认配置 smb ports = 445 139</span><br></pre></td></tr></table></figure></p>
+<h4 id="Win客户端配置"><a href="#Win客户端配置" class="headerlink" title="Win客户端配置"></a>Win客户端配置</h4><p>管理员身份打开 Powershell<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 开启端口转发（Portproxy）</span><br><span class="line">netsh interface portproxy add v4tov4 listenaddress=127.0.0.1 listenport=445 connectaddress=lab-server connectport=2222</span><br><span class="line"># 查看所有的代理</span><br><span class="line">netsh interface portproxy show all</span><br><span class="line"># 检查445端口监听状况</span><br><span class="line">netstat -ano | findstr :445</span><br><span class="line"># 删除代理(后期不用删除操作)</span><br><span class="line"># netsh interface portproxy delete v4tov4 listenport=445 listenaddress=127.0.0.1</span><br></pre></td></tr></table></figure></p>
+<h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><p>Refer to <a href="https://billystudio.github.io/2018/05/16/Command-of-the-day-May-sixteenth-2018/">https://billystudio.github.io/2018/05/16/Command-of-the-day-May-sixteenth-2018/</a></p>
 
       
     </div>
@@ -461,6 +470,8 @@
           
         
         <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
           
             <a href="/tags/OS/" rel="tag"># OS</a>
           
@@ -562,14 +573,40 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">139</span>
+                    <span class="site-state-item-count">141</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
               
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">146</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           
@@ -600,7 +637,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Win-10"><span class="nav-number">1.</span> <span class="nav-text">Win 10</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Clean-log-files"><span class="nav-number">1.1.</span> <span class="nav-text">Clean log files</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Win-10"><span class="nav-number">1.</span> <span class="nav-text">Win 10</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Clean-log-files"><span class="nav-number">1.1.</span> <span class="nav-text">Clean log files</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Mapping-network-drive"><span class="nav-number">2.</span> <span class="nav-text">Mapping network drive</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Win"><span class="nav-number">2.1.</span> <span class="nav-text">Win</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载nfs"><span class="nav-number">2.1.1.</span> <span class="nav-text">挂载nfs</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#挂载samba绕过"><span class="nav-number">2.1.2.</span> <span class="nav-text">挂载samba绕过</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Linux服务器Samba配置"><span class="nav-number">2.1.2.1.</span> <span class="nav-text">Linux服务器Samba配置</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Win客户端配置"><span class="nav-number">2.1.2.2.</span> <span class="nav-text">Win客户端配置</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-number">2.2.</span> <span class="nav-text">Linux</span></a></li></ol></li></ol></div>
             
 
           </div>

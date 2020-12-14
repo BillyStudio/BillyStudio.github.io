@@ -93,14 +93,14 @@
   <meta name="description" content="单例模式是最常用的设计模式之一，同时也是面试中最容易考到的设计模式。">
 <meta name="keywords" content="设计模式,Java">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Design patterns --- Singleton">
+<meta property="og:title" content="Design patterns ── Singleton">
 <meta property="og:url" content="http://BillyStudio.github.io/2020/05/20/2020-5-20-Design-patterns-singleton/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="单例模式是最常用的设计模式之一，同时也是面试中最容易考到的设计模式。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-06-19T14:30:47.158Z">
+<meta property="og:updated_time" content="2020-11-06T17:00:06.245Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Design patterns --- Singleton">
+<meta name="twitter:title" content="Design patterns ── Singleton">
 <meta name="twitter:description" content="单例模式是最常用的设计模式之一，同时也是面试中最容易考到的设计模式。">
 
 
@@ -119,7 +119,7 @@
   };
 </script>
 
-  <title>Design patterns --- Singleton | Shane's Blog</title>
+  <title>Design patterns ── Singleton | Shane's Blog</title>
   
 
 
@@ -327,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Design patterns --- Singleton
+          <h1 class="post-title" itemprop="name headline">Design patterns ── Singleton
 
               
             
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-06-19 22:30:47" itemprop="dateModified" datetime="2020-06-19T22:30:47+08:00">2020-06-19</time>
+                <time title="Modified: 2020-11-07 01:00:06" itemprop="dateModified" datetime="2020-11-07T01:00:06+08:00">2020-11-07</time>
               </span>
             
           
@@ -438,8 +438,10 @@
 </li>
 </ol>
 <h1 id="单例模式实例应用-—-Eureka源码项目"><a href="#单例模式实例应用-—-Eureka源码项目" class="headerlink" title="单例模式实例应用 —- Eureka源码项目"></a>单例模式实例应用 —- Eureka源码项目</h1><p><code>DiscoveryManager.java</code><br>DiscoveryManager 的作用是通过读取配置文件来配置 Discovery Client。这里 DiscoveryManager 作为管理员，只需要一个对象就可以了，所以源码中使用了饿汉式单例模式来实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * &lt;tt&gt;Discovery Manager&lt;/tt&gt; configures &lt;tt&gt;Discovery Client&lt;/tt&gt; based on the</span></span><br><span class="line"><span class="comment"> * properties specified.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &lt;p&gt;</span></span><br><span class="line"><span class="comment"> * The configuration file is searched for in the classpath with the name</span></span><br><span class="line"><span class="comment"> * specified by the property &lt;em&gt;eureka.client.props&lt;/em&gt; and with the suffix</span></span><br><span class="line"><span class="comment"> * &lt;em&gt;.properties&lt;/em&gt;. If the property is not specified,</span></span><br><span class="line"><span class="comment"> * &lt;em&gt;eureka-client.properties&lt;/em&gt; is assumed as the default.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Karthik Ranganathan</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DiscoveryManager</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> DiscoveryManager s_instance = <span class="keyword">new</span> DiscoveryManager();</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">private</span> <span class="title">DiscoveryManager</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> DiscoveryManager <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> s_instance;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    ......</span><br><span class="line">    </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<h1 id="单例模式典型应用-—-操作数据库"><a href="#单例模式典型应用-—-操作数据库" class="headerlink" title="单例模式典型应用 —- 操作数据库"></a>单例模式典型应用 —- 操作数据库</h1><p>以 LevelDB 为例，每次新建一个数据库操作对象的时候都会在磁盘中新建一个数据库。如果只操作一个数据库，那么程序中只能存在一个全局对象，这就可以利用单例模式的方法来编写程序。</p>
-<h2 id="例：JavaContract项目"><a href="#例：JavaContract项目" class="headerlink" title="例：JavaContract项目"></a>例：JavaContract项目</h2><h3 id="1-类的定义"><a href="#1-类的定义" class="headerlink" title="1. 类的定义"></a>1. 类的定义</h3><p>类的定义没有什么特殊的地方。<br><em>src/contracts/contracts_db_wrapper.h</em></p>
+<h1 id="单例模式典型应用-—-操作数据库"><a href="#单例模式典型应用-—-操作数据库" class="headerlink" title="单例模式典型应用 —- 操作数据库"></a>单例模式典型应用 —- 操作数据库</h1><h2 id="例：SPESC-Java-Contract-Service-项目"><a href="#例：SPESC-Java-Contract-Service-项目" class="headerlink" title="例：SPESC-Java-Contract-Service 项目"></a>例：SPESC-Java-Contract-Service 项目</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ContractDAO</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">static</span> <span class="keyword">final</span> ContractDAO s_instance = <span class="keyword">new</span> ContractDAO();</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">private</span> <span class="title">ContractDAO</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> ContractDAO <span class="title">getInstance</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		<span class="keyword">return</span> s_instance;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">    ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>使用：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">private</span> <span class="keyword">final</span> ContractDAO contractDAO = ContractDAO.getInstance();</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">addContract</span><span class="params">(Object contract)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> contractDAO.putContract((ContractTemplate) contract);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h2 id="例：JavaContract项目"><a href="#例：JavaContract项目" class="headerlink" title="例：JavaContract项目"></a>例：JavaContract项目</h2><p>以 LevelDB 为例，每次新建一个数据库操作对象的时候都会在磁盘中新建一个数据库。如果只操作一个数据库，那么程序中只能存在一个全局对象，这就可以利用单例模式的方法来编写程序。</p>
+<h3 id="1-类的定义"><a href="#1-类的定义" class="headerlink" title="1. 类的定义"></a>1. 类的定义</h3><p>类的定义没有什么特殊的地方。<br><em>src/contracts/contracts_db_wrapper.h</em></p>
 <h3 id="2-对象的声明"><a href="#2-对象的声明" class="headerlink" title="2. 对象的声明"></a>2. 对象的声明</h3><p>是通过全局对象来声明的。</p>
 <p><em>src/chainparams/state.h</em><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">mc_State</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line">    mc_State()</span><br><span class="line">    &#123;</span><br><span class="line">        InitDefaults();</span><br><span class="line">    &#125;</span><br><span class="line">    ~ mc_State()</span><br><span class="line">    &#123;</span><br><span class="line">        Destroy();</span><br><span class="line">    &#125;</span><br><span class="line">    ...</span><br><span class="line">    ContractsDB             *m_Contracts;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">InitDefaults</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">        m_Contracts = <span class="literal">NULL</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Destroy</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        ...</span><br><span class="line">        <span class="keyword">if</span> (m_Contracts)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">delete</span> m_Contracts;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p><em>src/contracts/contracts_db_wrapper.cpp</em><br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">void ContractsItem::Zero()</span><br><span class="line">&#123;</span><br><span class="line">    ...</span><br><span class="line">    contracts_DB = new mc_Database;</span><br><span class="line">    mc_GetFullFileName(name, &quot;contracts&quot;, &quot;.db&quot;, MC_FOM_RELATIVE_TO_DATADIR|MC_FOM_CREATE_DIR, m_FileName);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -575,14 +577,40 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">139</span>
+                    <span class="site-state-item-count">141</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
               
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">146</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           
@@ -613,7 +641,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#单例模式实例应用-—-Eureka源码项目"><span class="nav-number">1.</span> <span class="nav-text">单例模式实例应用 —- Eureka源码项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单例模式典型应用-—-操作数据库"><span class="nav-number">2.</span> <span class="nav-text">单例模式典型应用 —- 操作数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例：JavaContract项目"><span class="nav-number">2.1.</span> <span class="nav-text">例：JavaContract项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-类的定义"><span class="nav-number">2.1.1.</span> <span class="nav-text">1. 类的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-对象的声明"><span class="nav-number">2.1.2.</span> <span class="nav-text">2. 对象的声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-对象的使用"><span class="nav-number">2.1.3.</span> <span class="nav-text">3. 对象的使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单例模式经典应用-—-配置文件读取"><span class="nav-number">3.</span> <span class="nav-text">单例模式经典应用 —- 配置文件读取</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#单例模式实例应用-—-Eureka源码项目"><span class="nav-number">1.</span> <span class="nav-text">单例模式实例应用 —- Eureka源码项目</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单例模式典型应用-—-操作数据库"><span class="nav-number">2.</span> <span class="nav-text">单例模式典型应用 —- 操作数据库</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#例：SPESC-Java-Contract-Service-项目"><span class="nav-number">2.1.</span> <span class="nav-text">例：SPESC-Java-Contract-Service 项目</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#例：JavaContract项目"><span class="nav-number">2.2.</span> <span class="nav-text">例：JavaContract项目</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-类的定义"><span class="nav-number">2.2.1.</span> <span class="nav-text">1. 类的定义</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-对象的声明"><span class="nav-number">2.2.2.</span> <span class="nav-text">2. 对象的声明</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-对象的使用"><span class="nav-number">2.2.3.</span> <span class="nav-text">3. 对象的使用</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#单例模式经典应用-—-配置文件读取"><span class="nav-number">3.</span> <span class="nav-text">单例模式经典应用 —- 配置文件读取</span></a></li></ol></div>
             
 
           </div>

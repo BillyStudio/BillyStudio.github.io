@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="This article lists a Linux cheatsheet including lots of tools’ commands.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-27T09:15:13.980Z">
+<meta property="og:updated_time" content="2020-12-07T01:55:33.916Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux command of the day">
 <meta name="twitter:description" content="This article lists a Linux cheatsheet including lots of tools’ commands.">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-07-27 17:15:13" itemprop="dateModified" datetime="2020-07-27T17:15:13+08:00">2020-07-27</time>
+                <time title="Modified: 2020-12-07 09:55:33" itemprop="dateModified" datetime="2020-12-07T09:55:33+08:00">2020-12-07</time>
               </span>
             
           
@@ -449,6 +449,9 @@
 <li>Append a ‘&amp;’ to the time-spending command and it will be excuted in the background.</li>
 </ol>
 <h1 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h1><p>删除 .bashrc 的最后一行：<code>sed -i &#39;$d&#39; ~/.bashrc</code></p>
+<h1 id="xdg-open-Launch-program-in-terminal"><a href="#xdg-open-Launch-program-in-terminal" class="headerlink" title="xdg-open (Launch program in terminal)"></a>xdg-open (Launch program in terminal)</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xdg-open your_file</span><br></pre></td></tr></table></figure>
+<p>Some useful<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xdg-mime query filetype your_file</span><br><span class="line">xdg-mime default feh.desktop image/jpeg</span><br></pre></td></tr></table></figure></p>
+<p>~/.config/mimeapps.list<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Default Applications]</span><br><span class="line">text/html=google-chrome.desktop</span><br><span class="line">x-scheme-handler/http=google-chrome.desktop</span><br><span class="line">x-scheme-handler/https=google-chrome.desktop</span><br><span class="line">x-scheme-handler/about=google-chrome.desktop</span><br><span class="line">x-scheme-handler/unknown=google-chrome.desktop</span><br><span class="line">application/pdf=FoxitReader.desktop</span><br><span class="line">application/ppdf=FoxitReader.desktop</span><br><span class="line">x-scheme-handler/postman=Postman.desktop</span><br></pre></td></tr></table></figure></p>
 <h1 id="mount"><a href="#mount" class="headerlink" title="mount"></a>mount</h1><p>Linux <code>mount</code> command is used for mounting filesystems to directory and <code>/etc/fstab</code> file the default mounting config file at every booting time. Surely you can alse use <code>sudo mount -a</code> to remount all filesystems in /etc/fstab</p>
 <h2 id="USB-FAT32-filesystem"><a href="#USB-FAT32-filesystem" class="headerlink" title="USB FAT32 filesystem"></a>USB FAT32 filesystem</h2><p>It’s the easiest one:</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /mnt/usb</span><br><span class="line">lsblk</span><br><span class="line">sudo mount /dev/sdb1 /mnt/usb</span><br></pre></td></tr></table></figure>
@@ -601,14 +604,40 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">139</span>
+                    <span class="site-state-item-count">141</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
               
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">146</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           
@@ -639,7 +668,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-background-execute-command"><span class="nav-number">1.</span> <span class="nav-text">Linux background execute command</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sed"><span class="nav-number">2.</span> <span class="nav-text">sed</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mount"><span class="nav-number">3.</span> <span class="nav-text">mount</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#USB-FAT32-filesystem"><span class="nav-number">3.1.</span> <span class="nav-text">USB FAT32 filesystem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS-NFS-filesystem"><span class="nav-number">3.2.</span> <span class="nav-text">NAS NFS filesystem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS-CIFS-filesystem"><span class="nav-number">3.3.</span> <span class="nav-text">NAS CIFS filesystem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mount-at-boot-up"><span class="nav-number">3.3.1.</span> <span class="nav-text">Mount at boot-up</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web-Downloader"><span class="nav-number">4.</span> <span class="nav-text">Web Downloader</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#aria2"><span class="nav-number">4.1.</span> <span class="nav-text">aria2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wget"><span class="nav-number">4.2.</span> <span class="nav-text">wget</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#curl"><span class="nav-number">4.3.</span> <span class="nav-text">curl</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Campus-proxy"><span class="nav-number">5.</span> <span class="nav-text">Campus proxy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-configuration"><span class="nav-number">5.1.</span> <span class="nav-text">Sample configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-and-run"><span class="nav-number">5.1.1.</span> <span class="nav-text">Test and run</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#How-to-Keep-user-proxy-settings-when-‘sudo’"><span class="nav-number">5.1.2.</span> <span class="nav-text">How to Keep user proxy settings when ‘sudo’</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#User-management"><span class="nav-number">6.</span> <span class="nav-text">User management</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#add-user"><span class="nav-number">6.1.</span> <span class="nav-text">add user</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#add-to-group"><span class="nav-number">6.1.1.</span> <span class="nav-text">add to group</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">7.</span> <span class="nav-text">References</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Linux-background-execute-command"><span class="nav-number">1.</span> <span class="nav-text">Linux background execute command</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#sed"><span class="nav-number">2.</span> <span class="nav-text">sed</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#xdg-open-Launch-program-in-terminal"><span class="nav-number">3.</span> <span class="nav-text">xdg-open (Launch program in terminal)</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#mount"><span class="nav-number">4.</span> <span class="nav-text">mount</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#USB-FAT32-filesystem"><span class="nav-number">4.1.</span> <span class="nav-text">USB FAT32 filesystem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS-NFS-filesystem"><span class="nav-number">4.2.</span> <span class="nav-text">NAS NFS filesystem</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#NAS-CIFS-filesystem"><span class="nav-number">4.3.</span> <span class="nav-text">NAS CIFS filesystem</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Mount-at-boot-up"><span class="nav-number">4.3.1.</span> <span class="nav-text">Mount at boot-up</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Web-Downloader"><span class="nav-number">5.</span> <span class="nav-text">Web Downloader</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#aria2"><span class="nav-number">5.1.</span> <span class="nav-text">aria2</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#wget"><span class="nav-number">5.2.</span> <span class="nav-text">wget</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#curl"><span class="nav-number">5.3.</span> <span class="nav-text">curl</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Campus-proxy"><span class="nav-number">6.</span> <span class="nav-text">Campus proxy</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Sample-configuration"><span class="nav-number">6.1.</span> <span class="nav-text">Sample configuration</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Test-and-run"><span class="nav-number">6.1.1.</span> <span class="nav-text">Test and run</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#How-to-Keep-user-proxy-settings-when-‘sudo’"><span class="nav-number">6.1.2.</span> <span class="nav-text">How to Keep user proxy settings when ‘sudo’</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#User-management"><span class="nav-number">7.</span> <span class="nav-text">User management</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#add-user"><span class="nav-number">7.1.</span> <span class="nav-text">add user</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#add-to-group"><span class="nav-number">7.1.1.</span> <span class="nav-text">add to group</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number">8.</span> <span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>

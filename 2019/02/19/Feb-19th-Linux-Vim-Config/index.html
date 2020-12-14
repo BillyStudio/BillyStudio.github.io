@@ -90,18 +90,18 @@
 
 
 
-  <meta name="description" content="Better experience by customizing your own vim configuration file will bring you future convenience and fluency.">
-<meta name="keywords" content="Linux,Vim,Ubuntu">
+  <meta name="description" content="Customizing your own vim configuration file will bring you future convenience and fluency.">
+<meta name="keywords" content="Linux,Vim,ssh">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Vim config file on Linux Gnome">
+<meta property="og:title" content="Vim config file on Linux desktop">
 <meta property="og:url" content="http://BillyStudio.github.io/2019/02/19/Feb-19th-Linux-Vim-Config/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="Better experience by customizing your own vim configuration file will bring you future convenience and fluency.">
+<meta property="og:description" content="Customizing your own vim configuration file will bring you future convenience and fluency.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-18T06:54:34.763Z">
+<meta property="og:updated_time" content="2020-12-06T14:16:02.148Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Vim config file on Linux Gnome">
-<meta name="twitter:description" content="Better experience by customizing your own vim configuration file will bring you future convenience and fluency.">
+<meta name="twitter:title" content="Vim config file on Linux desktop">
+<meta name="twitter:description" content="Customizing your own vim configuration file will bring you future convenience and fluency.">
 
 
 
@@ -119,7 +119,7 @@
   };
 </script>
 
-  <title>Vim config file on Linux Gnome | Shane's Blog</title>
+  <title>Vim config file on Linux desktop | Shane's Blog</title>
   
 
 
@@ -327,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Vim config file on Linux Gnome
+          <h1 class="post-title" itemprop="name headline">Vim config file on Linux desktop
 
               
             
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-18 14:54:34" itemprop="dateModified" datetime="2019-08-18T14:54:34+08:00">2019-08-18</time>
+                <time title="Modified: 2020-12-06 22:16:02" itemprop="dateModified" datetime="2020-12-06T22:16:02+08:00">2020-12-06</time>
               </span>
             
           
@@ -427,22 +427,30 @@
       
 
       
-        <p>Better experience by customizing your own vim configuration file will bring you future convenience and fluency. <a id="more"></a>Writing into <code>~/.vimrc</code>, it will take effect next time you enter Vim editor. If you want your config file to apply to all users, edit <code>/etc/vim/vimrc</code> with <code>sudo</code> privilige. For some specific purposes like ACM contest, you can also create a config file. When use it, <code>source</code> this command.</p>
+        <p>Customizing your own vim configuration file will bring you future convenience and fluency. <a id="more"></a>Writing into <code>~/.vimrc</code>, it will take effect next time you enter Vim editor. If you want your config file to apply to all users, edit <code>/etc/vim/vimrc</code> with <code>sudo</code> privilige. For some specific purposes like ACM contest, you can also create a config file. When using it, <code>source</code> this command.</p>
 <p>If you want to specify different settings for different file types, for example, C++ files, you should first add <code>filetype plugin indent on</code> to the <code>.vimrc</code> file. and then create <code>.vim/after/ftplugin/cpp.vim</code>, and write</p>
 <pre><code>setlocal expandtab
 setlocal shiftwidth=2
 setlocal softtabstop=2
 </code></pre><h2 id="backup-file-swap-file-and-undo-file"><a href="#backup-file-swap-file-and-undo-file" class="headerlink" title="backup file, swap file and undo file"></a>backup file, swap file and undo file</h2><p>‘.filename~’ is a backup file, it stores the file before you start to edit it.<br>‘.filename.swp’ is a swap file, containing the unsaved changes.<br>‘.filename.un~’ is an undo file that stores the undo trees of the file edited.</p>
-<h1 id="Key-mappings"><a href="#Key-mappings" class="headerlink" title="Key mappings"></a>Key mappings</h1><p>Finally I will give the sample code that I set for my personal computer. Before that, let’s clarify a braces auto-completing algorithm. When the left brace is typed, only when there is no right char near it can the right brace be completed. When the right brace is typed, only when the right char near it is the same right char can the cursor be jumped.</p>
+<h1 id="Key-mappings"><a href="#Key-mappings" class="headerlink" title="Key mappings"></a>Key mappings</h1><h2 id="Default"><a href="#Default" class="headerlink" title="Default"></a>Default</h2><p><c-^> change active window panel</c-^></p>
+<h2 id="Self-define"><a href="#Self-define" class="headerlink" title="Self define"></a>Self define</h2><p>Finally I will give the sample code that I set for my personal computer. Before that, let’s clarify a braces auto-completing algorithm. When the left brace is typed, only when there is no right char near it can the right brace be completed. When the right brace is typed, only when the right char near it is the same right char can the cursor be jumped.</p>
 <p>Response for typing ‘(‘<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">get the line and column positions of current cursor as lnum, cnum</span><br><span class="line"></span><br><span class="line">if no next character exists:</span><br><span class="line">    print &apos;()&apos;</span><br><span class="line">else:</span><br><span class="line">    print &apos;(&apos;</span><br></pre></td></tr></table></figure></p>
 <p>Reponse for typing ‘)’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if the right next char is &apos;)&apos;:</span><br><span class="line">    jump one char</span><br><span class="line">else:</span><br><span class="line">    print &apos;)&apos;</span><br></pre></td></tr></table></figure></p>
 <p>To get the current line text, use <code>getline(&#39;.&#39;)</code></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&quot;~/.vimrc</span><br><span class="line">&quot;internationalisation</span><br><span class="line">set encoding=utf-8</span><br><span class="line"></span><br><span class="line">&quot;Indentations without hard tabs</span><br><span class="line">set expandtab &quot;pressing &lt;TAB&gt; will always insert &apos;softtabstop&apos; amount of spaces</span><br><span class="line">set softtabstop=4 &quot;default value equals &apos;tabstop&apos;, but when using indentation without hard tabs, set it to the same as &apos;shiftwidth&apos;</span><br><span class="line">set shiftwidth=4 &quot;affects when you press &apos;&gt;&gt;&apos;, &apos;&lt;&lt;&apos;, or &apos;==&apos;. It also affects how automatic indentation works.</span><br><span class="line"></span><br><span class="line">&quot;Automatic indentation</span><br><span class="line">set autoindent &quot;when starting a new line, indent as the previous line</span><br><span class="line"></span><br><span class="line">&quot;Syntax highlighting</span><br><span class="line">syntax on</span><br><span class="line"></span><br><span class="line">&quot;Mouse setting</span><br><span class="line">&quot;don&apos;t use the mouse to prevent the appearence of line numbers on copy. For example, use `:1,3y+` instead for copying to the &apos;+clipboard&apos; from line-1 to line-3</span><br><span class="line">set mouse=a</span><br><span class="line"></span><br><span class="line">&quot;Appearence</span><br><span class="line">set cursorline &quot;highlight the line where the curent cursor stays</span><br><span class="line">set nu &quot;set line number</span><br><span class="line">set ruler</span><br><span class="line">colorscheme desert &quot;available color themes are in &apos;/usr/share/vim/vim80/colors&apos;, also you can add your own in &apos;~/.vim/colors&apos;</span><br><span class="line">let g:molokai_original = 1</span><br><span class="line">set cmdheight=2</span><br><span class="line"></span><br><span class="line">&quot;Key mappings</span><br><span class="line">set showmatch</span><br><span class="line">set matchtime=3</span><br><span class="line">inoremap ( ()&lt;ESC&gt;i</span><br><span class="line">inoremap ) &lt;ESC&gt;:call Right_Brace(&apos;)&apos;)&lt;CR&gt;a</span><br><span class="line"></span><br><span class="line">function Right_Brace(schar)</span><br><span class="line">    let [bufnum, lnum, cnum, of] = getpos(&apos;.&apos;)</span><br><span class="line">    &quot;echo lnum cnum</span><br><span class="line">    let [lnum2, cnum2]=searchpos(a:schar, &apos;n&apos;)</span><br><span class="line">    &quot;echo lnum2 cnum2</span><br><span class="line">    if lnum==lnum2 &amp;&amp; cnum+1==cnum2</span><br><span class="line">        execute &quot;normal! l&quot;</span><br><span class="line">    else</span><br><span class="line">        execute &quot;normal! a)&quot;</span><br><span class="line">    endif</span><br><span class="line">endfunction</span><br><span class="line"></span><br><span class="line">&quot;Enable plugins</span><br><span class="line">filetype plugin indent on</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&quot;~/.vim/after/ftplugin/cpp.vim</span><br><span class="line">&quot;When it comes to C and C++, file type based indentations automatically sets &apos;cindent&apos;, and for that reason, there is no need to set &apos;cindent&apos; manually for such files.</span><br><span class="line"></span><br><span class="line">&quot;indentation</span><br><span class="line">setlocal shiftwidth=2</span><br><span class="line">setlocal softtabstop=2</span><br><span class="line">setlocal tabstop=2</span><br><span class="line"></span><br><span class="line">&quot;matching brackets</span><br><span class="line">inoremap &#123; &#123;&#125;&lt;ESC&gt;i</span><br><span class="line">inoremap &#123;&lt;CR&gt; &#123;&lt;CR&gt;&#125;&lt;ESC&gt;O</span><br></pre></td></tr></table></figure>
 <p>(copy from vim <code>ggVG</code> then <code>&quot;+y</code>)</p>
-<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><blockquote>
-<p>How do I set up different tab settings for different languages in Vim: <a href="https://stackoverflow.com/a/1743255" target="_blank" rel="noopener">https://stackoverflow.com/a/1743255</a><br>Vim: Remove swap, backup and undo Files from Working Directory: <a href="https://medium.com/@Aenon/vim-swap-backup-undo-git-2bf353caa02f" target="_blank" rel="noopener">https://medium.com/@Aenon/vim-swap-backup-undo-git-2bf353caa02f</a></p>
-</blockquote>
+<h3 id="paste-to-remote-vim"><a href="#paste-to-remote-vim" class="headerlink" title="paste to remote vim"></a>paste to remote vim</h3><ol>
+<li><p>ssh -Y user@server or permanently added in .ssh/config</p>
+</li>
+<li><p>Ctrl+Insert for copy, Shift+Insert for paste</p>
+</li>
+</ol>
+<h1 id="Tweak-vim-as-C-C-IDE"><a href="#Tweak-vim-as-C-C-IDE" class="headerlink" title="Tweak vim as C/C++ IDE"></a>Tweak vim as C/C++ IDE</h1><h2 id="Plugin-manager"><a href="#Plugin-manager" class="headerlink" title="Plugin manager"></a>Plugin manager</h2><p>vim-plug: <a href="https://github.com/junegunn/vim-plug" target="_blank" rel="noopener">https://github.com/junegunn/vim-plug</a></p>
+<h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><p>vimspector: <a href="https://github.com/puremourning/vimspector#quick-start" target="_blank" rel="noopener">https://github.com/puremourning/vimspector#quick-start</a><br>After putting <code>Plug &#39;puremourning/vimspector&#39;</code> into <code>.vimrc</code>. Go to gadget home to execute<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./install_gadget.py --all</span><br></pre></td></tr></table></figure></p>
+<h2 id="Close-a-tab"><a href="#Close-a-tab" class="headerlink" title="Close a tab"></a>Close a tab</h2><p>:tabclose</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>How do I set up different tab settings for different languages in Vim: <a href="https://stackoverflow.com/a/1743255" target="_blank" rel="noopener">https://stackoverflow.com/a/1743255</a><br>Vim: Remove swap, backup and undo Files from Working Directory: <a href="https://medium.com/@Aenon/vim-swap-backup-undo-git-2bf353caa02f" target="_blank" rel="noopener">https://medium.com/@Aenon/vim-swap-backup-undo-git-2bf353caa02f</a><br>How to close a tab in vim? : <a href="https://stackoverflow.com/questions/32714834/how-to-close-a-tab-in-vim" target="_blank" rel="noopener">https://stackoverflow.com/questions/32714834/how-to-close-a-tab-in-vim</a></p>
 
       
     </div>
@@ -477,7 +485,7 @@ setlocal softtabstop=2
           
             <a href="/tags/Vim/" rel="tag"># Vim</a>
           
-            <a href="/tags/Ubuntu/" rel="tag"># Ubuntu</a>
+            <a href="/tags/ssh/" rel="tag"># ssh</a>
           
         </div>
       
@@ -575,14 +583,40 @@ setlocal softtabstop=2
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">139</span>
+                    <span class="site-state-item-count">141</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
               
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">146</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           
@@ -613,7 +647,7 @@ setlocal softtabstop=2
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#backup-file-swap-file-and-undo-file"><span class="nav-number">1.</span> <span class="nav-text">backup file, swap file and undo file</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Key-mappings"><span class="nav-number"></span> <span class="nav-text">Key mappings</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number"></span> <span class="nav-text">References</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#backup-file-swap-file-and-undo-file"><span class="nav-number">1.</span> <span class="nav-text">backup file, swap file and undo file</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Key-mappings"><span class="nav-number"></span> <span class="nav-text">Key mappings</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Default"><span class="nav-number">1.</span> <span class="nav-text">Default</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Self-define"><span class="nav-number">2.</span> <span class="nav-text">Self define</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#paste-to-remote-vim"><span class="nav-number">2.1.</span> <span class="nav-text">paste to remote vim</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Tweak-vim-as-C-C-IDE"><span class="nav-number"></span> <span class="nav-text">Tweak vim as C/C++ IDE</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Plugin-manager"><span class="nav-number">1.</span> <span class="nav-text">Plugin manager</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Debugging"><span class="nav-number">2.</span> <span class="nav-text">Debugging</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Close-a-tab"><span class="nav-number">3.</span> <span class="nav-text">Close a tab</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number"></span> <span class="nav-text">References</span></a></li></div>
             
 
           </div>
