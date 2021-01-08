@@ -306,6 +306,589 @@
   
   
   <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2020/12/16/2020-12-16-Cpp-notes-Function-pointers/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shane Wang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shane's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/12/16/2020-12-16-Cpp-notes-Function-pointers/" class="post-title-link" itemprop="url">C++ Notes --- Function Pointers</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-12-16 15:49:45" itemprop="dateCreated datePublished" datetime="2020-12-16T15:49:45+08:00">2020-12-16</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2021-01-02 21:17:03" itemprop="dateModified" datetime="2021-01-02T21:17:03+08:00">2021-01-02</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/C-笔记/" itemprop="url" rel="index"><span itemprop="name">C++笔记</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span title="Symbols count in article"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              
+              <span title="Reading time"></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>在多链的源码中，多次出现函数指针的身影：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">typedef</span> json_spirit::Value(*rpcfn_type)(<span class="keyword">const</span> json_spirit::Array&amp; params, <span class="keyword">bool</span> fHelp);</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CRPCCommand</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> category;</span><br><span class="line">    <span class="built_in">std</span>::<span class="built_in">string</span> name;</span><br><span class="line">    rpcfn_type actor;</span><br><span class="line">    <span class="keyword">bool</span> okSafeMode;</span><br><span class="line">    <span class="keyword">bool</span> threadSafe;</span><br><span class="line">    <span class="keyword">bool</span> reqWallet;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+<p>阅读的难点在于，源码中的 <code>json_spirit::Value</code> 和 <code>(*rpcfn_type)(const json_spirit::Array&amp; params, bool fHelp)</code> 中间没有空格。</p>
+<p>调用函数指针，获取结果：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">json_spirit::Value result = pcmd-&gt;actor(params, <span class="literal">false</span>);</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2020/12/07/2020-Dec-7th-Shellchain-note-serialize-unserialize/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shane Wang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shane's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/12/07/2020-Dec-7th-Shellchain-note-serialize-unserialize/" class="post-title-link" itemprop="url">Shellchain笔记：序列化与反序列化</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-12-07 11:26:17" itemprop="dateCreated datePublished" datetime="2020-12-07T11:26:17+08:00">2020-12-07</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2020-12-14 21:58:47" itemprop="dateModified" datetime="2020-12-14T21:58:47+08:00">2020-12-14</time>
+              </span>
+            
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JuliuSC项目/" itemprop="url" rel="index"><span itemprop="name">JuliuSC项目</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span title="Symbols count in article"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              
+              <span title="Reading time"></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>leveldb的储存仅支持字符串和leveldb切片（即bytes），交易作为自定义类型，存储到数据库中需要进行序列化，从数据库中恢复需要反序列化。</p>
+<p>在 streams.h 中也有定义 CDataStream：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/** Double ended buffer combining vector and stream-like interfaces.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * &gt;&gt; and &lt;&lt; read and write unformatted data using the above serialization templates.</span></span><br><span class="line"><span class="comment"> * Fills with data in linear time; some stringstream implementations take N^2 time.</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CDataStream</span></span></span><br><span class="line"><span class="class">&#123;</span></span><br><span class="line"><span class="keyword">protected</span>:</span><br><span class="line">    <span class="keyword">typedef</span> CSerializeData vector_type;</span><br><span class="line">    vector_type vch;</span><br><span class="line">    <span class="keyword">unsigned</span> <span class="keyword">int</span> nReadPos;</span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="keyword">int</span> nType;</span><br><span class="line">    <span class="keyword">int</span> nVersion;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">typedef</span> vector_type::allocator_type   allocator_type;</span><br><span class="line">    <span class="keyword">typedef</span> vector_type::size_type        size_type;</span><br><span class="line">    <span class="keyword">typedef</span> vector_type::difference_type  difference_type;</span><br><span class="line">    <span class="keyword">typedef</span> vector_type::reference        reference;</span><br><span class="line">    <span class="keyword">typedef</span> vector_type::const_reference  const_reference;</span><br><span class="line">    <span class="keyword">typedef</span> vector_type::value_type       value_type;</span><br><span class="line">    <span class="keyword">typedef</span> vector_type::iterator         iterator;</span><br><span class="line">    <span class="keyword">typedef</span> vector_type::const_iterator   const_iterator;</span><br><span class="line">    <span class="keyword">typedef</span> vector_type::reverse_iterator reverse_iterator;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">explicit</span> <span class="title">CDataStream</span><span class="params">(<span class="keyword">int</span> nTypeIn, <span class="keyword">int</span> nVersionIn)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        Init(nTypeIn, nVersionIn);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    CDataStream(const_iterator pbegin, const_iterator pend, <span class="keyword">int</span> nTypeIn, <span class="keyword">int</span> nVersionIn) : vch(pbegin, pend)</span><br><span class="line">    &#123;</span><br><span class="line">        Init(nTypeIn, nVersionIn);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> !defined(_MSC_VER) || _MSC_VER &gt;= 1300</span></span><br><span class="line">    CDataStream(<span class="keyword">const</span> <span class="keyword">char</span>* pbegin, <span class="keyword">const</span> <span class="keyword">char</span>* pend, <span class="keyword">int</span> nTypeIn, <span class="keyword">int</span> nVersionIn) : vch(pbegin, pend)</span><br><span class="line">    &#123;</span><br><span class="line">        Init(nTypeIn, nVersionIn);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    CDataStream(<span class="keyword">const</span> vector_type&amp; vchIn, <span class="keyword">int</span> nTypeIn, <span class="keyword">int</span> nVersionIn) : vch(vchIn.begin(), vchIn.end())</span><br><span class="line">    &#123;</span><br><span class="line">        Init(nTypeIn, nVersionIn);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    CDataStream(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;&amp; vchIn, <span class="keyword">int</span> nTypeIn, <span class="keyword">int</span> nVersionIn) : vch(vchIn.begin(), vchIn.end())</span><br><span class="line">    &#123;</span><br><span class="line">        Init(nTypeIn, nVersionIn);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    CDataStream(<span class="keyword">const</span> <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">unsigned</span> <span class="keyword">char</span>&gt;&amp; vchIn, <span class="keyword">int</span> nTypeIn, <span class="keyword">int</span> nVersionIn) : vch(vchIn.begin(), vchIn.end())</span><br><span class="line">    &#123;</span><br><span class="line">        Init(nTypeIn, nVersionIn);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Init</span><span class="params">(<span class="keyword">int</span> nTypeIn, <span class="keyword">int</span> nVersionIn)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        nReadPos = <span class="number">0</span>;</span><br><span class="line">        nType = nTypeIn;</span><br><span class="line">        nVersion = nVersionIn;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    CDataStream&amp; <span class="keyword">operator</span>+=(<span class="keyword">const</span> CDataStream&amp; b)</span><br><span class="line">    &#123;</span><br><span class="line">        vch.insert(vch.end(), b.begin(), b.end());</span><br><span class="line">        <span class="keyword">return</span> *<span class="keyword">this</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">friend</span> CDataStream <span class="keyword">operator</span>+(<span class="keyword">const</span> CDataStream&amp; a, <span class="keyword">const</span> CDataStream&amp; b)</span><br><span class="line">    &#123;</span><br><span class="line">        CDataStream ret = a;</span><br><span class="line">        ret += b;</span><br><span class="line">        <span class="keyword">return</span> (ret);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="built_in">std</span>::<span class="function"><span class="built_in">string</span> <span class="title">str</span><span class="params">()</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (<span class="built_in">std</span>::<span class="built_in">string</span>(begin(), end()));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">// Vector subset</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="function">const_iterator <span class="title">begin</span><span class="params">()</span> <span class="keyword">const</span>                     </span>&#123; <span class="keyword">return</span> vch.begin() + nReadPos; &#125;</span><br><span class="line">    <span class="function">iterator <span class="title">begin</span><span class="params">()</span>                                 </span>&#123; <span class="keyword">return</span> vch.begin() + nReadPos; &#125;</span><br><span class="line">    <span class="function">const_iterator <span class="title">end</span><span class="params">()</span> <span class="keyword">const</span>                       </span>&#123; <span class="keyword">return</span> vch.end(); &#125;</span><br><span class="line">    <span class="function">iterator <span class="title">end</span><span class="params">()</span>                                   </span>&#123; <span class="keyword">return</span> vch.end(); &#125;</span><br><span class="line">    <span class="function">size_type <span class="title">size</span><span class="params">()</span> <span class="keyword">const</span>                           </span>&#123; <span class="keyword">return</span> vch.size() - nReadPos; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">empty</span><span class="params">()</span> <span class="keyword">const</span>                               </span>&#123; <span class="keyword">return</span> vch.size() == nReadPos; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">resize</span><span class="params">(size_type n, value_type c=<span class="number">0</span>)</span>         </span>&#123; vch.resize(n + nReadPos, c); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">reserve</span><span class="params">(size_type n)</span>                        </span>&#123; vch.reserve(n + nReadPos); &#125;</span><br><span class="line">    const_reference <span class="keyword">operator</span>[](size_type pos) <span class="keyword">const</span>  &#123; <span class="keyword">return</span> vch[pos + nReadPos]; &#125;</span><br><span class="line">    reference <span class="keyword">operator</span>[](size_type pos)              &#123; <span class="keyword">return</span> vch[pos + nReadPos]; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">clear</span><span class="params">()</span>                                     </span>&#123; vch.clear(); nReadPos = <span class="number">0</span>; &#125;</span><br><span class="line">    <span class="function">iterator <span class="title">insert</span><span class="params">(iterator it, <span class="keyword">const</span> <span class="keyword">char</span>&amp; x=<span class="keyword">char</span>())</span> </span>&#123; <span class="keyword">return</span> vch.insert(it, x); &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(iterator it, size_type n, <span class="keyword">const</span> <span class="keyword">char</span>&amp; x)</span> </span>&#123; vch.insert(it, n, x); &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(iterator it, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;::const_iterator first, <span class="built_in">std</span>::<span class="built_in">vector</span>&lt;<span class="keyword">char</span>&gt;::const_iterator last)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        assert(last - first &gt;= <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (it == vch.begin() + nReadPos &amp;&amp; (<span class="keyword">unsigned</span> <span class="keyword">int</span>)(last - first) &lt;= nReadPos)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// special case for inserting at the front when there's room</span></span><br><span class="line">            nReadPos -= (last - first);</span><br><span class="line">            <span class="built_in">memcpy</span>(&amp;vch[nReadPos], &amp;first[<span class="number">0</span>], last - first);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            vch.insert(it, first, last);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"><span class="meta">#<span class="meta-keyword">if</span> !defined(_MSC_VER) || _MSC_VER &gt;= 1300</span></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">insert</span><span class="params">(iterator it, <span class="keyword">const</span> <span class="keyword">char</span>* first, <span class="keyword">const</span> <span class="keyword">char</span>* last)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        assert(last - first &gt;= <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">if</span> (it == vch.begin() + nReadPos &amp;&amp; (<span class="keyword">unsigned</span> <span class="keyword">int</span>)(last - first) &lt;= nReadPos)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// special case for inserting at the front when there's room</span></span><br><span class="line">            nReadPos -= (last - first);</span><br><span class="line">            <span class="built_in">memcpy</span>(&amp;vch[nReadPos], &amp;first[<span class="number">0</span>], last - first);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            vch.insert(it, first, last);</span><br><span class="line">    &#125;</span><br><span class="line"><span class="meta">#<span class="meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    <span class="function">iterator <span class="title">erase</span><span class="params">(iterator it)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (it == vch.begin() + nReadPos)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// special case for erasing from the front</span></span><br><span class="line">            <span class="keyword">if</span> (++nReadPos &gt;= vch.size())</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="comment">// whenever we reach the end, we take the opportunity to clear the buffer</span></span><br><span class="line">                nReadPos = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">return</span> vch.erase(vch.begin(), vch.end());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">return</span> vch.begin() + nReadPos;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> vch.erase(it);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">iterator <span class="title">erase</span><span class="params">(iterator first, iterator last)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="keyword">if</span> (first == vch.begin() + nReadPos)</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="comment">// special case for erasing from the front</span></span><br><span class="line">            <span class="keyword">if</span> (last == vch.end())</span><br><span class="line">            &#123;</span><br><span class="line">                nReadPos = <span class="number">0</span>;</span><br><span class="line">                <span class="keyword">return</span> vch.erase(vch.begin(), vch.end());</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="keyword">else</span></span><br><span class="line">            &#123;</span><br><span class="line">                nReadPos = (last - vch.begin());</span><br><span class="line">                <span class="keyword">return</span> last;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">            <span class="keyword">return</span> vch.erase(first, last);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">inline</span> <span class="keyword">void</span> <span class="title">Compact</span><span class="params">()</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        vch.erase(vch.begin(), vch.begin() + nReadPos);</span><br><span class="line">        nReadPos = <span class="number">0</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">Rewind</span><span class="params">(size_type n)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// Rewind by n characters if the buffer hasn't been compacted yet</span></span><br><span class="line">        <span class="keyword">if</span> (n &gt; nReadPos)</span><br><span class="line">            <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">        nReadPos -= n;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="comment">// Stream subset</span></span><br><span class="line">    <span class="comment">//</span></span><br><span class="line">    <span class="function"><span class="keyword">bool</span> <span class="title">eof</span><span class="params">()</span> <span class="keyword">const</span>             </span>&#123; <span class="keyword">return</span> size() == <span class="number">0</span>; &#125;</span><br><span class="line">    <span class="function">CDataStream* <span class="title">rdbuf</span><span class="params">()</span>         </span>&#123; <span class="keyword">return</span> <span class="keyword">this</span>; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">in_avail</span><span class="params">()</span>               </span>&#123; <span class="keyword">return</span> size(); &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">SetType</span><span class="params">(<span class="keyword">int</span> n)</span>          </span>&#123; nType = n; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">GetType</span><span class="params">()</span>                </span>&#123; <span class="keyword">return</span> nType; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">SetVersion</span><span class="params">(<span class="keyword">int</span> n)</span>       </span>&#123; nVersion = n; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">GetVersion</span><span class="params">()</span>             </span>&#123; <span class="keyword">return</span> nVersion; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">ReadVersion</span><span class="params">()</span>           </span>&#123; *<span class="keyword">this</span> &gt;&gt; nVersion; &#125;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">WriteVersion</span><span class="params">()</span>          </span>&#123; *<span class="keyword">this</span> &lt;&lt; nVersion; &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">CDataStream&amp; <span class="title">read</span><span class="params">(<span class="keyword">char</span>* pch, <span class="keyword">size_t</span> nSize)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// Read from the beginning of the buffer</span></span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">int</span> nReadPosNext = nReadPos + nSize;</span><br><span class="line">        <span class="keyword">if</span> (nReadPosNext &gt;= vch.size())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (nReadPosNext &gt; vch.size())</span><br><span class="line">            &#123;</span><br><span class="line">                <span class="keyword">throw</span> <span class="built_in">std</span>::ios_base::failure(<span class="string">"CDataStream::read() : end of data"</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            <span class="built_in">memcpy</span>(pch, &amp;vch[nReadPos], nSize);</span><br><span class="line">            nReadPos = <span class="number">0</span>;</span><br><span class="line">            vch.clear();</span><br><span class="line">            <span class="keyword">return</span> (*<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="built_in">memcpy</span>(pch, &amp;vch[nReadPos], nSize);</span><br><span class="line">        nReadPos = nReadPosNext;</span><br><span class="line">        <span class="keyword">return</span> (*<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">CDataStream&amp; <span class="title">ignore</span><span class="params">(<span class="keyword">int</span> nSize)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// Ignore from the beginning of the buffer</span></span><br><span class="line">        assert(nSize &gt;= <span class="number">0</span>);</span><br><span class="line">        <span class="keyword">unsigned</span> <span class="keyword">int</span> nReadPosNext = nReadPos + nSize;</span><br><span class="line">        <span class="keyword">if</span> (nReadPosNext &gt;= vch.size())</span><br><span class="line">        &#123;</span><br><span class="line">            <span class="keyword">if</span> (nReadPosNext &gt; vch.size())</span><br><span class="line">                <span class="keyword">throw</span> <span class="built_in">std</span>::ios_base::failure(<span class="string">"CDataStream::ignore() : end of data"</span>);</span><br><span class="line">            nReadPos = <span class="number">0</span>;</span><br><span class="line">            vch.clear();</span><br><span class="line">            <span class="keyword">return</span> (*<span class="keyword">this</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        nReadPos = nReadPosNext;</span><br><span class="line">        <span class="keyword">return</span> (*<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function">CDataStream&amp; <span class="title">write</span><span class="params">(<span class="keyword">const</span> <span class="keyword">char</span>* pch, <span class="keyword">size_t</span> nSize)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// Write to the end of the buffer</span></span><br><span class="line">        vch.insert(vch.end(), pch, pch + nSize);</span><br><span class="line">        <span class="keyword">return</span> (*<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> Stream&gt;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">Serialize</span><span class="params">(Stream&amp; s, <span class="keyword">int</span> nType, <span class="keyword">int</span> nVersion)</span> <span class="keyword">const</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// Special case: stream &lt;&lt; stream concatenates like stream += stream</span></span><br><span class="line">        <span class="keyword">if</span> (!vch.empty())</span><br><span class="line">            s.write((<span class="keyword">char</span>*)&amp;vch[<span class="number">0</span>], vch.size() * <span class="keyword">sizeof</span>(vch[<span class="number">0</span>]));</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">    <span class="function"><span class="keyword">unsigned</span> <span class="keyword">int</span> <span class="title">GetSerializeSize</span><span class="params">(<span class="keyword">const</span> T&amp; obj)</span></span></span><br><span class="line"><span class="function">    </span>&#123;</span><br><span class="line">        <span class="comment">// Tells the size of the object if serialized to this stream</span></span><br><span class="line">        <span class="keyword">return</span> ::GetSerializeSize(obj, nType, nVersion);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">    CDataStream&amp; <span class="keyword">operator</span>&lt;&lt;(<span class="keyword">const</span> T&amp; obj)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Serialize to this stream</span></span><br><span class="line">        ::Serialize(*<span class="keyword">this</span>, obj, nType, nVersion);</span><br><span class="line">        <span class="keyword">return</span> (*<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">template</span>&lt;<span class="keyword">typename</span> T&gt;</span><br><span class="line">    CDataStream&amp; <span class="keyword">operator</span>&gt;&gt;(T&amp; obj)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="comment">// Unserialize from this stream</span></span><br><span class="line">        ::Unserialize(*<span class="keyword">this</span>, obj, nType, nVersion);</span><br><span class="line">        <span class="keyword">return</span> (*<span class="keyword">this</span>);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">GetAndClear</span><span class="params">(CSerializeData &amp;data)</span> </span>&#123;</span><br><span class="line">        data.insert(data.end(), begin(), end());</span><br><span class="line">        clear();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2020/11/06/2020-11-06-LaTeX-for-writing-paper/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shane Wang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shane's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2020/11/06/2020-11-06-LaTeX-for-writing-paper/" class="post-title-link" itemprop="url">学术论文 LaTeX 与 Word 排版</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2020-11-06 22:24:56" itemprop="dateCreated datePublished" datetime="2020-11-06T22:24:56+08:00">2020-11-06</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2021-01-03 17:46:32" itemprop="dateModified" datetime="2021-01-03T17:46:32+08:00">2021-01-03</time>
+              </span>
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span title="Symbols count in article"></span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              
+              <span title="Reading time"></span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <h1 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h1><h2 id="LaTeX-字体"><a href="#LaTeX-字体" class="headerlink" title="LaTeX 字体"></a>LaTeX 字体</h2><h3 id="一些名词解释"><a href="#一些名词解释" class="headerlink" title="一些名词解释"></a>一些名词解释</h3><p><em>PostScript (PS)</em>: Adobe公司开发的一种图灵完备的编程语言，目的是使用数学化的方式来描述几何图形和图片。<br><em>Portable Document Format</em>: 也有Adobe公司开发，属于PostScript的子集。pdf不是一种编程语言，因为其缺乏PostScript语言的条件分支能力。Pdf对编号和超链接的支持很好，主要用于文件组合与分享。<br><em>Type 1 fonts</em>: 矢量字体<br><em>Type 3 fonts</em>: bitmap位图字体<br><em>Computer Modern (CM) fonts</em>: Computer Modern 字体，由高德纳设计。它的一大优点是拥有非常完备的数学符号集。该字体是使用METAFONT语言（也是Knuth开发的）创建的。<br>不幸的是，METAFONT从未在打印机中广泛使用（不像PostScript那样）。所以在使用dvips生成PostScript时，Computer Modern字体的栅格化（从METAFONT转换为Type 3 bitmap）通常是较旧的（pre-teTEX 2.0）LATEX系统的默认行为。当LATEX系统使用此类Type 3字体时，生成的PostScript（或PDF）文件将不会总是在每台打印机上产生最佳质量，因为栅格化（rasterization）过程仅对于给定的打印分辨率才是最佳的。<br><em>CM-Super fonts</em>: 2001年由Vladimir Volovich公开发布，它拓展了 Computer Modern 字体集并且完全使用type 1字体。CM-Super字体集支持一些原先Computer Modern中不支持的字体和字形（如bold smallcaps字形，见下图）。当使用T1编码想去获取拓展字形的时候，需要引入以下两行以获取Type 1版本的CM字体：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;type1ec&#125;</span><br><span class="line">\usepackage[T1]&#123;fontenc&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="rwHuU.jpg" alt="rwHuU.jpg"></p>
+<h3 id="字体编码"><a href="#字体编码" class="headerlink" title="字体编码"></a>字体编码</h3><p>传统使用 fontenc 宏包来切换字体编码，默认的是高德纳设计的 Computer Modern 字体(OT1)。</p>
+<p>xelatex 和 lualatex 使用 fontspec 宏包满足用户设置字体的需求，支持直接调用系统和Texlive中的.ttf或.otf格式字体。</p>
+<h3 id="常用字体编码集"><a href="#常用字体编码集" class="headerlink" title="常用字体编码集"></a>常用字体编码集</h3><p>OT1: TeX text<br>T1: TeX extended text<br>cmr: Computer Modern Roman<br>cmss: Computer Modern Sans<br>cmtt: Computer Modern Typewriter<br>ptm: Adobe Times<br>phv: Adobe Helvetica<br>pcr: Adobe Courier</p>
+<h1 id="公式"><a href="#公式" class="headerlink" title="公式"></a>公式</h1><p>数学公式是 LaTeX 的强项。在数学公式中，一般变量都是斜体，只有函数是正体。而在 LaTeX 中自动就会用斜体表示。在 Word 中，可以给变量设置斜体，但是之后在统一调整格式的时候会被统一调整，所以 Word 对于数学变量使用 MathType 或自带公式模式。</p>
+<h2 id="公式右编号"><a href="#公式右编号" class="headerlink" title="公式右编号"></a>公式右编号</h2><h3 id="Word-自带公式"><a href="#Word-自带公式" class="headerlink" title="Word 自带公式"></a>Word 自带公式</h3><p>新建题注标签为公式左括号（<br>使用添加题注的方式增加序号，然后补全右括号）<br><img src="word-equation-caption.png" alt="插入题注"><br>在公式结束位置添加井号#，然后将序号 Ctrl+X Ctrl+V 到公式的#后，回车即可。<br>之后的序号变动 Word 会自动更新。</p>
+<h3 id="MathType"><a href="#MathType" class="headerlink" title="MathType"></a>MathType</h3><p>MathType 有自动插入标号的能力，不过关于标号右对齐，则需要手动设置段落的制表位来实现。</p>
+<h1 id="算法"><a href="#算法" class="headerlink" title="算法"></a>算法</h1><h2 id="Word"><a href="#Word" class="headerlink" title="Word"></a>Word</h2><p>Word中通过表格来实现，在表格中设置制表位来控制缩进<br>在表格中移动到下一制表位与正文中按键稍有不同，正文中是按 Tab 即可，表格中需要 Ctrl + Tab</p>
+<h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><h2 id="Word-1"><a href="#Word-1" class="headerlink" title="Word"></a>Word</h2><p>Word 推荐采用参考文献编为列表，然后文中使用交叉引用。</p>
+<p>一份（不太）简短的LaTeX指南 p.63： <a href="http://ctan.math.utah.edu/ctan/tex-archive/info/lshort/chinese/lshort-zh-cn.pdf" target="_blank" rel="noopener">http://ctan.math.utah.edu/ctan/tex-archive/info/lshort/chinese/lshort-zh-cn.pdf</a><br>LaTeX 2e font selection: <a href="https://www.latex-project.org/help/documentation/fntguide.pdf" target="_blank" rel="noopener">https://www.latex-project.org/help/documentation/fntguide.pdf</a><br><a href="http://ctan.mirrors.hoobly.com/macros/latex/contrib/IEEEtran/testflow/testflow_doc.pdf" target="_blank" rel="noopener">http://ctan.mirrors.hoobly.com/macros/latex/contrib/IEEEtran/testflow/testflow_doc.pdf</a></p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
     <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2020/10/09/2020-10-09-Git-cheatsheet/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -536,7 +1119,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-11-03 00:15:44" itemprop="dateModified" datetime="2020-11-03T00:15:44+08:00">2020-11-03</time>
+                <time title="Modified: 2021-01-03 10:58:42" itemprop="dateModified" datetime="2021-01-03T10:58:42+08:00">2021-01-03</time>
               </span>
             
           
@@ -600,14 +1183,6 @@
             <h1 id="Win-10"><a href="#Win-10" class="headerlink" title="Win 10"></a>Win 10</h1><h2 id="Clean-log-files"><a href="#Clean-log-files" class="headerlink" title="Clean log files"></a>Clean log files</h2><p>C:\\Windows\System32\winevt\Logs<br>按Ctrl+A全选后使用 Shift + Delete 删除，一些正被services使用的文件无法被删除。</p>
 <p>Open Administrator Powershell：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Get-EventLog -List</span><br><span class="line">Remove-EventLog -LogName &quot;some Log from list&quot;</span><br></pre></td></tr></table></figure></p>
 <p><img src="ps-eventlog.png" alt="ps-eventlog.png"></p>
-<h1 id="Mapping-network-drive"><a href="#Mapping-network-drive" class="headerlink" title="Mapping network drive"></a>Mapping network drive</h1><h2 id="Win"><a href="#Win" class="headerlink" title="Win"></a>Win</h2><p>windows 支持 ftp、samba、nfs（win10新加入）等多种文件共享协议。在没有防火墙的情况下都是好用的。<br>hostname可在C:\Windows\System32\drivers\etc\hosts文件中配置</p>
-<h3 id="挂载nfs"><a href="#挂载nfs" class="headerlink" title="挂载nfs"></a>挂载nfs</h3><p>右键我的电脑-&gt;Map Network Drive(注意nfs协议不能是添加网络位置)-&gt;如<code>lab-nas:/mnt/HD/HD_a2/Public</code></p>
-<p>由于nfs默认没有用户认证，注意配置nfs的匿名uid和gid<br>BusyBox nfs: 编辑 /etc/exports 文件的 anonuid=500 和 anongid=1000（admin用户访问）<br>然后更新配置文件 <code>exportfs -rv</code></p>
-<p>Windows NFS Client: Ctrl+R管理员regedit进入注册表：Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default<br>设置用户AnonymousUid 和 组 AnonymousGid 的 Decimal 值和服务器对应用户相同（500和1000）</p>
-<p>注：nfs需要两机器时间尽量同步</p>
-<h3 id="挂载samba绕过"><a href="#挂载samba绕过" class="headerlink" title="挂载samba绕过"></a>挂载samba绕过</h3><p>在一些网络环境中比如校园网屏蔽了smb的445端口时，需要采用端口绕过的方式来配置。</p>
-<h4 id="Linux服务器Samba配置"><a href="#Linux服务器Samba配置" class="headerlink" title="Linux服务器Samba配置"></a>Linux服务器Samba配置</h4><p>在smb.conf文件中改变端口(避开2000以内的约定俗成端口)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smb ports = 2222 # 默认配置 smb ports = 445 139</span><br></pre></td></tr></table></figure></p>
-<h4 id="Win客户端配置"><a href="#Win客户端配置" class="headerlink" title="Win客户端配置"></a>Win客户端配置</h4><p>管理员身份打开 Powershell<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 开启端口转发（Portproxy）</span><br><span class="line">netsh interface portproxy add v4tov4 listenaddress=127.0.0.1 listenport=445 connectaddress=lab-server connectport=2222</span><br><span class="line"># 查看所有的代理</span><br><span class="line">netsh interface portproxy show all</span><br><span class="line"># 检查445端口监听状况</span><br><span class="line">netstat -ano | findstr :445</span><br><span class="line"># 删除代理(后期不用删除操作)</span><br><span class="line"># netsh interface portproxy delete v4tov4 listenport=445 listenaddress=127.0.0.1</span><br></pre></td></tr></table></figure></p>
 <h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><p>Refer to <a href="https://billystudio.github.io/2018/05/16/Command-of-the-day-May-sixteenth-2018/">https://billystudio.github.io/2018/05/16/Command-of-the-day-May-sixteenth-2018/</a></p>
 
           
@@ -1594,550 +2169,6 @@
 
 
     
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2020/06/26/2020-06-26-KDE-desktop-config/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shane Wang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shane's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/06/26/2020-06-26-KDE-desktop-config/" class="post-title-link" itemprop="url">KDE Desktop Config</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2020-06-26 13:19:12" itemprop="dateCreated datePublished" datetime="2020-06-26T13:19:12+08:00">2020-06-26</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2020-07-14 23:25:02" itemprop="dateModified" datetime="2020-07-14T23:25:02+08:00">2020-07-14</time>
-              </span>
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              
-              <span title="Symbols count in article"></span>
-            </span>
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              
-              <span title="Reading time"></span>
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>KDE is a highly configurable modern Linux desktop environment which is developed by OpenSUSE company.
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2020/06/26/2020-06-26-KDE-desktop-config/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2020/05/30/2020-May-30-Chrome-extensions/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shane Wang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shane's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/05/30/2020-May-30-Chrome-extensions/" class="post-title-link" itemprop="url">Chrome 浏览器插件推荐</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2020-05-30 18:35:22 / Modified: 20:31:13" itemprop="dateCreated datePublished" datetime="2020-05-30T18:35:22+08:00">2020-05-30</time>
-            </span>
-          
-
-          
-            
-
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              
-              <span title="Symbols count in article"></span>
-            </span>
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              
-              <span title="Reading time"></span>
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          
-            <p>Several extensions that I use frequently.</p>
-<h1 id="Ad-block-plus"><a href="#Ad-block-plus" class="headerlink" title="Ad-block plus"></a>Ad-block plus</h1><p>屏蔽百度热搜<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">www.baidu.com##div[tpl=&quot;right_toplist1&quot;]</span><br><span class="line">www.baidu.com##div[tpl=&quot;right_toplist&quot;]</span><br><span class="line">www.baidu.com##div[class=&quot;cr-content&quot;]</span><br></pre></td></tr></table></figure></p>
-<p>屏蔽知乎热搜<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">www.zhihu.com##div[class=&quot;Card TopSearch TopSearch--new&quot;]</span><br></pre></td></tr></table></figure></p>
-
-          
-        
-      
-    </div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
-      
-
-  
-
-  
-  
-  
-
-  
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-  
-  
-  
-  <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2020/05/20/2020-5-20-Design-patterns-singleton/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="Shane Wang">
-      <meta itemprop="description" content>
-      <meta itemprop="image" content="/images/avatar.gif">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Shane's Blog">
-    </span>
-
-    
-      <header class="post-header">
-
-        
-        
-          <h1 class="post-title" itemprop="name headline">
-                
-                
-                <a href="/2020/05/20/2020-5-20-Design-patterns-singleton/" class="post-title-link" itemprop="url">Design patterns ── Singleton</a>
-              
-            
-          </h1>
-        
-
-        <div class="post-meta">
-
-          
-          
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Posted on</span>
-              
-
-              
-                
-              
-
-              <time title="Created: 2020-05-20 10:42:30" itemprop="dateCreated datePublished" datetime="2020-05-20T10:42:30+08:00">2020-05-20</time>
-            </span>
-          
-
-          
-            
-
-            
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2020-11-07 01:00:06" itemprop="dateModified" datetime="2020-11-07T01:00:06+08:00">2020-11-07</time>
-              </span>
-            
-          
-
-          
-
-          
-            
-            
-          
-
-          
-          
-
-          
-
-          
-
-          <br>
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-file-word-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Symbols count in article: </span>
-              
-              <span title="Symbols count in article"></span>
-            </span>
-          
-
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-clock-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">Reading time &asymp;</span>
-              
-              <span title="Reading time"></span>
-            </span>
-          
-
-          
-
-        </div>
-      </header>
-    
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-      
-
-      
-        
-          <p>单例模式是最常用的设计模式之一，同时也是面试中最容易考到的设计模式。
-          <!--noindex-->
-          
-            <div class="post-button text-center">
-              <a class="btn" href="/2020/05/20/2020-5-20-Design-patterns-singleton/#more" rel="contents">
-                Read more &raquo;
-              </a>
-            </div>
-          
-          <!--/noindex-->
-        
-      
-    </p></div>
-
-    
-
-    
-
-    
-    
-    
-
-    
-
-    
-      
-    
-    
-
-    
-
-    <footer class="post-footer">
-      
-
-      
-
-      
-
-      
-      
-        <div class="post-eof"></div>
-      
-    </footer>
-  </div>
-  
-  
-  
-  </article>
-
-
-    
   </section>
 
   
@@ -2184,40 +2215,14 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">141</span>
+                    <span class="site-state-item-count">144</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
               
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                      <a href="/categories/">
-                    
-                  
-                    <span class="site-state-item-count">7</span>
-                    <span class="site-state-item-name">categories</span>
-                  </a>
-                </div>
-              
 
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                      <a href="/tags/">
-                    
-                  
-                    <span class="site-state-item-count">146</span>
-                    <span class="site-state-item-name">tags</span>
-                  </a>
-                </div>
               
             </nav>
           
@@ -2252,7 +2257,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>

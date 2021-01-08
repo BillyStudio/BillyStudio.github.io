@@ -98,10 +98,13 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="KDE is a highly configurable modern Linux desktop environment which is developed by OpenSUSE company.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-07-14T15:25:02.034Z">
+<meta property="og:image" content="http://billystudio.github.io/2020/06/26/2020-06-26-KDE-desktop-config/chrome-panel-window-can-hover.png">
+<meta property="og:image" content="http://billystudio.github.io/2020/06/26/2020-06-26-KDE-desktop-config/firefox-panel-always-visible.png">
+<meta property="og:updated_time" content="2021-01-02T14:13:07.407Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KDE Desktop Config">
 <meta name="twitter:description" content="KDE is a highly configurable modern Linux desktop environment which is developed by OpenSUSE company.">
+<meta name="twitter:image" content="http://billystudio.github.io/2020/06/26/2020-06-26-KDE-desktop-config/chrome-panel-window-can-hover.png">
 
 
 
@@ -368,7 +371,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-07-14 23:25:02" itemprop="dateModified" datetime="2020-07-14T23:25:02+08:00">2020-07-14</time>
+                <time title="Modified: 2021-01-02 22:13:07" itemprop="dateModified" datetime="2021-01-02T22:13:07+08:00">2021-01-02</time>
               </span>
             
           
@@ -428,14 +431,22 @@
 
       
         <p>KDE is a highly configurable modern Linux desktop environment which is developed by OpenSUSE company. <a id="more"></a></p>
-<p>Plasma is the version name of KDE 5.</p>
+<p>Plasma is the version alias of KDE5.</p>
 <h1 id="Installing-KDE"><a href="#Installing-KDE" class="headerlink" title="Installing KDE"></a>Installing KDE</h1><p>I install it on my Arch Linux, so<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pacman -S plasma # kde plasma desktop group</span><br><span class="line">pacman -S dolphin # file manager</span><br></pre></td></tr></table></figure></p>
 <h1 id="Configure-KDE"><a href="#Configure-KDE" class="headerlink" title="Configure KDE"></a>Configure KDE</h1><h3 id="Disable-kde-wallet-whenever-I-start-Chromium-Chrome"><a href="#Disable-kde-wallet-whenever-I-start-Chromium-Chrome" class="headerlink" title="Disable kde wallet whenever I start Chromium/Chrome"></a>Disable kde wallet whenever I start Chromium/Chrome</h3><p>Edit <code>~/.config/kwalletrc</code>, and add<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[Wallet]</span><br><span class="line">Enabled=false</span><br></pre></td></tr></table></figure></p>
 <h3 id="Disable-Meta-key-for-virtual-machine-windows"><a href="#Disable-Meta-key-for-virtual-machine-windows" class="headerlink" title="Disable Meta key for virtual machine windows"></a>Disable Meta key for virtual machine windows</h3><p>Alt+F3 &gt; More Actions &gt; Configure special window settings &gt; Add property &gt; Disable global shortcuts</p>
 <h2 id="Configure-macOS-like-themes"><a href="#Configure-macOS-like-themes" class="headerlink" title="Configure macOS-like themes"></a>Configure macOS-like themes</h2><h3 id="Global-menu"><a href="#Global-menu" class="headerlink" title="Global menu"></a>Global menu</h3><p>Add Widgets: global menu<br>For VScode-like electron apps, pacman -S libdbusmenu-glib<br>For Firefox, pacman -S appmenu-gtk-module<br>For Chrome, uncheck “Use system titlebar and borders”</p>
 <h3 id="Active-window-control"><a href="#Active-window-control" class="headerlink" title="Active window control"></a>Active window control</h3><p>选择breezmite的svg图标<br>/home/wsd/.local/share/aurorae/themes/Breezemite</p>
+<p>Chrome 设置中关闭 <code>Use system title bar and borders</code>，在 panel 可隐藏模式中使用。<br><img src="chrome-panel-window-can-hover.png" alt="Chrome buttons when window can hover panel"><br>Firefox 需卸载默认版本转而aur安装<code>firefox-appmenu-bin</code>，设置 Mojave Theme，启动 Title bar。在 panel always visible 模式中使用<br><img src="firefox-panel-always-visible.png" alt="Firefox buttons when panel is always visible"></p>
 <h3 id="dock"><a href="#dock" class="headerlink" title="dock"></a>dock</h3><p>pacman -S latte-dock</p>
 <h3 id="Fonts"><a href="#Fonts" class="headerlink" title="Fonts"></a>Fonts</h3><p>sf-pro</p>
+<h3 id="具体应用场景"><a href="#具体应用场景" class="headerlink" title="具体应用场景"></a>具体应用场景</h3><p>I have three main usages:</p>
+<ol>
+<li>笔记本单屏幕桌面，拥有键鼠+Touchpad</li>
+<li>笔记本合上屏幕作为主机，外接显示屏+键鼠，无Touchpad</li>
+<li>笔记本外接屏幕作为拓展屏</li>
+</ol>
+<p>第1种情况下，配置Panel为 <code>Window can hover</code>，最大化13寸小屏幕；使用 Touchpad 四指滑动来回切换win10虚拟机所在桌面。选择Chrome作为主浏览器。<br>第2种情况下，外接屏幕足够大，而且无Touchpad，所以配置Panel为 <code>Always Visible</code>，使用鼠标点击panel 中的 Desktop 来切换虚拟机桌面和KDE桌面。由于Active Window Control和Chrome的兼容问题，选择 Firefox 作为主浏览器。<br>第3中情况下有两块屏幕，配置外接屏幕为 Always Visible 即可，支持Touchpad和鼠标点击两种方式切换桌面</p>
 
       
     </div>
@@ -564,40 +575,14 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">141</span>
+                    <span class="site-state-item-count">144</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
               
 
               
-                
-                
-                <div class="site-state-item site-state-categories">
-                  
-                    
-                      <a href="/categories/">
-                    
-                  
-                    <span class="site-state-item-count">7</span>
-                    <span class="site-state-item-name">categories</span>
-                  </a>
-                </div>
-              
 
-              
-                
-                
-                <div class="site-state-item site-state-tags">
-                  
-                    
-                      <a href="/tags/">
-                    
-                  
-                    <span class="site-state-item-count">146</span>
-                    <span class="site-state-item-name">tags</span>
-                  </a>
-                </div>
               
             </nav>
           
@@ -628,7 +613,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Installing-KDE"><span class="nav-number">1.</span> <span class="nav-text">Installing KDE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Configure-KDE"><span class="nav-number">2.</span> <span class="nav-text">Configure KDE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Disable-kde-wallet-whenever-I-start-Chromium-Chrome"><span class="nav-number">2.0.1.</span> <span class="nav-text">Disable kde wallet whenever I start Chromium/Chrome</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Disable-Meta-key-for-virtual-machine-windows"><span class="nav-number">2.0.2.</span> <span class="nav-text">Disable Meta key for virtual machine windows</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configure-macOS-like-themes"><span class="nav-number">2.1.</span> <span class="nav-text">Configure macOS-like themes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Global-menu"><span class="nav-number">2.1.1.</span> <span class="nav-text">Global menu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Active-window-control"><span class="nav-number">2.1.2.</span> <span class="nav-text">Active window control</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dock"><span class="nav-number">2.1.3.</span> <span class="nav-text">dock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fonts"><span class="nav-number">2.1.4.</span> <span class="nav-text">Fonts</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Installing-KDE"><span class="nav-number">1.</span> <span class="nav-text">Installing KDE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Configure-KDE"><span class="nav-number">2.</span> <span class="nav-text">Configure KDE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Disable-kde-wallet-whenever-I-start-Chromium-Chrome"><span class="nav-number">2.0.1.</span> <span class="nav-text">Disable kde wallet whenever I start Chromium/Chrome</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Disable-Meta-key-for-virtual-machine-windows"><span class="nav-number">2.0.2.</span> <span class="nav-text">Disable Meta key for virtual machine windows</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configure-macOS-like-themes"><span class="nav-number">2.1.</span> <span class="nav-text">Configure macOS-like themes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Global-menu"><span class="nav-number">2.1.1.</span> <span class="nav-text">Global menu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Active-window-control"><span class="nav-number">2.1.2.</span> <span class="nav-text">Active window control</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dock"><span class="nav-number">2.1.3.</span> <span class="nav-text">dock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fonts"><span class="nav-number">2.1.4.</span> <span class="nav-text">Fonts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体应用场景"><span class="nav-number">2.1.5.</span> <span class="nav-text">具体应用场景</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -649,7 +634,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2020</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
