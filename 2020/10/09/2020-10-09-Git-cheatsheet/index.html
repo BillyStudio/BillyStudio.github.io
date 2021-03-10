@@ -98,10 +98,12 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="bug 分支123456789101112git checkout -b fix-bug// git add 一些修改文件git commit -m &amp;quot;fix 1&amp;quot;// git add 再一些修改文件git commit -m &amp;quot;fix 2&amp;quot;git checkout mastergit pull -r origin mastergit checkout fi">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-10-09T08:40:25.382Z">
+<meta property="og:image" content="http://billystudio.github.io/2020/10/09/2020-10-09-Git-cheatsheet/get-remote-branch.png">
+<meta property="og:updated_time" content="2021-03-03T15:52:10.407Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 操作中的一些小技巧">
 <meta name="twitter:description" content="bug 分支123456789101112git checkout -b fix-bug// git add 一些修改文件git commit -m &amp;quot;fix 1&amp;quot;// git add 再一些修改文件git commit -m &amp;quot;fix 2&amp;quot;git checkout mastergit pull -r origin mastergit checkout fi">
+<meta name="twitter:image" content="http://billystudio.github.io/2020/10/09/2020-10-09-Git-cheatsheet/get-remote-branch.png">
 
 
 
@@ -353,13 +355,23 @@
                 
               
 
-              <time title="Created: 2020-10-09 16:29:33 / Modified: 16:40:25" itemprop="dateCreated datePublished" datetime="2020-10-09T16:29:33+08:00">2020-10-09</time>
+              <time title="Created: 2020-10-09 16:29:33" itemprop="dateCreated datePublished" datetime="2020-10-09T16:29:33+08:00">2020-10-09</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2021-03-03 23:52:10" itemprop="dateModified" datetime="2021-03-03T23:52:10+08:00">2021-03-03</time>
+              </span>
             
           
 
@@ -418,6 +430,8 @@
 
       
         <h1 id="bug-分支"><a href="#bug-分支" class="headerlink" title="bug 分支"></a>bug 分支</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">git checkout -b fix-bug</span><br><span class="line">// git add 一些修改文件</span><br><span class="line">git commit -m &quot;fix 1&quot;</span><br><span class="line">// git add 再一些修改文件</span><br><span class="line">git commit -m &quot;fix 2&quot;</span><br><span class="line">git checkout master</span><br><span class="line">git pull -r origin master</span><br><span class="line">git checkout fix-bug</span><br><span class="line">git rebase master</span><br><span class="line">git checkout master</span><br><span class="line">git merge --squash fix-bug</span><br><span class="line">git commit -m &quot;fix bug&quot;</span><br></pre></td></tr></table></figure>
+<h1 id="Pull-a-remote-branch"><a href="#Pull-a-remote-branch" class="headerlink" title="Pull a remote branch"></a>Pull a remote branch</h1><p>Ensure in advance that you ref all branches in <code>.git/config</code>, then<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git checkout -b branchname origin/branchname</span><br></pre></td></tr></table></figure></p>
+<p>A successful example:<br><img src="get-remote-branch.png" alt="fetch-remote-branch"></p>
 
       
     </div>
@@ -546,7 +560,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">146</span>
+                    <span class="site-state-item-count">145</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -576,7 +590,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">157</span>
+                    <span class="site-state-item-count">161</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -610,7 +624,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bug-分支"><span class="nav-number">1.</span> <span class="nav-text">bug 分支</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#bug-分支"><span class="nav-number">1.</span> <span class="nav-text">bug 分支</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Pull-a-remote-branch"><span class="nav-number">2.</span> <span class="nav-text">Pull a remote branch</span></a></li></ol></div>
             
 
           </div>

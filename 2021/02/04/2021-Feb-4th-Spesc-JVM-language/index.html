@@ -90,18 +90,21 @@
 
 
 
-  <meta name="description" content="编译过程没问题，执行时报错：Exception in thread “main” java.lang.ClassFormatError: Field “out” in class test has illegal signature “Ljava/io/PrintStream” 错误原因：在产生字节码的过程中，调用PrintStream忘记加分号12methodVisitor.visitField">
+  <meta name="description" content="开发基于JVM的SPESC语言">
 <meta name="keywords" content="JVM">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2021-Feb-4th-Spesc-JVM-language">
+<meta property="og:title" content="Spesc JVM language development">
 <meta property="og:url" content="http://BillyStudio.github.io/2021/02/04/2021-Feb-4th-Spesc-JVM-language/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="编译过程没问题，执行时报错：Exception in thread “main” java.lang.ClassFormatError: Field “out” in class test has illegal signature “Ljava/io/PrintStream” 错误原因：在产生字节码的过程中，调用PrintStream忘记加分号12methodVisitor.visitField">
+<meta property="og:description" content="开发基于JVM的SPESC语言">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-02-04T09:56:05.975Z">
+<meta property="og:image" content="http://billystudio.github.io/2021/02/04/2021-Feb-4th-Spesc-JVM-language/jps-jinfo.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/02/04/2021-Feb-4th-Spesc-JVM-language/default_gc.png">
+<meta property="og:updated_time" content="2021-03-10T09:33:13.186Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2021-Feb-4th-Spesc-JVM-language">
-<meta name="twitter:description" content="编译过程没问题，执行时报错：Exception in thread “main” java.lang.ClassFormatError: Field “out” in class test has illegal signature “Ljava/io/PrintStream” 错误原因：在产生字节码的过程中，调用PrintStream忘记加分号12methodVisitor.visitField">
+<meta name="twitter:title" content="Spesc JVM language development">
+<meta name="twitter:description" content="开发基于JVM的SPESC语言">
+<meta name="twitter:image" content="http://billystudio.github.io/2021/02/04/2021-Feb-4th-Spesc-JVM-language/jps-jinfo.png">
 
 
 
@@ -119,7 +122,7 @@
   };
 </script>
 
-  <title>2021-Feb-4th-Spesc-JVM-language | Shane's Blog</title>
+  <title>Spesc JVM language development | Shane's Blog</title>
   
 
 
@@ -327,7 +330,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">2021-Feb-4th-Spesc-JVM-language
+          <h1 class="post-title" itemprop="name headline">Spesc JVM language development
 
               
             
@@ -353,7 +356,7 @@
                 
               
 
-              <time title="Created: 2021-02-04 17:54:06 / Modified: 17:56:05" itemprop="dateCreated datePublished" datetime="2021-02-04T17:54:06+08:00">2021-02-04</time>
+              <time title="Created: 2021-02-04 17:54:06" itemprop="dateCreated datePublished" datetime="2021-02-04T17:54:06+08:00">2021-02-04</time>
             </span>
           
 
@@ -361,8 +364,33 @@
             
 
             
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2021-03-10 17:33:13" itemprop="dateModified" datetime="2021-03-10T17:33:13+08:00">2021-03-10</time>
+              </span>
+            
           
 
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JuliuSC项目/" itemprop="url" rel="index"><span itemprop="name">JuliuSC项目</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -417,9 +445,14 @@
       
 
       
-        <p>编译过程没问题，执行时报错：<br>Exception in thread “main” java.lang.ClassFormatError: Field “out” in class test has illegal signature “Ljava/io/PrintStream”</p>
+        <p>开发基于JVM的SPESC语言 <a id="more"></a></p>
+<h2 id="排错记录"><a href="#排错记录" class="headerlink" title="排错记录"></a>排错记录</h2><p>编译过程没问题，执行时报错：<br>Exception in thread “main” java.lang.ClassFormatError: Field “out” in class test has illegal signature “Ljava/io/PrintStream”</p>
 <p>错误原因：在产生字节码的过程中，调用PrintStream忘记加分号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">methodVisitor.visitFieldInsn(GETSTATIC, &quot;java/lang/System&quot;, &quot;out&quot;,</span><br><span class="line">					&quot;Ljava/io/PrintStream&quot;);</span><br></pre></td></tr></table></figure></p>
 <p>应为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">methodVisitor.visitFieldInsn(GETSTATIC, &quot;java/lang/System&quot;, &quot;out&quot;,</span><br><span class="line">					&quot;Ljava/io/PrintStream;&quot;);</span><br></pre></td></tr></table></figure></p>
+<h1 id="JVM结构"><a href="#JVM结构" class="headerlink" title="JVM结构"></a>JVM结构</h1><p>1.类加载器<br>2.运行时数据区<br>3.执行引擎<br>4.本地方法库</p>
+<p>double和long需要占据2个slot，其余基本类型和引用都是1个slot。<br>slot可以重复利用</p>
+<h1 id="垃圾回收（Garbage-Collection）"><a href="#垃圾回收（Garbage-Collection）" class="headerlink" title="垃圾回收（Garbage Collection）"></a>垃圾回收（Garbage Collection）</h1><p>查看Java进程使用的垃圾回收器：<br><img src="jps-jinfo.png" alt="jps-jinfo.png"></p>
+<p>查看默认垃圾回收器<br><img src="default_gc.png" alt="default_gc.png"></p>
 
       
     </div>
@@ -523,8 +556,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -539,7 +581,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">146</span>
+                    <span class="site-state-item-count">145</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -569,7 +611,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">157</span>
+                    <span class="site-state-item-count">161</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -592,6 +634,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#排错记录"><span class="nav-number">1.</span> <span class="nav-text">排错记录</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM结构"><span class="nav-number"></span> <span class="nav-text">JVM结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾回收（Garbage-Collection）"><span class="nav-number"></span> <span class="nav-text">垃圾回收（Garbage Collection）</span></a></li></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       

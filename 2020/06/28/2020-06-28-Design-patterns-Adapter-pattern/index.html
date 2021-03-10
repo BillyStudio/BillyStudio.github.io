@@ -103,7 +103,7 @@
 <meta property="og:image" content="http://billystudio.github.io/2020/06/28/2020-06-28-Design-patterns-Adapter-pattern/adapter-java.png">
 <meta property="og:image" content="http://billystudio.github.io/2020/06/28/2020-06-28-Design-patterns-Adapter-pattern/adapter2.png">
 <meta property="og:image" content="http://billystudio.github.io/2020/06/28/2020-06-28-Design-patterns-Adapter-pattern/eureka-adapter-dutychain.png">
-<meta property="og:updated_time" content="2020-07-06T08:30:29.707Z">
+<meta property="og:updated_time" content="2021-03-03T15:52:10.407Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式 之 适配器">
 <meta name="twitter:description" content="适配器模式是一种常用的设计模式。">
@@ -374,7 +374,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-07-06 16:30:29" itemprop="dateModified" datetime="2020-07-06T16:30:29+08:00">2020-07-06</time>
+                <time title="Modified: 2021-03-03 23:52:10" itemprop="dateModified" datetime="2021-03-03T23:52:10+08:00">2021-03-03</time>
               </span>
             
           
@@ -463,6 +463,8 @@
 <p>In eureka-client<br>com.netflix.discovery.shared.transport.jersey.JerseyApplicationClient.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * A version of Jersey1 &#123;<span class="doctag">@link</span> EurekaHttpClient&#125; to be used by applications.</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * <span class="doctag">@author</span> Tomasz Bak</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JerseyApplicationClient</span> <span class="keyword">extends</span> <span class="title">AbstractJerseyEurekaHttpClient</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="keyword">private</span> <span class="keyword">final</span> Map&lt;String, String&gt; additionalHeaders;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">JerseyApplicationClient</span><span class="params">(Client jerseyClient, String serviceUrl, Map&lt;String, String&gt; additionalHeaders)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(jerseyClient, serviceUrl);</span><br><span class="line">        <span class="keyword">this</span>.additionalHeaders = additionalHeaders;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">protected</span> <span class="keyword">void</span> <span class="title">addExtraHeaders</span><span class="params">(Builder webResource)</span> </span>&#123;</span><br><span class="line">        ......</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>eureka-core 服务器端<br>PeerAwareInstanceRegistryImpl.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Singleton</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">PeerAwareInstanceRegistryImpl</span> <span class="keyword">extends</span> <span class="title">AbstractInstanceRegistry</span> <span class="keyword">implements</span> <span class="title">PeerAwareInstanceRegistry</span> </span>&#123;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>责任链加适配器模式<br><img src="eureka-adapter-dutychain.png" alt="eureka-adapter-dutychain.png"></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Singleton</span></span><br><span class="line"><span class="meta">@ProvidedBy</span>(MyDataCenterInstanceConfigProvider.class)</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MyDataCenterInstanceConfig</span> <span class="keyword">extends</span> <span class="title">PropertiesInstanceConfig</span> <span class="keyword">implements</span> <span class="title">EurekaInstanceConfig</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyDataCenterInstanceConfig</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyDataCenterInstanceConfig</span><span class="params">(String namespace)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(namespace);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">MyDataCenterInstanceConfig</span><span class="params">(String namespace, DataCenterInfo dataCenterInfo)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">super</span>(namespace, dataCenterInfo);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p><code>ProvidedBy</code>是Guice的注解，表示<br>等同于<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bind(MyDataCenterInstanceConfig.class)</span><br><span class="line">    .toProvider(MyDataCenterInstanceConfigProvider.class)</span><br></pre></td></tr></table></figure></p>
 
       
     </div>
@@ -593,7 +595,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">146</span>
+                    <span class="site-state-item-count">145</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -623,7 +625,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">157</span>
+                    <span class="site-state-item-count">161</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
