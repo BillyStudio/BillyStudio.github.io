@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="字典序是最容易理解的一种顺序. 最初接触到字典序是在组合数学的课堂上.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-18T06:54:36.770Z">
+<meta property="og:updated_time" content="2021-03-12T06:45:29.662Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法笔记 —— 字典序">
 <meta name="twitter:description" content="字典序是最容易理解的一种顺序. 最初接触到字典序是在组合数学的课堂上.">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-18 14:54:36" itemprop="dateModified" datetime="2019-08-18T14:54:36+08:00">2019-08-18</time>
+                <time title="Modified: 2021-03-12 14:45:29" itemprop="dateModified" datetime="2021-03-12T14:45:29+08:00">2021-03-12</time>
               </span>
             
           
@@ -428,9 +428,9 @@
 
       
         <p>字典序是最容易理解的一种顺序. 最初接触到字典序是在组合数学的课堂上.<a id="more"></a></p>
-<p>我们依次比较串中的每个字母, 出现不一样的时候就能比较大小了. 如果某个串遍历到头了, 需要从头循环继续遍历. 如果两个串都到头了还没有比较出大小来, 说明两个串相等.<br>最容易出错的一个例子是比较48和484.</p>
-<p>当然, 更简单的一种方法是直接将两种排序的结果加起来, 比较s1+s2和s2+s1.</p>
-<p>题目参见牛客网上在线编程模块的题目 “数串”.</p>
+<p>我们依次比较串中的每个字母, 出现不一样的时候就能比较大小了. 如果某个串遍历到头了还没有比较出大小，那么较长的字符串较大。如果两个字符串一样长，那么这两个字符串的字典序相等。 </p>
+<p>有些情况下，字典序会有一些变体，比如参见牛客网上在线编程模块的题目 “数串”（<a href="https://www.nowcoder.com/questionTerminal/a6a656249f404eb498d16b2f8eaa2c60）" target="_blank" rel="noopener">https://www.nowcoder.com/questionTerminal/a6a656249f404eb498d16b2f8eaa2c60）</a>.<br>如果某个串遍历到头了, 需要从头循环继续遍历. 如果两个串都到头了还没有比较出大小来, 说明两个串相等.<br>最容易出错的一个例子是比较48和484，虽然字典序484&gt;48，但是两个字符串连起来的字典序是 484+48 &lt; 48+484，也就是说48应该在484的前面。</p>
+<p>所以这道题不能直接比较s1和s2的字典序，而是要进行s1+s2和s2+s1的字典序比较。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(dict, (s1, s2) -&gt; (s2+s1).compareTo(s1+s2)); <span class="comment">// 或下面写法</span></span><br><span class="line">Arrays.sort(dict, <span class="keyword">new</span> Comparator&lt;String&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String s1, String s2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (s2+s1).compareTo(s1+s2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>最近又做了一道 PAT 的真题和这类似, PAT 1038 Recover the Smallest Number</p>
 
       
@@ -555,7 +555,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">145</span>
+                    <span class="site-state-item-count">148</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -570,7 +570,7 @@
                       <a href="/categories/">
                     
                   
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -585,7 +585,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">161</span>
+                    <span class="site-state-item-count">164</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="微服务总线实验">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-01-08T08:16:46.440Z">
+<meta property="og:updated_time" content="2021-03-26T11:46:31.308Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring cloud 总线实验">
 <meta name="twitter:description" content="微服务总线实验">
@@ -353,13 +353,23 @@
                 
               
 
-              <time title="Created: 2021-01-08 15:55:43 / Modified: 16:16:46" itemprop="dateCreated datePublished" datetime="2021-01-08T15:55:43+08:00">2021-01-08</time>
+              <time title="Created: 2021-01-08 15:55:43" itemprop="dateCreated datePublished" datetime="2021-01-08T15:55:43+08:00">2021-01-08</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2021-03-26 19:46:31" itemprop="dateModified" datetime="2021-03-26T19:46:31+08:00">2021-03-26</time>
+              </span>
             
           
 
@@ -424,6 +434,18 @@
 <li>spring: <a href="https://start.aliyun.com/" target="_blank" rel="noopener">https://start.aliyun.com/</a></li>
 </ol>
 <h1 id="实验"><a href="#实验" class="headerlink" title="实验"></a>实验</h1><p>启动 Kafka 服务，默认端口9092</p>
+<p>常用的消息中间件中，RabbitMQ的特点是：使用Erlang编写，消息延迟率低（ms级别），但是不支持JMS通信协议，底层协议为AMQP，最大的特点是添加对于交换机的支持。<br>Kafka的特点是：支持高并发情况和Java Spring集成，持久化数据存储使用 ZooKeeper，支持多topic模式的分布式部署。</p>
+<h2 id="如何避免消息的重复发送和重复接收"><a href="#如何避免消息的重复发送和重复接收" class="headerlink" title="如何避免消息的重复发送和重复接收"></a>如何避免消息的重复发送和重复接收</h2><p>重复发送问题存在多种可能的触发场景：</p>
+<ol>
+<li>发送方成功将消息发送给RabbitMQ后，因为网络或者服务宕机、导致中间件没有及时向消息发送confirm，触发了发送方的重新发送。</li>
+</ol>
+<p>重复接收问题可能的触发场景：</p>
+<p>为了防止中间件进程中止或者宕机产生了消息的丢失问题，需要配置消息中间件的持久化存储：</p>
+<ol>
+<li>配置消息队列为 consistent（持久化）模式</li>
+<li>发送的消息也需要添加 persistent=2 参数，表示消息需要持久化存储到中间件。</li>
+</ol>
+<h2 id="RoutingKey"><a href="#RoutingKey" class="headerlink" title="RoutingKey"></a>RoutingKey</h2><p>交换机（Exchange）可以根据 RoutingKey 的值绑定不同的队列。<br>消息发往不同的 RoutingKey 的过程即发送不同的消息队列的过程。</p>
 
       
     </div>
@@ -554,7 +576,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">145</span>
+                    <span class="site-state-item-count">148</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -569,7 +591,7 @@
                       <a href="/categories/">
                     
                   
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -584,7 +606,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">161</span>
+                    <span class="site-state-item-count">164</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -618,7 +640,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验"><span class="nav-number">2.</span> <span class="nav-text">实验</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验"><span class="nav-number">2.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何避免消息的重复发送和重复接收"><span class="nav-number">2.1.</span> <span class="nav-text">如何避免消息的重复发送和重复接收</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RoutingKey"><span class="nav-number">2.2.</span> <span class="nav-text">RoutingKey</span></a></li></ol></li></ol></div>
             
 
           </div>

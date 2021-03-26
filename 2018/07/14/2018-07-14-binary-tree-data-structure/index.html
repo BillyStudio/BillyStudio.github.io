@@ -99,7 +99,7 @@
 <meta property="og:description" content="树结构在数据结构中有着举足轻重的地位。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://billystudio.github.io/2018/07/14/2018-07-14-binary-tree-data-structure/figure.png">
-<meta property="og:updated_time" content="2021-03-04T01:53:16.461Z">
+<meta property="og:updated_time" content="2021-03-13T15:14:00.819Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法笔记 | 树">
 <meta name="twitter:description" content="树结构在数据结构中有着举足轻重的地位。">
@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-03-04 09:53:16" itemprop="dateModified" datetime="2021-03-04T09:53:16+08:00">2021-03-04</time>
+                <time title="Modified: 2021-03-13 23:14:00" itemprop="dateModified" datetime="2021-03-13T23:14:00+08:00">2021-03-13</time>
               </span>
             
           
@@ -438,7 +438,7 @@
 <p>例题：<a href="https://www.nowcoder.com/practice/a861533d45854474ac791d90e447bafd?tpId=13&amp;tqId=11176&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking&amp;from=cyc_github" target="_blank" rel="noopener">牛客网: 二叉搜索树的后序遍历序列</a><br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">VerifySquenceOfBST</span><span class="params">(<span class="keyword">int</span> [] sequence)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(sequence.length == <span class="number">0</span>) <span class="keyword">return</span> <span class="keyword">false</span>; </span><br><span class="line">        <span class="keyword">if</span>(sequence.length&lt;=<span class="number">2</span>) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">boolean</span> res = verify(sequence, <span class="number">0</span>, sequence.length-<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">return</span> res;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">boolean</span> <span class="title">verify</span><span class="params">(<span class="keyword">int</span>[] s, <span class="keyword">int</span> st, <span class="keyword">int</span> end)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(st &gt;= end) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">int</span> i=st;</span><br><span class="line">        <span class="keyword">while</span>(s[i] &lt; s[end])</span><br><span class="line">            ++i;</span><br><span class="line">        <span class="keyword">int</span> pivot = i;</span><br><span class="line">        <span class="keyword">for</span>(; i&lt;end; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(s[i] &lt; s[end])</span><br><span class="line">                <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> verify(s, st, pivot-<span class="number">1</span>) &amp; verify(s, pivot+<span class="number">1</span>, end);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="2-平衡二叉树"><a href="#2-平衡二叉树" class="headerlink" title="2. 平衡二叉树"></a>2. 平衡二叉树</h1><h2 id="B-树"><a href="#B-树" class="headerlink" title="B+树"></a>B+树</h2><p>MySQL中使用B+树建立索引。<br>B+树比红黑树层数更少，查找速度更快，所以适合用来作为数据库索引的数据结构。</p>
 <h2 id="AVL树（一种自平衡二叉树）"><a href="#AVL树（一种自平衡二叉树）" class="headerlink" title="AVL树（一种自平衡二叉树）"></a>AVL树（一种自平衡二叉树）</h2><h3 id="PAT-1066-Root-of-AVL-Tree（25-分）"><a href="#PAT-1066-Root-of-AVL-Tree（25-分）" class="headerlink" title="PAT 1066: Root of AVL Tree（25 分）"></a>PAT 1066: Root of AVL Tree（25 分）</h3><p>An AVL tree is a self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any node differ by at most one; if at any time they differ by more than one, rebalancing is done to restore this property. Figures 1-4 illustrate the rotation rules.</p>
-<p><img src="figure.png" alt="示意图"></p>
+<p><img src="figure.png" alt="示意图" title="示意图"></p>
 <p>Now given a sequence of insertions, you are supposed to tell the root of the resulting AVL tree.</p>
 <h3 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h3><p>Each input file contains one test case. For each case, the first line contains a positive integer N (≤20) which is the total number of keys to be inserted. Then N distinct integer keys are given in the next line. All the numbers in a line are separated by a space.</p>
 <h3 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h3><p>For each test case, print the root of the resulting AVL tree in one line.</p>
@@ -589,7 +589,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">145</span>
+                    <span class="site-state-item-count">148</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -604,7 +604,7 @@
                       <a href="/categories/">
                     
                   
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -619,7 +619,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">161</span>
+                    <span class="site-state-item-count">164</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

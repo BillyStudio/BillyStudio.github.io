@@ -99,7 +99,8 @@
 <meta property="og:description" content="LevelDB is a kind of key-value C++ database developped by Google engineers.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://billystudio.github.io/2019/09/13/Sept-13th-cpp-examples-of-leveldb/check-dir.png">
-<meta property="og:updated_time" content="2021-01-02T13:17:03.417Z">
+<meta property="og:image" content="http://billystudio.github.io/2019/09/13/Sept-13th-cpp-examples-of-leveldb/leveldb-struct.png">
+<meta property="og:updated_time" content="2021-03-19T07:31:36.986Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C++ examples of leveldb">
 <meta name="twitter:description" content="LevelDB is a kind of key-value C++ database developped by Google engineers.">
@@ -370,7 +371,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-01-02 21:17:03" itemprop="dateModified" datetime="2021-01-02T21:17:03+08:00">2021-01-02</time>
+                <time title="Modified: 2021-03-19 15:31:36" itemprop="dateModified" datetime="2021-03-19T15:31:36+08:00">2021-03-19</time>
               </span>
             
           
@@ -439,6 +440,7 @@
 <h2 id="Example-2"><a href="#Example-2" class="headerlink" title="Example 2"></a>Example 2</h2><p>Create, Delete, Update, Query<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br></pre></td><td class="code"><pre><span class="line">#include &lt;iostream&gt;</span><br><span class="line">#include &lt;string&gt;</span><br><span class="line">#include &lt;assert.h&gt;</span><br><span class="line">#include &quot;leveldb/db.h&quot;</span><br><span class="line"></span><br><span class="line">using namespace std;</span><br><span class="line"></span><br><span class="line">int main(void)</span><br><span class="line">&#123;</span><br><span class="line">    leveldb::DB *db;</span><br><span class="line">    leveldb::Options options;</span><br><span class="line">    options.create_if_missing = true;</span><br><span class="line"></span><br><span class="line">    // open</span><br><span class="line">    leveldb::Status status = leveldb::DB::Open(options, &quot;/tmp/testdb&quot;, &amp;db);</span><br><span class="line">    assert(status.ok());</span><br><span class="line"></span><br><span class="line">    string key = &quot;name&quot;;</span><br><span class="line">    string value = &quot;shane&quot;;</span><br><span class="line"></span><br><span class="line">    // write</span><br><span class="line">    status = db-&gt;Put(leveldb::WriteOptions(), key, value);</span><br><span class="line">    assert(status.ok());</span><br><span class="line"></span><br><span class="line">    // read</span><br><span class="line">    status = db-&gt;Get(leveldb::ReadOptions(), key, &amp;value);</span><br><span class="line">    assert(status.ok());</span><br><span class="line"></span><br><span class="line">    cout &lt;&lt; value &lt;&lt; endl;</span><br><span class="line"></span><br><span class="line">    // delete</span><br><span class="line">    status = db-&gt;Delete(leveldb::WriteOptions(), key);</span><br><span class="line">    assert(status.ok());</span><br><span class="line"></span><br><span class="line">    status = db-&gt;Get(leveldb::ReadOptions(), key, &amp;value);</span><br><span class="line">    if (!status.ok()) &#123;</span><br><span class="line">        cerr &lt;&lt; key &lt;&lt; &quot;    &quot; &lt;&lt; status.ToString() &lt;&lt; endl;</span><br><span class="line">    &#125; else &#123;</span><br><span class="line">        cout &lt;&lt; key &lt;&lt; &quot;===&quot; &lt;&lt; value &lt;&lt; endl;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    //close</span><br><span class="line">    delete db;</span><br><span class="line">    </span><br><span class="line">    return 0;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>compile and link as example 1 shows.<br>run <code>./a.out</code>. /tmp/testdb will appear:<br><img src="check-dir.png" alt></p>
 <p>Here we can notice that even though <code>db</code> is deleted, the files created under <code>/tmp/cduq-db</code> are still exist. If you want to delete this file, we can use <code>leveldb::DestroyDB</code>.</p>
+<p>LevelDB Structure:<br><img src="leveldb-struct.png" alt="leveldb-struct.png"></p>
 
       
     </div>
@@ -569,7 +571,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">145</span>
+                    <span class="site-state-item-count">148</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -584,7 +586,7 @@
                       <a href="/categories/">
                     
                   
-                    <span class="site-state-item-count">8</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -599,7 +601,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">161</span>
+                    <span class="site-state-item-count">164</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
