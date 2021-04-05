@@ -90,18 +90,18 @@
 
 
 
-  <meta name="description" content="动态规划算法的两大特征是递推公式和记忆数组。该算法的应用场景很多，具体构造也非常灵活。">
+  <meta name="description" content="动态规划算法的两大特征是递推公式和记忆数组。根据递推公式，大问题分解为重叠子问题（overlap sub-problem），子问题的解储存起来形成记忆。">
 <meta name="keywords" content="算法,动态规划">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构与算法笔记 | 动态规划">
 <meta property="og:url" content="http://BillyStudio.github.io/2021/03/20/2021-Mar-20th-Algorithm-Dynamic-programming/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="动态规划算法的两大特征是递推公式和记忆数组。该算法的应用场景很多，具体构造也非常灵活。">
+<meta property="og:description" content="动态规划算法的两大特征是递推公式和记忆数组。根据递推公式，大问题分解为重叠子问题（overlap sub-problem），子问题的解储存起来形成记忆。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-03-20T12:16:59.723Z">
+<meta property="og:updated_time" content="2021-04-05T14:34:46.922Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法笔记 | 动态规划">
-<meta name="twitter:description" content="动态规划算法的两大特征是递推公式和记忆数组。该算法的应用场景很多，具体构造也非常灵活。">
+<meta name="twitter:description" content="动态规划算法的两大特征是递推公式和记忆数组。根据递推公式，大问题分解为重叠子问题（overlap sub-problem），子问题的解储存起来形成记忆。">
 
 
 
@@ -353,13 +353,23 @@
                 
               
 
-              <time title="Created: 2021-03-20 19:04:56 / Modified: 20:16:59" itemprop="dateCreated datePublished" datetime="2021-03-20T19:04:56+08:00">2021-03-20</time>
+              <time title="Created: 2021-03-20 19:04:56" itemprop="dateCreated datePublished" datetime="2021-03-20T19:04:56+08:00">2021-03-20</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2021-04-05 22:34:46" itemprop="dateModified" datetime="2021-04-05T22:34:46+08:00">2021-04-05</time>
+              </span>
             
           
 
@@ -401,7 +411,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article"></span>
+              <span title="Symbols count in article">843</span>
             </span>
           
 
@@ -413,7 +423,7 @@
               
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               
-              <span title="Reading time"></span>
+              <span title="Reading time">1 mins.</span>
             </span>
           
 
@@ -432,8 +442,8 @@
       
 
       
-        <p>动态规划算法的两大特征是递推公式和记忆数组。该算法的应用场景很多，具体构造也非常灵活。<a id="more"></a></p>
-<p><a href="https://www.nowcoder.com/practice/28970c15befb4ff3a264189087b99ad4?tpId=13&amp;tqId=11205&amp;rp=1&amp;ru=%2Fta%2Fcoding-interviews&amp;qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&amp;tab=answerKey" target="_blank" rel="noopener">剑指Offer - 正则表达式匹配</a><br>这道题的输入是字符串str和匹配模式串pattern，字符串”aaa”可以匹配模式”a.a”和”ab<em>ac</em>a”，模式中的通配符只有 ‘.’ 和 ‘<em>‘ 两种，和正则表达式标准所不同的是，’</em>‘表示它前面的字符可以出现任意次，而不是匹配任意长度的字符。</p>
+        <p>动态规划算法的两大特征是递推公式和记忆数组。根据递推公式，大问题分解为重叠子问题（overlap sub-problem），子问题的解储存起来形成记忆。<a id="more"></a><br>动态规划算法的应用场景很多，具体构造也非常灵活。</p>
+<h1 id="动态规划与字符串结合"><a href="#动态规划与字符串结合" class="headerlink" title="动态规划与字符串结合"></a>动态规划与字符串结合</h1><p><a href="https://www.nowcoder.com/practice/28970c15befb4ff3a264189087b99ad4?tpId=13&amp;tqId=11205&amp;rp=1&amp;ru=%2Fta%2Fcoding-interviews&amp;qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&amp;tab=answerKey" target="_blank" rel="noopener">剑指Offer - 正则表达式匹配</a><br>这道题的输入是字符串str和匹配模式串pattern，字符串”aaa”可以匹配模式”a.a”和”ab<em>ac</em>a”，模式中的通配符只有 ‘.’ 和 ‘<em>‘ 两种，和正则表达式标准所不同的是，’</em>‘表示它前面的字符可以出现任意次，而不是匹配任意长度的字符。</p>
 <p>假设布尔型 dp[m][n] 表示长度从1至m的字符串和长度从1至n的模式是否匹配，那么当递推到 dp[str.length][pattern.length]即为所求。</p>
 <p>dp[1][1] 表示第一个字符是否匹配。<br>如果 <code>pattern[2]==&#39;.&#39; || str[2] == pattern[2]</code>，则 <code>dp[2][2] = dp[1][1]</code>，否则需要考虑通配符<em>（比如字符串<code>&quot;0ab&quot;</code>与模式`”0a</em>b”<code>匹配，字符串</code>“0ab”<code>与模式</code>“0a*c”`不匹配）<br>可以有如下几种情况考虑</p>
 <ol>
@@ -497,6 +507,10 @@
 
           <div class="post-nav-prev post-nav-item">
             
+              <a href="/2021/03/27/2021-Mar-27th-MySQL-Query-and-Optimization/" rel="prev" title="高级MySQL与大表优化">
+                高级MySQL与大表优化 <i class="fa fa-chevron-right"></i>
+              </a>
+            
           </div>
         </div>
       
@@ -543,8 +557,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -559,7 +582,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">148</span>
+                    <span class="site-state-item-count">146</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -589,7 +612,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">164</span>
+                    <span class="site-state-item-count">168</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -612,6 +635,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#动态规划与字符串结合"><span class="nav-number">1.</span> <span class="nav-text">动态规划与字符串结合</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -639,7 +679,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total"></span>
+    <span title="Symbols count total">388k</span>
   
 
   
@@ -648,7 +688,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total"></span>
+    <span title="Reading time total">5:53</span>
   
 </div>
 

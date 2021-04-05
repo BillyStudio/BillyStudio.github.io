@@ -90,21 +90,21 @@
 
 
 
-  <meta name="description" content="This guide walks through the process of creating a “hello world” web site with Spring.">
+  <meta name="description" content="Spring MVC 框架是MVC设计模式的一种实现，被广泛应用在网站开发领域。">
 <meta name="keywords" content="Java,Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Serving Web Content with Spring MVC">
 <meta property="og:url" content="http://BillyStudio.github.io/2019/11/08/Nov-8th-Serving-Web-Content-with-Spring-MVC/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="This guide walks through the process of creating a “hello world” web site with Spring.">
+<meta property="og:description" content="Spring MVC 框架是MVC设计模式的一种实现，被广泛应用在网站开发领域。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://billystudio.github.io/2019/11/08/Nov-8th-Serving-Web-Content-with-Spring-MVC/hello-world.png">
 <meta property="og:image" content="http://billystudio.github.io/2019/11/08/Nov-8th-Serving-Web-Content-with-Spring-MVC/hello-user.png">
 <meta property="og:image" content="http://billystudio.github.io/2019/11/08/Nov-8th-Serving-Web-Content-with-Spring-MVC/homepage.png">
-<meta property="og:updated_time" content="2019-11-10T10:08:12.907Z">
+<meta property="og:updated_time" content="2021-04-02T14:11:22.680Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Serving Web Content with Spring MVC">
-<meta name="twitter:description" content="This guide walks through the process of creating a “hello world” web site with Spring.">
+<meta name="twitter:description" content="Spring MVC 框架是MVC设计模式的一种实现，被广泛应用在网站开发领域。">
 <meta name="twitter:image" content="http://billystudio.github.io/2019/11/08/Nov-8th-Serving-Web-Content-with-Spring-MVC/hello-world.png">
 
 
@@ -372,7 +372,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-11-10 18:08:12" itemprop="dateModified" datetime="2019-11-10T18:08:12+08:00">2019-11-10</time>
+                <time title="Modified: 2021-04-02 22:11:22" itemprop="dateModified" datetime="2021-04-02T22:11:22+08:00">2021-04-02</time>
               </span>
             
           
@@ -400,7 +400,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article"></span>
+              <span title="Symbols count in article">12k</span>
             </span>
           
 
@@ -412,7 +412,7 @@
               
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               
-              <span title="Reading time"></span>
+              <span title="Reading time">11 mins.</span>
             </span>
           
 
@@ -431,8 +431,25 @@
       
 
       
-        <p>This guide walks through the process of creating a “hello world” web site with Spring. <a id="more"></a></p>
-<h1 id="Our-goals"><a href="#Our-goals" class="headerlink" title="Our goals"></a>Our goals</h1><p>I will build an application that has a static home page, and also will accept HTTP GET requests at:</p>
+        <p>Spring MVC 框架是MVC设计模式的一种实现，被广泛应用在网站开发领域。 <a id="more"></a></p>
+<h1 id="MVC-模式"><a href="#MVC-模式" class="headerlink" title="MVC 模式"></a>MVC 模式</h1><p>MVC 模式属于软件工程中一种软件架构模式。该设计模式将软件系统分为三个基本部分：<br>模型（Model）、视图（View）和控制器（Controller）</p>
+<p>One of the successful implementation is Java Spring MVC.</p>
+<p>In Spring, if you want a class to be a controller you can use the annotation <code>@RestController</code> for this class.</p>
+<p>And in this class, use annotation <code>@RequestMapping</code> to show this is an RESTful API function.</p>
+<h2 id="View-层实现：JSP"><a href="#View-层实现：JSP" class="headerlink" title="View 层实现：JSP"></a>View 层实现：JSP</h2><p>JSP是动态执行文件，由Tomcat生成java servlet执行文件。jsp中的内容被放到 <code>_jspService()</code> 方法体的 <code>try...catch</code> 代码块里执行<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">&lt;li class="one"&gt;&lt;a href="jsp/status.jsp"&gt;Home&lt;/a&gt;&lt;/li&gt;</span><br><span class="line"></span><br><span class="line">&lt;div class="sectionTitle"&gt;Instance Info&lt;/div&gt;</span><br><span class="line">&lt;table id=<span class="string">'instanceInfo'</span> <span class="class"><span class="keyword">class</span></span>=<span class="string">"stripeable"</span>&gt;</span><br><span class="line">    &lt;tr&gt;&lt;th&gt;Name&lt;/th&gt;&lt;th&gt;Value&lt;/th&gt;&lt;/tr&gt;</span><br><span class="line">    &lt;tr&gt;&lt;td&gt;ipAddr&lt;/td&gt;&lt;td&gt;192.168.1.104&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td&gt;status&lt;/td&gt;&lt;td&gt;UP&lt;/td&gt;&lt;/tr&gt;</span><br><span class="line">&lt;/table&gt;</span><br><span class="line">&lt;/div&gt;</span><br></pre></td></tr></table></figure></p>
+<p>那么，当前 Eureka Server 的 InstanceInfo 是如何获取的呢？</p>
+<p>status.jsp<br><figure class="highlight jsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">146</span> StatusInfo statusInfo = (<span class="keyword">new</span> StatusUtil(serverContext)).getStatusInfo();</span><br></pre></td></tr></table></figure></p>
+<p>StatusUtil.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">29</span> <span class="keyword">this</span>.instanceInfo = server.getApplicationInfoManager().getInfo();</span><br></pre></td></tr></table></figure></p>
+<p>ApplicationInfoManager.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">58</span> <span class="keyword">private</span> <span class="keyword">static</span> ApplicationInfoManager instance = <span class="keyword">new</span> ApplicationInfoManager(<span class="keyword">null</span>, <span class="keyword">null</span>, <span class="keyword">null</span>);</span><br><span class="line"></span><br><span class="line"><span class="meta">@Inject</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="title">ApplicationInfoManager</span><span class="params">(EurekaInstanceConfig config, InstanceInfo instanceInfo, OptionalArgs optionalArgs)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.instanceInfo = instanceInfo;</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>调试后验证了，这里的instanceInfo一开始初始化是null，之后在BootStrap.java中才正式通过Builder初始化</p>
+<p>@Deprecated<br>DiscoveryManager.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment">    * Initializes the &lt;tt&gt;Discovery Client&lt;/tt&gt; with the given configuration.</span></span><br><span class="line"><span class="comment">    *</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> config</span></span><br><span class="line"><span class="comment">    *            the instance info configuration that will be used for</span></span><br><span class="line"><span class="comment">    *            registration with Eureka.</span></span><br><span class="line"><span class="comment">    * <span class="doctag">@param</span> eurekaConfig the eureka client configuration of the instance.</span></span><br><span class="line"><span class="comment">    */</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initComponent</span><span class="params">(EurekaInstanceConfig config,</span></span></span><br><span class="line"><span class="function"><span class="params">                            EurekaClientConfig eurekaConfig, AbstractDiscoveryClientOptionalArgs args)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">this</span>.eurekaInstanceConfig = config;</span><br><span class="line">    <span class="keyword">this</span>.eurekaClientConfig = eurekaConfig;</span><br><span class="line">    <span class="keyword">if</span> (ApplicationInfoManager.getInstance().getInfo() == <span class="keyword">null</span>) &#123;</span><br><span class="line">        <span class="comment">// Initialize application info</span></span><br><span class="line">        ApplicationInfoManager.getInstance().initComponent(config);</span><br><span class="line">    &#125;</span><br><span class="line">    InstanceInfo info = ApplicationInfoManager.getInstance().getInfo();</span><br><span class="line">    ......</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>ApplicationInfoManager.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">initComponent</span><span class="params">(EurekaInstanceConfig config)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">try</span> &#123;</span><br><span class="line">        <span class="keyword">this</span>.config = config;</span><br><span class="line">        <span class="keyword">this</span>.instanceInfo = <span class="keyword">new</span> EurekaConfigBasedInstanceInfoProvider(config).get();</span><br><span class="line">    &#125; <span class="keyword">catch</span> (Throwable e) &#123;</span><br><span class="line">        <span class="keyword">throw</span> <span class="keyword">new</span> RuntimeException(<span class="string">"Failed to initialize ApplicationInfoManager"</span>, e);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>EurekaBootStrap.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">161</span> EurekaInstanceConfig instanceConfig = isCloud(ConfigurationManager.getDeploymentContext())</span><br><span class="line">                    ? <span class="keyword">new</span> CloudInstanceConfig()</span><br><span class="line">                    : <span class="keyword">new</span> MyDataCenterInstanceConfig(); <span class="comment">// 调试发现用的是 MyDataCenterInstanceConfig()</span></span><br><span class="line"><span class="number">165</span>         applicationInfoManager = <span class="keyword">new</span> ApplicationInfoManager(</span><br><span class="line">                instanceConfig, <span class="keyword">new</span> EurekaConfigBasedInstanceInfoProvider(instanceConfig).get());</span><br></pre></td></tr></table></figure></p>
+<p>EurekaConfigBasedInstanceInfoProvider.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">builder.setNamespace(config.getNamespace())</span><br><span class="line">        .setInstanceId(instanceId)</span><br><span class="line">        .setAppName(config.getAppname())</span><br><span class="line">        .setAppGroupName(config.getAppGroupName())</span><br><span class="line">        .setDataCenterInfo(config.getDataCenterInfo())</span><br><span class="line">        .setIPAddr(config.getIpAddress())</span><br><span class="line">        .setHostName(defaultAddress)</span><br><span class="line">        .setPort(config.getNonSecurePort())</span><br><span class="line">        .enablePort(PortType.UNSECURE, config.isNonSecurePortEnabled())</span><br><span class="line">        .setSecurePort(config.getSecurePort())</span><br><span class="line">        .enablePort(PortType.SECURE, config.getSecurePortEnabled())</span><br><span class="line">        .setVIPAddress(config.getVirtualHostName())</span><br><span class="line">        .setSecureVIPAddress(config.getSecureVirtualHostName())</span><br><span class="line">        .setHomePageUrl(config.getHomePageUrlPath(), config.getHomePageUrl())</span><br><span class="line">        .setStatusPageUrl(config.getStatusPageUrlPath(), config.getStatusPageUrl())</span><br><span class="line">        .setASGName(config.getASGName())</span><br><span class="line">        .setHealthCheckUrls(config.getHealthCheckUrlPath(),</span><br><span class="line">                config.getHealthCheckUrl(), config.getSecureHealthCheckUrl());</span><br></pre></td></tr></table></figure></p>
+<p>于是我们在builder. 后面加入 .setAccountAddress(accountAddress)</p>
+<p>在 InstanceInfo.java 中的 Builder 类中添加<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> Builder <span class="title">setAccountAddress</span><span class="params">(String accountAddress)</span> </span>&#123;</span><br><span class="line">    result.accountAddress = accountAddress;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">this</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>继续调试发现 EurekaBootStrap.java 这段代码速度很慢<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">214 // Copy registry from neighboring eureka node</span><br><span class="line">215 int registryCount = registry.syncUp();</span><br></pre></td></tr></table></figure></p>
+<h1 id="First-Example-of-Spring-MVC"><a href="#First-Example-of-Spring-MVC" class="headerlink" title="First Example of Spring MVC"></a>First Example of Spring MVC</h1><h2 id="Our-goals"><a href="#Our-goals" class="headerlink" title="Our goals"></a>Our goals</h2><p>I will build an application that has a static home page, and also will accept HTTP GET requests at:</p>
 <pre><code>http://localhost:9001/greeting
 </code></pre><p>and respond with a web page displaying HTML. The body of the HTML contains a greeting:</p>
 <pre><code>&quot;Hello, World!&quot;
@@ -485,7 +502,7 @@
 <p>src/main/resources/static/index.html<br><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE HTML&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Getting Started: Serving Web Content<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">meta</span> <span class="attr">http-equiv</span>=<span class="string">"Content-Type"</span> <span class="attr">content</span>=<span class="string">"text/html; charset=UTF-8"</span> /&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">p</span>&gt;</span>Get your greeting <span class="tag">&lt;<span class="name">a</span> <span class="attr">href</span>=<span class="string">"/greeting"</span>&gt;</span>here<span class="tag">&lt;/<span class="name">a</span>&gt;</span><span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>and when you restart the app you will see the HTML at <a href="http://localhost:9001/" target="_blank" rel="noopener">http://localhost:9001/</a></p>
 <p><img src="homepage.png" alt="homepage"></p>
-<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>Congradulations! You have just developed a web page using Spring.</p>
+<h2 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h2><p>Congradulations! You have just developed a web page using Spring.</p>
 
       
     </div>
@@ -616,7 +633,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">148</span>
+                    <span class="site-state-item-count">146</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -646,7 +663,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">164</span>
+                    <span class="site-state-item-count">168</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -680,7 +697,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Our-goals"><span class="nav-number">1.</span> <span class="nav-text">Our goals</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Prerequites"><span class="nav-number">2.</span> <span class="nav-text">Prerequites</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Build-with-Maven"><span class="nav-number">2.1.</span> <span class="nav-text">Build with Maven</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Build-with-your-IDE"><span class="nav-number">2.2.</span> <span class="nav-text">Build with your IDE</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Create-a-web-controller"><span class="nav-number">3.</span> <span class="nav-text">Create a web controller</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Developing-web-apps"><span class="nav-number">4.</span> <span class="nav-text">Developing web apps</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Make-the-application-executable"><span class="nav-number">5.</span> <span class="nav-text">Make the application executable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Build-an-executable-JAR"><span class="nav-number">6.</span> <span class="nav-text">Build an executable JAR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Test-the-App"><span class="nav-number">7.</span> <span class="nav-text">Test the App</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Add-a-Home-Page"><span class="nav-number">8.</span> <span class="nav-text">Add a Home Page</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Summary"><span class="nav-number">9.</span> <span class="nav-text">Summary</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#MVC-模式"><span class="nav-number">1.</span> <span class="nav-text">MVC 模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#View-层实现：JSP"><span class="nav-number">1.1.</span> <span class="nav-text">View 层实现：JSP</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#First-Example-of-Spring-MVC"><span class="nav-number">2.</span> <span class="nav-text">First Example of Spring MVC</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Our-goals"><span class="nav-number">2.1.</span> <span class="nav-text">Our goals</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Prerequites"><span class="nav-number">3.</span> <span class="nav-text">Prerequites</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Build-with-Maven"><span class="nav-number">3.1.</span> <span class="nav-text">Build with Maven</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Build-with-your-IDE"><span class="nav-number">3.2.</span> <span class="nav-text">Build with your IDE</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Create-a-web-controller"><span class="nav-number">4.</span> <span class="nav-text">Create a web controller</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Developing-web-apps"><span class="nav-number">5.</span> <span class="nav-text">Developing web apps</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Make-the-application-executable"><span class="nav-number">6.</span> <span class="nav-text">Make the application executable</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Build-an-executable-JAR"><span class="nav-number">7.</span> <span class="nav-text">Build an executable JAR</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Test-the-App"><span class="nav-number">8.</span> <span class="nav-text">Test the App</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Add-a-Home-Page"><span class="nav-number">9.</span> <span class="nav-text">Add a Home Page</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Summary"><span class="nav-number">9.1.</span> <span class="nav-text">Summary</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -713,7 +730,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total"></span>
+    <span title="Symbols count total">388k</span>
   
 
   
@@ -722,7 +739,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total"></span>
+    <span title="Reading time total">5:53</span>
   
 </div>
 

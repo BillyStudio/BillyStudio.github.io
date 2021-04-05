@@ -100,7 +100,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://billystudio.github.io/2021/02/04/2021-Feb-4th-Spesc-JVM-language/jps-jinfo.png">
 <meta property="og:image" content="http://billystudio.github.io/2021/02/04/2021-Feb-4th-Spesc-JVM-language/default_gc.png">
-<meta property="og:updated_time" content="2021-03-10T09:33:13.186Z">
+<meta property="og:updated_time" content="2021-04-02T01:18:01.375Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spesc JVM language development">
 <meta name="twitter:description" content="开发基于JVM的SPESC语言">
@@ -371,7 +371,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-03-10 17:33:13" itemprop="dateModified" datetime="2021-03-10T17:33:13+08:00">2021-03-10</time>
+                <time title="Modified: 2021-04-02 09:18:01" itemprop="dateModified" datetime="2021-04-02T09:18:01+08:00">2021-04-02</time>
               </span>
             
           
@@ -414,7 +414,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article"></span>
+              <span title="Symbols count in article">2.7k</span>
             </span>
           
 
@@ -426,7 +426,7 @@
               
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               
-              <span title="Reading time"></span>
+              <span title="Reading time">2 mins.</span>
             </span>
           
 
@@ -453,6 +453,11 @@
 <p>double和long需要占据2个slot，其余基本类型和引用都是1个slot。<br>slot可以重复利用</p>
 <h1 id="垃圾回收（Garbage-Collection）"><a href="#垃圾回收（Garbage-Collection）" class="headerlink" title="垃圾回收（Garbage Collection）"></a>垃圾回收（Garbage Collection）</h1><p>查看Java进程使用的垃圾回收器：<br><img src="jps-jinfo.png" alt="jps-jinfo.png"></p>
 <p>查看默认垃圾回收器<br><img src="default_gc.png" alt="default_gc.png"></p>
+<h2 id="JVM字节码"><a href="#JVM字节码" class="headerlink" title="JVM字节码"></a>JVM字节码</h2><h3 id="解析一个接口"><a href="#解析一个接口" class="headerlink" title="解析一个接口"></a>解析一个接口</h3><p>接口定义：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> edu.ustb.spesc.element;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">InterfaceLook</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>javap -v 结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Classfile /home/wsd/STEM/Experiments/SPESC-Java-Compiler/compiler/target/test-classes/edu/ustb/spesc/element/InterfaceLook.class</span><br><span class="line">  Last modified Apr 1, 2021; size 130 bytes</span><br><span class="line">  MD5 checksum 849d09ca95f1ed5733cca527dce9ed9c</span><br><span class="line">  Compiled from &quot;InterfaceLook.java&quot;</span><br><span class="line">public interface edu.ustb.spesc.element.InterfaceLook</span><br><span class="line">  minor version: 0</span><br><span class="line">  major version: 52</span><br><span class="line">  flags: ACC_PUBLIC, ACC_INTERFACE, ACC_ABSTRACT</span><br><span class="line">Constant pool:</span><br><span class="line">  #1 = Class              #5              // edu/ustb/spesc/element/InterfaceLook</span><br><span class="line">  #2 = Class              #6              // java/lang/Object</span><br><span class="line">  #3 = Utf8               SourceFile</span><br><span class="line">  #4 = Utf8               InterfaceLook.java</span><br><span class="line">  #5 = Utf8               edu/ustb/spesc/element/InterfaceLook</span><br><span class="line">  #6 = Utf8               java/lang/Object</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line">SourceFile: &quot;InterfaceLook.java&quot;</span><br></pre></td></tr></table></figure></p>
+<h3 id="解析一个类"><a href="#解析一个类" class="headerlink" title="解析一个类"></a>解析一个类</h3><p>类定义：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> edu.ustb.spesc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">bytecodeTest</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>javap -v 结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">Classfile /home/wsd/STEM/Experiments/SPESC-Java-Compiler/compiler/target/test-classes/edu/ustb/spesc/bytecodeTest.class</span><br><span class="line">  Last modified Apr 1, 2021; size 291 bytes</span><br><span class="line">  MD5 checksum 58439c875ed1b27cf7a5a68507efbf13</span><br><span class="line">  Compiled from &quot;bytecodeTest.java&quot;</span><br><span class="line">public class edu.ustb.spesc.bytecodeTest</span><br><span class="line">  minor version: 0</span><br><span class="line">  major version: 52</span><br><span class="line">  flags: ACC_PUBLIC, ACC_SUPER</span><br><span class="line">Constant pool:</span><br><span class="line">   #1 = Methodref          #3.#13         // java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">   #2 = Class              #14            // edu/ustb/spesc/bytecodeTest</span><br><span class="line">   #3 = Class              #15            // java/lang/Object</span><br><span class="line">   #4 = Utf8               &lt;init&gt;</span><br><span class="line">   #5 = Utf8               ()V</span><br><span class="line">   #6 = Utf8               Code</span><br><span class="line">   #7 = Utf8               LineNumberTable</span><br><span class="line">   #8 = Utf8               LocalVariableTable</span><br><span class="line">   #9 = Utf8               this</span><br><span class="line">  #10 = Utf8               Ledu/ustb/spesc/bytecodeTest;</span><br><span class="line">  #11 = Utf8               SourceFile</span><br><span class="line">  #12 = Utf8               bytecodeTest.java</span><br><span class="line">  #13 = NameAndType        #4:#5          // &quot;&lt;init&gt;&quot;:()V</span><br><span class="line">  #14 = Utf8               edu/ustb/spesc/bytecodeTest</span><br><span class="line">  #15 = Utf8               java/lang/Object</span><br><span class="line">&#123;</span><br><span class="line">  public edu.ustb.spesc.bytecodeTest();</span><br><span class="line">    descriptor: ()V</span><br><span class="line">    flags: ACC_PUBLIC</span><br><span class="line">    Code:</span><br><span class="line">      stack=1, locals=1, args_size=1</span><br><span class="line">         0: aload_0</span><br><span class="line">         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">         4: return</span><br><span class="line">      LineNumberTable:</span><br><span class="line">        line 3: 0</span><br><span class="line">      LocalVariableTable:</span><br><span class="line">        Start  Length  Slot  Name   Signature</span><br><span class="line">            0       5     0  this   Ledu/ustb/spesc/bytecodeTest;</span><br><span class="line">&#125;</span><br><span class="line">SourceFile: &quot;bytecodeTest.java&quot;</span><br></pre></td></tr></table></figure></p>
+<p>由于JVM解析Java文件是按照行来解析的，一行Java代码可能对应多行字节码，所以设置 LineNumberTable 这个属性就是表示java文件的某行与字节码某行的对应关系。<br>比如上面的显示 line 3: 0 就表示bytecodeTest.java的第3行对应解析到jvm字节码的第0行即 aload_0<br>Slot是字节码中的存储单位，1个Slot大小为32bit（4 bytes）</p>
 
       
     </div>
@@ -581,7 +586,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">148</span>
+                    <span class="site-state-item-count">146</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -611,7 +616,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">164</span>
+                    <span class="site-state-item-count">168</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -645,7 +650,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#排错记录"><span class="nav-number">1.</span> <span class="nav-text">排错记录</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM结构"><span class="nav-number"></span> <span class="nav-text">JVM结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾回收（Garbage-Collection）"><span class="nav-number"></span> <span class="nav-text">垃圾回收（Garbage Collection）</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#排错记录"><span class="nav-number">1.</span> <span class="nav-text">排错记录</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM结构"><span class="nav-number"></span> <span class="nav-text">JVM结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾回收（Garbage-Collection）"><span class="nav-number"></span> <span class="nav-text">垃圾回收（Garbage Collection）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM字节码"><span class="nav-number">1.</span> <span class="nav-text">JVM字节码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解析一个接口"><span class="nav-number">1.1.</span> <span class="nav-text">解析一个接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析一个类"><span class="nav-number">1.2.</span> <span class="nav-text">解析一个类</span></a></li></ol></li></ol></li></div>
             
 
           </div>
@@ -678,7 +683,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total"></span>
+    <span title="Symbols count total">388k</span>
   
 
   
@@ -687,7 +692,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total"></span>
+    <span title="Reading time total">5:53</span>
   
 </div>
 

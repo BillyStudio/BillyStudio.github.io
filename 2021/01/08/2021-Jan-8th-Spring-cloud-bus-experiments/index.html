@@ -91,14 +91,14 @@
 
 
   <meta name="description" content="微服务总线实验">
-<meta name="keywords" content="Spring Cloud,Kafka">
+<meta name="keywords" content="Spring Cloud,Kafka,RabbitMQ">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Spring cloud 总线实验">
 <meta property="og:url" content="http://BillyStudio.github.io/2021/01/08/2021-Jan-8th-Spring-cloud-bus-experiments/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="微服务总线实验">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-03-26T11:46:31.308Z">
+<meta property="og:updated_time" content="2021-03-30T13:08:51.773Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring cloud 总线实验">
 <meta name="twitter:description" content="微服务总线实验">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-03-26 19:46:31" itemprop="dateModified" datetime="2021-03-26T19:46:31+08:00">2021-03-26</time>
+                <time title="Modified: 2021-03-30 21:08:51" itemprop="dateModified" datetime="2021-03-30T21:08:51+08:00">2021-03-30</time>
               </span>
             
           
@@ -396,7 +396,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article"></span>
+              <span title="Symbols count in article">1.5k</span>
             </span>
           
 
@@ -408,7 +408,7 @@
               
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               
-              <span title="Reading time"></span>
+              <span title="Reading time">1 mins.</span>
             </span>
           
 
@@ -429,7 +429,7 @@
       
         <p>微服务总线实验 <a id="more"></a></p>
 <h1 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h1><ol>
-<li>kafka</li>
+<li>kafka/rabbitmq</li>
 <li>jdk1.8</li>
 <li>spring: <a href="https://start.aliyun.com/" target="_blank" rel="noopener">https://start.aliyun.com/</a></li>
 </ol>
@@ -446,6 +446,20 @@
 <li>发送的消息也需要添加 persistent=2 参数，表示消息需要持久化存储到中间件。</li>
 </ol>
 <h2 id="RoutingKey"><a href="#RoutingKey" class="headerlink" title="RoutingKey"></a>RoutingKey</h2><p>交换机（Exchange）可以根据 RoutingKey 的值绑定不同的队列。<br>消息发往不同的 RoutingKey 的过程即发送不同的消息队列的过程。</p>
+<h3 id="AMQP-消息格式"><a href="#AMQP-消息格式" class="headerlink" title="AMQP 消息格式"></a>AMQP 消息格式</h3><p>发送消息头（8字节）：AMQP0xyz<br>其中x=AMQP_PROTOCOL_VERSION_MAJOR<br>y=AMQP_PROTOCOL_VERSION_MINOR<br>z=AMQP_PROTOCOL_VERSION_REVISION</p>
+<h2 id="RabbitMQ-C-发送接收测试"><a href="#RabbitMQ-C-发送接收测试" class="headerlink" title="RabbitMQ C 发送接收测试"></a>RabbitMQ C 发送接收测试</h2><p>先启动消费者客户端开启监听：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./examples/amqp_listen 192.168.123.1 5672 amq.direct test</span><br></pre></td></tr></table></figure></p>
+<p>执行 <code>amqp_listen</code> 命令会自动创建一个queue，这里是test，如果想直接使用已有的queue，可以采用<code>amqp_listenq</code> 命令</p>
+<p>然后启动生产者客户端<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./examples/ampq_sendstring 192.168.123.1 5672 amq.direct test &quot;some message&quot;</span><br></pre></td></tr></table></figure></p>
+<p>发送成功后生产者无返回消息，消费者将返回显示</p>
+<p>Note: debug listen 程序过程中返回 socket -9 error 是调试超时导致的</p>
+<p>rabbitmq服务端的log显示：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2021-03-30 20:11:26.678 [info] &lt;0.3044.4&gt; accepting AMQP connection &lt;0.3044.4&gt; (192.168.123.100:38380 -&gt; 192.168.123.1:5672)</span><br><span class="line">2021-03-30 20:11:28.556 [error] &lt;0.3044.4&gt; closing AMQP connection &lt;0.3044.4&gt; (192.168.123.100:38380 -&gt; 192.168.123.1:5672):</span><br><span class="line">&#123;handshake_timeout,frame_header&#125;</span><br></pre></td></tr></table></figure></p>
+<p>有时候frame_header会改成handshake</p>
+<p>所以为了调试方便，服务端的rabbitmq.conf中需要加入这3行设置：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">handshake_timeout = 120000</span><br><span class="line">ssl_handshake_timeout = 60000</span><br><span class="line">heartbeat = 100</span><br></pre></td></tr></table></figure></p>
+<p>handshake_timeout 和 ssl_handshake_timeout 的单位都是 ms，heartbeat 的单位是 s</p>
+<p>参考文献：</p>
+<ol>
+<li>RabbitMQ 配置：<a href="https://www.rabbitmq.com/configure.html" target="_blank" rel="noopener">https://www.rabbitmq.com/configure.html</a></li>
+</ol>
 
       
     </div>
@@ -479,6 +493,8 @@
             <a href="/tags/Spring-Cloud/" rel="tag"># Spring Cloud</a>
           
             <a href="/tags/Kafka/" rel="tag"># Kafka</a>
+          
+            <a href="/tags/RabbitMQ/" rel="tag"># RabbitMQ</a>
           
         </div>
       
@@ -576,7 +592,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">148</span>
+                    <span class="site-state-item-count">146</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -606,7 +622,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">164</span>
+                    <span class="site-state-item-count">168</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -640,7 +656,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验"><span class="nav-number">2.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何避免消息的重复发送和重复接收"><span class="nav-number">2.1.</span> <span class="nav-text">如何避免消息的重复发送和重复接收</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RoutingKey"><span class="nav-number">2.2.</span> <span class="nav-text">RoutingKey</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#实验"><span class="nav-number">2.</span> <span class="nav-text">实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#如何避免消息的重复发送和重复接收"><span class="nav-number">2.1.</span> <span class="nav-text">如何避免消息的重复发送和重复接收</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RoutingKey"><span class="nav-number">2.2.</span> <span class="nav-text">RoutingKey</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#AMQP-消息格式"><span class="nav-number">2.2.1.</span> <span class="nav-text">AMQP 消息格式</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#RabbitMQ-C-发送接收测试"><span class="nav-number">2.3.</span> <span class="nav-text">RabbitMQ C 发送接收测试</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -673,7 +689,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total"></span>
+    <span title="Symbols count total">388k</span>
   
 
   
@@ -682,7 +698,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total"></span>
+    <span title="Reading time total">5:53</span>
   
 </div>
 

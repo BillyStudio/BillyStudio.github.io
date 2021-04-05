@@ -90,18 +90,18 @@
 
 
 
-  <meta name="description" content="The MVC design pattern is broadly used in website development.">
-<meta name="keywords" content="设计模式">
+  <meta name="description" content="学习了各个主流编程语言后，经常学了这个忘了那个，故写此文对各语言进行总结和辨析。">
+<meta name="keywords" content="Java,Cpp,C">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Design patterns --- MVC">
-<meta property="og:url" content="http://BillyStudio.github.io/2020/05/19/2020-5-19-Design-patterns-MVC/index.html">
+<meta property="og:title" content="从C++到Java —— C系列编程语言辨析总结">
+<meta property="og:url" content="http://BillyStudio.github.io/2021/04/05/2021-Apr-5th-C-Cpp-Java/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="The MVC design pattern is broadly used in website development.">
+<meta property="og:description" content="学习了各个主流编程语言后，经常学了这个忘了那个，故写此文对各语言进行总结和辨析。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-03-26T11:46:31.308Z">
+<meta property="og:updated_time" content="2021-04-05T14:20:05.313Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Design patterns --- MVC">
-<meta name="twitter:description" content="The MVC design pattern is broadly used in website development.">
+<meta name="twitter:title" content="从C++到Java —— C系列编程语言辨析总结">
+<meta name="twitter:description" content="学习了各个主流编程语言后，经常学了这个忘了那个，故写此文对各语言进行总结和辨析。">
 
 
 
@@ -109,7 +109,7 @@
 
   
   
-  <link rel="canonical" href="http://BillyStudio.github.io/2020/05/19/2020-5-19-Design-patterns-MVC/">
+  <link rel="canonical" href="http://BillyStudio.github.io/2021/04/05/2021-Apr-5th-C-Cpp-Java/">
 
 
 
@@ -119,7 +119,7 @@
   };
 </script>
 
-  <title>Design patterns --- MVC | Shane's Blog</title>
+  <title>从C++到Java —— C系列编程语言辨析总结 | Shane's Blog</title>
   
 
 
@@ -310,7 +310,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2020/05/19/2020-5-19-Design-patterns-MVC/">
+    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2021/04/05/2021-Apr-5th-C-Cpp-Java/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Shane Wang">
@@ -327,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Design patterns --- MVC
+          <h1 class="post-title" itemprop="name headline">从C++到Java —— C系列编程语言辨析总结
 
               
             
@@ -353,7 +353,7 @@
                 
               
 
-              <time title="Created: 2020-05-19 15:45:41" itemprop="dateCreated datePublished" datetime="2020-05-19T15:45:41+08:00">2020-05-19</time>
+              <time title="Created: 2021-04-05 16:00:00 / Modified: 22:20:05" itemprop="dateCreated datePublished" datetime="2021-04-05T16:00:00+08:00">2021-04-05</time>
             </span>
           
 
@@ -361,33 +361,8 @@
             
 
             
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                
-                  <span class="post-meta-item-text">Edited on</span>
-                
-                <time title="Modified: 2021-03-26 19:46:31" itemprop="dateModified" datetime="2021-03-26T19:46:31+08:00">2021-03-26</time>
-              </span>
-            
           
 
-          
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              
-                <span class="post-meta-item-text">In</span>
-              
-              
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/Eureka项目/" itemprop="url" rel="index"><span itemprop="name">Eureka项目</span></a></span>
-
-                
-                
-              
-            </span>
           
 
           
@@ -411,7 +386,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article"></span>
+              <span title="Symbols count in article">859</span>
             </span>
           
 
@@ -423,7 +398,7 @@
               
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               
-              <span title="Reading time"></span>
+              <span title="Reading time">1 mins.</span>
             </span>
           
 
@@ -442,19 +417,17 @@
       
 
       
-        <p>The MVC design pattern is broadly used in website development. <a id="more"></a></p>
-<p>MVC 模式属于软件工程中一种软件架构模式。该设计模式将软件系统分为三个基本部分：<br>模型（Model）、视图（View）和控制器（Controller）</p>
-<p>One of the successful implementation is Java Spring MVC.</p>
-<p>In Spring, if you want a class to be a controller you can use the annotation <code>@RestController</code> for this class.</p>
-<p>And in this class, use annotation <code>@RequestMapping</code> to show this is an RESTful API function.</p>
-<h2 id="Eureka-Server源码阅读"><a href="#Eureka-Server源码阅读" class="headerlink" title="Eureka Server源码阅读"></a>Eureka Server源码阅读</h2><p>MVC 模式<br>Model：业务逻辑层，包括 InstanceInfo.java EurekaServerConfig.java eureka-core的registry文件夹下的InstanceRegistry.java<br>View：bootstrap<br>Control：各种resource文件，包括Application(s)Resource.java Instance(s)Resource.java</p>
-<p>Register操作为例：<br>接收Register请求的处理类有ApplicationResource.java下的 addInstance<br>AbstractInstanceRegistry.java 下的 register 函数</p>
-<p>而发送Register请求的是 DiscoveryClient.java 下的 register</p>
-<p>873 httpResponse = eurekaTransport.registrationClient.register(instanceInfo);</p>
-<p>EurekaHttpClientDecorator.java<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Override</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> EurekaHttpResponse&lt;Void&gt; <span class="title">register</span><span class="params">(<span class="keyword">final</span> InstanceInfo info)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> execute(<span class="keyword">new</span> RequestExecutor&lt;Void&gt;() &#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> EurekaHttpResponse&lt;Void&gt; <span class="title">execute</span><span class="params">(EurekaHttpClient delegate)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> delegate.register(info);</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> RequestType <span class="title">getRequestType</span><span class="params">()</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> RequestType.Register;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>调用的是 EurekaHttpClient 下的 register 函数。</p>
-<p>java/com/netflix/discovery/shared/transport/jersey/AbstractJerseyEurekaHttpClient.java</p>
-<p>以Update操作为例：</p>
+        <p>学习了各个主流编程语言后，经常学了这个忘了那个，故写此文对各语言进行总结和辨析。 <a id="more"></a></p>
+<h1 id="基本类型"><a href="#基本类型" class="headerlink" title="基本类型"></a>基本类型</h1><p>Java 拥有8大基本类型：<code>byte</code>, <code>boolean</code>, <code>char</code>, <code>short</code>, <code>int</code>, <code>long</code>, <code>float</code>, <code>double</code><br>C++ 的基本类型包括：<code>bool</code>, <code>(signed) char</code>, <code>(unsigned) short</code>, <code>(unsigned) int</code>, <code>(unsigned) long</code>, <code>float</code>, <code>double</code><br>C语言的基本数据类型有：<code>(signed) char</code>, <code>(unsigned) short</code>, <code>(unsigned) int</code>, <code>(unsigned) long</code>, <code>float</code>, <code>double</code></p>
+<p>注意，布尔类型Java叫<code>boolean</code>，C++叫<code>bool</code>，C语言默认没有。<br>字符类型Java使用双字节存储，而C/C++则使用单字节存储。<br>Java拥有字节类型<code>byte</code>，而C/C++没有。</p>
+<h1 id="数组"><a href="#数组" class="headerlink" title="数组"></a>数组</h1><p>Java创建一个长度为n的数组：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">boolean</span>[] flags = <span class="keyword">new</span> <span class="keyword">boolean</span>[n];</span><br></pre></td></tr></table></figure></p>
+<p>C++创建一个长度为n的数组：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">bool</span> *flags = <span class="keyword">new</span> <span class="keyword">bool</span>[n];</span><br></pre></td></tr></table></figure></p>
+<p>C语言创建一个长度为n的数组：<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">char</span> *flags = (<span class="keyword">char</span> *)<span class="built_in">malloc</span>(n * <span class="keyword">sizeof</span>(<span class="keyword">char</span>));</span><br></pre></td></tr></table></figure></p>
+<p>由于C/C++通过指针创建数组，所以没法根据指针获得数组长度，而Java获取数组长度的方法为<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> len = flags.length;</span><br></pre></td></tr></table></figure></p>
+<h1 id="全局变量"><a href="#全局变量" class="headerlink" title="全局变量"></a>全局变量</h1><p>C/C++中，在函数外部定义的变量称为全局变量，或外部变量。全局变量储存在静态存储区，在文件作用域范围内都能访问到。<br>Java为完全面向对象语言，不能在类作用域的外部定义全局变量。不过Java可以通过单例模式实现全局唯一对象。</p>
+<h1 id="类和对象"><a href="#类和对象" class="headerlink" title="类和对象"></a>类和对象</h1><p>Java 根据类实例化一个对象的一般做法：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Test test = <span class="keyword">new</span> Test();</span><br></pre></td></tr></table></figure></p>
+<p>C++根据类实例化一个对象的一般做法：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Test test = Test();</span><br></pre></td></tr></table></figure></p>
+<p>注意，C++中的<code>new</code>关键字是用来分配内存的，和<code>delete</code>关键字相对应；类似于C语言的<code>malloc</code>和<code>free</code>函数；而Java语言拥有垃圾回收机制，一般不需要手动处理内存分配和回收。</p>
 
       
     </div>
@@ -485,7 +458,11 @@
         
         <div class="post-tags">
           
-            <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+            <a href="/tags/Java/" rel="tag"># Java</a>
+          
+            <a href="/tags/Cpp/" rel="tag"># Cpp</a>
+          
+            <a href="/tags/C/" rel="tag"># C</a>
           
         </div>
       
@@ -498,8 +475,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2020/05/08/2020-05-08-UML-from-model-to-code/" rel="next" title="UML diagrams --- from models to codes">
-                <i class="fa fa-chevron-left"></i> UML diagrams --- from models to codes
+              <a href="/2021/03/27/2021-Mar-27th-MySQL-Query-and-Optimization/" rel="next" title="高级MySQL与大表优化">
+                <i class="fa fa-chevron-left"></i> 高级MySQL与大表优化
               </a>
             
           </div>
@@ -507,10 +484,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2020/05/20/2020-5-20-Design-patterns-singleton/" rel="prev" title="Design patterns ── Singleton">
-                Design patterns ── Singleton <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -583,7 +556,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">148</span>
+                    <span class="site-state-item-count">146</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -613,7 +586,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">164</span>
+                    <span class="site-state-item-count">168</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -647,7 +620,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka-Server源码阅读"><span class="nav-number">1.</span> <span class="nav-text">Eureka Server源码阅读</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#基本类型"><span class="nav-number">1.</span> <span class="nav-text">基本类型</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#数组"><span class="nav-number">2.</span> <span class="nav-text">数组</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#全局变量"><span class="nav-number">3.</span> <span class="nav-text">全局变量</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#类和对象"><span class="nav-number">4.</span> <span class="nav-text">类和对象</span></a></li></ol></div>
             
 
           </div>
@@ -680,7 +653,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total"></span>
+    <span title="Symbols count total">388k</span>
   
 
   
@@ -689,7 +662,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total"></span>
+    <span title="Reading time total">5:53</span>
   
 </div>
 

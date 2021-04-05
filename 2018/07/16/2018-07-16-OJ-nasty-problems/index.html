@@ -93,15 +93,15 @@
   <meta name="description" content="在刷算法题的时候, 不仅需要算法正确, 还要注意一些小的坑点, 才能保证程序结果的准确无误.">
 <meta name="keywords" content="算法,OJ">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构与算法笔记 —— OJ中的坑题">
+<meta property="og:title" content="数据结构与算法笔记 | 杂项">
 <meta property="og:url" content="http://BillyStudio.github.io/2018/07/16/2018-07-16-OJ-nasty-problems/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="在刷算法题的时候, 不仅需要算法正确, 还要注意一些小的坑点, 才能保证程序结果的准确无误.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://billystudio.github.io/2018/07/16/2018-07-16-OJ-nasty-problems/PAT1038.png">
-<meta property="og:updated_time" content="2019-08-18T06:54:36.863Z">
+<meta property="og:updated_time" content="2021-04-05T13:35:33.132Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构与算法笔记 —— OJ中的坑题">
+<meta name="twitter:title" content="数据结构与算法笔记 | 杂项">
 <meta name="twitter:description" content="在刷算法题的时候, 不仅需要算法正确, 还要注意一些小的坑点, 才能保证程序结果的准确无误.">
 <meta name="twitter:image" content="http://billystudio.github.io/2018/07/16/2018-07-16-OJ-nasty-problems/PAT1038.png">
 
@@ -121,7 +121,7 @@
   };
 </script>
 
-  <title>数据结构与算法笔记 —— OJ中的坑题 | Shane's Blog</title>
+  <title>数据结构与算法笔记 | 杂项 | Shane's Blog</title>
   
 
 
@@ -329,7 +329,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据结构与算法笔记 —— OJ中的坑题
+          <h1 class="post-title" itemprop="name headline">数据结构与算法笔记 | 杂项
 
               
             
@@ -370,11 +370,26 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-18 14:54:36" itemprop="dateModified" datetime="2019-08-18T14:54:36+08:00">2019-08-18</time>
+                <time title="Modified: 2021-04-05 21:35:33" itemprop="dateModified" datetime="2021-04-05T21:35:33+08:00">2021-04-05</time>
               </span>
             
           
 
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/数据结构与算法/" itemprop="url" rel="index"><span itemprop="name">数据结构与算法</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -398,7 +413,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article"></span>
+              <span title="Symbols count in article">1.4k</span>
             </span>
           
 
@@ -410,7 +425,7 @@
               
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               
-              <span title="Reading time"></span>
+              <span title="Reading time">1 mins.</span>
             </span>
           
 
@@ -430,17 +445,21 @@
 
       
         <p>在刷算法题的时候, 不仅需要算法正确, 还要注意一些小的坑点, 才能保证程序结果的准确无误. <a id="more"></a></p>
-<h1 id="输入输出类"><a href="#输入输出类" class="headerlink" title="输入输出类"></a>输入输出类</h1><p>这是最容易犯的一类错误.</p>
+<h1 id="long占几字节"><a href="#long占几字节" class="headerlink" title="long占几字节"></a>long占几字节</h1><p>这个是不固定的，根据操作系数和处理器位数不同而不同，比如我的64位Archlinux上是8字节的，64位Win10上是4字节的。<br>但是通常来说int是4字节，long long是8字节。所以在刷题时 long 是不被建议使用的。<br>所以如果想使用固定8字节，一般用 long long 或者更进一步使用 int64_t<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int64_t</span> ll;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">uint64_t</span> ull;</span><br></pre></td></tr></table></figure></p>
+<p>想使用固定4字节，一般用int或者更进一步使用 int32_t<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;stdint.h&gt;</span></span></span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">int32_t</span> <span class="keyword">int</span>;</span><br><span class="line"><span class="keyword">typedef</span> <span class="keyword">uint32_t</span> uint;</span><br></pre></td></tr></table></figure></p>
+<h1 id="输入输出重定向"><a href="#输入输出重定向" class="headerlink" title="输入输出重定向"></a>输入输出重定向</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./a.out &lt; in &gt; out</span><br></pre></td></tr></table></figure>
+<h1 id="OJ中的坑"><a href="#OJ中的坑" class="headerlink" title="OJ中的坑"></a>OJ中的坑</h1><h2 id="输入输出类"><a href="#输入输出类" class="headerlink" title="输入输出类"></a>输入输出类</h2><p>这是最容易犯的一类错误.</p>
 <p>比如OJ上面说输入是 a seperate line, 即使在样例输入中的字符串中间没有空格, 也不能保证 OJ 上的例子中字符串中间也是没有空格的. 所以这个时候千万不能用 scanf 读取, 应该用 fgets 或者是 getline.</p>
 <p>例: UVA-10405: <a href="https://vjudge.net/problem/UVA-10405" target="_blank" rel="noopener">https://vjudge.net/problem/UVA-10405</a></p>
-<h1 id="合法数据类"><a href="#合法数据类" class="headerlink" title="合法数据类"></a>合法数据类</h1><p>牛客网上有一道求树的高度的题, 明明说是一棵合法的二叉树, 可是在输入数据中却包含了不合法的多叉树情况. 这是需要忽略三叉之后的情况.</p>
+<h2 id="合法数据类"><a href="#合法数据类" class="headerlink" title="合法数据类"></a>合法数据类</h2><p>牛客网上有一道求树的高度的题, 明明说是一棵合法的二叉树, 可是在输入数据中却包含了不合法的多叉树情况. 这是需要忽略三叉之后的情况.</p>
 <p><a href="https://www.nowcoder.com/activity/oj?title=%E6%A0%91%E7%9A%84%E9%AB%98%E5%BA%A6&amp;page=1" target="_blank" rel="noopener">https://www.nowcoder.com/activity/oj?title=%E6%A0%91%E7%9A%84%E9%AB%98%E5%BA%A6&amp;page=1</a></p>
-<h1 id="读题不仔细类"><a href="#读题不仔细类" class="headerlink" title="读题不仔细类"></a>读题不仔细类</h1><p>PAT Advanced 1002: A+B for polynomials</p>
+<h2 id="读题不仔细类"><a href="#读题不仔细类" class="headerlink" title="读题不仔细类"></a>读题不仔细类</h2><p>PAT Advanced 1002: A+B for polynomials</p>
 <p>题目中明确说了NK到N1的指数范围是非负的, 但是我误以为系数a的范围也是非负的. 导致第二个测试点一直过不去… 其实系数的范围可正也可负.</p>
-<h1 id="生活常识类"><a href="#生活常识类" class="headerlink" title="生活常识类"></a>生活常识类</h1><h2 id="排名问题"><a href="#排名问题" class="headerlink" title="排名问题"></a>排名问题</h2><p>PAT Advanced 1012: The Best Rank<br>给A B C三人排名时如果分数 A = B &gt; C, 那么排名为 1,1,3</p>
-<h1 id="题目描述不清类"><a href="#题目描述不清类" class="headerlink" title="题目描述不清类"></a>题目描述不清类</h1><h3 id="PAT-1032-Sharing"><a href="#PAT-1032-Sharing" class="headerlink" title="PAT 1032 Sharing"></a>PAT 1032 Sharing</h3><p>题目中明明说了, The address of a node is a 5-digit positive integer. 可是实际上包含五位全部为 0 的合法地址… 也就是说在判定链表是否结束的时候, 使用 <code>(next &gt; 0)</code> 是不行的, 要用 <code>(next &gt;= 0)</code>. 也许是出题人理解的 positive integer 和我们有点不太一样…</p>
+<h2 id="生活常识类"><a href="#生活常识类" class="headerlink" title="生活常识类"></a>生活常识类</h2><h3 id="排名问题"><a href="#排名问题" class="headerlink" title="排名问题"></a>排名问题</h3><p>PAT Advanced 1012: The Best Rank<br>给A B C三人排名时如果分数 A = B &gt; C, 那么排名为 1,1,3</p>
+<h2 id="题目描述不清类"><a href="#题目描述不清类" class="headerlink" title="题目描述不清类"></a>题目描述不清类</h2><h3 id="PAT-1032-Sharing"><a href="#PAT-1032-Sharing" class="headerlink" title="PAT 1032 Sharing"></a>PAT 1032 Sharing</h3><p>题目中明明说了, The address of a node is a 5-digit positive integer. 可是实际上包含五位全部为 0 的合法地址… 也就是说在判定链表是否结束的时候, 使用 <code>(next &gt; 0)</code> 是不行的, 要用 <code>(next &gt;= 0)</code>. 也许是出题人理解的 positive integer 和我们有点不太一样…</p>
 <h3 id="PAT-1038-Recover-the-Smallest-Number"><a href="#PAT-1038-Recover-the-Smallest-Number" class="headerlink" title="PAT 1038 Recover the Smallest Number"></a>PAT 1038 Recover the Smallest Number</h3><p>题目中说最后结果不能是0, 实际上有0的数据. 我在代码里写了一行测试<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">For(i,N)&#123;</span><br><span class="line">    <span class="built_in">scanf</span>(<span class="string">"%s"</span>, segments[i]);</span><br><span class="line">    <span class="keyword">if</span> (atoi(segments[i]) == <span class="number">0</span>) &#123;--i;--N;&#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">if</span> (N==<span class="number">0</span>) &#123;<span class="built_in">puts</span>(<span class="string">"0"</span>); <span class="keyword">return</span> <span class="number">1</span>;&#125;</span><br></pre></td></tr></table></figure></p>
 <p>结果果然产生了非零返回… 让我很是气愤.<br><img src="PAT1038.png" alt="Angry"></p>
+<h2 id="针对C语言全局变量的坑"><a href="#针对C语言全局变量的坑" class="headerlink" title="针对C语言全局变量的坑"></a>针对C语言全局变量的坑</h2><p>C语言对全局变量会初始化为0，但对于LeetCode这样的在线做题网站，一个函数可能调用多次，在调用下一次的时候全局变量就已经不是0了，所以全局变量还是要在函数当中重新初始化赋值。</p>
 
       
     </div>
@@ -496,8 +515,8 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2018/07/17/2017-07-17-minimal-spanning-tree/" rel="prev" title="数据结构与算法笔记 —— Kruskal 算法与并查集">
-                数据结构与算法笔记 —— Kruskal 算法与并查集 <i class="fa fa-chevron-right"></i>
+              <a href="/2018/07/17/2017-07-17-minimal-spanning-tree/" rel="prev" title="数据结构与算法笔记 | 图">
+                数据结构与算法笔记 | 图 <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -571,7 +590,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">148</span>
+                    <span class="site-state-item-count">146</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -601,7 +620,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">164</span>
+                    <span class="site-state-item-count">168</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -635,7 +654,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#输入输出类"><span class="nav-number">1.</span> <span class="nav-text">输入输出类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#合法数据类"><span class="nav-number">2.</span> <span class="nav-text">合法数据类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#读题不仔细类"><span class="nav-number">3.</span> <span class="nav-text">读题不仔细类</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#生活常识类"><span class="nav-number">4.</span> <span class="nav-text">生活常识类</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#排名问题"><span class="nav-number">4.1.</span> <span class="nav-text">排名问题</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#题目描述不清类"><span class="nav-number">5.</span> <span class="nav-text">题目描述不清类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PAT-1032-Sharing"><span class="nav-number">5.0.1.</span> <span class="nav-text">PAT 1032 Sharing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PAT-1038-Recover-the-Smallest-Number"><span class="nav-number">5.0.2.</span> <span class="nav-text">PAT 1038 Recover the Smallest Number</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#long占几字节"><span class="nav-number">1.</span> <span class="nav-text">long占几字节</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#输入输出重定向"><span class="nav-number">2.</span> <span class="nav-text">输入输出重定向</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#OJ中的坑"><span class="nav-number">3.</span> <span class="nav-text">OJ中的坑</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#输入输出类"><span class="nav-number">3.1.</span> <span class="nav-text">输入输出类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#合法数据类"><span class="nav-number">3.2.</span> <span class="nav-text">合法数据类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#读题不仔细类"><span class="nav-number">3.3.</span> <span class="nav-text">读题不仔细类</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#生活常识类"><span class="nav-number">3.4.</span> <span class="nav-text">生活常识类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#排名问题"><span class="nav-number">3.4.1.</span> <span class="nav-text">排名问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#题目描述不清类"><span class="nav-number">3.5.</span> <span class="nav-text">题目描述不清类</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#PAT-1032-Sharing"><span class="nav-number">3.5.1.</span> <span class="nav-text">PAT 1032 Sharing</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#PAT-1038-Recover-the-Smallest-Number"><span class="nav-number">3.5.2.</span> <span class="nav-text">PAT 1038 Recover the Smallest Number</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#针对C语言全局变量的坑"><span class="nav-number">3.6.</span> <span class="nav-text">针对C语言全局变量的坑</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -668,7 +687,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total"></span>
+    <span title="Symbols count total">388k</span>
   
 
   
@@ -677,7 +696,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total"></span>
+    <span title="Reading time total">5:53</span>
   
 </div>
 

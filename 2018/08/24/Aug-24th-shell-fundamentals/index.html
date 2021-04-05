@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="shell 使用解释性语言.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-18T06:54:36.700Z">
+<meta property="og:updated_time" content="2021-03-31T14:33:04.027Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="shell 程序设计 | shell 基础">
 <meta name="twitter:description" content="shell 使用解释性语言.">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-18 14:54:36" itemprop="dateModified" datetime="2019-08-18T14:54:36+08:00">2019-08-18</time>
+                <time title="Modified: 2021-03-31 22:33:04" itemprop="dateModified" datetime="2021-03-31T22:33:04+08:00">2021-03-31</time>
               </span>
             
           
@@ -411,7 +411,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article"></span>
+              <span title="Symbols count in article">2.2k</span>
             </span>
           
 
@@ -423,7 +423,7 @@
               
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               
-              <span title="Reading time"></span>
+              <span title="Reading time">2 mins.</span>
             </span>
           
 
@@ -451,14 +451,15 @@
 <h1 id="Statements"><a href="#Statements" class="headerlink" title="Statements"></a>Statements</h1><h2 id="case-语句"><a href="#case-语句" class="headerlink" title="case 语句"></a>case 语句</h2><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">case 变量 in</span><br><span class="line">    模式1 ) 若干语句;;</span><br><span class="line">    模式2 ) 若干语句;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
 <h2 id="特殊符号"><a href="#特殊符号" class="headerlink" title="特殊符号"></a>特殊符号</h2><p>$$ 表示运行脚本的进程号(PID)</p>
 <p>The use of curly braces “{}” can enclose a variable into it even if characters follow with no spaces. See the example below.</p>
-<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br><span class="line">echo "What is your name?"</span><br><span class="line">read USER_NAME</span><br><span class="line">echo "Hello $USER_NAME"</span><br><span class="line">echo "I will create you a file called $&#123;USER_NAME&#125;_file"</span><br><span class="line">touch "$&#123;USER_NAME&#125;_file"</span><br></pre></td></tr></table></figure>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br><span class="line">echo "What is your name?"</span><br><span class="line">read USER_NAME</span><br><span class="line">echo "Hello $USER_NAME"</span><br><span class="line">echo "I will create you a file called $&#123;USER_NAME&#125;_file"</span><br><span class="line">touch "$&#123;USER_NAME&#125;_file"</span><br></pre></td></tr></table></figure>
 <p>There is one more advantage that if we type two seperated words, the curly braces will prevent <code>touch</code> creating two new files for it.</p>
 <h2 id="Comment"><a href="#Comment" class="headerlink" title="Comment"></a>Comment</h2><p>Shellscript uses <code>#</code> to comment a whole line.</p>
-<h2 id="Running-the-script"><a href="#Running-the-script" class="headerlink" title="Running the script"></a>Running the script</h2><p>Write scripts into a readable and executable file. The first line can indicate the program(/bin/sh) to run it. If you are using GNU/Linux, /bin/sh is normally a symbolic link to bash.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>!/bin/sh</span><br></pre></td></tr></table></figure></p>
+<h2 id="Running-the-script"><a href="#Running-the-script" class="headerlink" title="Running the script"></a>Running the script</h2><p>Write scripts into a readable and executable file. The first line can indicate the program(/bin/sh) to run it. If you are using GNU/Linux, /bin/sh is normally a symbolic link to bash.<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">!/bin/sh</span></span><br></pre></td></tr></table></figure></p>
 <h2 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h2><h3 id="buitin-commands"><a href="#buitin-commands" class="headerlink" title="buitin commands"></a>buitin commands</h3><p><code>echo</code>: takes one or more parameters seperated by blank characters(spaces or tabs).</p>
 <p><code>expr</code>: Print the value of EXPRESSION to standard output. It supports logical expressions. It can be also used as a simple caculator for integers in shell. But caution that the asteroid <code>*</code> is regarded as a wildcard. So when you do multiplication, you should use <code>\*</code>.</p>
 <p><code>read</code>: reads a line from standard input into the variable supplied.</p>
 <p><code>touch</code>: create a empty file by the name</p>
+<p><code>test</code>: 可以用来检测某些文件或者是相关的属性，和判断符号 [] 等价</p>
 <p>For more Linux builtin commands, go to this <a href="https://billystudio.github.io/2018/05/16/Command-of-the-day-May-sixteenth-2018/">article</a>. </p>
 
       
@@ -505,8 +506,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2018/08/23/nara-wpe-source-reading/" rel="next" title="nara_wpe/wpe.py 源码阅读">
-                <i class="fa fa-chevron-left"></i> nara_wpe/wpe.py 源码阅读
+              <a href="/2018/08/22/Aug-22nd-Python-unpack-series/" rel="next" title="Python 基础 | 系列数据结构的拆封">
+                <i class="fa fa-chevron-left"></i> Python 基础 | 系列数据结构的拆封
               </a>
             
           </div>
@@ -590,7 +591,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">148</span>
+                    <span class="site-state-item-count">146</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -620,7 +621,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">164</span>
+                    <span class="site-state-item-count">168</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -687,7 +688,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total"></span>
+    <span title="Symbols count total">388k</span>
   
 
   
@@ -696,7 +697,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total"></span>
+    <span title="Reading time total">5:53</span>
   
 </div>
 
