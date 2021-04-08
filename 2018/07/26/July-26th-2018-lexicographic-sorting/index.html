@@ -90,18 +90,18 @@
 
 
 
-  <meta name="description" content="字典序是最容易理解的一种顺序. 最初接触到字典序是在组合数学的课堂上.">
-<meta name="keywords" content="算法,PAT,组合数学">
+  <meta name="description" content="本题属于字典序的一道变题。">
+<meta name="keywords" content="算法,PAT,贪心,字典序">
 <meta property="og:type" content="article">
-<meta property="og:title" content="数据结构与算法笔记 —— 字典序">
+<meta property="og:title" content="PAT 真题 | 1038 Recover the Smallest Number">
 <meta property="og:url" content="http://BillyStudio.github.io/2018/07/26/July-26th-2018-lexicographic-sorting/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="字典序是最容易理解的一种顺序. 最初接触到字典序是在组合数学的课堂上.">
+<meta property="og:description" content="本题属于字典序的一道变题。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-03-12T06:45:29.662Z">
+<meta property="og:updated_time" content="2021-04-06T04:50:52.102Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="数据结构与算法笔记 —— 字典序">
-<meta name="twitter:description" content="字典序是最容易理解的一种顺序. 最初接触到字典序是在组合数学的课堂上.">
+<meta name="twitter:title" content="PAT 真题 | 1038 Recover the Smallest Number">
+<meta name="twitter:description" content="本题属于字典序的一道变题。">
 
 
 
@@ -119,7 +119,7 @@
   };
 </script>
 
-  <title>数据结构与算法笔记 —— 字典序 | Shane's Blog</title>
+  <title>PAT 真题 | 1038 Recover the Smallest Number | Shane's Blog</title>
   
 
 
@@ -327,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">数据结构与算法笔记 —— 字典序
+          <h1 class="post-title" itemprop="name headline">PAT 真题 | 1038 Recover the Smallest Number
 
               
             
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-03-12 14:45:29" itemprop="dateModified" datetime="2021-03-12T14:45:29+08:00">2021-03-12</time>
+                <time title="Modified: 2021-04-06 12:50:52" itemprop="dateModified" datetime="2021-04-06T12:50:52+08:00">2021-04-06</time>
               </span>
             
           
@@ -396,7 +396,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">673</span>
+              <span title="Symbols count in article">1.9k</span>
             </span>
           
 
@@ -408,7 +408,7 @@
               
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               
-              <span title="Reading time">1 mins.</span>
+              <span title="Reading time">2 mins.</span>
             </span>
           
 
@@ -427,11 +427,13 @@
       
 
       
-        <p>字典序是最容易理解的一种顺序. 最初接触到字典序是在组合数学的课堂上.<a id="more"></a></p>
-<p>我们依次比较串中的每个字母, 出现不一样的时候就能比较大小了. 如果某个串遍历到头了还没有比较出大小，那么较长的字符串较大。如果两个字符串一样长，那么这两个字符串的字典序相等。 </p>
-<p>有些情况下，字典序会有一些变体，比如参见牛客网上在线编程模块的题目 “数串”（<a href="https://www.nowcoder.com/questionTerminal/a6a656249f404eb498d16b2f8eaa2c60）" target="_blank" rel="noopener">https://www.nowcoder.com/questionTerminal/a6a656249f404eb498d16b2f8eaa2c60）</a>.<br>如果某个串遍历到头了, 需要从头循环继续遍历. 如果两个串都到头了还没有比较出大小来, 说明两个串相等.<br>最容易出错的一个例子是比较48和484，虽然字典序484&gt;48，但是两个字符串连起来的字典序是 484+48 &lt; 48+484，也就是说48应该在484的前面。</p>
+        <p>本题属于字典序的一道变题。<a id="more"></a></p>
+<p>字典序是最容易理解的一种顺序. 最初接触到字典序是在组合数学的课堂上。我们依次比较串中的每个字母, 出现不一样的时候就能比较大小了. 如果某个串遍历到头了还没有比较出大小，那么较长的字符串较大。如果两个字符串一样长，那么这两个字符串的字典序相等。 </p>
+<p>本题不能直接比较两个字符串的字典序，而是应该比较它们正反拼接后字符串的字典序。由于子串中可能以0开头，所以存在这样的特殊情况，比如<code>0229</code>和<code>0331</code>组成的最小数是<code>2290331</code>。所以读取的时候应以字符串而不是数字读取。比较的时候也是通过比较字符串字典序。在最后别忘了还要清楚前导0，更特殊的全0情况去除完后要补0.</p>
+<p>算法的Java实现：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="keyword">import</span> java.io.*;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        BufferedReader br = <span class="keyword">new</span> BufferedReader(<span class="keyword">new</span> InputStreamReader(System.in));</span><br><span class="line">        String line = <span class="keyword">null</span>;</span><br><span class="line">        <span class="keyword">try</span> &#123;</span><br><span class="line">            line = br.readLine();</span><br><span class="line">        &#125; <span class="keyword">catch</span> (IOException ioe) &#123;</span><br><span class="line">            ioe.printStackTrace();</span><br><span class="line">        &#125;</span><br><span class="line">        String[] segment = line.split(<span class="string">" "</span>);</span><br><span class="line">        <span class="keyword">int</span> N = Integer.parseInt(segment[<span class="number">0</span>]);</span><br><span class="line">        <span class="keyword">if</span>(N == <span class="number">0</span>) &#123;</span><br><span class="line">            System.out.println(<span class="string">"0"</span>);</span><br><span class="line">            <span class="keyword">return</span> ;</span><br><span class="line">        &#125;</span><br><span class="line">        Arrays.sort(segment, <span class="number">1</span>, N+<span class="number">1</span>, <span class="keyword">new</span> Comparator&lt;String&gt;() &#123;</span><br><span class="line">            <span class="meta">@Override</span></span><br><span class="line">            <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String s1, String s2)</span> </span>&#123;</span><br><span class="line">                <span class="keyword">return</span> (s1+s2).compareTo(s2+s1);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;);</span><br><span class="line">        StringBuilder builder = <span class="keyword">new</span> StringBuilder();</span><br><span class="line">        <span class="keyword">boolean</span> leadZero = <span class="keyword">true</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=N; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(leadZero) &#123;</span><br><span class="line">                <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;segment[i].length(); ++j) &#123;</span><br><span class="line">                    <span class="keyword">if</span>(leadZero) &#123;</span><br><span class="line">                        <span class="keyword">if</span>(segment[i].charAt(j) == <span class="string">'0'</span>) <span class="keyword">continue</span>;</span><br><span class="line">                        <span class="keyword">else</span> leadZero = <span class="keyword">false</span>;</span><br><span class="line">                    &#125;</span><br><span class="line">                    builder.append(segment[i].substring(j));</span><br><span class="line">                    <span class="keyword">break</span>;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">                builder.append(segment[i]);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span> (leadZero) &#123; System.out.println(<span class="string">"0"</span>);&#125;</span><br><span class="line">        <span class="keyword">else</span> System.out.println(builder);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>注意这里使用了 java.io 包中的 BufferedReader 和 InputStreamReader 以加快读取的速度。</p>
+<p>另外一道类似的题目参见牛客网上在线编程模块的题目 “数串”（<a href="https://www.nowcoder.com/questionTerminal/a6a656249f404eb498d16b2f8eaa2c60）" target="_blank" rel="noopener">https://www.nowcoder.com/questionTerminal/a6a656249f404eb498d16b2f8eaa2c60）</a>.<br>如果某个串遍历到头了, 需要从头循环继续遍历. 如果两个串都到头了还没有比较出大小来, 说明两个串相等.<br>最容易出错的一个例子是比较48和484，虽然字典序484&gt;48，但是两个字符串连起来的字典序是 484+48 &lt; 48+484，也就是说48应该在484的前面。</p>
 <p>所以这道题不能直接比较s1和s2的字典序，而是要进行s1+s2和s2+s1的字典序比较。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Arrays.sort(dict, (s1, s2) -&gt; (s2+s1).compareTo(s1+s2)); <span class="comment">// 或下面写法</span></span><br><span class="line">Arrays.sort(dict, <span class="keyword">new</span> Comparator&lt;String&gt;() &#123;</span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(String s1, String s2)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> (s2+s1).compareTo(s1+s2);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>最近又做了一道 PAT 的真题和这类似, PAT 1038 Recover the Smallest Number</p>
 
       
     </div>
@@ -466,7 +468,9 @@
           
             <a href="/tags/PAT/" rel="tag"># PAT</a>
           
-            <a href="/tags/组合数学/" rel="tag"># 组合数学</a>
+            <a href="/tags/贪心/" rel="tag"># 贪心</a>
+          
+            <a href="/tags/字典序/" rel="tag"># 字典序</a>
           
         </div>
       
@@ -555,7 +559,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">146</span>
+                    <span class="site-state-item-count">145</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -570,7 +574,7 @@
                       <a href="/categories/">
                     
                   
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">1</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -585,7 +589,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-count">9</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -635,7 +639,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">388k</span>
+    <span title="Symbols count total">392k</span>
   
 
   
@@ -644,7 +648,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">5:53</span>
+    <span title="Reading time total">5:56</span>
   
 </div>
 
