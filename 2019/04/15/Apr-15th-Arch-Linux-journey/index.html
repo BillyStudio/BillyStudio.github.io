@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://billystudio.github.io/2019/04/15/Apr-15th-Arch-Linux-journey/BaiduHelper.png">
 <meta property="og:image" content="http://billystudio.github.io/2019/04/15/Apr-15th-Arch-Linux-journey/fceux-gamepad.png">
 <meta property="og:image" content="http://billystudio.github.io/2019/04/15/Apr-15th-Arch-Linux-journey/fceux-scale.png">
-<meta property="og:updated_time" content="2021-03-03T15:52:10.410Z">
+<meta property="og:updated_time" content="2021-06-14T08:48:15.536Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Arch Linux journey">
 <meta name="twitter:description" content="I have long heard about the fame and reputation of Arch Linux. But not until after I have commenced to explore on this distro did I really feel the enjoyness that Linux brings to me.">
@@ -375,7 +375,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-03-03 23:52:10" itemprop="dateModified" datetime="2021-03-03T23:52:10+08:00">2021-03-03</time>
+                <time title="Modified: 2021-06-14 16:48:15" itemprop="dateModified" datetime="2021-06-14T16:48:15+08:00">2021-06-14</time>
               </span>
             
           
@@ -548,7 +548,7 @@ exec i3
 <h3 id="Xterm-middle-key-on-touchpad"><a href="#Xterm-middle-key-on-touchpad" class="headerlink" title="Xterm middle key on touchpad"></a>Xterm middle key on touchpad</h3><p>Ctrl + Click = middle key</p>
 <h3 id="Q-change-the-fonts-of-xterm"><a href="#Q-change-the-fonts-of-xterm" class="headerlink" title="Q: change the fonts of xterm"></a>Q: change the fonts of xterm</h3><p>create a file <code>~/.Xresources</code>, write the wildcard-form settings in it:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xterm*faceName:Consolas:antialias=True</span><br><span class="line">xterm*faceNameDoublesize:Microsoft YaHei:antialias=True</span><br><span class="line">xterm*faceSize: 12</span><br><span class="line">xterm*renderFont: true</span><br><span class="line">xterm*utf8: 2</span><br><span class="line">xterm*utf8Title: true</span><br><span class="line">xterm*titleModes: 2</span><br><span class="line">xterm*selectToClipboard: true</span><br></pre></td></tr></table></figure></p>
 <p>Default color schemes:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">xterm*fullscreen: true</span><br><span class="line">xterm*background: White</span><br><span class="line">xterm*foreground: Black</span><br><span class="line">xterm*color0:    Black </span><br><span class="line">xterm*color1:    Red </span><br><span class="line">xterm*color2:    Green </span><br><span class="line">xterm*color3:    Yellow </span><br><span class="line">xterm*color4:    CornflowerBlue </span><br><span class="line">xterm*color5:    Magenta </span><br><span class="line">xterm*color6:    Cyan </span><br><span class="line">xterm*color7:    White</span><br><span class="line">xterm*colorBDMode:  false</span><br><span class="line">xterm*colorULMode:  false </span><br><span class="line">xterm*cursorColor:  Red</span><br></pre></td></tr></table></figure></p>
-<p>background 太亮，换成淡粉灰色#FFFAF0（去白光蓝光）<br>color3 的yellow太亮（用在warning和字符串高亮匹配），背景中体现不出，改为深一些的黄#DAAA01<br>BDMode 是否关闭变色替换加粗，这里关闭以使用加粗模式<br>colorUL 超链接变色模式。用于Ctrl+R匹配命令。若关闭，则使用下划线显示匹配。也应该与背景和前景区分开，使用灰白：#7A8181<br>cusorColor改为深红</p>
+<p>background 太亮，换成淡粉灰色#FFFAF0（去白光蓝光），或者护眼色#C7EDCC<br>color3 的yellow太亮（用在warning和字符串高亮匹配），背景中体现不出，改为深一些的黄#DAAA01<br>BDMode 是否关闭变色替换加粗，这里关闭以使用加粗模式<br>colorUL 超链接变色模式。用于Ctrl+R匹配命令。若关闭，则使用下划线显示匹配。也应该与背景和前景区分开，使用灰白：#7A8181<br>cusorColor改为深红</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">xterm*background: #FFF5EE</span><br><span class="line">xterm*foreground: Black</span><br><span class="line">xterm*color0: Black </span><br><span class="line">xterm*color1: Red</span><br><span class="line">xterm*color2: Green</span><br><span class="line">xterm*color3: #DAAA01 </span><br><span class="line">xterm*color4: CornflowerBlue</span><br><span class="line">xterm*color5: Magenta</span><br><span class="line">xterm*color6: Cyan</span><br><span class="line">xterm*color7: White</span><br><span class="line">xterm*colorBDMode: false </span><br><span class="line">xterm*colorUL: #7A8181 </span><br><span class="line">xterm*colorULMode: true </span><br><span class="line">xterm*cursorColor: #D3423E</span><br></pre></td></tr></table></figure>
 <p>Then add <code>[[ -f ~/.Xresources ]] &amp;&amp; xrdb -merge ~/.Xresources</code> to the file .xprofile. For the X-org based GNOME environment, it is ok now. But for the default GNOME 3 wayland based desktop environment, since it didn’t initialize and X11 configurations, we should use other ways for autostarting. Here I suggest to rename .xprofile as .autostart_scripts.</p>
 <p>I found a way equivelent to audo starting every time logging in that is using xdg autostart files. After installing <code>xdg-user-dirs</code> I write a .desktop file under ‘~/.config/autostart/‘.<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Type=Application</span><br><span class="line">Name=XTerm settings under wayland</span><br><span class="line">NoDisplay=true</span><br><span class="line">Exec=/home/shane/.autostart_scripts</span><br></pre></td></tr></table></figure></p>
@@ -570,7 +570,8 @@ vim visual-studio-code.desktop
 <h3 id="pdf-viewer"><a href="#pdf-viewer" class="headerlink" title="pdf viewer"></a>pdf viewer</h3><p><a href="https://www.archlinux.org/packages/extra/x86_64/evince/" target="_blank" rel="noopener">Evince</a> and <code>WPS PDF</code> </p>
 <h3 id="Video-player"><a href="#Video-player" class="headerlink" title="Video player"></a>Video player</h3><p>VLC video viewer</p>
 <h3 id="System-monitor"><a href="#System-monitor" class="headerlink" title="System monitor"></a>System monitor</h3><p>gnome-system-monitor</p>
-<h3 id="Chinese-input-method"><a href="#Chinese-input-method" class="headerlink" title="Chinese input method"></a>Chinese input method</h3><p>Sogou Pinyin is currently the best Chinese Method solution but it is not easy to install it correctly on Arch Linux. Though I give methods here, more efforts should be made when practicing because it changes as time goes.</p>
+<h3 id="Chinese-input-method"><a href="#Chinese-input-method" class="headerlink" title="Chinese input method"></a>Chinese input method</h3><p>目前使用的方案为fcitx自带双拼.</p>
+<p>以下是之前倒腾搜狗输入法的记录:<br>Sogou Pinyin is currently the best Chinese Method solution but it is not easy to install it correctly on Arch Linux. Though I give methods here, more efforts should be made when practicing because it changes as time goes.</p>
 <p>The installation scripts for sogoupinyin which is based on qt4 are:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Rns fcitx-im fcitx-configtool</span><br><span class="line">rm -rf .config/fcitx</span><br><span class="line">rm -rf .sogouinput</span><br><span class="line">rm -rf .config/Sogou*</span><br><span class="line">sudo pacman -Syu fcitx-lilydjwg-git fcitx-sogoupinyin</span><br><span class="line"># For KDE user: sudo pacman -S kcm-fcitx </span><br><span class="line"># For GNOME user: pacman -S fcitx-configtool fcitx-qt5</span><br></pre></td></tr></table></figure></p>
 <p>If anything happened during inputing, don’t panic, use <code>Ctrl + 5</code> to reload Input method.</p>
 <p>The releases for newly <code>sogouimebs</code> based on qt5 are here: <a href="https://gitee.com/laomocode/fcitx-sogouimebs/releases" target="_blank" rel="noopener">https://gitee.com/laomocode/fcitx-sogouimebs/releases</a></p>
@@ -713,8 +714,8 @@ export QT_IM_MODULE=&quot;fcitx&quot;
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2019/04/17/Apr-24th-criminal-litigation-as-opposed-to-civil-litigation/" rel="prev" title="刑事诉讼与民事诉讼的区别">
-                刑事诉讼与民事诉讼的区别 <i class="fa fa-chevron-right"></i>
+              <a href="/2019/04/17/Apr-17th-Zsh-note/" rel="prev" title="Shell Programming | Zsh">
+                Shell Programming | Zsh <i class="fa fa-chevron-right"></i>
               </a>
             
           </div>
@@ -788,7 +789,7 @@ export QT_IM_MODULE=&quot;fcitx&quot;
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">145</span>
+                    <span class="site-state-item-count">148</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -818,7 +819,7 @@ export QT_IM_MODULE=&quot;fcitx&quot;
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">170</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -885,7 +886,7 @@ export QT_IM_MODULE=&quot;fcitx&quot;
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">392k</span>
+    <span title="Symbols count total">405k</span>
   
 
   
@@ -894,7 +895,7 @@ export QT_IM_MODULE=&quot;fcitx&quot;
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">5:56</span>
+    <span title="Reading time total">6:08</span>
   
 </div>
 

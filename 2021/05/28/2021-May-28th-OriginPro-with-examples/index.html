@@ -1,0 +1,995 @@
+<!DOCTYPE html>
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+
+<html class="theme-next muse use-motion" lang="en">
+<head><meta name="generator" content="Hexo 3.8.0">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css?v=4.7.0">
+
+<link rel="stylesheet" href="/css/main.css?v=7.2.0">
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=7.2.0">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=7.2.0">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=7.2.0" color="#222">
+
+
+
+
+
+
+
+<script id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Muse',
+    version: '7.2.0',
+    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    back2top: true,
+    back2top_sidebar: false,
+    fancybox: false,
+    fastclick: false,
+    lazyload: false,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <meta name="description" content="学习过程中用到的若干案例详细绘图过程">
+<meta name="keywords" content="drawing,OriginPro">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过案例学习OriginPro绘图">
+<meta property="og:url" content="http://BillyStudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="学习过程中用到的若干案例详细绘图过程">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/step4.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/select-data.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/create-layer2.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/two-y.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/layer-properties.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/show-top-x.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/layer1-delete-l&r-y.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/no-minus-sign.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/top-y-major-labels.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/vertical-major-grids.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/layer1-step3.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/errorbar-red.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/column-spacing-gap.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/step4.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s1.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s1-2.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s2.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s2-2.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s2-3.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s3.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s3-2.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s4.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s4-2.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s5-1.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s3-3.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s5-2.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s3-4.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s5-4.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s5-5.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s6.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s5.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s6-2.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s7.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s7-2.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s7-3.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s7-4.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s7-5.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2-s7-6.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex2.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex3.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex3-s1.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex3-s1-1.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex3-s1-2.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex3-s2.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex3-s2-1.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex3-s2-2.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex3-s3.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex3-s4.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex3-s4-1.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex3-s5.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex3-s5-2.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex3-s6.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex3-s6-2.png">
+<meta property="og:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/origin-ex3.png">
+<meta property="og:updated_time" content="2021-06-05T08:40:53.083Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通过案例学习OriginPro绘图">
+<meta name="twitter:description" content="学习过程中用到的若干案例详细绘图过程">
+<meta name="twitter:image" content="http://billystudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/step4.png">
+
+
+
+
+
+  
+  
+  <link rel="canonical" href="http://BillyStudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/">
+
+
+
+<script id="page.configurations">
+  CONFIG.page = {
+    sidebar: "",
+  };
+</script>
+
+  <title>通过案例学习OriginPro绘图 | Shane's Blog</title>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .motion-element,
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-title { opacity: initial; }
+
+  .use-motion .logo,
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="en">
+
+  
+  
+    
+  
+
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Shane's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+    
+    
+  </div>
+
+  <div class="site-nav-toggle">
+    <button aria-label="Toggle navigation bar">
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  
+    <ul id="menu" class="menu">
+      
+        
+        
+        
+          
+          <li class="menu-item menu-item-home">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-about">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-tags">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/tags/" rel="section"><i class="menu-item-icon fa fa-fw fa-tags"></i> <br>Tags</a>
+
+  </li>
+        
+        
+        
+          
+          <li class="menu-item menu-item-categories">
+
+    
+    
+      
+    
+
+    
+
+    <a href="/categories/" rel="section"><i class="menu-item-icon fa fa-fw fa-th"></i> <br>Categories</a>
+
+  </li>
+
+      
+      
+    </ul>
+  
+
+  
+    
+
+  
+
+  
+</nav>
+
+
+
+</div>
+    </header>
+
+    
+
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://BillyStudio.github.io/2021/05/28/2021-May-28th-OriginPro-with-examples/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Shane Wang">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Shane's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">通过案例学习OriginPro绘图
+
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+
+          
+          
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Posted on</span>
+              
+
+              
+                
+              
+
+              <time title="Created: 2021-05-28 14:22:53" itemprop="dateCreated datePublished" datetime="2021-05-28T14:22:53+08:00">2021-05-28</time>
+            </span>
+          
+
+          
+            
+
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2021-06-05 16:40:53" itemprop="dateModified" datetime="2021-06-05T16:40:53+08:00">2021-06-05</time>
+              </span>
+            
+          
+
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          <br>
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-file-word-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Symbols count in article: </span>
+              
+              <span title="Symbols count in article">2.2k</span>
+            </span>
+          
+
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-clock-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">Reading time &asymp;</span>
+              
+              <span title="Reading time">2 mins.</span>
+            </span>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <p>学习过程中用到的若干案例详细绘图过程 <a id="more"></a></p>
+<h2 id="案例1：绘制一张带正负双轴和ErrorBar的Bar图"><a href="#案例1：绘制一张带正负双轴和ErrorBar的Bar图" class="headerlink" title="案例1：绘制一张带正负双轴和ErrorBar的Bar图"></a>案例1：绘制一张带正负双轴和ErrorBar的Bar图</h2><p><img src="step4.png" alt></p>
+<p>注意Bar数据的x轴是纵轴，y轴是横轴。</p>
+<p><strong>Step 1</strong>：填充数据<br>设置服务名称(service)、条款名称(term)、合约条款执行时间及正负误差（95%置信区间）、服务接口执行时间及正负误差（95%置信区间）<br><img src="select-data.png" alt></p>
+<p><strong>Step 2</strong>：选中数据生成Bar，然后设置ErrorBar和Overlap</p>
+<p>按理来说，两套数据最好使用两个图层，但是OriginPro对于第二图层的bar显示有问题，所以将数据都放到一个图层。</p>
+<p><strong>Step 3</strong>：设置四个方向的边框<br>这里由于左Y形成了中间框，所以需要新建一个图层来画出左Y.<br>新建图层：右键 &gt; New Layer(Axis) &gt; Left-Y，然后隐藏图层1<br><img src="create-layer2.png" alt="create-layer2.png"><br>双击坐标轴可以设置左右两个Y如下图所示<br><img src="two-y.png" alt><br>然后隐藏图层2，打开图层1删掉左右Y</p>
+<p>设置图层之间的坐标轴关联（同x轴或同y轴）：右键 &gt; New Layer(Axis) &gt; Right Y 或者 Left Y</p>
+<p>建立之后可以右键图层数字&gt;Layer Properties 查看<br><img src="layer-properties.png" alt="设置图层坐标轴scale相同"></p>
+<p>Top X 的生成可以通过双击坐标轴，进入 “Title &amp; Format” 部分找到<br><img src="show-top-x.png" alt></p>
+<p><img src="layer1-delete-l&amp;r-y.png" alt></p>
+<p>这里有个小技巧是数据设置正负值来区分方向。现在，我们需要将负值显示为正值：<br><img src="no-minus-sign.png" alt></p>
+<p>以及添加Top X的数值显示<br><img src="top-y-major-labels.png" alt="show top x"></p>
+<p>添加对齐虚线<br><img src="vertical-major-grids.png" alt></p>
+<p>目前的Layer1：<br><img src="layer1-step3.png" alt></p>
+<p>Step 4: 合并图层，细调<br>双击errorBar，调节颜色为红色<br><img src="errorbar-red.png" alt></p>
+<p>将column宽度调细一些<br><img src="column-spacing-gap.png" alt><br>调整一下坐标轴说明，效果图：<br><img src="step4.png" alt></p>
+<p>调节一下字体</p>
+<p>裁边，右键&gt;Fit Page To Layers ,设置border width为2或3</p>
+<h3 id="案例2：在案例1基础上，正负轴的scale不一样"><a href="#案例2：在案例1基础上，正负轴的scale不一样" class="headerlink" title="案例2：在案例1基础上，正负轴的scale不一样"></a>案例2：在案例1基础上，正负轴的scale不一样</h3><p><img src="origin-ex2.png" alt="Example 2"><br>这次我们需要将两套数据画在两个图层上了，并且在用上2021新版的OriginPro后，原来Column全部从底部涂色的bug也消失了～</p>
+<p><strong>Step 1:</strong> 选中左边的数据（合约条款计时）<br><img src="origin-ex2-s1.png" alt></p>
+<p>Plot &gt; 绘制bar图<br><img src="origin-ex2-s1-2.png" alt></p>
+<p><strong>Step 2:</strong> 添加新图层: New Layer(Axes) &gt; Open Dialog<br>自定义坐标轴，Left和Buttom不勾选<br><img src="origin-ex2-s2.png" alt></p>
+<p>隐藏图层1。之后选中右边数据，点击当前图片窗口，然后点击Insert &gt; Plot to Layer &gt; 绘制column即可<br><img src="origin-ex2-s2-2.png" alt="Add column"></p>
+<p>因为Origin中column和bar的区别只是在于X-Y坐标轴的位置互换。将column变成bar只需要点击菜单 &gt; Graph，选中 Exchange X-Y Axes<br><img src="origin-ex2-s2-3.png" alt="Exchange xy"></p>
+<p><strong>Step 3:</strong> 统一坐标轴<br><img src="origin-ex2-s3.png" alt="Scale "></p>
+<p>只要将坐标轴的正负绝对值设置相等，就可以保持x轴（垂直）的重合：<br><img src="origin-ex2-s3-2.png" alt="Overlap"></p>
+<p><strong>Step 4:</strong> 设置ErrorBar<br>双击Error Bar，设置一正一负（对于正态分布，正负误差相等），并替换颜色为红色，增加bar两头的宽度（Cap值）<br><img src="origin-ex2-s4.png" alt="plus error"></p>
+<p>对于Layer的ErrorBar也是同理操作：<br><img src="origin-ex2-s4-2.png" alt="error bar"></p>
+<p><strong>Step 5:</strong> : Label值设定<br>Layer1 x轴(垂直)标签值加前缀Term，旋转45度，之后可去掉标题”term”。<br><img src="origin-ex2-s5-1.png" alt="term x"></p>
+<p>Layer2 x轴(垂直)的标签数据来源设置为service列<br><img src="origin-ex2-s3-3.png" alt="set Tick labels from dataset"></p>
+<p>亦设置格式旋转45度：<br><img src="origin-ex2-s5-2.png" alt="set tick labels"></p>
+<p>接下来设置y轴的tick labels。双击y轴（Top 水平轴）数据点，从自定义dataset（新建的Sheet2）中获取<br><img src="origin-ex2-s3-4.png" alt="tick-indexed dataset"></p>
+<p>调整dataset中的值，使之与原来的刻度水平匹配：<br><img src="origin-ex2-s5-4.png" alt="match scale and label"></p>
+<p>接着，隐藏layer1的bottom line和tick labels，将layer2 top的数据复制到bottom显示出来。复制粘贴坐标轴标题匹配对应部分：<br><img src="origin-ex2-s5-5.png" alt="self-defined tick labels"></p>
+<p><strong>Step 6:</strong> Update legends<br>右键图例更新，<br><img src="origin-ex2-s6.png" alt="update legend"></p>
+<p>选择 Reconstruct 和 One Legend for Whole Page<br><img src="origin-ex2-s5.png" alt="update legends for whole graph"></p>
+<p><img src="origin-ex2-s6-2.png" alt="new legend"></p>
+<p><strong>Step 7:</strong> 美化<br>修改宽度<br><img src="origin-ex2-s7.png" alt="change width"></p>
+<p>修改颜色<br><img src="origin-ex2-s7-2.png" alt="change color"></p>
+<p>设置Layer1和2的x轴（垂直轴）的minor ticks和minor grids为none；设置y轴（水平轴）的major grids和minor grids<br><img src="origin-ex2-s7-3.png" alt="change grids"></p>
+<p>右键图例&gt;Properties, 设置frame的border为none<br><img src="origin-ex2-s7-4.png" alt="legend frame border"></p>
+<p>Preferences &gt; Text Fonts修改默认字体为Times New Roman，Axis&gt;Unit Display for Axis Title 修改单位显示为 <code>/&lt;U&gt;</code><br><img src="origin-ex2-s7-5.png" alt="axis unit display"></p>
+<p>调节字体为Times New Roman，大小为18/20<br><img src="origin-ex2-s7-6.png" alt="change font"></p>
+<p>裁边:右键&gt;Fit Layers to Page…<br><img src="origin-ex2.png" alt="example 2"></p>
+<h3 id="案例3：栅图-组图"><a href="#案例3：栅图-组图" class="headerlink" title="案例3：栅图+组图"></a>案例3：栅图+组图</h3><p><img src="origin-ex3.png" alt="result"><br>我们先绘制比较简单的散点图部分<br><strong>Step 1:</strong> 选中前两列的数据，绘制散点图<br><img src="origin-ex3-s1.png" alt></p>
+<p>点击菜单栏 Plot &gt; Scatter<br><img src="origin-ex3-s1-1.png" alt="basic symbol + line"></p>
+<p>修改坐标轴，添加grids，字体统一 Times New Roman 24号<br><img src="origin-ex3-s1-2.png" alt="finish first"></p>
+<p><strong>Step 2:</strong> 复制<br>Graph窗口右键&gt;Duplicate</p>
+<p><img src="origin-ex3-s2.png" alt="copy"><br>然后右键copy Graph &gt; Properties，去掉Long Name</p>
+<p>接着右键图层1 &gt; Plot setup，选择新的X和Y轴数据，点击Replace<br><img src="origin-ex3-s2-1.png" alt="new graph"></p>
+<p>同理绘制出第3张散点图<br><img src="origin-ex3-s2-2.png" alt="3rd graph"></p>
+<p>3张图都出来后，统一一下大小格式</p>
+<p><strong>Step 3:</strong> 选中左边数据，点击  Trellis<br>Trellis图是Origin2017后提供的新功能，我们用它来制作Before-After图<br><img src="origin-ex3-s3.png" alt="trellis"></p>
+<p>在弹出窗口设置中加入C列Action Name，作为Panel的分类依据：<br><img src="origin-ex3-s4.png" alt="multi panels"></p>
+<p><strong>Step 4:</strong> 修正坐标轴<br><img src="origin-ex3-s4-1.png" alt="multi panels"></p>
+<p><strong>Step 5:</strong> 为线段添加文本<br><img src="origin-ex3-s5.png" alt="add text"></p>
+<p>设置颜色在panel内部递增：<br><img src="origin-ex3-s5-2.png" alt="add color"></p>
+<p><strong>Step 6:</strong> 合并</p>
+<p><img src="origin-ex3-s6.png" alt="Merge"><br>我们给每张图标上序号，然后点击某一个Graph，记住要排列的图片序号，然后进入Merge Graph Windows Dialog…</p>
+<p><img src="origin-ex3-s6-2.png" alt="merge setting"><br>不用的图片去掉， Margin调整为1</p>
+<p><img src="origin-ex3.png" alt="result"></p>
+
+      
+    </div>
+
+    
+
+    
+      
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/drawing/" rel="tag"># drawing</a>
+          
+            <a href="/tags/OriginPro/" rel="tag"># OriginPro</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2021/05/08/2021-May-8th-Psychological-effect-in-living/" rel="next" title="心理学效应在生活中的应用">
+                <i class="fa fa-chevron-left"></i> 心理学效应在生活中的应用
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+  </div>
+
+
+          </div>
+          
+
+  
+    <div class="comments" id="gitalk-container">
+    </div>
+
+  
+
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <p class="site-author-name" itemprop="name">Shane Wang</p>
+              <div class="site-description motion-element" itemprop="description"></div>
+          </div>
+
+          
+            <nav class="site-state motion-element">
+              
+                <div class="site-state-item site-state-posts">
+                
+                  <a href="/archives">
+                
+                    <span class="site-state-item-count">148</span>
+                    <span class="site-state-item-name">posts</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
+
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
+              
+            </nav>
+          
+
+          
+
+          
+
+          
+
+          
+
+          
+          
+
+          
+        </div>
+      </div>
+
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#案例1：绘制一张带正负双轴和ErrorBar的Bar图"><span class="nav-number">1.</span> <span class="nav-text">案例1：绘制一张带正负双轴和ErrorBar的Bar图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#案例2：在案例1基础上，正负轴的scale不一样"><span class="nav-number">1.1.</span> <span class="nav-text">案例2：在案例1基础上，正负轴的scale不一样</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#案例3：栅图-组图"><span class="nav-number">1.2.</span> <span class="nav-text">案例3：栅图+组图</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+  <span class="with-love" id="animate">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Shane Wang</span>
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-area-chart"></i>
+    </span>
+    
+    <span title="Symbols count total">405k</span>
+  
+
+  
+    <span class="post-meta-divider">|</span>
+    <span class="post-meta-item-icon">
+      <i class="fa fa-coffee"></i>
+    </span>
+    
+    <span title="Reading time total">6:08</span>
+  
+</div>
+
+
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+
+
+
+  <span class="post-meta-divider">|</span>
+
+
+
+  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Muse</a> v7.2.0</div>
+
+
+
+
+        
+
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+    
+
+    
+  </div>
+
+  
+
+<script>
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="/lib/jquery/index.js?v=3.4.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+
+  
+  <script src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+
+
+
+
+  <script src="/js/utils.js?v=7.2.0"></script>
+
+  <script src="/js/motion.js?v=7.2.0"></script>
+
+
+
+  
+  
+
+
+  <script src="/js/schemes/muse.js?v=7.2.0"></script>
+
+
+
+  
+  <script src="/js/scrollspy.js?v=7.2.0"></script>
+<script src="/js/post-details.js?v=7.2.0"></script>
+
+
+
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+    
+
+<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
+
+
+
+<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
+
+
+
+<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
+
+<script>
+  var gitalk = new Gitalk({
+    clientID: '1b976dbc382f1d1e40ad',
+    clientSecret: '31090c96642b800a520a7fce87050edb2bcaaeb7',
+    repo: 'Blog-de-Shane',
+    owner: 'BillyStudio',
+    admin: ['BillyStudio'],
+    id: md5(location.pathname),
+    
+      language: window.navigator.language || window.navigator.userLanguage,
+    
+    distractionFreeMode: 'true'
+  });
+  gitalk.render('gitalk-container');
+</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+</body>
+</html>

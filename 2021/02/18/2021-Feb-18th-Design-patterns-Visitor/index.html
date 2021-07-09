@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="访问者模式允许在不改变对象的类定义的情况下，新增对于对象的操作。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-03-03T15:52:10.427Z">
+<meta property="og:updated_time" content="2021-04-29T08:34:07.174Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式 之 访问者模式">
 <meta name="twitter:description" content="访问者模式允许在不改变对象的类定义的情况下，新增对于对象的操作。">
@@ -368,11 +368,26 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-03-03 23:52:10" itemprop="dateModified" datetime="2021-03-03T23:52:10+08:00">2021-03-03</time>
+                <time title="Modified: 2021-04-29 16:34:07" itemprop="dateModified" datetime="2021-04-29T16:34:07+08:00">2021-04-29</time>
               </span>
             
           
 
+          
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">In</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/JuliuSC项目/" itemprop="url" rel="index"><span itemprop="name">JuliuSC项目</span></a></span>
+
+                
+                
+              
+            </span>
           
 
           
@@ -396,7 +411,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">526</span>
+              <span title="Symbols count in article">827</span>
             </span>
           
 
@@ -430,7 +445,9 @@
         <p>访问者模式允许在不改变对象的类定义的情况下，新增对于对象的操作。 <a id="more"></a><br>主要意图是将数据结构和数据操作分离，适用于稳定的数据结构和易变的操作耦合问题。</p>
 <p>以SPESC-Compiler项目中的TermVisitor为例：</p>
 <p>Parser在生成AST的过程中，访问到节点时通过调用visit方法，返回对应节点的对象。所以就需要重写访问对应节点context的visit方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ContractVisitor</span> <span class="keyword">extends</span> <span class="title">SpescBaseVisitor</span>&lt;<span class="title">ContractDefinition</span>&gt; </span>&#123;</span><br><span class="line">	<span class="keyword">private</span> Scope scope;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> ContractDefinition <span class="title">visitContractDefinition</span><span class="params">(SpescParser.ContractDefinitionContext ctx)</span> </span>&#123;</span><br><span class="line">		...</span><br><span class="line">		<span class="keyword">return</span> <span class="keyword">new</span> ContractDefinition(contractTitle, parties, terms);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>ContractDefinition中各种属性的填充也依赖于其子节点的visit方法。<br>通过对象的accept方法唤起visit方法</p>
+<p>ContractDefinition中各种属性的填充也依赖于其子节点的visit方法。</p>
+<p>通过对象的accept方法唤起visit方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> &lt;T&gt; <span class="function">T <span class="title">accept</span><span class="params">(ParseTreeVisitor&lt;? extends T&gt; visitor)</span> </span>&#123;</span><br><span class="line">	<span class="keyword">if</span> ( visitor <span class="keyword">instanceof</span> SpescVisitor )</span><br><span class="line">		<span class="keyword">return</span> ((SpescVisitor&lt;? extends T&gt;)visitor).visitContractDefinition(<span class="keyword">this</span>);</span><br><span class="line">	<span class="keyword">else</span></span><br><span class="line">		<span class="keyword">return</span> visitor.visitChildren(<span class="keyword">this</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>这里会判断访问者是否为根访问者SpescVisitor，如果是，则从顶端ContractDefinition开始访问<br>如果不是，则访问child</p>
 
       
     </div>
@@ -550,7 +567,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">145</span>
+                    <span class="site-state-item-count">148</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -580,7 +597,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">170</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -630,7 +647,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">392k</span>
+    <span title="Symbols count total">405k</span>
   
 
   
@@ -639,7 +656,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">5:56</span>
+    <span title="Reading time total">6:08</span>
   
 </div>
 

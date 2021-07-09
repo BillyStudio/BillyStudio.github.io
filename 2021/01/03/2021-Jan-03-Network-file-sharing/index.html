@@ -90,18 +90,18 @@
 
 
 
-  <meta name="description" content="Mapping network driveWinwindows 支持 ftp、samba、nfs（win10新加入）等多种文件共享协议。在没有防火墙的情况下都是好用的。hostname可在C:\Windows\System32\drivers\etc\hosts文件中配置 挂载nfs右键我的电脑-&amp;gt;Map Network Drive(注意nfs协议不能是添加网络位置)-&amp;gt;如lab-na">
+  <meta name="description" content="Mapping network driveWinwindows 支持 ftp、samba、nfs（win10新加入）等多种文件共享协议。在没有防火墙的情况下都是好用的。nfs 协议需要提前在控制面板&amp;gt;程序&amp;gt;新增/删除Windows功能&amp;gt;nfs功能 中开启。hostname可在C:\Windows\System32\drivers\etc\hosts文件中配置 挂载nfs右键我的电">
 <meta name="keywords" content="samba,nfs,ftp,openvpn">
 <meta property="og:type" content="article">
-<meta property="og:title" content="2021-Jan-03-Network-file-sharing">
+<meta property="og:title" content="配置网络文件共享">
 <meta property="og:url" content="http://BillyStudio.github.io/2021/01/03/2021-Jan-03-Network-file-sharing/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="Mapping network driveWinwindows 支持 ftp、samba、nfs（win10新加入）等多种文件共享协议。在没有防火墙的情况下都是好用的。hostname可在C:\Windows\System32\drivers\etc\hosts文件中配置 挂载nfs右键我的电脑-&amp;gt;Map Network Drive(注意nfs协议不能是添加网络位置)-&amp;gt;如lab-na">
+<meta property="og:description" content="Mapping network driveWinwindows 支持 ftp、samba、nfs（win10新加入）等多种文件共享协议。在没有防火墙的情况下都是好用的。nfs 协议需要提前在控制面板&amp;gt;程序&amp;gt;新增/删除Windows功能&amp;gt;nfs功能 中开启。hostname可在C:\Windows\System32\drivers\etc\hosts文件中配置 挂载nfs右键我的电">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-01-03T02:59:00.544Z">
+<meta property="og:updated_time" content="2021-06-14T08:49:05.906Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="2021-Jan-03-Network-file-sharing">
-<meta name="twitter:description" content="Mapping network driveWinwindows 支持 ftp、samba、nfs（win10新加入）等多种文件共享协议。在没有防火墙的情况下都是好用的。hostname可在C:\Windows\System32\drivers\etc\hosts文件中配置 挂载nfs右键我的电脑-&amp;gt;Map Network Drive(注意nfs协议不能是添加网络位置)-&amp;gt;如lab-na">
+<meta name="twitter:title" content="配置网络文件共享">
+<meta name="twitter:description" content="Mapping network driveWinwindows 支持 ftp、samba、nfs（win10新加入）等多种文件共享协议。在没有防火墙的情况下都是好用的。nfs 协议需要提前在控制面板&amp;gt;程序&amp;gt;新增/删除Windows功能&amp;gt;nfs功能 中开启。hostname可在C:\Windows\System32\drivers\etc\hosts文件中配置 挂载nfs右键我的电">
 
 
 
@@ -119,7 +119,7 @@
   };
 </script>
 
-  <title>2021-Jan-03-Network-file-sharing | Shane's Blog</title>
+  <title>配置网络文件共享 | Shane's Blog</title>
   
 
 
@@ -327,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">2021-Jan-03-Network-file-sharing
+          <h1 class="post-title" itemprop="name headline">配置网络文件共享
 
               
             
@@ -353,13 +353,23 @@
                 
               
 
-              <time title="Created: 2021-01-03 10:22:26 / Modified: 10:59:00" itemprop="dateCreated datePublished" datetime="2021-01-03T10:22:26+08:00">2021-01-03</time>
+              <time title="Created: 2021-01-03 10:22:26" itemprop="dateCreated datePublished" datetime="2021-01-03T10:22:26+08:00">2021-01-03</time>
             </span>
           
 
           
             
 
+            
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">Edited on</span>
+                
+                <time title="Modified: 2021-06-14 16:49:05" itemprop="dateModified" datetime="2021-06-14T16:49:05+08:00">2021-06-14</time>
+              </span>
             
           
 
@@ -417,14 +427,14 @@
       
 
       
-        <h1 id="Mapping-network-drive"><a href="#Mapping-network-drive" class="headerlink" title="Mapping network drive"></a>Mapping network drive</h1><h2 id="Win"><a href="#Win" class="headerlink" title="Win"></a>Win</h2><p>windows 支持 ftp、samba、nfs（win10新加入）等多种文件共享协议。在没有防火墙的情况下都是好用的。<br>hostname可在C:\Windows\System32\drivers\etc\hosts文件中配置</p>
+        <h1 id="Mapping-network-drive"><a href="#Mapping-network-drive" class="headerlink" title="Mapping network drive"></a>Mapping network drive</h1><h2 id="Win"><a href="#Win" class="headerlink" title="Win"></a>Win</h2><p>windows 支持 ftp、samba、nfs（win10新加入）等多种文件共享协议。在没有防火墙的情况下都是好用的。<br>nfs 协议需要提前在控制面板&gt;程序&gt;新增/删除Windows功能&gt;nfs功能 中开启。<br>hostname可在C:\Windows\System32\drivers\etc\hosts文件中配置</p>
 <h3 id="挂载nfs"><a href="#挂载nfs" class="headerlink" title="挂载nfs"></a>挂载nfs</h3><p>右键我的电脑-&gt;Map Network Drive(注意nfs协议不能是添加网络位置)-&gt;如<code>lab-nas:/mnt/HD/HD_a2/Public</code></p>
 <p>由于nfs默认没有用户认证，注意配置nfs的匿名uid和gid<br>BusyBox nfs: 编辑 /etc/exports 文件的 anonuid=500 和 anongid=1000（admin用户访问）<br>然后更新配置文件 <code>exportfs -rv</code></p>
 <p>Windows NFS Client: Ctrl+R管理员regedit进入注册表：Computer\HKEY_LOCAL_MACHINE\SOFTWARE\Microsoft\ClientForNFS\CurrentVersion\Default<br>设置用户AnonymousUid 和 组 AnonymousGid 的 Decimal 值和服务器对应用户相同（500和1000）</p>
 <p>注：nfs需要两机器时间尽量同步</p>
 <h3 id="挂载samba绕过"><a href="#挂载samba绕过" class="headerlink" title="挂载samba绕过"></a>挂载samba绕过</h3><p>在一些网络环境中比如校园网屏蔽了smb的445端口时，需要采用端口绕过的方式来配置。</p>
 <h4 id="Linux服务器Samba配置"><a href="#Linux服务器Samba配置" class="headerlink" title="Linux服务器Samba配置"></a>Linux服务器Samba配置</h4><p>在smb.conf文件中改变端口(避开2000以内的约定俗成端口)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">smb ports = 2222 # 默认配置 smb ports = 445 139</span><br></pre></td></tr></table></figure></p>
-<h4 id="Win客户端配置"><a href="#Win客户端配置" class="headerlink" title="Win客户端配置"></a>Win客户端配置</h4><p>管理员身份打开 Powershell<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 开启端口转发（Portproxy）lab-server替换为服务器地址</span><br><span class="line">netsh interface portproxy add v4tov4 listenaddress=127.0.0.1 listenport=445 connectaddress=lab-server connectport=2222</span><br><span class="line"># 查看所有的代理</span><br><span class="line">netsh interface portproxy show all</span><br><span class="line"># 检查445端口监听状况</span><br><span class="line">netstat -ano | findstr :445</span><br><span class="line"># 删除代理(后期不用删除操作)</span><br><span class="line"># netsh interface portproxy delete v4tov4 listenport=445 listenaddress=127.0.0.1</span><br></pre></td></tr></table></figure></p>
+<h4 id="Win客户端配置"><a href="#Win客户端配置" class="headerlink" title="Win客户端配置"></a>Win客户端配置</h4><p>管理员身份打开 Powershell<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># 开启端口转发（Portproxy）lab-server替换为服务器地址</span><br><span class="line">netsh interface portproxy add v4tov4 listenaddress=127.0.0.1 listenport=445 connectaddress=inspiron-7537 connectport=2222</span><br><span class="line"># 查看所有的代理</span><br><span class="line">netsh interface portproxy show all</span><br><span class="line"># 检查445端口监听状况</span><br><span class="line">netstat -ano | findstr :445</span><br><span class="line"># 删除代理(后期不用删除操作)</span><br><span class="line"># netsh interface portproxy delete v4tov4 listenport=445 listenaddress=127.0.0.1</span><br></pre></td></tr></table></figure></p>
 <h2 id="Openvpn"><a href="#Openvpn" class="headerlink" title="Openvpn"></a>Openvpn</h2><p>Archwiki: <a href="https://wiki.archlinux.org/index.php/OpenVPN" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/OpenVPN</a></p>
 
       
@@ -560,7 +570,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">145</span>
+                    <span class="site-state-item-count">148</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -590,7 +600,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">170</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -657,7 +667,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">392k</span>
+    <span title="Symbols count total">405k</span>
   
 
   
@@ -666,7 +676,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">5:56</span>
+    <span title="Reading time total">6:08</span>
   
 </div>
 

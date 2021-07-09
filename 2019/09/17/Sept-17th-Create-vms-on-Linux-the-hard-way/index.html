@@ -105,7 +105,9 @@
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/after-install.png">
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/libvirt-uri.png">
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/vm-name.png">
-<meta property="og:updated_time" content="2021-04-06T13:21:12.251Z">
+<meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/addvol.png">
+<meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/afteradd.png">
+<meta property="og:updated_time" content="2021-04-24T06:49:27.974Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Creating virtual machiness on Linux --- the hard way">
 <meta name="twitter:description" content="Two ways of using vms on Linux are introduced.">
@@ -376,7 +378,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-04-06 21:21:12" itemprop="dateModified" datetime="2021-04-06T21:21:12+08:00">2021-04-06</time>
+                <time title="Modified: 2021-04-24 14:49:27" itemprop="dateModified" datetime="2021-04-24T14:49:27+08:00">2021-04-24</time>
               </span>
             
           
@@ -404,7 +406,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">4.7k</span>
+              <span title="Symbols count in article">4.8k</span>
             </span>
           
 
@@ -468,9 +470,9 @@
 <p><img src="vm-name.png" alt="vm-name"></p>
 <p>Now we can test the direct-open command:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virt-manager --connect qemu:///system --show-domain-console win10</span><br></pre></td></tr></table></figure></p>
 <p>Then create your desktop file under <code>~/.local/share/applications</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Version=1.0</span><br><span class="line">Type=Application</span><br><span class="line">Name=win10</span><br><span class="line">Comment=Start Win10 VM</span><br><span class="line">Exec=virt-manager --connect qemu:///system --show-domain-console win10</span><br><span class="line">Icon=your/logo/position/windows.svg</span><br><span class="line">Terminal=false</span><br><span class="line">StartupNotify=false</span><br></pre></td></tr></table></figure></p>
-<h3 id="Expand-block-image-size"><a href="#Expand-block-image-size" class="headerlink" title="Expand block image size"></a>Expand block image size</h3><p>add 5G to my win10 volume:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># virsh list --all</span><br><span class="line"> Id   Name    State</span><br><span class="line">------------------------</span><br><span class="line"> -    win10   shut off</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># cd /var/lib/libvirt/images/</span><br><span class="line"># ls -lh win10vol.img</span><br><span class="line"># qemu-img resize win10vol.img +5G</span><br></pre></td></tr></table></figure>
-<p>Then open win10 -&gt; Disk management -&gt; expand C:\ , ok.</p>
+<h3 id="Expand-block-image-size"><a href="#Expand-block-image-size" class="headerlink" title="Expand block image size"></a>Expand block image size</h3><p>To add 5G to my win10 raw format volume, first check the state:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># virsh list --all</span><br><span class="line"> Id   Name    State</span><br><span class="line">------------------------</span><br><span class="line"> -    win10   shut off</span><br></pre></td></tr></table></figure></p>
+<p>Then go to increase<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># cd /var/lib/libvirt/images/</span><br><span class="line"># ls -lh win10vol.img</span><br><span class="line"># qemu-img resize win10vol.img +5G</span><br></pre></td></tr></table></figure></p>
+<p>Then start win10 VM and right click ‘Start Menu’ -&gt; Disk management -&gt; Extend Volumn C:\<br><img src="addvol.png" alt="addvol.png"><br>ok.<br><img src="afteradd.png" alt="afteradd.png"></p>
 <h3 id="无线网卡直通"><a href="#无线网卡直通" class="headerlink" title="无线网卡直通"></a>无线网卡直通</h3><p>默认的虚拟机使用NAT模式上网，对一些其他上网模式也是支持的。<br>目前我对于桥接模式的配置没有成功，所以这里记录只成功了的网卡直通模式。<br>在该模式下，虚拟机直接使用无线网卡联网，宿主机可以用有线连接。</p>
 <p>参考：<a href="https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF</a><br>首先，是启用iommu<br>在计算机启动的grub页面按e进入kernal模式，在启动vmlinuz的参数后面添加 intel_iommu=on 和 iommu=pt</p>
 <p>成功开机后root使用下面命令检查无线网卡的pci地址：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">shopt -s nullglob</span><br><span class="line">for g in `find /sys/kernel/iommu_groups/* -maxdepth 0 -type d | sort -V`; do</span><br><span class="line">    echo &quot;IOMMU Group $&#123;g##*/&#125;:&quot;</span><br><span class="line">    for d in $g/devices/*; do</span><br><span class="line">        echo -e &quot;\t$(lspci -nns $&#123;d##*/&#125;)&quot;</span><br><span class="line">    done;</span><br><span class="line">done;</span><br></pre></td></tr></table></figure></p>
@@ -626,7 +628,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">145</span>
+                    <span class="site-state-item-count">148</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -656,7 +658,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">170</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -723,7 +725,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">392k</span>
+    <span title="Symbols count total">405k</span>
   
 
   
@@ -732,7 +734,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">5:56</span>
+    <span title="Reading time total">6:08</span>
   
 </div>
 

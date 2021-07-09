@@ -99,8 +99,9 @@
 <meta property="og:description" content="本文关注于利用UML框图将模型表达为代码的过程，其中穿插有设计模式。">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://billystudio.github.io/2020/05/08/2020-05-08-UML-from-model-to-code/Screenshot%20from%202020-05-08%2017-33-45.png">
+<meta property="og:image" content="http://billystudio.github.io/2020/05/08/2020-05-08-UML-from-model-to-code/unspecified-association.png">
 <meta property="og:image" content="http://billystudio.github.io/2020/05/08/2020-05-08-UML-from-model-to-code/aggregation-example.png">
-<meta property="og:updated_time" content="2021-01-02T13:17:03.404Z">
+<meta property="og:updated_time" content="2021-06-07T14:25:39.369Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UML diagrams --- from models to codes">
 <meta name="twitter:description" content="本文关注于利用UML框图将模型表达为代码的过程，其中穿插有设计模式。">
@@ -371,7 +372,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-01-02 21:17:03" itemprop="dateModified" datetime="2021-01-02T21:17:03+08:00">2021-01-02</time>
+                <time title="Modified: 2021-06-07 22:25:39" itemprop="dateModified" datetime="2021-06-07T22:25:39+08:00">2021-06-07</time>
               </span>
             
           
@@ -399,7 +400,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">1.8k</span>
+              <span title="Symbols count in article">1.9k</span>
             </span>
           
 
@@ -433,11 +434,11 @@
         <p>本文关注于利用UML框图将模型表达为代码的过程，其中穿插有设计模式。 <a id="more"></a></p>
 <h1 id="类之间的关系"><a href="#类之间的关系" class="headerlink" title="类之间的关系"></a>类之间的关系</h1><h2 id="整体部分关系"><a href="#整体部分关系" class="headerlink" title="整体部分关系"></a>整体部分关系</h2><p><img src="Screenshot from 2020-05-08 17-33-45.png" alt="整体部分类关系"><br>整体-部分关系使用一条带菱形的线段表示。</p>
 <p>整体-部分关系可再细分为以下几种。</p>
-<h3 id="关联关系-Association"><a href="#关联关系-Association" class="headerlink" title="关联关系(Association)"></a>关联关系(Association)</h3><p>关联类B以类属性的形式出现在关联类A中，也可能是关联类A引用了一个类型为类B的全局变量。</p>
-<h3 id="聚合关系-Aggregation"><a href="#聚合关系-Aggregation" class="headerlink" title="聚合关系(Aggregation)"></a>聚合关系(Aggregation)</h3><p>聚合关系是关联关系的一种特例，他体现的是整体与部分、拥有的关系，即 has-a 的关系。此时，整体与部分之间是可分离的，他们可以具有各自的生命周期，部分可以属于多个整体对象，也可以为多个整体对象共享；比如计算机与CPU、公司与员工的关系等。代码层面的表现和关联关系是一致的，只能从语义级别来区分。<br><img src="aggregation-example.png" alt="比赛队和运动员的例子"></p>
+<h3 id="1-关联关系-Association"><a href="#1-关联关系-Association" class="headerlink" title="1.关联关系(Association)"></a>1.关联关系(Association)</h3><p>关联类B以类属性的形式出现在关联类A中，也可能是关联类A引用了一个类型为类B的全局变量。如学生-课程-老师的关联关系：1名学生可以选0到多门课程，每门课程对应至少1名学生；1门课程有1位授课老师，一名老师可以教授0到多门课程。<br><img src="unspecified-association.png" alt="Teacher-Cource-Students"></p>
+<h3 id="2-聚合关系-Aggregation"><a href="#2-聚合关系-Aggregation" class="headerlink" title="2.聚合关系(Aggregation)"></a>2.聚合关系(Aggregation)</h3><p>聚合关系是关联关系的一种特例，他体现的是整体与部分、拥有的关系，即 has-a 的关系。此时，整体与部分之间是可分离的，他们可以具有各自的生命周期，部分可以属于多个整体对象，也可以为多个整体对象共享；比如计算机与CPU、公司与员工的关系等。代码层面的表现和关联关系是一致的，只能从语义级别来区分。<br><img src="aggregation-example.png" alt="比赛队和运动员的例子"></p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/**</span></span><br><span class="line"><span class="comment"> * 聚合关系示例</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 运动员</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Athelete</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Athelete</span><span class="params">(String _name)</span> </span>&#123;</span><br><span class="line">        name = _name;</span><br><span class="line">        System.out.println(<span class="string">"A new athelete:"</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 比赛队</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Team</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String name;</span><br><span class="line">    <span class="keyword">private</span> List&lt;Athelete&gt; atheletes;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Team</span><span class="params">(String _name)</span> </span>&#123;</span><br><span class="line">        name = _name;</span><br><span class="line">        System.out.println(<span class="string">"A new team:"</span> + name);</span><br><span class="line">        atheletes = <span class="keyword">new</span> List&lt;Athelete&gt;();</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">addAthelete</span><span class="params">(String athelete_name)</span> </span>&#123;</span><br><span class="line">        atheletes.add(<span class="keyword">new</span> Athelete(athelete_name));</span><br><span class="line">        System.out.println(<span class="string">"Add "</span> + athelete_name + <span class="string">" into "</span> + name);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>在示例中，运动员数组对象作为比赛队类中的私有对象，使用setter方法来设置。</p>
-<h3 id="组合关系-Composition"><a href="#组合关系-Composition" class="headerlink" title="组合关系(Composition)"></a>组合关系(Composition)</h3><p>组合也是关联关系的一种特例，他体现的是contains-a的关系。这种关系更强，也称为强聚合。它同样体现整体与部分的关系，但此时整体与部分是不可分的，整体的生命周期结束也就意味这部分的生命周期结束，比如人和人的大脑。表现在代码层面，和关联关系是一致的，只能从语义级别来区分。</p>
+<h3 id="3-组合关系-Composition"><a href="#3-组合关系-Composition" class="headerlink" title="3.组合关系(Composition)"></a>3.组合关系(Composition)</h3><p>组合也是关联关系的一种特例，他体现的是contains-a的关系。这种关系更强，也称为强聚合。它同样体现整体与部分的关系，但此时整体与部分是不可分的，整体的生命周期结束也就意味这部分的生命周期结束，比如人和人的大脑。表现在代码层面，和关联关系是一致的，只能从语义级别来区分。</p>
 <p>总的来说，几种关系所表现的强弱程度依次为：组合 &gt; 聚合 &gt; 关联。</p>
 <h3 id="关联与聚合关系的比较"><a href="#关联与聚合关系的比较" class="headerlink" title="关联与聚合关系的比较"></a>关联与聚合关系的比较</h3><ol>
 <li>从代码层面表现看，关联与聚合是一致的，只能从语义级别来区分</li>
@@ -581,7 +582,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">145</span>
+                    <span class="site-state-item-count">148</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -611,7 +612,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">170</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -645,7 +646,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#类之间的关系"><span class="nav-number">1.</span> <span class="nav-text">类之间的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#整体部分关系"><span class="nav-number">1.1.</span> <span class="nav-text">整体部分关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#关联关系-Association"><span class="nav-number">1.1.1.</span> <span class="nav-text">关联关系(Association)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#聚合关系-Aggregation"><span class="nav-number">1.1.2.</span> <span class="nav-text">聚合关系(Aggregation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#组合关系-Composition"><span class="nav-number">1.1.3.</span> <span class="nav-text">组合关系(Composition)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联与聚合关系的比较"><span class="nav-number">1.1.4.</span> <span class="nav-text">关联与聚合关系的比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一般-特殊关系"><span class="nav-number">1.2.</span> <span class="nav-text">一般-特殊关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#继承关系"><span class="nav-number">1.2.1.</span> <span class="nav-text">继承关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现关系"><span class="nav-number">1.2.2.</span> <span class="nav-text">实现关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象之间的消息"><span class="nav-number">1.3.</span> <span class="nav-text">对象之间的消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖关系"><span class="nav-number">1.4.</span> <span class="nav-text">依赖关系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#类之间的关系"><span class="nav-number">1.</span> <span class="nav-text">类之间的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#整体部分关系"><span class="nav-number">1.1.</span> <span class="nav-text">整体部分关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-关联关系-Association"><span class="nav-number">1.1.1.</span> <span class="nav-text">1.关联关系(Association)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-聚合关系-Aggregation"><span class="nav-number">1.1.2.</span> <span class="nav-text">2.聚合关系(Aggregation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-组合关系-Composition"><span class="nav-number">1.1.3.</span> <span class="nav-text">3.组合关系(Composition)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联与聚合关系的比较"><span class="nav-number">1.1.4.</span> <span class="nav-text">关联与聚合关系的比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一般-特殊关系"><span class="nav-number">1.2.</span> <span class="nav-text">一般-特殊关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#继承关系"><span class="nav-number">1.2.1.</span> <span class="nav-text">继承关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现关系"><span class="nav-number">1.2.2.</span> <span class="nav-text">实现关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象之间的消息"><span class="nav-number">1.3.</span> <span class="nav-text">对象之间的消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖关系"><span class="nav-number">1.4.</span> <span class="nav-text">依赖关系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">2.</span> <span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -678,7 +679,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">392k</span>
+    <span title="Symbols count total">405k</span>
   
 
   
@@ -687,7 +688,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">5:56</span>
+    <span title="Reading time total">6:08</span>
   
 </div>
 

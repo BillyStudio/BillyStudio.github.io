@@ -100,7 +100,7 @@
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://billystudio.github.io/2021/02/04/2021-Feb-4th-Spesc-JVM-language/jps-jinfo.png">
 <meta property="og:image" content="http://billystudio.github.io/2021/02/04/2021-Feb-4th-Spesc-JVM-language/default_gc.png">
-<meta property="og:updated_time" content="2021-04-02T01:18:01.375Z">
+<meta property="og:updated_time" content="2021-06-14T08:48:15.533Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spesc JVM language development">
 <meta name="twitter:description" content="开发基于JVM的SPESC语言">
@@ -371,7 +371,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-04-02 09:18:01" itemprop="dateModified" datetime="2021-04-02T09:18:01+08:00">2021-04-02</time>
+                <time title="Modified: 2021-06-14 16:48:15" itemprop="dateModified" datetime="2021-06-14T16:48:15+08:00">2021-06-14</time>
               </span>
             
           
@@ -414,7 +414,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">2.7k</span>
+              <span title="Symbols count in article">6.4k</span>
             </span>
           
 
@@ -426,7 +426,7 @@
               
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               
-              <span title="Reading time">2 mins.</span>
+              <span title="Reading time">6 mins.</span>
             </span>
           
 
@@ -446,6 +446,7 @@
 
       
         <p>开发基于JVM的SPESC语言 <a id="more"></a></p>
+<h1 id="PreRequisites"><a href="#PreRequisites" class="headerlink" title="PreRequisites"></a>PreRequisites</h1><p>antlr4<br>asm-plugin: <a href="https://github.com/kamiiel/asm-intellij-plugin/releases" target="_blank" rel="noopener">https://github.com/kamiiel/asm-intellij-plugin/releases</a><br>  Intellij IDEA Install plugin from disk</p>
 <h2 id="排错记录"><a href="#排错记录" class="headerlink" title="排错记录"></a>排错记录</h2><p>编译过程没问题，执行时报错：<br>Exception in thread “main” java.lang.ClassFormatError: Field “out” in class test has illegal signature “Ljava/io/PrintStream”</p>
 <p>错误原因：在产生字节码的过程中，调用PrintStream忘记加分号<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">methodVisitor.visitFieldInsn(GETSTATIC, &quot;java/lang/System&quot;, &quot;out&quot;,</span><br><span class="line">					&quot;Ljava/io/PrintStream&quot;);</span><br></pre></td></tr></table></figure></p>
 <p>应为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">methodVisitor.visitFieldInsn(GETSTATIC, &quot;java/lang/System&quot;, &quot;out&quot;,</span><br><span class="line">					&quot;Ljava/io/PrintStream;&quot;);</span><br></pre></td></tr></table></figure></p>
@@ -455,9 +456,109 @@
 <p>查看默认垃圾回收器<br><img src="default_gc.png" alt="default_gc.png"></p>
 <h2 id="JVM字节码"><a href="#JVM字节码" class="headerlink" title="JVM字节码"></a>JVM字节码</h2><h3 id="解析一个接口"><a href="#解析一个接口" class="headerlink" title="解析一个接口"></a>解析一个接口</h3><p>接口定义：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> edu.ustb.spesc.element;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">InterfaceLook</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>javap -v 结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Classfile /home/wsd/STEM/Experiments/SPESC-Java-Compiler/compiler/target/test-classes/edu/ustb/spesc/element/InterfaceLook.class</span><br><span class="line">  Last modified Apr 1, 2021; size 130 bytes</span><br><span class="line">  MD5 checksum 849d09ca95f1ed5733cca527dce9ed9c</span><br><span class="line">  Compiled from &quot;InterfaceLook.java&quot;</span><br><span class="line">public interface edu.ustb.spesc.element.InterfaceLook</span><br><span class="line">  minor version: 0</span><br><span class="line">  major version: 52</span><br><span class="line">  flags: ACC_PUBLIC, ACC_INTERFACE, ACC_ABSTRACT</span><br><span class="line">Constant pool:</span><br><span class="line">  #1 = Class              #5              // edu/ustb/spesc/element/InterfaceLook</span><br><span class="line">  #2 = Class              #6              // java/lang/Object</span><br><span class="line">  #3 = Utf8               SourceFile</span><br><span class="line">  #4 = Utf8               InterfaceLook.java</span><br><span class="line">  #5 = Utf8               edu/ustb/spesc/element/InterfaceLook</span><br><span class="line">  #6 = Utf8               java/lang/Object</span><br><span class="line">&#123;</span><br><span class="line">&#125;</span><br><span class="line">SourceFile: &quot;InterfaceLook.java&quot;</span><br></pre></td></tr></table></figure></p>
+<p>一些操作码助记符：除了比较容易记住的 i=int, l=long, s=short, b=byte, c=char, f=float, d=double,<br>还有 z=boolean, a=reference</p>
+<h3 id="DUP"><a href="#DUP" class="headerlink" title="DUP"></a>DUP</h3><p>这是一条直接操作操作数栈的指令，表示复制操作数栈栈顶的值，并插入到栈顶<br>比如最常见的：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function">Object <span class="title">create</span><span class="params">()</span> </span>&#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="keyword">new</span> Object();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>编译后字节码如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Method java.lang.Object create()</span><br><span class="line"> 0 new #1 // Class java.lang.Object</span><br><span class="line"> 3 dup</span><br><span class="line"> 4 invokespecial #4 // Method java.lang.Object.&lt;init&gt;()V</span><br><span class="line"> 7 areturn</span><br></pre></td></tr></table></figure></p>
+<p>第0行通过new创建了一个Object类型的对象，并将其引用压入栈顶<br>第3行复制栈顶的引用一份<br>第4行调用invokespecial为Object的构造函数，这里会消耗一个引用<br>所以第3行需要复制一份，不然调用invokespecial后会导致无法返回实例引用</p>
 <h3 id="解析一个类"><a href="#解析一个类" class="headerlink" title="解析一个类"></a>解析一个类</h3><p>类定义：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> edu.ustb.spesc;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">bytecodeTest</span> </span>&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <p>javap -v 结果：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">Classfile /home/wsd/STEM/Experiments/SPESC-Java-Compiler/compiler/target/test-classes/edu/ustb/spesc/bytecodeTest.class</span><br><span class="line">  Last modified Apr 1, 2021; size 291 bytes</span><br><span class="line">  MD5 checksum 58439c875ed1b27cf7a5a68507efbf13</span><br><span class="line">  Compiled from &quot;bytecodeTest.java&quot;</span><br><span class="line">public class edu.ustb.spesc.bytecodeTest</span><br><span class="line">  minor version: 0</span><br><span class="line">  major version: 52</span><br><span class="line">  flags: ACC_PUBLIC, ACC_SUPER</span><br><span class="line">Constant pool:</span><br><span class="line">   #1 = Methodref          #3.#13         // java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">   #2 = Class              #14            // edu/ustb/spesc/bytecodeTest</span><br><span class="line">   #3 = Class              #15            // java/lang/Object</span><br><span class="line">   #4 = Utf8               &lt;init&gt;</span><br><span class="line">   #5 = Utf8               ()V</span><br><span class="line">   #6 = Utf8               Code</span><br><span class="line">   #7 = Utf8               LineNumberTable</span><br><span class="line">   #8 = Utf8               LocalVariableTable</span><br><span class="line">   #9 = Utf8               this</span><br><span class="line">  #10 = Utf8               Ledu/ustb/spesc/bytecodeTest;</span><br><span class="line">  #11 = Utf8               SourceFile</span><br><span class="line">  #12 = Utf8               bytecodeTest.java</span><br><span class="line">  #13 = NameAndType        #4:#5          // &quot;&lt;init&gt;&quot;:()V</span><br><span class="line">  #14 = Utf8               edu/ustb/spesc/bytecodeTest</span><br><span class="line">  #15 = Utf8               java/lang/Object</span><br><span class="line">&#123;</span><br><span class="line">  public edu.ustb.spesc.bytecodeTest();</span><br><span class="line">    descriptor: ()V</span><br><span class="line">    flags: ACC_PUBLIC</span><br><span class="line">    Code:</span><br><span class="line">      stack=1, locals=1, args_size=1</span><br><span class="line">         0: aload_0</span><br><span class="line">         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">         4: return</span><br><span class="line">      LineNumberTable:</span><br><span class="line">        line 3: 0</span><br><span class="line">      LocalVariableTable:</span><br><span class="line">        Start  Length  Slot  Name   Signature</span><br><span class="line">            0       5     0  this   Ledu/ustb/spesc/bytecodeTest;</span><br><span class="line">&#125;</span><br><span class="line">SourceFile: &quot;bytecodeTest.java&quot;</span><br></pre></td></tr></table></figure></p>
 <p>由于JVM解析Java文件是按照行来解析的，一行Java代码可能对应多行字节码，所以设置 LineNumberTable 这个属性就是表示java文件的某行与字节码某行的对应关系。<br>比如上面的显示 line 3: 0 就表示bytecodeTest.java的第3行对应解析到jvm字节码的第0行即 aload_0<br>Slot是字节码中的存储单位，1个Slot大小为32bit（4 bytes）</p>
+<h1 id="使用ASM操作字节码"><a href="#使用ASM操作字节码" class="headerlink" title="使用ASM操作字节码"></a>使用ASM操作字节码</h1><p>methodVisitor.visitMethodInsn五个参数</p>
+<ol>
+<li>INVOKE</li>
+<li>调用函数的内部全类名</li>
+<li>函数名</li>
+<li>返回类型</li>
+<li>是否接口调用</li>
+</ol>
+<h2 id="一些与标准文档的出入之处"><a href="#一些与标准文档的出入之处" class="headerlink" title="一些与标准文档的出入之处"></a>一些与标准文档的出入之处</h2><p>3.1 .用作结构体访问的操作符，用做结束符会冲突<br>6.3 当事人描述中的 field 不止属于当事人，还可以作为合约的全局变量<br>另外，在filed定义中  attribute : (constant | type)<br>实际匹配过程应该是先匹配type，再匹配constant。否则如果出现类似 name : String 会将其匹配到constant<br>所以程序中使用 name : (type | value) 的方式匹配<br>name : IDENTIFIER<br>type : BOOLEAN (‘[‘ ‘]’)<em><br>        | INTEGER (‘[‘ ‘]’)</em> ;<br>value : NUMBER | STRING ;<br>其中，(‘[‘ ‘]’)*用于匹配数组</p>
+<p>6.8 有关系符号，但缺少关系表达式<br>关系表达式属于谓词，可返回Yes,No,Unknown<br>关系表达式中可再分所属关系和比较关系，所属关系的关键词是belongsTo，比较关系的关键词有 &gt; &gt;= &lt; &lt;= == !=<br>所以在规则中添加了relationalExpression</p>
+<h3 id="实验探究-invokespecial-和-invokevirtual-的区别"><a href="#实验探究-invokespecial-和-invokevirtual-的区别" class="headerlink" title="实验探究 invokespecial 和 invokevirtual 的区别"></a>实验探究 invokespecial 和 invokevirtual 的区别</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LibSayHello</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sayHello</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Hello"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>bytecode如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public sayHello()V</span><br><span class="line">  L0</span><br><span class="line">  LINENUMBER 5 L0</span><br><span class="line">  GETSTATIC java/lang/System.out : Ljava/io/PrintStream;</span><br><span class="line">  LDC &quot;Hello&quot;</span><br><span class="line">  INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V</span><br><span class="line">  L1</span><br><span class="line">  LINENUMBER 6 L1</span><br><span class="line">  RETURN</span><br><span class="line">  L2</span><br><span class="line">  LOCALVARIABLE this Ledu/ustb/spesc/LibSayHello; L0 L2 0</span><br><span class="line">  MAXSTACK = 2</span><br><span class="line">  MAXLOCALS = 1</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">MainTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        LibSayHello testObj = <span class="keyword">new</span> LibSayHello();</span><br><span class="line">        testObj.sayHello();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>bytecode如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public static main([Ljava/lang/String;)V</span><br><span class="line">  L0</span><br><span class="line">  LINENUMBER 5 L0</span><br><span class="line">  NEW edu/ustb/spesc/LibSayHello</span><br><span class="line">  DUP</span><br><span class="line">  INVOKESPECIAL edu/ustb/spesc/LibSayHello.&lt;init&gt; ()V</span><br><span class="line">  ASTORE 1</span><br><span class="line">  L1</span><br><span class="line">  LINENUMBER 6 L1</span><br><span class="line">  ALOAD 1</span><br><span class="line">  INVOKEVIRTUAL edu/ustb/spesc/LibSayHello.sayHello ()V</span><br><span class="line">  L2</span><br><span class="line">  LINENUMBER 7 L2</span><br><span class="line">  RETURN</span><br><span class="line">  L3</span><br><span class="line">  LOCALVARIABLE args [Ljava/lang/String; L0 L3 0</span><br><span class="line">  LOCALVARIABLE testObj Ledu/ustb/spesc/LibSayHello; L1 L3 1</span><br><span class="line">  MAXSTACK = 2</span><br><span class="line">  MAXLOCALS = 2</span><br></pre></td></tr></table></figure></p>
+<p>可以看到，init构造函数使用的是INVOKESPECIAL，普通方法sayHello使用的是INVOKEVIRTUAL</p>
+<p>再来进行一层抽象，将LibHello写成接口的形式，类LibHelloImpl用于实现，此时测试main函数的bytecode变为如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public static main([Ljava/lang/String;)V</span><br><span class="line">  L0</span><br><span class="line">  LINENUMBER 5 L0</span><br><span class="line">  NEW edu/ustb/spesc/LibHelloImpl</span><br><span class="line">  DUP</span><br><span class="line">  INVOKESPECIAL edu/ustb/spesc/LibHelloImpl.&lt;init&gt; ()V</span><br><span class="line">  ASTORE 1</span><br><span class="line">  L1</span><br><span class="line">  LINENUMBER 6 L1</span><br><span class="line">  ALOAD 1</span><br><span class="line">  INVOKEINTERFACE edu/ustb/spesc/LibHello.sayHello ()V (itf)</span><br><span class="line">  L2</span><br><span class="line">  LINENUMBER 7 L2</span><br><span class="line">  RETURN</span><br><span class="line">  L3</span><br><span class="line">  LOCALVARIABLE args [Ljava/lang/String; L0 L3 0</span><br><span class="line">  LOCALVARIABLE testObj Ledu/ustb/spesc/LibHello; L1 L3 1</span><br><span class="line">  MAXSTACK = 2</span><br><span class="line">  MAXLOCALS = 2</span><br></pre></td></tr></table></figure></p>
+<p>可以看到对sayHello的调用由原来的invokespecial变成了invokeinterface</p>
+<p>假如LibHello是abstract类呢？<br>实验后可以发现，不管LibHelloImpl是否重写hello方法，对sayHello的调用都变回了invokevirtual<br>并且只要LibHello不变，即使改变了LibHelloImpl，也不会触发对于MainTest的字节码重新编译</p>
+<h1 id="一些思考"><a href="#一些思考" class="headerlink" title="一些思考"></a>一些思考</h1><h3 id="条款对应实现的Java数据结构是怎样的？一个函数、多个函数还是一个类"><a href="#条款对应实现的Java数据结构是怎样的？一个函数、多个函数还是一个类" class="headerlink" title="条款对应实现的Java数据结构是怎样的？一个函数、多个函数还是一个类"></a>条款对应实现的Java数据结构是怎样的？一个函数、多个函数还是一个类</h3><p>一个函数表达不出条款的意思<br>多个函数方案可以将when，while，where分别对应到一个函数，不过难以统一判断条款的参与方party，需要每个函数前面都加一个判断。<br>一个类的方案目前还没遇到问题。</p>
+<h3 id="条款中的动作参数是形参还是实参"><a href="#条款中的动作参数是形参还是实参" class="headerlink" title="条款中的动作参数是形参还是实参"></a>条款中的动作参数是形参还是实参</h3><p>使用形参parametersList。因为条款里的动作相当于AOP中的PointCut，定义为ActionSignature<br>与此区分，test函数里的action调用定义为 functionCall，使用实参argumentList</p>
+<h2 id="关于不支持函数重载"><a href="#关于不支持函数重载" class="headerlink" title="关于不支持函数重载"></a>关于不支持函数重载</h2><p>一般说来，虽然Action中支持定义参数，但是我们一般不使用同名不同参来进行函数重载（即不支持函数重载）<br>原因是我们使用的是方法名作为唯一标示去查找和判定的。为什么不用Method？<br>因为 Method 不支持 Berkeley DB持久化存储。</p>
+<h1 id="ContractEngine-的设计"><a href="#ContractEngine-的设计" class="headerlink" title="ContractEngine 的设计"></a>ContractEngine 的设计</h1><p>根据Action是由自主触发还是AOP外部触发将工作模式分为自实现和AOP两种。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">自实现</th>
+<th style="text-align:center">AOP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">handleAction触发，内部调用method.invoke执行动作</td>
+<td style="text-align:center">Spring Bean中方法执行动作，@Pointcut拦截触发</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>两种模式对于duty的处理:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Duty</th>
+<th style="text-align:center">自实现</th>
+<th style="text-align:center">AOP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">can</td>
+<td style="text-align:center">通过调用handleAction触发</td>
+<td style="text-align:center">拦截外部调用后检查termObj, termObj.when 通过后执行</td>
+</tr>
+<tr>
+<td style="text-align:center">must</td>
+<td style="text-align:center">runMustActions 中触发调用must动作</td>
+<td style="text-align:center">和can对待是一样的。所以需要另写breach term处理must动作如果一直不触发的情况</td>
+</tr>
+<tr>
+<td style="text-align:center">cannot</td>
+<td style="text-align:center">handleAction中检查出来，则不发生动作执行</td>
+<td style="text-align:center">termObj.when 通过后，则不执行pjp.proceed</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>两种模式对于条件的处理：</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Condition</th>
+<th style="text-align:center">自实现</th>
+<th style="text-align:center">AOP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">when</td>
+<td style="text-align:center">termObj.when</td>
+<td style="text-align:center">和自实现一样</td>
+</tr>
+<tr>
+<td style="text-align:center">while</td>
+<td style="text-align:center">termObj.while，和method.invoke 并列执行</td>
+<td style="text-align:center">termObj.while，和 pjp.proceed 并列执行</td>
+</tr>
+<tr>
+<td style="text-align:center">where</td>
+<td style="text-align:center">termObj.where</td>
+<td style="text-align:center">和自实现一样</td>
+</tr>
+</tbody>
+</table>
+</div>
 
       
     </div>
@@ -586,7 +687,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">145</span>
+                    <span class="site-state-item-count">148</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -616,7 +717,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">170</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -650,7 +751,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#排错记录"><span class="nav-number">1.</span> <span class="nav-text">排错记录</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM结构"><span class="nav-number"></span> <span class="nav-text">JVM结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾回收（Garbage-Collection）"><span class="nav-number"></span> <span class="nav-text">垃圾回收（Garbage Collection）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM字节码"><span class="nav-number">1.</span> <span class="nav-text">JVM字节码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解析一个接口"><span class="nav-number">1.1.</span> <span class="nav-text">解析一个接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析一个类"><span class="nav-number">1.2.</span> <span class="nav-text">解析一个类</span></a></li></ol></li></ol></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#PreRequisites"><span class="nav-number">1.</span> <span class="nav-text">PreRequisites</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#排错记录"><span class="nav-number">1.1.</span> <span class="nav-text">排错记录</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#JVM结构"><span class="nav-number">2.</span> <span class="nav-text">JVM结构</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#垃圾回收（Garbage-Collection）"><span class="nav-number">3.</span> <span class="nav-text">垃圾回收（Garbage Collection）</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#JVM字节码"><span class="nav-number">3.1.</span> <span class="nav-text">JVM字节码</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#解析一个接口"><span class="nav-number">3.1.1.</span> <span class="nav-text">解析一个接口</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#DUP"><span class="nav-number">3.1.2.</span> <span class="nav-text">DUP</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#解析一个类"><span class="nav-number">3.1.3.</span> <span class="nav-text">解析一个类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#使用ASM操作字节码"><span class="nav-number">4.</span> <span class="nav-text">使用ASM操作字节码</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#一些与标准文档的出入之处"><span class="nav-number">4.1.</span> <span class="nav-text">一些与标准文档的出入之处</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#实验探究-invokespecial-和-invokevirtual-的区别"><span class="nav-number">4.1.1.</span> <span class="nav-text">实验探究 invokespecial 和 invokevirtual 的区别</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一些思考"><span class="nav-number">5.</span> <span class="nav-text">一些思考</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#条款对应实现的Java数据结构是怎样的？一个函数、多个函数还是一个类"><span class="nav-number">5.0.1.</span> <span class="nav-text">条款对应实现的Java数据结构是怎样的？一个函数、多个函数还是一个类</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#条款中的动作参数是形参还是实参"><span class="nav-number">5.0.2.</span> <span class="nav-text">条款中的动作参数是形参还是实参</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#关于不支持函数重载"><span class="nav-number">5.1.</span> <span class="nav-text">关于不支持函数重载</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#ContractEngine-的设计"><span class="nav-number">6.</span> <span class="nav-text">ContractEngine 的设计</span></a></li></div>
             
 
           </div>
@@ -683,7 +784,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">392k</span>
+    <span title="Symbols count total">405k</span>
   
 
   
@@ -692,7 +793,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">5:56</span>
+    <span title="Reading time total">6:08</span>
   
 </div>
 
