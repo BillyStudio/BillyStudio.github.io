@@ -91,7 +91,7 @@
 
 
   <meta name="description" content="以太坊开发团队开发了 Remix IDE 和配套的 Remix 一系列插件供智能合约实验用。当然也可以使用 Java 的 web3j 来实现这些功能">
-<meta name="keywords" content="Solidity,Ethereum,Smart Contracts,node.js,Remix IDE">
+<meta name="keywords" content="Solidity,Ethereum,Smart Contracts,Remix IDE,web3.js">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Solidity 智能合约实验">
 <meta property="og:url" content="http://BillyStudio.github.io/2020/03/19/2020-03-19-Solidity-Smart-Contract-Experiment/index.html">
@@ -113,7 +113,7 @@
 <meta property="og:image" content="http://billystudio.github.io/2020/03/19/2020-03-19-Solidity-Smart-Contract-Experiment/transaction-with-event-logs.png">
 <meta property="og:image" content="http://billystudio.github.io/2020/03/19/2020-03-19-Solidity-Smart-Contract-Experiment/web3j-ethLogFlowable-subscribe.png">
 <meta property="og:image" content="http://billystudio.github.io/2020/03/19/2020-03-19-Solidity-Smart-Contract-Experiment/decode-events.png">
-<meta property="og:updated_time" content="2021-03-03T15:52:10.427Z">
+<meta property="og:updated_time" content="2021-07-18T15:29:40.774Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Solidity 智能合约实验">
 <meta name="twitter:description" content="以太坊开发团队开发了 Remix IDE 和配套的 Remix 一系列插件供智能合约实验用。当然也可以使用 Java 的 web3j 来实现这些功能">
@@ -384,7 +384,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-03-03 23:52:10" itemprop="dateModified" datetime="2021-03-03T23:52:10+08:00">2021-03-03</time>
+                <time title="Modified: 2021-07-18 23:29:40" itemprop="dateModified" datetime="2021-07-18T23:29:40+08:00">2021-07-18</time>
               </span>
             
           
@@ -412,7 +412,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">7.6k</span>
+              <span title="Symbols count in article">8k</span>
             </span>
           
 
@@ -461,6 +461,11 @@
 <p>verify and publish 成功<br><img src="verify-and-publish-code-success.png" alt="verify-and-publish-code-success.png"></p>
 <p>可以通过 read contract 读取合约中的public变量值：<br><img src="read-contract.png" alt="read-contract.png"></p>
 <p>使用 Prepros 软件或 VS Code Live Server 插件将文档部署在 localhost 的某个端口上（注意不能直接从本地用浏览器打开）</p>
+<h2 id="使用JavaScript开发的web3-js的一些用法"><a href="#使用JavaScript开发的web3-js的一些用法" class="headerlink" title="使用JavaScript开发的web3.js的一些用法"></a>使用JavaScript开发的web3.js的一些用法</h2><p>按照模块分</p>
+<p>eth.blockNumber<br>eth.accounts # == personal.listAccounts<br>eth.getBalance(arg) # arg: 账户地址<br>eth.sendTransaction({from: arg0, to: arg1, value: web3.toWei(3, ‘ether’)}) # arg0账户向arg1账户转账3个以太币</p>
+<p>personal.newAccount(arg) # arg: 账户密码字符串(123)； 账户地址是随机生成的<br>personal.unlockAccont(account, pass, duration) # 账户地址, 密码， 持续时间(秒)</p>
+<p>miner.start(arg) # arg: 挖矿线程数<br>miner.stop()</p>
+<p>web3.fromWei(arg0, ‘ether’) # arg0 wei数量</p>
 <h1 id="Java下的-web3j-实验"><a href="#Java下的-web3j-实验" class="headerlink" title="Java下的 web3j 实验"></a>Java下的 web3j 实验</h1><p><img src="architecture.png" alt="architecture.png"></p>
 <p>接着上一个实验，再安装 <code>solidity</code>, <code>go-ethereum</code>, 以及 <code>web3j</code> 的 3.6.0 版本(<a href="https://github.com/web3j/web3j/releases/tag/v3.6.0" target="_blank" rel="noopener">https://github.com/web3j/web3j/releases/tag/v3.6.0</a>)<br>首先查看 版本号<br><img src="solc-version.png" alt="solc-version.png"><br><img src="web3j-version.png" alt="web3j-version.png"></p>
 <p>根据版本号，编写一个指定了对应版本号的 Solidity 合约(当然，程序第一行也可以指定合约版本号范围，这样合约文件的适用性会更好，但是可能功能会有所局限在最早的版本。)<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^0.6.6;</span><br><span class="line"></span><br><span class="line">contract StorageContract &#123;</span><br><span class="line">    mapping(string =&gt; bool) public allTokens;</span><br><span class="line">    event logToken(string token);</span><br><span class="line">    event logCheck(bool result);</span><br><span class="line">    event compute_times(int256 times);</span><br><span class="line">    </span><br><span class="line">    function sendToken(string memory token) public &#123;</span><br><span class="line">        allTokens[token] = true;</span><br><span class="line">        emit logToken(token);</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    function checkToken(string memory token) public returns (bool result) &#123;</span><br><span class="line">        if (allTokens[token] == true)&#123;</span><br><span class="line">            logCheck(true);</span><br><span class="line">            return true;</span><br><span class="line">        &#125; else &#123;</span><br><span class="line">            logCheck(false);</span><br><span class="line">            return false;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    function computeTimes(int times) public &#123;</span><br><span class="line">        emit compute_times(times);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
@@ -542,9 +547,9 @@
           
             <a href="/tags/Smart-Contracts/" rel="tag"># Smart Contracts</a>
           
-            <a href="/tags/node-js/" rel="tag"># node.js</a>
-          
             <a href="/tags/Remix-IDE/" rel="tag"># Remix IDE</a>
+          
+            <a href="/tags/web3-js/" rel="tag"># web3.js</a>
           
         </div>
       
@@ -590,10 +595,6 @@
 
           </div>
           
-
-  
-    <div class="comments" id="gitalk-container">
-    </div>
 
   
 
@@ -672,7 +673,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">172</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -706,7 +707,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.</span> <span class="nav-text">Installation</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Procedure"><span class="nav-number"></span> <span class="nav-text">Procedure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编写智能合约"><span class="nav-number">1.</span> <span class="nav-text">编写智能合约</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译智能合约"><span class="nav-number">2.</span> <span class="nav-text">编译智能合约</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deploy-and-run-on-localhost"><span class="nav-number">3.</span> <span class="nav-text">Deploy and run on localhost</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一些语法点"><span class="nav-number"></span> <span class="nav-text">一些语法点</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java下的-web3j-实验"><span class="nav-number"></span> <span class="nav-text">Java下的 web3j 实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#启动以太坊区块链"><span class="nav-number">1.</span> <span class="nav-text">启动以太坊区块链</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#geth-private-network"><span class="nav-number">1.1.</span> <span class="nav-text">geth private network</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#geth-rinkeby-test-node"><span class="nav-number">1.2.</span> <span class="nav-text">geth rinkeby test node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Infura-remote-test-node"><span class="nav-number">1.3.</span> <span class="nav-text">Infura remote test node</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署智能合约"><span class="nav-number">2.</span> <span class="nav-text">部署智能合约</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Remix-IDE-部署"><span class="nav-number">2.1.</span> <span class="nav-text">Remix IDE 部署</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java调用合约ABI程序"><span class="nav-number">3.</span> <span class="nav-text">Java调用合约ABI程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java端监听合约log程序"><span class="nav-number">4.</span> <span class="nav-text">Java端监听合约log程序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#几个问题和一些想法"><span class="nav-number"></span> <span class="nav-text">几个问题和一些想法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number"></span> <span class="nav-text">References:</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Installation"><span class="nav-number">1.</span> <span class="nav-text">Installation</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Procedure"><span class="nav-number"></span> <span class="nav-text">Procedure</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#编写智能合约"><span class="nav-number">1.</span> <span class="nav-text">编写智能合约</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#编译智能合约"><span class="nav-number">2.</span> <span class="nav-text">编译智能合约</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Deploy-and-run-on-localhost"><span class="nav-number">3.</span> <span class="nav-text">Deploy and run on localhost</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一些语法点"><span class="nav-number"></span> <span class="nav-text">一些语法点</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用JavaScript开发的web3-js的一些用法"><span class="nav-number">1.</span> <span class="nav-text">使用JavaScript开发的web3.js的一些用法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Java下的-web3j-实验"><span class="nav-number"></span> <span class="nav-text">Java下的 web3j 实验</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#启动以太坊区块链"><span class="nav-number">1.</span> <span class="nav-text">启动以太坊区块链</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#geth-private-network"><span class="nav-number">1.1.</span> <span class="nav-text">geth private network</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#geth-rinkeby-test-node"><span class="nav-number">1.2.</span> <span class="nav-text">geth rinkeby test node</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Infura-remote-test-node"><span class="nav-number">1.3.</span> <span class="nav-text">Infura remote test node</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#部署智能合约"><span class="nav-number">2.</span> <span class="nav-text">部署智能合约</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Remix-IDE-部署"><span class="nav-number">2.1.</span> <span class="nav-text">Remix IDE 部署</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java调用合约ABI程序"><span class="nav-number">3.</span> <span class="nav-text">Java调用合约ABI程序</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Java端监听合约log程序"><span class="nav-number">4.</span> <span class="nav-text">Java端监听合约log程序</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#几个问题和一些想法"><span class="nav-number"></span> <span class="nav-text">几个问题和一些想法</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-number"></span> <span class="nav-text">References:</span></a></li></div>
             
 
           </div>
@@ -739,7 +740,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">405k</span>
+    <span title="Symbols count total">406k</span>
   
 
   
@@ -748,7 +749,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:08</span>
+    <span title="Reading time total">6:09</span>
   
 </div>
 
@@ -857,47 +858,7 @@
 
 
 
-  <script src="/js/next-boot.js?v=7.2.0"></script>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-    
-
-<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-
-
-<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
-
-<script>
-  var gitalk = new Gitalk({
-    clientID: '1b976dbc382f1d1e40ad',
-    clientSecret: '31090c96642b800a520a7fce87050edb2bcaaeb7',
-    repo: 'Blog-de-Shane',
-    owner: 'BillyStudio',
-    admin: ['BillyStudio'],
-    id: md5(location.pathname),
-    
-      language: window.navigator.language || window.navigator.userLanguage,
-    
-    distractionFreeMode: 'true'
-  });
-  gitalk.render('gitalk-container');
-</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  <script src="/js/next-boot.js?v=7.2.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -915,6 +876,17 @@
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
   
 

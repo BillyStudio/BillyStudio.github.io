@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://billystudio.github.io/2020/11/06/2020-11-06-LaTeX-for-writing-paper/word-triline-table-3.png">
 <meta property="og:image" content="http://billystudio.github.io/2020/11/06/2020-11-06-LaTeX-for-writing-paper/word-table-no-break.png">
 <meta property="og:image" content="http://billystudio.github.io/2020/11/06/2020-11-06-LaTeX-for-writing-paper/word-equation-caption.png">
-<meta property="og:updated_time" content="2021-06-16T13:19:25.374Z">
+<meta property="og:updated_time" content="2021-07-18T15:17:24.505Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学术论文 LaTeX 与 Word 排版">
 <meta name="twitter:description" content="学术论文写作过程中的一些经验记录总结。">
@@ -375,7 +375,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-06-16 21:19:25" itemprop="dateModified" datetime="2021-06-16T21:19:25+08:00">2021-06-16</time>
+                <time title="Modified: 2021-07-18 23:17:24" itemprop="dateModified" datetime="2021-07-18T23:17:24+08:00">2021-07-18</time>
               </span>
             
           
@@ -435,12 +435,7 @@
 
       
         <p>学术论文写作过程中的一些经验记录总结。<a id="more"></a></p>
-<h1 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h1><h2 id="LaTeX-字体"><a href="#LaTeX-字体" class="headerlink" title="LaTeX 字体"></a>LaTeX 字体</h2><h3 id="一些名词解释"><a href="#一些名词解释" class="headerlink" title="一些名词解释"></a>一些名词解释</h3><p><em>PostScript (PS)</em>: Adobe公司开发的一种图灵完备的编程语言，目的是使用数学化的方式来描述几何图形和图片。<br><em>Portable Document Format</em>: 也有Adobe公司开发，属于PostScript的子集。pdf不是一种编程语言，因为其缺乏PostScript语言的条件分支能力。Pdf对编号和超链接的支持很好，主要用于文件组合与分享。<br><em>Type 1 fonts</em>: 矢量字体<br><em>Type 3 fonts</em>: bitmap位图字体<br><em>Computer Modern (CM) fonts</em>: Computer Modern 字体，由高德纳设计。它的一大优点是拥有非常完备的数学符号集。该字体是使用METAFONT语言（也是Knuth开发的）创建的。<br>不幸的是，METAFONT从未在打印机中广泛使用（不像PostScript那样）。所以在使用dvips生成PostScript时，Computer Modern字体的栅格化（从METAFONT转换为Type 3 bitmap）通常是较旧的（pre-teTEX 2.0）LATEX系统的默认行为。当LATEX系统使用此类Type 3字体时，生成的PostScript（或PDF）文件将不会总是在每台打印机上产生最佳质量，因为栅格化（rasterization）过程仅对于给定的打印分辨率才是最佳的。<br><em>CM-Super fonts</em>: 2001年由Vladimir Volovich公开发布，它拓展了 Computer Modern 字体集并且完全使用type 1字体。CM-Super字体集支持一些原先Computer Modern中不支持的字体和字形（如bold smallcaps字形，见下图）。当使用T1编码想去获取拓展字形的时候，需要引入以下两行以获取Type 1版本的CM字体：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;type1ec&#125;</span><br><span class="line">\usepackage[T1]&#123;fontenc&#125;</span><br></pre></td></tr></table></figure></p>
-<p><img src="rwHuU.jpg" alt="rwHuU.jpg"></p>
-<h3 id="字体编码"><a href="#字体编码" class="headerlink" title="字体编码"></a>字体编码</h3><p>传统使用 fontenc 宏包来切换字体编码，默认的是高德纳设计的 Computer Modern 字体(OT1)。</p>
-<p>xelatex 和 lualatex 使用 fontspec 宏包满足用户设置字体的需求，支持直接调用系统和Texlive中的.ttf或.otf格式字体。</p>
-<h3 id="常用字体编码集"><a href="#常用字体编码集" class="headerlink" title="常用字体编码集"></a>常用字体编码集</h3><p>OT1: TeX text<br>T1: TeX extended text<br>cmr: Computer Modern Roman<br>cmss: Computer Modern Sans<br>cmtt: Computer Modern Typewriter<br>ptm: Adobe Times<br>phv: Adobe Helvetica<br>pcr: Adobe Courier</p>
-<h2 id="Word-字体"><a href="#Word-字体" class="headerlink" title="Word 字体"></a>Word 字体</h2><p>1磅=0.35mm<br>1英寸=72磅=25.4mm</p>
+<h1 id="字体"><a href="#字体" class="headerlink" title="字体"></a>字体</h1><h3 id="字体大小对应关系"><a href="#字体大小对应关系" class="headerlink" title="字体大小对应关系"></a>字体大小对应关系</h3><p>1磅=0.35mm<br>1英寸=72磅=25.4mm<br>10pt = 3.52mm = 0.352 cm</p>
 <p>字号、磅数与大小像素对应表</p>
 <div class="table-container">
 <table>
@@ -558,7 +553,12 @@
 </tbody>
 </table>
 </div>
-<p>在一些Word版本或软件中，不支持中文字体名，比如宋体、仿宋等，而是显示成 <code>SimSun</code>，<code>FangSong</code>等，需要注意。</p>
+<h2 id="LaTeX-字体"><a href="#LaTeX-字体" class="headerlink" title="LaTeX 字体"></a>LaTeX 字体</h2><h3 id="一些名词解释"><a href="#一些名词解释" class="headerlink" title="一些名词解释"></a>一些名词解释</h3><p><em>PostScript (PS)</em>: Adobe公司开发的一种图灵完备的编程语言，目的是使用数学化的方式来描述几何图形和图片。<br><em>Portable Document Format</em>: 也有Adobe公司开发，属于PostScript的子集。pdf不是一种编程语言，因为其缺乏PostScript语言的条件分支能力。Pdf对编号和超链接的支持很好，主要用于文件组合与分享。<br><em>Type 1 fonts</em>: 矢量字体<br><em>Type 3 fonts</em>: bitmap位图字体<br><em>Computer Modern (CM) fonts</em>: Computer Modern 字体，由高德纳设计。它的一大优点是拥有非常完备的数学符号集。该字体是使用METAFONT语言（也是Knuth开发的）创建的。<br>不幸的是，METAFONT从未在打印机中广泛使用（不像PostScript那样）。所以在使用dvips生成PostScript时，Computer Modern字体的栅格化（从METAFONT转换为Type 3 bitmap）通常是较旧的（pre-teTEX 2.0）LATEX系统的默认行为。当LATEX系统使用此类Type 3字体时，生成的PostScript（或PDF）文件将不会总是在每台打印机上产生最佳质量，因为栅格化（rasterization）过程仅对于给定的打印分辨率才是最佳的。<br><em>CM-Super fonts</em>: 2001年由Vladimir Volovich公开发布，它拓展了 Computer Modern 字体集并且完全使用type 1字体。CM-Super字体集支持一些原先Computer Modern中不支持的字体和字形（如bold smallcaps字形，见下图）。当使用T1编码想去获取拓展字形的时候，需要引入以下两行以获取Type 1版本的CM字体：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\usepackage&#123;type1ec&#125;</span><br><span class="line">\usepackage[T1]&#123;fontenc&#125;</span><br></pre></td></tr></table></figure></p>
+<p><img src="rwHuU.jpg" alt="rwHuU.jpg"></p>
+<h3 id="字体编码"><a href="#字体编码" class="headerlink" title="字体编码"></a>字体编码</h3><p>传统使用 fontenc 宏包来切换字体编码，默认的是高德纳设计的 Computer Modern 字体(OT1)。</p>
+<p>xelatex 和 lualatex 使用 fontspec 宏包满足用户设置字体的需求，支持直接调用系统和Texlive中的.ttf或.otf格式字体。</p>
+<h3 id="常用字体编码集"><a href="#常用字体编码集" class="headerlink" title="常用字体编码集"></a>常用字体编码集</h3><p>OT1: TeX text<br>T1: TeX extended text<br>cmr: Computer Modern Roman<br>cmss: Computer Modern Sans<br>cmtt: Computer Modern Typewriter<br>ptm: Adobe Times<br>phv: Adobe Helvetica<br>pcr: Adobe Courier</p>
+<h2 id="Word-字体"><a href="#Word-字体" class="headerlink" title="Word 字体"></a>Word 字体</h2><p>在一些Word版本或软件中，不支持中文字体名，比如宋体、仿宋等，而是显示成 <code>SimSun</code>，<code>FangSong</code>等，需要注意。</p>
 <h1 id="图片"><a href="#图片" class="headerlink" title="图片"></a>图片</h1><h2 id="Word插图"><a href="#Word插图" class="headerlink" title="Word插图"></a>Word插图</h2><p>Word插入图片可分为嵌入式和非嵌入式两种。参考：<a href="https://zhuanlan.zhihu.com/p/35979312" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/35979312</a></p>
 <h3 id="显示不全的图片"><a href="#显示不全的图片" class="headerlink" title="显示不全的图片"></a>显示不全的图片</h3><p>Word插入图片有时只显示最下面一行，原因大多数是行距设置成了固定值，<br>使用 <code>Ctrl+1</code> 给图片设置单倍行距（或设置图片样式为单倍行距，再设置图片样式）</p>
 <h1 id="表格"><a href="#表格" class="headerlink" title="表格"></a>表格</h1><h2 id="Word-三线表"><a href="#Word-三线表" class="headerlink" title="Word 三线表"></a>Word 三线表</h2><p>首先绘制一个Word表格：<br><img src="word-triline-table.png" alt="Word three-line table"></p>
@@ -655,10 +655,6 @@
           
 
   
-    <div class="comments" id="gitalk-container">
-    </div>
-
-  
 
 
 
@@ -735,7 +731,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">172</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -769,7 +765,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#字体"><span class="nav-number">1.</span> <span class="nav-text">字体</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#LaTeX-字体"><span class="nav-number">1.1.</span> <span class="nav-text">LaTeX 字体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一些名词解释"><span class="nav-number">1.1.1.</span> <span class="nav-text">一些名词解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字体编码"><span class="nav-number">1.1.2.</span> <span class="nav-text">字体编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用字体编码集"><span class="nav-number">1.1.3.</span> <span class="nav-text">常用字体编码集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Word-字体"><span class="nav-number">1.2.</span> <span class="nav-text">Word 字体</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#图片"><span class="nav-number">2.</span> <span class="nav-text">图片</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Word插图"><span class="nav-number">2.1.</span> <span class="nav-text">Word插图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#显示不全的图片"><span class="nav-number">2.1.1.</span> <span class="nav-text">显示不全的图片</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#表格"><span class="nav-number">3.</span> <span class="nav-text">表格</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Word-三线表"><span class="nav-number">3.1.</span> <span class="nav-text">Word 三线表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#禁止表格分页"><span class="nav-number">3.1.1.</span> <span class="nav-text">禁止表格分页</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#公式"><span class="nav-number">4.</span> <span class="nav-text">公式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#公式右编号"><span class="nav-number">4.1.</span> <span class="nav-text">公式右编号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Word-自带公式"><span class="nav-number">4.1.1.</span> <span class="nav-text">Word 自带公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MathType"><span class="nav-number">4.1.2.</span> <span class="nav-text">MathType</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法"><span class="nav-number">5.</span> <span class="nav-text">算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Word"><span class="nav-number">5.1.</span> <span class="nav-text">Word</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">6.</span> <span class="nav-text">参考文献</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Word-1"><span class="nav-number">6.1.</span> <span class="nav-text">Word</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文献次序调整"><span class="nav-number">6.1.1.</span> <span class="nav-text">文献次序调整</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#字体"><span class="nav-number">1.</span> <span class="nav-text">字体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#字体大小对应关系"><span class="nav-number">1.0.1.</span> <span class="nav-text">字体大小对应关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#LaTeX-字体"><span class="nav-number">1.1.</span> <span class="nav-text">LaTeX 字体</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#一些名词解释"><span class="nav-number">1.1.1.</span> <span class="nav-text">一些名词解释</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#字体编码"><span class="nav-number">1.1.2.</span> <span class="nav-text">字体编码</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#常用字体编码集"><span class="nav-number">1.1.3.</span> <span class="nav-text">常用字体编码集</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Word-字体"><span class="nav-number">1.2.</span> <span class="nav-text">Word 字体</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#图片"><span class="nav-number">2.</span> <span class="nav-text">图片</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Word插图"><span class="nav-number">2.1.</span> <span class="nav-text">Word插图</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#显示不全的图片"><span class="nav-number">2.1.1.</span> <span class="nav-text">显示不全的图片</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#表格"><span class="nav-number">3.</span> <span class="nav-text">表格</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Word-三线表"><span class="nav-number">3.1.</span> <span class="nav-text">Word 三线表</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#禁止表格分页"><span class="nav-number">3.1.1.</span> <span class="nav-text">禁止表格分页</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#公式"><span class="nav-number">4.</span> <span class="nav-text">公式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#公式右编号"><span class="nav-number">4.1.</span> <span class="nav-text">公式右编号</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Word-自带公式"><span class="nav-number">4.1.1.</span> <span class="nav-text">Word 自带公式</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MathType"><span class="nav-number">4.1.2.</span> <span class="nav-text">MathType</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#算法"><span class="nav-number">5.</span> <span class="nav-text">算法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Word"><span class="nav-number">5.1.</span> <span class="nav-text">Word</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-number">6.</span> <span class="nav-text">参考文献</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Word-1"><span class="nav-number">6.1.</span> <span class="nav-text">Word</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#文献次序调整"><span class="nav-number">6.1.1.</span> <span class="nav-text">文献次序调整</span></a></li></ol></li></ol></li></div>
             
 
           </div>
@@ -802,7 +798,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">405k</span>
+    <span title="Symbols count total">406k</span>
   
 
   
@@ -811,7 +807,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:08</span>
+    <span title="Reading time total">6:09</span>
   
 </div>
 
@@ -920,47 +916,7 @@
 
 
 
-  <script src="/js/next-boot.js?v=7.2.0"></script>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-    
-
-<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-
-
-<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
-
-<script>
-  var gitalk = new Gitalk({
-    clientID: '1b976dbc382f1d1e40ad',
-    clientSecret: '31090c96642b800a520a7fce87050edb2bcaaeb7',
-    repo: 'Blog-de-Shane',
-    owner: 'BillyStudio',
-    admin: ['BillyStudio'],
-    id: md5(location.pathname),
-    
-      language: window.navigator.language || window.navigator.userLanguage,
-    
-    distractionFreeMode: 'true'
-  });
-  gitalk.render('gitalk-container');
-</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  <script src="/js/next-boot.js?v=7.2.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -978,6 +934,17 @@
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
   
 

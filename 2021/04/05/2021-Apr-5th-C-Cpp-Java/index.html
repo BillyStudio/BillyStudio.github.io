@@ -91,14 +91,14 @@
 
 
   <meta name="description" content="学习了各个主流编程语言后，经常学了这个忘了那个，故写此文对各语言进行总结和辨析。">
-<meta name="keywords" content="Java,C,Cpp">
+<meta name="keywords" content="Java,Cpp,C">
 <meta property="og:type" content="article">
 <meta property="og:title" content="从C++到Java —— C系列编程语言辨析总结">
 <meta property="og:url" content="http://BillyStudio.github.io/2021/04/05/2021-Apr-5th-C-Cpp-Java/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="学习了各个主流编程语言后，经常学了这个忘了那个，故写此文对各语言进行总结和辨析。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-07-09T14:41:38.503Z">
+<meta property="og:updated_time" content="2021-07-14T01:13:52.646Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="从C++到Java —— C系列编程语言辨析总结">
 <meta name="twitter:description" content="学习了各个主流编程语言后，经常学了这个忘了那个，故写此文对各语言进行总结和辨析。">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-07-09 22:41:38" itemprop="dateModified" datetime="2021-07-09T22:41:38+08:00">2021-07-09</time>
+                <time title="Modified: 2021-07-14 09:13:52" itemprop="dateModified" datetime="2021-07-14T09:13:52+08:00">2021-07-14</time>
               </span>
             
           
@@ -396,7 +396,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">1.6k</span>
+              <span title="Symbols count in article">1.7k</span>
             </span>
           
 
@@ -408,7 +408,7 @@
               
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               
-              <span title="Reading time">1 mins.</span>
+              <span title="Reading time">2 mins.</span>
             </span>
           
 
@@ -441,9 +441,11 @@
 <h1 id="常量"><a href="#常量" class="headerlink" title="常量"></a>常量</h1><p>Java中使用final来表示常量固定值<br>对于集合类型的转化方法<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">final</span> List&lt;?&gt; constList = Collections.unmodifiableList(list);</span><br></pre></td></tr></table></figure></p>
 <h1 id="接口"><a href="#接口" class="headerlink" title="接口"></a>接口</h1><h2 id="Java传递接口作为参数的三种方法"><a href="#Java传递接口作为参数的三种方法" class="headerlink" title="Java传递接口作为参数的三种方法"></a>Java传递接口作为参数的三种方法</h2><p>以sort函数中常用的比较器Comparator为例展示接口作为参数的3种实现方法。<br>先看比较器的源码定义：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Comparator</span>&lt;<span class="title">T</span>&gt; </span>&#123;</span><br><span class="line">  <span class="function"><span class="keyword">int</span> <span class="title">compare</span><span class="params">(T o1, T o2)</span></span>;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <ol>
-<li><p>Lambda函数(最简洁)</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[] strs = &#123;<span class="string">"dog"</span>, <span class="string">"apple"</span>, <span class="string">"cat"</span>&#125;;</span><br><span class="line">Arrays.sort(strs, (o1, o2)-&gt;&#123;</span><br><span class="line">  <span class="keyword">return</span> o2.comparesTo(o1);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<li>Lambda函数(最简洁)<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">String[] strs = &#123;<span class="string">"dog"</span>, <span class="string">"apple"</span>, <span class="string">"cat"</span>&#125;;</span><br><span class="line">Arrays.sort(strs, (o1, o2)-&gt;&#123;</span><br><span class="line">  <span class="keyword">return</span> o2.comparesTo(o1);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 </li>
+</ol>
+<p>这种方式比较特殊，仅用在接口里面只有一个抽象方法的情况。这种接口也成为Single Abstract Method（SAM）Interface。<br>Java8中新引入了 @FunctionalInterface 用来帮助在编译阶段检查是否为SAM接口。</p>
+<ol>
 <li><p>new接口，并重写接口方法（最常用）</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">Integer arr[] = &#123;<span class="number">2</span>, <span class="number">1</span>, <span class="number">3</span>&#125;;</span><br><span class="line">Arrays.sort(arr, <span class="keyword">new</span> Comparator&lt;Integer&gt;() &#123;</span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">  <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Integer n1, Integer n2)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> n2 - n1;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
 </li>
@@ -482,9 +484,9 @@
           
             <a href="/tags/Java/" rel="tag"># Java</a>
           
-            <a href="/tags/C/" rel="tag"># C</a>
-          
             <a href="/tags/Cpp/" rel="tag"># Cpp</a>
+          
+            <a href="/tags/C/" rel="tag"># C</a>
           
         </div>
       
@@ -530,10 +532,6 @@
 
           </div>
           
-
-  
-    <div class="comments" id="gitalk-container">
-    </div>
 
   
 
@@ -612,7 +610,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">172</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -679,7 +677,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">405k</span>
+    <span title="Symbols count total">406k</span>
   
 
   
@@ -688,7 +686,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:08</span>
+    <span title="Reading time total">6:09</span>
   
 </div>
 
@@ -797,47 +795,7 @@
 
 
 
-  <script src="/js/next-boot.js?v=7.2.0"></script>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-    
-
-<script src="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.js"></script>
-
-
-
-<link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk@1/dist/gitalk.min.css">
-
-
-
-<script src="//cdn.jsdelivr.net/npm/js-md5@0.7.3/src/md5.min.js"></script>
-
-<script>
-  var gitalk = new Gitalk({
-    clientID: '1b976dbc382f1d1e40ad',
-    clientSecret: '31090c96642b800a520a7fce87050edb2bcaaeb7',
-    repo: 'Blog-de-Shane',
-    owner: 'BillyStudio',
-    admin: ['BillyStudio'],
-    id: md5(location.pathname),
-    
-      language: window.navigator.language || window.navigator.userLanguage,
-    
-    distractionFreeMode: 'true'
-  });
-  gitalk.render('gitalk-container');
-</script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  <script src="/js/next-boot.js?v=7.2.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -855,6 +813,17 @@
 </script>
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
+
+  
+
+  
+
+  
+
+  
+
+  
+
 
   
 
