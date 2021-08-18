@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="题目需要思考了才有价值, 所以在我的博客中给出的练习题都不直接给答案, 在这里进行集中解答. 有需要者自取.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-05-26T01:04:08.664Z">
+<meta property="og:updated_time" content="2021-08-18T17:44:54.523Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="博客中的练习题解答">
 <meta name="twitter:description" content="题目需要思考了才有价值, 所以在我的博客中给出的练习题都不直接给答案, 在这里进行集中解答. 有需要者自取.">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-05-26 09:04:08" itemprop="dateModified" datetime="2021-05-26T09:04:08+08:00">2021-05-26</time>
+                <time title="Modified: 2021-08-19 01:44:54" itemprop="dateModified" datetime="2021-08-19T01:44:54+08:00">2021-08-19</time>
               </span>
             
           
@@ -396,7 +396,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">212</span>
+              <span title="Symbols count in article">754</span>
             </span>
           
 
@@ -431,7 +431,7 @@
 <blockquote>
 <p>Py1<br><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">A = np.array([</span><br><span class="line">[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>],</span><br><span class="line">[<span class="number">1</span>, <span class="number">1</span>, <span class="number">1</span>, <span class="number">5</span>, <span class="number">5</span>, <span class="number">5</span>],</span><br><span class="line">[<span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>],</span><br><span class="line">[<span class="number">4</span>, <span class="number">4</span>, <span class="number">4</span>, <span class="number">6</span>, <span class="number">6</span>, <span class="number">6</span>]</span><br><span class="line">])</span><br><span class="line">B = np.lib.stride_tricks.as_strided(A, shape=(<span class="number">2</span>,<span class="number">2</span>,<span class="number">2</span>,<span class="number">3</span>), strides=(<span class="number">48</span>,<span class="number">12</span>,<span class="number">24</span>,<span class="number">4</span>))</span><br><span class="line">print(B)</span><br></pre></td></tr></table></figure></p>
 </blockquote>
-
+<h3 id="包含min函数的栈"><a href="#包含min函数的栈" class="headerlink" title="包含min函数的栈"></a>包含min函数的栈</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    Stack&lt;Integer&gt; dataStack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    Stack&lt;Integer&gt; minStack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> node)</span> </span>&#123;</span><br><span class="line">        dataStack.push(node);</span><br><span class="line">        <span class="keyword">if</span>(minStack.isEmpty() || node &lt;= minStack.peek()) &#123;</span><br><span class="line">            minStack.push(node);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> out = dataStack.pop();</span><br><span class="line">        <span class="keyword">if</span>(out == minStack.peek()) &#123;</span><br><span class="line">            minStack.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">top</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> dataStack.peek();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">min</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> minStack.peek();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
       
     </div>
 
@@ -530,8 +530,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -553,7 +562,33 @@
               
 
               
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           
@@ -573,6 +608,23 @@
         </div>
       </div>
 
+      
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#包含min函数的栈"><span class="nav-number">1.</span> <span class="nav-text">包含min函数的栈</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
       
 
       
@@ -600,7 +652,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">415k</span>
+    <span title="Symbols count total">417k</span>
   
 
   
@@ -609,7 +661,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:18</span>
+    <span title="Reading time total">6:20</span>
   
 </div>
 

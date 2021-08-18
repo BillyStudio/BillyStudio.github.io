@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="动态规划算法的两大特征是递推公式和记忆数组。根据递推公式，大问题分解为重叠子问题（overlap sub-problem），子问题的解储存起来形成记忆。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-04-05T14:34:46.922Z">
+<meta property="og:updated_time" content="2021-08-17T05:19:21.793Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法笔记 | 动态规划">
 <meta name="twitter:description" content="动态规划算法的两大特征是递推公式和记忆数组。根据递推公式，大问题分解为重叠子问题（overlap sub-problem），子问题的解储存起来形成记忆。">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-04-05 22:34:46" itemprop="dateModified" datetime="2021-04-05T22:34:46+08:00">2021-04-05</time>
+                <time title="Modified: 2021-08-17 13:19:21" itemprop="dateModified" datetime="2021-08-17T13:19:21+08:00">2021-08-17</time>
               </span>
             
           
@@ -411,7 +411,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">843</span>
+              <span title="Symbols count in article">1.5k</span>
             </span>
           
 
@@ -443,7 +443,7 @@
 
       
         <p>动态规划算法的两大特征是递推公式和记忆数组。根据递推公式，大问题分解为重叠子问题（overlap sub-problem），子问题的解储存起来形成记忆。<a id="more"></a><br>动态规划算法的应用场景很多，具体构造也非常灵活。</p>
-<h1 id="动态规划与字符串结合"><a href="#动态规划与字符串结合" class="headerlink" title="动态规划与字符串结合"></a>动态规划与字符串结合</h1><p><a href="https://www.nowcoder.com/practice/28970c15befb4ff3a264189087b99ad4?tpId=13&amp;tqId=11205&amp;rp=1&amp;ru=%2Fta%2Fcoding-interviews&amp;qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&amp;tab=answerKey" target="_blank" rel="noopener">剑指Offer - 正则表达式匹配</a><br>这道题的输入是字符串str和匹配模式串pattern，字符串”aaa”可以匹配模式”a.a”和”ab<em>ac</em>a”，模式中的通配符只有 ‘.’ 和 ‘<em>‘ 两种，和正则表达式标准所不同的是，’</em>‘表示它前面的字符可以出现任意次，而不是匹配任意长度的字符。</p>
+<h1 id="一、动态规划与字符串结合"><a href="#一、动态规划与字符串结合" class="headerlink" title="一、动态规划与字符串结合"></a>一、动态规划与字符串结合</h1><p><a href="https://www.nowcoder.com/practice/28970c15befb4ff3a264189087b99ad4?tpId=13&amp;tqId=11205&amp;rp=1&amp;ru=%2Fta%2Fcoding-interviews&amp;qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&amp;tab=answerKey" target="_blank" rel="noopener">剑指Offer - 正则表达式匹配</a><br>这道题的输入是字符串str和匹配模式串pattern，字符串”aaa”可以匹配模式”a.a”和”ab<em>ac</em>a”，模式中的通配符只有 ‘.’ 和 ‘<em>‘ 两种，和正则表达式标准所不同的是，’</em>‘表示它前面的字符可以出现任意次，而不是匹配任意长度的字符。</p>
 <p>假设布尔型 dp[m][n] 表示长度从1至m的字符串和长度从1至n的模式是否匹配，那么当递推到 dp[str.length][pattern.length]即为所求。</p>
 <p>dp[1][1] 表示第一个字符是否匹配。<br>如果 <code>pattern[2]==&#39;.&#39; || str[2] == pattern[2]</code>，则 <code>dp[2][2] = dp[1][1]</code>，否则需要考虑通配符<em>（比如字符串<code>&quot;0ab&quot;</code>与模式`”0a</em>b”<code>匹配，字符串</code>“0ab”<code>与模式</code>“0a*c”`不匹配）<br>可以有如下几种情况考虑</p>
 <ol>
@@ -452,6 +452,12 @@
 <li>匹配掉模式的两个字符，如<code>bc</code>和<code>a*bc</code>匹配剩下：<code>bc</code>和<code>bc</code><br>上述几种考虑编写代码段如下：<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span>(pattern[<span class="number">2</span>] == <span class="string">'.'</span> || str[<span class="number">2</span>] == pattern[<span class="number">2</span>]) &#123;</span><br><span class="line">    dp[<span class="number">2</span>][<span class="number">2</span>] = dp[<span class="number">1</span>][<span class="number">1</span>]; <span class="comment">// 第1种情况</span></span><br><span class="line">&#125; <span class="keyword">else</span> <span class="keyword">if</span>(pattern[<span class="number">2</span>] == <span class="string">'*'</span>) &#123;</span><br><span class="line">    <span class="keyword">if</span>(dp[<span class="number">2</span>][<span class="number">0</span>] == <span class="keyword">true</span>) &#123;</span><br><span class="line">        dp[<span class="number">2</span>][<span class="number">2</span>] = <span class="keyword">true</span>;    <span class="comment">// 第3种情况</span></span><br><span class="line">    &#125; <span class="keyword">else</span> <span class="keyword">if</span>(pattern[<span class="number">1</span>]==<span class="string">'.'</span> || pattern[<span class="number">1</span>]==str[<span class="number">2</span>]) &#123;</span><br><span class="line">        dp[<span class="number">2</span>][<span class="number">2</span>] = dp[<span class="number">1</span>][<span class="number">2</span>]; <span class="comment">// 第2种情况</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
+<h1 id="二、背包问题"><a href="#二、背包问题" class="headerlink" title="二、背包问题"></a>二、背包问题</h1><p>背包问题的目标是将总价值尽可能高的物品塞到背包中，有以下几类常考问题：</p>
+<h2 id="01背包"><a href="#01背包" class="headerlink" title="01背包"></a>01背包</h2><p>有N件商品和容量为V的背包，第<code>i(0&lt;=i&lt;N)</code>件商品的体积是 <code>c[i]</code>，价值是 <code>w[i]</code>，每件商品最多只能用1次。求解将哪些商品放入背包中可在不超过背包容量的情况下使总价值达到最大。<br>我们设 <code>dp[i][j]</code> 为考虑前 <code>i</code> 件商品的情况下，容量不超过 <code>j</code> 的最大价值，则 <code>dp[N][V]</code> 即为所求。<br>初始值 <code>dp[0][j]=0, dp[i][0]=0</code>，<br>考虑第 <code>i</code> 件商品放或者不放，如果放，那么前<code>i-1</code>件商品的允许容量会减小<code>c[i]</code>，价值会加上第<code>i</code>件商品的价值<code>w[i]</code>，此时 <code>dp[i][j] = dp[i-1][j-c[i]] + w[i]</code>；如果不放，那么等价于前<code>i-1</code>件商品不超过容量<code>j</code>的最大价值，此时 <code>dp[i][j] = dp[i-1][j]</code>，故可以得到递推公式：</p>
+<script type="math/tex; mode=display">
+dp[i][j] = max(dp[i-1][j-c[i]] + w[i], dp[i-1][j])</script><p>注意01背包问题不能使用贪心思想求解，看下面的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">容量 V = 5</span><br><span class="line">3件商品：</span><br><span class="line">(体积=1, 价值=2) 单位体积价值=2</span><br><span class="line">(体积=2, 价值=4) 单位体积价值=2</span><br><span class="line">(体积=3, 价值=3) 单位体积价值=1</span><br></pre></td></tr></table></figure></p>
+<p>如果采用贪心思想，那么先放体积为1和2的物品，此时总价值达到6。剩余体积为2,放不下体积为3的商品了。<br>而我们知道最优解是放体积为2和3的商品，总价值为7。所以过度贪心，将会导致胸怀不够大，看不到全局最优解。</p>
+<p>例题：<a href="https://leetcode-cn.com/problems/partition-equal-subset-sum/" target="_blank" rel="noopener">分割等和子集</a></p>
 
       
     </div>
@@ -585,7 +591,33 @@
               
 
               
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           
@@ -616,7 +648,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#动态规划与字符串结合"><span class="nav-number">1.</span> <span class="nav-text">动态规划与字符串结合</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、动态规划与字符串结合"><span class="nav-number">1.</span> <span class="nav-text">一、动态规划与字符串结合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、背包问题"><span class="nav-number">2.</span> <span class="nav-text">二、背包问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01背包"><span class="nav-number">2.1.</span> <span class="nav-text">01背包</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -649,7 +681,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">415k</span>
+    <span title="Symbols count total">417k</span>
   
 
   
@@ -658,7 +690,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:18</span>
+    <span title="Reading time total">6:20</span>
   
 </div>
 
@@ -767,7 +799,75 @@
 
 
 
-  <script src="/js/next-boot.js?v=7.2.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -786,35 +886,7 @@
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
 
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-
-  
-
-
-
-
-  
-
-  
-
-  
-  
-
-  
-  
-
+    
   
 
 
