@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="动态规划算法的两大特征是递推公式和记忆数组。根据递推公式，大问题分解为重叠子问题（overlap sub-problem），子问题的解储存起来形成记忆。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-08-17T05:19:21.793Z">
+<meta property="og:updated_time" content="2021-08-28T17:51:19.324Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法笔记 | 动态规划">
 <meta name="twitter:description" content="动态规划算法的两大特征是递推公式和记忆数组。根据递推公式，大问题分解为重叠子问题（overlap sub-problem），子问题的解储存起来形成记忆。">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-08-17 13:19:21" itemprop="dateModified" datetime="2021-08-17T13:19:21+08:00">2021-08-17</time>
+                <time title="Modified: 2021-08-29 01:51:19" itemprop="dateModified" datetime="2021-08-29T01:51:19+08:00">2021-08-29</time>
               </span>
             
           
@@ -411,7 +411,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">1.5k</span>
+              <span title="Symbols count in article">2k</span>
             </span>
           
 
@@ -423,7 +423,7 @@
               
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               
-              <span title="Reading time">1 mins.</span>
+              <span title="Reading time">2 mins.</span>
             </span>
           
 
@@ -458,6 +458,10 @@
 dp[i][j] = max(dp[i-1][j-c[i]] + w[i], dp[i-1][j])</script><p>注意01背包问题不能使用贪心思想求解，看下面的例子：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">容量 V = 5</span><br><span class="line">3件商品：</span><br><span class="line">(体积=1, 价值=2) 单位体积价值=2</span><br><span class="line">(体积=2, 价值=4) 单位体积价值=2</span><br><span class="line">(体积=3, 价值=3) 单位体积价值=1</span><br></pre></td></tr></table></figure></p>
 <p>如果采用贪心思想，那么先放体积为1和2的物品，此时总价值达到6。剩余体积为2,放不下体积为3的商品了。<br>而我们知道最优解是放体积为2和3的商品，总价值为7。所以过度贪心，将会导致胸怀不够大，看不到全局最优解。</p>
 <p>例题：<a href="https://leetcode-cn.com/problems/partition-equal-subset-sum/" target="_blank" rel="noopener">分割等和子集</a></p>
+<h1 id="一些一维DP问题"><a href="#一些一维DP问题" class="headerlink" title="一些一维DP问题"></a>一些一维DP问题</h1><h2 id="丑数"><a href="#丑数" class="headerlink" title="丑数"></a>丑数</h2><p>定义丑数为质因子只包含2、3、5的数，给你一个正整数n，找出第n个丑数<br>通常认为，第一个丑数为1。</p>
+<h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>除了1之外，第n个丑数只能是前面某个丑数乘2或乘3或乘5得到的结果。令p2,p3,p5储存前面某个丑数的下标，那么第i个丑数应为 <code>dp[p2]*2,dp[p3]*3,dp[p5]*5</code> 的最小值。<br>特征是假如第i个新丑数是第p2个丑数乘2得到的，则下标p2+1，第i+1个丑数为 <code>dp[p2+1]*2,dp[p3]*3,dp[p5]*5</code> 最小值；<br>第p3个丑数乘3得到的第i个丑数则下标p3+1，第i+1个丑数为 <code>dp[p2]*2,dp[p3+1]*3,dp[p5]*5</code> 最小值；<br>第p5个丑数乘5得到的则下标p5+1，第i+1个丑数为<code>dp[p2]*2,dp[p3]*3,dp[p5+1]*5</code> 最小值。</p>
+<h2 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h2><p>前缀和数组细分有两种：<br>如果preSum[i]记录从0累加到i的和，那么计算数组第i到j个元素的累加和即为 preSum[j]-preSum[i]+arr[i]<br>如果preSum[i]（i&gt;0）记录从下标0累加到下标i-1的和，preSum[0]=0，那么计算数组下标i到j的元素累加和即为 preSum[j+1]-preSum[i]</p>
+<p>例题：<a href="https://billystudio.github.io/2018/08/22/Aug-22nd-exercises-answer/#leetcode1588">所有奇数长度子数组的和</a></p>
 
       
     </div>
@@ -584,7 +588,7 @@ dp[i][j] = max(dp[i-1][j-c[i]] + w[i], dp[i-1][j])</script><p>注意01背包问�
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">148</span>
+                    <span class="site-state-item-count">149</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -614,7 +618,7 @@ dp[i][j] = max(dp[i-1][j-c[i]] + w[i], dp[i-1][j])</script><p>注意01背包问�
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">173</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -648,7 +652,7 @@ dp[i][j] = max(dp[i-1][j-c[i]] + w[i], dp[i-1][j])</script><p>注意01背包问�
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、动态规划与字符串结合"><span class="nav-number">1.</span> <span class="nav-text">一、动态规划与字符串结合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、背包问题"><span class="nav-number">2.</span> <span class="nav-text">二、背包问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01背包"><span class="nav-number">2.1.</span> <span class="nav-text">01背包</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、动态规划与字符串结合"><span class="nav-number">1.</span> <span class="nav-text">一、动态规划与字符串结合</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、背包问题"><span class="nav-number">2.</span> <span class="nav-text">二、背包问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#01背包"><span class="nav-number">2.1.</span> <span class="nav-text">01背包</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#一些一维DP问题"><span class="nav-number">3.</span> <span class="nav-text">一些一维DP问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#丑数"><span class="nav-number">3.1.</span> <span class="nav-text">丑数</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#分析"><span class="nav-number">3.1.1.</span> <span class="nav-text">分析</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前缀和"><span class="nav-number">3.2.</span> <span class="nav-text">前缀和</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -681,7 +685,7 @@ dp[i][j] = max(dp[i-1][j-c[i]] + w[i], dp[i-1][j])</script><p>注意01背包问�
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">417k</span>
+    <span title="Symbols count total">419k</span>
   
 
   
@@ -690,7 +694,7 @@ dp[i][j] = max(dp[i-1][j-c[i]] + w[i], dp[i-1][j])</script><p>注意01背包问�
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:20</span>
+    <span title="Reading time total">6:21</span>
   
 </div>
 
