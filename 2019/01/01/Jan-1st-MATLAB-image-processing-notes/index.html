@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="本笔记整合了之前在作业部落上的现代通信技术笔记. 又融合了数字图像处理课程的实验笔记.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-01-10T17:33:30.742Z">
+<meta property="og:updated_time" content="2021-08-29T13:23:56.156Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="MATLAB 图像处理笔记">
 <meta name="twitter:description" content="本笔记整合了之前在作业部落上的现代通信技术笔记. 又融合了数字图像处理课程的实验笔记.">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-01-11 01:33:30" itemprop="dateModified" datetime="2020-01-11T01:33:30+08:00">2020-01-11</time>
+                <time title="Modified: 2021-08-29 21:23:56" itemprop="dateModified" datetime="2021-08-29T21:23:56+08:00">2021-08-29</time>
               </span>
             
           
@@ -411,7 +411,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">89</span>
+              <span title="Symbols count in article">1.6k</span>
             </span>
           
 
@@ -444,6 +444,10 @@
       
         <p>本笔记整合了之前在作业部落上的现代通信技术笔记. 又融合了数字图像处理课程的实验笔记. <a id="more"></a></p>
 <h1 id="图像读取"><a href="#图像读取" class="headerlink" title="图像读取"></a>图像读取</h1><p>主要函数有 <code>imread(FILENAME)</code> <code>imshow(A)</code> <code>rgb2gray(RGB)</code></p>
+<h1 id="repmat-函数"><a href="#repmat-函数" class="headerlink" title="repmat 函数"></a>repmat 函数</h1><p>MATLAB中如果想对一个矩阵或向量进行复制填充成一个新的矩阵怎么办？就用repmat函数。<br>示例：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">x = [<span class="number">1</span> <span class="number">2</span> <span class="number">3</span>];</span><br><span class="line">y = repmat(x, 2, 1);    // 构建x作为子矩阵，构建两行一列子矩阵的合成矩阵</span><br></pre></td></tr></table></figure></p>
+<h1 id="exist-函数"><a href="#exist-函数" class="headerlink" title="exist 函数"></a>exist 函数</h1><p>MATLAB中有一个非常强大的检查某个名称是否存在的函数，exist(str)。</p>
+<p>下面是help出来的官方说明文档<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">exist  Check existence of variable, script, function, folder, or class</span><br><span class="line">exist(NAME) returns:</span><br><span class="line">  0 if NAME does not exist</span><br><span class="line">  1 if NAME is a variable in the workspace</span><br><span class="line">  2 if NAME is a file with extension .m, .mlx, or .mlapp, or NAME</span><br><span class="line">    is the name of a file with a non-registered file extension </span><br><span class="line">    (.mat, .fig, .txt).</span><br><span class="line">  3 if NAME is a MEX-file on the MATLAB search path</span><br><span class="line">  4 if NAME is a Simulink model or library file on the MATLAB search path</span><br><span class="line">  5 if NAME is a built-in MATLAB function. This does not include classes</span><br><span class="line">  6 if NAME is a P-code file on the MATLAB search path</span><br><span class="line">  7 if NAME is a folder</span><br><span class="line">  8 if NAME is a class (exist returns 0 for Java classes if you</span><br><span class="line">    start MATLAB with the -nojvm option.)</span><br><span class="line"></span><br><span class="line">exist(&apos;NAME&apos;,&apos;builtin&apos;) checks only for built-in functions.</span><br><span class="line">exist(&apos;NAME&apos;,&apos;class&apos;) checks only for classes.</span><br><span class="line">exist(&apos;NAME&apos;,&apos;dir&apos;) checks only for folders.</span><br><span class="line">exist(&apos;NAME&apos;,&apos;file&apos;) checks for files or folders.</span><br><span class="line">exist(&apos;NAME&apos;,&apos;var&apos;) checks only for variables.</span><br><span class="line"></span><br><span class="line">NAME can include a partial path, but must be in a folder on the search</span><br><span class="line">path, or in the current folder. Otherwise, name must include a full path.</span><br><span class="line"></span><br><span class="line">If NAME specifies a file with a non-registered file extension </span><br><span class="line">(.mat, .fig, .txt), include the extension.</span><br><span class="line"></span><br><span class="line">NAME is case insensitive on Windows systems, and case sensitive for </span><br><span class="line">files and folder on UNIX systems.</span><br><span class="line"></span><br><span class="line">MATLAB does not examine the contents or internal structure of a file </span><br><span class="line">and relies solely on the file extension for classification.</span><br></pre></td></tr></table></figure></p>
+<p>可以用<code>exist(&#39;NAME&#39;,&#39;var&#39;)</code>检查变量NAME是否存在。</p>
 
       
     </div>
@@ -568,7 +572,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">149</span>
+                    <span class="site-state-item-count">144</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -583,7 +587,7 @@
                       <a href="/categories/">
                     
                   
-                    <span class="site-state-item-count">9</span>
+                    <span class="site-state-item-count">7</span>
                     <span class="site-state-item-name">categories</span>
                   </a>
                 </div>
@@ -598,7 +602,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">173</span>
+                    <span class="site-state-item-count">172</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -632,7 +636,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#图像读取"><span class="nav-number">1.</span> <span class="nav-text">图像读取</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#图像读取"><span class="nav-number">1.</span> <span class="nav-text">图像读取</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#repmat-函数"><span class="nav-number">2.</span> <span class="nav-text">repmat 函数</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#exist-函数"><span class="nav-number">3.</span> <span class="nav-text">exist 函数</span></a></li></ol></div>
             
 
           </div>
@@ -665,7 +669,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">419k</span>
+    <span title="Symbols count total">412k</span>
   
 
   
@@ -674,7 +678,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:21</span>
+    <span title="Reading time total">6:15</span>
   
 </div>
 
