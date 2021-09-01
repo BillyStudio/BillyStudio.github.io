@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="动态规划算法的两大特征是递推公式和记忆数组。根据递推公式，大问题分解为重叠子问题（overlap sub-problem），子问题的解储存起来形成记忆。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-08-29T13:29:18.877Z">
+<meta property="og:updated_time" content="2021-08-31T15:47:50.167Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法笔记 | 动态规划">
 <meta name="twitter:description" content="动态规划算法的两大特征是递推公式和记忆数组。根据递推公式，大问题分解为重叠子问题（overlap sub-problem），子问题的解储存起来形成记忆。">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-08-29 21:29:18" itemprop="dateModified" datetime="2021-08-29T21:29:18+08:00">2021-08-29</time>
+                <time title="Modified: 2021-08-31 23:47:50" itemprop="dateModified" datetime="2021-08-31T23:47:50+08:00">2021-08-31</time>
               </span>
             
           
@@ -462,6 +462,7 @@ dp[i][j] = max(dp[i-1][j-c[i]] + w[i], dp[i-1][j])</script><p>注意01背包问�
 <h3 id="分析"><a href="#分析" class="headerlink" title="分析"></a>分析</h3><p>除了1之外，第n个丑数只能是前面某个丑数乘2或乘3或乘5得到的结果。令p2,p3,p5储存前面某个丑数的下标，那么第i个丑数应为 <code>dp[p2]*2,dp[p3]*3,dp[p5]*5</code> 的最小值。<br>特征是假如第i个新丑数是第p2个丑数乘2得到的，则下标p2+1，第i+1个丑数为 <code>dp[p2+1]*2,dp[p3]*3,dp[p5]*5</code> 最小值；<br>第p3个丑数乘3得到的第i个丑数则下标p3+1，第i+1个丑数为 <code>dp[p2]*2,dp[p3+1]*3,dp[p5]*5</code> 最小值；<br>第p5个丑数乘5得到的则下标p5+1，第i+1个丑数为<code>dp[p2]*2,dp[p3]*3,dp[p5+1]*5</code> 最小值。</p>
 <h2 id="前缀和"><a href="#前缀和" class="headerlink" title="前缀和"></a>前缀和</h2><p>前缀和数组细分有两种：<br>如果preSum[i]记录从0累加到i的和，那么计算数组第i到j个元素的累加和即为 preSum[j]-preSum[i]+arr[i]<br>如果preSum[i]（i&gt;0）记录从下标0累加到下标i-1的和，preSum[0]=0，那么计算数组下标i到j的元素累加和即为 preSum[j+1]-preSum[i]</p>
 <p>例题：<a href="https://billystudio.github.io/2018/08/22/Aug-22nd-exercises-answer/#leetcode1588">所有奇数长度子数组的和</a></p>
+<p>利用前缀和还可以构造差分数组，例题：<a href="https://leetcode-cn.com/problems/corporate-flight-bookings/" target="_blank" rel="noopener">航班预订统计</a></p>
 
       
     </div>
@@ -685,7 +686,7 @@ dp[i][j] = max(dp[i-1][j-c[i]] + w[i], dp[i-1][j])</script><p>注意01背包问�
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">412k</span>
+    <span title="Symbols count total">413k</span>
   
 
   
