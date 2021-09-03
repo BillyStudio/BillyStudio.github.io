@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="学习操作系统和编程中经常遇到的一些概念。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-07-18T15:19:09.304Z">
+<meta property="og:updated_time" content="2021-09-03T11:31:06.601Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程、线程和协程">
 <meta name="twitter:description" content="学习操作系统和编程中经常遇到的一些概念。">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-07-18 23:19:09" itemprop="dateModified" datetime="2021-07-18T23:19:09+08:00">2021-07-18</time>
+                <time title="Modified: 2021-09-03 19:31:06" itemprop="dateModified" datetime="2021-09-03T19:31:06+08:00">2021-09-03</time>
               </span>
             
           
@@ -396,7 +396,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">569</span>
+              <span title="Symbols count in article">588</span>
             </span>
           
 
@@ -435,7 +435,7 @@
 <h3 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h3><p>协程不是由操作系统内核管理的，而是完全由程序所控制（也就是在用户态执行）。</p>
 <h1 id="线程通信的同步与异步、阻塞与非阻塞"><a href="#线程通信的同步与异步、阻塞与非阻塞" class="headerlink" title="线程通信的同步与异步、阻塞与非阻塞"></a>线程通信的同步与异步、阻塞与非阻塞</h1><p>同步与异步是针对得到结果的时间来分类的。同步情况下，返回的结果就是调用的结果；或者说在没有得到结果之前，调用就不返回。<br>而在异步情况下，调用会立即返回一个空值，调用方不会直接获得真正的结果，真正的结果由被调用方来主动通知或发送给调用方。</p>
 <p>阻塞与非阻塞是针对等待调用结果时调用方的状态来分类的。在阻塞的情况下，当前线程会被挂起，直到获取结果才会继续。<br>而在非阻塞的情况下，调用之后没有等待，不会阻塞当前进程做下一件事。</p>
-<p>举个例子，Java编程的三个IO模型中，BIO属于同步阻塞，NIO属于同步非阻塞，AIO属于异步非阻塞。</p>
+<p>举个例子，Java编程的三个IO模型中，BIO属于同步阻塞，NIO属于同步非阻塞，AIO属于异步非阻塞。而在线程池中处理BIO则属于异步阻塞。</p>
 
       
     </div>
@@ -564,7 +564,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">144</span>
+                    <span class="site-state-item-count">143</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -594,7 +594,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">172</span>
+                    <span class="site-state-item-count">171</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -661,7 +661,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">413k</span>
+    <span title="Symbols count total">414k</span>
   
 
   
