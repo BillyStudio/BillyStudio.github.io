@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="如果只考一道最基本的数据结构与算法题, 那他一定是道排序题. —- 鲁迅">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-09-03T18:10:23.891Z">
+<meta property="og:updated_time" content="2021-09-04T02:14:05.881Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法笔记 | 查找与排序">
 <meta name="twitter:description" content="如果只考一道最基本的数据结构与算法题, 那他一定是道排序题. —- 鲁迅">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-09-04 02:10:23" itemprop="dateModified" datetime="2021-09-04T02:10:23+08:00">2021-09-04</time>
+                <time title="Modified: 2021-09-04 10:14:05" itemprop="dateModified" datetime="2021-09-04T10:14:05+08:00">2021-09-04</time>
               </span>
             
           
@@ -447,7 +447,7 @@
 <h2 id="冒泡排序"><a href="#冒泡排序" class="headerlink" title="冒泡排序"></a>冒泡排序</h2><p>i 从 0 开始遍历到 n，相邻两个元素 r[i] 和 r[i+1] 进行比较, 将较大的元素交换到后面, 这样经过一次 i 的遍历之后, 最大的元素就会沉底. 然后 i 从 0 开始遍历到 n-1, 同样的方法, 第二大的元素就会沉底. 依次类推. 时间复杂度 O(n^2)</p>
 <h2 id="快速排序"><a href="#快速排序" class="headerlink" title="快速排序"></a>快速排序</h2><p>经典的快速排序方法首先选定某个数 (如第一个元素) 作为基准(Pivot), 接下来通过 key 的逆序比较(用 j 遍历)和正序比较 (用 i 遍历) 找出倒着数比基准小的和正着数比基准大的数, 然后把比基准小放到 i 的位置, 比基准大的放到 j 的位置, 当 i == j 时, 就找到了基准所在的位置。<br>partition函数中，数组arr从下标l到下标r进行一次遍历，返回pivot所插入的位置。<br>双指针遍历的代码描述有如下两种方式(assert arr.length &gt;= r+1)<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 交换法</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span></span></span><br><span class="line"><span class="function"></span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pivot = arr[l];</span><br><span class="line">    <span class="keyword">int</span> i = l, j = r;</span><br><span class="line">    <span class="keyword">while</span>(l &lt; r) &#123;</span><br><span class="line">        <span class="keyword">while</span>(i &lt; r &amp;&amp; arr[i] &lt;= pivot) &#123;++i;&#125;</span><br><span class="line">        <span class="keyword">while</span>(j &gt; l &amp;&amp; arr[j] &gt;= pivot) &#123;--j;&#125;</span><br><span class="line">        <span class="keyword">if</span>(i &gt;= j) &#123; <span class="keyword">break</span>;&#125;</span><br><span class="line">        swap(arr, i, j);</span><br><span class="line">    &#125;</span><br><span class="line">    swap(arr, l, j);</span><br><span class="line">    <span class="keyword">return</span> j;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 填坑法</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">partition2</span><span class="params">(<span class="keyword">int</span>* arr, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> pivot = arr[l];</span><br><span class="line">    <span class="keyword">while</span>(l &lt; r) &#123;</span><br><span class="line">        <span class="keyword">while</span>(r &gt; l &amp;&amp; arr[r] &gt;= pivot) --r;</span><br><span class="line">        arr[l] = arr[r];</span><br><span class="line">        <span class="keyword">while</span>(l &lt; r &amp;&amp; arr[l] &lt;= pivot) ++l;</span><br><span class="line">        arr[r] = arr[l];</span><br><span class="line">    &#125;</span><br><span class="line">    arr[l] = pivot;</span><br><span class="line">    <span class="keyword">return</span> l;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>注意，这里的参数r是闭区间。partion函数分成了基准位置前和基准位置后两块, 再对其递归排序. 时间复杂度 O(nlog_2 n)</p>
+<p>注意，这里的参数r是闭区间。partion函数分成了基准位置前和基准位置后两块, 再对其递归排序. 时间复杂度 O(nlog n)</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">quicksort</span><span class="params">(<span class="keyword">int</span>[] arr, <span class="keyword">int</span> l, <span class="keyword">int</span> r)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(l &lt;= r) &#123;</span><br><span class="line">        <span class="keyword">int</span> pos = partition(arr, l, r);</span><br><span class="line">        quicksort(arr, l, pos-<span class="number">1</span>);</span><br><span class="line">        quicksort(arr, pos+<span class="number">1</span>, r);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>利用快速排序的性质，可以解决一些问题，比如：利用双指针遍历一次后，pivot插入了i的位置，在pivot之前有i个数比pivot小。可以通过这个特性找最小的K个数： <a href="https://www.nowcoder.com/practice/6a296eb82cf844ca8539b57c23e6e9bf?tpId=13&amp;tqId=11182&amp;tPage=1&amp;rp=1&amp;ru=%2Fta%2Fcoding-interviews&amp;qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&amp;from=cyc_github&amp;tab=answerKey" target="_blank" rel="noopener">牛客网 最小的K个数</a></p>
 <h1 id="选择排序"><a href="#选择排序" class="headerlink" title="选择排序"></a>选择排序</h1><p>选择排序是最符合人们思维习惯的一种排序方法. 也是考试中的常见出题范围.<br>选择排序的基本思想是先选出最小 (或最大) 的元素, 然后在剩余的元素中选出最小 (或大) 的元素作为第二个排序好的元素, 以此类推. 选择排序目前主要分为两大类, 即直接选择排序和堆排序.</p>
@@ -607,7 +607,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">143</span>
+                    <span class="site-state-item-count">141</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -637,7 +637,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">171</span>
+                    <span class="site-state-item-count">168</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>

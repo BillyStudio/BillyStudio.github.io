@@ -90,18 +90,18 @@
 
 
 
-  <meta name="description" content="这道题用到了一个 ACM 赛题中常见的数据结构树状数组, 又称 Binary Index Tree.">
-<meta name="keywords" content="数据结构,算法,PAT,树状数组,DIP,二分查找">
+  <meta name="description" content="这道题用到了一个 ACM 赛题中常见的数据结构——树状数组, 又称 Binary Index Tree.">
+<meta name="keywords" content="数据结构,算法,PAT,树状数组,二分查找">
 <meta property="og:type" content="article">
 <meta property="og:title" content="PAT 真题 | 1057 Stack">
 <meta property="og:url" content="http://BillyStudio.github.io/2018/09/07/Sep-7th-PAT-1057/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="这道题用到了一个 ACM 赛题中常见的数据结构树状数组, 又称 Binary Index Tree.">
+<meta property="og:description" content="这道题用到了一个 ACM 赛题中常见的数据结构——树状数组, 又称 Binary Index Tree.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-18T06:54:36.760Z">
+<meta property="og:updated_time" content="2021-09-04T14:36:02.412Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="PAT 真题 | 1057 Stack">
-<meta name="twitter:description" content="这道题用到了一个 ACM 赛题中常见的数据结构树状数组, 又称 Binary Index Tree.">
+<meta name="twitter:description" content="这道题用到了一个 ACM 赛题中常见的数据结构——树状数组, 又称 Binary Index Tree.">
 
 
 
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-18 14:54:36" itemprop="dateModified" datetime="2019-08-18T14:54:36+08:00">2019-08-18</time>
+                <time title="Modified: 2021-09-04 22:36:02" itemprop="dateModified" datetime="2021-09-04T22:36:02+08:00">2021-09-04</time>
               </span>
             
           
@@ -396,7 +396,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">712</span>
+              <span title="Symbols count in article">991</span>
             </span>
           
 
@@ -427,14 +427,15 @@
       
 
       
-        <p>这道题用到了一个 ACM 赛题中常见的数据结构树状数组, 又称 Binary Index Tree. <a id="more"></a></p>
-<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><p>让我们记录一个栈中的数据的中位数. 考虑用一个辅助数组 c 来实现树状数组, 为了方便理解, 假设 c 对应的原始数组为 a[i]. 那么 a[i] 记录的是大小为 i 的数据的个数. 树状数组能对 a[0] … a[i] 的值进行O(lg n)时间复杂度的求和, 这个和表示的就是值小于等于 i 的数据的个数. 当这个和等于 (int)读入所有元素的个数/2 时, i 对应的就是中位数了.</p>
+        <p>这道题用到了一个 ACM 赛题中常见的数据结构——树状数组, 又称 Binary Index Tree. <a id="more"></a><br><a href="https://pintia.cn/problem-sets/994805342720868352/problems/994805417945710592" target="_blank" rel="noopener">PAT 1057 Stack</a></p>
+<h1 id="题目分析"><a href="#题目分析" class="headerlink" title="题目分析"></a>题目分析</h1><p>让我们记录一个栈中的数据的中位数. 如果使用传统的前缀和方法，更新时的复杂度为O(n)，复杂度较大。考虑用一个辅助数组 c 来实现树状数组, 为了方便理解, 假设 c 对应的原始数组为 a[i]. 那么 a[i] 记录的是大小为 i 的数据的个数. 树状数组能对 a[0] … a[i] 的值进行O(lg n)时间复杂度的求和, 这个和表示的就是值小于等于 i 的数据的个数. 当这个和等于 (int)读入所有元素的个数/2 时, i 对应的就是中位数了.</p>
 <p>树状数组的存储方式比较简单, 但是操作非常有技巧, 首先就是获取某数的二进制表示下最低的 1 对应数.</p>
-<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) ((x) &amp; (-x))</span></span><br></pre></td></tr></table></figure>
-<p>当Push一个数 temp 后, 我们对树状数组进行更新就可以这样写:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = temp; i &lt; maxn; i += lowbit(i))&#123;</span><br><span class="line">    c[i] += <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>如果是Pop就把+1变为-1即可.</p>
-<p>如果要统计小于等于 x 的键值个数 sum, 复杂度也是 O(lg n).<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">for</span>(<span class="keyword">int</span> i = x; i &gt;= <span class="number">1</span>; i -= lowbit(i))&#123;</span><br><span class="line">    sum += c[i];</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>在查找的时候使用二分查找, 效率会更高.<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 假设数据读进了 vector&lt;int&gt; s 中</span></span><br><span class="line"><span class="keyword">int</span> left = <span class="number">1</span>, right = maxn, k = (s.size()+<span class="number">1</span>) / <span class="number">2</span>; <span class="comment">// k 表示中位数前面的数的总数(包括中位数)</span></span><br><span class="line"><span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line">    <span class="keyword">int</span> mid = (left + right) / <span class="number">2</span>;</span><br><span class="line">    <span class="keyword">if</span> (getSum(mid) &lt; k)&#123;</span><br><span class="line">        left = mid;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">define</span> lowbit(x) ((x) &amp; (-x))</span></span><br><span class="line"><span class="keyword">int</span> c[maxn];    <span class="comment">// 树状数组</span></span><br></pre></td></tr></table></figure>
+<p>当Push一个数 temp 后, 我们对树状数组进行更新就可以这样写，v=1:<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">update</span><span class="params">(<span class="keyword">int</span> start, <span class="keyword">int</span> v)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = start; i &lt; maxn; i += lowbit(i))&#123;</span><br><span class="line">        c[i] += v;  <span class="comment">// v是增加/减少的个数</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>如果是Pop就把v=1变为-1即可.</p>
+<p>如果要统计小于等于 x 的键值个数 sum, 复杂度也是 O(log n).<br><figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">askSum</span><span class="params">(<span class="keyword">int</span> x)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = x; i; i -= lowbit(i))&#123;</span><br><span class="line">        sum += c[i];</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>在查找最小为target的位置时使用二分查找的思想, 效率会更高.<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// target 表示中位数的位置，（若栈中数据个数n，则target=(n+1)/2）</span></span><br><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">medianSearch</span><span class="params">(<span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> left = <span class="number">0</span>, right = maxn<span class="number">-1</span>;</span><br><span class="line">    <span class="keyword">while</span>(left &lt; right)&#123;</span><br><span class="line">        <span class="keyword">int</span> mid = left + (right-left)/<span class="number">2</span>;</span><br><span class="line">        <span class="keyword">if</span> (askSum(mid) &gt;= target)&#123;</span><br><span class="line">            right = mid;</span><br><span class="line">        &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">            left = mid + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> left;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>参考资料：<br>[1]: <a href="https://www.bilibili.com/video/BV1pE41197Qj?from=search&amp;seid=817487465112371111&amp;spm_id_from=333.337.0.0" target="_blank" rel="noopener">完全理解并深入应用树状数组 | 支持多种动态维护区间操作</a><br>[2]: <a href="https://www.liuchuo.net/archives/2265" target="_blank" rel="noopener">柳婼 の blog</a></p>
 
       
     </div>
@@ -472,8 +473,6 @@
             <a href="/tags/PAT/" rel="tag"># PAT</a>
           
             <a href="/tags/树状数组/" rel="tag"># 树状数组</a>
-          
-            <a href="/tags/DIP/" rel="tag"># DIP</a>
           
             <a href="/tags/二分查找/" rel="tag"># 二分查找</a>
           
@@ -569,7 +568,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">143</span>
+                    <span class="site-state-item-count">141</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -599,7 +598,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">171</span>
+                    <span class="site-state-item-count">168</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
