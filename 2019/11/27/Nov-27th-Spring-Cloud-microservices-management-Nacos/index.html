@@ -696,7 +696,33 @@
               
 
               
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           
@@ -727,7 +753,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Prerequisites"><span class="nav-number">1.</span> <span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初探：Spring-Boot-启动-Eureka-Server-和-Eureka-Client微服务"><span class="nav-number">2.</span> <span class="nav-text">初探：Spring Boot 启动 Eureka Server 和 Eureka Client微服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开启一个-Eureka-服务注册"><span class="nav-number">2.1.</span> <span class="nav-text">开启一个 Eureka 服务注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与注册中心对话"><span class="nav-number">2.2.</span> <span class="nav-text">与注册中心对话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提供服务"><span class="nav-number">2.3.</span> <span class="nav-text">提供服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习：源码启动-Eureka-Server，-Eureka-Client-和微服务"><span class="nav-number">3.</span> <span class="nav-text">学习：源码启动 Eureka Server， Eureka Client 和微服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-number">3.1.</span> <span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-IDEA选2019-2-2020-1-的版本-；-jdk1-8-Tomcat-8-9"><span class="nav-number">3.1.1.</span> <span class="nav-text">1. IDEA选2019.2-2020.1 的版本 ； jdk1.8 ; Tomcat 8/9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-注册码云帐号，然后克隆项目："><span class="nav-number">3.1.2.</span> <span class="nav-text">2. 注册码云帐号，然后克隆项目：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-配置gradle"><span class="nav-number">3.1.3.</span> <span class="nav-text">3. 配置gradle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-配置-Tomcat"><span class="nav-number">3.1.4.</span> <span class="nav-text">4. 配置 Tomcat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-点击启动Tomcat，会弹出eureka界面"><span class="nav-number">3.1.5.</span> <span class="nav-text">6. 点击启动Tomcat，会弹出eureka界面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka-源码解析"><span class="nav-number">3.2.</span> <span class="nav-text">Eureka 源码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取-eureka-v2-apps-appId-下的xml解析"><span class="nav-number">3.2.1.</span> <span class="nav-text">获取 eureka/v2/apps/{appId} 下的xml解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Renew-操作"><span class="nav-number">3.2.2.</span> <span class="nav-text">Renew 操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Status-Update-操作"><span class="nav-number">3.2.3.</span> <span class="nav-text">Status Update 操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v1-9-26-版本"><span class="nav-number">3.3.</span> <span class="nav-text">v1.9.26 版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务发现模块-com-netflix-discovery"><span class="nav-number">3.4.</span> <span class="nav-text">服务发现模块 com.netflix.discovery</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三级缓存"><span class="nav-number">3.4.1.</span> <span class="nav-text">三级缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全量拉取与增量拉取"><span class="nav-number">3.4.2.</span> <span class="nav-text">全量拉取与增量拉取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整体架构设计采用-MVC-模式"><span class="nav-number">3.5.</span> <span class="nav-text">整体架构设计采用 MVC 模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#做的一些尝试（Deprecated）"><span class="nav-number">3.6.</span> <span class="nav-text">做的一些尝试（Deprecated）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多级缓存机制"><span class="nav-number">3.6.1.</span> <span class="nav-text">多级缓存机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微服务实例对自己的四种接口操作"><span class="nav-number">3.6.2.</span> <span class="nav-text">微服务实例对自己的四种接口操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Register注册动作"><span class="nav-number">3.6.3.</span> <span class="nav-text">Register注册动作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Renew-续约"><span class="nav-number">3.6.4.</span> <span class="nav-text">Renew 续约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Contract-status-update-操作的算法描述"><span class="nav-number">3.6.5.</span> <span class="nav-text">Contract status update 操作的算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsp-无法识别包依赖自动补全问题"><span class="nav-number">3.6.6.</span> <span class="nav-text">jsp 无法识别包依赖自动补全问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud-Eureka"><span class="nav-number">4.</span> <span class="nav-text">Spring Cloud Eureka</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-cloud-netflix-eureka-server-源码阅读"><span class="nav-number">4.1.</span> <span class="nav-text">spring-cloud-netflix-eureka-server 源码阅读</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Prerequisites"><span class="nav-text">Prerequisites</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#初探：Spring-Boot-启动-Eureka-Server-和-Eureka-Client微服务"><span class="nav-text">初探：Spring Boot 启动 Eureka Server 和 Eureka Client微服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#开启一个-Eureka-服务注册"><span class="nav-text">开启一个 Eureka 服务注册</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#与注册中心对话"><span class="nav-text">与注册中心对话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#提供服务"><span class="nav-text">提供服务</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#学习：源码启动-Eureka-Server，-Eureka-Client-和微服务"><span class="nav-text">学习：源码启动 Eureka Server， Eureka Client 和微服务</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#安装"><span class="nav-text">安装</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-IDEA选2019-2-2020-1-的版本-；-jdk1-8-Tomcat-8-9"><span class="nav-text">1. IDEA选2019.2-2020.1 的版本 ； jdk1.8 ; Tomcat 8/9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-注册码云帐号，然后克隆项目："><span class="nav-text">2. 注册码云帐号，然后克隆项目：</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-配置gradle"><span class="nav-text">3. 配置gradle</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-配置-Tomcat"><span class="nav-text">4. 配置 Tomcat</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-点击启动Tomcat，会弹出eureka界面"><span class="nav-text">6. 点击启动Tomcat，会弹出eureka界面</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Eureka-源码解析"><span class="nav-text">Eureka 源码解析</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#获取-eureka-v2-apps-appId-下的xml解析"><span class="nav-text">获取 eureka/v2/apps/{appId} 下的xml解析</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Renew-操作"><span class="nav-text">Renew 操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Status-Update-操作"><span class="nav-text">Status Update 操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#v1-9-26-版本"><span class="nav-text">v1.9.26 版本</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#服务发现模块-com-netflix-discovery"><span class="nav-text">服务发现模块 com.netflix.discovery</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#三级缓存"><span class="nav-text">三级缓存</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#全量拉取与增量拉取"><span class="nav-text">全量拉取与增量拉取</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#整体架构设计采用-MVC-模式"><span class="nav-text">整体架构设计采用 MVC 模式</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#做的一些尝试（Deprecated）"><span class="nav-text">做的一些尝试（Deprecated）</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#多级缓存机制"><span class="nav-text">多级缓存机制</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#微服务实例对自己的四种接口操作"><span class="nav-text">微服务实例对自己的四种接口操作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Register注册动作"><span class="nav-text">Register注册动作</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Renew-续约"><span class="nav-text">Renew 续约</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Contract-status-update-操作的算法描述"><span class="nav-text">Contract status update 操作的算法描述</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#jsp-无法识别包依赖自动补全问题"><span class="nav-text">jsp 无法识别包依赖自动补全问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Spring-Cloud-Eureka"><span class="nav-text">Spring Cloud Eureka</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#spring-cloud-netflix-eureka-server-源码阅读"><span class="nav-text">spring-cloud-netflix-eureka-server 源码阅读</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -760,7 +786,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">416k</span>
+    <span title="Symbols count total">417k</span>
   
 
   
@@ -769,7 +795,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:18</span>
+    <span title="Reading time total">6:20</span>
   
 </div>
 

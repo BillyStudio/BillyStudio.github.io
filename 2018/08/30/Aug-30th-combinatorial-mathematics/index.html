@@ -102,7 +102,7 @@
 <meta property="og:image" content="http://billystudio.github.io/2018/08/30/Aug-30th-combinatorial-mathematics/C53-Cpp-Java.png">
 <meta property="og:image" content="http://billystudio.github.io/2018/08/30/Aug-30th-combinatorial-mathematics/C53-C.png">
 <meta property="og:image" content="http://billystudio.github.io/2018/08/30/Aug-30th-combinatorial-mathematics/listC42.png">
-<meta property="og:updated_time" content="2021-04-05T06:56:16.017Z">
+<meta property="og:updated_time" content="2021-09-18T16:26:53.755Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法笔记 | 数学">
 <meta name="twitter:description" content="本文是数据结构与算法系列第十篇 —— 数学部分。">
@@ -373,7 +373,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-04-05 14:56:16" itemprop="dateModified" datetime="2021-04-05T14:56:16+08:00">2021-04-05</time>
+                <time title="Modified: 2021-09-19 00:26:53" itemprop="dateModified" datetime="2021-09-19T00:26:53+08:00">2021-09-19</time>
               </span>
             
           
@@ -416,7 +416,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">3.5k</span>
+              <span title="Symbols count in article">5.1k</span>
             </span>
           
 
@@ -428,7 +428,7 @@
               
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               
-              <span title="Reading time">3 mins.</span>
+              <span title="Reading time">5 mins.</span>
             </span>
           
 
@@ -448,7 +448,15 @@
 
       
         <p>本文是数据结构与算法系列第十篇 —— 数学部分。 <a id="more"></a></p>
-<h1 id="组合数学"><a href="#组合数学" class="headerlink" title="组合数学"></a>组合数学</h1><p>组合数学是数学的一个分支, 在计算机领域有着广泛的应用.</p>
+<h1 id="一、质数"><a href="#一、质数" class="headerlink" title="一、质数"></a>一、质数</h1><p>定义：A <em>prime</em> is a positive integer X that has exactly two distinct divisors: 1 and X. The first few prime integers are 2, 3, 5, 7, 11 and 13.</p>
+<p>判断单独一个正整数n是否为质数就可以用定义法，由于数的因子具有对偶性，所以只需要在遍历到 $\sqrt{n}$ 仍没有出现因子时，即可判定为质数(prime)，否则为合数(composite)：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="comment">// assert n &gt; 0</span></span><br><span class="line"><span class="function"><span class="keyword">bool</span> <span class="title">isPrime</span><span class="params">(<span class="keyword">int</span> n)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">if</span>(n == <span class="number">1</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> fac=<span class="number">2</span>; fac&lt;=<span class="built_in">sqrt</span>(n); ++fac) &#123;</span><br><span class="line">        <span class="keyword">if</span>(n % fac == <span class="number">0</span>) <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>算法时间复杂度为 O($\sqrt{n}$)。<br>例题 <a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&amp;sectionid=1&amp;problemid=2" target="_blank" rel="noopener">HDU2.1.2 How many prime numbers</a></p>
+<h2 id="Eratosthenes-筛法（埃式筛法）"><a href="#Eratosthenes-筛法（埃式筛法）" class="headerlink" title="Eratosthenes 筛法（埃式筛法）"></a>Eratosthenes 筛法（埃式筛法）</h2><p>如果需要求取已知范围（[1, N]）内的所有质数，那么使用定义法的时间复杂度会变为 O($N\sqrt{N}$) = O($N^{\frac{3}{2}}$)，效率不佳。这种情况下一般使用埃式筛法，算法的基本逻辑是：质数的倍数都是合数，可以遍历筛掉。比如2是质数，那么所有2之后的倍数（偶数）都是合数。进一步，3是质数，3×2已经在遍历2倍数时删掉了，所以从3×3开始，之后的3×6、3×9都是合数。5是质数，5×2^k和5×3^k已经被删掉了，所以从5^2开始筛，5^3，5^4…都是合数。当取到 sqrt(N) 时，由于从 sqrt(N)*sqrt(N) = N 开始筛，已经超出已知范围了，所以取到外层循环sqrt(N)即可。<br>假设使用数组prime保存[1, N]中是否为质数，默认均为质数true。根据上面思路得到埃式筛法：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#<span class="meta-keyword">include</span> <span class="meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> <span class="keyword">int</span> MAX_N = <span class="number">1e6</span>+<span class="number">1</span>;</span><br><span class="line"><span class="keyword">bool</span> prime[MAX_N];</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 返回 [1,N] 范围内所有质数</span></span><br><span class="line"><span class="comment">    assert N &gt; 0</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; sieve(<span class="keyword">int</span> N) &#123;</span><br><span class="line">    <span class="built_in">memset</span>(prime, <span class="number">1</span>, N*<span class="keyword">sizeof</span>(<span class="keyword">bool</span>));</span><br><span class="line">    prime[<span class="number">0</span>] = prime[<span class="number">1</span>] = <span class="literal">false</span>;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> base=<span class="number">2</span>; base&lt;=<span class="built_in">sqrt</span>(N); ++base) &#123;</span><br><span class="line">        <span class="keyword">if</span>(prime[base]) <span class="keyword">for</span>(<span class="keyword">int</span> idx=base*base; idx&lt;=N; idx+=base) &#123;</span><br><span class="line">            prime[idx] = <span class="literal">false</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="comment">// 遍历取出质数</span></span><br><span class="line">    <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; ans;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">2</span>; i&lt;=N; ++i) <span class="keyword">if</span>(prime[i]) &#123;</span><br><span class="line">        ans.push_back(i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> ans;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>算法中，筛数的过程中，由于每个<code>prime[idx]</code>最多被赋值1次，而base遍历sqrt(N)&lt; N，所以时间复杂度为 O(N)，空间上prime数组占用了N的空间，故空间复杂度为 O(N)</p>
+<p>例题 <a href="https://app.codility.com/programmers/lessons/11-sieve_of_eratosthenes/count_semiprimes/" target="_blank" rel="noopener">Codility Lesson 11-2 CountSemiPrimes</a></p>
+<h2 id="欧几里德算法"><a href="#欧几里德算法" class="headerlink" title="欧几里德算法"></a>欧几里德算法</h2><p>欧几里德算法通过辗转相除，计算得到最大公约数。有递归和非递归两种写法：<br>递归写法：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> m == <span class="number">0</span> ? n : gcd(m, n % m);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>非递归写法：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">int</span> <span class="title">gcd</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">while</span>(m != <span class="number">0</span>) &#123;</span><br><span class="line">        n = n % m;</span><br><span class="line">        swap(n, m);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> n;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="二、组合数学"><a href="#二、组合数学" class="headerlink" title="二、组合数学"></a>二、组合数学</h1><p>组合数学是数学的一个分支, 在计算机领域有着广泛的应用.</p>
 <h2 id="排列与组合"><a href="#排列与组合" class="headerlink" title="排列与组合"></a>排列与组合</h2><p>排列使用A(Arrangement)或P(Permutation)表示，从 n 个数中取出 m 个数的排列数公式：</p>
 <script type="math/tex; mode=display">A_n^m = A(n, m) = n\times (n-1) \times\cdots (n-m+1) = \frac{n!}{(n-m)!}</script><p>全排列是排列数的一种特殊情况：$A(n,n) = n!$</p>
 <figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment">    求从 n 个数中取出 m 个数的排列数</span></span><br><span class="line"><span class="comment">    要求：n &gt;= m &gt; 0</span></span><br><span class="line"><span class="comment">*/</span></span><br><span class="line"><span class="function"><span class="keyword">long</span> <span class="keyword">long</span> <span class="title">permutation</span><span class="params">(<span class="keyword">int</span> n, <span class="keyword">int</span> m)</span> </span>&#123;</span><br><span class="line">    <span class="keyword">long</span> <span class="keyword">long</span> P = n;</span><br><span class="line">    <span class="keyword">for</span>(<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; m; ++i) &#123;</span><br><span class="line">        P = P * (n-i);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">return</span> P;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
@@ -628,7 +636,33 @@
               
 
               
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    <span class="site-state-item-count">7</span>
+                    <span class="site-state-item-name">categories</span>
+                  </a>
+                </div>
+              
 
+              
+                
+                
+                <div class="site-state-item site-state-tags">
+                  
+                    
+                      <a href="/tags/">
+                    
+                  
+                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-name">tags</span>
+                  </a>
+                </div>
               
             </nav>
           
@@ -659,7 +693,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#组合数学"><span class="nav-number">1.</span> <span class="nav-text">组合数学</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#排列与组合"><span class="nav-number">1.1.</span> <span class="nav-text">排列与组合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二项式定理"><span class="nav-number">1.1.1.</span> <span class="nav-text">二项式定理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Catalan-数"><span class="nav-number">1.2.</span> <span class="nav-text">Catalan 数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基础数论"><span class="nav-number">2.</span> <span class="nav-text">基础数论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mobius-反演定理"><span class="nav-number">2.1.</span> <span class="nav-text">Mobius 反演定理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#除法表达式-NYOJ-1013"><span class="nav-number">2.1.1.</span> <span class="nav-text">除法表达式 NYOJ 1013</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、质数"><span class="nav-text">一、质数</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Eratosthenes-筛法（埃式筛法）"><span class="nav-text">Eratosthenes 筛法（埃式筛法）</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#欧几里德算法"><span class="nav-text">欧几里德算法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、组合数学"><span class="nav-text">二、组合数学</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#排列与组合"><span class="nav-text">排列与组合</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#二项式定理"><span class="nav-text">二项式定理</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Catalan-数"><span class="nav-text">Catalan 数</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#基础数论"><span class="nav-text">基础数论</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Mobius-反演定理"><span class="nav-text">Mobius 反演定理</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#除法表达式-NYOJ-1013"><span class="nav-text">除法表达式 NYOJ 1013</span></a></li></ol></li></ol></li></ol></div>
             
 
           </div>
@@ -692,7 +726,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">416k</span>
+    <span title="Symbols count total">417k</span>
   
 
   
@@ -701,7 +735,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:18</span>
+    <span title="Reading time total">6:20</span>
   
 </div>
 
