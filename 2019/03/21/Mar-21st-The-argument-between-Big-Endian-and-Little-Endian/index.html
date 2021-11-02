@@ -90,17 +90,18 @@
 
 
 
-  <meta name="description" content="Numpy default is little endian as opposed to Big endian used in Fotran.">
+  <meta name="description" content="大小端的故事源于《格列佛游记》故事中两个国家为了吃鸡蛋究竟是先打破较大的一端还是先打破较小的一端而征战不休。">
+<meta name="keywords" content="numpy,计算机组成原理,Fortran">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Mar-21st-The-argument-between-Big-Endian-and-Little-Endian">
+<meta property="og:title" content="The argument between-Big-Endian-and-Little-Endian">
 <meta property="og:url" content="http://BillyStudio.github.io/2019/03/21/Mar-21st-The-argument-between-Big-Endian-and-Little-Endian/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="Numpy default is little endian as opposed to Big endian used in Fotran.">
+<meta property="og:description" content="大小端的故事源于《格列佛游记》故事中两个国家为了吃鸡蛋究竟是先打破较大的一端还是先打破较小的一端而征战不休。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-18T06:54:36.713Z">
+<meta property="og:updated_time" content="2021-09-23T13:57:12.615Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Mar-21st-The-argument-between-Big-Endian-and-Little-Endian">
-<meta name="twitter:description" content="Numpy default is little endian as opposed to Big endian used in Fotran.">
+<meta name="twitter:title" content="The argument between-Big-Endian-and-Little-Endian">
+<meta name="twitter:description" content="大小端的故事源于《格列佛游记》故事中两个国家为了吃鸡蛋究竟是先打破较大的一端还是先打破较小的一端而征战不休。">
 
 
 
@@ -118,7 +119,7 @@
   };
 </script>
 
-  <title>Mar-21st-The-argument-between-Big-Endian-and-Little-Endian | Shane's Blog</title>
+  <title>The argument between-Big-Endian-and-Little-Endian | Shane's Blog</title>
   
 
 
@@ -326,7 +327,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">Mar-21st-The-argument-between-Big-Endian-and-Little-Endian
+          <h1 class="post-title" itemprop="name headline">The argument between-Big-Endian-and-Little-Endian
 
               
             
@@ -367,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-18 14:54:36" itemprop="dateModified" datetime="2019-08-18T14:54:36+08:00">2019-08-18</time>
+                <time title="Modified: 2021-09-23 21:57:12" itemprop="dateModified" datetime="2021-09-23T21:57:12+08:00">2021-09-23</time>
               </span>
             
           
@@ -395,7 +396,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">59</span>
+              <span title="Symbols count in article">389</span>
             </span>
           
 
@@ -426,7 +427,10 @@
       
 
       
-        <p>Numpy default is little endian as opposed to Big endian used in Fotran.</p>
+        <p>大小端的故事源于《格列佛游记》故事中两个国家为了吃鸡蛋究竟是先打破较大的一端还是先打破较小的一端而征战不休。<a id="more"></a><br>Numpy default is little endian as opposed to Big endian used in Fotran.</p>
+<p>Little Endian 叫小端存储/小端模式，指低位字节存储在低地址中（低对低）；<br>Big Endian 叫大端存储/大端模式，与小端模式相反，大端存储将低位字节存储于高地址中（低对高）。</p>
+<p>小端存储虽然看似正常，其实不然，比如一个4字节数0x1A2B3C4D，使用小端存储则内存从小到大访问值是 4D 3C 2B 1A；<br>而使用大端存储看似反常，其实用计算机表示方便，从小到达访问值就是 1A 2B 3C 4D</p>
+<p>大端模式方便的地方在于可将符号位（一般为最高位）存储在地址第1位中，方便判断正负<br>小端模式方便的地方在于将地址拓展（如进行强制数据类型转换）的时候，原低位字节不需要调整。</p>
 
       
     </div>
@@ -451,6 +455,19 @@
     
 
     <footer class="post-footer">
+      
+        
+          
+        
+        <div class="post-tags">
+          
+            <a href="/tags/numpy/" rel="tag"># numpy</a>
+          
+            <a href="/tags/计算机组成原理/" rel="tag"># 计算机组成原理</a>
+          
+            <a href="/tags/Fortran/" rel="tag"># Fortran</a>
+          
+        </div>
       
 
       
@@ -533,7 +550,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">141</span>
+                    <span class="site-state-item-count">146</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -563,7 +580,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -613,7 +630,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">417k</span>
+    <span title="Symbols count total">430k</span>
   
 
   
@@ -622,7 +639,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:20</span>
+    <span title="Reading time total">6:31</span>
   
 </div>
 

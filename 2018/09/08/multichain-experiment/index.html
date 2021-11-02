@@ -122,7 +122,7 @@
 <meta property="og:image" content="http://billystudio.github.io/2018/09/08/multichain-experiment/14.png">
 <meta property="og:image" content="http://billystudio.github.io/2018/09/08/multichain-experiment/15.png">
 <meta property="og:image" content="http://billystudio.github.io/2018/09/08/multichain-experiment/workflow.png">
-<meta property="og:updated_time" content="2021-06-14T08:48:15.536Z">
+<meta property="og:updated_time" content="2021-09-26T07:31:33.692Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Shellchain experiment">
 <meta name="twitter:description" content="Basic experiment docs">
@@ -393,7 +393,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-06-14 16:48:15" itemprop="dateModified" datetime="2021-06-14T16:48:15+08:00">2021-06-14</time>
+                <time title="Modified: 2021-09-26 15:31:33" itemprop="dateModified" datetime="2021-09-26T15:31:33+08:00">2021-09-26</time>
               </span>
             
           
@@ -469,7 +469,7 @@
       
         <p>Basic experiment docs <a id="more"></a></p>
 <h1 id="Download-and-install"><a href="#Download-and-install" class="headerlink" title="Download and install"></a>Download and install</h1><p><a href="https://github.com/USTB-InternetSecurityLab/Shellchain" target="_blank" rel="noopener">https://github.com/USTB-InternetSecurityLab/Shellchain</a></p>
-<p>项目代码量100余万行，最近开发的分支： springboot-contract</p>
+<p>项目代码量17余万行，基于multichain开发，最近的分支： springboot-contract</p>
 <p>VSCode配置config.json举例：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    // Use IntelliSense to learn about possible attributes.</span><br><span class="line">    // Hover to view descriptions of existing attributes.</span><br><span class="line">    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387</span><br><span class="line">    &quot;version&quot;: &quot;0.2.0&quot;,</span><br><span class="line">    &quot;configurations&quot;: [</span><br><span class="line">        &#123;</span><br><span class="line">            &quot;name&quot;: &quot;(gdb) Launch&quot;,</span><br><span class="line">            &quot;type&quot;: &quot;cppdbg&quot;,</span><br><span class="line">            &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">            &quot;program&quot;: &quot;$&#123;workspaceRoot&#125;/src/multichaind&quot;,</span><br><span class="line">            &quot;args&quot;: [&quot;shellchain&quot;],</span><br><span class="line">            &quot;stopAtEntry&quot;: false,</span><br><span class="line">            &quot;cwd&quot;: &quot;$&#123;workspaceRoot&#125;&quot;,</span><br><span class="line">            &quot;environment&quot;: [],</span><br><span class="line">            &quot;externalConsole&quot;: false,</span><br><span class="line">            &quot;MIMode&quot;: &quot;gdb&quot;</span><br><span class="line">            &quot;setupCommands&quot;: [</span><br><span class="line">               &#123;</span><br><span class="line">                   &quot;description&quot;: &quot;Enable pretty-printing for gdb&quot;,</span><br><span class="line">                   &quot;text&quot;: &quot;-enable-pretty-printing&quot;,</span><br><span class="line">                   &quot;ignoreFailures&quot;: true</span><br><span class="line">               &#125;</span><br><span class="line">            ]</span><br><span class="line">        &#125;</span><br><span class="line">    ]</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 <h1 id="Experiment-1-单机实验"><a href="#Experiment-1-单机实验" class="headerlink" title="Experiment 1: 单机实验"></a>Experiment 1: 单机实验</h1><h3 id="start"><a href="#start" class="headerlink" title="start"></a>start</h3><p>创建一条新链，这里的链名为chain1：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ shellchain-util create chain1</span><br></pre></td></tr></table></figure></p>
 <p><img src="util-create-chain1.png" alt="./src/shellchain-util create chain1"></p>
@@ -783,7 +783,7 @@ lpScript-&gt;Clear();
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">141</span>
+                    <span class="site-state-item-count">146</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -813,7 +813,7 @@ lpScript-&gt;Clear();
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -880,7 +880,7 @@ lpScript-&gt;Clear();
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">417k</span>
+    <span title="Symbols count total">430k</span>
   
 
   
@@ -889,7 +889,7 @@ lpScript-&gt;Clear();
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:20</span>
+    <span title="Reading time total">6:31</span>
   
 </div>
 

@@ -90,18 +90,20 @@
 
 
 
-  <meta name="description" content="在计算机科学中，一个图就是一些顶点的集合，这些顶点通过一系列边结对（连接）。顶点用圆圈表示，边就是这些圆圈之间的连线。顶点之间通过边连接。">
+  <meta name="description" content="在计算机科学中，一个图就是一些顶点的集合，这些顶点通过一系列边结对（连接）。">
 <meta name="keywords" content="数据结构,算法,最小生成树,MST,ACM,并查集,cpp">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构与算法笔记 | 图">
 <meta property="og:url" content="http://BillyStudio.github.io/2018/07/17/2017-07-17-minimal-spanning-tree/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="在计算机科学中，一个图就是一些顶点的集合，这些顶点通过一系列边结对（连接）。顶点用圆圈表示，边就是这些圆圈之间的连线。顶点之间通过边连接。">
+<meta property="og:description" content="在计算机科学中，一个图就是一些顶点的集合，这些顶点通过一系列边结对（连接）。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-08-08T14:48:17.967Z">
+<meta property="og:image" content="http://billystudio.github.io/2018/07/17/2017-07-17-minimal-spanning-tree/graph-ex1.png">
+<meta property="og:updated_time" content="2021-09-25T14:31:22.370Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="数据结构与算法笔记 | 图">
-<meta name="twitter:description" content="在计算机科学中，一个图就是一些顶点的集合，这些顶点通过一系列边结对（连接）。顶点用圆圈表示，边就是这些圆圈之间的连线。顶点之间通过边连接。">
+<meta name="twitter:description" content="在计算机科学中，一个图就是一些顶点的集合，这些顶点通过一系列边结对（连接）。">
+<meta name="twitter:image" content="http://billystudio.github.io/2018/07/17/2017-07-17-minimal-spanning-tree/graph-ex1.png">
 
 
 
@@ -368,7 +370,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-08-08 22:48:17" itemprop="dateModified" datetime="2021-08-08T22:48:17+08:00">2021-08-08</time>
+                <time title="Modified: 2021-09-25 22:31:22" itemprop="dateModified" datetime="2021-09-25T22:31:22+08:00">2021-09-25</time>
               </span>
             
           
@@ -411,7 +413,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">6.9k</span>
+              <span title="Symbols count in article">7.8k</span>
             </span>
           
 
@@ -423,7 +425,7 @@
               
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               
-              <span title="Reading time">6 mins.</span>
+              <span title="Reading time">7 mins.</span>
             </span>
           
 
@@ -442,8 +444,13 @@
       
 
       
-        <p>在计算机科学中，一个图就是一些顶点的集合，这些顶点通过一系列边结对（连接）。顶点用圆圈表示，边就是这些圆圈之间的连线。顶点之间通过边连接。 <a id="more"></a></p>
-<h1 id="最短路问题"><a href="#最短路问题" class="headerlink" title="最短路问题"></a>最短路问题</h1><p>在一个连通图中, 如何求解从一个节点到另一个节点的最短路径, 称为最短路问题。<br>Dijkstra 算法是解决单源最短路问题的经典算法，适用于边长为非负值的大多数情况。</p>
+        <p>在计算机科学中，一个图就是一些顶点的集合，这些顶点通过一系列边结对（连接）。<a id="more"></a> 顶点用圆圈表示，顶点的集合可以使用V表示。边就是这些圆圈之间的连线，每一条边可以用一个点对 $(v,w)$ 表示，其中$v,w \in V$。<br>如果点对顺序无关，即$(v,w)$和$(w,v)$是同一条边，那么此图就被称为无向图；反之如果点对有序，相当于边有箭头指向，那么此图就被称为有向图。</p>
+<h1 id="一、图的表示法"><a href="#一、图的表示法" class="headerlink" title="一、图的表示法"></a>一、图的表示法</h1><p><img src="graph-ex1.png" alt="graph-ex1.png"><br>以一个无向图为例，展示三种图的表示法</p>
+<h2 id="1-1-邻接矩阵"><a href="#1-1-邻接矩阵" class="headerlink" title="1.1 邻接矩阵"></a>1.1 邻接矩阵</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[[0, 1, 1, 1, 1],</span><br><span class="line">[1, 0, Inf, Inf, Inf],</span><br><span class="line">[1, Inf, 0, Inf, Inf],</span><br><span class="line">[1, Inf, Inf, 0, Inf],</span><br><span class="line">[1, Inf, Inf, Inf, 0]]</span><br></pre></td></tr></table></figure>
+<p>上面矩阵数值为0表示同一个点，为1表示有边相连（边长默认1），Inf（一个很大的数）表示不可达</p>
+<h2 id="1-2-邻接表"><a href="#1-2-邻接表" class="headerlink" title="1.2 邻接表"></a>1.2 邻接表</h2><p>使用链表记录相邻点集合<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0: [1, 2, 3, 4]</span><br><span class="line">1: [0]</span><br><span class="line">2: [0]</span><br><span class="line">3: [0]</span><br><span class="line">4: [0]</span><br></pre></td></tr></table></figure></p>
+<h2 id="1-3-边集"><a href="#1-3-边集" class="headerlink" title="1.3 边集"></a>1.3 边集</h2><p>将图中4条边记录下来：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(0,1), (0,2), (0,3), (0,4)]</span><br></pre></td></tr></table></figure></p>
+<h1 id="二、最短路问题"><a href="#二、最短路问题" class="headerlink" title="二、最短路问题"></a>二、最短路问题</h1><p>在一个连通图中, 如何求解从一个节点到另一个节点的最短路径, 称为最短路问题。<br>Dijkstra 算法是解决单源最短路问题的经典算法，适用于边长为非负值的大多数情况。</p>
 <h2 id="Dijkstra-算法与优先队列"><a href="#Dijkstra-算法与优先队列" class="headerlink" title="Dijkstra 算法与优先队列"></a>Dijkstra 算法与优先队列</h2><p><em>第一步</em>：使用一个数组<code>dist</code>储存从原点到该点的最短距离, 原点初始化为0, 其余全部初始化为不可达；另用一个数组<code>used</code>标记某点是否已访问。目标点<code>point</code>和原点到其最短距离<code>dist[point]</code>作为一个 pair 加入优先队列, 优先队列按照最短距离的大小逆序排列.<br>第二步：若优先队列为空，则退出循环；否则从优先队列中取出一条最短边，遍历最短边对应目标点的所有相邻节点（故使用Dijkstra算法时宜采用临接表形式来表示图），<br>若通过目标点到达其相邻节点的路径比原路径更短, 则更新dist路径.<br>第三步：选出used数组中标记的未访问的节点中dist最小的节点next，将<code>pair&lt;next, dist[next]&gt;</code>加入优先队列。返回第二步。</p>
 <figure class="highlight c++"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">int</span> dist[maxn]; <span class="comment">// dist[i] 更新从原点到 i 点的最短距离</span></span><br><span class="line"><span class="keyword">typedef</span> pair&lt;<span class="keyword">int</span>, <span class="keyword">int</span>&gt; P; <span class="comment">// first 表示距离, second 表示目标点</span></span><br><span class="line"><span class="function"><span class="keyword">void</span> <span class="title">dijkstra</span><span class="params">(<span class="keyword">int</span> source)</span> </span>&#123;</span><br><span class="line">    priority_queue&lt;P, <span class="built_in">vector</span>&lt;P&gt;, greater&lt;P&gt; &gt; pq;   <span class="comment">// 定义距离越小越靠前的优先队列</span></span><br><span class="line">    <span class="built_in">memset</span>(dist, <span class="number">0xff</span>, <span class="keyword">sizeof</span> dist);    <span class="comment">// 原点到各点初始化为不可达</span></span><br><span class="line">    dist[source] = <span class="number">0</span>;   <span class="comment">// 原点到原点初始化距离为0</span></span><br><span class="line">    qp.push(<span class="number">0</span>, source);</span><br><span class="line">    <span class="keyword">while</span>(!pq.empty()) &#123;</span><br><span class="line">        P pair = pq.top(); pq.pop();   <span class="comment">// 弹出到未访问节点的最短pair</span></span><br><span class="line">        <span class="keyword">int</span> shortest = p.first, point = pair.second;</span><br><span class="line">        <span class="keyword">if</span> (shortest &gt; dist[point]) <span class="keyword">continue</span>;     <span class="comment">// 减枝，去除弹出最短边比暂存最短边还长的情况</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">auto</span> &amp;e : graph[point]) &#123;</span><br><span class="line">            <span class="keyword">int</span> next = e.second, dist_update = dist[point] + e.first;</span><br><span class="line">            <span class="keyword">if</span>(dist_update &lt; dist[next]) &#123;</span><br><span class="line">                dist[next] = dist_update;</span><br><span class="line">                pq.push(dist_update, next);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h3 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h3><p>C++ 中的优先队列是一个容器, 插入时为对数时间的复杂度, 读取最大值或最小值为常数时间的复杂度.</p>
@@ -454,7 +461,7 @@
 <p>上述解答会在这个用例超时：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[[0,1,2, ..., 90000]]</span><br><span class="line">0</span><br><span class="line">900</span><br></pre></td></tr></table></figure></p>
 <p>判定是否连接的方法可以是将公交路线放在集合中，检查两个集合的交集是否为空；或者将公交路线中的车站进行递增排序，并使用双指针的方法检查是否有相同的车站。</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/*</span></span><br><span class="line"><span class="comment"> * @lc app=leetcode id=815 lang=java</span></span><br><span class="line"><span class="comment"> *</span></span><br><span class="line"><span class="comment"> * [815] Bus Routes</span></span><br><span class="line"><span class="comment"> */</span></span><br><span class="line"><span class="keyword">import</span> java.util.*;</span><br><span class="line"><span class="comment">// @lc code=start</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    HashMap&lt;Integer, ArrayList&lt;Integer&gt;&gt; graph = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    HashMap&lt;Integer, Boolean&gt; searched = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="class"><span class="keyword">class</span> <span class="title">Pair</span></span>&#123;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> k;</span><br><span class="line">        <span class="keyword">public</span> <span class="keyword">int</span> v;</span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="title">Pair</span><span class="params">(<span class="keyword">int</span> point, <span class="keyword">int</span> dist)</span> </span>&#123;</span><br><span class="line">            k = point;</span><br><span class="line">            v = dist;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    PriorityQueue&lt;Pair&gt; pq = <span class="keyword">new</span> PriorityQueue&lt;Pair&gt;(<span class="keyword">new</span> Comparator&lt;Pair&gt;()&#123;</span><br><span class="line">        <span class="meta">@Override</span></span><br><span class="line">        <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">compare</span><span class="params">(Pair o1, Pair o2)</span> </span>&#123;</span><br><span class="line">            <span class="keyword">return</span> o1.v - o2.v;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;);</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">numBusesToDestination</span><span class="params">(<span class="keyword">int</span>[][] routes, <span class="keyword">int</span> source, <span class="keyword">int</span> target)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">if</span>(source == target) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;routes.length; ++i) &#123;</span><br><span class="line">            graph.put(i, <span class="keyword">new</span> ArrayList&lt;Integer&gt;());</span><br><span class="line">            searched.put(i, <span class="keyword">false</span>);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;routes.length; ++i) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=<span class="number">0</span>; j&lt;routes.length; ++j) &#123;</span><br><span class="line">                <span class="keyword">if</span>(intersect(routes[i], routes[j])) &#123;</span><br><span class="line">                    graph.get(i).add(j);</span><br><span class="line">                    graph.get(j).add(i);</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="comment">// find route of source and target</span></span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">0</span>; i&lt;routes.length; ++i) &#123;</span><br><span class="line">            <span class="keyword">if</span>(Arrays.binarySearch(routes[i], source)&gt;=<span class="number">0</span>) &#123;</span><br><span class="line">                Pair pair = <span class="keyword">new</span> Pair(i, <span class="number">0</span>);</span><br><span class="line">                searched.put(i, <span class="keyword">true</span>);</span><br><span class="line">                pq.add(pair);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line"></span><br><span class="line">        <span class="keyword">int</span> min = Integer.MAX_VALUE;</span><br><span class="line">        <span class="keyword">while</span>(!pq.isEmpty()) &#123;</span><br><span class="line">            Pair out = pq.poll();</span><br><span class="line">            searched.put(out.k, <span class="keyword">true</span>);</span><br><span class="line">            <span class="keyword">if</span>(Arrays.binarySearch(routes[out.k], target)&gt;=<span class="number">0</span>) &#123;</span><br><span class="line">                min = Math.min(min, out.v+<span class="number">1</span>);</span><br><span class="line">            &#125;</span><br><span class="line">            ArrayList&lt;Integer&gt; neighbors = graph.get(out.k);</span><br><span class="line">            <span class="keyword">int</span> dist = out.v;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> route : neighbors) <span class="keyword">if</span>(!searched.get(route)) &#123;</span><br><span class="line">                pq.add(<span class="keyword">new</span> Pair(route, dist+<span class="number">1</span>));</span><br><span class="line">                searched.put(route, <span class="keyword">true</span>);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">if</span>(min == Integer.MAX_VALUE) <span class="keyword">return</span> -<span class="number">1</span>;</span><br><span class="line">        <span class="keyword">return</span> min;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">boolean</span> <span class="title">intersect</span><span class="params">(<span class="keyword">int</span>[] A, <span class="keyword">int</span>[] B)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> i = <span class="number">0</span>, j = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">while</span> (i &lt; A.length &amp;&amp; j &lt; B.length) &#123;</span><br><span class="line">            <span class="keyword">if</span> (A[i] == B[j]) <span class="keyword">return</span> <span class="keyword">true</span>;</span><br><span class="line">            <span class="keyword">if</span> (A[i] &lt; B[j]) i++; <span class="keyword">else</span> j++;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> <span class="keyword">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// @lc code=end</span></span><br></pre></td></tr></table></figure>
-<h1 id="最小生成树-minimal-spanning-tree"><a href="#最小生成树-minimal-spanning-tree" class="headerlink" title="最小生成树 (minimal spanning tree)"></a>最小生成树 (minimal spanning tree)</h1><p>在实际应用中, 我们经常会遇到求解最小生成树的问题，比如城市之间的通信管道铺设要求总长最短。<br>由于树可看作一种不形成环的无向连通图，对于一个带权无向连通图，最小生成树就是图中边的一个子集，该子集连接了图中的所有点，并且权值和最小。</p>
+<h1 id="三、最小生成树-minimal-spanning-tree"><a href="#三、最小生成树-minimal-spanning-tree" class="headerlink" title="三、最小生成树 (minimal spanning tree)"></a>三、最小生成树 (minimal spanning tree)</h1><p>在实际应用中, 我们经常会遇到求解最小生成树的问题，比如城市之间的通信管道铺设要求总长最短。<br>由于树可看作一种不形成环的无向连通图，对于一个带权无向连通图，最小生成树就是图中边的一个子集，该子集连接了图中的所有点，并且权值和最小。</p>
 <h2 id="Kruskal-算法与并查集"><a href="#Kruskal-算法与并查集" class="headerlink" title="Kruskal 算法与并查集"></a>Kruskal 算法与并查集</h2><p>该算法的目的是找出一个图中的最小生成树。具体做法如下：</p>
 <ol>
 <li>初始化最小生成树的边的集合S。将所有的边按照升序排列，依次取出长度最小的边。</li>
@@ -472,6 +479,15 @@
 <li>如果此边是关键边，则其不是伪关键边；</li>
 <li>否则，如果提前将关键边的两点连通，之后计算出的最小生成树权值如不变，则说明是伪关键边，若变化（增大），则说明是非关键边。</li>
 </ol>
+<h1 id="四、深度优先搜索与广度有限搜索"><a href="#四、深度优先搜索与广度有限搜索" class="headerlink" title="四、深度优先搜索与广度有限搜索"></a>四、深度优先搜索与广度有限搜索</h1><h1 id="五、拓扑排序"><a href="#五、拓扑排序" class="headerlink" title="五、拓扑排序"></a>五、拓扑排序</h1><h2 id="4-1-拓扑排序判断是否有环"><a href="#4-1-拓扑排序判断是否有环" class="headerlink" title="4.1 拓扑排序判断是否有环"></a>4.1 拓扑排序判断是否有环</h2><p>使用拓扑排序可以判断有向图和无向图中是否有环。</p>
+<ol>
+<li><p>判断有向图是否有环的步骤：<br>Step 1：求出图中所有结点的入度<br>Step 2：将所有入度=0的结点入队<br>Step 3：当队列不为空时，不断弹出队首元素。将队首元素指向的相邻节点的入度-1（相当于从图中去掉这个结点和它的所有出度），当相邻节点的入度减至0时，将该相邻结点入队。<br>Step 4：循环结束时判断已经访问的结点数是否等于n。如果等于则说明所有结点都被去掉了，图中不存在环;反之，说明存在环。</p>
+</li>
+<li><p>判断无向图是否有环的步骤：<br>Step 1：求出图中所有节点的度<br>Step 2：将所有度&lt;=1的结点入队（独立结点的度为0）<br>Step 3：当队列不为空时，弹出队首元素。将与队首元素相邻节点的度-1（相当于从图中去掉这个结点和它的相邻边），如果相邻节点的度变为1,则将相邻结点入队。<br>Step 4：循环结束时判断已经访问的结点数是否等于n。如果等于则说明所有结点都被去掉了，图中不存在环；反之，说明存在环。</p>
+</li>
+</ol>
+<p>例题： <a href="https://leetcode-cn.com/problems/course-schedule/submissions/" target="_blank" rel="noopener">LC 207 课程表</a></p>
+<h2 id="4-2-拓扑排序的遍历顺序"><a href="#4-2-拓扑排序的遍历顺序" class="headerlink" title="4.2 拓扑排序的遍历顺序"></a>4.2 拓扑排序的遍历顺序</h2><p>拓扑排序的遍历顺序不止一种，所以返回其中一个即可。使用bfs算法进行遍历，返回存储在数组中的访问路径。</p>
 
       
     </div>
@@ -608,7 +624,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">141</span>
+                    <span class="site-state-item-count">146</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -638,7 +654,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -672,7 +688,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#最短路问题"><span class="nav-text">最短路问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dijkstra-算法与优先队列"><span class="nav-text">Dijkstra 算法与优先队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#priority-queue"><span class="nav-text">priority_queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些特殊案例"><span class="nav-text">一些特殊案例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#最小生成树-minimal-spanning-tree"><span class="nav-text">最小生成树 (minimal spanning tree)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kruskal-算法与并查集"><span class="nav-text">Kruskal 算法与并查集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并查集-union-find-set"><span class="nav-text">并查集 (union-find set)</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、图的表示法"><span class="nav-text">一、图的表示法</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#1-1-邻接矩阵"><span class="nav-text">1.1 邻接矩阵</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-2-邻接表"><span class="nav-text">1.2 邻接表</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1-3-边集"><span class="nav-text">1.3 边集</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、最短路问题"><span class="nav-text">二、最短路问题</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Dijkstra-算法与优先队列"><span class="nav-text">Dijkstra 算法与优先队列</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#priority-queue"><span class="nav-text">priority_queue</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#一些特殊案例"><span class="nav-text">一些特殊案例</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、最小生成树-minimal-spanning-tree"><span class="nav-text">三、最小生成树 (minimal spanning tree)</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Kruskal-算法与并查集"><span class="nav-text">Kruskal 算法与并查集</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#并查集-union-find-set"><span class="nav-text">并查集 (union-find set)</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#四、深度优先搜索与广度有限搜索"><span class="nav-text">四、深度优先搜索与广度有限搜索</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#五、拓扑排序"><span class="nav-text">五、拓扑排序</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#4-1-拓扑排序判断是否有环"><span class="nav-text">4.1 拓扑排序判断是否有环</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#4-2-拓扑排序的遍历顺序"><span class="nav-text">4.2 拓扑排序的遍历顺序</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -705,7 +721,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">417k</span>
+    <span title="Symbols count total">430k</span>
   
 
   
@@ -714,7 +730,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:20</span>
+    <span title="Reading time total">6:31</span>
   
 </div>
 
@@ -823,7 +839,75 @@
 
 
 
-  <script src="/js/next-boot.js?v=7.2.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  <script src="/js/next-boot.js?v=7.2.0"></script>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
+  
+
+  
+  
+
+  
+    
+      <script type="text/x-mathjax-config">
+  
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+      
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
+        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
+      }
+    });
+  });
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
+    }
+  });
+</script>
+<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -842,35 +926,7 @@
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
 
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-
-  
-
-
-
-
-  
-
-  
-
-  
-  
-
-  
-  
-
+    
   
 
 

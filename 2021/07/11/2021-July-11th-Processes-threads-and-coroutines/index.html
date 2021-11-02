@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="学习操作系统和编程中经常遇到的一些概念。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-09-03T11:31:06.601Z">
+<meta property="og:updated_time" content="2021-09-24T14:35:47.023Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="进程、线程和协程">
 <meta name="twitter:description" content="学习操作系统和编程中经常遇到的一些概念。">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-09-03 19:31:06" itemprop="dateModified" datetime="2021-09-03T19:31:06+08:00">2021-09-03</time>
+                <time title="Modified: 2021-09-24 22:35:47" itemprop="dateModified" datetime="2021-09-24T22:35:47+08:00">2021-09-24</time>
               </span>
             
           
@@ -396,7 +396,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">588</span>
+              <span title="Symbols count in article">672</span>
             </span>
           
 
@@ -433,9 +433,40 @@
 <h3 id="进程的组成"><a href="#进程的组成" class="headerlink" title="进程的组成"></a>进程的组成</h3><p>进程一般由程序、数据和进程控制块（PCB）三部分组成。</p>
 <p>如何通俗地理解进程和线程的关系？</p>
 <h3 id="协程"><a href="#协程" class="headerlink" title="协程"></a>协程</h3><p>协程不是由操作系统内核管理的，而是完全由程序所控制（也就是在用户态执行）。</p>
-<h1 id="线程通信的同步与异步、阻塞与非阻塞"><a href="#线程通信的同步与异步、阻塞与非阻塞" class="headerlink" title="线程通信的同步与异步、阻塞与非阻塞"></a>线程通信的同步与异步、阻塞与非阻塞</h1><p>同步与异步是针对得到结果的时间来分类的。同步情况下，返回的结果就是调用的结果；或者说在没有得到结果之前，调用就不返回。<br>而在异步情况下，调用会立即返回一个空值，调用方不会直接获得真正的结果，真正的结果由被调用方来主动通知或发送给调用方。</p>
-<p>阻塞与非阻塞是针对等待调用结果时调用方的状态来分类的。在阻塞的情况下，当前线程会被挂起，直到获取结果才会继续。<br>而在非阻塞的情况下，调用之后没有等待，不会阻塞当前进程做下一件事。</p>
+<h1 id="线程通信的同步与异步、阻塞与非阻塞"><a href="#线程通信的同步与异步、阻塞与非阻塞" class="headerlink" title="线程通信的同步与异步、阻塞与非阻塞"></a>线程通信的同步与异步、阻塞与非阻塞</h1><p>同步与异步是针对线程一次调用得到结果的时间来分类的。</p>
+<ol>
+<li>同步情况下，返回的结果就是调用的结果；或者说在没有得到结果之前，调用就不返回。</li>
+<li>异步情况下，调用会立即返回一个空值，调用方不会直接获得真正的结果，真正的结果由被调用方来主动通知或发送给调用方。</li>
+</ol>
+<p>阻塞与非阻塞是根据多线程并发的相互影响程度来分类的。</p>
+<ol>
+<li>若一个线程是阻塞的，那么当该线程期待获得的临界区资源被其他线程占用未释放时，该线程就会调用阻塞原语将自己挂起，直到获取临界区资源才会调用唤醒原语进入就绪状态。阻塞是最严格的并发级别。</li>
+<li>对非阻塞线程，当前线程对资源的使用不妨碍其他线程的继续执行。</li>
+</ol>
 <p>举个例子，Java编程的三个IO模型中，BIO属于同步阻塞，NIO属于同步非阻塞，AIO属于异步非阻塞。而在线程池中处理BIO则属于异步阻塞。</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center"></th>
+<th style="text-align:center">同步</th>
+<th style="text-align:center">异步</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">阻塞</td>
+<td style="text-align:center">BIO</td>
+<td style="text-align:center">线程池</td>
+</tr>
+<tr>
+<td style="text-align:center">非阻塞</td>
+<td style="text-align:center">NIO</td>
+<td style="text-align:center">AIO</td>
+</tr>
+</tbody>
+</table>
+</div>
 
       
     </div>
@@ -492,6 +523,10 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2021/09/24/2021-Sept-24th-SPESC-contract-engine-manual/" rel="prev" title="服务型合约引擎构建指南">
+                服务型合约引擎构建指南 <i class="fa fa-chevron-right"></i>
+              </a>
             
           </div>
         </div>
@@ -560,7 +595,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">141</span>
+                    <span class="site-state-item-count">146</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -590,7 +625,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -657,7 +692,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">417k</span>
+    <span title="Symbols count total">430k</span>
   
 
   
@@ -666,7 +701,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:20</span>
+    <span title="Reading time total">6:31</span>
   
 </div>
 

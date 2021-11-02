@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="构建 C/C++ 开源项目目前有两大类，一是gnu build tools，二是cmake。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-05-26T01:04:08.664Z">
+<meta property="og:updated_time" content="2021-10-21T14:01:00.345Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="C&#x2F;C++ 开源项目构建">
 <meta name="twitter:description" content="构建 C/C++ 开源项目目前有两大类，一是gnu build tools，二是cmake。">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-05-26 09:04:08" itemprop="dateModified" datetime="2021-05-26T09:04:08+08:00">2021-05-26</time>
+                <time title="Modified: 2021-10-21 22:01:00" itemprop="dateModified" datetime="2021-10-21T22:01:00+08:00">2021-10-21</time>
               </span>
             
           
@@ -411,7 +411,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">243</span>
+              <span title="Symbols count in article">488</span>
             </span>
           
 
@@ -446,6 +446,7 @@
 <h1 id="GNU-Build-Tools"><a href="#GNU-Build-Tools" class="headerlink" title="GNU Build Tools"></a>GNU Build Tools</h1><h2 id="configure-ac-amp-amp-m4"><a href="#configure-ac-amp-amp-m4" class="headerlink" title="configure.ac &amp;&amp; m4"></a>configure.ac &amp;&amp; m4</h2><p>使用dnl表示注释</p>
 <p>一些编译宏的解释<br><code>AC_COMPILE_IFELSE(input, [action-if-true], [action-if-false])</code>根据对input进行编译，如果成功则执行action-if-true，如果失败则执行action-if-false</p>
 <p><code>AC_SUBST</code> 将定义的变量赋值到makefile中</p>
+<p><code>AC_DEFINE_UNQUOTED</code>或<code>AC_DEFINE</code> 添加宏定义，如 <code>AC_DEFINE_UNQUOTED([ENABLE_WALLET],[1],[Define to 1 to enable wallet functions])</code> 等价于 <code>#define ENABLE_WALLET 1</code><br>所不同的是，<code>AC_DEFINE_UNQUOTED</code> 支持shell语言的替换，如：variable expansion (‘$’), command substitution (‘`’), and backslash escaping (‘\’)</p>
 <h1 id="Cmake"><a href="#Cmake" class="headerlink" title="Cmake"></a>Cmake</h1>
       
     </div>
@@ -572,7 +573,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">141</span>
+                    <span class="site-state-item-count">146</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -602,7 +603,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -669,7 +670,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">417k</span>
+    <span title="Symbols count total">430k</span>
   
 
   
@@ -678,7 +679,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:20</span>
+    <span title="Reading time total">6:31</span>
   
 </div>
 

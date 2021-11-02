@@ -90,19 +90,19 @@
 
 
 
-  <meta name="description" content="Win 10Clean log filesC:\\Windows\System32\winevt\Logs按Ctrl+A全选后使用 Shift + Delete 删除，一些正被services使用的文件无法被删除。 Open Administrator Powershell：12Get-EventLog -ListRemove-EventLog -LogName &amp;quot;some Log fr">
+  <meta name="description" content="Win 10Clean log filesC:\Windows\System32\winevt\Logs按Ctrl+A全选后使用 Shift + Delete 删除，一些正被services使用的文件无法被删除。 Open Administrator Powershell：12Get-EventLog -ListRemove-EventLog -LogName &amp;quot;some Log fro">
 <meta name="keywords" content="Linux,OS,Win10">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Operating System Maintainance and Cleaning">
 <meta property="og:url" content="http://BillyStudio.github.io/2020/10/06/2020-10-06-System-maintainance-and-cleaning/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="Win 10Clean log filesC:\\Windows\System32\winevt\Logs按Ctrl+A全选后使用 Shift + Delete 删除，一些正被services使用的文件无法被删除。 Open Administrator Powershell：12Get-EventLog -ListRemove-EventLog -LogName &amp;quot;some Log fr">
+<meta property="og:description" content="Win 10Clean log filesC:\Windows\System32\winevt\Logs按Ctrl+A全选后使用 Shift + Delete 删除，一些正被services使用的文件无法被删除。 Open Administrator Powershell：12Get-EventLog -ListRemove-EventLog -LogName &amp;quot;some Log fro">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://billystudio.github.io/2020/10/06/2020-10-06-System-maintainance-and-cleaning/ps-eventlog.png">
-<meta property="og:updated_time" content="2021-01-03T02:58:42.791Z">
+<meta property="og:updated_time" content="2021-10-30T08:31:36.166Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Operating System Maintainance and Cleaning">
-<meta name="twitter:description" content="Win 10Clean log filesC:\\Windows\System32\winevt\Logs按Ctrl+A全选后使用 Shift + Delete 删除，一些正被services使用的文件无法被删除。 Open Administrator Powershell：12Get-EventLog -ListRemove-EventLog -LogName &amp;quot;some Log fr">
+<meta name="twitter:description" content="Win 10Clean log filesC:\Windows\System32\winevt\Logs按Ctrl+A全选后使用 Shift + Delete 删除，一些正被services使用的文件无法被删除。 Open Administrator Powershell：12Get-EventLog -ListRemove-EventLog -LogName &amp;quot;some Log fro">
 <meta name="twitter:image" content="http://billystudio.github.io/2020/10/06/2020-10-06-System-maintainance-and-cleaning/ps-eventlog.png">
 
 
@@ -370,7 +370,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-01-03 10:58:42" itemprop="dateModified" datetime="2021-01-03T10:58:42+08:00">2021-01-03</time>
+                <time title="Modified: 2021-10-30 16:31:36" itemprop="dateModified" datetime="2021-10-30T16:31:36+08:00">2021-10-30</time>
               </span>
             
           
@@ -398,7 +398,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">288</span>
+              <span title="Symbols count in article">352</span>
             </span>
           
 
@@ -429,9 +429,11 @@
       
 
       
-        <h1 id="Win-10"><a href="#Win-10" class="headerlink" title="Win 10"></a>Win 10</h1><h2 id="Clean-log-files"><a href="#Clean-log-files" class="headerlink" title="Clean log files"></a>Clean log files</h2><p>C:\\Windows\System32\winevt\Logs<br>按Ctrl+A全选后使用 Shift + Delete 删除，一些正被services使用的文件无法被删除。</p>
+        <h1 id="Win-10"><a href="#Win-10" class="headerlink" title="Win 10"></a>Win 10</h1><h2 id="Clean-log-files"><a href="#Clean-log-files" class="headerlink" title="Clean log files"></a>Clean log files</h2><p><code>C:\Windows\System32\winevt\Logs</code><br>按Ctrl+A全选后使用 Shift + Delete 删除，一些正被services使用的文件无法被删除。</p>
 <p>Open Administrator Powershell：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">Get-EventLog -List</span><br><span class="line">Remove-EventLog -LogName &quot;some Log from list&quot;</span><br></pre></td></tr></table></figure></p>
 <p><img src="ps-eventlog.png" alt="ps-eventlog.png"></p>
+<h2 id="禁用休眠"><a href="#禁用休眠" class="headerlink" title="禁用休眠"></a>禁用休眠</h2><p>休眠会将系统内存保存到磁盘文件hiberfil.sys中。可以通过<br><figure class="highlight cmd"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">powercfg /hibernate off</span><br></pre></td></tr></table></figure></p>
+<p>关闭休眠功能</p>
 <h2 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h2><p>Refer to <a href="https://billystudio.github.io/2018/05/16/Command-of-the-day-May-sixteenth-2018/">https://billystudio.github.io/2018/05/16/Command-of-the-day-May-sixteenth-2018/</a></p>
 
       
@@ -561,7 +563,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">141</span>
+                    <span class="site-state-item-count">146</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -591,7 +593,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -625,7 +627,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Win-10"><span class="nav-text">Win 10</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Clean-log-files"><span class="nav-text">Clean log files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-text">Linux</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Win-10"><span class="nav-text">Win 10</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Clean-log-files"><span class="nav-text">Clean log files</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#禁用休眠"><span class="nav-text">禁用休眠</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Linux"><span class="nav-text">Linux</span></a></li></ol></li></ol></div>
             
 
           </div>
@@ -658,7 +660,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">417k</span>
+    <span title="Symbols count total">430k</span>
   
 
   
@@ -667,7 +669,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:20</span>
+    <span title="Reading time total">6:31</span>
   
 </div>
 

@@ -91,7 +91,7 @@
 
 
   <meta name="description" content="Two ways of using vms on Linux are introduced.">
-<meta name="keywords" content="Linux,VM,Win10,qemu,kvm">
+<meta name="keywords" content="VM,Linux,Win10,qemu,kvm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Creating virtual machiness on Linux --- the hard way">
 <meta property="og:url" content="http://BillyStudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/index.html">
@@ -107,7 +107,9 @@
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/vm-name.png">
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/addvol.png">
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/afteradd.png">
-<meta property="og:updated_time" content="2021-04-24T06:49:27.974Z">
+<meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/grub-edit.jpg">
+<meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/bind-adapter-addr.png">
+<meta property="og:updated_time" content="2021-10-30T08:31:36.166Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Creating virtual machiness on Linux --- the hard way">
 <meta name="twitter:description" content="Two ways of using vms on Linux are introduced.">
@@ -378,7 +380,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-04-24 14:49:27" itemprop="dateModified" datetime="2021-04-24T14:49:27+08:00">2021-04-24</time>
+                <time title="Modified: 2021-10-30 16:31:36" itemprop="dateModified" datetime="2021-10-30T16:31:36+08:00">2021-10-30</time>
               </span>
             
           
@@ -474,7 +476,7 @@
 <p>Then go to increase<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># cd /var/lib/libvirt/images/</span><br><span class="line"># ls -lh win10vol.img</span><br><span class="line"># qemu-img resize win10vol.img +5G</span><br></pre></td></tr></table></figure></p>
 <p>Then start win10 VM and right click ‘Start Menu’ -&gt; Disk management -&gt; Extend Volumn C:\<br><img src="addvol.png" alt="addvol.png"><br>ok.<br><img src="afteradd.png" alt="afteradd.png"></p>
 <h3 id="无线网卡直通"><a href="#无线网卡直通" class="headerlink" title="无线网卡直通"></a>无线网卡直通</h3><p>默认的虚拟机使用NAT模式上网，对一些其他上网模式也是支持的。<br>目前我对于桥接模式的配置没有成功，所以这里记录只成功了的网卡直通模式。<br>在该模式下，虚拟机直接使用无线网卡联网，宿主机可以用有线连接。</p>
-<p>参考：<a href="https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF</a><br>首先，是启用iommu<br>在计算机启动的grub页面按e进入kernal模式，在启动vmlinuz的参数后面添加 intel_iommu=on 和 iommu=pt</p>
+<p>参考：<a href="https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF</a><br>首先，是启用iommu<br>在计算机启动的grub页面按e进入kernal模式，在启动vmlinuz的参数后面添加 intel_iommu=on 和 iommu=pt<br><img src="grub-edit.jpg" alt="grub-edit.jpg"></p>
 <p>成功开机后root使用下面命令检查无线网卡的pci地址：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">shopt -s nullglob</span><br><span class="line">for g in `find /sys/kernel/iommu_groups/* -maxdepth 0 -type d | sort -V`; do</span><br><span class="line">    echo &quot;IOMMU Group $&#123;g##*/&#125;:&quot;</span><br><span class="line">    for d in $g/devices/*; do</span><br><span class="line">        echo -e &quot;\t$(lspci -nns $&#123;d##*/&#125;)&quot;</span><br><span class="line">    done;</span><br><span class="line">done;</span><br></pre></td></tr></table></figure></p>
 <p>我的是</p>
 <blockquote>
@@ -486,7 +488,7 @@
 <p>[    0.452590] pci 0000:3a:00.0: Adding to iommu group 15</p>
 </blockquote>
 <p>将无线网卡与宿主机解绑：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;0000:3a:00.0&quot; &gt; /sys/bus/pci/devices/0000\:3a\:00.0/driver/unbind</span><br></pre></td></tr></table></figure></p>
-<p>然后，打开虚拟机软件，添加pci device，与虚拟机绑定。</p>
+<p>然后，打开虚拟机软件，添加pci device，与虚拟机绑定:<br><img src="bind-adapter-addr.png" alt="bind-adapter-addr.png"></p>
 <p>我配置无线网卡直连只是为了暂时同步一下微信聊天记录（因为必须在同一wifi下），重启之后配置又会变成原来的样子。</p>
 <p>参考：<a href="https://www.cnblogs.com/xia-dong/p/11542771.html" target="_blank" rel="noopener">https://www.cnblogs.com/xia-dong/p/11542771.html</a></p>
 <h3 id="CPU绑定"><a href="#CPU绑定" class="headerlink" title="CPU绑定"></a>CPU绑定</h3><p>通过 <code>virsh vcpuinfo win10</code> 可以查看当前使用的CPU情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">wsd@xps13 ~ % sudo virsh vcpuinfo win10                                                                                                                                                                         [1]</span><br><span class="line">VCPU:           0</span><br><span class="line">CPU:            5</span><br><span class="line">State:          running</span><br><span class="line">CPU time:       45.5s</span><br><span class="line">CPU Affinity:   yyyyyyyy</span><br><span class="line"></span><br><span class="line">VCPU:           1</span><br><span class="line">CPU:            1</span><br><span class="line">State:          running</span><br><span class="line">CPU time:       42.7s</span><br><span class="line">CPU Affinity:   yyyyyyyy</span><br></pre></td></tr></table></figure></p>
@@ -522,9 +524,9 @@
         
         <div class="post-tags">
           
-            <a href="/tags/Linux/" rel="tag"># Linux</a>
-          
             <a href="/tags/VM/" rel="tag"># VM</a>
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
           
             <a href="/tags/Win10/" rel="tag"># Win10</a>
           
@@ -624,7 +626,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">141</span>
+                    <span class="site-state-item-count">146</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -654,7 +656,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -721,7 +723,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">417k</span>
+    <span title="Symbols count total">430k</span>
   
 
   
@@ -730,7 +732,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:20</span>
+    <span title="Reading time total">6:31</span>
   
 </div>
 

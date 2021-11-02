@@ -91,20 +91,22 @@
 
 
   <meta name="description" content="KDE is a highly configurable modern Linux desktop environment which is developed by OpenSUSE company.">
-<meta name="keywords" content="KDE">
+<meta name="keywords" content="Linux,KDE">
 <meta property="og:type" content="article">
 <meta property="og:title" content="KDE Desktop Config">
 <meta property="og:url" content="http://BillyStudio.github.io/2020/06/26/2020-06-26-KDE-desktop-config/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="KDE is a highly configurable modern Linux desktop environment which is developed by OpenSUSE company.">
 <meta property="og:locale" content="en">
+<meta property="og:image" content="http://billystudio.github.io/2020/06/26/2020-06-26-KDE-desktop-config/hide-titlebar-when-maximized.png">
+<meta property="og:image" content="http://billystudio.github.io/2020/06/26/2020-06-26-KDE-desktop-config/cancel-top-hot-corner.png">
 <meta property="og:image" content="http://billystudio.github.io/2020/06/26/2020-06-26-KDE-desktop-config/chrome-panel-window-can-hover.png">
 <meta property="og:image" content="http://billystudio.github.io/2020/06/26/2020-06-26-KDE-desktop-config/firefox-panel-always-visible.png">
-<meta property="og:updated_time" content="2021-01-02T14:13:07.407Z">
+<meta property="og:updated_time" content="2021-10-30T08:31:36.163Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="KDE Desktop Config">
 <meta name="twitter:description" content="KDE is a highly configurable modern Linux desktop environment which is developed by OpenSUSE company.">
-<meta name="twitter:image" content="http://billystudio.github.io/2020/06/26/2020-06-26-KDE-desktop-config/chrome-panel-window-can-hover.png">
+<meta name="twitter:image" content="http://billystudio.github.io/2020/06/26/2020-06-26-KDE-desktop-config/hide-titlebar-when-maximized.png">
 
 
 
@@ -371,7 +373,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-01-02 22:13:07" itemprop="dateModified" datetime="2021-01-02T22:13:07+08:00">2021-01-02</time>
+                <time title="Modified: 2021-10-30 16:31:36" itemprop="dateModified" datetime="2021-10-30T16:31:36+08:00">2021-10-30</time>
               </span>
             
           
@@ -399,7 +401,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">1.3k</span>
+              <span title="Symbols count in article">1.9k</span>
             </span>
           
 
@@ -411,7 +413,7 @@
               
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               
-              <span title="Reading time">1 mins.</span>
+              <span title="Reading time">2 mins.</span>
             </span>
           
 
@@ -436,7 +438,11 @@
 <h1 id="Configure-KDE"><a href="#Configure-KDE" class="headerlink" title="Configure KDE"></a>Configure KDE</h1><h3 id="Disable-kde-wallet-whenever-I-start-Chromium-Chrome"><a href="#Disable-kde-wallet-whenever-I-start-Chromium-Chrome" class="headerlink" title="Disable kde wallet whenever I start Chromium/Chrome"></a>Disable kde wallet whenever I start Chromium/Chrome</h3><p>Edit <code>~/.config/kwalletrc</code>, and add<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[Wallet]</span><br><span class="line">Enabled=false</span><br></pre></td></tr></table></figure></p>
 <h3 id="Disable-Meta-key-for-virtual-machine-windows"><a href="#Disable-Meta-key-for-virtual-machine-windows" class="headerlink" title="Disable Meta key for virtual machine windows"></a>Disable Meta key for virtual machine windows</h3><p>Alt+F3 &gt; More Actions &gt; Configure special window settings &gt; Add property &gt; Disable global shortcuts</p>
 <h2 id="Configure-macOS-like-themes"><a href="#Configure-macOS-like-themes" class="headerlink" title="Configure macOS-like themes"></a>Configure macOS-like themes</h2><h3 id="Global-menu"><a href="#Global-menu" class="headerlink" title="Global menu"></a>Global menu</h3><p>Add Widgets: global menu<br>For VScode-like electron apps, pacman -S libdbusmenu-glib<br>For Firefox, pacman -S appmenu-gtk-module<br>For Chrome, uncheck “Use system titlebar and borders”</p>
-<h3 id="Active-window-control"><a href="#Active-window-control" class="headerlink" title="Active window control"></a>Active window control</h3><p>选择breezmite的svg图标<br>/home/wsd/.local/share/aurorae/themes/Breezemite</p>
+<p>For features like macOS-like buttons, hiding title bar when maximized, we have two choices now:</p>
+<h3 id="Choice-1-Recommended-for-KDE-version-gt-5-22-Window-Button-Window-Title-Window-AppMenu"><a href="#Choice-1-Recommended-for-KDE-version-gt-5-22-Window-Button-Window-Title-Window-AppMenu" class="headerlink" title="Choice 1: (Recommended for KDE version &gt; 5.22) Window Button + Window Title + Window AppMenu"></a>Choice 1: (Recommended for KDE version &gt; 5.22) Window Button + Window Title + Window AppMenu</h3><h4 id="Hiding-titlebar-when-maximizing-window-for-AppMenu-lt-v0-10"><a href="#Hiding-titlebar-when-maximizing-window-for-AppMenu-lt-v0-10" class="headerlink" title="Hiding titlebar when maximizing window for AppMenu &lt; v0.10"></a>Hiding titlebar when maximizing window for AppMenu &lt; v0.10</h4><p><img src="hide-titlebar-when-maximized.png" alt="hide-titlebar-when-maximized.png"></p>
+<h4 id="Hiding-titlebar-when-maximizing-window-for-Latte-Dock-gt-v0-10-amp-amp-AppMenu-gt-v0-10"><a href="#Hiding-titlebar-when-maximizing-window-for-Latte-Dock-gt-v0-10-amp-amp-AppMenu-gt-v0-10" class="headerlink" title="Hiding titlebar when maximizing window for Latte Dock &gt;= v0.10 &amp;&amp; AppMenu &gt;= v0.10"></a>Hiding titlebar when maximizing window for Latte Dock &gt;= v0.10 &amp;&amp; AppMenu &gt;= v0.10</h4><p>In Latte Dock settings, enable “Support borderless maximized windows in different layouts” and then check “Borderless” in Layouts editor:<br><img src="cancel-top-hot-corner.png" alt="cancel-top-hot-corner.png"></p>
+<h4 id="Hiding-titlebar-when-maximizing-window-AppMenu-gt-v0-10-amp-amp-without-Latte-Dock-installed-ref-1"><a href="#Hiding-titlebar-when-maximizing-window-AppMenu-gt-v0-10-amp-amp-without-Latte-Dock-installed-ref-1" class="headerlink" title="Hiding titlebar when maximizing window AppMenu &gt;= v0.10 &amp;&amp; without Latte Dock installed ref 1"></a>Hiding titlebar when maximizing window AppMenu &gt;= v0.10 &amp;&amp; without Latte Dock installed <a href="## References">ref 1</a></h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true</span><br><span class="line">qdbus org.kde.KWin /KWin reconfigure</span><br></pre></td></tr></table></figure>
+<h3 id="Choice-2-Active-window-control"><a href="#Choice-2-Active-window-control" class="headerlink" title="Choice 2: Active window control"></a>Choice 2: Active window control</h3><p>选择breezmite的svg图标<br>/home/wsd/.local/share/aurorae/themes/Breezemite</p>
 <p>Chrome 设置中关闭 <code>Use system title bar and borders</code>，在 panel 可隐藏模式中使用。<br><img src="chrome-panel-window-can-hover.png" alt="Chrome buttons when window can hover panel"><br>Firefox 需卸载默认版本转而aur安装<code>firefox-appmenu-bin</code>，设置 Mojave Theme，启动 Title bar。在 panel always visible 模式中使用<br><img src="firefox-panel-always-visible.png" alt="Firefox buttons when panel is always visible"></p>
 <h3 id="dock"><a href="#dock" class="headerlink" title="dock"></a>dock</h3><p>pacman -S latte-dock</p>
 <h3 id="Fonts"><a href="#Fonts" class="headerlink" title="Fonts"></a>Fonts</h3><p>sf-pro</p>
@@ -447,7 +453,7 @@
 <li>笔记本外接屏幕作为拓展屏</li>
 </ol>
 <p>第1种情况下，配置Panel为 <code>Window can hover</code>，最大化13寸小屏幕；使用 Touchpad 四指滑动来回切换win10虚拟机所在桌面。选择Chrome作为主浏览器。<br>第2种情况下，外接屏幕足够大，而且无Touchpad，所以配置Panel为 <code>Always Visible</code>，使用鼠标点击panel 中的 Desktop 来切换虚拟机桌面和KDE桌面。由于Active Window Control和Chrome的兼容问题，选择 Firefox 作为主浏览器。<br>第3中情况下有两块屏幕，配置外接屏幕为 Always Visible 即可，支持Touchpad和鼠标点击两种方式切换桌面</p>
-
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2>
       
     </div>
 
@@ -476,6 +482,8 @@
           
         
         <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"># Linux</a>
           
             <a href="/tags/KDE/" rel="tag"># KDE</a>
           
@@ -571,7 +579,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">141</span>
+                    <span class="site-state-item-count">146</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -601,7 +609,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">168</span>
+                    <span class="site-state-item-count">174</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -635,7 +643,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Installing-KDE"><span class="nav-text">Installing KDE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Configure-KDE"><span class="nav-text">Configure KDE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Disable-kde-wallet-whenever-I-start-Chromium-Chrome"><span class="nav-text">Disable kde wallet whenever I start Chromium/Chrome</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Disable-Meta-key-for-virtual-machine-windows"><span class="nav-text">Disable Meta key for virtual machine windows</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configure-macOS-like-themes"><span class="nav-text">Configure macOS-like themes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Global-menu"><span class="nav-text">Global menu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Active-window-control"><span class="nav-text">Active window control</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dock"><span class="nav-text">dock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fonts"><span class="nav-text">Fonts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体应用场景"><span class="nav-text">具体应用场景</span></a></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Installing-KDE"><span class="nav-text">Installing KDE</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Configure-KDE"><span class="nav-text">Configure KDE</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Disable-kde-wallet-whenever-I-start-Chromium-Chrome"><span class="nav-text">Disable kde wallet whenever I start Chromium/Chrome</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Disable-Meta-key-for-virtual-machine-windows"><span class="nav-text">Disable Meta key for virtual machine windows</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Configure-macOS-like-themes"><span class="nav-text">Configure macOS-like themes</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Global-menu"><span class="nav-text">Global menu</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Choice-1-Recommended-for-KDE-version-gt-5-22-Window-Button-Window-Title-Window-AppMenu"><span class="nav-text">Choice 1: (Recommended for KDE version &gt; 5.22) Window Button + Window Title + Window AppMenu</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Hiding-titlebar-when-maximizing-window-for-AppMenu-lt-v0-10"><span class="nav-text">Hiding titlebar when maximizing window for AppMenu &lt; v0.10</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hiding-titlebar-when-maximizing-window-for-Latte-Dock-gt-v0-10-amp-amp-AppMenu-gt-v0-10"><span class="nav-text">Hiding titlebar when maximizing window for Latte Dock &gt;= v0.10 &amp;&amp; AppMenu &gt;= v0.10</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hiding-titlebar-when-maximizing-window-AppMenu-gt-v0-10-amp-amp-without-Latte-Dock-installed-ref-1"><span class="nav-text">Hiding titlebar when maximizing window AppMenu &gt;= v0.10 &amp;&amp; without Latte Dock installed ref 1</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Choice-2-Active-window-control"><span class="nav-text">Choice 2: Active window control</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#dock"><span class="nav-text">dock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Fonts"><span class="nav-text">Fonts</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#具体应用场景"><span class="nav-text">具体应用场景</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
@@ -668,7 +676,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">417k</span>
+    <span title="Symbols count total">430k</span>
   
 
   
@@ -677,7 +685,7 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:20</span>
+    <span title="Reading time total">6:31</span>
   
 </div>
 
