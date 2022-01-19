@@ -15,7 +15,7 @@
 
 
 <html class="theme-next muse use-motion" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -70,7 +70,7 @@
     root: '/',
     scheme: 'Muse',
     version: '7.2.0',
-    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false},
     back2top: true,
     back2top_sidebar: false,
     fancybox: false,
@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="题目需要思考了才有价值, 所以在我的博客中给出的练习题都不直接给答案, 在这里进行集中解答. 有需要者自取.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2021-08-28T17:51:27.991Z">
+<meta property="og:updated_time" content="2021-11-29T01:05:34.150Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="博客中的练习题解答">
 <meta name="twitter:description" content="题目需要思考了才有价值, 所以在我的博客中给出的练习题都不直接给答案, 在这里进行集中解答. 有需要者自取.">
@@ -167,7 +167,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-08-29 01:51:27" itemprop="dateModified" datetime="2021-08-29T01:51:27+08:00">2021-08-29</time>
+                <time title="Modified: 2021-11-29 09:05:34" itemprop="dateModified" datetime="2021-11-29T09:05:34+08:00">2021-11-29</time>
               </span>
             
           
@@ -396,7 +396,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">1.1k</span>
+              <span title="Symbols count in article">1.2k</span>
             </span>
           
 
@@ -433,6 +433,10 @@
 </blockquote>
 <h3 id="包含min函数的栈"><a href="#包含min函数的栈" class="headerlink" title="包含min函数的栈"></a>包含min函数的栈</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> java.util.Stack;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Solution</span> </span>&#123;</span><br><span class="line">    </span><br><span class="line">    Stack&lt;Integer&gt; dataStack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    Stack&lt;Integer&gt; minStack = <span class="keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">push</span><span class="params">(<span class="keyword">int</span> node)</span> </span>&#123;</span><br><span class="line">        dataStack.push(node);</span><br><span class="line">        <span class="keyword">if</span>(minStack.isEmpty() || node &lt;= minStack.peek()) &#123;</span><br><span class="line">            minStack.push(node);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">pop</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> out = dataStack.pop();</span><br><span class="line">        <span class="keyword">if</span>(out == minStack.peek()) &#123;</span><br><span class="line">            minStack.pop();</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">top</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> dataStack.peek();</span><br><span class="line">    &#125;</span><br><span class="line">    </span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">int</span> <span class="title">min</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> minStack.peek();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p></p><h3 id="leetcode1588">所有奇数长度子数组的和</h3><br><a href="https://leetcode-cn.com/problems/sum-of-all-odd-length-subarrays/" target="_blank" rel="noopener">Leetcode 1588</a><br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Solution</span> &#123;</span></span><br><span class="line"><span class="keyword">public</span>:</span><br><span class="line">    <span class="function"><span class="keyword">int</span> <span class="title">sumOddLengthSubarrays</span><span class="params">(<span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt;&amp; arr)</span> </span>&#123;</span><br><span class="line">        <span class="keyword">int</span> len = arr.size();</span><br><span class="line">        <span class="built_in">vector</span>&lt;<span class="keyword">int</span>&gt; preSum(len+<span class="number">1</span>);</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> i=<span class="number">1</span>; i&lt;=len; ++i) &#123;</span><br><span class="line">            preSum[i] = preSum[i<span class="number">-1</span>] + arr[i<span class="number">-1</span>];</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">int</span> sum = <span class="number">0</span>;</span><br><span class="line">        <span class="keyword">for</span>(<span class="keyword">int</span> k=<span class="number">1</span>; k&lt;=len; k+=<span class="number">2</span>) &#123;</span><br><span class="line">            <span class="keyword">for</span>(<span class="keyword">int</span> j=k; j&lt;=len; ++j) &#123;</span><br><span class="line">                sum += preSum[j]-preSum[j-k];</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> sum;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure><p></p>
+<p><a href="https://billystudio.github.io/2019/12/12/Dec-12th-Accumulation-of-English-expressions/">Accumulation of English writing by examples</a></p>
+<ol>
+<li>C</li>
+</ol>
 
       
     </div>
@@ -557,7 +561,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">146</span>
+                    <span class="site-state-item-count">149</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -587,7 +591,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">178</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -642,7 +646,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -654,7 +658,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">430k</span>
+    <span title="Symbols count total">439k</span>
   
 
   
@@ -663,12 +667,12 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:31</span>
+    <span title="Reading time total">6:39</span>
   
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
 
 
 
@@ -772,75 +776,7 @@
 
 
 
-  <script src="/js/next-boot.js?v=7.2.0"></script>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-
-  
-
-
-
-
-  
-
-  
-
-  
-  
-
-  
-  
-
-  
-    
-      <script type="text/x-mathjax-config">
-  
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
-        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
-      }
-    });
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
-    }
-  });
-</script>
-<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  <script src="/js/next-boot.js?v=7.2.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -859,9 +795,30 @@
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
 
-    
   
 
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
 
   
 

@@ -15,7 +15,7 @@
 
 
 <html class="theme-next muse use-motion" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -70,7 +70,7 @@
     root: '/',
     scheme: 'Muse',
     version: '7.2.0',
-    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false},
     back2top: true,
     back2top_sidebar: false,
     fancybox: false,
@@ -90,13 +90,13 @@
 
 
 
-  <meta name="description" content="Two ways of using vms on Linux are introduced.">
+  <meta name="description" content="Two ways of using KVM-based vms on Linux are introduced.">
 <meta name="keywords" content="VM,Linux,Win10,qemu,kvm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Creating virtual machiness on Linux --- the hard way">
 <meta property="og:url" content="http://BillyStudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="Two ways of using vms on Linux are introduced.">
+<meta property="og:description" content="Two ways of using KVM-based vms on Linux are introduced.">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/check-module.png">
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/Screenshot-win7-activation.png">
@@ -109,10 +109,10 @@
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/afteradd.png">
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/grub-edit.jpg">
 <meta property="og:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/bind-adapter-addr.png">
-<meta property="og:updated_time" content="2021-10-30T08:31:36.166Z">
+<meta property="og:updated_time" content="2021-12-12T08:12:43.339Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Creating virtual machiness on Linux --- the hard way">
-<meta name="twitter:description" content="Two ways of using vms on Linux are introduced.">
+<meta name="twitter:description" content="Two ways of using KVM-based vms on Linux are introduced.">
 <meta name="twitter:image" content="http://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/check-module.png">
 
 
@@ -179,7 +179,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -380,7 +380,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-10-30 16:31:36" itemprop="dateModified" datetime="2021-10-30T16:31:36+08:00">2021-10-30</time>
+                <time title="Modified: 2021-12-12 16:12:43" itemprop="dateModified" datetime="2021-12-12T16:12:43+08:00">2021-12-12</time>
               </span>
             
           
@@ -408,7 +408,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">4.8k</span>
+              <span title="Symbols count in article">7.9k</span>
             </span>
           
 
@@ -420,7 +420,7 @@
               
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               
-              <span title="Reading time">4 mins.</span>
+              <span title="Reading time">7 mins.</span>
             </span>
           
 
@@ -439,19 +439,16 @@
       
 
       
-        <p>Two ways of using vms on Linux are introduced.<a id="more"></a> One is using virt-manager GUI, another is using the raw <code>qemu-system</code>.</p>
-<h1 id="QEMU"><a href="#QEMU" class="headerlink" title="QEMU"></a>QEMU</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pacman -S qemu bridge-utils iptables dnsmasq ebtables</span><br><span class="line">pacman -S libvirt</span><br></pre></td></tr></table></figure>
+        <p>Two ways of using KVM-based vms on Linux are introduced.<a id="more"></a> One is using virt-manager GUI, another is using the raw <code>qemu-system</code>.</p>
+<h1 id="I-Prerequisites"><a href="#I-Prerequisites" class="headerlink" title="I. Prerequisites"></a>I. Prerequisites</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pacman -S qemu bridge-utils iptables dnsmasq ebtables</span><br><span class="line">pacman -S libvirt</span><br></pre></td></tr></table></figure>
 <p>check for module loading:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep kvm</span><br><span class="line">lsmod | grep virtio</span><br></pre></td></tr></table></figure></p>
 <p><img src="check-module.png" alt></p>
 <p>To auto load a module at boot, create a file like ‘/etc/modules-load.d/virtio.conf’<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Load virtio at boot</span><br><span class="line">virtio</span><br></pre></td></tr></table></figure></p>
-<h2 id="Ubuntu-Setting-socks5-proxy"><a href="#Ubuntu-Setting-socks5-proxy" class="headerlink" title="Ubuntu Setting socks5 proxy"></a>Ubuntu Setting socks5 proxy</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt-get install tsocks</span><br></pre></td></tr></table></figure>
-<p>edit /etc/tsocks.conf<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">local = 192.168.122.0/255.255.255.0</span><br><span class="line">local = 10.0.0.0/255.0.0.0</span><br><span class="line"></span><br><span class="line">server = 192.168.122.1</span><br><span class="line"># Server type defaults to 4 so we need to specify it as 5 for this one</span><br><span class="line">server_type = 5</span><br><span class="line"># The port defaults to 1080 but I&apos;ve stated it here for clarity </span><br><span class="line">server_port = 1080</span><br></pre></td></tr></table></figure></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo -s</span><br><span class="line">tsocks apt-get install -y package-name</span><br></pre></td></tr></table></figure>
-<h1 id="Virt-Manager"><a href="#Virt-Manager" class="headerlink" title="Virt Manager"></a>Virt Manager</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S virt-manager</span><br></pre></td></tr></table></figure>
+<h1 id="II-Virt-Manager"><a href="#II-Virt-Manager" class="headerlink" title="II. Virt Manager"></a>II. Virt Manager</h1><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S virt-manager</span><br></pre></td></tr></table></figure>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod --append --groups libvirt $(whoami)</span><br><span class="line">sudo systemctl start libvirtd</span><br></pre></td></tr></table></figure>
 <p>check for nat:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo virsh net-list --all</span><br><span class="line"># sudo virsh net-start default</span><br></pre></td></tr></table></figure></p>
 <p>Then install using GUI.<br>if you want a raw image, create the img file by yourself<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create -f raw imgfile 20G</span><br></pre></td></tr></table></figure></p>
-<h2 id="Win7-VM-installation"><a href="#Win7-VM-installation" class="headerlink" title="Win7 VM installation"></a>Win7 VM installation</h2><p>aur install virtio-win<br>pacman install dmidecode</p>
+<h2 id="II-A-Win7-VM-installation-and-usage"><a href="#II-A-Win7-VM-installation-and-usage" class="headerlink" title="II.A Win7 VM installation and usage"></a>II.A Win7 VM installation and usage</h2><p>aur install virtio-win<br>pacman install dmidecode</p>
 <p>Under hard disk OS-images directory, find the file <code>windows7_Ultimate_x64.iso</code> and copy it into /var/lib/libvirt/images.<br>This is a ghost OS image with some preinstall software. I use this because the activation tool is inside.<br><img src="Screenshot-win7-activation.png" alt="Screenshot-win7-activation.png"></p>
 <p>Just put the script and <code>Windows Loader.ext</code> in the same directory and then run the script in Administrator.</p>
 <h3 id="Real-time-clock"><a href="#Real-time-clock" class="headerlink" title="Real time clock"></a>Real time clock</h3><p>In virt manager, enable XML editing.<br>Then replace <code>&lt;clock offset=&#39;utc&#39;&gt;</code> with <code>&lt;clock offset=&#39;localtime&#39;&gt;</code><br>Administrator open cmd:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bcdedit /set &#123;default&#125; USEPLATFORMCLOCK on</span><br></pre></td></tr></table></figure></p>
@@ -465,18 +462,25 @@
 <p>make sure sshd on host is on<br>open one term on host and type <code>tty</code> to get device name，say <code>/dev/pts/0</code></p>
 <p>ssh to host using PuTTY from win7 client<br><code>echo &quot;copied text&quot; &gt;&gt; /dev/pts/0</code></p>
 <p>You will see “copied text” on the host terminal.</p>
-<h3 id="Win10-VM-Installation"><a href="#Win10-VM-Installation" class="headerlink" title="Win10 VM Installation"></a>Win10 VM Installation</h3><p>Because of two bugs of Win7 VM: the first is that copy-and-pasteing for office object always throws an error in VM; the second is that Office2016 on win7 cannot open remote-location file. I change to win10 vm, and I found that’s cool.</p>
-<h3 id="Launch-VM-as-a-desktop-program"><a href="#Launch-VM-as-a-desktop-program" class="headerlink" title="Launch VM as a desktop program"></a>Launch VM as a desktop program</h3><p>Go to Virt-manager &gt; Connection Details to find Libvirt URI, here mine is <code>qemu:///system</code></p>
+<h2 id="II-B-Win10-VM-Installation"><a href="#II-B-Win10-VM-Installation" class="headerlink" title="II.B Win10 VM Installation"></a>II.B Win10 VM Installation</h2><p>Because of two bugs of Win7 VM: the first is that copy-and-pasteing for office object always throws an error in VM; the second is that Office2016 on win7 cannot open remote-location file. I change to win10 vm, and I found that’s cool.</p>
+<h3 id="II-B-a-Launch-VM-as-a-desktop-program"><a href="#II-B-a-Launch-VM-as-a-desktop-program" class="headerlink" title="II.B.a Launch VM as a desktop program"></a>II.B.a Launch VM as a desktop program</h3><p>Go to Virt-manager &gt; Connection Details to find Libvirt URI, here mine is <code>qemu:///system</code></p>
 <p><img src="libvirt-uri.png" alt="libvirt-uri"></p>
 <p>Then open virtual machine, go to View &gt; Details to find the name of the virtual machine, here mine is <code>win10</code></p>
 <p><img src="vm-name.png" alt="vm-name"></p>
 <p>Now we can test the direct-open command:<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virt-manager --connect qemu:///system --show-domain-console win10</span><br></pre></td></tr></table></figure></p>
 <p>Then create your desktop file under <code>~/.local/share/applications</code>:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Version=1.0</span><br><span class="line">Type=Application</span><br><span class="line">Name=win10</span><br><span class="line">Comment=Start Win10 VM</span><br><span class="line">Exec=virt-manager --connect qemu:///system --show-domain-console win10</span><br><span class="line">Icon=your/logo/position/windows.svg</span><br><span class="line">Terminal=false</span><br><span class="line">StartupNotify=false</span><br></pre></td></tr></table></figure></p>
-<h3 id="Expand-block-image-size"><a href="#Expand-block-image-size" class="headerlink" title="Expand block image size"></a>Expand block image size</h3><p>To add 5G to my win10 raw format volume, first check the state:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># virsh list --all</span><br><span class="line"> Id   Name    State</span><br><span class="line">------------------------</span><br><span class="line"> -    win10   shut off</span><br></pre></td></tr></table></figure></p>
+<h3 id="II-B-b-Expand-block-image-size"><a href="#II-B-b-Expand-block-image-size" class="headerlink" title="II.B.b Expand block image size"></a>II.B.b Expand block image size</h3><p>To add 5G to my win10 raw format volume, first check the state:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># virsh list --all</span><br><span class="line"> Id   Name    State</span><br><span class="line">------------------------</span><br><span class="line"> -    win10   shut off</span><br></pre></td></tr></table></figure></p>
 <p>Then go to increase<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># cd /var/lib/libvirt/images/</span><br><span class="line"># ls -lh win10vol.img</span><br><span class="line"># qemu-img resize win10vol.img +5G</span><br></pre></td></tr></table></figure></p>
 <p>Then start win10 VM and right click ‘Start Menu’ -&gt; Disk management -&gt; Extend Volumn C:\<br><img src="addvol.png" alt="addvol.png"><br>ok.<br><img src="afteradd.png" alt="afteradd.png"></p>
-<h3 id="无线网卡直通"><a href="#无线网卡直通" class="headerlink" title="无线网卡直通"></a>无线网卡直通</h3><p>默认的虚拟机使用NAT模式上网，对一些其他上网模式也是支持的。<br>目前我对于桥接模式的配置没有成功，所以这里记录只成功了的网卡直通模式。<br>在该模式下，虚拟机直接使用无线网卡联网，宿主机可以用有线连接。</p>
-<p>参考：<a href="https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF</a><br>首先，是启用iommu<br>在计算机启动的grub页面按e进入kernal模式，在启动vmlinuz的参数后面添加 intel_iommu=on 和 iommu=pt<br><img src="grub-edit.jpg" alt="grub-edit.jpg"></p>
+<h3 id="II-B-c-PCI硬件设备直通"><a href="#II-B-c-PCI硬件设备直通" class="headerlink" title="II.B.c PCI硬件设备直通"></a>II.B.c PCI硬件设备直通</h3><p><strong>Prerequisite: Enable IOMMU(Input/Output Memory Management Unit)</strong><br>Intel CPU上开启IOMMU需要VT-d的支持。VT-d(Intel Virtualization Technology for Direct I/O)是一个位于CPU、内存和I/O设备之间的硬件设备，它可以拦截I/O设备产生的中断请求和通过DMA方式对虚拟机内存的访问，然后重定向到通过虚拟机监视器（VMM）设定的虚拟机中。VT-d技术支持了虚拟机内部驱动程序直接与硬件设备通信，替代了传统的软件模拟方式，大大提升了虚拟化的I/O性能。</p>
+<p>开启方式可分为临时开启和写配置文件开启两种方式：<br>方式一（临时开启方法）：在计算机启动的grub页面按e进入kernal模式，在启动vmlinuz的参数后面添加 intel_iommu=on 和 iommu=pt<br><img src="grub-edit.jpg" alt="grub-edit.jpg"><br>这种开启方法在重启之后配置又会变成原来的样子。</p>
+<p>方式二（写配置文件开启方法）：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su</span><br><span class="line">vim /etc/default/grub</span><br></pre></td></tr></table></figure></p>
+<p>在 <code>GRUB_CMDLINE_LINUX_DEFAULT</code> 参数中添加 <code>intel_iommu=on iommu=pt</code></p>
+<blockquote>
+<p>GRUB_CMDLINE_LINUX_DEFAULT=”loglevel=3 intel_iommu=on iommu=pt”</p>
+</blockquote>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+<p><strong>1. 配置无线网卡直通</strong><br>默认的虚拟机使用NAT模式上网，对一些其他上网模式也是支持的。目前我对于桥接模式的配置没有成功，所以这里记录只成功了的网卡直通模式。<br>在该模式下，虚拟机直接使用无线网卡联网，宿主机可以用有线连接，当时配置该模式只是为了暂时同步一下微信聊天记录（因为必须在同一wifi下）</p>
 <p>成功开机后root使用下面命令检查无线网卡的pci地址：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">shopt -s nullglob</span><br><span class="line">for g in `find /sys/kernel/iommu_groups/* -maxdepth 0 -type d | sort -V`; do</span><br><span class="line">    echo &quot;IOMMU Group $&#123;g##*/&#125;:&quot;</span><br><span class="line">    for d in $g/devices/*; do</span><br><span class="line">        echo -e &quot;\t$(lspci -nns $&#123;d##*/&#125;)&quot;</span><br><span class="line">    done;</span><br><span class="line">done;</span><br></pre></td></tr></table></figure></p>
 <p>我的是</p>
 <blockquote>
@@ -489,11 +493,16 @@
 </blockquote>
 <p>将无线网卡与宿主机解绑：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;0000:3a:00.0&quot; &gt; /sys/bus/pci/devices/0000\:3a\:00.0/driver/unbind</span><br></pre></td></tr></table></figure></p>
 <p>然后，打开虚拟机软件，添加pci device，与虚拟机绑定:<br><img src="bind-adapter-addr.png" alt="bind-adapter-addr.png"></p>
-<p>我配置无线网卡直连只是为了暂时同步一下微信聊天记录（因为必须在同一wifi下），重启之后配置又会变成原来的样子。</p>
 <p>参考：<a href="https://www.cnblogs.com/xia-dong/p/11542771.html" target="_blank" rel="noopener">https://www.cnblogs.com/xia-dong/p/11542771.html</a></p>
-<h3 id="CPU绑定"><a href="#CPU绑定" class="headerlink" title="CPU绑定"></a>CPU绑定</h3><p>通过 <code>virsh vcpuinfo win10</code> 可以查看当前使用的CPU情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">wsd@xps13 ~ % sudo virsh vcpuinfo win10                                                                                                                                                                         [1]</span><br><span class="line">VCPU:           0</span><br><span class="line">CPU:            5</span><br><span class="line">State:          running</span><br><span class="line">CPU time:       45.5s</span><br><span class="line">CPU Affinity:   yyyyyyyy</span><br><span class="line"></span><br><span class="line">VCPU:           1</span><br><span class="line">CPU:            1</span><br><span class="line">State:          running</span><br><span class="line">CPU time:       42.7s</span><br><span class="line">CPU Affinity:   yyyyyyyy</span><br></pre></td></tr></table></figure></p>
+<p><strong>2. 配置USB直通</strong><br>一般情况下，QEMU的USB软件重定向方式可以满足U盘等设备的使用需求，但是在一些需要特定驱动的方式下（比如无线投影、USB转VGA），需要开启USB直通功能。</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@arch wsd]# lsusb</span><br><span class="line">Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub</span><br><span class="line">Bus 001 Device 003: ID 0c45:670c Microdia Integrated Webcam HD</span><br><span class="line">Bus 001 Device 002: ID 0cf3:e300 Qualcomm Atheros Communications QCA61x4 Bluetooth 4.0</span><br><span class="line">Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br></pre></td></tr></table></figure>
+<p>通过<code>lsusb</code>命令可以看到，USB接口和蓝牙、摄像头都挂在USB Bus 001下。</p>
+<p>检查USB设置是否支持RESET功能：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">[root@arch wsd]# for iommu_group in $(find /sys/kernel/iommu_groups/ -maxdepth 1 -mindepth 1 -type d);do echo "IOMMU group $(basename "$iommu_group")"; for device in $(\ls -1 "$iommu_group"/devices/); do if [[ -e "$iommu_group"/devices/"$device"/reset ]]; then echo -n "[RESET]"; fi; echo -n $'\t';lspci -nns "$device"; done; done</span><br><span class="line">IOMMU group 7</span><br><span class="line">[RESET] 00:1c.4 PCI bridge [0604]: Intel Corporation Sunrise Point-LP PCI Express Root Port #5 [8086:9d14] (rev f1)</span><br><span class="line">IOMMU group 5</span><br><span class="line">        00:16.0 Communication controller [0780]: Intel Corporation Sunrise Point-LP CSME HECI #1 [8086:9d3a] (rev 21)</span><br><span class="line">IOMMU group 13</span><br><span class="line">[RESET] 3c:00.0 Non-Volatile memory controller [0108]: SK hynix PC401 NVMe Solid State Drive 256GB [1c5c:1527]</span><br><span class="line">IOMMU group 3</span><br><span class="line">        00:14.0 USB controller [0c03]: Intel Corporation Sunrise Point-LP USB 3.0 xHCI Controller [8086:9d2f] (rev 21)</span><br><span class="line">        00:14.2 Signal processing controller [1180]: Intel Corporation Sunrise Point-LP Thermal subsystem [8086:9d31] (rev 21)</span><br><span class="line">IOMMU group 11</span><br><span class="line">[RESET] 3a:00.0 Network controller [0280]: Qualcomm Atheros QCA6174 802.11ac Wireless Network Adapter [168c:003e] (rev 32)</span><br><span class="line">IOMMU group 1</span><br><span class="line">[RESET] 00:02.0 VGA compatible controller [0300]: Intel Corporation UHD Graphics 620 [8086:5917] (rev 07)</span><br><span class="line">IOMMU group 8</span><br><span class="line">[RESET] 00:1c.5 PCI bridge [0604]: Intel Corporation Sunrise Point-LP PCI Express Root Port #6 [8086:9d15] (rev f1)</span><br><span class="line">IOMMU group 6</span><br><span class="line">[RESET] 00:1c.0 PCI bridge [0604]: Intel Corporation Sunrise Point-LP PCI Express Root Port #1 [8086:9d10] (rev f1)</span><br><span class="line">IOMMU group 4</span><br><span class="line">        00:15.0 Signal processing controller [1180]: Intel Corporation Sunrise Point-LP Serial IO I2C Controller #0 [8086:9d60] (rev 21)</span><br><span class="line">        00:15.1 Signal processing controller [1180]: Intel Corporation Sunrise Point-LP Serial IO I2C Controller #1 [8086:9d61] (rev 21)</span><br><span class="line">IOMMU group 12</span><br><span class="line">[RESET] 3b:00.0 Unassigned class [ff00]: Realtek Semiconductor Co., Ltd. RTS525A PCI Express Card Reader [10ec:525a] (rev 01)</span><br><span class="line">IOMMU group 2</span><br><span class="line">        00:04.0 Signal processing controller [1180]: Intel Corporation Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor Thermal Subsystem [8086:1903] (rev 08)</span><br><span class="line">IOMMU group 10</span><br><span class="line">        00:1f.0 ISA bridge [0601]: Intel Corporation Sunrise Point LPC Controller/eSPI Controller [8086:9d4e] (rev 21)</span><br><span class="line">        00:1f.2 Memory controller [0580]: Intel Corporation Sunrise Point-LP PMC [8086:9d21] (rev 21)</span><br><span class="line">        00:1f.3 Audio device [0403]: Intel Corporation Sunrise Point-LP HD Audio [8086:9d71] (rev 21)</span><br><span class="line">        00:1f.4 SMBus [0c05]: Intel Corporation Sunrise Point-LP SMBus [8086:9d23] (rev 21)</span><br><span class="line">IOMMU group 0</span><br><span class="line">        00:00.0 Host bridge [0600]: Intel Corporation Xeon E3-1200 v6/7th Gen Core Processor Host Bridge/DRAM Registers [8086:5914] (rev 08)</span><br><span class="line">IOMMU group 9</span><br><span class="line">[RESET] 00:1d.0 PCI bridge [0604]: Intel Corporation Sunrise Point-LP PCI Express Root Port #9 [8086:9d18] (rev f1)</span><br></pre></td></tr></table></figure></p>
+<p>每行前面带有RESET字样就是可以支持的，可以看到”00:14.0 USB controller”是不支持RESET的。</p>
+<h3 id="II-B-d-CPU绑定"><a href="#II-B-d-CPU绑定" class="headerlink" title="II.B.d CPU绑定"></a>II.B.d CPU绑定</h3><p>通过 <code>virsh vcpuinfo win10</code> 可以查看当前使用的CPU情况<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">wsd@xps13 ~ % sudo virsh vcpuinfo win10                                                                                                                                                                         [1]</span><br><span class="line">VCPU:           0</span><br><span class="line">CPU:            5</span><br><span class="line">State:          running</span><br><span class="line">CPU time:       45.5s</span><br><span class="line">CPU Affinity:   yyyyyyyy</span><br><span class="line"></span><br><span class="line">VCPU:           1</span><br><span class="line">CPU:            1</span><br><span class="line">State:          running</span><br><span class="line">CPU time:       42.7s</span><br><span class="line">CPU Affinity:   yyyyyyyy</span><br></pre></td></tr></table></figure></p>
 <p>通过<code>virsh edit win10</code>，在<code>&lt;vcpu placement=&#39;static&#39;&gt;2&lt;/vcpu&gt;</code>下一行添加：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">cputune</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">vcpupin</span> <span class="attr">vcpu</span>=<span class="string">'0'</span> <span class="attr">cpuset</span>=<span class="string">'6'</span>/&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">vcpupin</span> <span class="attr">vcpu</span>=<span class="string">'1'</span> <span class="attr">cpuset</span>=<span class="string">'7'</span>/&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">cputune</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
 <p>将虚拟机两个vCPU分别绑定在宿主机6和7号CPU上<br>再次检查CPU使用情况：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@xps13 wsd]# virsh vcpuinfo win10</span><br><span class="line">VCPU:           0</span><br><span class="line">CPU:            6</span><br><span class="line">State:          running</span><br><span class="line">CPU time:       165.3s</span><br><span class="line">CPU Affinity:   ------y-</span><br><span class="line"></span><br><span class="line">VCPU:           1</span><br><span class="line">CPU:            7</span><br><span class="line">State:          running</span><br><span class="line">CPU time:       105.4s</span><br><span class="line">CPU Affinity:   -------y</span><br></pre></td></tr></table></figure></p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF</a></p>
 
       
     </div>
@@ -626,7 +635,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">146</span>
+                    <span class="site-state-item-count">149</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -656,7 +665,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">178</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -690,7 +699,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#QEMU"><span class="nav-text">QEMU</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Ubuntu-Setting-socks5-proxy"><span class="nav-text">Ubuntu Setting socks5 proxy</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Virt-Manager"><span class="nav-text">Virt Manager</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#Win7-VM-installation"><span class="nav-text">Win7 VM installation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Real-time-clock"><span class="nav-text">Real time clock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Office-2016-pack"><span class="nav-text">Office 2016 pack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QXL-Acceleration"><span class="nav-text">QXL Acceleration</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Win10-VM-Installation"><span class="nav-text">Win10 VM Installation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Launch-VM-as-a-desktop-program"><span class="nav-text">Launch VM as a desktop program</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Expand-block-image-size"><span class="nav-text">Expand block image size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#无线网卡直通"><span class="nav-text">无线网卡直通</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CPU绑定"><span class="nav-text">CPU绑定</span></a></li></ol></li></ol></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#I-Prerequisites"><span class="nav-text">I. Prerequisites</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#II-Virt-Manager"><span class="nav-text">II. Virt Manager</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#II-A-Win7-VM-installation-and-usage"><span class="nav-text">II.A Win7 VM installation and usage</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Real-time-clock"><span class="nav-text">Real time clock</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Office-2016-pack"><span class="nav-text">Office 2016 pack</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#QXL-Acceleration"><span class="nav-text">QXL Acceleration</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#II-B-Win10-VM-Installation"><span class="nav-text">II.B Win10 VM Installation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#II-B-a-Launch-VM-as-a-desktop-program"><span class="nav-text">II.B.a Launch VM as a desktop program</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#II-B-b-Expand-block-image-size"><span class="nav-text">II.B.b Expand block image size</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#II-B-c-PCI硬件设备直通"><span class="nav-text">II.B.c PCI硬件设备直通</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#II-B-d-CPU绑定"><span class="nav-text">II.B.d CPU绑定</span></a></li></ol></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#References"><span class="nav-text">References</span></a></li></ol></div>
             
 
           </div>
@@ -711,7 +720,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -723,7 +732,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">430k</span>
+    <span title="Symbols count total">439k</span>
   
 
   
@@ -732,12 +741,12 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:31</span>
+    <span title="Reading time total">6:39</span>
   
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
 
 
 
@@ -884,13 +893,6 @@
   
 
   
-  
-
-  
-  
-
-  
-
 
   
 

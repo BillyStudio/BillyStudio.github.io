@@ -15,7 +15,7 @@
 
 
 <html class="theme-next muse use-motion" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -70,7 +70,7 @@
     root: '/',
     scheme: 'Muse',
     version: '7.2.0',
-    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false},
     back2top: true,
     back2top_sidebar: false,
     fancybox: false,
@@ -90,18 +90,22 @@
 
 
 
-  <meta name="description" content="动态代理模式">
-<meta name="keywords" content="Java,设计模式">
+  <meta name="description" content="&amp;emsp;&amp;emsp;动态代理模式是借助proxy对象执行被代理接口方法的设计模式。">
+<meta name="keywords" content="Java,设计模式,Spring">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Design patterns --- Dynamic proxy">
 <meta property="og:url" content="http://BillyStudio.github.io/2020/07/14/2020-07-14-Design-patterns-Dynamic-proxy/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
-<meta property="og:description" content="动态代理模式">
+<meta property="og:description" content="&amp;emsp;&amp;emsp;动态代理模式是借助proxy对象执行被代理接口方法的设计模式。">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2020-10-31T14:29:34.342Z">
+<meta property="og:image" content="http://billystudio.github.io/2020/07/14/2020-07-14-Design-patterns-Dynamic-proxy/dynamic-proxy.png">
+<meta property="og:image" content="http://billystudio.github.io/2020/07/14/2020-07-14-Design-patterns-Dynamic-proxy/rpc-dynamic-proxy.png">
+<meta property="og:image" content="http://billystudio.github.io/2020/07/14/2020-07-14-Design-patterns-Dynamic-proxy/dynamic-call.png">
+<meta property="og:updated_time" content="2021-12-23T12:18:30.644Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Design patterns --- Dynamic proxy">
-<meta name="twitter:description" content="动态代理模式">
+<meta name="twitter:description" content="&amp;emsp;&amp;emsp;动态代理模式是借助proxy对象执行被代理接口方法的设计模式。">
+<meta name="twitter:image" content="http://billystudio.github.io/2020/07/14/2020-07-14-Design-patterns-Dynamic-proxy/dynamic-proxy.png">
 
 
 
@@ -167,7 +171,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -368,7 +372,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2020-10-31 22:29:34" itemprop="dateModified" datetime="2020-10-31T22:29:34+08:00">2020-10-31</time>
+                <time title="Modified: 2021-12-23 20:18:30" itemprop="dateModified" datetime="2021-12-23T20:18:30+08:00">2021-12-23</time>
               </span>
             
           
@@ -411,7 +415,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">1.1k</span>
+              <span title="Symbols count in article">2.4k</span>
             </span>
           
 
@@ -423,7 +427,7 @@
               
                 <span class="post-meta-item-text">Reading time &asymp;</span>
               
-              <span title="Reading time">1 mins.</span>
+              <span title="Reading time">2 mins.</span>
             </span>
           
 
@@ -442,8 +446,22 @@
       
 
       
-        <p>动态代理模式 <a id="more"></a></p>
-<p>获取jar包执行方法并展示</p>
+        <p>&emsp;&emsp;动态代理模式是借助proxy对象执行被代理接口方法的设计模式。<a id="more"></a> 动态代理模式的“动态”体现在代理对象代理的接口所来自的实例方法是可以动态指配的。动态代理模式可以应用于：</p>
+<ol>
+<li>网络服务接口的调用</li>
+<li>对一些方法做统一的处理以减少重复代码</li>
+</ol>
+<p>&emsp;&emsp;动态代理模式的特征是代理类（ProxyClass）和被代理类（RealSubject）实现同一个接口（doAction），使用者（Client）不直接访问被代理类的接口，而是借助代理类实现对接口的访问。<br><img src="dynamic-proxy.png" alt="dynamic-proxy.png"></p>
+<center style="font-style:italic"><small>图 1 动态代理模式UML示意图</small></center>
+
+<p>&emsp;&emsp;在Java中，实现动态代理模式的相关工具有JDK自带的动态代理模块、CgLib和JavaAssist等。动态代理的典型应用场景有RPC和Spring AOP。接下来分别结合实例代码理解动态代理模式的使用：</p>
+<h1 id="一、RPC中的动态代理模式"><a href="#一、RPC中的动态代理模式" class="headerlink" title="一、RPC中的动态代理模式"></a>一、RPC中的动态代理模式</h1><p><img src="rpc-dynamic-proxy.png" alt="Dynamic proxy in RPC" title="RPC中的动态代理模式"></p>
+<p><center style="font-style:italic"><small>图 2 RPC中的动态代理模式</small></center><br>使用者（Client）对Service接口的调用通过Proxy转化为了对invoke函数的调用，在invoke函数中会调用http/tcp客户端发送调用请求。</p>
+<p><img src="dynamic-call.png" alt><br>以JDChain为例，<code>queryService</code>是通过动态代理模式生成的服务接口 <code>HttpBlockchainBrowserService</code> 的实例。客户端调用<code>getLedgerHashs()</code>方法实际上调用的是 <code>ServiceInvocationHandler</code> 中的 <code>invoke</code> 方法。</p>
+<h1 id="二、Spring-AOP中的动态代理模式"><a href="#二、Spring-AOP中的动态代理模式" class="headerlink" title="二、Spring AOP中的动态代理模式"></a>二、Spring AOP中的动态代理模式</h1><p>与发送http/tcp请求不同，aop在invoke函数中运行了method.invoke进行原方法的调用。在method.invoke之前执行的就是前置切面，在method.invoke之后执行的就是后置切面。</p>
+<h2 id="使用方法"><a href="#使用方法" class="headerlink" title="使用方法"></a>使用方法</h2><p>在SpringBoot项目中添加依赖：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>org.springframework.boot<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>spring-boot-starter-aop<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>注入切面类：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Aspect</span></span><br><span class="line"><span class="meta">@Component</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">LogAspect</span> </span>&#123;</span><br><span class="line">	<span class="comment">/**</span></span><br><span class="line"><span class="comment">	 * 定义拦截规则：拦截org.springframework.cloud.netflix.eureka.server.InstanceRegistry.register方法</span></span><br><span class="line"><span class="comment">	 */</span></span><br><span class="line">	<span class="meta">@Pointcut</span>(<span class="string">"execution(* org.springframework.cloud.netflix.eureka.server.InstanceRegistry.register(..))"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">controllerRequestPointcut</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Around</span>(<span class="string">"controllerRequestPointcut()"</span>)</span><br><span class="line">	<span class="function"><span class="keyword">public</span> Object <span class="title">Interceptor</span><span class="params">(ProceedingJoinPoint pjp)</span> </span>&#123;</span><br><span class="line">		<span class="comment">// aspect code here</span></span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h1 id="三、JuLiuSc合约平台中的使用"><a href="#三、JuLiuSc合约平台中的使用" class="headerlink" title="三、JuLiuSc合约平台中的使用"></a>三、JuLiuSc合约平台中的使用</h1><p>获取jar包执行方法并展示</p>
 <figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">URLClassLoader contractCLassLoader = contractService.loadContractJar(contractJarName);</span><br><span class="line">Class clazz = Class.forName(contractRefName, <span class="keyword">false</span>, contractCLassLoader);</span><br><span class="line">Object argObj = <span class="keyword">null</span>;</span><br><span class="line">String contractAddr = rand.nextString();</span><br><span class="line"></span><br><span class="line"><span class="comment">// select the constructor based on args to initialize,</span></span><br><span class="line"><span class="comment">// else the default constructor is used</span></span><br><span class="line"><span class="keyword">if</span> (<span class="keyword">null</span> != argsMap) &#123;</span><br><span class="line">    List&lt;Class&gt; argClasses = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    List&lt;Object&gt; argObjects = <span class="keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="keyword">for</span> (Map.Entry&lt;String, Object&gt; arg : argsMap.entrySet()) &#123;</span><br><span class="line">        Class argClazz = Class.forName(arg.getKey());</span><br><span class="line">        argClasses.add(argClazz);</span><br><span class="line">        argObjects.add(argClazz.cast(arg.getValue()));</span><br><span class="line">    &#125;</span><br><span class="line">    Constructor constructor = clazz.getConstructor(argClasses.toArray(<span class="keyword">new</span> Class[argClasses.size()]));</span><br><span class="line">    argObj = constructor.newInstance(argObjects.toArray(<span class="keyword">new</span> Object[argObjects.size()]));</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    Constructor constructor = clazz.getConstructor();</span><br><span class="line">    argObj = constructor.newInstance();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <p>注意 <code>clazz.getConstructor</code> 函数的参数由 <code>List</code> 转 <code>[]</code> 类型，不可以直接使用强制类型转换 <code>(Class[]) argClasses.toArray()</code>，不然会报错如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to [Ljava.lang.Class;</span><br></pre></td></tr></table></figure></p>
 
@@ -479,6 +497,8 @@
             <a href="/tags/Java/" rel="tag"># Java</a>
           
             <a href="/tags/设计模式/" rel="tag"># 设计模式</a>
+          
+            <a href="/tags/Spring/" rel="tag"># Spring</a>
           
         </div>
       
@@ -547,8 +567,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            Table of Contents
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            Overview
+          </li>
+        </ul>
+      
 
-      <div class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <div class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -563,7 +592,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">146</span>
+                    <span class="site-state-item-count">149</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -593,7 +622,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">178</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -617,6 +646,23 @@
       </div>
 
       
+      <!--noindex-->
+        <div class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+            
+            
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#一、RPC中的动态代理模式"><span class="nav-text">一、RPC中的动态代理模式</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#二、Spring-AOP中的动态代理模式"><span class="nav-text">二、Spring AOP中的动态代理模式</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#使用方法"><span class="nav-text">使用方法</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#三、JuLiuSc合约平台中的使用"><span class="nav-text">三、JuLiuSc合约平台中的使用</span></a></li></ol></div>
+            
+
+          </div>
+        </div>
+      <!--/noindex-->
+      
 
       
 
@@ -631,7 +677,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -643,7 +689,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">430k</span>
+    <span title="Symbols count total">439k</span>
   
 
   
@@ -652,12 +698,12 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:31</span>
+    <span title="Reading time total">6:39</span>
   
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
 
 
 
@@ -804,13 +850,6 @@
   
 
   
-  
-
-  
-  
-
-  
-
 
   
 

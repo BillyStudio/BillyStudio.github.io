@@ -15,7 +15,7 @@
 
 
 <html class="theme-next muse use-motion" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -70,7 +70,7 @@
     root: '/',
     scheme: 'Muse',
     version: '7.2.0',
-    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false},
     back2top: true,
     back2top_sidebar: false,
     fancybox: false,
@@ -101,7 +101,9 @@
 <meta property="og:image" content="http://billystudio.github.io/2020/05/08/2020-05-08-UML-from-model-to-code/Screenshot%20from%202020-05-08%2017-33-45.png">
 <meta property="og:image" content="http://billystudio.github.io/2020/05/08/2020-05-08-UML-from-model-to-code/unspecified-association.png">
 <meta property="og:image" content="http://billystudio.github.io/2020/05/08/2020-05-08-UML-from-model-to-code/aggregation-example.png">
-<meta property="og:updated_time" content="2021-06-07T14:25:39.369Z">
+<meta property="og:image" content="http://billystudio.github.io/2020/05/08/2020-05-08-UML-from-model-to-code/inheritance.png">
+<meta property="og:image" content="http://billystudio.github.io/2020/05/08/2020-05-08-UML-from-model-to-code/Realization.png">
+<meta property="og:updated_time" content="2021-11-15T09:21:15.613Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="UML diagrams --- from models to codes">
 <meta name="twitter:description" content="本文关注于利用UML框图将模型表达为代码的过程，其中穿插有设计模式。">
@@ -171,7 +173,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -372,7 +374,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-06-07 22:25:39" itemprop="dateModified" datetime="2021-06-07T22:25:39+08:00">2021-06-07</time>
+                <time title="Modified: 2021-11-15 17:21:15" itemprop="dateModified" datetime="2021-11-15T17:21:15+08:00">2021-11-15</time>
               </span>
             
           
@@ -400,7 +402,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">1.9k</span>
+              <span title="Symbols count in article">2.1k</span>
             </span>
           
 
@@ -446,8 +448,11 @@
 <li>关联是一种结构化的关系，指一种对象和另一种对象有联系，比依赖关系要强。</li>
 <li>关联和聚合是视问题域而定的。例如，在关心汽车的领域内，轮胎是一定要组合在汽车类中的，因为它离开了汽车就没有意义了；而在买轮胎的店铺业务里，轮胎就算离开了汽车也是有意义的，这就可以用聚合了。</li>
 </ol>
-<h2 id="一般-特殊关系"><a href="#一般-特殊关系" class="headerlink" title="一般-特殊关系"></a>一般-特殊关系</h2><h3 id="继承关系"><a href="#继承关系" class="headerlink" title="继承关系"></a>继承关系</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clerk</span> <span class="keyword">implements</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Clerk</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="实现关系"><a href="#实现关系" class="headerlink" title="实现关系"></a>实现关系</h3><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Tool</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Tool</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span> <span class="keyword">implements</span> <span class="title">Tool</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Car</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="一般-特殊关系"><a href="#一般-特殊关系" class="headerlink" title="一般-特殊关系"></a>一般-特殊关系</h2><h3 id="继承关系-Inheritance"><a href="#继承关系-Inheritance" class="headerlink" title="继承关系 Inheritance"></a>继承关系 Inheritance</h3><p><img src="inheritance.png" alt="Inheritance"><br>继承关系是指子类中的成员有部分来自父类的成员，在UML类图中通常用”实线+空心三角箭头”来表示，箭头方向由子类指向父类。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    String name;</span><br><span class="line">    <span class="keyword">int</span> sex;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Person</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Clerk</span> <span class="keyword">implements</span> <span class="title">Person</span> </span>&#123;</span><br><span class="line">    <span class="keyword">int</span> position;</span><br><span class="line">    <span class="keyword">double</span> salary;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Clerk</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>继承关系在一些资料和设计软件中又被称为泛化关系（Generalization）。</p>
+<h3 id="实现关系"><a href="#实现关系" class="headerlink" title="实现关系"></a>实现关系</h3><p><img src="Realization.png" alt="Realization"><br>实现关系是定义的接口与实现类的关系，在UML类图中通常以“虚线+空心三角箭头”表示，箭头方向由实现类指向接口。</p>
+<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">interface</span> <span class="title">Tool</span> </span>&#123;</span><br><span class="line">    <span class="function">String <span class="title">use</span><span class="params">()</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Car</span> <span class="keyword">implements</span> <span class="title">Tool</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">Car</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> String <span class="title">use</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        <span class="keyword">return</span> <span class="string">"drive"</span>;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="对象之间的消息"><a href="#对象之间的消息" class="headerlink" title="对象之间的消息"></a>对象之间的消息</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Util</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">fun1</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">fun2</span><span class="params">()</span> </span>&#123;&#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Call</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">callFunc</span><span class="params">()</span> </span>&#123;</span><br><span class="line">        Util.fun1();</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
 <h2 id="依赖关系"><a href="#依赖关系" class="headerlink" title="依赖关系"></a>依赖关系</h2><h1 id="参考文献"><a href="#参考文献" class="headerlink" title="参考文献"></a>参考文献</h1><p>谈谈类之间的关联关系与依赖关系： <a href="https://www.cnblogs.com/iyangyuan/archive/2013/06/16/3138463.html" target="_blank" rel="noopener">https://www.cnblogs.com/iyangyuan/archive/2013/06/16/3138463.html</a></p>
 
@@ -578,7 +583,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">146</span>
+                    <span class="site-state-item-count">149</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -608,7 +613,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">178</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -642,7 +647,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#类之间的关系"><span class="nav-text">类之间的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#整体部分关系"><span class="nav-text">整体部分关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-关联关系-Association"><span class="nav-text">1.关联关系(Association)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-聚合关系-Aggregation"><span class="nav-text">2.聚合关系(Aggregation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-组合关系-Composition"><span class="nav-text">3.组合关系(Composition)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联与聚合关系的比较"><span class="nav-text">关联与聚合关系的比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一般-特殊关系"><span class="nav-text">一般-特殊关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#继承关系"><span class="nav-text">继承关系</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现关系"><span class="nav-text">实现关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象之间的消息"><span class="nav-text">对象之间的消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖关系"><span class="nav-text">依赖关系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-text">参考文献</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#类之间的关系"><span class="nav-text">类之间的关系</span></a><ol class="nav-child"><li class="nav-item nav-level-2"><a class="nav-link" href="#整体部分关系"><span class="nav-text">整体部分关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-关联关系-Association"><span class="nav-text">1.关联关系(Association)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-聚合关系-Aggregation"><span class="nav-text">2.聚合关系(Aggregation)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-组合关系-Composition"><span class="nav-text">3.组合关系(Composition)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#关联与聚合关系的比较"><span class="nav-text">关联与聚合关系的比较</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#一般-特殊关系"><span class="nav-text">一般-特殊关系</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#继承关系-Inheritance"><span class="nav-text">继承关系 Inheritance</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实现关系"><span class="nav-text">实现关系</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#对象之间的消息"><span class="nav-text">对象之间的消息</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#依赖关系"><span class="nav-text">依赖关系</span></a></li></ol></li><li class="nav-item nav-level-1"><a class="nav-link" href="#参考文献"><span class="nav-text">参考文献</span></a></li></ol></div>
             
 
           </div>
@@ -663,7 +668,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -675,7 +680,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">430k</span>
+    <span title="Symbols count total">439k</span>
   
 
   
@@ -684,12 +689,12 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:31</span>
+    <span title="Reading time total">6:39</span>
   
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
 
 
 
@@ -836,13 +841,6 @@
   
 
   
-  
-
-  
-  
-
-  
-
 
   
 

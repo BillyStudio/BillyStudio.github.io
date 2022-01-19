@@ -1702,7 +1702,7 @@ pre .javascript .function {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #345500;
+  background: #f1a813;
 }
 .feed-link,
 .chat {
@@ -2113,10 +2113,6 @@ pre .javascript .function {
   transform: translate(-50%, -50%);
   color: #ccc;
 }
-.has-jax {
-  overflow-x: auto;
-  overflow-y: hidden;
-}
 .page-archive .archive-page-counter {
   position: relative;
   top: 3px;
@@ -2464,6 +2460,21 @@ embed {
 }
 .site-search form {
   display: none;
+}
+.sidebar {
+  right: auto;
+  left: 0;
+}
+.sidebar-toggle,
+.back-to-top {
+  right: auto;
+  left: 30px;
+}
+@media (max-width: 991px) {
+  .sidebar-toggle,
+  .back-to-top {
+    left: 20px;
+  }
 }
 .links-of-blogroll-inline .links-of-blogroll-item {
   display: inline-block;

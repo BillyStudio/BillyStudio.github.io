@@ -15,7 +15,7 @@
 
 
 <html class="theme-next muse use-motion" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -70,7 +70,7 @@
     root: '/',
     scheme: 'Muse',
     version: '7.2.0',
-    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false},
     back2top: true,
     back2top_sidebar: false,
     fancybox: false,
@@ -98,7 +98,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="Linux can be used as main desktop computer because I have found a harder OS called Unix.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-18T06:54:37.487Z">
+<meta property="og:updated_time" content="2021-12-23T12:18:30.681Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Linux Troubleshooting">
 <meta name="twitter:description" content="Linux can be used as main desktop computer because I have found a harder OS called Unix.">
@@ -167,7 +167,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -368,7 +368,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2019-08-18 14:54:37" itemprop="dateModified" datetime="2019-08-18T14:54:37+08:00">2019-08-18</time>
+                <time title="Modified: 2021-12-23 20:18:30" itemprop="dateModified" datetime="2021-12-23T20:18:30+08:00">2021-12-23</time>
               </span>
             
           
@@ -396,7 +396,7 @@
               
                 <span class="post-meta-item-text">Symbols count in article: </span>
               
-              <span title="Symbols count in article">255</span>
+              <span title="Symbols count in article">771</span>
             </span>
           
 
@@ -430,6 +430,10 @@
         <p>Linux can be used as main desktop computer because I have found a harder OS called Unix. <a id="more"></a></p>
 <h1 id="Raspbian-on-Pi"><a href="#Raspbian-on-Pi" class="headerlink" title="Raspbian on Pi"></a>Raspbian on Pi</h1><p>When executing some linux module command like:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">lsmod: /usr/local/lib/libcrypto.so.1.1: version `OPENSSL_1_1_0&apos; not found (required by lsmod)</span><br></pre></td></tr></table></figure></p>
 <p>It means no user previlige, you should add sudo.</p>
+<h1 id="grub修复"><a href="#grub修复" class="headerlink" title="grub修复"></a>grub修复</h1><p>一日手残，进入BIOS后恢复了出厂设置，导致重启后找不到系统引导，进不了安装的Arch Linux操作系统了。于是刷了系统安装U盘，进入终端修复grub。以下修复命令：<br>arch-chroot shell:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br><span class="line">efibootmgr -b 0000 -B</span><br><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot/efi --boot-directory=/boot/grub</span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br><span class="line">grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=GRUB</span><br></pre></td></tr></table></figure></p>
+<p>grub.cfg是在启动分区中的</p>
+<p>grub shell:<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt; bcfg boot dump -V 查看efi启动项</span><br><span class="line">&gt; bcfs boot add 3 FS1:\EFI\grub\grubx64.efi &quot;Grub 2&quot;  挂载EFI分区</span><br><span class="line">&gt; exit</span><br></pre></td></tr></table></figure></p>
+<p>在界面进入Reboot into Firmware Interface</p>
 
       
     </div>
@@ -554,7 +558,7 @@
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">146</span>
+                    <span class="site-state-item-count">149</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -584,7 +588,7 @@
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">178</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -618,7 +622,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Raspbian-on-Pi"><span class="nav-text">Raspbian on Pi</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-1"><a class="nav-link" href="#Raspbian-on-Pi"><span class="nav-text">Raspbian on Pi</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#grub修复"><span class="nav-text">grub修复</span></a></li></ol></div>
             
 
           </div>
@@ -639,7 +643,7 @@
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -651,7 +655,7 @@
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">430k</span>
+    <span title="Symbols count total">439k</span>
   
 
   
@@ -660,12 +664,12 @@
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:31</span>
+    <span title="Reading time total">6:39</span>
   
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
 
 
 
@@ -812,13 +816,6 @@
   
 
   
-  
-
-  
-  
-
-  
-
 
   
 

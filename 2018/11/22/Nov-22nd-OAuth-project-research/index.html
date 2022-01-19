@@ -15,7 +15,7 @@
 
 
 <html class="theme-next muse use-motion" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -70,7 +70,7 @@
     root: '/',
     scheme: 'Muse',
     version: '7.2.0',
-    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false},
     back2top: true,
     back2top_sidebar: false,
     fancybox: false,
@@ -91,7 +91,7 @@
 
 
   <meta name="description" content="OAuth 2.0 的协议标准 RFC 6749 于 2012 年 10 月发布.">
-<meta name="keywords" content="Java,OAuth,Spring">
+<meta name="keywords" content="Java,Spring,OAuth">
 <meta property="og:type" content="article">
 <meta property="og:title" content="OAuth 项目调研">
 <meta property="og:url" content="http://BillyStudio.github.io/2018/11/22/Nov-22nd-OAuth-project-research/index.html">
@@ -104,7 +104,7 @@
 <meta property="og:image" content="http://billystudio.github.io/2018/11/22/Nov-22nd-OAuth-project-research/unexpected-page.png">
 <meta property="og:image" content="http://billystudio.github.io/2018/11/22/Nov-22nd-OAuth-project-research/RedirectBaidu.png">
 <meta property="og:image" content="http://billystudio.github.io/2018/11/22/Nov-22nd-OAuth-project-research/auth-code.png">
-<meta property="og:updated_time" content="2021-03-27T06:58:41.897Z">
+<meta property="og:updated_time" content="2021-12-23T12:18:30.681Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="OAuth 项目调研">
 <meta name="twitter:description" content="OAuth 2.0 的协议标准 RFC 6749 于 2012 年 10 月发布.">
@@ -174,7 +174,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -375,7 +375,7 @@
                 
                   <span class="post-meta-item-text">Edited on</span>
                 
-                <time title="Modified: 2021-03-27 14:58:41" itemprop="dateModified" datetime="2021-03-27T14:58:41+08:00">2021-03-27</time>
+                <time title="Modified: 2021-12-23 20:18:30" itemprop="dateModified" datetime="2021-12-23T20:18:30+08:00">2021-12-23</time>
               </span>
             
           
@@ -545,6 +545,8 @@ user.oauth.user.password=abcd
 <p><img src="RedirectBaidu.png" alt="RedirectBaidu.png"></p>
 <p>After the user click login, authorization code will be responsed as ‘code=xxx’</p>
 <p><img src="auth-code.png" alt="auth-code.png"></p>
+<h1 id="经典访问控制模型"><a href="#经典访问控制模型" class="headerlink" title="经典访问控制模型"></a>经典访问控制模型</h1><p>RBAC：通过用户、角色、客体的偏序关系定义访问控制。<br>数学上通过BLP模型定义了三个安全性。</p>
+<p>ABAC采用属性级别的访问控制，目前不如RBAC好用，即比较考验管理员的能力，但是学术界比较推崇。</p>
 
       
     </div>
@@ -577,9 +579,9 @@ user.oauth.user.password=abcd
           
             <a href="/tags/Java/" rel="tag"># Java</a>
           
-            <a href="/tags/OAuth/" rel="tag"># OAuth</a>
-          
             <a href="/tags/Spring/" rel="tag"># Spring</a>
+          
+            <a href="/tags/OAuth/" rel="tag"># OAuth</a>
           
         </div>
       
@@ -673,7 +675,7 @@ user.oauth.user.password=abcd
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">146</span>
+                    <span class="site-state-item-count">149</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -703,7 +705,7 @@ user.oauth.user.password=abcd
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">178</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -737,7 +739,7 @@ user.oauth.user.password=abcd
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-text">Prerequisites</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Create-an-OAuth-2-0-Server"><span class="nav-text">Create an OAuth 2.0 Server</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Build-Your-Client-App"><span class="nav-text">Build Your Client App</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Test-the-Resource-Server"><span class="nav-text">Test the Resource Server</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Understand-the-code"><span class="nav-text">Understand the code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Login-with-Baidu"><span class="nav-text">Login with Baidu</span></a></li></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Prerequisites"><span class="nav-text">Prerequisites</span></a></li></ol><li class="nav-item nav-level-1"><a class="nav-link" href="#Create-an-OAuth-2-0-Server"><span class="nav-text">Create an OAuth 2.0 Server</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Build-Your-Client-App"><span class="nav-text">Build Your Client App</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Test-the-Resource-Server"><span class="nav-text">Test the Resource Server</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Understand-the-code"><span class="nav-text">Understand the code</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#Login-with-Baidu"><span class="nav-text">Login with Baidu</span></a></li><li class="nav-item nav-level-1"><a class="nav-link" href="#经典访问控制模型"><span class="nav-text">经典访问控制模型</span></a></li></div>
             
 
           </div>
@@ -758,7 +760,7 @@ user.oauth.user.password=abcd
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -770,7 +772,7 @@ user.oauth.user.password=abcd
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">430k</span>
+    <span title="Symbols count total">439k</span>
   
 
   
@@ -779,12 +781,12 @@ user.oauth.user.password=abcd
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:31</span>
+    <span title="Reading time total">6:39</span>
   
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
 
 
 
@@ -931,13 +933,6 @@ user.oauth.user.password=abcd
   
 
   
-  
-
-  
-  
-
-  
-
 
   
 

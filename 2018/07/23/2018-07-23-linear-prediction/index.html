@@ -15,7 +15,7 @@
 
 
 <html class="theme-next muse use-motion" lang="en">
-<head><meta name="generator" content="Hexo 3.8.0">
+<head><meta name="generator" content="Hexo 3.9.0">
   <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
@@ -70,7 +70,7 @@
     root: '/',
     scheme: 'Muse',
     version: '7.2.0',
-    sidebar: {"position":"right","display":"hide","offset":12,"onmobile":false},
+    sidebar: {"position":"left","display":"hide","offset":12,"onmobile":false},
     back2top: true,
     back2top_sidebar: false,
     fancybox: false,
@@ -91,7 +91,7 @@
 
 
   <meta name="description" content="线性预测的数学模型在很多领域都有应用, 包括时间序列分析, 数字信号处理, 最优化方法等等.">
-<meta name="keywords" content="math modeling,math">
+<meta name="keywords" content="math,math modeling">
 <meta property="og:type" content="article">
 <meta property="og:title" content="线性预测模型">
 <meta property="og:url" content="http://BillyStudio.github.io/2018/07/23/2018-07-23-linear-prediction/index.html">
@@ -169,7 +169,7 @@
     
   
 
-  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-right page-post-detail">
+  <!-- hexo-inject:begin --><!-- hexo-inject:end --><div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -466,7 +466,7 @@ e=\begin{bmatrix}e_{p+1}\\ e_{p+2}\\ \vdots\\ e_{n-1}\\ e_n \end{bmatrix}</scrip
 <script type="math/tex; mode=display">\hat{x}[n] = -\sum_{i=1}^p a_i x[n-i]</script><p>以及误差:</p>
 <script type="math/tex; mode=display">e[n] = x[n] - \hat{x}[n] = \sum_{i=0}^p a_i x[n-i]</script><p>求:</p>
 <script type="math/tex; mode=display">\min E\{e^2[n]\}</script><p>令:</p>
-<script type="math/tex; mode=display">\frac{\partial E\{e^2[n]\}}{\partial a_l} = 0</script><p>其中, $l\in\{ 1,2,\cdots,p \}$</p>
+<script type="math/tex; mode=display">\frac{\partial E\{e^2[n]\}}{\partial a_l} = 0</script><p>其中, $l\in{ 1,2,\cdots,p }$</p>
 <script type="math/tex; mode=display">\begin{align*}
 \frac{\partial E\{e^2[n]\}}{\partial a_l} &= E\left\{2 e[n] \frac{\partial e[n]}{\partial a_l}\right\} \\
 &= E\{2 e[n] x[n-l]\}\\
@@ -517,9 +517,9 @@ E\{e^2[n]\} &= E\{e[n]\sum_{i=0}^p a_i x[n-i]\}\\
         
         <div class="post-tags">
           
-            <a href="/tags/math-modeling/" rel="tag"># math modeling</a>
-          
             <a href="/tags/math/" rel="tag"># math</a>
+          
+            <a href="/tags/math-modeling/" rel="tag"># math modeling</a>
           
         </div>
       
@@ -613,7 +613,7 @@ E\{e^2[n]\} &= E\{e[n]\sum_{i=0}^p a_i x[n-i]\}\\
                 
                   <a href="/archives">
                 
-                    <span class="site-state-item-count">146</span>
+                    <span class="site-state-item-count">149</span>
                     <span class="site-state-item-name">posts</span>
                   </a>
                 </div>
@@ -643,7 +643,7 @@ E\{e^2[n]\} &= E\{e[n]\sum_{i=0}^p a_i x[n-i]\}\\
                       <a href="/tags/">
                     
                   
-                    <span class="site-state-item-count">174</span>
+                    <span class="site-state-item-count">178</span>
                     <span class="site-state-item-name">tags</span>
                   </a>
                 </div>
@@ -698,7 +698,7 @@ E\{e^2[n]\} &= E\{e[n]\sum_{i=0}^p a_i x[n-i]\}\\
 
     <footer id="footer" class="footer">
       <div class="footer-inner">
-        <div class="copyright">&copy; <span itemprop="copyrightYear">2021</span>
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2022</span>
   <span class="with-love" id="animate">
     <i class="fa fa-user"></i>
   </span>
@@ -710,7 +710,7 @@ E\{e^2[n]\} &= E\{e[n]\sum_{i=0}^p a_i x[n-i]\}\\
       <i class="fa fa-area-chart"></i>
     </span>
     
-    <span title="Symbols count total">430k</span>
+    <span title="Symbols count total">439k</span>
   
 
   
@@ -719,12 +719,12 @@ E\{e^2[n]\} &= E\{e[n]\sum_{i=0}^p a_i x[n-i]\}\\
       <i class="fa fa-coffee"></i>
     </span>
     
-    <span title="Reading time total">6:31</span>
+    <span title="Reading time total">6:39</span>
   
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.8.0</div>
+  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> v3.9.0</div>
 
 
 
@@ -828,75 +828,7 @@ E\{e^2[n]\} &= E\{e[n]\sum_{i=0}^p a_i x[n-i]\}\\
 
 
 
-  <script src="/js/next-boot.js?v=7.2.0"></script>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-
-  
-
-
-  
-
-
-
-
-  
-
-  
-
-  
-  
-
-  
-  
-
-  
-    
-      <script type="text/x-mathjax-config">
-  
-
-  MathJax.Hub.Config({
-    tex2jax: {
-      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
-      processEscapes: true,
-      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
-    },
-    TeX: {
-      
-      equationNumbers: {
-        autoNumber: 'AMS'
-      }
-    }
-  });
-  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
-    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
-      if (data.display) {
-        var next = data.script.nextSibling;
-        while (next && next.nodeName.toLowerCase() === '#text') { next = next.nextSibling }
-        if (next && next.nodeName.toLowerCase() === 'br') { next.parentNode.removeChild(next) }
-      }
-    });
-  });
-</script>
-
-<script type="text/x-mathjax-config">
-  MathJax.Hub.Queue(function() {
-    var all = MathJax.Hub.getAllJax(), i;
-    for (i = 0; i < all.length; i += 1) {
-      document.getElementById(all[i].inputID + '-Frame').parentNode.className += ' has-jax';
-    }
-  });
-</script>
-<script src="//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+  <script src="/js/next-boot.js?v=7.2.0"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
 <script type="text/x-mathjax-config">
   MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
 </script>
@@ -915,9 +847,30 @@ E\{e^2[n]\} &= E\{e[n]\sum_{i=0}^p a_i x[n-i]\}\\
 <!-- End: Injected MathJax -->
 <!-- hexo-inject:end -->
 
-    
   
 
+  
+
+  
+
+  
+
+  
+
+
+  
+
+
+  
+
+
+
+
+  
+
+  
+
+  
 
   
 
