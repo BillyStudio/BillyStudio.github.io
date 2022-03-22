@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>树莓派与Arduino通信 - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/July-19-2019-Arduino-communicate-with-RPi/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="Arduino &amp;#x5F00;&amp;#x53D1;&amp;#x677F;&amp;#x4E0A;&amp;#x7684;&amp;#x63A7;&amp;#x5236;&amp;#x5668;&amp;#x82AF;&amp;#x7247;&amp;#x6BCF;&amp;#x79D2;&amp;#x53EF;&amp;#x6267;&amp;#x884C;1600&amp;#x4E07;&amp;#x6761;&amp;#x6307;&amp;#x4EE4;&amp;#x3002;">
+<meta name="keywords" content="Raspberry Pi,Arduino">
+<meta property="og:type" content="article">
+<meta property="og:title" content="树莓派与Arduino通信">
+<meta property="og:url" content="https://BillyStudio.github.io/July-19-2019-Arduino-communicate-with-RPi/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="Arduino &amp;#x5F00;&amp;#x53D1;&amp;#x677F;&amp;#x4E0A;&amp;#x7684;&amp;#x63A7;&amp;#x5236;&amp;#x5668;&amp;#x82AF;&amp;#x7247;&amp;#x6BCF;&amp;#x79D2;&amp;#x53EF;&amp;#x6267;&amp;#x884C;1600&amp;#x4E07;&amp;#x6761;&amp;#x6307;&amp;#x4EE4;&amp;#x3002;">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://billystudio.github.io/July-19-2019-Arduino-communicate-with-RPi/Arduino-output-0.png">
+<meta property="og:image" content="https://billystudio.github.io/July-19-2019-Arduino-communicate-with-RPi/RPi-output-0.png">
+<meta property="og:updated_time" content="2019-09-12T12:38:40.307Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="树莓派与Arduino通信">
+<meta name="twitter:description" content="Arduino &amp;#x5F00;&amp;#x53D1;&amp;#x677F;&amp;#x4E0A;&amp;#x7684;&amp;#x63A7;&amp;#x5236;&amp;#x5668;&amp;#x82AF;&amp;#x7247;&amp;#x6BCF;&amp;#x79D2;&amp;#x53EF;&amp;#x6267;&amp;#x884C;1600&amp;#x4E07;&amp;#x6761;&amp;#x6307;&amp;#x4EE4;&amp;#x3002;">
+<meta name="twitter:image" content="https://billystudio.github.io/July-19-2019-Arduino-communicate-with-RPi/Arduino-output-0.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/July-19-2019-Arduino-communicate-with-RPi/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/July-19-2019-Arduino-communicate-with-RPi/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            树莓派与Arduino通信
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-07-19T06:00:41.000Z" itemprop="datePublished">Jul 19 2019</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            5 minutes read (About 709 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>Arduino &#x5F00;&#x53D1;&#x677F;&#x4E0A;&#x7684;&#x63A7;&#x5236;&#x5668;&#x82AF;&#x7247;&#x6BCF;&#x79D2;&#x53EF;&#x6267;&#x884C;1600&#x4E07;&#x6761;&#x6307;&#x4EE4;&#x3002;<br><a id="more"></a></p>
+<p>Arduino &#x4F7F;&#x7528;&#x57FA;&#x4E8E;C&#x8BED;&#x8A00;&#x7684;Wiring&#x5E93;&#x548C;&#x57FA;&#x4E8E;Java&#x7684;Processing&#x5E93;&#x3002;<br>&#x5185;&#x5B58;&#x6709;2KB&#xFF0C;&#x95EA;&#x5B58;&#x6709;32KB, and also 1kB of EEPROM for long-term storage.</p>
+<p>&#x4F7F;&#x7528; AVR-GCC &#x8FDB;&#x884C;&#x7F16;&#x8BD1;&#x7684;&#x3002;</p>
+<p>In order to ensure the connection to Arduino, you need to have module <code>cdc_acm</code> loaded:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep acm # check, if not, use next command</span><br><span class="line">sudo modprobe cdc_acm</span><br></pre></td></tr></table></figure>
+
+<p>Raspberry &#x8054;&#x7F51;&#x7684;Arch Linux&#x6307;&#x4EE4;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -t nat -A POSTROUTING -o wlp2s0 -j MASQUERADE</span><br><span class="line">iptables -A FORWARD -m conntrack --ctstate RELATED,ESTABLISHED -j ACCEPT</span><br><span class="line">iptables -A FORWARD -i enp3s0f1 -o wlp2s0 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<p>If there is error with iptables saying &#x2018;sudo modprobe ip_tables<br>sudo echo &#x2018;ip_tables&#x2019; &gt;&gt; /etc/modules&#x2019;. Then Open nat:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo modprobe ip_tables</span><br><span class="line">sudo echo &apos;ip_tables&apos; &gt;&gt; /etc/modules</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">iptables -I INPUT -p udp --dport 67 -i enp3s0f1 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p udp --dport 53 -s 192.168.137.0/24 -j ACCEPT</span><br><span class="line">iptables -I INPUT -p tcp --dport 53 -s 192.168.137.0/24 -j ACCEPT</span><br></pre></td></tr></table></figure>
+
+<h2 id="Experiment-One-byte-IIC-transfer"><a href="#Experiment-One-byte-IIC-transfer" class="headerlink" title="Experiment: One byte IIC transfer"></a>Experiment: One byte IIC transfer</h2><p>Firstly ensure i2c interface is opened by raspberry pi.</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install build-essentials i2c-tools</span><br></pre></td></tr></table></figure>
+
+<p>then check by</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo i2cdetect -y 1</span><br></pre></td></tr></table></figure>
+
+<p>If a problem happened showing &#x2018;no i2c device found, /dev/i2c-1 or /dev/i2c/1&#x2019;. You should edit <code>/boot/config.txt</code>, then open by uncomment</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"># dtparam=i2c1=on</span><br></pre></td></tr></table></figure>
+
+<p>Then install python2.7 package &#x2018;smbus2&#x2019;. You may install python-setuptools first. Then you can download source code to install or use pip install.</p>
+<p>When connecting Arduino, check i2c pinout on your Pi by typing <code>pinout</code>. But this command might not be found on Raspbian Lite, so firstly you should install</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt install python-gpiozero</span><br></pre></td></tr></table></figure>
+
+<p>Python program on RPi</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="hljs-comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="hljs-keyword">import</span> smbus</span><br><span class="line"><span class="hljs-keyword">import</span> time</span><br><span class="line">bus = smbus.SMBus(<span class="hljs-number">1</span>)</span><br><span class="line">address = <span class="hljs-number">0x20</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">writeNumber</span><span class="hljs-params">(value)</span>:</span></span><br><span class="line"> bus.write_byte(address, value)</span><br><span class="line"> <span class="hljs-keyword">return</span> <span class="hljs-number">-1</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">readNumber</span><span class="hljs-params">()</span>:</span></span><br><span class="line"> number = bus.read_byte(address)</span><br><span class="line"> <span class="hljs-keyword">return</span> number</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:</span><br><span class="line">  var=input(<span class="hljs-string">&quot;Enter1&#x2013;9:&quot;</span>)</span><br><span class="line">  <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> var:</span><br><span class="line">     <span class="hljs-keyword">continue</span></span><br><span class="line">  writeNumber(var)</span><br><span class="line">  <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;RPI: Hi Arduino, I sent you &quot;</span>, var</span><br><span class="line">  <span class="hljs-comment"># sleep one second</span></span><br><span class="line">  time.sleep(<span class="hljs-number">1</span>)</span><br><span class="line">  number = readNumber()</span><br><span class="line">  <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;Arduino: Hey RPI,I received a digit&quot;</span>, number</span><br><span class="line">  <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;======================================\n&quot;</span></span><br></pre></td></tr></table></figure>
+
+<p>Arduino program:</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;Wire.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> IIC_SLAVE_ADDR 0x20</span></span><br><span class="line"><span class="hljs-keyword">byte</span> number = <span class="hljs-number">0</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">loop</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">    <span class="hljs-built_in">delay</span>(<span class="hljs-number">100</span>);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sendData</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">    <span class="hljs-built_in">Wire</span>.<span class="hljs-built_in">write</span>(number);</span><br><span class="line">    <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Data written: &quot;</span>);</span><br><span class="line">    <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">println</span>(number);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">receiveData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> byteCount)</span> </span>{</span><br><span class="line">    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">Wire</span>.<span class="hljs-built_in">available</span>()){</span><br><span class="line">        number = <span class="hljs-built_in">Wire</span>.<span class="hljs-built_in">read</span>();</span><br><span class="line">        <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;data received: &quot;</span>);</span><br><span class="line">        <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">println</span>(number);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setup</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">    <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">begin</span>(<span class="hljs-number">9600</span>); <span class="hljs-comment">// for serial debugging</span></span><br><span class="line">    <span class="hljs-built_in">Wire</span>.<span class="hljs-built_in">begin</span>(IIC_SLAVE_ADDR);</span><br><span class="line">    <span class="hljs-built_in">Wire</span>.<span class="hljs-built_in">onReceive</span>(receiveData);</span><br><span class="line">    <span class="hljs-built_in">Wire</span>.<span class="hljs-built_in">onRequest</span>(sendData);</span><br><span class="line">    <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;Ready&quot;</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h2 id="Experiment-block-of-bytes-I2C-transfer"><a href="#Experiment-block-of-bytes-I2C-transfer" class="headerlink" title="Experiment: block of bytes I2C transfer"></a>Experiment: block of bytes I2C transfer</h2><p>Python program on host</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">#!/usr/bin/env python</span></span><br><span class="line"><span class="hljs-comment"># -*- coding:utf-8 -*-</span></span><br><span class="line"><span class="hljs-keyword">import</span> smbus</span><br><span class="line"><span class="hljs-keyword">import</span> time</span><br><span class="line">bus = smbus.SMBus(<span class="hljs-number">1</span>)</span><br><span class="line">address = <span class="hljs-number">0x20</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">readString</span><span class="hljs-params">(len)</span>:</span></span><br><span class="line">    tmp = bus.read_i2c_block_data(address, <span class="hljs-number">0</span>, len)</span><br><span class="line">    message = <span class="hljs-string">&quot;&quot;</span>.join([chr(i) <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> tmp])</span><br><span class="line">    <span class="hljs-keyword">return</span> message</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">while</span> <span class="hljs-literal">True</span>:</span><br><span class="line">    var=input(<span class="hljs-string">&quot;Enter one byte to get a string:&quot;</span>)</span><br><span class="line">    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> var:</span><br><span class="line">        <span class="hljs-keyword">continue</span></span><br><span class="line">    </span><br><span class="line">    <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;RPi: Hi Arduino, I sent you &quot;</span>, var</span><br><span class="line">    writeNumber(var)</span><br><span class="line">    <span class="hljs-comment"># sleep one second</span></span><br><span class="line">    time.sleep(<span class="hljs-number">1</span>)</span><br><span class="line">    message = readString(<span class="hljs-number">14</span>)</span><br><span class="line">    <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;RPi: I receive the string: &quot;</span>, message</span><br></pre></td></tr></table></figure>
+
+<p>Arduino program on guest transmitter:</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;Wire.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> IIC_SLAVE_ADDR 0x20</span></span><br><span class="line"><span class="hljs-keyword">byte</span> number = <span class="hljs-number">0</span>;</span><br><span class="line"><span class="hljs-keyword">char</span> message[<span class="hljs-number">14</span>] = <span class="hljs-string">&quot;short message&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">loop</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">    <span class="hljs-built_in">delay</span>(<span class="hljs-number">100</span>);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">sendData</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">    <span class="hljs-built_in">Wire</span>.<span class="hljs-built_in">write</span>(message);</span><br><span class="line">    <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;Data written: &quot;</span>);</span><br><span class="line">    <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">println</span>(message);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">receiveData</span><span class="hljs-params">(<span class="hljs-keyword">int</span> byteCount)</span> </span>{</span><br><span class="line">    <span class="hljs-keyword">while</span>(<span class="hljs-built_in">Wire</span>.<span class="hljs-built_in">available</span>()){</span><br><span class="line">        number = <span class="hljs-built_in">Wire</span>.<span class="hljs-built_in">read</span>();</span><br><span class="line">        <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">print</span>(<span class="hljs-string">&quot;data received: &quot;</span>);</span><br><span class="line">        <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">println</span>(number);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">setup</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">    <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">begin</span>(<span class="hljs-number">9600</span>); <span class="hljs-comment">// for serial debugging</span></span><br><span class="line">    <span class="hljs-built_in">Wire</span>.<span class="hljs-built_in">begin</span>(IIC_SLAVE_ADDR);</span><br><span class="line">    <span class="hljs-built_in">Wire</span>.<span class="hljs-built_in">onReceive</span>(receiveData);</span><br><span class="line">    <span class="hljs-built_in">Wire</span>.<span class="hljs-built_in">onRequest</span>(sendData);</span><br><span class="line">    <span class="hljs-built_in">Serial</span>.<span class="hljs-built_in">println</span>(<span class="hljs-string">&quot;Ready&quot;</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>On Arduino you will see:<br><img src="Arduino-output-0.png" alt></p>
+<p>On RPi you will see:<br><img src="RPi-output-0.png" alt></p>
+<p>This suggests that these two kinds of IIC protocals are slightly different. Because everytime when Pi requires Arduino to send a block of data, Arduino takes it as not only a send command but also an invalid receive command. Also Arduino won&#x2019;t send the &#x2018;\0&#x2019; of a string.<br>Therefore, we can let Arduino take the receive data 0 as a signal of bytes transfer.</p>
+<h2 id="Experiment-write-random-numbers-into-EEPROM-of-Arduino-and-read-from-Pi"><a href="#Experiment-write-random-numbers-into-EEPROM-of-Arduino-and-read-from-Pi" class="headerlink" title="Experiment: write random numbers into EEPROM of Arduino and read from Pi"></a>Experiment: write random numbers into EEPROM of Arduino and read from Pi</h2>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Raspberry-Pi/">#Raspberry Pi</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Arduino/">#Arduino</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/August-6th-Pi-driver-development/">Driver development for Raspberry Pi</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/July-17th-2019-Descent-to-Hades-Raspberry-Pi/">Descent to Hades of Raspberry Pi</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="notification is-danger">
+    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
+</div>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

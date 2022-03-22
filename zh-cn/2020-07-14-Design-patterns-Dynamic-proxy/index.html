@@ -1,0 +1,480 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>Design patterns --- Dynamic proxy - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/2020-07-14-Design-patterns-Dynamic-proxy/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x2003;&amp;#x2003;&amp;#x52A8;&amp;#x6001;&amp;#x4EE3;&amp;#x7406;&amp;#x6A21;&amp;#x5F0F;&amp;#x662F;&amp;#x501F;&amp;#x52A9;proxy&amp;#x5BF9;&amp;#x8C61;&amp;#x6267;&amp;#x884C;&amp;#x88AB;&amp;#x4EE3;&amp;#x7406;&amp;#x63A5;&amp;#x53E3;&amp;#x65B9;&amp;#x6CD5;&amp;#x7684;&amp;#x8BBE;&amp;#x">
+<meta name="keywords" content="Java,设计模式,Spring">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Design patterns --- Dynamic proxy">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/2020-07-14-Design-patterns-Dynamic-proxy/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x2003;&amp;#x2003;&amp;#x52A8;&amp;#x6001;&amp;#x4EE3;&amp;#x7406;&amp;#x6A21;&amp;#x5F0F;&amp;#x662F;&amp;#x501F;&amp;#x52A9;proxy&amp;#x5BF9;&amp;#x8C61;&amp;#x6267;&amp;#x884C;&amp;#x88AB;&amp;#x4EE3;&amp;#x7406;&amp;#x63A5;&amp;#x53E3;&amp;#x65B9;&amp;#x6CD5;&amp;#x7684;&amp;#x8BBE;&amp;#x">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-07-14-Design-patterns-Dynamic-proxy/dynamic-proxy.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-07-14-Design-patterns-Dynamic-proxy/rpc-dynamic-proxy.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-07-14-Design-patterns-Dynamic-proxy/dynamic-call.png">
+<meta property="og:updated_time" content="2022-03-21T08:05:21.074Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Design patterns --- Dynamic proxy">
+<meta name="twitter:description" content="&amp;#x2003;&amp;#x2003;&amp;#x52A8;&amp;#x6001;&amp;#x4EE3;&amp;#x7406;&amp;#x6A21;&amp;#x5F0F;&amp;#x662F;&amp;#x501F;&amp;#x52A9;proxy&amp;#x5BF9;&amp;#x8C61;&amp;#x6267;&amp;#x884C;&amp;#x88AB;&amp;#x4EE3;&amp;#x7406;&amp;#x63A5;&amp;#x53E3;&amp;#x65B9;&amp;#x6CD5;&amp;#x7684;&amp;#x8BBE;&amp;#x">
+<meta name="twitter:image" content="https://billystudio.github.io/zh-cn/2020-07-14-Design-patterns-Dynamic-proxy/dynamic-proxy.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2020-07-14-Design-patterns-Dynamic-proxy/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2020-07-14-Design-patterns-Dynamic-proxy/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Design patterns --- Dynamic proxy
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2020-07-14T14:11:44.000Z" itemprop="datePublished">7月 14 2020</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh-cn/categories/Eureka项目/">Eureka项目</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            5 分钟 读完 (约 728 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x2003;&#x2003;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;&#x662F;&#x501F;&#x52A9;proxy&#x5BF9;&#x8C61;&#x6267;&#x884C;&#x88AB;&#x4EE3;&#x7406;&#x63A5;&#x53E3;&#x65B9;&#x6CD5;&#x7684;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x3002;<a id="more"></a> &#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;&#x7684;&#x201C;&#x52A8;&#x6001;&#x201D;&#x4F53;&#x73B0;&#x5728;&#x4EE3;&#x7406;&#x5BF9;&#x8C61;&#x4EE3;&#x7406;&#x7684;&#x63A5;&#x53E3;&#x6240;&#x6765;&#x81EA;&#x7684;&#x5B9E;&#x4F8B;&#x65B9;&#x6CD5;&#x662F;&#x53EF;&#x4EE5;&#x52A8;&#x6001;&#x6307;&#x914D;&#x7684;&#x3002;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;&#x53EF;&#x4EE5;&#x5E94;&#x7528;&#x4E8E;&#xFF1A;</p>
+<ol>
+<li>&#x7F51;&#x7EDC;&#x670D;&#x52A1;&#x63A5;&#x53E3;&#x7684;&#x8C03;&#x7528;</li>
+<li>&#x5BF9;&#x4E00;&#x4E9B;&#x65B9;&#x6CD5;&#x505A;&#x7EDF;&#x4E00;&#x7684;&#x5904;&#x7406;&#x4EE5;&#x51CF;&#x5C11;&#x91CD;&#x590D;&#x4EE3;&#x7801;</li>
+</ol>
+<p>&#x2003;&#x2003;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;&#x7684;&#x7279;&#x5F81;&#x662F;&#x4EE3;&#x7406;&#x7C7B;&#xFF08;ProxyClass&#xFF09;&#x548C;&#x88AB;&#x4EE3;&#x7406;&#x7C7B;&#xFF08;RealSubject&#xFF09;&#x5B9E;&#x73B0;&#x540C;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#xFF08;doAction&#xFF09;&#xFF0C;&#x4F7F;&#x7528;&#x8005;&#xFF08;Client&#xFF09;&#x4E0D;&#x76F4;&#x63A5;&#x8BBF;&#x95EE;&#x88AB;&#x4EE3;&#x7406;&#x7C7B;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x800C;&#x662F;&#x501F;&#x52A9;&#x4EE3;&#x7406;&#x7C7B;&#x5B9E;&#x73B0;&#x5BF9;&#x63A5;&#x53E3;&#x7684;&#x8BBF;&#x95EE;&#x3002;<br><img src="dynamic-proxy.png" alt="dynamic-proxy.png"></p>
+<center style="font-style:italic"><small>&#x56FE; 1 &#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;UML&#x793A;&#x610F;&#x56FE;</small></center>
+
+<p>&#x2003;&#x2003;&#x5728;Java&#x4E2D;&#xFF0C;&#x5B9E;&#x73B0;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;&#x7684;&#x76F8;&#x5173;&#x5DE5;&#x5177;&#x6709;JDK&#x81EA;&#x5E26;&#x7684;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5757;&#x3001;CgLib&#x548C;JavaAssist&#x7B49;&#x3002;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x7684;&#x5178;&#x578B;&#x5E94;&#x7528;&#x573A;&#x666F;&#x6709;RPC&#x548C;Spring AOP&#x3002;&#x63A5;&#x4E0B;&#x6765;&#x5206;&#x522B;&#x7ED3;&#x5408;&#x5B9E;&#x4F8B;&#x4EE3;&#x7801;&#x7406;&#x89E3;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;&#x7684;&#x4F7F;&#x7528;&#xFF1A;</p>
+<h1 id="&#x4E00;&#x3001;RPC&#x4E2D;&#x7684;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;"><a href="#&#x4E00;&#x3001;RPC&#x4E2D;&#x7684;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;" class="headerlink" title="&#x4E00;&#x3001;RPC&#x4E2D;&#x7684;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;"></a>&#x4E00;&#x3001;RPC&#x4E2D;&#x7684;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;</h1><p><img src="rpc-dynamic-proxy.png" alt="Dynamic proxy in RPC" title="RPC&#x4E2D;&#x7684;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;"></p>
+<p><center style="font-style:italic"><small>&#x56FE; 2 RPC&#x4E2D;&#x7684;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;</small></center><br>&#x4F7F;&#x7528;&#x8005;&#xFF08;Client&#xFF09;&#x5BF9;Service&#x63A5;&#x53E3;&#x7684;&#x8C03;&#x7528;&#x901A;&#x8FC7;Proxy&#x8F6C;&#x5316;&#x4E3A;&#x4E86;&#x5BF9;invoke&#x51FD;&#x6570;&#x7684;&#x8C03;&#x7528;&#xFF0C;&#x5728;invoke&#x51FD;&#x6570;&#x4E2D;&#x4F1A;&#x8C03;&#x7528;http/tcp&#x5BA2;&#x6237;&#x7AEF;&#x53D1;&#x9001;&#x8C03;&#x7528;&#x8BF7;&#x6C42;&#x3002;</p>
+<p><img src="dynamic-call.png" alt><br>&#x4EE5;JDChain&#x4E3A;&#x4F8B;&#xFF0C;<code>queryService</code>&#x662F;&#x901A;&#x8FC7;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;&#x751F;&#x6210;&#x7684;&#x670D;&#x52A1;&#x63A5;&#x53E3; <code>HttpBlockchainBrowserService</code> &#x7684;&#x5B9E;&#x4F8B;&#x3002;&#x5BA2;&#x6237;&#x7AEF;&#x8C03;&#x7528;<code>getLedgerHashs()</code>&#x65B9;&#x6CD5;&#x5B9E;&#x9645;&#x4E0A;&#x8C03;&#x7528;&#x7684;&#x662F; <code>ServiceInvocationHandler</code> &#x4E2D;&#x7684; <code>invoke</code> &#x65B9;&#x6CD5;&#x3002;</p>
+<h1 id="&#x4E8C;&#x3001;Spring-AOP&#x4E2D;&#x7684;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;"><a href="#&#x4E8C;&#x3001;Spring-AOP&#x4E2D;&#x7684;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;" class="headerlink" title="&#x4E8C;&#x3001;Spring AOP&#x4E2D;&#x7684;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;"></a>&#x4E8C;&#x3001;Spring AOP&#x4E2D;&#x7684;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;</h1><p>&#x4E0E;&#x53D1;&#x9001;http/tcp&#x8BF7;&#x6C42;&#x4E0D;&#x540C;&#xFF0C;aop&#x5728;invoke&#x51FD;&#x6570;&#x4E2D;&#x8FD0;&#x884C;&#x4E86;method.invoke&#x8FDB;&#x884C;&#x539F;&#x65B9;&#x6CD5;&#x7684;&#x8C03;&#x7528;&#x3002;&#x5728;method.invoke&#x4E4B;&#x524D;&#x6267;&#x884C;&#x7684;&#x5C31;&#x662F;&#x524D;&#x7F6E;&#x5207;&#x9762;&#xFF0C;&#x5728;method.invoke&#x4E4B;&#x540E;&#x6267;&#x884C;&#x7684;&#x5C31;&#x662F;&#x540E;&#x7F6E;&#x5207;&#x9762;&#x3002;</p>
+<h2 id="&#x4F7F;&#x7528;&#x65B9;&#x6CD5;"><a href="#&#x4F7F;&#x7528;&#x65B9;&#x6CD5;" class="headerlink" title="&#x4F7F;&#x7528;&#x65B9;&#x6CD5;"></a>&#x4F7F;&#x7528;&#x65B9;&#x6CD5;</h2><p>&#x5728;SpringBoot&#x9879;&#x76EE;&#x4E2D;&#x6DFB;&#x52A0;&#x4F9D;&#x8D56;&#xFF1A;</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-aop<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>&#x6CE8;&#x5165;&#x5207;&#x9762;&#x7C7B;&#xFF1A;</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Aspect</span></span><br><span class="line"><span class="hljs-meta">@Component</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LogAspect</span> </span>{</span><br><span class="line">	<span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">	 * &#x5B9A;&#x4E49;&#x62E6;&#x622A;&#x89C4;&#x5219;&#xFF1A;&#x62E6;&#x622A;org.springframework.cloud.netflix.eureka.server.InstanceRegistry.register&#x65B9;&#x6CD5;</span></span><br><span class="line"><span class="hljs-comment">	 */</span></span><br><span class="line">	<span class="hljs-meta">@Pointcut</span>(<span class="hljs-string">&quot;execution(* org.springframework.cloud.netflix.eureka.server.InstanceRegistry.register(..))&quot;</span>)</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">controllerRequestPointcut</span><span class="hljs-params">()</span> </span>{}</span><br><span class="line"></span><br><span class="line">	<span class="hljs-meta">@Around</span>(<span class="hljs-string">&quot;controllerRequestPointcut()&quot;</span>)</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">Interceptor</span><span class="hljs-params">(ProceedingJoinPoint pjp)</span> </span>{</span><br><span class="line">		<span class="hljs-comment">// aspect code here</span></span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h1 id="&#x4E09;&#x3001;JuLiuSc&#x5408;&#x7EA6;&#x5E73;&#x53F0;&#x4E2D;&#x7684;&#x4F7F;&#x7528;"><a href="#&#x4E09;&#x3001;JuLiuSc&#x5408;&#x7EA6;&#x5E73;&#x53F0;&#x4E2D;&#x7684;&#x4F7F;&#x7528;" class="headerlink" title="&#x4E09;&#x3001;JuLiuSc&#x5408;&#x7EA6;&#x5E73;&#x53F0;&#x4E2D;&#x7684;&#x4F7F;&#x7528;"></a>&#x4E09;&#x3001;JuLiuSc&#x5408;&#x7EA6;&#x5E73;&#x53F0;&#x4E2D;&#x7684;&#x4F7F;&#x7528;</h1><p>&#x83B7;&#x53D6;jar&#x5305;&#x6267;&#x884C;&#x65B9;&#x6CD5;&#x5E76;&#x5C55;&#x793A;</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">URLClassLoader contractCLassLoader = contractService.loadContractJar(contractJarName);</span><br><span class="line">Class clazz = Class.forName(contractRefName, <span class="hljs-keyword">false</span>, contractCLassLoader);</span><br><span class="line">Object argObj = <span class="hljs-keyword">null</span>;</span><br><span class="line">String contractAddr = rand.nextString();</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// select the constructor based on args to initialize,</span></span><br><span class="line"><span class="hljs-comment">// else the default constructor is used</span></span><br><span class="line"><span class="hljs-keyword">if</span> (<span class="hljs-keyword">null</span> != argsMap) {</span><br><span class="line">    List&lt;Class&gt; argClasses = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    List&lt;Object&gt; argObjects = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="hljs-keyword">for</span> (Map.Entry&lt;String, Object&gt; arg : argsMap.entrySet()) {</span><br><span class="line">        Class argClazz = Class.forName(arg.getKey());</span><br><span class="line">        argClasses.add(argClazz);</span><br><span class="line">        argObjects.add(argClazz.cast(arg.getValue()));</span><br><span class="line">    }</span><br><span class="line">    Constructor constructor = clazz.getConstructor(argClasses.toArray(<span class="hljs-keyword">new</span> Class[argClasses.size()]));</span><br><span class="line">    argObj = constructor.newInstance(argObjects.toArray(<span class="hljs-keyword">new</span> Object[argObjects.size()]));</span><br><span class="line">} <span class="hljs-keyword">else</span> {</span><br><span class="line">    Constructor constructor = clazz.getConstructor();</span><br><span class="line">    argObj = constructor.newInstance();</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x6CE8;&#x610F; <code>clazz.getConstructor</code> &#x51FD;&#x6570;&#x7684;&#x53C2;&#x6570;&#x7531; <code>List</code> &#x8F6C; <code>[]</code> &#x7C7B;&#x578B;&#xFF0C;&#x4E0D;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x5F3A;&#x5236;&#x7C7B;&#x578B;&#x8F6C;&#x6362; <code>(Class[]) argClasses.toArray()</code>&#xFF0C;&#x4E0D;&#x7136;&#x4F1A;&#x62A5;&#x9519;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">java.lang.ClassCastException: [Ljava.lang.Object; cannot be cast to [Ljava.lang.Class;</span><br></pre></td></tr></table></figure>
+
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Java/">#Java</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/设计模式/">#设计模式</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Spring/">#Spring</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/2020-10-06-System-maintainance-and-cleaning/">Operating System Maintainance and Cleaning</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/2020-07-11-Swagger-tutorial/">使用Swagger构建接口文档</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="notification is-danger">
+    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
+</div>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

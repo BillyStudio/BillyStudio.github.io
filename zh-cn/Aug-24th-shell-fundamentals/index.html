@@ -1,0 +1,477 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>shell 程序设计 | shell 基础 - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/Aug-24th-shell-fundamentals/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="shell &amp;#x4F7F;&amp;#x7528;&amp;#x89E3;&amp;#x91CA;&amp;#x6027;&amp;#x8BED;&amp;#x8A00;.">
+<meta name="keywords" content="Linux,shell">
+<meta property="og:type" content="article">
+<meta property="og:title" content="shell 程序设计 | shell 基础">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/Aug-24th-shell-fundamentals/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="shell &amp;#x4F7F;&amp;#x7528;&amp;#x89E3;&amp;#x91CA;&amp;#x6027;&amp;#x8BED;&amp;#x8A00;.">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2022-03-21T08:05:23.284Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="shell 程序设计 | shell 基础">
+<meta name="twitter:description" content="shell &amp;#x4F7F;&amp;#x7528;&amp;#x89E3;&amp;#x91CA;&amp;#x6027;&amp;#x8BED;&amp;#x8A00;.">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/Aug-24th-shell-fundamentals/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/Aug-24th-shell-fundamentals/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            shell 程序设计 | shell 基础
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-08-24T08:10:42.000Z" itemprop="datePublished">8月 24 2018</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh-cn/categories/Linux-shell/">Linux shell</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            4 分钟 读完 (约 581 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>shell &#x4F7F;&#x7528;&#x89E3;&#x91CA;&#x6027;&#x8BED;&#x8A00;. <a id="more"></a></p>
+<h1 id="Variables"><a href="#Variables" class="headerlink" title="Variables"></a>Variables</h1><p>One big difference between Shellscript and other programming languages is that there must be no spaces between &#x201C;=&#x201D; sign. It has its reason. Because when in a shell, if you use <code>VAR = value</code>, it&#x2019;s just like running some command called &#x201C;VAR&#x201D; and two arguments named &#x201C;=&#x201D; and &#x201C;value&#x201D;. Therefore that is impossible to run successfully.</p>
+<p>Shellscript uses <code>$VAR</code> to indicate it&#x2019;s a variable that has been defined before.</p>
+<h2 id="Scope-of-variables"><a href="#Scope-of-variables" class="headerlink" title="Scope of variables"></a>Scope of variables</h2><h3 id="&#x201C;local&#x201D;-variable"><a href="#&#x201C;local&#x201D;-variable" class="headerlink" title="&#x201C;local&#x201D; variable"></a>&#x201C;local&#x201D; variable</h3><p>When we run a scipt, Linux creates a new process with a unique &#x2018;pid&#x2019; for it. So we can only use variables created in this files in the process. Once the process is ending or we are in another process, we cannot use the variables. </p>
+<h3 id="&#x201C;global&#x201D;-variable"><a href="#&#x201C;global&#x201D;-variable" class="headerlink" title="&#x201C;global&#x201D; variable"></a>&#x201C;global&#x201D; variable</h3><p>However, like the concept of &#x2018;environmental variables&#x2019; in Windows, Linux also has global-scope variables by using the <code>source</code> commands or <code>. ./*.sh</code> for sourcing a scipt file. This is how the configuration files like <code>.bashrc</code> or <code>.vimrc</code> work (<code>source .bashrc</code> everytime before opening a bash and <code>source .vimrc</code> everytime before openning a vim program).</p>
+<h3 id="the-priority"><a href="#the-priority" class="headerlink" title="the priority"></a>the priority</h3><p>Think a occasionally case, if a local defined variable has the same name as a global variable, the local one has priority. If the local one doesn&#x2019;t exist or hasn&#x2019;t been defined yet, use the global ones. If none of them exist, give out a null.</p>
+<h1 id="Statements"><a href="#Statements" class="headerlink" title="Statements"></a>Statements</h1><h2 id="if&#x8BED;&#x53E5;"><a href="#if&#x8BED;&#x53E5;" class="headerlink" title="if&#x8BED;&#x53E5;"></a>if&#x8BED;&#x53E5;</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">if [ &#x5E03;&#x5C14;&#x8868;&#x8FBE;&#x5F0F; ]</span><br><span class="line">then</span><br><span class="line">	&#x82E5;&#x5E72;&#x8BED;&#x53E5;</span><br><span class="line">else</span><br><span class="line">	&#x82E5;&#x5E72;&#x8BED;&#x53E5;</span><br><span class="line">fi</span><br></pre></td></tr></table></figure>
+
+<h2 id="case-&#x8BED;&#x53E5;"><a href="#case-&#x8BED;&#x53E5;" class="headerlink" title="case &#x8BED;&#x53E5;"></a>case &#x8BED;&#x53E5;</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">case &#x53D8;&#x91CF; in</span><br><span class="line">    &#x6A21;&#x5F0F;1 ) &#x82E5;&#x5E72;&#x8BED;&#x53E5;;;</span><br><span class="line">    &#x6A21;&#x5F0F;2 ) &#x82E5;&#x5E72;&#x8BED;&#x53E5;;;</span><br><span class="line">esac</span><br></pre></td></tr></table></figure>
+
+<h2 id="&#x5FAA;&#x73AF;&#x8BED;&#x53E5;"><a href="#&#x5FAA;&#x73AF;&#x8BED;&#x53E5;" class="headerlink" title="&#x5FAA;&#x73AF;&#x8BED;&#x53E5;"></a>&#x5FAA;&#x73AF;&#x8BED;&#x53E5;</h2><p>&#x5FAA;&#x73AF;&#x8BED;&#x53E5;&#x6709;&#x591A;&#x79CD;&#x5199;&#x6CD5;</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">for i in {1..10}</span><br><span class="line">do</span><br><span class="line">    &#x82E5;&#x5E72;&#x8BED;&#x53E5;</span><br><span class="line">done</span><br></pre></td></tr></table></figure>
+
+<h2 id="&#x7279;&#x6B8A;&#x7B26;&#x53F7;"><a href="#&#x7279;&#x6B8A;&#x7B26;&#x53F7;" class="headerlink" title="&#x7279;&#x6B8A;&#x7B26;&#x53F7;"></a>&#x7279;&#x6B8A;&#x7B26;&#x53F7;</h2><p>$$ &#x8868;&#x793A;&#x8FD0;&#x884C;&#x811A;&#x672C;&#x7684;&#x8FDB;&#x7A0B;&#x53F7;(PID)</p>
+<p>The use of curly braces &#x201C;{}&#x201D; can enclose a variable into it even if characters follow with no spaces. See the example below.</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/sh</span></span><br><span class="line">echo &quot;What is your name?&quot;</span><br><span class="line">read USER_NAME</span><br><span class="line">echo &quot;Hello $USER_NAME&quot;</span><br><span class="line">echo &quot;I will create you a file called ${USER_NAME}_file&quot;</span><br><span class="line">touch &quot;${USER_NAME}_file&quot;</span><br></pre></td></tr></table></figure>
+
+<p>There is one more advantage that if we type two seperated words, the curly braces will prevent <code>touch</code> creating two new files for it.</p>
+<h2 id="Comment"><a href="#Comment" class="headerlink" title="Comment"></a>Comment</h2><p>Shellscript uses <code>#</code> to comment a whole line.</p>
+<h2 id="Running-the-script"><a href="#Running-the-script" class="headerlink" title="Running the script"></a>Running the script</h2><p>Write scripts into a readable and executable file. The first line can indicate the program(/bin/sh) to run it. If you are using GNU/Linux, /bin/sh is normally a symbolic link to bash.</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#</span><span class="hljs-bash">!/bin/sh</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="Functions"><a href="#Functions" class="headerlink" title="Functions"></a>Functions</h2><h3 id="buitin-commands"><a href="#buitin-commands" class="headerlink" title="buitin commands"></a>buitin commands</h3><p><code>echo</code>: takes one or more parameters seperated by blank characters(spaces or tabs).</p>
+<p><code>expr</code>: Print the value of EXPRESSION to standard output. It supports logical expressions. It can be also used as a simple caculator for integers in shell. But caution that the asteroid <code>*</code> is regarded as a wildcard. So when you do multiplication, you should use <code>\*</code>.</p>
+<p><code>read</code>: reads a line from standard input into the variable supplied.</p>
+<p><code>touch</code>: create a empty file by the name</p>
+<p><code>test</code>: &#x53EF;&#x4EE5;&#x7528;&#x6765;&#x68C0;&#x6D4B;&#x67D0;&#x4E9B;&#x6587;&#x4EF6;&#x6216;&#x8005;&#x662F;&#x76F8;&#x5173;&#x7684;&#x5C5E;&#x6027;&#xFF0C;&#x548C;&#x5224;&#x65AD;&#x7B26;&#x53F7; [] &#x7B49;&#x4EF7;<br><code>test -n &#x5B57;&#x7B26;&#x4E32;</code>: &#x5B57;&#x7B26;&#x4E32;&#x957F;&#x5EA6;&#x4E0D;&#x4E3A;&#x96F6;&#x5219;&#x4E3A;&#x771F;</p>
+<p>For more Linux builtin commands, go to this <a href="https://billystudio.github.io/2018/05/16/Command-of-the-day-May-sixteenth-2018/">article</a>. </p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Linux/">#Linux</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/shell/">#shell</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/Aug-30th-combinatorial-mathematics/">数据结构与算法笔记 | 数学</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/Aug-22nd-Python-unpack-series/">Python 基础 | 系列数据结构的拆封</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="notification is-danger">
+    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
+</div>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

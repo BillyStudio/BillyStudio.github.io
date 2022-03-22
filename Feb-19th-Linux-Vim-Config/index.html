@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>Vim config file on Linux desktop - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/Feb-19th-Linux-Vim-Config/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="Customizing your own vim configuration file will bring you future convenience and fluency.">
+<meta name="keywords" content="Linux,Vim,ssh">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Vim config file on Linux desktop">
+<meta property="og:url" content="https://BillyStudio.github.io/Feb-19th-Linux-Vim-Config/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="Customizing your own vim configuration file will bring you future convenience and fluency.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-12-06T14:16:02.148Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Vim config file on Linux desktop">
+<meta name="twitter:description" content="Customizing your own vim configuration file will bring you future convenience and fluency.">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/Feb-19th-Linux-Vim-Config/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/Feb-19th-Linux-Vim-Config/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Vim config file on Linux desktop
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-02-19T02:30:49.000Z" itemprop="datePublished">Feb 19 2019</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            4 minutes read (About 663 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>Customizing your own vim configuration file will bring you future convenience and fluency. <a id="more"></a>Writing into <code>~/.vimrc</code>, it will take effect next time you enter Vim editor. If you want your config file to apply to all users, edit <code>/etc/vim/vimrc</code> with <code>sudo</code> privilige. For some specific purposes like ACM contest, you can also create a config file. When using it, <code>source</code> this command.</p>
+<p>If you want to specify different settings for different file types, for example, C++ files, you should first add <code>filetype plugin indent on</code> to the <code>.vimrc</code> file. and then create <code>.vim/after/ftplugin/cpp.vim</code>, and write</p>
+<pre><code>setlocal expandtab
+setlocal shiftwidth=2
+setlocal softtabstop=2
+</code></pre><h2 id="backup-file-swap-file-and-undo-file"><a href="#backup-file-swap-file-and-undo-file" class="headerlink" title="backup file, swap file and undo file"></a>backup file, swap file and undo file</h2><p>&#x2018;.filename~&#x2019; is a backup file, it stores the file before you start to edit it.<br>&#x2018;.filename.swp&#x2019; is a swap file, containing the unsaved changes.<br>&#x2018;.filename.un~&#x2019; is an undo file that stores the undo trees of the file edited.</p>
+<h1 id="Key-mappings"><a href="#Key-mappings" class="headerlink" title="Key mappings"></a>Key mappings</h1><h2 id="Default"><a href="#Default" class="headerlink" title="Default"></a>Default</h2><p>&lt;C-^&gt; change active window panel</p>
+<h2 id="Self-define"><a href="#Self-define" class="headerlink" title="Self define"></a>Self define</h2><p>Finally I will give the sample code that I set for my personal computer. Before that, let&#x2019;s clarify a braces auto-completing algorithm. When the left brace is typed, only when there is no right char near it can the right brace be completed. When the right brace is typed, only when the right char near it is the same right char can the cursor be jumped.</p>
+<p>Response for typing &#x2018;(&#x2018;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">get the line and column positions of current cursor as lnum, cnum</span><br><span class="line"></span><br><span class="line">if no next character exists:</span><br><span class="line">    print &apos;()&apos;</span><br><span class="line">else:</span><br><span class="line">    print &apos;(&apos;</span><br></pre></td></tr></table></figure>
+
+<p>Reponse for typing &#x2018;)&#x2019;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">if the right next char is &apos;)&apos;:</span><br><span class="line">    jump one char</span><br><span class="line">else:</span><br><span class="line">    print &apos;)&apos;</span><br></pre></td></tr></table></figure>
+
+<p>To get the current line text, use <code>getline(&apos;.&apos;)</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">&quot;~/.vimrc</span><br><span class="line">&quot;internationalisation</span><br><span class="line">set encoding=utf-8</span><br><span class="line"></span><br><span class="line">&quot;Indentations without hard tabs</span><br><span class="line">set expandtab &quot;pressing &lt;TAB&gt; will always insert &apos;softtabstop&apos; amount of spaces</span><br><span class="line">set softtabstop=4 &quot;default value equals &apos;tabstop&apos;, but when using indentation without hard tabs, set it to the same as &apos;shiftwidth&apos;</span><br><span class="line">set shiftwidth=4 &quot;affects when you press &apos;&gt;&gt;&apos;, &apos;&lt;&lt;&apos;, or &apos;==&apos;. It also affects how automatic indentation works.</span><br><span class="line"></span><br><span class="line">&quot;Automatic indentation</span><br><span class="line">set autoindent &quot;when starting a new line, indent as the previous line</span><br><span class="line"></span><br><span class="line">&quot;Syntax highlighting</span><br><span class="line">syntax on</span><br><span class="line"></span><br><span class="line">&quot;Mouse setting</span><br><span class="line">&quot;don&apos;t use the mouse to prevent the appearence of line numbers on copy. For example, use `:1,3y+` instead for copying to the &apos;+clipboard&apos; from line-1 to line-3</span><br><span class="line">set mouse=a</span><br><span class="line"></span><br><span class="line">&quot;Appearence</span><br><span class="line">set cursorline &quot;highlight the line where the curent cursor stays</span><br><span class="line">set nu &quot;set line number</span><br><span class="line">set ruler</span><br><span class="line">colorscheme desert &quot;available color themes are in &apos;/usr/share/vim/vim80/colors&apos;, also you can add your own in &apos;~/.vim/colors&apos;</span><br><span class="line">let g:molokai_original = 1</span><br><span class="line">set cmdheight=2</span><br><span class="line"></span><br><span class="line">&quot;Key mappings</span><br><span class="line">set showmatch</span><br><span class="line">set matchtime=3</span><br><span class="line">inoremap ( ()&lt;ESC&gt;i</span><br><span class="line">inoremap ) &lt;ESC&gt;:call Right_Brace(&apos;)&apos;)&lt;CR&gt;a</span><br><span class="line"></span><br><span class="line">function Right_Brace(schar)</span><br><span class="line">    let [bufnum, lnum, cnum, of] = getpos(&apos;.&apos;)</span><br><span class="line">    &quot;echo lnum cnum</span><br><span class="line">    let [lnum2, cnum2]=searchpos(a:schar, &apos;n&apos;)</span><br><span class="line">    &quot;echo lnum2 cnum2</span><br><span class="line">    if lnum==lnum2 &amp;&amp; cnum+1==cnum2</span><br><span class="line">        execute &quot;normal! l&quot;</span><br><span class="line">    else</span><br><span class="line">        execute &quot;normal! a)&quot;</span><br><span class="line">    endif</span><br><span class="line">endfunction</span><br><span class="line"></span><br><span class="line">&quot;Enable plugins</span><br><span class="line">filetype plugin indent on</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&quot;~/.vim/after/ftplugin/cpp.vim</span><br><span class="line">&quot;When it comes to C and C++, file type based indentations automatically sets &apos;cindent&apos;, and for that reason, there is no need to set &apos;cindent&apos; manually for such files.</span><br><span class="line"></span><br><span class="line">&quot;indentation</span><br><span class="line">setlocal shiftwidth=2</span><br><span class="line">setlocal softtabstop=2</span><br><span class="line">setlocal tabstop=2</span><br><span class="line"></span><br><span class="line">&quot;matching brackets</span><br><span class="line">inoremap { {}&lt;ESC&gt;i</span><br><span class="line">inoremap {&lt;CR&gt; {&lt;CR&gt;}&lt;ESC&gt;O</span><br></pre></td></tr></table></figure>
+
+<p>(copy from vim <code>ggVG</code> then <code>&quot;+y</code>)</p>
+<h3 id="paste-to-remote-vim"><a href="#paste-to-remote-vim" class="headerlink" title="paste to remote vim"></a>paste to remote vim</h3><ol>
+<li><p>ssh -Y user@server or permanently added in .ssh/config</p>
+</li>
+<li><p>Ctrl+Insert for copy, Shift+Insert for paste</p>
+</li>
+</ol>
+<h1 id="Tweak-vim-as-C-C-IDE"><a href="#Tweak-vim-as-C-C-IDE" class="headerlink" title="Tweak vim as C/C++ IDE"></a>Tweak vim as C/C++ IDE</h1><h2 id="Plugin-manager"><a href="#Plugin-manager" class="headerlink" title="Plugin manager"></a>Plugin manager</h2><p>vim-plug: <a href="https://github.com/junegunn/vim-plug" target="_blank" rel="noopener">https://github.com/junegunn/vim-plug</a></p>
+<h2 id="Debugging"><a href="#Debugging" class="headerlink" title="Debugging"></a>Debugging</h2><p>vimspector: <a href="https://github.com/puremourning/vimspector#quick-start" target="_blank" rel="noopener">https://github.com/puremourning/vimspector#quick-start</a><br>After putting <code>Plug &apos;puremourning/vimspector&apos;</code> into <code>.vimrc</code>. Go to gadget home to execute</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./install_gadget.py --all</span><br></pre></td></tr></table></figure>
+
+<h2 id="Close-a-tab"><a href="#Close-a-tab" class="headerlink" title="Close a tab"></a>Close a tab</h2><p>:tabclose</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>How do I set up different tab settings for different languages in Vim: <a href="https://stackoverflow.com/a/1743255" target="_blank" rel="noopener">https://stackoverflow.com/a/1743255</a><br>Vim: Remove swap, backup and undo Files from Working Directory: <a href="https://medium.com/@Aenon/vim-swap-backup-undo-git-2bf353caa02f" target="_blank" rel="noopener">https://medium.com/@Aenon/vim-swap-backup-undo-git-2bf353caa02f</a><br>How to close a tab in vim? : <a href="https://stackoverflow.com/questions/32714834/how-to-close-a-tab-in-vim" target="_blank" rel="noopener">https://stackoverflow.com/questions/32714834/how-to-close-a-tab-in-vim</a></p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Linux/">#Linux</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Vim/">#Vim</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/ssh/">#ssh</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/Feb-20th-cross-correlation/">Cross correlation in Machine learning</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/Feb-13th-How-to-be-a-gentleman/">如何做一个绅士</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="notification is-danger">
+    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
+</div>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

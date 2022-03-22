@@ -1,0 +1,610 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>标签: 设计模式 - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/tags/设计模式/index.html" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta property="og:type" content="website">
+<meta property="og:title" content="Shane&#39;s Blog">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/tags/设计模式/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:locale" content="zh-cn">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shane&#39;s Blog">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/tags/设计模式/index.html" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/tags/设计模式/index.html" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section section-heading">
+    <div class="container">
+        <div class="content">
+            <h5>#设计模式</h5>
+        </div>
+    </div>
+</section>
+<section class="section">
+    <div class="container">
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/zh-cn/2021-Dec-18th-Design-patterns-Facade/" itemprop="url">设计模式 之 门面模式</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2021-12-18T13:20:30.000Z" itemprop="datePublished">12月 18 2021</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            2 分钟 读完 (约 315 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x95E8;&#x9762;&#xFF08;fa&#xE7;ade&#xFF0C;&#x8BFB;&#x4F5C;<code>[fasad]</code>&#xFF09;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#xFF0C;&#x53C8;&#x79F0;&#x4E3A;&#x5916;&#x89C2;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#xFF0C;&#x5C5E;&#x4E8E;&#x7ED3;&#x6784;&#x6027;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x7684;&#x4E00;&#x79CD;&#x3002;</p>
+        <p class="article-more-link">
+            <a href="/zh-cn/2021-Dec-18th-Design-patterns-Facade/#more">阅读更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/zh-cn/2021-Feb-18th-Design-patterns-Visitor/" itemprop="url">设计模式 之 访问者模式</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2021-02-18T10:11:31.000Z" itemprop="datePublished">2月 18 2021</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh-cn/categories/JuliuSC项目/">JuliuSC项目</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            2 分钟 读完 (约 255 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x8BBF;&#x95EE;&#x8005;&#x6A21;&#x5F0F;&#x5141;&#x8BB8;&#x5728;&#x4E0D;&#x6539;&#x53D8;&#x5BF9;&#x8C61;&#x7684;&#x7C7B;&#x5B9A;&#x4E49;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x65B0;&#x589E;&#x5BF9;&#x4E8E;&#x5BF9;&#x8C61;&#x7684;&#x64CD;&#x4F5C;&#x3002;</p>
+        <p class="article-more-link">
+            <a href="/zh-cn/2021-Feb-18th-Design-patterns-Visitor/#more">阅读更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/zh-cn/2020-07-14-Design-patterns-Dynamic-proxy/" itemprop="url">Design patterns --- Dynamic proxy</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2020-07-14T14:11:44.000Z" itemprop="datePublished">7月 14 2020</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh-cn/categories/Eureka项目/">Eureka项目</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            5 分钟 读完 (约 728 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x2003;&#x2003;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;&#x662F;&#x501F;&#x52A9;proxy&#x5BF9;&#x8C61;&#x6267;&#x884C;&#x88AB;&#x4EE3;&#x7406;&#x63A5;&#x53E3;&#x65B9;&#x6CD5;&#x7684;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x3002;</p>
+        <p class="article-more-link">
+            <a href="/zh-cn/2020-07-14-Design-patterns-Dynamic-proxy/#more">阅读更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/zh-cn/2020-06-28-Design-patterns-Adapter-pattern/" itemprop="url">设计模式 之 适配器</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2020-06-28T08:07:52.000Z" itemprop="datePublished">6月 28 2020</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh-cn/categories/Eureka项目/">Eureka项目</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            6 分钟 读完 (约 838 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;&#x662F;&#x4E00;&#x79CD;&#x5E38;&#x7528;&#x7684;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x3002;</p>
+        <p class="article-more-link">
+            <a href="/zh-cn/2020-06-28-Design-patterns-Adapter-pattern/#more">阅读更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/zh-cn/2020-5-20-Design-patterns-singleton/" itemprop="url">Design patterns ── Singleton</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2020-05-20T02:42:30.000Z" itemprop="datePublished">5月 20 2020</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            12 分钟 读完 (约 1748 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x5355;&#x4F8B;&#x6A21;&#x5F0F;&#x662F;&#x6700;&#x5E38;&#x7528;&#x7684;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x4E4B;&#x4E00;&#xFF0C;&#x540C;&#x65F6;&#x4E5F;&#x662F;&#x9762;&#x8BD5;&#x4E2D;&#x6700;&#x5BB9;&#x6613;&#x8003;&#x5230;&#x7684;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x3002;</p>
+        <p class="article-more-link">
+            <a href="/zh-cn/2020-5-20-Design-patterns-singleton/#more">阅读更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/zh-cn/2020-05-08-UML-from-model-to-code/" itemprop="url">UML diagrams --- from models to codes</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2020-05-08T09:19:58.000Z" itemprop="datePublished">5月 8 2020</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            7 分钟 读完 (约 1102 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x672C;&#x6587;&#x5173;&#x6CE8;&#x4E8E;&#x5229;&#x7528;UML&#x6846;&#x56FE;&#x5C06;&#x6A21;&#x578B;&#x8868;&#x8FBE;&#x4E3A;&#x4EE3;&#x7801;&#x7684;&#x8FC7;&#x7A0B;&#xFF0C;&#x5176;&#x4E2D;&#x7A7F;&#x63D2;&#x6709;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x3002;</p>
+        <p class="article-more-link">
+            <a href="/zh-cn/2020-05-08-UML-from-model-to-code/#more">阅读更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+    
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

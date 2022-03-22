@@ -1,0 +1,502 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>Driver development for Raspberry Pi - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/August-6th-Pi-driver-development/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="The hardware driver development is involved in the operating system programming.">
+<meta name="keywords" content="Raspberry Pi,Linux kernel">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Driver development for Raspberry Pi">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/August-6th-Pi-driver-development/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="The hardware driver development is involved in the operating system programming.">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/August-6th-Pi-driver-development/linux-version.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/August-6th-Pi-driver-development/self-compile.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/August-6th-Pi-driver-development/check-new-version.png">
+<meta property="og:updated_time" content="2022-03-21T08:05:23.481Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Driver development for Raspberry Pi">
+<meta name="twitter:description" content="The hardware driver development is involved in the operating system programming.">
+<meta name="twitter:image" content="https://billystudio.github.io/zh-cn/August-6th-Pi-driver-development/linux-version.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/August-6th-Pi-driver-development/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/August-6th-Pi-driver-development/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Driver development for Raspberry Pi
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-08-06T08:43:37.000Z" itemprop="datePublished">8月 6 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh-cn/categories/Linux驱动开发/">Linux驱动开发</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            5 分钟 读完 (约 747 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>The hardware driver development is involved in the operating system programming. <a id="more"></a></p>
+<h1 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h1><p>Before we start the driver development, the Linux kernel has to be manually built at least once. So the next two ways will be introduced for building Pi linux kernel, one way is to self compile on Raspberry Pi, another is to compile it on a host Linux computer and then copyed to RPi. First of all, download the linux kernel package Raspberry github&#x2019;s page: <a href="https://github.com/raspberrypi/linux/releases" target="_blank" rel="noopener">https://github.com/raspberrypi/linux/releases</a> with the same version as your Raspbian Linux version. You can check your Raspbian linux version by<br><img src="linux-version.png" alt="linux-version.png"><br>My current raspbian linux kernel version is v4.19.57(2019-07-25), so I download 4.19.y linux.</p>
+<h2 id="Cross-compile-on-Arch-Linux"><a href="#Cross-compile-on-Arch-Linux" class="headerlink" title="Cross compile on Arch Linux"></a>Cross compile on Arch Linux</h2><p>Download or git clone and &#x2018;tools&#x2019; repository from </p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone --depth=1 https://github.com/raspberrypi/tools ./tools</span><br></pre></td></tr></table></figure>
+
+<p>For Arch Linux, some basic packages for cross-compiling are required and can be installed by <code>sudo pacman -Syu bison flex openssl p7zip</code>. Use <code>7z x</code> rather than <code>unzip</code> to extract linux kernel file(<code>unzip</code> somewhat doesn&#x2019;t support very long full path). Then manually copy the config file from the running pi to the source code tree and configure it further:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd linux</span><br><span class="line">KERNEL=kernel7</span><br><span class="line">make bcm2709_defconfig</span><br></pre></td></tr></table></figure>
+
+<p>Error: Can&#x2019;t find default configuration &#x201C;arch/x86/configs/bcm2709_defconfig&#x201D;!<br>It&#x2019;s reseasonable because this config file hasn&#x2019;t been created. So 1st method is to generate one:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">make ARCH=arm CROSS_COMPILE=arm-linux-gnueabihf- bcm2709_defconfig</span><br></pre></td></tr></table></figure>
+
+<p>2nd alternative method is to copy one from rpi. On RPi:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo modprobe configs</span><br><span class="line">sudo cp /proc/config.gz ~/Documents</span><br></pre></td></tr></table></figure>
+
+<p>Back Arch</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">scp -P2022 pi@raspberry:~/Documents/config.gz [directory/of/linux]</span><br><span class="line">zcat config.gz &gt; .config</span><br><span class="line"></span><br><span class="line">make ARCH=arm CROSS_COMPILE=../tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf- zImage -j4</span><br><span class="line">make ARCH=arm CROSS_COMPILE=../tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf- modules -j8</span><br><span class="line">make ARCH=arm CROSS_COMPILE=../tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf- dtbs -j4</span><br></pre></td></tr></table></figure>
+
+<p>Type enter for default settings when encounting input waiting.</p>
+<p>Insert RPi TF card and check it via <code>lsblk</code>, then mount</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /mnt/fat32</span><br><span class="line">sudo mkdir /mnt/ext4</span><br><span class="line">sudo mount /dev/sdb6 mnt/fat32</span><br><span class="line">sudo mount /dev/sdb7 /mnt/ext4</span><br><span class="line">sudo make ARCH=arm CROSS_COMPILE=../tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf- INSTALL_MOD_PATH=/mnt/ext4 modules_install</span><br><span class="line">KERNEL=kernel7</span><br><span class="line">ls /mnt/fat32 -l | grep img</span><br><span class="line">sudo cp arch/arm/boot/zImage /mnt/fat32/kernel-myconfig.img</span><br><span class="line">sudo cp arch/arm/boot/dts/*.dtb /mnt/fat32/  </span><br><span class="line">sudo cp arch/arm/boot/dts/overlays/*.dtb* /mnt/fat32/overlays </span><br><span class="line">sudo cp arch/arm/boot/dts/overlays/README /mnt/fat32/overlays</span><br></pre></td></tr></table></figure>
+
+<p>sudo edit /mnt/fat32/config.txt file:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kernel=kernel-myconfig.img</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo umount /mnt/fat32</span><br><span class="line">sudo umount /mnt/ext4</span><br><span class="line">lsblk</span><br></pre></td></tr></table></figure>
+
+<p>Re-insert TF card into Pi and start, type <code>uname -r</code> to check. It&#x2019;s <code>4.19.64+</code>. Succeed~</p>
+<h2 id="Self-compile-on-RPi4"><a href="#Self-compile-on-RPi4" class="headerlink" title="Self compile on RPi4"></a>Self compile on RPi4</h2><p>ssh into pi and scp those two folders.</p>
+<p>extract and enter &#x2018;linux-rpi-x.xx.x&#x2019; and type</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install bc bison flex libssl-dev</span><br><span class="line">KERNEL=kernel7l</span><br><span class="line">make bcm2711_defconfig</span><br></pre></td></tr></table></figure>
+
+<p><img src="self-compile.png" alt="self-compile.png"></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">make -j4 zImage modules dtbs</span><br><span class="line">sudo make modules_install</span><br><span class="line">sudo cp arch/arm/boot/dts/*.dtb /boot/</span><br><span class="line">sudo cp arch/arm/boot/dts/overlays/*.dtb* /boot/overlays/</span><br><span class="line">sudo cp arch/arm/boot/dts/overlays/README /boot/overlays/</span><br><span class="line">sudo cp arch/arm/boot/zImage /boot/$KERNEL.img</span><br></pre></td></tr></table></figure>
+
+<p>Check the new kernel version:<br><img src="check-new-version.png" alt="check-new-version.png"></p>
+<h1 id="LED-driver-Experiment"><a href="#LED-driver-Experiment" class="headerlink" title="LED driver Experiment"></a>LED driver Experiment</h1><p>Makefile</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">ifneq ($(KERNELRELEASE),)</span><br><span class="line">        obj-m :=hello.o</span><br><span class="line">else</span><br><span class="line">    KERNELDIR :=/home/shane/Downloads/Raspberry-Pi/linux/</span><br><span class="line">all:</span><br><span class="line">        $(MAKE) -C $(KERNELDIR) M=$(PWD) ARCH=arm CROSS_COMPILE=/home/shane/Downloads/Raspberry-Pi/tools/arm-bcm2708/gcc-linaro-arm-linux-gnueabihf-raspbian-x64/bin/arm-linux-gnueabihf- modules</span><br><span class="line">clean:</span><br><span class="line">        rm -rf *.o *~ core .depend .*.cmd *.ko *.mod.c .tmp_versions modul*</span><br><span class="line">endif</span><br></pre></td></tr></table></figure>
+
+<p>make and then scp hello.ko file. On RPi</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo insmod hello.ko</span><br><span class="line">sudo rmmod hello</span><br><span class="line">dmesg | tail -5</span><br></pre></td></tr></table></figure>
+
+<p>[ 7804.521916] smsc95xx 1-1.1:1.0 enxb827eb802252: link down<br>[ 7839.258242] smsc95xx 1-1.1:1.0 enxb827eb802252: link up, 100Mbps, full-duplex, lpa 0xCDE1<br>[ 8655.103844] hello: loading out-of-tree module taints kernel.<br>[ 8655.110062] Hello, world<br>[ 8726.505905] Goodbye, world</p>
+<h3 id="Procedures-conclusion"><a href="#Procedures-conclusion" class="headerlink" title="Procedures conclusion"></a>Procedures conclusion</h3><ol>
+<li>Write a driver file</li>
+<li>Compile, build and <code>sudo insmod some-name.ko</code></li>
+<li>Write the test test</li>
+<li>Compile, build and <code>sudo ./test</code></li>
+</ol>
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2><p><a href="https://www.raspberrypi.org/documentation/linux/kernel/building.md" target="_blank" rel="noopener">https://www.raspberrypi.org/documentation/linux/kernel/building.md</a></p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Raspberry-Pi/">#Raspberry Pi</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Linux-kernel/">#Linux kernel</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/Aug-13th-2019-Linux-troubleshooting/">Linux Troubleshooting</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/July-19-2019-Arduino-communicate-with-RPi/">树莓派与Arduino通信</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="notification is-danger">
+    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
+</div>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

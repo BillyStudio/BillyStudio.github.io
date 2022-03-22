@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>设计模式 之 适配器 - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/2020-06-28-Design-patterns-Adapter-pattern/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x9002;&amp;#x914D;&amp;#x5668;&amp;#x6A21;&amp;#x5F0F;&amp;#x662F;&amp;#x4E00;&amp;#x79CD;&amp;#x5E38;&amp;#x7528;&amp;#x7684;&amp;#x8BBE;&amp;#x8BA1;&amp;#x6A21;&amp;#x5F0F;&amp;#x3002;">
+<meta name="keywords" content="Java,设计模式">
+<meta property="og:type" content="article">
+<meta property="og:title" content="设计模式 之 适配器">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/2020-06-28-Design-patterns-Adapter-pattern/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x9002;&amp;#x914D;&amp;#x5668;&amp;#x6A21;&amp;#x5F0F;&amp;#x662F;&amp;#x4E00;&amp;#x79CD;&amp;#x5E38;&amp;#x7528;&amp;#x7684;&amp;#x8BBE;&amp;#x8BA1;&amp;#x6A21;&amp;#x5F0F;&amp;#x3002;">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-06-28-Design-patterns-Adapter-pattern/plug_A_and_receptacle_A.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-06-28-Design-patterns-Adapter-pattern/plug_B_and_receptacle_A.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-06-28-Design-patterns-Adapter-pattern/adapter-java.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-06-28-Design-patterns-Adapter-pattern/adapter2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-06-28-Design-patterns-Adapter-pattern/eureka-adapter-dutychain.png">
+<meta property="og:updated_time" content="2022-03-21T08:05:20.934Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="设计模式 之 适配器">
+<meta name="twitter:description" content="&amp;#x9002;&amp;#x914D;&amp;#x5668;&amp;#x6A21;&amp;#x5F0F;&amp;#x662F;&amp;#x4E00;&amp;#x79CD;&amp;#x5E38;&amp;#x7528;&amp;#x7684;&amp;#x8BBE;&amp;#x8BA1;&amp;#x6A21;&amp;#x5F0F;&amp;#x3002;">
+<meta name="twitter:image" content="https://billystudio.github.io/zh-cn/2020-06-28-Design-patterns-Adapter-pattern/plug_A_and_receptacle_A.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2020-06-28-Design-patterns-Adapter-pattern/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2020-06-28-Design-patterns-Adapter-pattern/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            设计模式 之 适配器
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2020-06-28T08:07:52.000Z" itemprop="datePublished">6月 28 2020</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh-cn/categories/Eureka项目/">Eureka项目</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            6 分钟 读完 (约 838 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;&#x662F;&#x4E00;&#x79CD;&#x5E38;&#x7528;&#x7684;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x3002;<a id="more"></a></p>
+<h1 id="&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;&#x7684;&#x4E24;&#x79CD;&#x7528;&#x6CD5;"><a href="#&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;&#x7684;&#x4E24;&#x79CD;&#x7528;&#x6CD5;" class="headerlink" title="&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;&#x7684;&#x4E24;&#x79CD;&#x7528;&#x6CD5;"></a>&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;&#x7684;&#x4E24;&#x79CD;&#x7528;&#x6CD5;</h1><p>&#x7B2C;&#x4E00;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x662F;&#x5728;&#x6211;&#x4EEC;&#x5199;&#x597D;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#x548C;&#x65B9;&#x6CD5;&#x5E76;&#x7F16;&#x5199;&#x8C03;&#x7528;&#x540E;&#xFF0C;&#x51FA;&#x73B0;&#x4E86;&#x4E00;&#x79CD;&#x65B0;&#x7684;&#x9700;&#x6C42;&#x63A5;&#x53E3;&#xFF0C;&#x4E3A;&#x4E86;&#x4F7F;&#x63A5;&#x53E3;&#x80FD;&#x591F;&#x517C;&#x5BB9;&#xFF0C;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;Adapter&#x7C7B;&#x3002;&#x8FD9;&#x79CD;&#x5199;&#x6CD5;&#x5728;&#x505A;&#x5B89;&#x5353;&#x5F00;&#x53D1;&#x517C;&#x5BB9;&#x65F6;&#x7ECF;&#x5E38;&#x7528;&#x5230;&#x3002;<br><img src="plug_A_and_receptacle_A.png" alt="plug_A_and_receptacle_A.png"></p>
+<p>&#x5047;&#x8BBE;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x5199;&#x597D;&#x4E86;&#x4E00;&#x4E2A;&#x5339;&#x914D;&#x7684;&#x63D2;&#x5EA7;&#x548C;&#x63D2;&#x5934;&#xFF0C;&#x5982;&#x4E0A;&#x56FE;&#x6240;&#x793A;&#x3002;</p>
+<p>&#x5047;&#x8BBE;&#x73B0;&#x5728;&#x53C8;&#x6709;&#x4E86;&#x4E00;&#x4E2A;&#x5706;&#x5B54;&#x7684;&#x63D2;&#x5EA7;&#xFF08;&#x53F3;&#xFF09;&#xFF0C;&#x4F46;&#x662F;&#x73B0;&#x5728;&#x4E70;&#x56DE;&#x4E86;&#x4E00;&#x4E2A;&#x65B9;&#x5B54;&#x7684;&#x63D2;&#x5934;&#xFF08;&#x5DE6;&#xFF09;&#x3002;&#x4E3A;&#x4E86;&#x4F7F;&#x539F;&#x672C;&#x65E0;&#x6CD5;&#x5339;&#x914D;&#x7684;&#x63A5;&#x53E3;&#x901A;&#x7528;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8FD9;&#x6837;&#x4E00;&#x4E2A;&#x9002;&#x914D;&#x5668;&#x7C7B;&#xFF08;&#x4E2D;&#xFF09;&#xFF0C;&#x5728;&#x9002;&#x914D;&#x5668;&#x4E2D;&#x8FDB;&#x884C;&#x63A5;&#x53E3;&#x7684;&#x8F6C;&#x6362;&#xFF0C;&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;&#x3002;<br><img src="plug_B_and_receptacle_A.png" alt="plug_B_and_receptacle_A.png"></p>
+<p>&#x793A;&#x4F8B;&#x4EE3;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ReceptacleA</span> </span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">work</span><span class="hljs-params">(PlugA plugA)</span> </span>{</span><br><span class="line">        plugA.plugRound();</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;&#x63D2;&#x5EA7;&#x5DE5;&#x4F5C;&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlugA</span> </span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">plugRound</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;&#x63D2;&#x5165;&#x5706;&#x5B54;&#x63D2;&#x5934;&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Adapter</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PlugA</span> </span>{</span><br><span class="line">    PlugB plugB;</span><br><span class="line"></span><br><span class="line">    Adapter(PlugB plugB) {</span><br><span class="line">        <span class="hljs-keyword">this</span>.plugB = plugB;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">plugRound</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">        plugB.plugSquare();</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PlugB</span> </span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">plugSquare</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;&#x63D2;&#x5165;&#x65B9;&#x5B54;&#x63D2;&#x5934;&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Test</span> </span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testPlugA</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">        ReceptacleA receptacleA = <span class="hljs-keyword">new</span> ReceptacleA();</span><br><span class="line">        PlugA plugA = <span class="hljs-keyword">new</span> PlugA();</span><br><span class="line">        receptacleA.work(plugA);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">testPlugB</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">        ReceptacleA receptacleA = <span class="hljs-keyword">new</span> ReceptacleA();</span><br><span class="line">        PlugB plugB = <span class="hljs-keyword">new</span> PlugB();</span><br><span class="line">        Adapter adapter = <span class="hljs-keyword">new</span> Adapter(plugB);</span><br><span class="line">        receptacleA.work(adapter);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{</span><br><span class="line">        testPlugA();</span><br><span class="line">        testPlugB();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x4EE3;&#x7801;&#x8FD0;&#x884C;&#x7ED3;&#x679C;&#xFF1A;<br><img src="adapter-java.png" alt="adapter-java.png"></p>
+<p>&#x7B2C;&#x4E8C;&#x79CD;&#x65B9;&#x5F0F;&#xFF0C;&#x662F;&#x6211;&#x4EEC;&#x53EA;&#x5E0C;&#x671B;&#x5B9E;&#x73B0;&#x63A5;&#x53E3;&#x4E2D;&#x7684;&#x90E8;&#x5206;&#x65B9;&#x6CD5;&#x65F6;&#xFF0C;&#x901A;&#x8FC7;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x62BD;&#x8C61;&#x9002;&#x914D;&#x5668;&#x7C7B;&#xFF0C;&#x518D;&#x901A;&#x8FC7;&#x5177;&#x4F53;&#x7C7B;&#x7EE7;&#x627F;&#x6765;&#x8986;&#x5199;&#x5176;&#x4E2D;&#x7684;&#x90E8;&#x5206;&#x65B9;&#x6CD5;&#x4EE5;&#x8FBE;&#x5230;&#x7EE7;&#x627F;&#x63A5;&#x53E3;&#x90E8;&#x5206;&#x65B9;&#x6CD5;&#x7684;&#x76EE;&#x7684;&#x3002;</p>
+<p><img src="adapter2.png" alt="adapter2.png"></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">Behaviours</span> </span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">swim</span><span class="hljs-params">()</span></span>;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span></span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Animal</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Behaviours</span> </span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span></span>{}</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">swim</span><span class="hljs-params">()</span></span>{}</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span></span>{}</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Dog</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Animal</span> </span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">run</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;Dogs run&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">swim</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;Dogs swim&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>{</span><br><span class="line">        Dog dog = <span class="hljs-keyword">new</span> Dog();</span><br><span class="line">        dog.run();</span><br><span class="line">        dog.swim();</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Sparrow</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">Animal</span> </span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">fly</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;Sparrows fly&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span></span>{</span><br><span class="line">        Sparrow sparrow = <span class="hljs-keyword">new</span> Sparrow();</span><br><span class="line">        sparrow.fly();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h1 id="&#x9879;&#x76EE;&#x5B9E;&#x4F8B;"><a href="#&#x9879;&#x76EE;&#x5B9E;&#x4F8B;" class="headerlink" title="&#x9879;&#x76EE;&#x5B9E;&#x4F8B;"></a>&#x9879;&#x76EE;&#x5B9E;&#x4F8B;</h1><p>Eureka &#x9879;&#x76EE;</p>
+<p>In eureka-core &#x5BA2;&#x6237;&#x7AEF;<br>com.netflix.discovery.shared.transport.EurekaHttpClient.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Low level Eureka HTTP client API.</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> Tomasz Bak</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">EurekaHttpClient</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">EurekaHttpResponse&lt;Void&gt; <span class="hljs-title">register</span><span class="hljs-params">(InstanceInfo info)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">EurekaHttpResponse&lt;Void&gt; <span class="hljs-title">cancel</span><span class="hljs-params">(String appName, String id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">EurekaHttpResponse&lt;InstanceInfo&gt; <span class="hljs-title">sendHeartBeat</span><span class="hljs-params">(String appName, String id, InstanceInfo info, InstanceStatus overriddenStatus)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">EurekaHttpResponse&lt;Void&gt; <span class="hljs-title">statusUpdate</span><span class="hljs-params">(String appName, String id, InstanceStatus newStatus, InstanceInfo info)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">EurekaHttpResponse&lt;Void&gt; <span class="hljs-title">deleteStatusOverride</span><span class="hljs-params">(String appName, String id, InstanceInfo info)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">EurekaHttpResponse&lt;Applications&gt; <span class="hljs-title">getApplications</span><span class="hljs-params">(String... regions)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">EurekaHttpResponse&lt;Applications&gt; <span class="hljs-title">getDelta</span><span class="hljs-params">(String... regions)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">EurekaHttpResponse&lt;Applications&gt; <span class="hljs-title">getVip</span><span class="hljs-params">(String vipAddress, String... regions)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">EurekaHttpResponse&lt;Applications&gt; <span class="hljs-title">getSecureVip</span><span class="hljs-params">(String secureVipAddress, String... regions)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">EurekaHttpResponse&lt;Application&gt; <span class="hljs-title">getApplication</span><span class="hljs-params">(String appName)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">EurekaHttpResponse&lt;InstanceInfo&gt; <span class="hljs-title">getInstance</span><span class="hljs-params">(String appName, String id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">EurekaHttpResponse&lt;InstanceInfo&gt; <span class="hljs-title">getInstance</span><span class="hljs-params">(String id)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">shutdown</span><span class="hljs-params">()</span></span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>In eureka-client-jersey2<br>com.netflix.discovery.shared.transport.jersey.AbstractJerseyEurekaHttpClient.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">abstract</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AbstractJerseyEurekaHttpClient</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">EurekaHttpClient</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> Logger logger = LoggerFactory.getLogger(AbstractJerseyEurekaHttpClient<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>;</span><br><span class="line">    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String HTML = <span class="hljs-string">&quot;html&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">final</span> Client jerseyClient;</span><br><span class="line">    <span class="hljs-keyword">protected</span> <span class="hljs-keyword">final</span> String serviceUrl;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-title">AbstractJerseyEurekaHttpClient</span><span class="hljs-params">(Client jerseyClient, String serviceUrl)</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">this</span>.jerseyClient = jerseyClient;</span><br><span class="line">        <span class="hljs-keyword">this</span>.serviceUrl = serviceUrl;</span><br><span class="line">        logger.debug(<span class="hljs-string">&quot;Created client for url: {}&quot;</span>, serviceUrl);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    ......</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">abstract</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addExtraHeaders</span><span class="hljs-params">(Builder webResource)</span></span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Map&lt;String, String&gt; <span class="hljs-title">headersOf</span><span class="hljs-params">(ClientResponse response)</span> </span>{</span><br><span class="line">        ......</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>In eureka-client<br>com.netflix.discovery.shared.transport.jersey.JerseyApplicationClient.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * A version of Jersey1 {<span class="hljs-doctag">@link</span> EurekaHttpClient} to be used by applications.</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * <span class="hljs-doctag">@author</span> Tomasz Bak</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">JerseyApplicationClient</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractJerseyEurekaHttpClient</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> Map&lt;String, String&gt; additionalHeaders;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">JerseyApplicationClient</span><span class="hljs-params">(Client jerseyClient, String serviceUrl, Map&lt;String, String&gt; additionalHeaders)</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">super</span>(jerseyClient, serviceUrl);</span><br><span class="line">        <span class="hljs-keyword">this</span>.additionalHeaders = additionalHeaders;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">addExtraHeaders</span><span class="hljs-params">(Builder webResource)</span> </span>{</span><br><span class="line">        ......</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>eureka-core &#x670D;&#x52A1;&#x5668;&#x7AEF;<br>PeerAwareInstanceRegistryImpl.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Singleton</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">PeerAwareInstanceRegistryImpl</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AbstractInstanceRegistry</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">PeerAwareInstanceRegistry</span> </span>{</span><br><span class="line">    ......</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x8D23;&#x4EFB;&#x94FE;&#x52A0;&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;<br><img src="eureka-adapter-dutychain.png" alt="eureka-adapter-dutychain.png"></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Singleton</span></span><br><span class="line"><span class="hljs-meta">@ProvidedBy</span>(MyDataCenterInstanceConfigProvider<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-title">public</span> <span class="hljs-title">class</span> <span class="hljs-title">MyDataCenterInstanceConfig</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">PropertiesInstanceConfig</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">EurekaInstanceConfig</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyDataCenterInstanceConfig</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyDataCenterInstanceConfig</span><span class="hljs-params">(String namespace)</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">super</span>(namespace);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">MyDataCenterInstanceConfig</span><span class="hljs-params">(String namespace, DataCenterInfo dataCenterInfo)</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">super</span>(namespace, dataCenterInfo);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><code>ProvidedBy</code>&#x662F;Guice&#x7684;&#x6CE8;&#x89E3;&#xFF0C;&#x8868;&#x793A;<br>&#x7B49;&#x540C;&#x4E8E;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bind(MyDataCenterInstanceConfig.class)</span><br><span class="line">    .toProvider(MyDataCenterInstanceConfigProvider.class)</span><br></pre></td></tr></table></figure>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Java/">#Java</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/设计模式/">#设计模式</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/2020-07-07-Docker-cheatsheet/">Docker词汇表</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/2020-06-26-KDE-desktop-config/">KDE Desktop Config</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="notification is-danger">
+    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
+</div>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

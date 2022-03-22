@@ -1,0 +1,844 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>Arch Linux journey - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/Apr-15th-Arch-Linux-journey/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="I have long heard about the fame and reputation of Arch Linux. But not until after I have commenced to explore on this distro did I really feel the enjoyness that Linux brings to me.">
+<meta name="keywords" content="Linux,OS,Arch Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Arch Linux journey">
+<meta property="og:url" content="https://BillyStudio.github.io/Apr-15th-Arch-Linux-journey/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="I have long heard about the fame and reputation of Arch Linux. But not until after I have commenced to explore on this distro did I really feel the enjoyness that Linux brings to me.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://billystudio.github.io/Apr-15th-Arch-Linux-journey/iw-power-manage-off.png">
+<meta property="og:image" content="https://billystudio.github.io/Apr-15th-Arch-Linux-journey/clean-systemd-journal.png">
+<meta property="og:image" content="https://billystudio.github.io/Apr-15th-Arch-Linux-journey/select_to_clipboard.png">
+<meta property="og:image" content="https://billystudio.github.io/Apr-15th-Arch-Linux-journey/BaiduHelper.png">
+<meta property="og:image" content="https://billystudio.github.io/Apr-15th-Arch-Linux-journey/fceux-gamepad.png">
+<meta property="og:image" content="https://billystudio.github.io/Apr-15th-Arch-Linux-journey/fceux-scale.png">
+<meta property="og:updated_time" content="2022-03-21T09:25:34.436Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Arch Linux journey">
+<meta name="twitter:description" content="I have long heard about the fame and reputation of Arch Linux. But not until after I have commenced to explore on this distro did I really feel the enjoyness that Linux brings to me.">
+<meta name="twitter:image" content="https://billystudio.github.io/Apr-15th-Arch-Linux-journey/iw-power-manage-off.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/Apr-15th-Arch-Linux-journey/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/Apr-15th-Arch-Linux-journey/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Arch Linux journey
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-04-14T16:15:15.000Z" itemprop="datePublished">Apr 15 2019</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            38 minutes read (About 5687 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>I have long heard about the fame and reputation of Arch Linux. But not until after I have commenced to explore on this distro did I really feel the enjoyness that Linux brings to me. <a id="more"></a></p>
+<p>This article mainly aims to record the problems that I faced during my hunting journey as well as the solutions that are suitable to solve them. It is not going to just drop down every step that I followed, neither will it explains every concept and mechanism lying in those procedures, commands and scripts. Because the more detailed and thorough explanations can be easily found on ArchWiki and Web. What this article tries to do is to strip down my thoughts and to help to improve my and the readers&#x2019; understanding of Arch, of Linux, and hopefully, of Operating Systems. I just hope what I have written here would save my time if I face the similar problems again and help more people to save our precious time.</p>
+<h1 id="Preparation"><a href="#Preparation" class="headerlink" title="Preparation"></a>Preparation</h1><p>The preparation process for those who ever installed some other Linux distribution versions is a comparatively easy job which may cause less problems. Note that UltraISO is not suggested for write Arch Linux installation image.</p>
+<h2 id="Installation-media"><a href="#Installation-media" class="headerlink" title="Installation media"></a>Installation media</h2><h3 id="How-can-I-write-image-into-flash-disk"><a href="#How-can-I-write-image-into-flash-disk" class="headerlink" title="How can I write image into flash disk?"></a>How can I write image into flash disk?</h3><p>After writing, you cannot find it by Windows or Linux file system. Keeping this in mind, don&#x2019;t be worry.</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dd bs=4M if=Downloads/archlinux-2019.06.01-x86_64.iso of=/dev/sdx status=progress oflag=sync</span><br></pre></td></tr></table></figure>
+
+<h2 id="Network-support"><a href="#Network-support" class="headerlink" title="Network support"></a>Network support</h2><p>Some campus Wi-Fi need username and password to get Internet access, which is not supported by command-line Live system. For a cellphone, it have only one wireless card, so it cannot functioned as both the Wi-Fi user and the hotspot at the same time. If using a hotspot from cellphone, note that <code>ping</code> command may not be supported. An RJ45 wired connection without password is recommended because this is the easiest one. Remember that network connection is necessary.</p>
+<h3 id="How-do-I-maintain-the-network-connection-which-requires-webpage-user-login-for-example-a-campus-net-environment"><a href="#How-do-I-maintain-the-network-connection-which-requires-webpage-user-login-for-example-a-campus-net-environment" class="headerlink" title="How do I maintain the network connection which requires webpage user login for example a campus-net environment?"></a>How do I maintain the network connection which requires webpage user login for example a campus-net environment?</h3><p>In this case, a hotspot generated by your cellphone mobile data is recommended, even though it is a little slow without a proxy.</p>
+<h3 id="How-can-I-connect-to-an-encrypted-WiFi-network-by-under-archiso-installing-process"><a href="#How-can-I-connect-to-an-encrypted-WiFi-network-by-under-archiso-installing-process" class="headerlink" title="How can I connect to an encrypted WiFi network by under archiso installing process?"></a>How can I connect to an encrypted WiFi network by under archiso installing process?</h3><p>The problem of connecting to network may be reappearing after OS is installed, so it&#x2019;s better to understand as thorough as possible at the beginning. The connection process can be divided into three parts: first, setup interface; second, authentication from the router; third, get ip address.<br>Back to simply, set a non-encrypt wireless network and use <code>wifi-menu</code> for connecting. This tool belongs to netctl and will do first and second step for you. <code>wifi-menu</code> also supports WPA encrypted WiFi spot. However, nowadays WPA2 protocal has been widely used so several other tools can be selected to use <a href="https://wiki.archlinux.org/index.php/Wireless_network_configuration" target="_blank" rel="noopener">archwiki-wireless-network-config</a>. Take <code>wpa_supplicant</code> as an example:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">ip link set wlp58s0 up # First step: Set Wlan interface up</span><br><span class="line">wpa_supplicant -B -i wlp58s0 -c &lt;(wpa_passphrase &quot;Abc-104&quot; &quot;4001001225888&quot;) # Second step: Replace with your wifi name and pass</span><br><span class="line">dhcpcd # Third step: to get a dynamic ip address</span><br></pre></td></tr></table></figure>
+
+<p>Note that you must use <code>root</code> user for manipulation rather than <code>sudo</code>.</p>
+<h1 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h1><p>The mainly installation process generally consists of these parts: 0. Accessing Internet 1. Partitioning the disk and formating; 2. Install base system on new arch and change root; 3. Adding boot config; 4. Windows manager and display manager 5. Reboot into new arch 6. System settings</p>
+<h2 id="1-Partitioning-the-disk-and-formatting"><a href="#1-Partitioning-the-disk-and-formatting" class="headerlink" title="1. Partitioning the disk and formatting"></a>1. Partitioning the disk and formatting</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fdisk -l</span><br><span class="line">gdisk -l /dev/sda</span><br><span class="line">gdisk /dev/sda # EFI(skip for dual system boot), swap(recommended)</span><br><span class="line">mkswap -L &quot;Linux Swap&quot; /dev/sda3</span><br><span class="line">swapon /dev/sda3</span><br><span class="line">free -m # Verify if swap is turned on</span><br><span class="line">mkfs.ext4 -L &quot;Arch Linux&quot; /dev/sda2</span><br><span class="line">mkfs.fat -F32 /dev/nvme0n1p1</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-Installing-base-system-for-new-arch"><a href="#2-Installing-base-system-for-new-arch" class="headerlink" title="2. Installing base system for new arch"></a>2. Installing base system for new arch</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mount /dev/[partition where you install root hierachy /] /mnt # First mount it under /mnt</span><br><span class="line">(Optional) vim /etc/pacman.d/mirrorlist # Server=https://mirrors.tuna.tsinghua.edu.cn/archlinux/$repo/os/$arch</span><br><span class="line">pacstrap /mnt base # Other groups can also be installed here, eg: base-devel your-favorite-desktop</span><br></pre></td></tr></table></figure>
+
+<p>Don&#x2019;t worry if one or some packages were lost during the installation process. If that could happen, just reboot go back to live system and install and chroot to newly-installed system.</p>
+<h2 id="3-Adding-boot-config"><a href="#3-Adding-boot-config" class="headerlink" title="3. Adding boot config"></a>3. Adding boot config</h2><p>&#x9884;&#x5907;&#x77E5;&#x8BC6; &#x2014;&#x2014; Linux&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x7684;&#x542F;&#x52A8;&#x8FC7;&#x7A0B;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">mkdir -p /mnt/boot/efi</span><br><span class="line">mount /dev/sda1 /mnt/boot/efi # Mount your EFI partition</span><br><span class="line">genfstab -p /mnt &gt;&gt; /mnt/etc/fstab # Check by cat, this file should contain all partitions of your new system</span><br><span class="line">arch-chroot /mnt</span><br><span class="line">passwd root</span><br><span class="line">ln -s /usr/share/zoneinfo/Asia/Shanghai /etc/localtime</span><br><span class="line">mkinitcpio -p linux</span><br><span class="line">sudo pacman -Syu grub efibootmgr</span><br><span class="line">(Optional) mkdir /boot/grub # &#x65E0;&#x5219;&#x521B;&#x5EFA;</span><br><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br><span class="line">grub-install /dev/sda # grub-install --target=x86_64-efi --efi-directory=/boot/efi --bootloader-id=grub</span><br><span class="line">ls -l /boot/efi/EFI/arch # Checking</span><br></pre></td></tr></table></figure>
+
+<p>&#x67E5;&#x770B;&#x6240;&#x6709;&#x53EF;&#x7528;&#x542F;&#x52A8;&#x9879;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">efibootmgr -v</span><br></pre></td></tr></table></figure>
+
+<p>&#x542F;&#x52A8;&#x9879;&#x7684;&#x4FEE;&#x590D;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">efibootmgr --create --disk /dev/nvme0n1 --loader /boot/efi/EFI/grub/grubx64.efi --label &quot;grub 2&quot; --verbose -e 3</span><br></pre></td></tr></table></figure>
+
+<p>&#x5982;&#x679C;&#x91CD;&#x542F;&#x540E;&#x4ECD;&#x7136;&#x6CA1;&#x6709;&#x88AB;&#x68C0;&#x6D4B;&#x5230;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x8FDB;&#x5165;UEFI Shell&#x624B;&#x52A8;&#x6DFB;&#x52A0;</p>
+<h2 id="4-Desktop-and-display-manager"><a href="#4-Desktop-and-display-manager" class="headerlink" title="4. Desktop and display manager"></a>4. Desktop and display manager</h2><h3 id="bofore"><a href="#bofore" class="headerlink" title="bofore"></a>bofore</h3><p>Before choosing our willing destop, create a normal user for using graphical interfaces.</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">pacman -S vim xterm zsh sudo fakeroot # fakeroot is for aur makepkg</span><br><span class="line">pacman -S dialog wpa_supplicant # wireless network support</span><br><span class="line">useradd -G wheel -s /bin/zsh -m -c &quot;WANG Shengdian&quot; wsd</span><br><span class="line">passwd wsd # ******</span><br></pre></td></tr></table></figure>
+
+<p>For window desktops, you can choose GNOME, KDE, or others.<br>You can use display managers(gdm for gnome and lightdm usually for kde) or not.<br>Here I give two suggestive configurations without display manager(Gnome and i3). For KDE users, goes <a href="https://billystudio.github.io/2020/06/26/2020-06-26-KDE-desktop-config">here</a>.</p>
+<p>Before desktop settings, install startx:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S xorg-xinit</span><br></pre></td></tr></table></figure>
+
+<p>startx uses .xinitc and .zprofile(or .bash_profile)</p>
+<h3 id="4-1-GNOME-wayland"><a href="#4-1-GNOME-wayland" class="headerlink" title="4.1. GNOME wayland"></a>4.1. GNOME wayland</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pacman -S gnome-desktop gnome-control-center gnome-shell gnome-tweaks # or put simply, pacstrap /mnt gnome</span><br><span class="line">pacman -S xorg-server-xwayland</span><br></pre></td></tr></table></figure>
+
+<p>For startx wayland, add to <code>.zshrc</code>(because I set zsh as default shell):</p>
+<pre><code>if [[ -z $DISPLAY &amp;&amp; $(tty) == /dev/tty1 &amp;&amp; $XDG_SESSION_TYPE == tty ]]; then
+    MOZ_ENABLE_WAYLAND=1 QT_QPA_PLATFORM=wayland XDG_SESSION_TYPE=wayland exec dbus-run-session gnome-session
+fi
+</code></pre><p>If you choose gdm display manager(which some software like teamviewer requires):</p>
+<pre><code>pacman -Syu gdm
+systemctl enable gdm
+</code></pre><p>For a more detailed configuration and more deeply exploring about Gnome, go to <a href="https://billystudio.github.io/2019/05/27/May-27th-gnome-shell-project-reading/">this article</a></p>
+<h3 id="4-2-i3-startx"><a href="#4-2-i3-startx" class="headerlink" title="4.2. i3 startx"></a>4.2. i3 startx</h3><pre><code>pacman -S xorg i3-wm i3status dmenu # install i3dm
+pacman -S xorg-xinit # install startx
+</code></pre><p>Add to <code>~/.zshrc</code>:</p>
+<pre><code>if systemctl -q is-active graphical.target &amp;&amp;
+[[ ! $DISPLAY &amp;&amp; $XDG_VTNR -eq 1 ]]; then
+    exec startx
+fi
+</code></pre><p>Add ~/.xinitrc</p>
+<pre><code>[ -f /etc/xprofile ] &amp;&amp; . /etc/xprofile
+[ -f ~/.xprofile ] &amp;&amp; . ~/.xprofile
+...
+exec i3
+</code></pre><h3 id="after"><a href="#after" class="headerlink" title="after"></a>after</h3><p>unified wireless network config<br>wpa_supplicant.conf</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ctrl_interface=/run/wpa_supplicant</span><br><span class="line">update_config=1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">systemctl enable wpa_supplicant@wlp58s0.service</span><br><span class="line">systemctl enable dhcpcd</span><br></pre></td></tr></table></figure>
+
+<h2 id="5-Reboot-into-new-arch"><a href="#5-Reboot-into-new-arch" class="headerlink" title="5. Reboot into new arch"></a>5. Reboot into new arch</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">exit # exit chroot</span><br><span class="line">umount -R /mnt</span><br><span class="line">reboot</span><br></pre></td></tr></table></figure>
+
+<p>Then change boot option at start up.</p>
+<h2 id="6-System-settings-and-loacalization"><a href="#6-System-settings-and-loacalization" class="headerlink" title="6. System settings and loacalization"></a>6. System settings and loacalization</h2><p>Edit host name: /etc/hostname<br>Edit known hosts: /etc/hosts<br>Locale: <a href="https://wiki.archlinux.org/index.php/Locale" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Locale</a><br>Fonts: <a href="https://wiki.archlinux.org/index.php/Fonts#Manual_installation" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Fonts#Manual_installation</a></p>
+<h3 id="Add-archlinuxcn-repository"><a href="#Add-archlinuxcn-repository" class="headerlink" title="Add archlinuxcn repository"></a>Add archlinuxcn repository</h3><p>cat into &#x2018;/etc/pacman.conf&#x2019; with</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">/etc/pacman.conf</span><br><span class="line">[archlinuxcn]</span><br><span class="line">Server = https://mirrors.tuna.tsinghua.edu.cn/archlinuxcn/$arch</span><br></pre></td></tr></table></figure>
+
+<p>Then in terminal:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syy &amp;&amp; sudo pacman -S archlinuxcn-keyring</span><br></pre></td></tr></table></figure>
+
+<p>Note that Manjaro doesn&#x2019;t have archlinuxcn support yet.</p>
+<h2 id="Q-amp-A"><a href="#Q-amp-A" class="headerlink" title="Q &amp; A"></a>Q &amp; A</h2><h3 id="Why-I-cannot-find-the-disk-file-system-when-using-fdisk-l"><a href="#Why-I-cannot-find-the-disk-file-system-when-using-fdisk-l" class="headerlink" title="Why I cannot find the disk file system when using fdisk -l"></a>Why I cannot find the disk file system when using <code>fdisk -l</code></h3><p>Analyse: I face this problem because I am using Dell XPS-13 with SDD. I should go into BIOS setup and change the integrated SATA hard drive controller from &#x2018;RAID ON&#x2019; to &#x2018;AHCI&#x2019;. After that, reboot windows using diagonotics.</p>
+<h3 id="Add-boot-option-for-single-disk-install"><a href="#Add-boot-option-for-single-disk-install" class="headerlink" title="Add boot option for single-disk install"></a>Add boot option for single-disk install</h3><p>For my Dell-XPS13, type <code>F12</code> to enter BIOS, then find &#x2018;boot sequence&#x2019; menu and add a boot option from <code>\EFI\arch\grubx64.efi</code></p>
+<h3 id="Restore-the-flash-USB-after-installing-process"><a href="#Restore-the-flash-USB-after-installing-process" class="headerlink" title="Restore the flash USB after installing process"></a>Restore the flash USB after installing process</h3><h3 id="Extra-settings-for-dual-system"><a href="#Extra-settings-for-dual-system" class="headerlink" title="Extra settings for dual system?"></a>Extra settings for dual system?</h3><p>grub to replace windows EFI starter</p>
+<h3 id="how-can-I-get-write-access-to-Windows-NTFS-filesystem"><a href="#how-can-I-get-write-access-to-Windows-NTFS-filesystem" class="headerlink" title="how can I get write access to Windows NTFS filesystem?"></a>how can I get write access to Windows NTFS filesystem?</h3><p>Install the open source version of NTFS, i.e., <code>ntfs-3g</code>.<br>The proper way is to create a /mnt/win10 folder that is owned by your current user.<br>And then write the configuration in /etc/fstab like<br><code>UUID=FED8CDDDD8CD93F5   mnt/win10       ntfs-3g         defaults        0      0</code><br>UUID can be found by <code>blkid</code> of root.</p>
+<h3 id="Q-why-the-times-are-incompatible"><a href="#Q-why-the-times-are-incompatible" class="headerlink" title="Q: why the times are incompatible?"></a>Q: why the times are incompatible?</h3><p>Because windows just take the machine time as the time of current timezone. But Linux defaultly take it as UTC+0, and change to current timezone.</p>
+<p>Solution:<br>Considering that modifying Windows settings is more complex, we change Linux settings by take machine time as the time of current timezone.</p>
+<h3 id="If-I-don&#x2019;t-use-Windows-OS-for-a-while-it-will-go-into-Hibernate-Mode-And-when-I-open-again-boot-defaultly-enter-Arch-Linux-Then-I-cannot-edit-files-under-Windows-filesystem-because-they-are-in-read-only-state-How-can-I-prevent-this-situation"><a href="#If-I-don&#x2019;t-use-Windows-OS-for-a-while-it-will-go-into-Hibernate-Mode-And-when-I-open-again-boot-defaultly-enter-Arch-Linux-Then-I-cannot-edit-files-under-Windows-filesystem-because-they-are-in-read-only-state-How-can-I-prevent-this-situation" class="headerlink" title="If I don&#x2019;t use Windows OS for a while, it will go into Hibernate Mode. And when I open again, boot defaultly enter Arch Linux. Then I cannot edit files under Windows filesystem because they are in read-only state. How can I prevent this situation?"></a>If I don&#x2019;t use Windows OS for a while, it will go into Hibernate Mode. And when I open again, boot defaultly enter Arch Linux. Then I cannot edit files under Windows filesystem because they are in read-only state. How can I prevent this situation?</h3><p>In Sleep Mode, the system won&#x2019;t restart. So you need to change the power settings in control panel. Just go to advanced setting &gt; Hibernate after this time &gt; Never.<br>I think that will be fine.</p>
+<h1 id="Sharpening"><a href="#Sharpening" class="headerlink" title="Sharpening"></a>Sharpening</h1><h2 id="Wireless-network"><a href="#Wireless-network" class="headerlink" title="Wireless network"></a>Wireless network</h2><h3 id="Q-amp-A-I-suddenly-has-no-internet-access-even-IP-address-shows-I-cannot-ping-gateway-why"><a href="#Q-amp-A-I-suddenly-has-no-internet-access-even-IP-address-shows-I-cannot-ping-gateway-why" class="headerlink" title="Q&amp;A: I suddenly has no internet access even IP address shows. I cannot ping gateway, why?"></a>Q&amp;A: I suddenly has no internet access even IP address shows. I cannot ping gateway, why?</h3><p>If you are using wps_supplicant, typing:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl restart wpa_supplicant@wlp58s0.service</span><br></pre></td></tr></table></figure>
+
+<p>may solve it instantly.</p>
+<p>A sample configuration file <code>/etc/wpa_supplicant/wpa_supplicant-wlp58s0.conf</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># Giving configuration update rights to wpa_cli</span><br><span class="line">country=CN</span><br><span class="line">ctrl_interface=/run/wpa_supplicant</span><br><span class="line">ctrl_interface_group=wheel</span><br><span class="line">update_config=1</span><br><span class="line"></span><br><span class="line">network={</span><br><span class="line">    ssid = &quot;name-WiFi&quot;</span><br><span class="line">    psk = somethingafterhash</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>If you are using netctl, typing:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo netctl stop wlp58s0-USTB_Wi-Fi</span><br><span class="line">sudo wifi-menu</span><br></pre></td></tr></table></figure>
+
+<p>The power saving strategy of <code>iw</code> may cause regularly wireless network down. To prevent this, set it off:<br><img src="iw-power-manage-off.png" alt="iw-power-manage-off.png"></p>
+<h3 id="Q-amp-A-Change-from-wpa-supplicant-to-netctl-and-vice-versa"><a href="#Q-amp-A-Change-from-wpa-supplicant-to-netctl-and-vice-versa" class="headerlink" title="Q&amp;A: Change from wpa_supplicant to netctl and vice versa?"></a>Q&amp;A: Change from wpa_supplicant to netctl and vice versa?</h3><p>example of changing from wpa_supplicant to netctl:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop wpa_supplicant@wlp58s0</span><br><span class="line">sudo ip link set wlp58s0 down</span><br><span class="line">ip a # Check if there is a ip addr residual</span><br></pre></td></tr></table></figure>
+
+<p>If there exists an ip addr not delete, use</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ip addr del [IP address] dev [WIFI dev]</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo netctl start [your wifi profile] # Or sudo wifi-menu for the first time</span><br></pre></td></tr></table></figure>
+
+<p>example of changing from netctl to wpa_supplicant:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl stop netctl@USTB_Wi-Fi</span><br><span class="line">sudo systemctl start wpa_supplicant@wlp58s0</span><br></pre></td></tr></table></figure>
+
+<h2 id="AUR"><a href="#AUR" class="headerlink" title="AUR"></a>AUR</h2><p>Before building an AUR package, ensure that base-devel is installed</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S --needed base-devel</span><br></pre></td></tr></table></figure>
+
+<h3 id="AUR-through-proxy"><a href="#AUR-through-proxy" class="headerlink" title="AUR through proxy"></a>AUR through proxy</h3><ol>
+<li><code>export all_proxy=&apos;http://127.0.0.1:1080&apos;</code> under user&#x2019;s shell by editing &#x2018;~/.zshrc&#x2019;.</li>
+<li>under root user, <code>visudo /etc/sudoers</code>, <code>Defaults env_keep += &quot;all_proxy ftp_proxy http_proxy https_proxy no_proxy&quot;</code> to keep envs when sudo</li>
+</ol>
+<h3 id="&#x5173;&#x4E8E;&#x5305;&#x7BA1;&#x7406;&#x591A;&#x8BF4;&#x4E00;&#x5634;"><a href="#&#x5173;&#x4E8E;&#x5305;&#x7BA1;&#x7406;&#x591A;&#x8BF4;&#x4E00;&#x5634;" class="headerlink" title="&#x5173;&#x4E8E;&#x5305;&#x7BA1;&#x7406;&#x591A;&#x8BF4;&#x4E00;&#x5634;"></a>&#x5173;&#x4E8E;&#x5305;&#x7BA1;&#x7406;&#x591A;&#x8BF4;&#x4E00;&#x5634;</h3><p>aur &#x5B89;&#x88C5;&#x540E;&#x7684;&#x5305;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;pacman&#x6765;&#x5378;&#x8F7D;&#xFF0C;&#x4F46;&#x65E0;&#x6CD5;&#x50CF;Repository&#x4E2D;&#x7684;&#x5305;&#x4E00;&#x6837;&#x76F4;&#x63A5;&#x901A;&#x8FC7;pacman&#x6765;&#x66F4;&#x65B0;&#x3002;<br>&#x6240;&#x4EE5;&#x6709;&#x4E9B;&#x5305;&#x4E0D;&#x9002;&#x5408;&#x7528;aur&#x6765;&#x5B89;&#x88C5;&#xFF0C;&#x6709;&#x4E9B;&#x5305;&#x9002;&#x5408;&#x3002;<br>&#x6BD4;&#x5982;&#xFF0C;&#x66F4;&#x65B0;&#x4E00;&#x6B21;&#x5C31;&#x8981;&#x4E0B;&#x8F7D;&#x5F88;&#x5927;&#x5B89;&#x88C5;&#x5305;&#x7684;IDEA&#xFF0C;&#x5C31;&#x6BD4;&#x8F83;&#x9002;&#x5408;&#x7528;aur&#x6765;&#x7BA1;&#x7406;&#xFF0C;&#x60F3;&#x66F4;&#x65B0;&#x5C31;&#x66F4;&#x65B0;&#x3002;&#x518D;&#x5927;&#x4E00;&#x70B9;&#x7684;&#x5C31;&#x53EF;&#x4EE5;&#x8131;&#x79BB;aur&#xFF0C;&#x76F4;&#x63A5;&#x53BB;&#x5B98;&#x7F51;&#x4E0B;&#x8F7D;&#x5B89;&#x88C5;&#xFF0C;&#x5982;MATLAB&#x3002;<br>&#x800C;&#x4E00;&#x4E9B;python&#x4E0B;&#x7684;&#x5DE5;&#x5177;&#x6216;node.js&#x5B89;&#x88C5;&#x7684;&#x5DE5;&#x5177;&#xFF0C;&#x53EF;&#x4EE5;&#x7528;&#x81EA;&#x5E26;&#x7684;pip&#x6216;&#x8005;npm&#x6765;&#x7BA1;&#x7406;&#xFF0C;&#x7528;aur&#x53CD;&#x800C;&#x4E0D;&#x591F;&#x7075;&#x6D3B;&#xFF0C;&#x4E14;&#x591A;&#x4F59;&#x3002;</p>
+<h2 id="Desktop-i3-wm"><a href="#Desktop-i3-wm" class="headerlink" title="Desktop: i3-wm"></a>Desktop: i3-wm</h2><h3 id="common-commands"><a href="#common-commands" class="headerlink" title="common commands"></a>common commands</h3><p>i3 supports three window layouts: stacking mode, tabbed mode, and standard mode.<br>$mod+s: stacking mode<br>$mod+w: tabbed mode<br>$mod+e: standard mode</p>
+<h3 id="To-prevent-sleeping"><a href="#To-prevent-sleeping" class="headerlink" title="To prevent sleeping"></a>To prevent sleeping</h3><p>/etc/systemd/logind.conf</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">HandleLidSwitch ignore</span><br></pre></td></tr></table></figure>
+
+<p>append to &#x2018;~/.xprofile&#x2019;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">xrandr --output eDP-1 --off # close laptop primary screen</span><br><span class="line">xset s off -dpms</span><br><span class="line">xset s noblank</span><br></pre></td></tr></table></figure>
+
+<h3 id="Brightness-of-screen"><a href="#Brightness-of-screen" class="headerlink" title="Brightness of screen"></a>Brightness of screen</h3><p>for intel graphical driver, go into</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># cd /sys/class/backlight/intel_backlight</span><br><span class="line"># cat max_brightness</span><br><span class="line"># echo 3000 &gt; brightness</span><br></pre></td></tr></table></figure>
+
+<p>Check if it is ok. Then we will combine keys to modify it. Install</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S xf86-video-intel</span><br></pre></td></tr></table></figure>
+
+<p>Before binding the kay, check the name of keys by <code>xmodmap -pke</code>, the edit:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">bindsym XF86MonBrightnessUp exec xbacklight -inc 10 # increase screen brightness</span><br><span class="line">bindsym XF86MonBrightnessDown exec xbacklight -dec 10 # decrease screen brightness</span><br></pre></td></tr></table></figure>
+
+<h3 id="Sound-card"><a href="#Sound-card" class="headerlink" title="Sound card"></a>Sound card</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu pulseaudio pulseaudio-alsa</span><br></pre></td></tr></table></figure>
+
+<h3 id="Bluetooth-sounder"><a href="#Bluetooth-sounder" class="headerlink" title="Bluetooth sounder"></a>Bluetooth sounder</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu bluez bluez-utils pulseaudio-bluetooth</span><br><span class="line">sudo usermod -a -G lp wsd</span><br><span class="line">pulseaudio -k   # ensure close</span><br><span class="line">pulseaudio --start</span><br><span class="line">sudo pacman -Syu pavucontrol    # gui for redirecting</span><br><span class="line">lsmod | grep btusb  # check if the module loads</span><br><span class="line">sudo systemctl start bluetooth.service</span><br></pre></td></tr></table></figure>
+
+<p>Then open the bluetooth control</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">bluetoothctl</span><br><span class="line">[bluetooth]# power on</span><br><span class="line">[bluetooth]# scan on</span><br><span class="line">[bluetooth]# pair EC:49:BC:00:90:DE </span><br><span class="line">[bluetooth]# paired-devices</span><br><span class="line">Device EC:49:BC:00:90:DE SANSUI A38S</span><br><span class="line">[bluetooth]# connect EC:49:BC:00:90:DE</span><br></pre></td></tr></table></figure>
+
+<h3 id="Touchpad-tap-to-click"><a href="#Touchpad-tap-to-click" class="headerlink" title="Touchpad tap-to-click"></a>Touchpad tap-to-click</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo touch /etc/X11/xorg.conf.d/90-touchpad.conf</span><br></pre></td></tr></table></figure>
+
+<p>Add these lines</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"># 90-touchpad.conf</span><br><span class="line">Section &quot;InputClass&quot;</span><br><span class="line">        Identifier &quot;touchpad&quot;</span><br><span class="line">        MatchIsTouchpad &quot;on&quot;</span><br><span class="line">        Driver &quot;libinput&quot;</span><br><span class="line">        Option &quot;Tapping&quot; &quot;on&quot;</span><br><span class="line">        Option &quot;TappingButtonMap&quot; &quot;lrm&quot;</span><br><span class="line">        Option &quot;NaturalScrolling&quot; &quot;on&quot;</span><br><span class="line">        Option &quot;ScrollMethod&quot; &quot;twofinger&quot;</span><br><span class="line">EndSection</span><br></pre></td></tr></table></figure>
+
+<p>Note that <code>TappingButtonMap lrm</code> means one-finger tap for left click, two-finger tap for right click and three-finger tap for middle click.</p>
+<h3 id="Wallpaper-setting"><a href="#Wallpaper-setting" class="headerlink" title="Wallpaper setting"></a>Wallpaper setting</h3><p>Edit &#x2018;~/.config/i3/config&#x2019;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">...</span><br><span class="line">exec --no-startup-id feh --bg-scale /path/to/image.file</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+
+<h2 id="System-Maintainance"><a href="#System-Maintainance" class="headerlink" title="System Maintainance"></a>System Maintainance</h2><h3 id="HDD-trim"><a href="#HDD-trim" class="headerlink" title="HDD trim"></a>HDD trim</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo fstrim -a -v</span><br></pre></td></tr></table></figure>
+
+<h3 id="Limit-systemd-journal"><a href="#Limit-systemd-journal" class="headerlink" title="Limit systemd journal"></a>Limit systemd journal</h3><p>/etc/systemd/journald.conf</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">SystemMaxUse=500M</span><br><span class="line">MaxFileSec=1month</span><br></pre></td></tr></table></figure>
+
+<p>Take effects immediately.<br><img src="clean-systemd-journal.png" alt="clean-systemd-journal.png"></p>
+<h3 id="web-browser-profile-cleaner"><a href="#web-browser-profile-cleaner" class="headerlink" title="web browser profile-cleaner"></a>web browser profile-cleaner</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">profile-cleaner</span><br></pre></td></tr></table></figure>
+
+<h2 id="International-language-support"><a href="#International-language-support" class="headerlink" title="International language support"></a>International language support</h2><p>set locale: <a href="https://wiki.archlinux.org/index.php/Localization" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Localization</a></p>
+<h3 id="Change-charset"><a href="#Change-charset" class="headerlink" title="Change charset"></a>Change charset</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">pacman -S enca</span><br><span class="line">enca -L zh_CN file # check the encoding of file</span><br><span class="line">enca -L zh_CN -x UTF-8 &lt; file &gt; newfile # convert the encoding of file</span><br></pre></td></tr></table></figure>
+
+<p>However, this tool is not steady all the time. So a text editor or an editor plugin is suggestted.</p>
+<h2 id="Compatibility-to-Win-OS"><a href="#Compatibility-to-Win-OS" class="headerlink" title="Compatibility to Win OS"></a>Compatibility to Win OS</h2><p>Run win10 in qemu/virt-manager, refer to <a href="https://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/">https://billystudio.github.io/2019/09/17/Sept-17th-Create-vms-on-Linux-the-hard-way/</a></p>
+<h3 id="Install-missing-fonts-on-Linux-host"><a href="#Install-missing-fonts-on-Linux-host" class="headerlink" title="Install missing fonts on Linux host"></a>Install missing fonts on Linux host</h3><p>I save win10 fonts into the hard drive disk.<br><a href="https://wiki.archlinux.org/index.php/Fonts#Manual_installation" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Fonts#Manual_installation</a><br>Some common missing fonts: Consolas, Calibri, Microsoft Yahei</p>
+<h2 id="Printer-service"><a href="#Printer-service" class="headerlink" title="Printer service"></a>Printer service</h2><h3 id="How-can-I-print-through-the-network-HP-printer"><a href="#How-can-I-print-through-the-network-HP-printer" class="headerlink" title="How can I print through the network HP printer?"></a>How can I print through the network HP printer?</h3><ol>
+<li>Install the Linux print service<br><code>pacman -S cups</code><br>In this step, you should check if this service is started after installation. You can type <code>localhost:631</code> to check. If cannot be opened, start the service by<br><code>sudo systemctl start cups.socket</code> or <code>sudo systemctl start cups.service</code></li>
+</ol>
+<p>If there is still some problem, try add your current user to <code>lp</code> group</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo gpasswd -a [username] lp</span><br></pre></td></tr></table></figure>
+
+<p>Check your group by <code>groups [username]</code></p>
+<ol start="2">
+<li><p>Install the HP Linux imaging and printing driver<br><code>pacman -S hplip</code></p>
+</li>
+<li><p>Find the IP address of network printer, and run<br><code>sudo hp-setup -i [ip addr]</code></p>
+</li>
+</ol>
+<p>If it needs some authentification, enter username as root and provide root pass.</p>
+<p>If the plugin is not successfully donwloaded by hp-setup program, then follow these steps:<br>Step 1: Go to <a href="https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins" target="_blank" rel="noopener">https://www.openprinting.org/download/printdriver/auxfiles/HP/plugins</a>.<br>Step 2: Download the plugin files (both &#x2018;run&#x2019; and &#x2018;run.asc&#x2019;) for the hplip version that you are using. Then give them <code>execute</code> previlege by <code>chmod +x</code>.<br>Step 3: Re-run <code>hp-setup -i</code>. Choose to specify a path to the plugin and use the path to the &#x2018;run&#x2019; file that you downloaded in step 2. It may give you some errors about gpg key checking, but install it anyway.<br>Step 4: In the final step, a test page should be printed.</p>
+<p>Now you should have a working printer.<br>Refer 1: <a href="https://wiki.archlinux.org/index.php/CUPS" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/CUPS</a><br>Refer 2: <a href="https://wiki.archlinux.org/index.php/CUPS/Printer-specific_problems#HPLIP" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/CUPS/Printer-specific_problems#HPLIP</a></p>
+<p><strong>remove printer</strong> :</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo hp-setup -i -r</span><br></pre></td></tr></table></figure>
+
+<h2 id="terminal-console"><a href="#terminal-console" class="headerlink" title="terminal console"></a>terminal console</h2><h3 id="z-plugin-for-directory-jump"><a href="#z-plugin-for-directory-jump" class="headerlink" title="z plugin for directory jump"></a>z plugin for directory jump</h3><blockquote>
+<p><a href="https://github.com/rupa/z" target="_blank" rel="noopener">https://github.com/rupa/z</a></p>
+</blockquote>
+<h3 id="grant-sudo-previlige-to-common-user"><a href="#grant-sudo-previlige-to-common-user" class="headerlink" title="grant sudo previlige to common user"></a>grant sudo previlige to common user</h3><p>Install <code>sudo</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">cp /etc/sudoers /etc/sudoers.edit</span><br><span class="line">visudo /etc/sudoers.edit</span><br></pre></td></tr></table></figure>
+
+<p>The file should be opened by default text editor. Mine is vim. Then uncomment the specification for <code>wheel</code> group because my user is already in <code>wheel</code> group.</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">visudo -c -f /etc/sudoers.edit # check</span><br><span class="line">mv /etc/sudoers.edit /etc/sudoers</span><br></pre></td></tr></table></figure>
+
+<h3 id="Xterm-full-screen"><a href="#Xterm-full-screen" class="headerlink" title="Xterm full screen"></a>Xterm full screen</h3><p>use <code>ALT+ENTER</code>.</p>
+<h3 id="Xterm-middle-key-on-touchpad"><a href="#Xterm-middle-key-on-touchpad" class="headerlink" title="Xterm middle key on touchpad"></a>Xterm middle key on touchpad</h3><p>Ctrl + Click = middle key</p>
+<h3 id="Q-change-the-fonts-of-xterm"><a href="#Q-change-the-fonts-of-xterm" class="headerlink" title="Q: change the fonts of xterm"></a>Q: change the fonts of xterm</h3><p>create a file <code>~/.Xresources</code>, write the wildcard-form settings in it:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">xterm*faceName:Consolas:antialias=True</span><br><span class="line">xterm*faceNameDoublesize:Microsoft YaHei:antialias=True</span><br><span class="line">xterm*faceSize: 12</span><br><span class="line">xterm*renderFont: true</span><br><span class="line">xterm*utf8: 2</span><br><span class="line">xterm*utf8Title: true</span><br><span class="line">xterm*titleModes: 2</span><br><span class="line">xterm*selectToClipboard: true</span><br></pre></td></tr></table></figure>
+
+<p>Default color schemes:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">xterm*fullscreen: true</span><br><span class="line">xterm*background: White</span><br><span class="line">xterm*foreground: Black</span><br><span class="line">xterm*color0:    Black </span><br><span class="line">xterm*color1:    Red </span><br><span class="line">xterm*color2:    Green </span><br><span class="line">xterm*color3:    Yellow </span><br><span class="line">xterm*color4:    CornflowerBlue </span><br><span class="line">xterm*color5:    Magenta </span><br><span class="line">xterm*color6:    Cyan </span><br><span class="line">xterm*color7:    White</span><br><span class="line">xterm*colorBDMode:  false</span><br><span class="line">xterm*colorULMode:  false </span><br><span class="line">xterm*cursorColor:  Red</span><br></pre></td></tr></table></figure>
+
+<p>background &#x592A;&#x4EAE;&#xFF0C;&#x6362;&#x6210;&#x6DE1;&#x7C89;&#x7070;&#x8272;#FFFAF0&#xFF08;&#x53BB;&#x767D;&#x5149;&#x84DD;&#x5149;&#xFF09;&#xFF0C;&#x6216;&#x8005;&#x62A4;&#x773C;&#x8272;#C7EDCC<br>color3 &#x7684;yellow&#x592A;&#x4EAE;&#xFF08;&#x7528;&#x5728;warning&#x548C;&#x5B57;&#x7B26;&#x4E32;&#x9AD8;&#x4EAE;&#x5339;&#x914D;&#xFF09;&#xFF0C;&#x80CC;&#x666F;&#x4E2D;&#x4F53;&#x73B0;&#x4E0D;&#x51FA;&#xFF0C;&#x6539;&#x4E3A;&#x6DF1;&#x4E00;&#x4E9B;&#x7684;&#x9EC4;#DAAA01<br>BDMode &#x662F;&#x5426;&#x5173;&#x95ED;&#x53D8;&#x8272;&#x66FF;&#x6362;&#x52A0;&#x7C97;&#xFF0C;&#x8FD9;&#x91CC;&#x5173;&#x95ED;&#x4EE5;&#x4F7F;&#x7528;&#x52A0;&#x7C97;&#x6A21;&#x5F0F;<br>colorUL &#x8D85;&#x94FE;&#x63A5;&#x53D8;&#x8272;&#x6A21;&#x5F0F;&#x3002;&#x7528;&#x4E8E;Ctrl+R&#x5339;&#x914D;&#x547D;&#x4EE4;&#x3002;&#x82E5;&#x5173;&#x95ED;&#xFF0C;&#x5219;&#x4F7F;&#x7528;&#x4E0B;&#x5212;&#x7EBF;&#x663E;&#x793A;&#x5339;&#x914D;&#x3002;&#x4E5F;&#x5E94;&#x8BE5;&#x4E0E;&#x80CC;&#x666F;&#x548C;&#x524D;&#x666F;&#x533A;&#x5206;&#x5F00;&#xFF0C;&#x4F7F;&#x7528;&#x7070;&#x767D;&#xFF1A;#7A8181<br>cusorColor&#x6539;&#x4E3A;&#x6DF1;&#x7EA2;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">xterm*background: #FFF5EE</span><br><span class="line">xterm*foreground: Black</span><br><span class="line">xterm*color0: Black </span><br><span class="line">xterm*color1: Red</span><br><span class="line">xterm*color2: Green</span><br><span class="line">xterm*color3: #DAAA01 </span><br><span class="line">xterm*color4: CornflowerBlue</span><br><span class="line">xterm*color5: Magenta</span><br><span class="line">xterm*color6: Cyan</span><br><span class="line">xterm*color7: White</span><br><span class="line">xterm*colorBDMode: false </span><br><span class="line">xterm*colorUL: #7A8181 </span><br><span class="line">xterm*colorULMode: true </span><br><span class="line">xterm*cursorColor: #D3423E</span><br></pre></td></tr></table></figure>
+
+<p>Then add <code>[[ -f ~/.Xresources ]] &amp;&amp; xrdb -merge ~/.Xresources</code> to the file .xprofile. For the X-org based GNOME environment, it is ok now. But for the default GNOME 3 wayland based desktop environment, since it didn&#x2019;t initialize and X11 configurations, we should use other ways for autostarting. Here I suggest to rename .xprofile as .autostart_scripts.</p>
+<p>I found a way equivelent to audo starting every time logging in that is using xdg autostart files. After installing <code>xdg-user-dirs</code> I write a .desktop file under &#x2018;~/.config/autostart/&#x2018;.</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Type=Application</span><br><span class="line">Name=XTerm settings under wayland</span><br><span class="line">NoDisplay=true</span><br><span class="line">Exec=/home/shane/.autostart_scripts</span><br></pre></td></tr></table></figure>
+
+<p>Note that the Exec item should be a fullpath filename and the relevant files including <code>~/.autostart_scripts</code> are granted as user excutable permision(+x).</p>
+<h3 id="Xterm-prevent-Alt-B-becoming-strange-symbol"><a href="#Xterm-prevent-Alt-B-becoming-strange-symbol" class="headerlink" title="Xterm prevent Alt+B becoming strange symbol"></a>Xterm prevent Alt+B becoming strange symbol</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xterm*metaSendsEscape: true</span><br></pre></td></tr></table></figure>
+
+<h3 id="How-can-I-copy-and-paste-from-xterm"><a href="#How-can-I-copy-and-paste-from-xterm" class="headerlink" title="How can I copy and paste from xterm?"></a>How can I copy and paste from xterm?</h3><p>Understanding the concept of &#x2018;PRIMARY&#x2019; and &#x2018;CLIPBOARD&#x2019;, the middle mouse key is served for PRIMARY buffer. If I want to select also for CLIPBOARD, just Ctrl+Mouse Middle Key, and then check &#x2018;selection to clipboard&#x2019;.</p>
+<p><img src="select_to_clipboard.png" alt="toClipboard"></p>
+<p>Just highlighting by draging(inside one screen) or right mouse key(long screen) will select them for copy, Shift+Insert or using the mouse middle key for paste.</p>
+<h3 id="Add-a-keyboard-shortcut-for-xterm"><a href="#Add-a-keyboard-shortcut-for-xterm" class="headerlink" title="Add a keyboard shortcut for xterm"></a>Add a keyboard shortcut for xterm</h3><p>Set in GNOME settings &gt; Keyboard shortcut &gt; Add shortcut &gt; run <code>uxterm</code> by pressing &#x2018;Alt + T&#x2019;</p>
+<h2 id="Those-common-used-software"><a href="#Those-common-used-software" class="headerlink" title="Those common-used software?"></a>Those common-used software?</h2><h3 id="v2ray"><a href="#v2ray" class="headerlink" title="v2ray"></a>v2ray</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">v2ray -test -config=/etc/v2ray/config.json</span><br><span class="line">sudo v2ray --config=/etc/v2ray/config.json</span><br></pre></td></tr></table></figure>
+
+<h3 id="web-browser"><a href="#web-browser" class="headerlink" title="web browser"></a>web browser</h3><p>Chrome and Firefox are my choices. I suggest adding <code>archlinuxcn</code> Repository to install <code>google-chrome-stable</code> and <code>firefox-esr</code>. </p>
+<h3 id="text-editor"><a href="#text-editor" class="headerlink" title="text editor"></a>text editor</h3><p>I use <code>vim-gnome</code> and <code>visual-studio-code-bin</code>.</p>
+<pre><code>sudo cp /usr/share/applications/visual-studio-code.desktop ~/.local/share/applications
+cd ~/.local/share/applications
+sudo chown wsd:wsd visual-studio-code.desktop
+vim visual-studio-code.desktop
+</code></pre><p>Add proxy <code>--proxy-server=&quot;http://127.0.0.1:1080&quot;</code> to Exec.</p>
+<p>Sometimes I open several VSCode windows and I want them to look different. In this case, set &#x201C;window.titleBarStyle&#x201D; = &#x201C;custom&#x201D; to make sure the menu merges title bar. And then install &#x201C;window colors&#x201D; extension.</p>
+<h3 id="pdf-viewer"><a href="#pdf-viewer" class="headerlink" title="pdf viewer"></a>pdf viewer</h3><p><a href="https://www.archlinux.org/packages/extra/x86_64/evince/" target="_blank" rel="noopener">Evince</a> and <code>WPS PDF</code> </p>
+<h3 id="Video-player"><a href="#Video-player" class="headerlink" title="Video player"></a>Video player</h3><p>VLC video viewer</p>
+<h3 id="System-monitor"><a href="#System-monitor" class="headerlink" title="System monitor"></a>System monitor</h3><p>gnome-system-monitor</p>
+<h3 id="Chinese-input-method"><a href="#Chinese-input-method" class="headerlink" title="Chinese input method"></a>Chinese input method</h3><p>&#x641C;&#x72D7;&#x62FC;&#x97F3;&#x7F3A;&#x70B9;&#xFF1A;&#x5360;&#x5185;&#x5B58;&#x3001;&#x6613;&#x5D29;&#x6E83;&#x3001;&#x72B6;&#x6001;&#x680F;&#x65E0;&#x6CD5;&#x5728;&#x4E0D;&#x8F93;&#x5165;&#x65F6;&#x9690;&#x85CF;<br>&#x767E;&#x5EA6;&#x62FC;&#x97F3;&#x7F3A;&#x70B9;&#xFF1A;&#x72B6;&#x6001;&#x680F;&#x65E0;&#x6CD5;&#x5728;&#x4E0D;&#x8F93;&#x5165;&#x65F6;&#x9690;&#x85CF;<br>fcitx&#x81EA;&#x5E26;&#x62FC;&#x97F3;&#x7F3A;&#x70B9;&#xFF1A;&#x8BCD;&#x5E93;&#x4E0D;&#x591F;&#x5F3A;&#x5927;</p>
+<p>or </p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ibus ibus-libpinyin</span><br></pre></td></tr></table></figure>
+
+<p>to get a quicker access to Chinese input method.</p>
+<p><strong>&#x76EE;&#x524D;&#x4F7F;&#x7528;&#x7684;&#x65B9;&#x6848;&#x4E3A;fcitx&#x81EA;&#x5E26;&#x53CC;&#x62FC;&#x3002;</strong><br>&#x901A;&#x8FC7;&#x8F93;&#x5165;&#x5206;&#x53F7;&#xFF1B;&#x53EF;&#x4EE5;&#x5524;&#x8D77;&#x5FEB;&#x901F;&#x8F93;&#x5165;&#xFF0C;&#x7528;&#x6237;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5728; <code>$HOME/.config/fcitx/data/QuickPhrase.mb</code></p>
+<p>&#x7981;&#x7528;&#x5168;&#x89D2;&#x5FEB;&#x6377;&#x952E;&#xFF1A;Global Config &#x9009;&#x9879; &#x300B; Show Advance Options &#x300B; Swithing Full Width Character Mode<br>&#x5C06;&#x4E24;&#x8005;&#x5FEB;&#x6377;&#x952E;&#x90FD;&#x8BBE;&#x7F6E;&#x4E3A; Empty &#x5373;&#x53EF;&#xFF08;&#x6309; Esc &#x952E;&#x53EF;&#x4EE5;&#x6E05;&#x7A7A;&#x5FEB;&#x6377;&#x952E;&#x8BBE;&#x7F6E;&#xFF09;</p>
+<p>&#x4EE5;&#x4E0B;&#x662F;&#x4E4B;&#x524D;&#x5012;&#x817E;&#x641C;&#x72D7;&#x8F93;&#x5165;&#x6CD5;&#x7684;&#x8BB0;&#x5F55;(<em>Deprecated</em>):<br>Sogou Pinyin is currently the best Chinese Method solution but it is not easy to install it correctly on Arch Linux. Though I give methods here, more efforts should be made when practicing because it changes as time goes.</p>
+<p>The installation scripts for sogoupinyin which is based on qt4 are:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Rns fcitx-im fcitx-configtool</span><br><span class="line">rm -rf .config/fcitx</span><br><span class="line">rm -rf .sogouinput</span><br><span class="line">rm -rf .config/Sogou*</span><br><span class="line">sudo pacman -Syu fcitx-lilydjwg-git fcitx-sogoupinyin</span><br><span class="line"># For KDE user: sudo pacman -S kcm-fcitx </span><br><span class="line"># For GNOME user: pacman -S fcitx-configtool fcitx-qt5</span><br></pre></td></tr></table></figure>
+
+<p>If anything happened during inputing, don&#x2019;t panic, use <code>Ctrl + 5</code> to reload Input method.</p>
+<p>The releases for newly <code>sogouimebs</code> based on qt5 are here: <a href="https://gitee.com/laomocode/fcitx-sogouimebs/releases" target="_blank" rel="noopener">https://gitee.com/laomocode/fcitx-sogouimebs/releases</a></p>
+<h3 id="Teamviewer"><a href="#Teamviewer" class="headerlink" title="Teamviewer"></a>Teamviewer</h3><p>aur <code>teamviewer</code> on xorg<br>If showing the message <code>Not ready. Please check your connection</code>, then the service should be enabled</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">systemctl start teamviewerd.service</span><br></pre></td></tr></table></figure>
+
+<p>Note that teamviewer(current version is Teamviewer 14) need lightdm or gdm supports, so startx ways doesn&#x2019;t work.</p>
+<h3 id="WPS-Office"><a href="#WPS-Office" class="headerlink" title="WPS Office"></a>WPS Office</h3><p>Add archlinuxcn repository, then</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu ttf-wps-fonts wps-office wps-office-mime wps-office-mui-zh-cn</span><br></pre></td></tr></table></figure>
+
+<p>Sometimes, wps office may not config input method properly. There are two ways to solve it:</p>
+<p><strong>For Zsh users</strong> Because wps binary files run /bin/bash, so you need to edit <code>~/.bash_profile</code> and add:</p>
+<pre><code>export XMODIFIERS=&quot;@im=fcitx&quot;
+export GTK_IM_MODULE=&quot;fcitx&quot;
+export QT_IM_MODULE=&quot;fcitx&quot;
+</code></pre><p><strong>For Bash users</strong> Normally for bash users, wps office can set input method well. But if that is not the case, you need to add some parameters for the executable file. Here I use fcitx on gnome. So I should replace add two lines to, for example, <code>sudo vim /usr/bin/et</code>:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export XMODIFIERS=&quot;@im=fcitx&quot;</span><br><span class="line">export GTK_IM_MODULE=&quot;fcitx&quot;</span><br></pre></td></tr></table></figure>
+
+<p>It is just a temporary solution because every time wps-office-et is upgraded, <code>/usr/bin/et</code> will be rewritten to a default config. So it is suggest to enable a user-specific application by </p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /usr/share/applications/wps-office-et.desktop ~/.local/share/applications</span><br><span class="line">cd ~/.local/share/applications</span><br><span class="line">sudo chown wsd:wsd wps-office-et.desktop</span><br><span class="line">vim wps-office-et.desktop</span><br></pre></td></tr></table></figure>
+
+<p>wps-office-et.desktop</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Exec=$HOME/.local/bin/et %f</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /usr/bin/et ~/.local/bin/</span><br><span class="line">cd ~/.local/bin</span><br><span class="line">vim et</span><br></pre></td></tr></table></figure>
+
+<p>and add the two exports above.</p>
+<h3 id="Remote-Windows-desktop"><a href="#Remote-Windows-desktop" class="headerlink" title="Remote Windows desktop"></a>Remote Windows desktop</h3><p><em>As Windows desktop client</em></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S xfreerdp</span><br></pre></td></tr></table></figure>
+
+<p>Toggle Full screen: Ctrl + Alt + Enter</p>
+<p>Link to lab server:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xfreerdp /size:1920x1080 /network:LAN /u:wangshengdian /v:202.204.62.142</span><br></pre></td></tr></table></figure>
+
+<p>Or <code>xfreerdp -g 1920x1080 -x 0x80 -u wangshengdian 202.204.62.142</code></p>
+<p><em>As Server</em><br><code>realvnc-vnc-server</code></p>
+<h3 id="Screenshot"><a href="#Screenshot" class="headerlink" title="Screenshot"></a>Screenshot</h3><p><strong>Under GNOME</strong>:<br><code>gnome-screenshot</code> is good for use.</p>
+<p><strong>Under KDE</strong>:<br><code>spectacle</code></p>
+<p><strong>Command Line tool</strong>:<br><code>escrotum</code></p>
+<h3 id="Zip-file-generator-and-extractor"><a href="#Zip-file-generator-and-extractor" class="headerlink" title="Zip file generator and extractor"></a>Zip file generator and extractor</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu 7zip</span><br></pre></td></tr></table></figure>
+
+<p>For rar files:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">7z x filename.rar</span><br></pre></td></tr></table></figure>
+
+<p>For Windows zip file with GBK encoding, use python code in the following</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">#!/usr/bin/env python2</span></span><br><span class="line"><span class="hljs-comment"># -*- coding: utf-8 -*-</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> os</span><br><span class="line"><span class="hljs-keyword">import</span> sys</span><br><span class="line"><span class="hljs-keyword">import</span> zipfile</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">print</span> <span class="hljs-string">&quot;Processing File &quot;</span> + sys.argv[<span class="hljs-number">1</span>] </span><br><span class="line"></span><br><span class="line">file=zipfile.ZipFile(sys.argv[<span class="hljs-number">1</span>],<span class="hljs-string">&quot;r&quot;</span>);</span><br><span class="line"><span class="hljs-keyword">for</span> name <span class="hljs-keyword">in</span> file.namelist():</span><br><span class="line">    utf8name=name.decode(<span class="hljs-string">&apos;gbk&apos;</span>)</span><br><span class="line">    <span class="hljs-keyword">print</span> <span class="hljs-string">&quot;Extracting &quot;</span> + utf8name</span><br><span class="line">    pathname = os.path.dirname(utf8name)</span><br><span class="line">    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(pathname) <span class="hljs-keyword">and</span> pathname!= <span class="hljs-string">&quot;&quot;</span>:</span><br><span class="line">        os.makedirs(pathname)</span><br><span class="line">    data = file.read(name)</span><br><span class="line">    <span class="hljs-keyword">if</span> <span class="hljs-keyword">not</span> os.path.exists(utf8name):</span><br><span class="line">        fo = open(utf8name, <span class="hljs-string">&quot;w&quot;</span>)</span><br><span class="line">        fo.write(data)</span><br><span class="line">        fo.close</span><br><span class="line">file.close()</span><br></pre></td></tr></table></figure>
+
+<h3 id="Dictionary"><a href="#Dictionary" class="headerlink" title="Dictionary"></a>Dictionary</h3><p>Go to website <a href="http://download.huzheng.org/bigdict/" target="_blank" rel="noopener">http://download.huzheng.org/bigdict/</a> to download your demanding dictionary and enter root:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">tar -xjvf a.tar.bz2</span><br><span class="line">mv a /usr/share/stardict/dic</span><br></pre></td></tr></table></figure>
+
+<p>Then we install another pretty good front-end software called goldendict</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu goldendict</span><br></pre></td></tr></table></figure>
+
+<p>If you are using Wayland rather than X11, goldendict might not go well. Use <code>QT_QPA_PLATFORM=xcb</code> to force X11 use.</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /usr/share/applications/goldendict.desktop ~/.local/share/applications</span><br><span class="line">cd ~/.local/share/applications</span><br><span class="line">sudo chown youruser:youruser goldendict.desktop</span><br></pre></td></tr></table></figure>
+
+<p>Replace <code>Exec=</code> line in goldendict.desktop with <code>goldendict.desktop</code>.<br>Refer to <a href="#References">&#x201C;goldendict&#x201D; terminated by signal SIGSEGV (Address boundary error) and segfaults</a><br>and <a href="#References">Arch Wiki Desktop entries</a></p>
+<p>Generally, the dictionary will detected by it, if not, Edit -&gt; Dictionaries -&gt; Files, then add <code>/usr/share/stardict/dic</code>.</p>
+<p>My experience after using digital dictionaries under WinOS basically includes some points of view. First, it&#x2019;s of little difference if I am searching words with a web browser. Then I would like to tell some feelings of some WinOS dictionary software. Sure there are plenty of them under WinOS, but most of them carries some unwanted ads. Sometimes I just want the English meanings but they offer me Chinese meaning primarily and defaultly. Excluding those have the former two disadvantages, only <code>Lingoes</code> and <code>OALED</code> are left for choices. But a little unfortunately, <code>Lingoes</code> is huge-size and <code>OALED3</code> is too old for Win10(its pixel rendering is bad). Under Linux, I can install a clean and small interface and just install the dictionary that I want(Here I mean Merriam-Webster). It&#x2019;s a very pure experience.</p>
+<h3 id="Baidu-Netdisk-Downloader"><a href="#Baidu-Netdisk-Downloader" class="headerlink" title="Baidu Netdisk Downloader"></a>Baidu Netdisk Downloader</h3><p><code>aria2</code> backend, <code>Camtd</code> chrome extension and <code>TamperMonkey</code> are prepared.<br>Then install <code>&#x7F51;&#x76D8;&#x76F4;&#x94FE;&#x4E0B;&#x8F7D;&#x52A9;&#x624B;</code> userscript in TamperMonkey</p>
+<p>Then login pan.baidu.com by your own account, click &#x201C;&#x4E0B;&#x8F7D;&#x52A9;&#x624B;&#x201D;&gt;&#x201D;RPC&#x4E0B;&#x8F7D;&#x201D;&gt;&#x201D;&#x53D1;&#x9001;&#x5230;aria2&#x201D; to download.<br><img src="BaiduHelper.png" alt="BaiduHelper"></p>
+<h3 id="Wallpaper-Changer"><a href="#Wallpaper-Changer" class="headerlink" title="Wallpaper Changer"></a>Wallpaper Changer</h3><p><strong>GNOME3: How can I automatically change the wallpaers which are selected from a folder?</strong><br>It is not a big problem because the gnome community has offered a large amount of extensions. What you need to do is to find and then use them. Here, the GNOME extension <a href="https://extensions.gnome.org/extension/1225/wallpaper-changer/" target="_blank" rel="noopener">Wallpaper Changer</a> is suggested for you.</p>
+<h3 id="Backup-rsync-fcron"><a href="#Backup-rsync-fcron" class="headerlink" title="Backup: rsync + fcron"></a>Backup: rsync + fcron</h3><p>install <code>fcron</code> and <code>rsnyc</code></p>
+<p>For example, a user works on server filesystem, and backs up to its local system daily.</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/cron.daily</span><br><span class="line">sudo touch backup</span><br><span class="line">sudo chmod +x backup</span><br></pre></td></tr></table></figure>
+
+<p>In backup, write</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">#!/bin/bash</span><br><span class="line">rsync -a --delete --quiet working-on-the-remote-file backup-to-local</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start fcron.service</span><br><span class="line">sudo systemctl enable fcron.service</span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x5317;&#x90AE;&#x4EBA;-&#x7231;&#x5317;&#x79D1;"><a href="#&#x5317;&#x90AE;&#x4EBA;-&#x7231;&#x5317;&#x79D1;" class="headerlink" title="&#x5317;&#x90AE;&#x4EBA; / &#x7231;&#x5317;&#x79D1;"></a>&#x5317;&#x90AE;&#x4EBA; / &#x7231;&#x5317;&#x79D1;</h3><p>sudo pacman -S transmission-cli</p>
+<p><a href="http://localhost:9091" target="_blank" rel="noopener">http://localhost:9091</a></p>
+<p>Ref: <a href="https://wiki.archlinux.org/index.php/Transmission" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Transmission</a></p>
+<p>When using from other computers meeting error <em>403: Forbidden Unauthorized IP Address.</em>,<br>add your ip to <code>rpc-whitelist</code> in <code>~/.config/transmission-daemon/settings.json</code>, then restart</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">transmission-remote --exit # or pkill -3 transmission-daemon</span><br><span class="line">transmission-daemon</span><br></pre></td></tr></table></figure>
+
+<h3 id="Games"><a href="#Games" class="headerlink" title="Games"></a>Games</h3><!-- 红色警戒 --- 兵临城下
+aur install deepin-wine5
+对于非Gnome桌面如 KDE，需要自启动 xsettingsd，在 .autostart_scripts 中写入
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/xsettingsd &amp;</span><br></pre></td></tr></table></figure>
+
+启动Ra2.exe命令
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deepin-wine5 start /unix ~/Documents/Living/Games/binglinchengxia/Ra2.exe</span><br></pre></td></tr></table></figure>
+
+-->
+<p>&#x8857;&#x673A;&#x6E38;&#x620F; <code>fceux</code>, &#x6253;&#x5F00; nes &#x6216;&#x8005; zip &#x7684; ROM &#x6587;&#x4EF6;<br>&#x6309;&#x952E;&#x8BBE;&#x7F6E;&#xFF1A;<br><img src="fceux-gamepad.png" alt="fceux-gamepad.png"></p>
+<p>&#x5C4F;&#x5E55;&#x5927;&#x5C0F;&#x8BBE;&#x7F6E;&#xFF1A;<br><img src="fceux-scale.png" alt="fceux-scale.png"></p>
+<h1 id="Understanding"><a href="#Understanding" class="headerlink" title="Understanding"></a>Understanding</h1><h2 id="pacman"><a href="#pacman" class="headerlink" title="pacman"></a>pacman</h2><p>To see what packages belong to the gnome group, run:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Sg gnome</span><br></pre></td></tr></table></figure>
+
+<p>To install a package completely, use</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Rns [package_name]</span><br></pre></td></tr></table></figure>
+
+<p>where <code>-R</code> means remove the package, <code>-n</code> means not saving important configuration files, and <code>-s</code> means removing its dependencies which are note required by any other installed packages.</p>
+<p>Within the firewall, the speed is limited by v4. So I suggest v6. The differences are really distinguishable.</p>
+<ol>
+<li>get a v6 address</li>
+<li>get a v6 vps</li>
+<li><code># export all_proxy=&apos;socks5://127.0.0.1:1080&apos;</code></li>
+<li><code># pacman -Syu</code></li>
+</ol>
+<p>To retrieve a list of the files installed by a package, run:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Ql package_name</span><br></pre></td></tr></table></figure>
+
+<p>To query which package a file/directory in the file system belongs to:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Qo /usr/bin/ctags</span><br></pre></td></tr></table></figure>
+
+<p>To clear the cache of all uninstalled packages in <code>/var/cache/pacman/pkg/</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -Sc</span><br></pre></td></tr></table></figure>
+
+<h3 id="Q-amp-A-1"><a href="#Q-amp-A-1" class="headerlink" title="Q&amp;A"></a>Q&amp;A</h3><p>pacman -Syu facing:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">==&gt; WARNING: Possibly missing firmware for module: wd719x</span><br><span class="line">==&gt; WARNING: Possibly missing firmware for module: aic94xx</span><br><span class="line">==&gt; WARNING: Possibly missing firmware for module: xhci_pci</span><br></pre></td></tr></table></figure>
+
+<p>every time. To replay these warnings, you can also type:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mkinitcpio -p linux</span><br></pre></td></tr></table></figure>
+
+<p>Reason: you miss these firmwares:<br>aic94xx-firmware: Adaptec SAS 44300, 48300, 58300 Sequencer Firmware for AIC94xx driver<br>wd719x-firmware: Driver for Western Digital WD7193, WD7197 and WD7296 SCSI cards<br>xhci_pci: rensas controller like uPD720201 and uPD720202<br>You need to install these modules by <code>makepkg -sri</code>:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone https://aur.archlinux.org/aic94xx-firmware.git</span><br><span class="line">git clone https://aur.archlinux.org/wd719x-firmware.git</span><br><span class="line">git clone https://aur.archlinux.org/upd72020x-fw.git</span><br></pre></td></tr></table></figure>
+
+<h3 id="installing-eclipse-from-aur"><a href="#installing-eclipse-from-aur" class="headerlink" title="installing eclipse from aur"></a>installing eclipse from aur</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">git clone https://aur.archlinux.org/eclipse.git</span><br><span class="line">cd eclipse</span><br><span class="line">makepkg -s # you can download the install packages in advance using aria2c</span><br><span class="line">sudo pacman -U eclipse-common-4.15-6-x86_64.pkg.tar.xz</span><br><span class="line">sudo pacman -U eclipse-java-4.15-6-x86_64.pkg.tar.xz # or jee, javascript, cpp, rust, php</span><br></pre></td></tr></table></figure>
+
+<h3 id="Trouble-shooting"><a href="#Trouble-shooting" class="headerlink" title="Trouble shooting"></a>Trouble shooting</h3><p><strong>1. Unable to lock database</strong>:</p>
+<blockquote>
+<p>:: Synchronizing package databases&#x2026;<br>error: failed to update core (unable to lock database)<br>error: failed to update extra (unable to lock database)<br>&#x2026;<br>error: failed to synchronize all databases</p>
+</blockquote>
+<p>It might because another process is running <code>pacman</code>. Just take a coffee and wait for it ^_-</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[root@inspiron-7537 shane]# pacman -Syu                                   </span><br><span class="line">:: Synchronizing package databases...                       </span><br><span class="line">error: failed to update core (unable to lock database)                                                                       </span><br><span class="line">error: failed to update extra (unable to lock database)                                                                        </span><br><span class="line">error: failed to update community (unable to lock database)                                                                    </span><br><span class="line">error: failed to update multilib (unable to lock database)                                                                     </span><br><span class="line">error: failed to update archlinuxcn (unable to lock database)                                                                  </span><br><span class="line">error: failed to update blackarch (unable to lock database)                                                                    </span><br><span class="line">error: failed to synchronize all databases</span><br></pre></td></tr></table></figure>
+
+<p>Solve:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">rm /var/lib/pacman/db.lck</span><br></pre></td></tr></table></figure>
+
+<p><strong>2. file confliction</strong>:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu</span><br><span class="line">error: failed to commit transaction (conflicting files)</span><br><span class="line">python-numpy: /usr/bin/f2py exists in filesystem</span><br></pre></td></tr></table></figure>
+
+<p>This happens because I use pip install numpy but some packages in my repository takes python-numpy as dependencies. This is a trivial problem, just remove by <code>sudo pip3 uninstall numpy</code>.</p>
+<p><strong>3. could not satisfy dependencies (Dec 22nd 2019)</strong>:<br>When running <code>sudo pacman --noconfirm -Syu</code>, I received an error:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">error: failed to prepare transaction (could not satisfy dependencies)</span><br><span class="line">:: installing xorgproto (2019.2-2) breaks dependency &apos;dmxproto&apos; required by libdmx</span><br><span class="line">:: installing xorgproto (2019.2-2) breaks dependency &apos;xf86dgaproto&apos; required by libxxf86dga</span><br></pre></td></tr></table></figure>
+
+<p>This happens because <code>libdmx</code> requires <code>dmxproto</code> but updating will break this requirement chain, so that <code>libdmx</code> loses dependency.<br>To repair the bug, the easy way is manually removing <code>libdmx</code> and <code>libxxf86dga</code>, then upgrade.<br>But <code>libdmx</code> and <code>libxxf86dga</code> may be dependent under other upper level packages.<br>So we should use <code>pacman -Rdd libdmx libxxf86dga &amp;&amp; pacman -Syu</code>.</p>
+<p><strong>4. GPGME error: No data</strong></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">error: GPGME error: No data</span><br><span class="line">error: GPGME error: No data</span><br><span class="line">error: GPGME error: No data</span><br><span class="line">error: GPGME error: No data</span><br><span class="line">:: Synchronizing package databases...</span><br><span class="line"> core                  137.8 KiB   485 KiB/s 00:00 [######################] 100%</span><br><span class="line"> extra                1567.2 KiB   666 KiB/s 00:02 [######################] 100%</span><br><span class="line"> community               5.8 MiB   635 KiB/s 00:09 [######################] 100%</span><br><span class="line"> multilib              150.3 KiB   626 KiB/s 00:00 [######################] 100%</span><br><span class="line"> archlinuxcn is up to date</span><br><span class="line">error: GPGME error: No data</span><br><span class="line">error: GPGME error: No data</span><br><span class="line">error: GPGME error: No data</span><br><span class="line">error: GPGME error: No data</span><br><span class="line">error: failed to synchronize all databases (unexpected error)</span><br></pre></td></tr></table></figure>
+
+<p>Try to empty the synchronized folder and full-update:</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo rm -R /var/lib/pacman/sync</span><br><span class="line">sudo pacman -Syyu</span><br></pre></td></tr></table></figure>
+
+<p><strong>5. error: signature from &#x201C;<a href="mailto:xxx@archlinux.org" target="_blank" rel="noopener">xxx@archlinux.org</a>&#x201C; is unknown/marginal trust</strong></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">error: failed to commit transation (invalid or corrupted package)</span><br><span class="line">Errors occured, no packages were upgraded.</span><br></pre></td></tr></table></figure>
+
+<p>you should run </p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Sy archlinux-keyring</span><br><span class="line">sudo pacman-key --populate archlinux</span><br><span class="line">sudo pacman-key --refresh-keys</span><br><span class="line">sudo pacman -Syu</span><br></pre></td></tr></table></figure>
+
+<blockquote>
+<p>Sometimes my wifi is off. when I ping my local router, the destination is unreachable.<br>Later I find the power_saving function of iw causes that. So I edit <code>/etc/udev/rules.d/81-wifi-powersave.rules</code>:</p>
+</blockquote>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ACTION==&quot;add&quot;, SUBSYSTEM==&quot;net&quot;, KERNEL==&quot;wl*&quot;, RUN+=&quot;/usr/bin/iwconfig wlp58s0 power off&quot;</span><br></pre></td></tr></table></figure>
+
+<p>Reboot and found iwconfig off the power management.</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>This video is also recommended: <a href="https://www.bilibili.com/video/av5462824/?redirectFrom=h5" target="_blank" rel="noopener">https://www.bilibili.com/video/av5462824/?redirectFrom=h5</a></p>
+<p><a href="https://github.com/goldendict/goldendict/issues/935" target="_blank" rel="noopener">&#x201C;goldendict&#x201D; terminated by signal SIGSEGV (Address boundary error) and segfaults</a>: <a href="https://github.com/goldendict/goldendict/issues/935" target="_blank" rel="noopener">https://github.com/goldendict/goldendict/issues/935</a></p>
+<p><a href="https://wiki.archlinux.org/index.php/Desktop_entries#Modify_environment_variables" target="_blank" rel="noopener">Arch Wiki Desktop Entries</a>: <a href="https://wiki.archlinux.org/index.php/Desktop_entries#Modify_environment_variables" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Desktop_entries#Modify_environment_variables</a></p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Linux/">#Linux</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/OS/">#OS</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Arch-Linux/">#Arch Linux</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/Apr-24th-criminal-litigation-as-opposed-to-civil-litigation/">刑事诉讼与民事诉讼的区别</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/Apr-10th-Python-pickle-package/">Python pickle package</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="notification is-danger">
+    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
+</div>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

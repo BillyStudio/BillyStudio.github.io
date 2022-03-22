@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>学习非主流汉字输入法 - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/2020-01-19-Wubi-Chinese-input-method/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x975E;&amp;#x4E3B;&amp;#x6D41;&amp;#x6C49;&amp;#x5B57;&amp;#x8F93;&amp;#x5165;&amp;#x6CD5;&amp;#x8BA9;&amp;#x6211;&amp;#x5BF9;&amp;#x6C49;&amp;#x5B57;&amp;#x7684;&amp;#x7406;&amp;#x89E3;&amp;#x53C8;&amp;#x52A0;&amp;#x6DF1;&amp;#x4E86;&amp;#x4E00;&amp;#x5C42;&amp;#x3002;">
+<meta name="keywords" content="五笔,双拼,输入法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学习非主流汉字输入法">
+<meta property="og:url" content="https://BillyStudio.github.io/2020-01-19-Wubi-Chinese-input-method/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x975E;&amp;#x4E3B;&amp;#x6D41;&amp;#x6C49;&amp;#x5B57;&amp;#x8F93;&amp;#x5165;&amp;#x6CD5;&amp;#x8BA9;&amp;#x6211;&amp;#x5BF9;&amp;#x6C49;&amp;#x5B57;&amp;#x7684;&amp;#x7406;&amp;#x89E3;&amp;#x53C8;&amp;#x52A0;&amp;#x6DF1;&amp;#x4E86;&amp;#x4E00;&amp;#x5C42;&amp;#x3002;">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://billystudio.github.io/2020-01-19-Wubi-Chinese-input-method/tips.jpg">
+<meta property="og:updated_time" content="2021-04-24T14:42:55.217Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学习非主流汉字输入法">
+<meta name="twitter:description" content="&amp;#x975E;&amp;#x4E3B;&amp;#x6D41;&amp;#x6C49;&amp;#x5B57;&amp;#x8F93;&amp;#x5165;&amp;#x6CD5;&amp;#x8BA9;&amp;#x6211;&amp;#x5BF9;&amp;#x6C49;&amp;#x5B57;&amp;#x7684;&amp;#x7406;&amp;#x89E3;&amp;#x53C8;&amp;#x52A0;&amp;#x6DF1;&amp;#x4E86;&amp;#x4E00;&amp;#x5C42;&amp;#x3002;">
+<meta name="twitter:image" content="https://billystudio.github.io/2020-01-19-Wubi-Chinese-input-method/tips.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2020-01-19-Wubi-Chinese-input-method/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2020-01-19-Wubi-Chinese-input-method/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            学习非主流汉字输入法
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2020-01-19T04:57:51.000Z" itemprop="datePublished">Jan 19 2020</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            3 minutes read (About 480 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x975E;&#x4E3B;&#x6D41;&#x6C49;&#x5B57;&#x8F93;&#x5165;&#x6CD5;&#x8BA9;&#x6211;&#x5BF9;&#x6C49;&#x5B57;&#x7684;&#x7406;&#x89E3;&#x53C8;&#x52A0;&#x6DF1;&#x4E86;&#x4E00;&#x5C42;&#x3002; <a id="more"></a></p>
+<h1 id="&#x4E94;&#x7B14;&#x7684;&#x5B66;&#x4E60;"><a href="#&#x4E94;&#x7B14;&#x7684;&#x5B66;&#x4E60;" class="headerlink" title="&#x4E94;&#x7B14;&#x7684;&#x5B66;&#x4E60;"></a>&#x4E94;&#x7B14;&#x7684;&#x5B66;&#x4E60;</h1><h2 id="&#x62C6;&#x5B57;&#x539F;&#x5219;"><a href="#&#x62C6;&#x5B57;&#x539F;&#x5219;" class="headerlink" title="&#x62C6;&#x5B57;&#x539F;&#x5219;"></a>&#x62C6;&#x5B57;&#x539F;&#x5219;</h2><h3 id="&#x4E66;&#x5199;&#x987A;&#x5E8F;"><a href="#&#x4E66;&#x5199;&#x987A;&#x5E8F;" class="headerlink" title="&#x4E66;&#x5199;&#x987A;&#x5E8F;"></a>&#x4E66;&#x5199;&#x987A;&#x5E8F;</h3><p>&#x91CC;<br>&#x6BCD;</p>
+<h3 id="&#x53D6;&#x5927;&#x4F18;&#x5148;"><a href="#&#x53D6;&#x5927;&#x4F18;&#x5148;" class="headerlink" title="&#x53D6;&#x5927;&#x4F18;&#x5148;"></a>&#x53D6;&#x5927;&#x4F18;&#x5148;</h3><p>&#x5E74;</p>
+<h3 id="&#x80FD;&#x6563;&#x4E0D;&#x8FDE;"><a href="#&#x80FD;&#x6563;&#x4E0D;&#x8FDE;" class="headerlink" title="&#x80FD;&#x6563;&#x4E0D;&#x8FDE;"></a>&#x80FD;&#x6563;&#x4E0D;&#x8FDE;</h3><h3 id="&#x80FD;&#x8FDE;&#x4E0D;&#x4EA4;"><a href="#&#x80FD;&#x8FDE;&#x4E0D;&#x4EA4;" class="headerlink" title="&#x80FD;&#x8FDE;&#x4E0D;&#x4EA4;"></a>&#x80FD;&#x8FDE;&#x4E0D;&#x4EA4;</h3><p>&#x4E8E;</p>
+<p>###&#x3000;&#x672B;&#x7B14;&#x8BC6;&#x522B;&#x7801;&#x7684;&#x7279;&#x6B8A;&#x89C4;&#x5B9A;</p>
+<h3 id="&#x96BE;&#x89E3;&#x5B57;"><a href="#&#x96BE;&#x89E3;&#x5B57;" class="headerlink" title="&#x96BE;&#x89E3;&#x5B57;"></a>&#x96BE;&#x89E3;&#x5B57;</h3><p>&#x8C22;</p>
+<h2 id="&#x6C49;&#x5B57;&#x7ED3;&#x6784;"><a href="#&#x6C49;&#x5B57;&#x7ED3;&#x6784;" class="headerlink" title="&#x6C49;&#x5B57;&#x7ED3;&#x6784;"></a>&#x6C49;&#x5B57;&#x7ED3;&#x6784;</h2><h3 id="&#x4E0A;&#x4E0B;&#x7ED3;&#x6784;&#x7684;&#x5B57;"><a href="#&#x4E0A;&#x4E0B;&#x7ED3;&#x6784;&#x7684;&#x5B57;" class="headerlink" title="&#x4E0A;&#x4E0B;&#x7ED3;&#x6784;&#x7684;&#x5B57;"></a>&#x4E0A;&#x4E0B;&#x7ED3;&#x6784;&#x7684;&#x5B57;</h3><p>&#x6709;&#x3001;&#x6C14;</p>
+<h2 id="&#x7B80;&#x7801;"><a href="#&#x7B80;&#x7801;" class="headerlink" title="&#x7B80;&#x7801;"></a>&#x7B80;&#x7801;</h2><p>q &#x6211;<br>j &#x662F;<br>k &#x4E2D;<br>l &#x56FD;<br>w &#x4EBA;<br>d &#x5728;<br>r &#x7684;</p>
+<p>52 b &#x4E86;</p>
+<p>qqqq &#x91D1;<br>dddd &#x5927;</p>
+<h2 id="&#x4E94;&#x7B14;&#x53E3;&#x8BC0;"><a href="#&#x4E94;&#x7B14;&#x53E3;&#x8BC0;" class="headerlink" title="&#x4E94;&#x7B14;&#x53E3;&#x8BC0;"></a>&#x4E94;&#x7B14;&#x53E3;&#x8BC0;</h2><p><img src="tips.jpg" alt="tips.jpg"></p>
+<h2 id="&#x4E94;&#x7B14;&#x8F93;&#x5165;&#x4E0E;&#x62FC;&#x97F3;&#x8F93;&#x5165;&#x7684;&#x4F18;&#x52A3;&#x6BD4;&#x8F83;"><a href="#&#x4E94;&#x7B14;&#x8F93;&#x5165;&#x4E0E;&#x62FC;&#x97F3;&#x8F93;&#x5165;&#x7684;&#x4F18;&#x52A3;&#x6BD4;&#x8F83;" class="headerlink" title="&#x4E94;&#x7B14;&#x8F93;&#x5165;&#x4E0E;&#x62FC;&#x97F3;&#x8F93;&#x5165;&#x7684;&#x4F18;&#x52A3;&#x6BD4;&#x8F83;"></a>&#x4E94;&#x7B14;&#x8F93;&#x5165;&#x4E0E;&#x62FC;&#x97F3;&#x8F93;&#x5165;&#x7684;&#x4F18;&#x52A3;&#x6BD4;&#x8F83;</h2><p>###&#x3000;&#x4E94;&#x7B14;&#x76F8;&#x6BD4;&#x62FC;&#x97F3;&#x7684;&#x7F3A;&#x70B9;<br>&#x4E94;&#x7B14;&#x6253;&#x5B57;&#x5927;&#x8111;&#x4E2D;&#x9700;&#x8981;&#x7ECF;&#x5386;&#x4E09;&#x4E2A;&#x9636;&#x6BB5;&#xFF1A;&#x62C6;&#x5B57;-&gt;&#x7F16;&#x7801;-&gt;&#x8F93;&#x5165;&#xFF0C;&#x800C;&#x62FC;&#x97F3;&#x6253;&#x5B57;&#x53EA;&#x7ECF;&#x8FC7;&#x4E24;&#x4E2A;&#x9636;&#x6BB5;&#xFF1A;&#x6807;&#x97F3;-&gt;&#x8F93;&#x5165;&#x3002;<br>&#x800C;&#x4E14;&#x62C6;&#x5B57;&#x9636;&#x6BB5;&#x6D88;&#x8017;&#x65F6;&#x95F4;&#x8F83;&#x591A;&#xFF0C;</p>
+<p>&#x5404;&#x624B;&#x6307;&#x5206;&#x5E03;&#x9891;&#x7387;&#x4E0A;&#xFF0C;&#x4E94;&#x7B14;&#x6253;&#x5B57;&#x4E2D;&#x7684;&#x4E24;&#x4E2A;&#x98DF;&#x6307;&#x4F7F;&#x7528;&#x975E;&#x5E38;&#x9891;&#x7E41;&#xFF0C;&#x5176;&#x4ED6;&#x624B;&#x6307;&#x8F83;&#x5C11;&#x3002;&#x62FC;&#x97F3;&#x867D;&#x7136;&#x4E5F;&#x6709;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#xFF0C;&#x4F46;&#x8F83;&#x4E94;&#x7B14;&#x66F4;&#x52A0;&#x5747;&#x5300;&#x4E00;&#x4E9B;&#x3002;</p>
+<h1 id="&#x53CC;&#x62FC;&#x8F93;&#x5165;&#x6CD5;"><a href="#&#x53CC;&#x62FC;&#x8F93;&#x5165;&#x6CD5;" class="headerlink" title="&#x53CC;&#x62FC;&#x8F93;&#x5165;&#x6CD5;"></a>&#x53CC;&#x62FC;&#x8F93;&#x5165;&#x6CD5;</h1><p>&#x4F18;&#x70B9;&#xFF1A;&#x8282;&#x594F;&#x611F;&#x5F3A;</p>
+<p>&#x4EE5;&#x81EA;&#x7136;&#x7801;&#x4E3A;&#x4F8B;&#xFF1A;<br>&#x96F6;&#x58F0;&#x6BCD;&#x6807;&#x5FD7;&#xFF1A;O<br>&#x4E8C;&#xFF1A;or&#x6216;er</p>
+<h2 id="&#x97F5;&#x6BCD;&#x7BC7;"><a href="#&#x97F5;&#x6BCD;&#x7BC7;" class="headerlink" title="&#x97F5;&#x6BCD;&#x7BC7;"></a>&#x97F5;&#x6BCD;&#x7BC7;</h2><p>&#x90E8;&#x5206;&#x987A;&#x53E3;&#x6E9C;&#xFF1A;<br>Q iu &#x7403;<br>X ie &#x978B;<br>Z ei &#x8D3C;<br>M ian &#x7EF5;<br>R uan &#x8F6F;<br>G eng &#x66F4;<br>K ao &#x9760;<br>N in &#x60A8;<br>L ai &#x6765;<br>F en &#x5206;</p>
+<p>&#x80FD;&#x8FDE;&#x51FB;&#x51FA;&#x5B57;&#x7684;&#x9664;&#x4E86;&#x4E0A;&#x9762;&#x7684;&#x8FD8;&#x6709;&#xFF1A;<br>yy ying &#x5E94;<br>uu shu &#x4E66;<br>ii chi &#x5403;<br>oo o &#x54E6;<br>aa a &#x554A;<br>ss song &#x9001;<br>hh hang &#x822A;<br>vv zhui &#x8FFD;</p>
+<p>&#x5269;&#x4E0B;&#x7279;&#x6B8A;&#x8BB0;&#x5FC6;&#x7684;&#xFF1A;<br>J an &#xFF08;&#x6839;&#x636E;&#x5BF9;&#x5076;&#x4F4D;&#x7684; F en &#x6765;&#x8BB0;&#x5FC6;&#xFF09;<br>B ou &#xFF08;&#x82F1;&#x6587; -ble &#x540E;&#x7F00;&#xFF09;<br>T ue &#xFF08;&#x5410;&#x75F0;&#xFF09;<br>V ui &#xFF08;oui&#x53D1;&#x97F3;&#x662F;V&#xFF09;<br>P un &#xFF08;&#x786C;&#x8BB0;&#xFF09;<br>O uo &#xFF08;&#x5594;&#x5594;&#xFF09;<br>W ia/ua &#xFF08;&#x8001;&#x7537;&#x5B69;&#x6B4C;&#x8BCD;/&#x54C7;&#xFF09;<br>C iao &#xFF08;&#x7F51;&#x7EDC;&#x8BED;ciao&#xFF09;<br>Y uai &#xFF08;&#x786C;&#x8BB0;&#xFF09;<br>S iong &#xFF08;&#x8054;&#x7CFB;song&#x5B8B;&#xFF09;<br>D iang/uang &#xFF08;&#x8FEA;&#x6602;/&#x7F51;&#x7EDC;&#x8BED;duang&#xFF09;</p>
+<h2 id="&#x53C2;&#x8003;&#x8D44;&#x6599;"><a href="#&#x53C2;&#x8003;&#x8D44;&#x6599;" class="headerlink" title="&#x53C2;&#x8003;&#x8D44;&#x6599;"></a>&#x53C2;&#x8003;&#x8D44;&#x6599;</h2><p>&#x53CC;&#x62FC;&#x8F93;&#x5165;&#x6CD5;-&#x81EA;&#x7136;&#x7801;&#x548C;&#x5FAE;&#x8F6F;&#x53CC;&#x62FC;&#xFF1A;<a href="https://blog.csdn.net/qq_45668723/article/details/111570778" target="_blank" rel="noopener">https://blog.csdn.net/qq_45668723/article/details/111570778</a></p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/五笔/">#五笔</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/双拼/">#双拼</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/输入法/">#输入法</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2020-01-30-VSCode-for-LeetCode/">VSCode for LeetCode</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2020-01-06-Algebra-SageMath-computing/">Algebra | SageMath computing</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="notification is-danger">
+    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
+</div>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

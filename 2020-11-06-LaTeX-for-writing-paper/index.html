@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>学术论文 LaTeX 与 Word 排版 - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/2020-11-06-LaTeX-for-writing-paper/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x5B66;&amp;#x672F;&amp;#x8BBA;&amp;#x6587;&amp;#x5199;&amp;#x4F5C;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E2D;&amp;#x7684;&amp;#x4E00;&amp;#x4E9B;&amp;#x7ECF;&amp;#x9A8C;&amp;#x8BB0;&amp;#x5F55;&amp;#x603B;&amp;#x7ED3;&amp;#x3002;">
+<meta name="keywords" content="LaTeX,Word,Office">
+<meta property="og:type" content="article">
+<meta property="og:title" content="学术论文 LaTeX 与 Word 排版">
+<meta property="og:url" content="https://BillyStudio.github.io/2020-11-06-LaTeX-for-writing-paper/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x5B66;&amp;#x672F;&amp;#x8BBA;&amp;#x6587;&amp;#x5199;&amp;#x4F5C;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E2D;&amp;#x7684;&amp;#x4E00;&amp;#x4E9B;&amp;#x7ECF;&amp;#x9A8C;&amp;#x8BB0;&amp;#x5F55;&amp;#x603B;&amp;#x7ED3;&amp;#x3002;">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://billystudio.github.io/2020-11-06-LaTeX-for-writing-paper/rwHuU.jpg">
+<meta property="og:image" content="https://billystudio.github.io/2020-11-06-LaTeX-for-writing-paper/word-triline-table.png">
+<meta property="og:image" content="https://billystudio.github.io/2020-11-06-LaTeX-for-writing-paper/word-triline-table-2.png">
+<meta property="og:image" content="https://billystudio.github.io/2020-11-06-LaTeX-for-writing-paper/word-triline-table-3.png">
+<meta property="og:image" content="https://billystudio.github.io/2020-11-06-LaTeX-for-writing-paper/word-table-no-break.png">
+<meta property="og:image" content="https://billystudio.github.io/2020-11-06-LaTeX-for-writing-paper/seq-n.png">
+<meta property="og:image" content="https://billystudio.github.io/2020-11-06-LaTeX-for-writing-paper/word-equation-caption.png">
+<meta property="og:image" content="https://billystudio.github.io/2020-11-06-LaTeX-for-writing-paper/batch-superscript.png">
+<meta property="og:updated_time" content="2022-03-19T14:12:40.911Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="学术论文 LaTeX 与 Word 排版">
+<meta name="twitter:description" content="&amp;#x5B66;&amp;#x672F;&amp;#x8BBA;&amp;#x6587;&amp;#x5199;&amp;#x4F5C;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E2D;&amp;#x7684;&amp;#x4E00;&amp;#x4E9B;&amp;#x7ECF;&amp;#x9A8C;&amp;#x8BB0;&amp;#x5F55;&amp;#x603B;&amp;#x7ED3;&amp;#x3002;">
+<meta name="twitter:image" content="https://billystudio.github.io/2020-11-06-LaTeX-for-writing-paper/rwHuU.jpg">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2020-11-06-LaTeX-for-writing-paper/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2020-11-06-LaTeX-for-writing-paper/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            学术论文 LaTeX 与 Word 排版
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2020-11-06T14:24:56.000Z" itemprop="datePublished">Nov 6 2020</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            16 minutes read (About 2349 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x5B66;&#x672F;&#x8BBA;&#x6587;&#x5199;&#x4F5C;&#x8FC7;&#x7A0B;&#x4E2D;&#x7684;&#x4E00;&#x4E9B;&#x7ECF;&#x9A8C;&#x8BB0;&#x5F55;&#x603B;&#x7ED3;&#x3002;<a id="more"></a></p>
+<h1 id="&#x5B57;&#x4F53;"><a href="#&#x5B57;&#x4F53;" class="headerlink" title="&#x5B57;&#x4F53;"></a>&#x5B57;&#x4F53;</h1><h2 id="1-1-LaTeX-&#x5B57;&#x4F53;"><a href="#1-1-LaTeX-&#x5B57;&#x4F53;" class="headerlink" title="1.1 LaTeX &#x5B57;&#x4F53;"></a>1.1 LaTeX &#x5B57;&#x4F53;</h2><h3 id="&#x4E00;&#x4E9B;&#x540D;&#x8BCD;&#x89E3;&#x91CA;"><a href="#&#x4E00;&#x4E9B;&#x540D;&#x8BCD;&#x89E3;&#x91CA;" class="headerlink" title="&#x4E00;&#x4E9B;&#x540D;&#x8BCD;&#x89E3;&#x91CA;"></a>&#x4E00;&#x4E9B;&#x540D;&#x8BCD;&#x89E3;&#x91CA;</h3><p><em>PostScript (PS)</em>: Adobe&#x516C;&#x53F8;&#x5F00;&#x53D1;&#x7684;&#x4E00;&#x79CD;&#x56FE;&#x7075;&#x5B8C;&#x5907;&#x7684;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#xFF0C;&#x76EE;&#x7684;&#x662F;&#x4F7F;&#x7528;&#x6570;&#x5B66;&#x5316;&#x7684;&#x65B9;&#x5F0F;&#x6765;&#x63CF;&#x8FF0;&#x51E0;&#x4F55;&#x56FE;&#x5F62;&#x548C;&#x56FE;&#x7247;&#x3002;<br><em>Portable Document Format</em>: &#x4E5F;&#x6709;Adobe&#x516C;&#x53F8;&#x5F00;&#x53D1;&#xFF0C;&#x5C5E;&#x4E8E;PostScript&#x7684;&#x5B50;&#x96C6;&#x3002;pdf&#x4E0D;&#x662F;&#x4E00;&#x79CD;&#x7F16;&#x7A0B;&#x8BED;&#x8A00;&#xFF0C;&#x56E0;&#x4E3A;&#x5176;&#x7F3A;&#x4E4F;PostScript&#x8BED;&#x8A00;&#x7684;&#x6761;&#x4EF6;&#x5206;&#x652F;&#x80FD;&#x529B;&#x3002;Pdf&#x5BF9;&#x7F16;&#x53F7;&#x548C;&#x8D85;&#x94FE;&#x63A5;&#x7684;&#x652F;&#x6301;&#x5F88;&#x597D;&#xFF0C;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x6587;&#x4EF6;&#x7EC4;&#x5408;&#x4E0E;&#x5206;&#x4EAB;&#x3002;<br><em>Type 1 fonts</em>: &#x77E2;&#x91CF;&#x5B57;&#x4F53;<br><em>Type 3 fonts</em>: bitmap&#x4F4D;&#x56FE;&#x5B57;&#x4F53;<br><em>Computer Modern (CM) fonts</em>: Computer Modern &#x5B57;&#x4F53;&#xFF0C;&#x7531;&#x9AD8;&#x5FB7;&#x7EB3;&#x8BBE;&#x8BA1;&#x3002;&#x5B83;&#x7684;&#x4E00;&#x5927;&#x4F18;&#x70B9;&#x662F;&#x62E5;&#x6709;&#x975E;&#x5E38;&#x5B8C;&#x5907;&#x7684;&#x6570;&#x5B66;&#x7B26;&#x53F7;&#x96C6;&#x3002;&#x8BE5;&#x5B57;&#x4F53;&#x662F;&#x4F7F;&#x7528;METAFONT&#x8BED;&#x8A00;&#xFF08;&#x4E5F;&#x662F;Knuth&#x5F00;&#x53D1;&#x7684;&#xFF09;&#x521B;&#x5EFA;&#x7684;&#x3002;<br>&#x4E0D;&#x5E78;&#x7684;&#x662F;&#xFF0C;METAFONT&#x4ECE;&#x672A;&#x5728;&#x6253;&#x5370;&#x673A;&#x4E2D;&#x5E7F;&#x6CDB;&#x4F7F;&#x7528;&#xFF08;&#x4E0D;&#x50CF;PostScript&#x90A3;&#x6837;&#xFF09;&#x3002;&#x6240;&#x4EE5;&#x5728;&#x4F7F;&#x7528;dvips&#x751F;&#x6210;PostScript&#x65F6;&#xFF0C;Computer Modern&#x5B57;&#x4F53;&#x7684;&#x6805;&#x683C;&#x5316;&#xFF08;&#x4ECE;METAFONT&#x8F6C;&#x6362;&#x4E3A;Type 3 bitmap&#xFF09;&#x901A;&#x5E38;&#x662F;&#x8F83;&#x65E7;&#x7684;&#xFF08;pre-teTEX 2.0&#xFF09;LATEX&#x7CFB;&#x7EDF;&#x7684;&#x9ED8;&#x8BA4;&#x884C;&#x4E3A;&#x3002;&#x5F53;LATEX&#x7CFB;&#x7EDF;&#x4F7F;&#x7528;&#x6B64;&#x7C7B;Type 3&#x5B57;&#x4F53;&#x65F6;&#xFF0C;&#x751F;&#x6210;&#x7684;PostScript&#xFF08;&#x6216;PDF&#xFF09;&#x6587;&#x4EF6;&#x5C06;&#x4E0D;&#x4F1A;&#x603B;&#x662F;&#x5728;&#x6BCF;&#x53F0;&#x6253;&#x5370;&#x673A;&#x4E0A;&#x4EA7;&#x751F;&#x6700;&#x4F73;&#x8D28;&#x91CF;&#xFF0C;&#x56E0;&#x4E3A;&#x6805;&#x683C;&#x5316;&#xFF08;rasterization&#xFF09;&#x8FC7;&#x7A0B;&#x4EC5;&#x5BF9;&#x4E8E;&#x7ED9;&#x5B9A;&#x7684;&#x6253;&#x5370;&#x5206;&#x8FA8;&#x7387;&#x624D;&#x662F;&#x6700;&#x4F73;&#x7684;&#x3002;<br><em>CM-Super fonts</em>: 2001&#x5E74;&#x7531;Vladimir Volovich&#x516C;&#x5F00;&#x53D1;&#x5E03;&#xFF0C;&#x5B83;&#x62D3;&#x5C55;&#x4E86; Computer Modern &#x5B57;&#x4F53;&#x96C6;&#x5E76;&#x4E14;&#x5B8C;&#x5168;&#x4F7F;&#x7528;type 1&#x5B57;&#x4F53;&#x3002;CM-Super&#x5B57;&#x4F53;&#x96C6;&#x652F;&#x6301;&#x4E00;&#x4E9B;&#x539F;&#x5148;Computer Modern&#x4E2D;&#x4E0D;&#x652F;&#x6301;&#x7684;&#x5B57;&#x4F53;&#x548C;&#x5B57;&#x5F62;&#xFF08;&#x5982;bold smallcaps&#x5B57;&#x5F62;&#xFF0C;&#x89C1;&#x4E0B;&#x56FE;&#xFF09;&#x3002;&#x5F53;&#x4F7F;&#x7528;T1&#x7F16;&#x7801;&#x60F3;&#x53BB;&#x83B7;&#x53D6;&#x62D3;&#x5C55;&#x5B57;&#x5F62;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x9700;&#x8981;&#x5F15;&#x5165;&#x4EE5;&#x4E0B;&#x4E24;&#x884C;&#x4EE5;&#x83B7;&#x53D6;Type 1&#x7248;&#x672C;&#x7684;CM&#x5B57;&#x4F53;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">\usepackage{type1ec}</span><br><span class="line">\usepackage[T1]{fontenc}</span><br></pre></td></tr></table></figure>
+
+<p><img src="rwHuU.jpg" alt="rwHuU.jpg"></p>
+<h3 id="&#x5B57;&#x4F53;&#x7F16;&#x7801;"><a href="#&#x5B57;&#x4F53;&#x7F16;&#x7801;" class="headerlink" title="&#x5B57;&#x4F53;&#x7F16;&#x7801;"></a>&#x5B57;&#x4F53;&#x7F16;&#x7801;</h3><p>&#x4F20;&#x7EDF;&#x4F7F;&#x7528; fontenc &#x5B8F;&#x5305;&#x6765;&#x5207;&#x6362;&#x5B57;&#x4F53;&#x7F16;&#x7801;&#xFF0C;&#x9ED8;&#x8BA4;&#x7684;&#x662F;&#x9AD8;&#x5FB7;&#x7EB3;&#x8BBE;&#x8BA1;&#x7684; Computer Modern &#x5B57;&#x4F53;(OT1)&#x3002;</p>
+<p>xelatex &#x548C; lualatex &#x4F7F;&#x7528; fontspec &#x5B8F;&#x5305;&#x6EE1;&#x8DB3;&#x7528;&#x6237;&#x8BBE;&#x7F6E;&#x5B57;&#x4F53;&#x7684;&#x9700;&#x6C42;&#xFF0C;&#x652F;&#x6301;&#x76F4;&#x63A5;&#x8C03;&#x7528;&#x7CFB;&#x7EDF;&#x548C;Texlive&#x4E2D;&#x7684;.ttf&#x6216;.otf&#x683C;&#x5F0F;&#x5B57;&#x4F53;&#x3002;</p>
+<h3 id="&#x5E38;&#x7528;&#x5B57;&#x4F53;&#x7F16;&#x7801;&#x96C6;"><a href="#&#x5E38;&#x7528;&#x5B57;&#x4F53;&#x7F16;&#x7801;&#x96C6;" class="headerlink" title="&#x5E38;&#x7528;&#x5B57;&#x4F53;&#x7F16;&#x7801;&#x96C6;"></a>&#x5E38;&#x7528;&#x5B57;&#x4F53;&#x7F16;&#x7801;&#x96C6;</h3><p>OT1: TeX text<br>T1: TeX extended text<br>cmr: Computer Modern Roman<br>cmss: Computer Modern Sans<br>cmtt: Computer Modern Typewriter<br>ptm: Adobe Times<br>phv: Adobe Helvetica<br>pcr: Adobe Courier</p>
+<h3 id="&#x5B57;&#x4F53;&#x5927;&#x5C0F;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;"><a href="#&#x5B57;&#x4F53;&#x5927;&#x5C0F;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;" class="headerlink" title="&#x5B57;&#x4F53;&#x5927;&#x5C0F;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;"></a>&#x5B57;&#x4F53;&#x5927;&#x5C0F;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;</h3><p>1&#x78C5;=0.35mm<br>1&#x82F1;&#x5BF8;=72&#x78C5;=25.4mm<br>10pt = 3.52mm = 0.352 cm</p>
+<p>&#x5B57;&#x53F7;&#x3001;&#x78C5;&#x6570;&#x4E0E;&#x5927;&#x5C0F;&#x50CF;&#x7D20;&#x5BF9;&#x5E94;&#x8868;</p>
+<table>
+<thead>
+<tr>
+<th>&#x4E2D;&#x6587;&#x5B57;&#x53F7;</th>
+<th>&#x82F1;&#x6587;&#x5B57;&#x53F7;(&#x78C5;)</th>
+<th style="text-align:center">&#x6BEB;&#x7C73;</th>
+<th style="text-align:center">&#x50CF;&#x7D20;</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>&#x521D;&#x53F7;</td>
+<td>42pt</td>
+<td style="text-align:center">14.82mm</td>
+<td style="text-align:center">56px</td>
+</tr>
+<tr>
+<td>&#x5C0F;&#x521D;</td>
+<td>36pt</td>
+<td style="text-align:center">12.70mm</td>
+<td style="text-align:center">48px</td>
+</tr>
+<tr>
+<td>&#x4E00;&#x53F7;</td>
+<td>26pt</td>
+<td style="text-align:center">9.17mm</td>
+<td style="text-align:center">34.7px</td>
+</tr>
+<tr>
+<td>&#x5C0F;&#x4E00;</td>
+<td>24pt</td>
+<td style="text-align:center">8.47mm</td>
+<td style="text-align:center">32px</td>
+</tr>
+<tr>
+<td>&#x4E8C;&#x53F7;</td>
+<td>22pt</td>
+<td style="text-align:center">7.76mm</td>
+<td style="text-align:center">29.3px</td>
+</tr>
+<tr>
+<td>&#x5C0F;&#x4E8C;</td>
+<td>18pt</td>
+<td style="text-align:center">6.35mm</td>
+<td style="text-align:center">24px</td>
+</tr>
+<tr>
+<td>&#x4E09;&#x53F7;</td>
+<td>16pt</td>
+<td style="text-align:center">5.64mm</td>
+<td style="text-align:center">21.3px</td>
+</tr>
+<tr>
+<td>&#x4E09;&#x53F7;</td>
+<td>16pt</td>
+<td style="text-align:center">5.64mm</td>
+<td style="text-align:center">21.3px</td>
+</tr>
+<tr>
+<td>&#x5C0F;&#x4E09;</td>
+<td>15pt</td>
+<td style="text-align:center">5.29mm</td>
+<td style="text-align:center">20px</td>
+</tr>
+<tr>
+<td>&#x56DB;&#x53F7;</td>
+<td>14pt</td>
+<td style="text-align:center">4.94mm</td>
+<td style="text-align:center">18.7px</td>
+</tr>
+<tr>
+<td>&#x5C0F;&#x56DB;</td>
+<td>12pt</td>
+<td style="text-align:center">4.23mm</td>
+<td style="text-align:center">16px</td>
+</tr>
+<tr>
+<td>&#x4E94;&#x53F7;</td>
+<td>10.5pt</td>
+<td style="text-align:center">3.70mm</td>
+<td style="text-align:center">14px</td>
+</tr>
+<tr>
+<td>&#x5C0F;&#x4E94;</td>
+<td>9pt</td>
+<td style="text-align:center">3.18mm</td>
+<td style="text-align:center">12px</td>
+</tr>
+<tr>
+<td>&#x516D;&#x53F7;</td>
+<td>7.5pt</td>
+<td style="text-align:center">2.56mm</td>
+<td style="text-align:center">10px</td>
+</tr>
+<tr>
+<td>&#x5C0F;&#x516D;</td>
+<td>6.5pt</td>
+<td style="text-align:center">2.29mm</td>
+<td style="text-align:center">8.7px</td>
+</tr>
+<tr>
+<td>&#x4E03;&#x53F7;</td>
+<td>5.5pt</td>
+<td style="text-align:center">1.94mm</td>
+<td style="text-align:center">7.3px</td>
+</tr>
+<tr>
+<td>&#x516B;&#x53F7;</td>
+<td>5pt</td>
+<td style="text-align:center">1.76mm</td>
+<td style="text-align:center">6.7px</td>
+</tr>
+</tbody>
+</table>
+<p>&#x5E38;&#x7528;&#x5B57;&#x4F53;&#x5927;&#x5C0F;&#x63A7;&#x5236;&#x547D;&#x4EE4;&#x5BF9;&#x5E94;&#x8868;<br>size             10pt (default)   11pt option      12pt option<br>\tiny            5pt              6pt              6pt                        &#x4E03;&#x53F7;<br>\scriptsize      7pt              8pt              8pt                    &#x5C0F;&#x516D;&#x53F7;<br>\footnotesize    8pt              9pt              10pt               &#x516D;&#x53F7;<br>\small           9pt              10pt             11pt                  &#x5C0F;&#x4E94;&#x53F7;<br>\normalsize      10pt             11pt             12pt              &#x4E94;&#x53F7;<br>\large           12pt             12pt             14pt                  &#x5C0F;&#x56DB;&#x53F7;<br>\Large           14pt             14pt             17pt                 &#x56DB;&#x53F7;<br>\LARGE           17pt             17pt             20pt              &#x4E09;&#x53F7;<br>\huge            20pt             20pt             25pt                 &#x4E8C;&#x53F7;<br>\Huge            25pt             25pt             25pt                 &#x4E00;&#x53F7;</p>
+<h2 id="1-2-Word-&#x5B57;&#x4F53;"><a href="#1-2-Word-&#x5B57;&#x4F53;" class="headerlink" title="1.2 Word &#x5B57;&#x4F53;"></a>1.2 Word &#x5B57;&#x4F53;</h2><p>&#x5728;&#x4E00;&#x4E9B;Word&#x7248;&#x672C;&#x6216;&#x8F6F;&#x4EF6;&#x4E2D;&#xFF0C;&#x4E0D;&#x652F;&#x6301;&#x4E2D;&#x6587;&#x5B57;&#x4F53;&#x540D;&#xFF0C;&#x6BD4;&#x5982;&#x5B8B;&#x4F53;&#x3001;&#x4EFF;&#x5B8B;&#x7B49;&#xFF0C;&#x800C;&#x662F;&#x663E;&#x793A;&#x6210; <code>SimSun</code>&#xFF0C;<code>FangSong</code>&#x7B49;&#xFF0C;&#x9700;&#x8981;&#x6CE8;&#x610F;&#x3002;</p>
+<h1 id="&#x56FE;&#x7247;"><a href="#&#x56FE;&#x7247;" class="headerlink" title="&#x56FE;&#x7247;"></a>&#x56FE;&#x7247;</h1><h2 id="2-1-LaTeX&#x56FE;&#x7247;&#x88C1;&#x526A;"><a href="#2-1-LaTeX&#x56FE;&#x7247;&#x88C1;&#x526A;" class="headerlink" title="2.1 LaTeX&#x56FE;&#x7247;&#x88C1;&#x526A;"></a>2.1 LaTeX&#x56FE;&#x7247;&#x88C1;&#x526A;</h2><p>&#x5728;<code>\includegraphics</code>&#x547D;&#x4EE4;&#x7684;&#x53C2;&#x6570;&#x4E2D;&#x4F7F;&#x7528;trim&#x8FDB;&#x884C;&#x88C1;&#x526A;&#xFF1A;&#x53C2;&#x6570;&#x987A;&#x5E8F;&#x4E3A; &#x5DE6; &#x4E0B; &#x53F3; &#x4E0A;<br>&#x4F8B;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\includegraphics[witdh=\linewidth,trim=0 10cm 0 0.5cm]{FigName}</span><br></pre></td></tr></table></figure>
+
+<h3 id="LaTeX&#x56FE;&#x7247;&#x52A0;&#x8FB9;&#x6846;"><a href="#LaTeX&#x56FE;&#x7247;&#x52A0;&#x8FB9;&#x6846;" class="headerlink" title="LaTeX&#x56FE;&#x7247;&#x52A0;&#x8FB9;&#x6846;"></a>LaTeX&#x56FE;&#x7247;&#x52A0;&#x8FB9;&#x6846;</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">\fbox</span><br></pre></td></tr></table></figure>
+
+<h2 id="2-2-Word&#x63D2;&#x56FE;"><a href="#2-2-Word&#x63D2;&#x56FE;" class="headerlink" title="2.2 Word&#x63D2;&#x56FE;"></a>2.2 Word&#x63D2;&#x56FE;</h2><p>Word&#x63D2;&#x5165;&#x56FE;&#x7247;&#x53EF;&#x5206;&#x4E3A;&#x5D4C;&#x5165;&#x5F0F;&#x548C;&#x975E;&#x5D4C;&#x5165;&#x5F0F;&#x4E24;&#x79CD;&#x3002;&#x53C2;&#x8003;&#xFF1A;<a href="https://zhuanlan.zhihu.com/p/35979312" target="_blank" rel="noopener">https://zhuanlan.zhihu.com/p/35979312</a></p>
+<h3 id="&#x663E;&#x793A;&#x4E0D;&#x5168;&#x7684;&#x56FE;&#x7247;"><a href="#&#x663E;&#x793A;&#x4E0D;&#x5168;&#x7684;&#x56FE;&#x7247;" class="headerlink" title="&#x663E;&#x793A;&#x4E0D;&#x5168;&#x7684;&#x56FE;&#x7247;"></a>&#x663E;&#x793A;&#x4E0D;&#x5168;&#x7684;&#x56FE;&#x7247;</h3><p>Word&#x63D2;&#x5165;&#x56FE;&#x7247;&#x6709;&#x65F6;&#x53EA;&#x663E;&#x793A;&#x6700;&#x4E0B;&#x9762;&#x4E00;&#x884C;&#xFF0C;&#x539F;&#x56E0;&#x5927;&#x591A;&#x6570;&#x662F;&#x884C;&#x8DDD;&#x8BBE;&#x7F6E;&#x6210;&#x4E86;&#x56FA;&#x5B9A;&#x503C;&#xFF0C;<br>&#x4F7F;&#x7528; <code>Ctrl+1</code> &#x7ED9;&#x56FE;&#x7247;&#x8BBE;&#x7F6E;&#x5355;&#x500D;&#x884C;&#x8DDD;&#xFF08;&#x6216;&#x8BBE;&#x7F6E;&#x56FE;&#x7247;&#x6837;&#x5F0F;&#x4E3A;&#x5355;&#x500D;&#x884C;&#x8DDD;&#xFF0C;&#x518D;&#x8BBE;&#x7F6E;&#x56FE;&#x7247;&#x6837;&#x5F0F;&#xFF09;</p>
+<h1 id="&#x8868;&#x683C;"><a href="#&#x8868;&#x683C;" class="headerlink" title="&#x8868;&#x683C;"></a>&#x8868;&#x683C;</h1><h2 id="3-1-LaTeX-&#x8868;&#x683C;"><a href="#3-1-LaTeX-&#x8868;&#x683C;" class="headerlink" title="3.1 LaTeX &#x8868;&#x683C;"></a>3.1 LaTeX &#x8868;&#x683C;</h2><p>&#x63A7;&#x5236;&#x5B57;&#x4F53;&#x5927;&#x5C0F;&#xFF1A;&#x5728;begin{tabular} &#x524D;&#x9762;&#x6DFB;&#x52A0;&#x63A7;&#x5236;&#x5B57;&#x4F53;&#x5927;&#x5C0F;&#x547D;&#x4EE4;&#xFF0C;&#x5982; \scriptsize</p>
+<h2 id="3-2-Word-&#x4E09;&#x7EBF;&#x8868;"><a href="#3-2-Word-&#x4E09;&#x7EBF;&#x8868;" class="headerlink" title="3.2 Word &#x4E09;&#x7EBF;&#x8868;"></a>3.2 Word &#x4E09;&#x7EBF;&#x8868;</h2><p>&#x9996;&#x5148;&#x7ED8;&#x5236;&#x4E00;&#x4E2A;Word&#x8868;&#x683C;&#xFF1A;<br><img src="word-triline-table.png" alt="Word three-line table"></p>
+<p>&#x7136;&#x540E;&#x5C06;&#x8FB9;&#x6846;&#x5168;&#x90E8;&#x53D6;&#x6D88;&#xFF0C;&#x9009;&#x62E9;1&#x78C5;&#x7684;&#x753B;&#x7B14;&#x7ED8;&#x5236;&#x9876;&#x90E8;&#x548C;&#x5E95;&#x90E8;&#x4E24;&#x6761;&#x6846;&#x7EBF;&#x3002;<br>&#x7136;&#x540E;&#x9009;&#x7528;0.5&#x78C5;&#x7684;&#x6846;&#x7EBF;&#x7ED8;&#x5236;&#x5185;&#x90E8;&#x6807;&#x9898;&#x548C;&#x5185;&#x5BB9;&#x7684;&#x6846;&#x7EBF;&#xFF1A;<br><img src="word-triline-table-2.png" alt="add lines"></p>
+<p>&#x9047;&#x5230;&#x8FD9;&#x6837;&#x5C0F;&#x6807;&#x9898;&#x95F4;&#x7684;&#x8FDE;&#x7EBF;&#x91CD;&#x5408;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x5C06;&#x4ED6;&#x4EEC;&#x7684;&#x5206;&#x5272;&#x7EBF;&#x4E2D;&#x7EBF;&#x589E;&#x52A0;3&#x78C5;&#x5BBD;&#x5EA6;&#xFF0C;&#x7B14;&#x989C;&#x8272;&#x8BBE;&#x4E3A;&#x767D;&#x8272;&#xFF1A;<br><img src="word-triline-table-3.png" alt="seperate line"></p>
+<h3 id="&#x7981;&#x6B62;&#x8868;&#x683C;&#x5206;&#x9875;"><a href="#&#x7981;&#x6B62;&#x8868;&#x683C;&#x5206;&#x9875;" class="headerlink" title="&#x7981;&#x6B62;&#x8868;&#x683C;&#x5206;&#x9875;"></a>&#x7981;&#x6B62;&#x8868;&#x683C;&#x5206;&#x9875;</h3><p>&#x53F3;&#x952E;&#x8868;&#x683C;&#x5C5E;&#x6027; &gt; &#x884C; &gt; &#x53D6;&#x6D88;&#x52FE;&#x9009;&#x201C;&#x5141;&#x8BB8;&#x8DE8;&#x9875;&#x65AD;&#x884C;&#x201D;<br><img src="word-table-no-break.png" alt="word-table-no-break.png"></p>
+<h1 id="&#x7F16;&#x53F7;&#x4E0E;&#x5F15;&#x7528;"><a href="#&#x7F16;&#x53F7;&#x4E0E;&#x5F15;&#x7528;" class="headerlink" title="&#x7F16;&#x53F7;&#x4E0E;&#x5F15;&#x7528;"></a>&#x7F16;&#x53F7;&#x4E0E;&#x5F15;&#x7528;</h1><h2 id="4-1-LaTeX&#x7F16;&#x53F7;"><a href="#4-1-LaTeX&#x7F16;&#x53F7;" class="headerlink" title="4.1 LaTeX&#x7F16;&#x53F7;"></a>4.1 LaTeX&#x7F16;&#x53F7;</h2><p>LaTeX&#x4F7F;&#x7528;enumerate&#x73AF;&#x5883;&#x8FDB;&#x884C;&#x6709;&#x5E8F;&#x7F16;&#x53F7;&#xFF0C;itemize&#x73AF;&#x5883;&#x8FDB;&#x884C;&#x65E0;&#x5E8F;&#x7F16;&#x53F7;</p>
+<h3 id="&#x81EA;&#x5B9A;&#x4E49;&#x7F16;&#x53F7;"><a href="#&#x81EA;&#x5B9A;&#x4E49;&#x7F16;&#x53F7;" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49;&#x7F16;&#x53F7;"></a>&#x81EA;&#x5B9A;&#x4E49;&#x7F16;&#x53F7;</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">\begin{enumerate}</span><br><span class="line">\def\labelenumi{\arabic{enumi}.}</span><br><span class="line">\setcounter{enumi}{1}</span><br><span class="line">\item</span><br><span class="line">  &#x5B9E;&#x9A8C;&#x9A8C;&#x8BC1;</span><br><span class="line">\end{enumerate}</span><br></pre></td></tr></table></figure>
+
+<h2 id="4-2-Word&#x7F16;&#x53F7;"><a href="#4-2-Word&#x7F16;&#x53F7;" class="headerlink" title="4.2 Word&#x7F16;&#x53F7;"></a>4.2 Word&#x7F16;&#x53F7;</h2><h3 id="&#x56FE;&#x8868;&#x94FE;&#x63A5;&#x7AE0;&#x8282;&#x7F16;&#x53F7;"><a href="#&#x56FE;&#x8868;&#x94FE;&#x63A5;&#x7AE0;&#x8282;&#x7F16;&#x53F7;" class="headerlink" title="&#x56FE;&#x8868;&#x94FE;&#x63A5;&#x7AE0;&#x8282;&#x7F16;&#x53F7;"></a>&#x56FE;&#x8868;&#x94FE;&#x63A5;&#x7AE0;&#x8282;&#x7F16;&#x53F7;</h3><p>&#x5728;&#x63D2;&#x5165;&#x7AE0;&#x8282;&#x7F16;&#x53F7;&#x540E;&#x51FA;&#x73B0;&#x201C;&#x9519;&#x8BEF;!&#x6587;&#x6863;&#x4E2D;&#x6CA1;&#x6709;&#x6307;&#x5B9A;&#x6837;&#x5F0F;&#x7684;&#x6587;&#x5B57;&#x3002;&#x201D;&#x7684;&#x5B57;&#x6837;&#xFF0C;&#x9700;&#x8981;&#x53F3;&#x952E;-&gt;&#x7F16;&#x8F91;&#x57DF;-&gt;StyleRef-&gt;&#x57DF;&#x5C5E;&#x6027;&#x9009;&#x62E9;&#x8981;&#x94FE;&#x63A5;&#x7684;&#x6837;&#x5F0F;&#x540D;&#xFF08;&#x5982;u&#x6B63;&#x6587;1&#x7EA7;&#x6807;&#x9898;&#xFF09;&#xFF0C;&#x786E;&#x5B9A;&#x540E;&#xFF0C;&#x9009;&#x4E2D;F9&#x5237;&#x65B0;&#x5373;&#x53EF;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;&#x6BCF;&#x4E00;&#x7AE0;&#x8282;&#x5F00;&#x59CB;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x56FE;&#x8868;&#x6807;&#x6CE8;&#x4E3A;1&#xFF0C;&#x9700;&#x8981;&#x53F3;&#x952E;&#x7F16;&#x8F91;&#x57DF;-&gt;&#x5C06;\s 1&#x4FEE;&#x6539;&#x4E3A;\r 1&#xFF0C;&#x5BF9;&#x4E8E;&#x540E;&#x9762;&#x7684;&#x56FE;&#x6807;&#x5E8F;&#x53F7;&#xFF0C;&#x5E94;&#x6807;&#x6CE8;&#x4E3A;\n&#xFF0C;&#x8FD9;&#x6837;&#x5C31;&#x80FD;&#x987A;&#x5E8F;&#x7F16;&#x53F7;&#x4E86;</p>
+<p><img src="seq-n.png" alt="seq-n.png"></p>
+<h1 id="&#x516C;&#x5F0F;"><a href="#&#x516C;&#x5F0F;" class="headerlink" title="&#x516C;&#x5F0F;"></a>&#x516C;&#x5F0F;</h1><p>&#x6570;&#x5B66;&#x516C;&#x5F0F;&#x662F; LaTeX &#x7684;&#x5F3A;&#x9879;&#x3002;&#x5728;&#x6570;&#x5B66;&#x516C;&#x5F0F;&#x4E2D;&#xFF0C;&#x4E00;&#x822C;&#x53D8;&#x91CF;&#x90FD;&#x662F;&#x659C;&#x4F53;&#xFF0C;&#x53EA;&#x6709;&#x51FD;&#x6570;&#x662F;&#x6B63;&#x4F53;&#x3002;&#x800C;&#x5728; LaTeX &#x4E2D;&#x81EA;&#x52A8;&#x5C31;&#x4F1A;&#x7528;&#x659C;&#x4F53;&#x8868;&#x793A;&#x3002;&#x5728; Word &#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x7ED9;&#x53D8;&#x91CF;&#x8BBE;&#x7F6E;&#x659C;&#x4F53;&#xFF0C;&#x4F46;&#x662F;&#x4E4B;&#x540E;&#x5728;&#x7EDF;&#x4E00;&#x8C03;&#x6574;&#x683C;&#x5F0F;&#x7684;&#x65F6;&#x5019;&#x4F1A;&#x88AB;&#x7EDF;&#x4E00;&#x8C03;&#x6574;&#xFF0C;&#x6240;&#x4EE5; Word &#x5BF9;&#x4E8E;&#x6570;&#x5B66;&#x53D8;&#x91CF;&#x4F7F;&#x7528; MathType &#x6216;&#x81EA;&#x5E26;&#x516C;&#x5F0F;&#x6A21;&#x5F0F;&#x3002;</p>
+<h2 id="&#x516C;&#x5F0F;&#x53F3;&#x7F16;&#x53F7;"><a href="#&#x516C;&#x5F0F;&#x53F3;&#x7F16;&#x53F7;" class="headerlink" title="&#x516C;&#x5F0F;&#x53F3;&#x7F16;&#x53F7;"></a>&#x516C;&#x5F0F;&#x53F3;&#x7F16;&#x53F7;</h2><h3 id="Word-&#x81EA;&#x5E26;&#x516C;&#x5F0F;"><a href="#Word-&#x81EA;&#x5E26;&#x516C;&#x5F0F;" class="headerlink" title="Word &#x81EA;&#x5E26;&#x516C;&#x5F0F;"></a>Word &#x81EA;&#x5E26;&#x516C;&#x5F0F;</h3><p>&#x65B0;&#x5EFA;&#x9898;&#x6CE8;&#x6807;&#x7B7E;&#x4E3A;&#x516C;&#x5F0F;&#x5DE6;&#x62EC;&#x53F7;&#xFF08;<br>&#x4F7F;&#x7528;&#x6DFB;&#x52A0;&#x9898;&#x6CE8;&#x7684;&#x65B9;&#x5F0F;&#x589E;&#x52A0;&#x5E8F;&#x53F7;&#xFF0C;&#x7136;&#x540E;&#x8865;&#x5168;&#x53F3;&#x62EC;&#x53F7;&#xFF09;<br><img src="word-equation-caption.png" alt="&#x63D2;&#x5165;&#x9898;&#x6CE8;"><br>&#x5728;&#x516C;&#x5F0F;&#x7ED3;&#x675F;&#x4F4D;&#x7F6E;&#x6DFB;&#x52A0;&#x4E95;&#x53F7;#&#xFF0C;&#x7136;&#x540E;&#x5C06;&#x5E8F;&#x53F7; Ctrl+X Ctrl+V &#x5230;&#x516C;&#x5F0F;&#x7684;#&#x540E;&#xFF0C;&#x56DE;&#x8F66;&#x5373;&#x53EF;&#x3002;<br>&#x4E4B;&#x540E;&#x7684;&#x5E8F;&#x53F7;&#x53D8;&#x52A8; Word &#x4F1A;&#x81EA;&#x52A8;&#x66F4;&#x65B0;&#x3002;</p>
+<h3 id="MathType"><a href="#MathType" class="headerlink" title="MathType"></a>MathType</h3><p>MathType &#x6709;&#x81EA;&#x52A8;&#x63D2;&#x5165;&#x6807;&#x53F7;&#x7684;&#x80FD;&#x529B;&#xFF0C;&#x4E0D;&#x8FC7;&#x5173;&#x4E8E;&#x6807;&#x53F7;&#x53F3;&#x5BF9;&#x9F50;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x624B;&#x52A8;&#x8BBE;&#x7F6E;&#x6BB5;&#x843D;&#x7684;&#x5236;&#x8868;&#x4F4D;&#x6765;&#x5B9E;&#x73B0;&#x3002;</p>
+<h1 id="&#x7B97;&#x6CD5;"><a href="#&#x7B97;&#x6CD5;" class="headerlink" title="&#x7B97;&#x6CD5;"></a>&#x7B97;&#x6CD5;</h1><h2 id="Word"><a href="#Word" class="headerlink" title="Word"></a>Word</h2><p>Word&#x4E2D;&#x901A;&#x8FC7;&#x8868;&#x683C;&#x6765;&#x5B9E;&#x73B0;&#xFF0C;&#x5728;&#x8868;&#x683C;&#x4E2D;&#x8BBE;&#x7F6E;&#x5236;&#x8868;&#x4F4D;&#x6765;&#x63A7;&#x5236;&#x7F29;&#x8FDB;<br>&#x5728;&#x8868;&#x683C;&#x4E2D;&#x79FB;&#x52A8;&#x5230;&#x4E0B;&#x4E00;&#x5236;&#x8868;&#x4F4D;&#x4E0E;&#x6B63;&#x6587;&#x4E2D;&#x6309;&#x952E;&#x7A0D;&#x6709;&#x4E0D;&#x540C;&#xFF0C;&#x6B63;&#x6587;&#x4E2D;&#x662F;&#x6309; Tab &#x5373;&#x53EF;&#xFF0C;&#x8868;&#x683C;&#x4E2D;&#x9700;&#x8981; Ctrl + Tab</p>
+<h1 id="&#x53C2;&#x8003;&#x6587;&#x732E;"><a href="#&#x53C2;&#x8003;&#x6587;&#x732E;" class="headerlink" title="&#x53C2;&#x8003;&#x6587;&#x732E;"></a>&#x53C2;&#x8003;&#x6587;&#x732E;</h1><h2 id="Word-1"><a href="#Word-1" class="headerlink" title="Word"></a>Word</h2><p>Word &#x63A8;&#x8350;&#x91C7;&#x7528;&#x53C2;&#x8003;&#x6587;&#x732E;&#x7F16;&#x4E3A;&#x5217;&#x8868;&#xFF0C;&#x7136;&#x540E;&#x6587;&#x4E2D;&#x4F7F;&#x7528;&#x4EA4;&#x53C9;&#x5F15;&#x7528;&#x3002;</p>
+<p>Word&#x4E2D;&#x67E5;&#x627E;&#x5F15;&#x7528;&#x91C7;&#x7528;&#x901A;&#x914D;&#x7B26;^#&#x8868;&#x793A;&#x6570;&#x5B57;&#xFF0C;&#x67E5;&#x627E;&#x6240;&#x6709;&#x4EA4;&#x53C9;&#x5F15;&#x7528;&#xFF1A;<code>[^#]</code><br>&#x67E5;&#x627E;&#x7B2C;9&#x6761;&#x4EA4;&#x53C9;&#x5F15;&#x7528;: <code>[9]</code> &#x5373;&#x53EF;</p>
+<h3 id="&#x6279;&#x91CF;&#x66FF;&#x6362;&#x5F15;&#x7528;&#x5904;&#x4E3A;&#x4E0A;&#x811A;&#x6807;"><a href="#&#x6279;&#x91CF;&#x66FF;&#x6362;&#x5F15;&#x7528;&#x5904;&#x4E3A;&#x4E0A;&#x811A;&#x6807;" class="headerlink" title="&#x6279;&#x91CF;&#x66FF;&#x6362;&#x5F15;&#x7528;&#x5904;&#x4E3A;&#x4E0A;&#x811A;&#x6807;"></a>&#x6279;&#x91CF;&#x66FF;&#x6362;&#x5F15;&#x7528;&#x5904;&#x4E3A;&#x4E0A;&#x811A;&#x6807;</h3><p>&#x7531;&#x4E8E;&#x521A;&#x521A;&#x63D2;&#x5165;&#x7684;&#x4EA4;&#x53C9;&#x5F15;&#x7528;&#x6CA1;&#x6709;&#x8BBE;&#x7F6E;&#x4E0A;&#x811A;&#x6807;&#xFF0C;&#x6240;&#x4EE5;&#x6BCF;&#x6B21;&#x90FD;&#x9700;&#x8981;&#x9009;&#x4E2D;&#x540E;&#x6309; <code>Ctrl+Shift+=</code> &#x8BBE;&#x7F6E;&#x4E00;&#x4E0B;&#xFF0C;&#x8FD9;&#x6837;&#x64CD;&#x4F5C;&#x6BD4;&#x8F83;&#x7E41;&#x7410;&#x3002;&#x4F18;&#x5316;&#x65B9;&#x6CD5;&#x662F;&#x9996;&#x5148;&#x4E0D;&#x7BA1;&#x4E0A;&#x811A;&#x6807;&#x7684;&#x4E8B;&#xFF0C;&#x505A;&#x597D;&#x6240;&#x6709;&#x53C2;&#x8003;&#x6587;&#x732E;&#x7684;&#x5F15;&#x7528;&#x4E4B;&#x540E;&#x6279;&#x91CF;&#x8BBE;&#x7F6E;&#x683C;&#x5F0F;&#xFF0C;&#x5177;&#x4F53;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<p>&#x7B2C;&#x4E00;&#x6B65;&#xFF1A;Ctrl+H&#xFF0C;&#x66F4;&#x591A;&#x91CC;&#x6253;&#x5F00;&#x201C;&#x4F7F;&#x7528;&#x901A;&#x914D;&#x7B26;&#x201D;</p>
+<p>&#x7B2C;&#x4E8C;&#x6B65;&#xFF1A;&#x67E5;&#x627E;&#x5185;&#x5BB9;&#x5904;&#xFF1A;\[[0-9]{1,2}\]</p>
+<p>&#x7B2C;&#x4E09;&#x6B65;&#xFF1A;&#x9F20;&#x6807;&#x70B9;&#x51FB;&#x201C;&#x66FF;&#x6362;&#x4E3A;&#x201D;&#x540E;&#x7684;&#x6846;&#x6846;</p>
+<p>&#x7B2C;&#x56DB;&#x6B65;&#xFF1A;&#x540C;&#x65F6;&#x6309;&#x4F4F;&#x201C;Ctrl&#x201D;&#x201C;Shift&#x201D;&#x201C;=&#x201D;&#xFF0C;&#x6846;&#x6846;&#x4E0B;&#x5C31;&#x4F1A;&#x663E;&#x793A;&#x201C;&#x4E0A;&#x6807;&#x201D;</p>
+<p>&#x7B2C;&#x4E94;&#x6B65;&#xFF1A;&#x5168;&#x90E8;&#x66FF;&#x6362;</p>
+<p><img src="batch-superscript.png" alt="batch-superscript.png"></p>
+<h3 id="&#x6587;&#x732E;&#x6B21;&#x5E8F;&#x8C03;&#x6574;"><a href="#&#x6587;&#x732E;&#x6B21;&#x5E8F;&#x8C03;&#x6574;" class="headerlink" title="&#x6587;&#x732E;&#x6B21;&#x5E8F;&#x8C03;&#x6574;"></a>&#x6587;&#x732E;&#x6B21;&#x5E8F;&#x8C03;&#x6574;</h3><p>&#x9009;&#x4E2D;&#x6587;&#x732E;&#x90A3;&#x4E00;&#x6574;&#x884C;&#xFF0C;&#x9F20;&#x6807;&#x62D6;&#x52A8;&#x5373;&#x53EF;</p>
+<h1 id="git&#x7248;&#x672C;&#x7BA1;&#x7406;"><a href="#git&#x7248;&#x672C;&#x7BA1;&#x7406;" class="headerlink" title="git&#x7248;&#x672C;&#x7BA1;&#x7406;"></a>git&#x7248;&#x672C;&#x7BA1;&#x7406;</h1><p>&#x7531;&#x4E8E;latex&#x662F;&#x6587;&#x672C;&#x5F62;&#x5F0F;&#x6587;&#x4EF6;&#xFF0C;&#x6240;&#x4EE5;&#x5929;&#x7136;&#x9002;&#x5408;&#x4F7F;&#x7528;git&#x8FDB;&#x884C;&#x7248;&#x672C;&#x7BA1;&#x7406;&#x3002;</p>
+<p>&#x800C;&#x5BF9;&#x4E8E;office&#x683C;&#x5F0F;&#x7684;&#x975E;&#x6587;&#x672C;&#x6587;&#x4EF6;&#xFF0C;&#x76F4;&#x63A5;&#x4F7F;&#x7528;git&#x7BA1;&#x7406;&#x4F1A;&#x5C06;&#x5176;&#x770B;&#x4F5C;&#x4E8C;&#x8FDB;&#x5236;&#x6587;&#x4EF6;&#xFF0C;&#x65E2;&#x65E0;&#x6CD5;&#x53CA;&#x65F6;&#x9884;&#x89C8;&#x4E5F;&#x65E0;&#x6CD5;&#x67E5;&#x770B;&#x4FEE;&#x6539;&#x5386;&#x53F2;&#x3002;<br>&#x5BF9;&#x4E8E;word&#x800C;&#x8A00;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;pandoc&#x5C06;&#x5176;&#x8F6C;&#x5316;&#x4E3A;markdown&#x6587;&#x4EF6;&#x6765;&#x7BA1;&#x7406;&#x3002;<br>&#x8FD9;&#x91CC;&#x9700;&#x8981;&#x8BBE;&#x7F6E;git&#x94A9;&#x5B50;&#xFF0C;&#x4F7F;&#x5F97;&#x6BCF;&#x6B21;&#x63D0;&#x4EA4;&#x7684;&#x65F6;&#x5019;&#x90FD;&#x80FD;&#x5C06;.doc/.docx&#x6587;&#x4EF6;&#x81EA;&#x52A8;&#x4F7F;&#x7528;pandoc&#x547D;&#x4EE4;&#x8F6C;&#x5316;&#x4E3A;.md&#x6587;&#x4EF6;&#x5E76;&#x6DFB;&#x52A0;&#xFF08;amend&#xFF09;&#x8FD9;&#x6B21;&#x63D0;&#x4EA4;&#x4E2D;&#xFF0C;&#x65B9;&#x6CD5;&#xFF1A;</p>
+<ol>
+<li>&#x5B89;&#x88C5;pandoc</li>
+<li>&#x62F7;&#x8D1D;pre-commit&#x548C;post-commit&#x6587;&#x4EF6;&#x6216;&#x6DFB;&#x52A0;&#x8F6F;&#x94FE;&#x63A5;&#x5230;&#x5F53;&#x524D;&#x4ED3;&#x5E93;&#x7684; .git/hooks &#x6587;&#x4EF6;&#x5939;&#x4E0B;&#xFF1A;<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ln -s ~/Clouds/my-config-files-for-linux/git_hooks/pre-commit-git-diff-docx.sh pre-commit</span><br><span class="line">ln -s ~/Clouds/my-config-files-for-linux/git_hooks/post-commit-git-diff-docx.sh post-commit</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>&#x6CE8;&#x610F;&#x6DFB;&#x52A0;&#x8F6F;&#x94FE;&#x63A5;&#x65F6;&#x8981;&#x4FDD;&#x8BC1;&#x4E24;&#x4E2A;&#x6E90;&#x6587;&#x4EF6;<code>pre-commit-git-diff-docx.sh</code>&#x548C;<code>post-commit-git-diff-docx.sh</code>&#x7684;&#x53EF;&#x6267;&#x884C;&#x6743;&#x9650;&#x3002;</p>
+<p>&#x5BF9;&#x4E8E;diff&#x7684;&#x529F;&#x80FD;&#x53EF;&#x4EE5;&#x6DFB;&#x52A0;alias&#x6765;&#x5B9E;&#x73B0;&#xFF0C;&#x65B9;&#x6CD5;&#x5982;&#x4E0B;&#xFF1A;<br>1.&#x7F16;&#x8F91;.git/config&#x6DFB;&#x52A0;&#x5BF9;diff</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[diff &quot;pandoc&quot;]</span><br><span class="line">    textconv=pandoc --to=markdown</span><br><span class="line">    prompt=false</span><br><span class="line">[alias]</span><br><span class="line">    wdiff = diff --word-diff=color --unified=1</span><br></pre></td></tr></table></figure>
+
+<p>2.&#x6DFB;&#x52A0;.gitattributes&#x6587;&#x4EF6;&#x6DFB;&#x52A0;diff docx&#x6587;&#x4EF6;&#x65F6;&#x4F7F;&#x7528;pandoc</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*.docx diff=pandoc</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E00;&#x4EFD;&#xFF08;&#x4E0D;&#x592A;&#xFF09;&#x7B80;&#x77ED;&#x7684;LaTeX&#x6307;&#x5357; p.63&#xFF1A; <a href="http://ctan.math.utah.edu/ctan/tex-archive/info/lshort/chinese/lshort-zh-cn.pdf" target="_blank" rel="noopener">http://ctan.math.utah.edu/ctan/tex-archive/info/lshort/chinese/lshort-zh-cn.pdf</a><br>LaTeX 2e font selection: <a href="https://www.latex-project.org/help/documentation/fntguide.pdf" target="_blank" rel="noopener">https://www.latex-project.org/help/documentation/fntguide.pdf</a><br><a href="http://ctan.mirrors.hoobly.com/macros/latex/contrib/IEEEtran/testflow/testflow_doc.pdf" target="_blank" rel="noopener">http://ctan.mirrors.hoobly.com/macros/latex/contrib/IEEEtran/testflow/testflow_doc.pdf</a><br>&#x5982;&#x4F55;&#x5B9E;&#x73B0;docx&#x6587;&#x6863;&#x7684;&#x7248;&#x672C;&#x7BA1;&#x7406;&#xFF1A;<a href="https://xiaofengwo.github.io/2018/03/18/howtotrackdocxfilewithgit/" target="_blank" rel="noopener">https://xiaofengwo.github.io/2018/03/18/howtotrackdocxfilewithgit/</a></p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/LaTeX/">#LaTeX</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Word/">#Word</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Office/">#Office</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2020-Dec-7th-Shellchain-note-serialize-unserialize/">Shellchain笔记：序列化与反序列化</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2020-10-09-Git-cheatsheet/">git 操作中的一些小技巧</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="notification is-danger">
+    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
+</div>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

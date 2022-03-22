@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>Setting up open-source STM32 developing environment on ARM Eclipse - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/Aug-18th-2019-Linux-STM32-HAL-IIC/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="Different from &amp;#x2018;STD&amp;#x2019; lib, STM32 &amp;#x2018;HAL&amp;#x2019; lib is more compatible to hardware development and is now well-supported by ST company&amp;#x2019;s Cube IDE.">
+<meta name="keywords" content="STM32,MCU,Eclipse">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Setting up open-source STM32 developing environment on ARM Eclipse">
+<meta property="og:url" content="https://BillyStudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="Different from &amp;#x2018;STD&amp;#x2019; lib, STM32 &amp;#x2018;HAL&amp;#x2019; lib is more compatible to hardware development and is now well-supported by ST company&amp;#x2019;s Cube IDE.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/add-plugin.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/check-path-of-packs.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/st-link-v2.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/flash-error.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/flash-ok.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/new-c-project.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/uncheck%20newlib%20nano.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/arm-none-eabi-gcc.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/close-unrelated-projects.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/before.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/after.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/stm32mxcube-pinout-config.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/stm32mxcube-clock-config.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/stm32mxcube-project-manager.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/drag-and-copy-using-file-manager.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/ld-file-drag-and-copy.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/check-path-of-jlink.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/J-link-config-main.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/J-link-config-debugger.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/J-link-config-startup.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/J-link-config-common.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/open-swd.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/debug-setup1.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/debug-setup2.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/confirm-perspective-switch.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/debug-startup.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/go-into-break-point.png">
+<meta property="og:updated_time" content="2019-08-23T17:52:39.870Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Setting up open-source STM32 developing environment on ARM Eclipse">
+<meta name="twitter:description" content="Different from &amp;#x2018;STD&amp;#x2019; lib, STM32 &amp;#x2018;HAL&amp;#x2019; lib is more compatible to hardware development and is now well-supported by ST company&amp;#x2019;s Cube IDE.">
+<meta name="twitter:image" content="https://billystudio.github.io/Aug-18th-2019-Linux-STM32-HAL-IIC/add-plugin.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/Aug-18th-2019-Linux-STM32-HAL-IIC/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/Aug-18th-2019-Linux-STM32-HAL-IIC/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Setting up open-source STM32 developing environment on ARM Eclipse
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-08-18T07:33:11.000Z" itemprop="datePublished">Aug 18 2019</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            8 minutes read (About 1208 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>Different from &#x2018;STD&#x2019; lib, STM32 &#x2018;HAL&#x2019; lib is more compatible to hardware development and is now well-supported by ST company&#x2019;s Cube IDE. <a id="more"></a></p>
+<h1 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h1><h2 id="ARM-gcc-compiler"><a href="#ARM-gcc-compiler" class="headerlink" title="ARM gcc compiler"></a>ARM gcc compiler</h2><p>Cross compilers for ARM EABI(bare-metal) target:</p>
+<blockquote>
+<p>arm-none-eabi-gcc<br>arm-none-eabi-newlib<br>arm-none-eabi-gdb</p>
+</blockquote>
+<p>Check by <code>arm-none-eabi-gcc -v</code></p>
+<h2 id="Eclipse"><a href="#Eclipse" class="headerlink" title="Eclipse"></a>Eclipse</h2><blockquote>
+<p>eclipse-cpp</p>
+</blockquote>
+<p>Menu &gt; Help &gt; Install new software&#x2026; &gt; Add<br>Name: GNU ARM eclipse<br>Location: <a href="http://gnuarmeclipse.sourceforge.net/updates" target="_blank" rel="noopener">http://gnuarmeclipse.sourceforge.net/updates</a><br><img src="add-plugin.png" alt="add-plugin.png"></p>
+<p>Then select at least &#x2018;GNU ARM C/C++ Cross Compiler&#x2019;, &#x2018;GNU ARM C/C++ STM32Fx Project Templates&#x2019;, &#x2018;GNU ARM J-Link Debugging Support&#x2019; and &#x2018;GNU ARM C/C++ Packs&#x2019;. If there emerges any warnings about key checks, install anyway.</p>
+<p>In order to select device, go to check packages location at Window &gt; Preferences &gt; C/C++ &gt; Packs<br><img src="check-path-of-packs.png" alt></p>
+<h2 id="Debugger"><a href="#Debugger" class="headerlink" title="Debugger"></a>Debugger</h2><h3 id="Option-A-J-Link"><a href="#Option-A-J-Link" class="headerlink" title="Option A: J-Link"></a>Option A: J-Link</h3><blockquote>
+<p>jlink-software-and-documentation</p>
+</blockquote>
+<h3 id="Option-B-ST-Link"><a href="#Option-B-ST-Link" class="headerlink" title="Option B:ST Link"></a>Option B:ST Link</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S st-link</span><br></pre></td></tr></table></figure>
+
+<p>Run &gt; Run as &gt; External tools setting &gt; new a config called st-linkv2<br><img src="st-link-v2.png" alt="st-link-v2.png"></p>
+<p>Note that ${project_loc} is automatically set as a variable of current project location as well as the ${project_name}</p>
+<p>Then run.</p>
+<p>In the routine, we will get an error from Console like:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">2019-08-19T18:07:07 INFO common.c: Loading device parameters....</span><br><span class="line">2019-08-19T18:07:07 INFO common.c: Device connected is: F4 device, id 0x100f6413</span><br><span class="line">2019-08-19T18:07:07 INFO common.c: SRAM size: 0x30000 bytes (192 KiB), Flash: 0x100000 bytes (1024 KiB) in pages of 16384 bytes</span><br><span class="line">open(DeFly-STM32F407-board-template.bin) == -1</span><br><span class="line">2019-08-19T18:07:07 ERROR common.c: map_file() == -1</span><br><span class="line">st-flash 1.5.1</span><br><span class="line">stlink_fwrite_flash() == -1</span><br></pre></td></tr></table></figure>
+
+<p><img src="flash-error.png" alt="flash-error.png"></p>
+<p>But don&#x2019;t worry because we will fix it immediately.</p>
+<p>Go to Project &gt; Properties &gt; C/C++ Build &gt; Settings &gt; Cross ARM GNU Create Flash Image &gt; General &gt; Output file format, Choose &#x2018;Raw binary&#x2019;. Then it&#x2019;s ok:<br><img src="flash-ok.png" alt="flash-ok.png"></p>
+<p>Note that J-Link is not opensource, so we don&#x2019;t like it on Linux.</p>
+<h1 id="Create-new-project"><a href="#Create-new-project" class="headerlink" title="Create new project"></a>Create new project</h1><h2 id="Native-ARM-Eclipse-HAL"><a href="#Native-ARM-Eclipse-HAL" class="headerlink" title="Native ARM Eclipse HAL"></a>Native ARM Eclipse HAL</h2><p>To enable HAL support, change <code>#if 0</code> to <code>1</code> in <code>_initialize_hardware.c</code>.<br>New a C project &gt; STM32F4xx C/C++ Project(Toolchains: Cross ARM GCC)</p>
+<p><img src="new-c-project.png" alt="Create a C project"></p>
+<p>On the next page uncheck &#x2018;Use newlib nano&#x2019; because we intend to use HAL library<br><img src="uncheck newlib nano.png" alt="Uncheck newlib"></p>
+<p>Folder settings: keep the default.</p>
+<p>Select Configurations: both debug and release.</p>
+<p>Cross GNU ARM Toolchain: choose arm-none-eabi-gcc<br><img src="arm-none-eabi-gcc.png" alt="choose toolchain"><br>Finish and wait for creating.</p>
+<h3 id="Build-setting"><a href="#Build-setting" class="headerlink" title="Build setting"></a>Build setting</h3><p>Windows &gt; Preferences &gt; General &gt; Workspace &gt; Check &#x2018;Always close unerlated projects without prompt.<br><img src="close-unrelated-projects.png" alt="close-unrelated-projects.png"></p>
+<h3 id="Error"><a href="#Error" class="headerlink" title="Error:"></a>Error:</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">/usr/lib/gcc/arm-none-eabi/9.2.0/../../../../arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/9.2.0/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg_nano.a(lib_a-writer.o): in function `_write_r&apos;:</span><br><span class="line">writer.c:(.text._write_r+0x10): undefined reference to `_write&apos;</span><br><span class="line">/usr/lib/gcc/arm-none-eabi/9.2.0/../../../../arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/9.2.0/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg_nano.a(lib_a-closer.o): in function `_close_r&apos;:</span><br><span class="line">closer.c:(.text._close_r+0xc): undefined reference to `_close&apos;</span><br><span class="line">/usr/lib/gcc/arm-none-eabi/9.2.0/../../../../arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/9.2.0/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg_nano.a(lib_a-lseekr.o): in function `_lseek_r&apos;:</span><br><span class="line">lseekr.c:(.text._lseek_r+0x10): undefined reference to `_lseek&apos;</span><br><span class="line">/usr/lib/gcc/arm-none-eabi/9.2.0/../../../../arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/9.2.0/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg_nano.a(lib_a-readr.o): in function `_read_r&apos;:</span><br><span class="line">readr.c:(.text._read_r+0x10): undefined reference to `_read&apos;</span><br><span class="line">/usr/lib/gcc/arm-none-eabi/9.2.0/../../../../arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/9.2.0/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg_nano.a(lib_a-fstatr.o): in function `_fstat_r&apos;:</span><br><span class="line">fstatr.c:(.text._fstat_r+0xe): undefined reference to `_fstat&apos;</span><br><span class="line">/usr/lib/gcc/arm-none-eabi/9.2.0/../../../../arm-none-eabi/bin/ld: /usr/lib/gcc/arm-none-eabi/9.2.0/../../../../arm-none-eabi/lib/thumb/v7e-m/nofp/libg_nano.a(lib_a-isattyr.o): in function `_isatty_r&apos;:</span><br><span class="line">isattyr.c:(.text._isatty_r+0xc): undefined reference to `_isatty&apos;</span><br><span class="line">collect2: error: ld returned 1 exit status</span><br><span class="line">make: *** [makefile:64: F4cubeBlinky.elf] Error 1</span><br></pre></td></tr></table></figure>
+
+<p>This happens might because I use HAL lib but not the newlib, I solved it by open Project &gt; Properties &gt; C/C++ Build &gt; Settings &gt; Cross ARM GNU C++ Linker &gt; Miscellaneous, Uncheck &#x2018;Use newlib -nano (&#x2013;specs=nano.specs)&#x2019; and add &#x2018;-specs=nosys.specs&#x2019;.</p>
+<p>Before:<br><img src="before.png" alt="Before change linker option"></p>
+<p>After:<br><img src="after.png" alt="After change linker option"></p>
+<h2 id="STD-lib"><a href="#STD-lib" class="headerlink" title="STD lib"></a>STD lib</h2><h2 id="STM32CubeMX-generated-HAL"><a href="#STM32CubeMX-generated-HAL" class="headerlink" title="STM32CubeMX generated HAL"></a>STM32CubeMX generated HAL</h2><p>We need to install STM32CubeMX for generating HAL fw-lib template codes.</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">git clone --depth=1 https://aur.archlinux.org/stm32cubemx.git</span><br><span class="line">cd stm32cubemx</span><br><span class="line">makepkg -si</span><br></pre></td></tr></table></figure>
+
+<p>Then config for our microchip<br><img src="stm32mxcube-pinout-config.png" alt></p>
+<p><img src="stm32mxcube-clock-config.png" alt></p>
+<p><img src="stm32mxcube-project-manager.png" alt></p>
+<p>Now we can generate code for it</p>
+<p>Now we can use Eclipse to create a template project. And delete the files. Then drag and copy.</p>
+<p><img src="drag-and-copy-using-file-manager.png" alt="drag-and-copy-using-file-manager.png"></p>
+<p>Don&#x2019;t forget the link file, also we drag and copy into startup folder.<br><img src="ld-file-drag-and-copy.png" alt="ld-file-drag-and-copy.png"></p>
+<p>Or you can use <code>mv</code> commands to manipulate and click &#x2018;Refresh&#x2019; under Eclipse project.</p>
+<p>Next are modifications of projects.</p>
+<ol>
+<li>change .s startup file to .S uppercase one.</li>
+<li>Go to project properties &gt; C/C++ BUild &gt; Settings. Delte other proprocessors and then add Preprocessor: <code>STM32407xx</code> and <code>USE_HAL_DRIVER</code>, Add includes files&#x2026; then linker delete the already existed items and check using startup files, then add our new starup .ld file.</li>
+</ol>
+<h1 id="Debug-settings"><a href="#Debug-settings" class="headerlink" title="Debug settings"></a>Debug settings</h1><h3 id="J-Link"><a href="#J-Link" class="headerlink" title="J-Link"></a>J-Link</h3><p>Go to Window &gt; Preferences &gt; Run/Debug &gt; SEGGER J-Link to check the path of J-Link.<br><img src="check-path-of-jlink.png" alt></p>
+<p>By default, the GDB server is defined as ${jlink_path}/${jlink_gdbserver}; these two macros are automatically set by the above preference page; for portability reasons, it is recommended to keep this definition in all your debug configurations.</p>
+<p>After successfully built the project and see a .elf file generated, go to Debug Configurations and create a new item for J-Link Debug.</p>
+<p><img src="J-link-config-main.png" alt></p>
+<p><img src="J-link-config-debugger.png" alt></p>
+<p><img src="J-link-config-startup.png" alt></p>
+<p><img src="J-link-config-common.png" alt></p>
+<h3 id="ST-Link"><a href="#ST-Link" class="headerlink" title="ST Link"></a>ST Link</h3><p>Add breakpoint in a while statement. Then open the server by Menu &gt; Run &gt; External Tools &gt; ST-Link GDB Server (SWD). Console ouput is like:<br><img src="open-swd.png" alt></p>
+<p>Then edit debug configuration:</p>
+<p><img src="debug-setup1.png" alt="debug-setup1.png"></p>
+<p><img src="debug-setup2.png" alt="debug-setup2.png"></p>
+<p>Then click &#x2018;Debug&#x2019; and happily to see:<br><img src="confirm-perspective-switch.png" alt="confirm-perspective-switch.png"><br>Click Switch, then we go into debug window:<br><img src="debug-startup.png" alt="debug-startup.png"></p>
+<p>When encounting a dead loop between two statements, it&#x2019;s because you didn&#x2019;t press reset button. Yes, in debug mode, pressing reset button is necessary. So click and voila:<br><img src="go-into-break-point.png" alt="go-into-break-point.png"></p>
+<p>We enter our breakpoint successfully.</p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/STM32/">#STM32</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/MCU/">#MCU</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Eclipse/">#Eclipse</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/Aug-24th-RPi-communicates-with-STM32-by-USART-protocal/">USART serial communication between Raspberry Pi and STM32</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/Aug-13th-2019-Linux-troubleshooting/">Linux Troubleshooting</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="notification is-danger">
+    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
+</div>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>Raspberry Pi parallel computing and cluster computing experiment - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/Oct-26th-Raspberry-Pi-parallel-computing-and-cluster-computing-experiment/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="We are going to use 4 Raspberry Pis to build a parallel computing cluster based on MPI protocol.">
+<meta name="keywords" content="Linux,Raspberry Pi,Parallel computing,Cluster computing">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Raspberry Pi parallel computing and cluster computing experiment">
+<meta property="og:url" content="https://BillyStudio.github.io/Oct-26th-Raspberry-Pi-parallel-computing-and-cluster-computing-experiment/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="We are going to use 4 Raspberry Pis to build a parallel computing cluster based on MPI protocol.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-10-06T17:25:32.090Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Raspberry Pi parallel computing and cluster computing experiment">
+<meta name="twitter:description" content="We are going to use 4 Raspberry Pis to build a parallel computing cluster based on MPI protocol.">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/Oct-26th-Raspberry-Pi-parallel-computing-and-cluster-computing-experiment/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/Oct-26th-Raspberry-Pi-parallel-computing-and-cluster-computing-experiment/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Raspberry Pi parallel computing and cluster computing experiment
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-10-26T10:02:58.000Z" itemprop="datePublished">Oct 26 2019</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            3 minutes read (About 377 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>We are going to use 4 Raspberry Pis to build a parallel computing cluster based on MPI protocol.<a id="more"></a> As usual, we are going to install Raspbian OS for every RPi machine:</p>
+<h1 id="Building-programming-environment"><a href="#Building-programming-environment" class="headerlink" title="Building programming environment"></a>Building programming environment</h1><h2 id="Raspbian-Installation"><a href="#Raspbian-Installation" class="headerlink" title="Raspbian Installation"></a>Raspbian Installation</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">7za x 2019-09-26-raspbian-buster.zip</span><br><span class="line">dd bs=4M if=2019-07-10-raspbian-buster.img of=/dev/sdX status=progress conv=fsync</span><br></pre></td></tr></table></figure>
+
+<p>To enable SSH, placing a file name <code>ssh</code> without any extension on the <code>boot</code> partition(rather than <code>/boot/</code> on <code>rootfs</code> partition) of SD card.</p>
+<h2 id="Network-Proxy"><a href="#Network-Proxy" class="headerlink" title="Network Proxy"></a>Network Proxy</h2><p>Edit ~/.bashrc</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">export http_proxy=&quot;http://USER:PASS@IP_ADDRESS:PORT_NUM&quot;</span><br><span class="line">export https_proxy=&quot;http://USER:PASS@IP_ADDRESS:PORT_NUM&quot;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">su</span><br><span class="line">visudo /etc/sudoers</span><br><span class="line">Defaults env_keep += &quot;all_proxy ftp_proxy http_proxy https_proxy no_proxy&quot;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Time-syncronizing"><a href="#Time-syncronizing" class="headerlink" title="Time syncronizing"></a>Time syncronizing</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo date -s &quot;$(wget -S  &quot;http://www.ustb.edu.cn/&quot; 2&gt;&amp;1 | grep -E &apos;^[[:space:]]*[dD]ate:&apos; | sed &apos;s/^[[:space:]]*[dD]ate:[[:space:]]*//&apos; | head -1l | awk &apos;{print $1, $3, $2,  $5 ,&quot;GMT&quot;, $4 }&apos; | sed &apos;s/,//&apos;)&quot;</span><br></pre></td></tr></table></figure>
+
+<p>Or replace <code>wget -S</code> with <code>curl -I</code>.</p>
+<p>install proxy tool from network</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -O https://raw.githubusercontent.com/v2fly/fhs-install-v2ray/master/install-release.sh --proxy &quot;http://ip:port&quot;</span><br><span class="line">sudo bash install-release.sh --proxy &quot;http://ip:port&quot;</span><br></pre></td></tr></table></figure>
+
+<p>or copy the arm32-v7a install-pkg</p>
+<h3 id="Tsinghua-mirrors"><a href="#Tsinghua-mirrors" class="headerlink" title="Tsinghua mirrors"></a>Tsinghua mirrors</h3><p><a href="https://mirrors.tuna.tsinghua.edu.cn/help/raspbian/" target="_blank" rel="noopener">https://mirrors.tuna.tsinghua.edu.cn/help/raspbian/</a></p>
+<p>/etc/apt/sources.list</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib</span><br><span class="line">deb-src http://mirrors.tuna.tsinghua.edu.cn/raspbian/raspbian/ buster main non-free contrib</span><br></pre></td></tr></table></figure>
+
+<p>/etc/apt/sources.list.d/raspi.list</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">deb http://mirrors.tuna.tsinghua.edu.cn/raspberrypi/ buster main ui</span><br></pre></td></tr></table></figure>
+
+<h3 id="Upgrade-system"><a href="#Upgrade-system" class="headerlink" title="Upgrade system"></a>Upgrade system</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo apt update</span><br><span class="line">sudo apt upgrade # It may take a long time</span><br></pre></td></tr></table></figure>
+
+<h3 id="ssh-config-for-non-interactive-shell"><a href="#ssh-config-for-non-interactive-shell" class="headerlink" title="ssh config for non-interactive shell"></a>ssh config for non-interactive shell</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">rpi0:~ $ ssh-keygen -t rsa</span><br><span class="line">rpi0:~ $ cat .ssh/id_rsa.pub</span><br></pre></td></tr></table></figure>
+
+<p>Copy the content into <code>rpi1:~/.ssh/authorized_keys</code></p>
+<h1 id="Experiments"><a href="#Experiments" class="headerlink" title="Experiments"></a>Experiments</h1><h2 id="Openmpi"><a href="#Openmpi" class="headerlink" title="Openmpi"></a>Openmpi</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install build-essentials openmpi-bin openmpi-common openssh-server openssh-client libopenmpi3 libopenmpi-dev libopenmpi-dbg</span><br></pre></td></tr></table></figure>
+
+<h2 id="Python-mpi4py"><a href="#Python-mpi4py" class="headerlink" title="Python mpi4py"></a>Python mpi4py</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install python-numpy python-mpi4py</span><br></pre></td></tr></table></figure>
+
+<h2 id="Obtain-project"><a href="#Obtain-project" class="headerlink" title="Obtain project"></a>Obtain project</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">sudo apt install git</span><br><span class="line">git config --global user.name   &quot;YourUserName&quot;</span><br><span class="line">git config --global user.email  &quot;YourEmail&quot;</span><br><span class="line">git config --global http.proxy  &quot;Your proxy&quot;</span><br><span class="line">git config --global https.proxy &quot;Your proxy&quot;</span><br><span class="line">git config --global http.proxyAuthMethod &apos;basic&apos;</span><br><span class="line">git clone https://github.com/BillyStudio/openmpi-demo.git</span><br></pre></td></tr></table></figure>
+
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Linux/">#Linux</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Raspberry-Pi/">#Raspberry Pi</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Parallel-computing/">#Parallel computing</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Cluster-computing/">#Cluster computing</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/Nov-5th-2019-Managing-Java-project-using-Maven/">Managing Java projects using Gradle or Maven</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/Sept-17th-Create-vms-on-Linux-the-hard-way/">Creating virtual machiness on Linux --- the hard way</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="notification is-danger">
+    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
+</div>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

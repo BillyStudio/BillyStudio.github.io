@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>Cross correlation in Machine learning - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/Feb-20th-cross-correlation/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="The discrict 2D cross correlation is very similar to 2D convolution.">
+<meta name="keywords" content="machine learning">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Cross correlation in Machine learning">
+<meta property="og:url" content="https://BillyStudio.github.io/Feb-20th-cross-correlation/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="The discrict 2D cross correlation is very similar to 2D convolution.">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2019-08-18T06:54:37.357Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Cross correlation in Machine learning">
+<meta name="twitter:description" content="The discrict 2D cross correlation is very similar to 2D convolution.">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/Feb-20th-cross-correlation/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/Feb-20th-cross-correlation/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Cross correlation in Machine learning
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-02-20T09:24:22.000Z" itemprop="datePublished">Feb 20 2019</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            2 minutes read (About 264 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>The discrict 2D cross correlation is very similar to 2D convolution. <a id="more"></a></p>
+<p>check by MATLAB code</p>
+<pre><code>M1 = [17 24  1  8 15;
+      23  5  7 14 16;
+       4  6 13 20 22;
+      10 12 19 21  3;
+      11 18 25  2  9];
+M2 = [8 1 6;
+      3 5 7;
+      4 9 2];
+D = xcorr2(M1, M2);
+D
+</code></pre><p>But there is some difference between MATLAB and PyTorch. The relevant functions in PyTorch are <code>torch.nn.functional.conv2d</code> and <code>torch.nn.Conv2d</code>. Because <code>torch.nn.functional.conv2d</code> can setup paddings as an argument, so the result matrix can be smaller. Let&#x2019;s do a simple experiment to check it.</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">Python <span class="hljs-number">2.7</span><span class="hljs-number">.15</span> |Anaconda, Inc.| (default, Dec <span class="hljs-number">14</span> <span class="hljs-number">2018</span>, <span class="hljs-number">19</span>:<span class="hljs-number">04</span>:<span class="hljs-number">19</span>) </span><br><span class="line">[GCC <span class="hljs-number">7.3</span><span class="hljs-number">.0</span>] on linux2</span><br><span class="line">Type <span class="hljs-string">&quot;help&quot;</span>, <span class="hljs-string">&quot;copyright&quot;</span>, <span class="hljs-string">&quot;credits&quot;</span> <span class="hljs-keyword">or</span> <span class="hljs-string">&quot;license&quot;</span> <span class="hljs-keyword">for</span> more information.</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> torch</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> torch.nn <span class="hljs-keyword">as</span> nn</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> torch.nn.functional <span class="hljs-keyword">as</span> F</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>inputs = torch.randn(<span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">5</span>, <span class="hljs-number">5</span>)</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>filters = torch.randn(<span class="hljs-number">6</span>, <span class="hljs-number">4</span>, <span class="hljs-number">3</span>, <span class="hljs-number">3</span>)</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>results = F.conv2d(inputs, filters, padding=<span class="hljs-number">2</span>)</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>results.size()</span><br><span class="line">(<span class="hljs-number">1</span>, <span class="hljs-number">6</span>, <span class="hljs-number">7</span>, <span class="hljs-number">7</span>)</span><br></pre></td></tr></table></figure>
+
+<p>We will check the value for first filter.</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>inputs</span><br><span class="line">tensor([[[[<span class="hljs-number">-2.0126</span>, <span class="hljs-number">-1.2142</span>, <span class="hljs-number">-0.5943</span>,  <span class="hljs-number">0.9880</span>,  <span class="hljs-number">1.3990</span>],</span><br><span class="line">          [ <span class="hljs-number">1.2635</span>,  <span class="hljs-number">1.6013</span>, <span class="hljs-number">-0.4639</span>,  <span class="hljs-number">0.1469</span>,  <span class="hljs-number">1.7033</span>],</span><br><span class="line">          [ <span class="hljs-number">1.0538</span>,  <span class="hljs-number">0.8419</span>,  <span class="hljs-number">2.0627</span>,  <span class="hljs-number">1.7289</span>,  <span class="hljs-number">0.0493</span>],</span><br><span class="line">          [<span class="hljs-number">-0.7360</span>, <span class="hljs-number">-1.0318</span>, <span class="hljs-number">-2.6838</span>,  <span class="hljs-number">0.1069</span>, <span class="hljs-number">-1.1440</span>],</span><br><span class="line">          [<span class="hljs-number">-0.2589</span>,  <span class="hljs-number">2.0517</span>,  <span class="hljs-number">0.2611</span>, <span class="hljs-number">-1.7295</span>,  <span class="hljs-number">0.0654</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="hljs-number">-1.8845</span>, <span class="hljs-number">-1.9481</span>,  <span class="hljs-number">0.3805</span>, <span class="hljs-number">-0.6467</span>,  <span class="hljs-number">0.6878</span>],</span><br><span class="line">          [<span class="hljs-number">-0.3418</span>, <span class="hljs-number">-1.3715</span>,  <span class="hljs-number">0.4947</span>,  <span class="hljs-number">0.4899</span>,  <span class="hljs-number">0.2835</span>],</span><br><span class="line">          [<span class="hljs-number">-0.8665</span>,  <span class="hljs-number">0.6921</span>,  <span class="hljs-number">0.1421</span>,  <span class="hljs-number">0.1243</span>, <span class="hljs-number">-0.9729</span>],</span><br><span class="line">          [ <span class="hljs-number">0.2235</span>, <span class="hljs-number">-0.3882</span>, <span class="hljs-number">-0.4885</span>,  <span class="hljs-number">1.1147</span>, <span class="hljs-number">-0.2176</span>],</span><br><span class="line">          [<span class="hljs-number">-0.8032</span>, <span class="hljs-number">-0.1928</span>, <span class="hljs-number">-0.6535</span>, <span class="hljs-number">-0.0107</span>,  <span class="hljs-number">0.6291</span>]],</span><br><span class="line"></span><br><span class="line">         [[ <span class="hljs-number">1.0086</span>,  <span class="hljs-number">1.0685</span>, <span class="hljs-number">-0.2147</span>, <span class="hljs-number">-0.0510</span>,  <span class="hljs-number">0.2829</span>],</span><br><span class="line">          [ <span class="hljs-number">0.1978</span>, <span class="hljs-number">-1.4479</span>,  <span class="hljs-number">0.8483</span>, <span class="hljs-number">-0.7487</span>, <span class="hljs-number">-0.5068</span>],</span><br><span class="line">          [ <span class="hljs-number">1.0150</span>,  <span class="hljs-number">0.2064</span>, <span class="hljs-number">-0.1610</span>,  <span class="hljs-number">1.1604</span>, <span class="hljs-number">-0.0933</span>],</span><br><span class="line">          [<span class="hljs-number">-0.4072</span>,  <span class="hljs-number">0.2518</span>,  <span class="hljs-number">0.2360</span>,  <span class="hljs-number">0.0037</span>,  <span class="hljs-number">0.0191</span>],</span><br><span class="line">          [ <span class="hljs-number">1.3504</span>, <span class="hljs-number">-0.1713</span>, <span class="hljs-number">-1.0858</span>,  <span class="hljs-number">1.7440</span>, <span class="hljs-number">-1.0150</span>]],</span><br><span class="line"></span><br><span class="line">         [[<span class="hljs-number">-1.1781</span>,  <span class="hljs-number">0.9697</span>, <span class="hljs-number">-0.0453</span>, <span class="hljs-number">-0.2083</span>, <span class="hljs-number">-0.9241</span>],</span><br><span class="line">          [<span class="hljs-number">-0.3955</span>,  <span class="hljs-number">0.0400</span>, <span class="hljs-number">-0.4108</span>, <span class="hljs-number">-0.8875</span>, <span class="hljs-number">-0.3455</span>],</span><br><span class="line">          [<span class="hljs-number">-0.6430</span>,  <span class="hljs-number">0.3412</span>,  <span class="hljs-number">0.6656</span>,  <span class="hljs-number">0.6985</span>,  <span class="hljs-number">0.2691</span>],</span><br><span class="line">          [ <span class="hljs-number">1.3433</span>, <span class="hljs-number">-1.4387</span>, <span class="hljs-number">-1.2028</span>, <span class="hljs-number">-0.2997</span>,  <span class="hljs-number">0.6933</span>],</span><br><span class="line">          [<span class="hljs-number">-0.4480</span>, <span class="hljs-number">-0.7450</span>,  <span class="hljs-number">0.9386</span>, <span class="hljs-number">-1.3733</span>,  <span class="hljs-number">1.1912</span>]]]])</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>filters[<span class="hljs-number">0</span>]</span><br><span class="line">tensor([[[<span class="hljs-number">-1.1877</span>,  <span class="hljs-number">0.2613</span>,  <span class="hljs-number">1.7033</span>],</span><br><span class="line">         [ <span class="hljs-number">0.5515</span>, <span class="hljs-number">-0.5155</span>, <span class="hljs-number">-0.8936</span>],</span><br><span class="line">         [<span class="hljs-number">-1.1671</span>, <span class="hljs-number">-1.3611</span>, <span class="hljs-number">-0.0778</span>]],</span><br><span class="line"></span><br><span class="line">        [[<span class="hljs-number">-1.0069</span>,  <span class="hljs-number">1.0255</span>,  <span class="hljs-number">0.9102</span>],</span><br><span class="line">         [<span class="hljs-number">-0.4946</span>,  <span class="hljs-number">0.8556</span>,  <span class="hljs-number">1.4657</span>],</span><br><span class="line">         [ <span class="hljs-number">0.1137</span>, <span class="hljs-number">-0.2616</span>,  <span class="hljs-number">0.5006</span>]],</span><br><span class="line"></span><br><span class="line">        [[ <span class="hljs-number">1.4465</span>,  <span class="hljs-number">1.2084</span>,  <span class="hljs-number">2.2803</span>],</span><br><span class="line">         [ <span class="hljs-number">0.2097</span>,  <span class="hljs-number">0.0633</span>,  <span class="hljs-number">0.7705</span>],</span><br><span class="line">         [<span class="hljs-number">-0.7784</span>, <span class="hljs-number">-0.9365</span>, <span class="hljs-number">-0.9489</span>]],</span><br><span class="line"></span><br><span class="line">        [[ <span class="hljs-number">0.7263</span>,  <span class="hljs-number">1.7227</span>,  <span class="hljs-number">1.2436</span>],</span><br><span class="line">         [<span class="hljs-number">-0.9810</span>,  <span class="hljs-number">0.2232</span>,  <span class="hljs-number">2.0970</span>],</span><br><span class="line">         [ <span class="hljs-number">0.4908</span>,  <span class="hljs-number">0.0761</span>, <span class="hljs-number">-1.2843</span>]]])</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>results[<span class="hljs-number">0</span>, <span class="hljs-number">0</span>]</span><br><span class="line">tensor([[ <span class="hljs-number">-0.2308</span>,  <span class="hljs-number">-0.9420</span>,   <span class="hljs-number">2.5055</span>,   <span class="hljs-number">1.6621</span>,   <span class="hljs-number">0.8917</span>,  <span class="hljs-number">-3.7088</span>,  <span class="hljs-number">-2.2284</span>],</span><br><span class="line">        [ <span class="hljs-number">-2.6064</span>,  <span class="hljs-number">-1.0220</span>,  <span class="hljs-number">-1.0562</span>,  <span class="hljs-number">-1.2500</span>,  <span class="hljs-number">-2.6156</span>,  <span class="hljs-number">-1.1755</span>,  <span class="hljs-number">-0.3335</span>],</span><br><span class="line">        [ <span class="hljs-number">-7.2688</span>, <span class="hljs-number">-11.5212</span>,  <span class="hljs-number">-0.2480</span>,   <span class="hljs-number">0.6509</span>,  <span class="hljs-number">-6.4913</span>,  <span class="hljs-number">-3.3876</span>,  <span class="hljs-number">-1.5478</span>],</span><br><span class="line">        [ <span class="hljs-number">-2.1471</span>,   <span class="hljs-number">0.4592</span>,   <span class="hljs-number">3.3012</span>,   <span class="hljs-number">0.6832</span>,   <span class="hljs-number">0.4210</span>,  <span class="hljs-number">-1.7197</span>,  <span class="hljs-number">-1.4319</span>],</span><br><span class="line">        [  <span class="hljs-number">4.9215</span>,   <span class="hljs-number">0.9659</span>,  <span class="hljs-number">-0.4123</span>,   <span class="hljs-number">8.2638</span>,   <span class="hljs-number">4.4465</span>,   <span class="hljs-number">0.5087</span>,   <span class="hljs-number">1.1521</span>],</span><br><span class="line">        [ <span class="hljs-number">-1.1531</span>,  <span class="hljs-number">-5.8456</span>,  <span class="hljs-number">-8.2622</span>,   <span class="hljs-number">0.1412</span>,   <span class="hljs-number">5.1500</span>,   <span class="hljs-number">0.7043</span>,   <span class="hljs-number">0.4526</span>],</span><br><span class="line">        [  <span class="hljs-number">1.3501</span>,   <span class="hljs-number">1.9708</span>,   <span class="hljs-number">0.1334</span>,  <span class="hljs-number">-4.0153</span>,  <span class="hljs-number">-1.4115</span>,   <span class="hljs-number">5.0781</span>,  <span class="hljs-number">-1.3142</span>]])</span><br></pre></td></tr></table></figure>
+
+<p>Do the same thing on Matlab</p>
+<figure class="highlight matlab hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt; inputs_0 = [[<span class="hljs-number">-2.0126</span>, <span class="hljs-number">-1.2142</span>, <span class="hljs-number">-0.5943</span>,  <span class="hljs-number">0.9880</span>,  <span class="hljs-number">1.3990</span>];</span><br><span class="line">          [ <span class="hljs-number">1.2635</span>,  <span class="hljs-number">1.6013</span>, <span class="hljs-number">-0.4639</span>,  <span class="hljs-number">0.1469</span>,  <span class="hljs-number">1.7033</span>];</span><br><span class="line">          [ <span class="hljs-number">1.0538</span>,  <span class="hljs-number">0.8419</span>,  <span class="hljs-number">2.0627</span>,  <span class="hljs-number">1.7289</span>,  <span class="hljs-number">0.0493</span>];</span><br><span class="line">          [<span class="hljs-number">-0.7360</span>, <span class="hljs-number">-1.0318</span>, <span class="hljs-number">-2.6838</span>,  <span class="hljs-number">0.1069</span>, <span class="hljs-number">-1.1440</span>];</span><br><span class="line">          [<span class="hljs-number">-0.2589</span>,  <span class="hljs-number">2.0517</span>,  <span class="hljs-number">0.2611</span>, <span class="hljs-number">-1.7295</span>,  <span class="hljs-number">0.0654</span>]];</span><br><span class="line">&gt;&gt; inputs_1 = [[<span class="hljs-number">-1.8845</span>, <span class="hljs-number">-1.9481</span>,  <span class="hljs-number">0.3805</span>, <span class="hljs-number">-0.6467</span>,  <span class="hljs-number">0.6878</span>];</span><br><span class="line">          [<span class="hljs-number">-0.3418</span>, <span class="hljs-number">-1.3715</span>,  <span class="hljs-number">0.4947</span>,  <span class="hljs-number">0.4899</span>,  <span class="hljs-number">0.2835</span>];</span><br><span class="line">          [<span class="hljs-number">-0.8665</span>,  <span class="hljs-number">0.6921</span>,  <span class="hljs-number">0.1421</span>,  <span class="hljs-number">0.1243</span>, <span class="hljs-number">-0.9729</span>];</span><br><span class="line">          [ <span class="hljs-number">0.2235</span>, <span class="hljs-number">-0.3882</span>, <span class="hljs-number">-0.4885</span>,  <span class="hljs-number">1.1147</span>, <span class="hljs-number">-0.2176</span>];</span><br><span class="line">          [<span class="hljs-number">-0.8032</span>, <span class="hljs-number">-0.1928</span>, <span class="hljs-number">-0.6535</span>, <span class="hljs-number">-0.0107</span>,  <span class="hljs-number">0.6291</span>]];</span><br><span class="line">&gt;&gt; inputs_2 = [[ <span class="hljs-number">1.0086</span>,  <span class="hljs-number">1.0685</span>, <span class="hljs-number">-0.2147</span>, <span class="hljs-number">-0.0510</span>,  <span class="hljs-number">0.2829</span>];</span><br><span class="line">          [ <span class="hljs-number">0.1978</span>, <span class="hljs-number">-1.4479</span>,  <span class="hljs-number">0.8483</span>, <span class="hljs-number">-0.7487</span>, <span class="hljs-number">-0.5068</span>];</span><br><span class="line">          [ <span class="hljs-number">1.0150</span>,  <span class="hljs-number">0.2064</span>, <span class="hljs-number">-0.1610</span>,  <span class="hljs-number">1.1604</span>, <span class="hljs-number">-0.0933</span>];</span><br><span class="line">          [<span class="hljs-number">-0.4072</span>,  <span class="hljs-number">0.2518</span>,  <span class="hljs-number">0.2360</span>,  <span class="hljs-number">0.0037</span>,  <span class="hljs-number">0.0191</span>];</span><br><span class="line">          [ <span class="hljs-number">1.3504</span>, <span class="hljs-number">-0.1713</span>, <span class="hljs-number">-1.0858</span>,  <span class="hljs-number">1.7440</span>, <span class="hljs-number">-1.0150</span>]];</span><br><span class="line">&gt;&gt; inputs_3 = [[<span class="hljs-number">-1.1781</span>,  <span class="hljs-number">0.9697</span>, <span class="hljs-number">-0.0453</span>, <span class="hljs-number">-0.2083</span>, <span class="hljs-number">-0.9241</span>];</span><br><span class="line">          [<span class="hljs-number">-0.3955</span>,  <span class="hljs-number">0.0400</span>, <span class="hljs-number">-0.4108</span>, <span class="hljs-number">-0.8875</span>, <span class="hljs-number">-0.3455</span>];</span><br><span class="line">          [<span class="hljs-number">-0.6430</span>,  <span class="hljs-number">0.3412</span>,  <span class="hljs-number">0.6656</span>,  <span class="hljs-number">0.6985</span>,  <span class="hljs-number">0.2691</span>];</span><br><span class="line">          [ <span class="hljs-number">1.3433</span>, <span class="hljs-number">-1.4387</span>, <span class="hljs-number">-1.2028</span>, <span class="hljs-number">-0.2997</span>,  <span class="hljs-number">0.6933</span>];</span><br><span class="line">          [<span class="hljs-number">-0.4480</span>, <span class="hljs-number">-0.7450</span>,  <span class="hljs-number">0.9386</span>, <span class="hljs-number">-1.3733</span>,  <span class="hljs-number">1.1912</span>]];</span><br><span class="line">&gt;&gt; filters_0 = [[<span class="hljs-number">-1.1877</span>,  <span class="hljs-number">0.2613</span>,  <span class="hljs-number">1.7033</span>];</span><br><span class="line">         [ <span class="hljs-number">0.5515</span>, <span class="hljs-number">-0.5155</span>, <span class="hljs-number">-0.8936</span>];</span><br><span class="line">         [<span class="hljs-number">-1.1671</span>, <span class="hljs-number">-1.3611</span>, <span class="hljs-number">-0.0778</span>]];</span><br><span class="line">&gt;&gt; filters_1 = [[<span class="hljs-number">-1.0069</span>,  <span class="hljs-number">1.0255</span>,  <span class="hljs-number">0.9102</span>];</span><br><span class="line">         [<span class="hljs-number">-0.4946</span>,  <span class="hljs-number">0.8556</span>,  <span class="hljs-number">1.4657</span>];</span><br><span class="line">         [ <span class="hljs-number">0.1137</span>, <span class="hljs-number">-0.2616</span>,  <span class="hljs-number">0.5006</span>]];</span><br><span class="line">&gt;&gt; filters_2 = [[ <span class="hljs-number">1.4465</span>,  <span class="hljs-number">1.2084</span>,  <span class="hljs-number">2.2803</span>];</span><br><span class="line">         [ <span class="hljs-number">0.2097</span>,  <span class="hljs-number">0.0633</span>,  <span class="hljs-number">0.7705</span>];</span><br><span class="line">         [<span class="hljs-number">-0.7784</span>, <span class="hljs-number">-0.9365</span>, <span class="hljs-number">-0.9489</span>]];</span><br><span class="line">&gt;&gt; filters_3 = [[ <span class="hljs-number">0.7263</span>,  <span class="hljs-number">1.7227</span>,  <span class="hljs-number">1.2436</span>];</span><br><span class="line">         [<span class="hljs-number">-0.9810</span>,  <span class="hljs-number">0.2232</span>,  <span class="hljs-number">2.0970</span>];</span><br><span class="line">         [ <span class="hljs-number">0.4908</span>,  <span class="hljs-number">0.0761</span>, <span class="hljs-number">-1.2843</span>]];</span><br><span class="line">&gt;&gt; c_0 = xcorr2(inputs_0, filters_0);</span><br><span class="line">&gt;&gt; c_1 = xcorr2(inputs_1, filters_1);</span><br><span class="line">&gt;&gt; c_2 = xcorr2(inputs_2, filters_2);</span><br><span class="line">&gt;&gt; c_3 = xcorr2(inputs_3, filters_3);</span><br><span class="line">&gt;&gt; c_0 + c_1 + c_2 + c_3</span><br><span class="line"><span class="hljs-built_in">ans</span> =</span><br><span class="line">   <span class="hljs-number">-0.2308</span>   <span class="hljs-number">-0.9419</span>    <span class="hljs-number">2.5054</span>    <span class="hljs-number">1.6621</span>    <span class="hljs-number">0.8919</span>   <span class="hljs-number">-3.7085</span>   <span class="hljs-number">-2.2283</span></span><br><span class="line">   <span class="hljs-number">-2.6062</span>   <span class="hljs-number">-1.0219</span>   <span class="hljs-number">-1.0561</span>   <span class="hljs-number">-1.2497</span>   <span class="hljs-number">-2.6155</span>   <span class="hljs-number">-1.1754</span>   <span class="hljs-number">-0.3335</span></span><br><span class="line">   <span class="hljs-number">-7.2686</span>  <span class="hljs-number">-11.5207</span>   <span class="hljs-number">-0.2484</span>    <span class="hljs-number">0.6508</span>   <span class="hljs-number">-6.4911</span>   <span class="hljs-number">-3.3877</span>   <span class="hljs-number">-1.5477</span></span><br><span class="line">   <span class="hljs-number">-2.1475</span>    <span class="hljs-number">0.4589</span>    <span class="hljs-number">3.3011</span>    <span class="hljs-number">0.6829</span>    <span class="hljs-number">0.4209</span>   <span class="hljs-number">-1.7198</span>   <span class="hljs-number">-1.4318</span></span><br><span class="line">    <span class="hljs-number">4.9216</span>    <span class="hljs-number">0.9663</span>   <span class="hljs-number">-0.4121</span>    <span class="hljs-number">8.2640</span>    <span class="hljs-number">4.4465</span>    <span class="hljs-number">0.5085</span>    <span class="hljs-number">1.1521</span></span><br><span class="line">   <span class="hljs-number">-1.1531</span>   <span class="hljs-number">-5.8454</span>   <span class="hljs-number">-8.2619</span>    <span class="hljs-number">0.1415</span>    <span class="hljs-number">5.1501</span>    <span class="hljs-number">0.7042</span>    <span class="hljs-number">0.4525</span></span><br><span class="line">    <span class="hljs-number">1.3501</span>    <span class="hljs-number">1.9708</span>    <span class="hljs-number">0.1334</span>   <span class="hljs-number">-4.0152</span>   <span class="hljs-number">-1.4114</span>    <span class="hljs-number">5.0780</span>   <span class="hljs-number">-1.3141</span></span><br></pre></td></tr></table></figure>
+
+<p>No suprisingly we will find that <code>ans</code> on matlab is equivalent to <code>results[0, 0]</code> on python.</p>
+<p>For <code>torch.nn.Conv2d</code>, PyTorch add random weights to the cross correlation bigot multiplication, which make it more complex. Look at the following codes run in python terminal:</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> torch</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> torch.nn <span class="hljs-keyword">as</span> nn</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span><span class="hljs-keyword">import</span> os</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>os.system(<span class="hljs-string">&quot;clear&quot;</span>)</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>input = torch.ones(<span class="hljs-number">2</span>,<span class="hljs-number">3</span>,<span class="hljs-number">4</span>)</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>input</span><br><span class="line">tensor([[[<span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>],</span><br><span class="line">         [<span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>],</span><br><span class="line">         [<span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>]],</span><br><span class="line"></span><br><span class="line">        [[<span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>],</span><br><span class="line">         [<span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>],</span><br><span class="line">         [<span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>]]])</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>m = nn.Conv1d(<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>)</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>m2= nn.Conv1d(<span class="hljs-number">3</span>,<span class="hljs-number">1</span>,<span class="hljs-number">1</span>)</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>m(input)</span><br><span class="line">tensor([[[<span class="hljs-number">-0.3817</span>, <span class="hljs-number">-0.3817</span>, <span class="hljs-number">-0.3817</span>, <span class="hljs-number">-0.3817</span>]],</span><br><span class="line"></span><br><span class="line">        [[<span class="hljs-number">-0.3817</span>, <span class="hljs-number">-0.3817</span>, <span class="hljs-number">-0.3817</span>, <span class="hljs-number">-0.3817</span>]]], grad_fn=&lt;SqueezeBackward1&gt;)</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>m2(input)</span><br><span class="line">tensor([[[<span class="hljs-number">0.4615</span>, <span class="hljs-number">0.4615</span>, <span class="hljs-number">0.4615</span>, <span class="hljs-number">0.4615</span>]],</span><br><span class="line"></span><br><span class="line">        [[<span class="hljs-number">0.4615</span>, <span class="hljs-number">0.4615</span>, <span class="hljs-number">0.4615</span>, <span class="hljs-number">0.4615</span>]]], grad_fn=&lt;SqueezeBackward1&gt;)</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>input[<span class="hljs-number">1</span>]</span><br><span class="line">tensor([[<span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>],</span><br><span class="line">        [<span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>],</span><br><span class="line">        [<span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>]])</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>input[<span class="hljs-number">1</span>] = <span class="hljs-number">2</span> * input[<span class="hljs-number">1</span>]</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>input</span><br><span class="line">tensor([[[<span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>],</span><br><span class="line">         [<span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>],</span><br><span class="line">         [<span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>, <span class="hljs-number">1.</span>]],</span><br><span class="line"></span><br><span class="line">        [[<span class="hljs-number">2.</span>, <span class="hljs-number">2.</span>, <span class="hljs-number">2.</span>, <span class="hljs-number">2.</span>],</span><br><span class="line">         [<span class="hljs-number">2.</span>, <span class="hljs-number">2.</span>, <span class="hljs-number">2.</span>, <span class="hljs-number">2.</span>],</span><br><span class="line">         [<span class="hljs-number">2.</span>, <span class="hljs-number">2.</span>, <span class="hljs-number">2.</span>, <span class="hljs-number">2.</span>]]])</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>m(input)</span><br><span class="line">tensor([[[<span class="hljs-number">-0.3817</span>, <span class="hljs-number">-0.3817</span>, <span class="hljs-number">-0.3817</span>, <span class="hljs-number">-0.3817</span>]],</span><br><span class="line"></span><br><span class="line">        [[<span class="hljs-number">-0.3176</span>, <span class="hljs-number">-0.3176</span>, <span class="hljs-number">-0.3176</span>, <span class="hljs-number">-0.3176</span>]]], grad_fn=&lt;SqueezeBackward1&gt;)</span><br></pre></td></tr></table></figure>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/machine-learning/">#machine learning</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/Feb-25-understand-forward-and-backprop-in-neural-networks/">Understanding forward and backprop in neural networks</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/Feb-19th-Linux-Vim-Config/">Vim config file on Linux desktop</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="notification is-danger">
+    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
+</div>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

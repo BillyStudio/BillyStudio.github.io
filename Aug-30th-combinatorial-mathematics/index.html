@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>数据结构与算法笔记 | 数学 - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/Aug-30th-combinatorial-mathematics/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x672C;&amp;#x6587;&amp;#x662F;&amp;#x6570;&amp;#x636E;&amp;#x7ED3;&amp;#x6784;&amp;#x4E0E;&amp;#x7B97;&amp;#x6CD5;&amp;#x7CFB;&amp;#x5217;&amp;#x7B2C;&amp;#x5341;&amp;#x7BC7; &amp;#x2014;&amp;#x2014; &amp;#x6570;&amp;#x5B66;&amp;#x90E8;&amp;#x5206;&amp;#x3002;">
+<meta name="keywords" content="算法,组合数学,数学,数论">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法笔记 | 数学">
+<meta property="og:url" content="https://BillyStudio.github.io/Aug-30th-combinatorial-mathematics/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x672C;&amp;#x6587;&amp;#x662F;&amp;#x6570;&amp;#x636E;&amp;#x7ED3;&amp;#x6784;&amp;#x4E0E;&amp;#x7B97;&amp;#x6CD5;&amp;#x7CFB;&amp;#x5217;&amp;#x7B2C;&amp;#x5341;&amp;#x7BC7; &amp;#x2014;&amp;#x2014; &amp;#x6570;&amp;#x5B66;&amp;#x90E8;&amp;#x5206;&amp;#x3002;">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://billystudio.github.io/Aug-30th-combinatorial-mathematics/C53-raw.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-30th-combinatorial-mathematics/C53-Cpp-Java.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-30th-combinatorial-mathematics/C53-C.png">
+<meta property="og:image" content="https://billystudio.github.io/Aug-30th-combinatorial-mathematics/listC42.png">
+<meta property="og:updated_time" content="2021-09-18T16:26:53.755Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法笔记 | 数学">
+<meta name="twitter:description" content="&amp;#x672C;&amp;#x6587;&amp;#x662F;&amp;#x6570;&amp;#x636E;&amp;#x7ED3;&amp;#x6784;&amp;#x4E0E;&amp;#x7B97;&amp;#x6CD5;&amp;#x7CFB;&amp;#x5217;&amp;#x7B2C;&amp;#x5341;&amp;#x7BC7; &amp;#x2014;&amp;#x2014; &amp;#x6570;&amp;#x5B66;&amp;#x90E8;&amp;#x5206;&amp;#x3002;">
+<meta name="twitter:image" content="https://billystudio.github.io/Aug-30th-combinatorial-mathematics/C53-raw.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/Aug-30th-combinatorial-mathematics/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/Aug-30th-combinatorial-mathematics/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            数据结构与算法笔记 | 数学
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-08-30T14:51:19.000Z" itemprop="datePublished">Aug 30 2018</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/数据结构与算法/">数据结构与算法</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            16 minutes read (About 2390 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x672C;&#x6587;&#x662F;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x4E0E;&#x7B97;&#x6CD5;&#x7CFB;&#x5217;&#x7B2C;&#x5341;&#x7BC7; &#x2014;&#x2014; &#x6570;&#x5B66;&#x90E8;&#x5206;&#x3002; <a id="more"></a></p>
+<h1 id="&#x4E00;&#x3001;&#x8D28;&#x6570;"><a href="#&#x4E00;&#x3001;&#x8D28;&#x6570;" class="headerlink" title="&#x4E00;&#x3001;&#x8D28;&#x6570;"></a>&#x4E00;&#x3001;&#x8D28;&#x6570;</h1><p>&#x5B9A;&#x4E49;&#xFF1A;A <em>prime</em> is a positive integer X that has exactly two distinct divisors: 1 and X. The first few prime integers are 2, 3, 5, 7, 11 and 13.</p>
+<p>&#x5224;&#x65AD;&#x5355;&#x72EC;&#x4E00;&#x4E2A;&#x6B63;&#x6574;&#x6570;n&#x662F;&#x5426;&#x4E3A;&#x8D28;&#x6570;&#x5C31;&#x53EF;&#x4EE5;&#x7528;&#x5B9A;&#x4E49;&#x6CD5;&#xFF0C;&#x7531;&#x4E8E;&#x6570;&#x7684;&#x56E0;&#x5B50;&#x5177;&#x6709;&#x5BF9;&#x5076;&#x6027;&#xFF0C;&#x6240;&#x4EE5;&#x53EA;&#x9700;&#x8981;&#x5728;&#x904D;&#x5386;&#x5230; $\sqrt{n}$ &#x4ECD;&#x6CA1;&#x6709;&#x51FA;&#x73B0;&#x56E0;&#x5B50;&#x65F6;&#xFF0C;&#x5373;&#x53EF;&#x5224;&#x5B9A;&#x4E3A;&#x8D28;&#x6570;(prime)&#xFF0C;&#x5426;&#x5219;&#x4E3A;&#x5408;&#x6570;(composite)&#xFF1A;</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"><span class="hljs-comment">// assert n &gt; 0</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">isPrime</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span> </span>{</span><br><span class="line">    <span class="hljs-keyword">if</span>(n == <span class="hljs-number">1</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> fac=<span class="hljs-number">2</span>; fac&lt;=<span class="hljs-built_in">sqrt</span>(n); ++fac) {</span><br><span class="line">        <span class="hljs-keyword">if</span>(n % fac == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x7B97;&#x6CD5;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x4E3A; O($\sqrt{n}$)&#x3002;<br>&#x4F8B;&#x9898; <a href="http://acm.hdu.edu.cn/game/entry/problem/show.php?chapterid=2&amp;sectionid=1&amp;problemid=2" target="_blank" rel="noopener">HDU2.1.2 How many prime numbers</a></p>
+<h2 id="Eratosthenes-&#x7B5B;&#x6CD5;&#xFF08;&#x57C3;&#x5F0F;&#x7B5B;&#x6CD5;&#xFF09;"><a href="#Eratosthenes-&#x7B5B;&#x6CD5;&#xFF08;&#x57C3;&#x5F0F;&#x7B5B;&#x6CD5;&#xFF09;" class="headerlink" title="Eratosthenes &#x7B5B;&#x6CD5;&#xFF08;&#x57C3;&#x5F0F;&#x7B5B;&#x6CD5;&#xFF09;"></a>Eratosthenes &#x7B5B;&#x6CD5;&#xFF08;&#x57C3;&#x5F0F;&#x7B5B;&#x6CD5;&#xFF09;</h2><p>&#x5982;&#x679C;&#x9700;&#x8981;&#x6C42;&#x53D6;&#x5DF2;&#x77E5;&#x8303;&#x56F4;&#xFF08;[1, N]&#xFF09;&#x5185;&#x7684;&#x6240;&#x6709;&#x8D28;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x4F7F;&#x7528;&#x5B9A;&#x4E49;&#x6CD5;&#x7684;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x4F1A;&#x53D8;&#x4E3A; O($N\sqrt{N}$) = O($N^{\frac{3}{2}}$)&#xFF0C;&#x6548;&#x7387;&#x4E0D;&#x4F73;&#x3002;&#x8FD9;&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#x4E00;&#x822C;&#x4F7F;&#x7528;&#x57C3;&#x5F0F;&#x7B5B;&#x6CD5;&#xFF0C;&#x7B97;&#x6CD5;&#x7684;&#x57FA;&#x672C;&#x903B;&#x8F91;&#x662F;&#xFF1A;&#x8D28;&#x6570;&#x7684;&#x500D;&#x6570;&#x90FD;&#x662F;&#x5408;&#x6570;&#xFF0C;&#x53EF;&#x4EE5;&#x904D;&#x5386;&#x7B5B;&#x6389;&#x3002;&#x6BD4;&#x5982;2&#x662F;&#x8D28;&#x6570;&#xFF0C;&#x90A3;&#x4E48;&#x6240;&#x6709;2&#x4E4B;&#x540E;&#x7684;&#x500D;&#x6570;&#xFF08;&#x5076;&#x6570;&#xFF09;&#x90FD;&#x662F;&#x5408;&#x6570;&#x3002;&#x8FDB;&#x4E00;&#x6B65;&#xFF0C;3&#x662F;&#x8D28;&#x6570;&#xFF0C;3&#xD7;2&#x5DF2;&#x7ECF;&#x5728;&#x904D;&#x5386;2&#x500D;&#x6570;&#x65F6;&#x5220;&#x6389;&#x4E86;&#xFF0C;&#x6240;&#x4EE5;&#x4ECE;3&#xD7;3&#x5F00;&#x59CB;&#xFF0C;&#x4E4B;&#x540E;&#x7684;3&#xD7;6&#x3001;3&#xD7;9&#x90FD;&#x662F;&#x5408;&#x6570;&#x3002;5&#x662F;&#x8D28;&#x6570;&#xFF0C;5&#xD7;2^k&#x548C;5&#xD7;3^k&#x5DF2;&#x7ECF;&#x88AB;&#x5220;&#x6389;&#x4E86;&#xFF0C;&#x6240;&#x4EE5;&#x4ECE;5^2&#x5F00;&#x59CB;&#x7B5B;&#xFF0C;5^3&#xFF0C;5^4&#x2026;&#x90FD;&#x662F;&#x5408;&#x6570;&#x3002;&#x5F53;&#x53D6;&#x5230; sqrt(N) &#x65F6;&#xFF0C;&#x7531;&#x4E8E;&#x4ECE; sqrt(N)*sqrt(N) = N &#x5F00;&#x59CB;&#x7B5B;&#xFF0C;&#x5DF2;&#x7ECF;&#x8D85;&#x51FA;&#x5DF2;&#x77E5;&#x8303;&#x56F4;&#x4E86;&#xFF0C;&#x6240;&#x4EE5;&#x53D6;&#x5230;&#x5916;&#x5C42;&#x5FAA;&#x73AF;sqrt(N)&#x5373;&#x53EF;&#x3002;<br>&#x5047;&#x8BBE;&#x4F7F;&#x7528;&#x6570;&#x7EC4;prime&#x4FDD;&#x5B58;[1, N]&#x4E2D;&#x662F;&#x5426;&#x4E3A;&#x8D28;&#x6570;&#xFF0C;&#x9ED8;&#x8BA4;&#x5747;&#x4E3A;&#x8D28;&#x6570;true&#x3002;&#x6839;&#x636E;&#x4E0A;&#x9762;&#x601D;&#x8DEF;&#x5F97;&#x5230;&#x57C3;&#x5F0F;&#x7B5B;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;cmath&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> MAX_N = <span class="hljs-number">1e6</span>+<span class="hljs-number">1</span>;</span><br><span class="line"><span class="hljs-keyword">bool</span> prime[MAX_N];</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/* &#x8FD4;&#x56DE; [1,N] &#x8303;&#x56F4;&#x5185;&#x6240;&#x6709;&#x8D28;&#x6570;</span></span><br><span class="line"><span class="hljs-comment">    assert N &gt; 0</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; <span class="hljs-title">sieve</span><span class="hljs-params">(<span class="hljs-keyword">int</span> N)</span> </span>{</span><br><span class="line">    <span class="hljs-built_in">memset</span>(prime, <span class="hljs-number">1</span>, N*<span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">bool</span>));</span><br><span class="line">    prime[<span class="hljs-number">0</span>] = prime[<span class="hljs-number">1</span>] = <span class="hljs-literal">false</span>;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> base=<span class="hljs-number">2</span>; base&lt;=<span class="hljs-built_in">sqrt</span>(N); ++base) {</span><br><span class="line">        <span class="hljs-keyword">if</span>(prime[base]) <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> idx=base*base; idx&lt;=N; idx+=base) {</span><br><span class="line">            prime[idx] = <span class="hljs-literal">false</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-comment">// &#x904D;&#x5386;&#x53D6;&#x51FA;&#x8D28;&#x6570;</span></span><br><span class="line">    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; ans;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">2</span>; i&lt;=N; ++i) <span class="hljs-keyword">if</span>(prime[i]) {</span><br><span class="line">        ans.push_back(i);</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">return</span> ans;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x7B97;&#x6CD5;&#x4E2D;&#xFF0C;&#x7B5B;&#x6570;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x7531;&#x4E8E;&#x6BCF;&#x4E2A;<code>prime[idx]</code>&#x6700;&#x591A;&#x88AB;&#x8D4B;&#x503C;1&#x6B21;&#xFF0C;&#x800C;base&#x904D;&#x5386;sqrt(N)&lt; N&#xFF0C;&#x6240;&#x4EE5;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x4E3A; O(N)&#xFF0C;&#x7A7A;&#x95F4;&#x4E0A;prime&#x6570;&#x7EC4;&#x5360;&#x7528;&#x4E86;N&#x7684;&#x7A7A;&#x95F4;&#xFF0C;&#x6545;&#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x4E3A; O(N)</p>
+<p>&#x4F8B;&#x9898; <a href="https://app.codility.com/programmers/lessons/11-sieve_of_eratosthenes/count_semiprimes/" target="_blank" rel="noopener">Codility Lesson 11-2 CountSemiPrimes</a></p>
+<h2 id="&#x6B27;&#x51E0;&#x91CC;&#x5FB7;&#x7B97;&#x6CD5;"><a href="#&#x6B27;&#x51E0;&#x91CC;&#x5FB7;&#x7B97;&#x6CD5;" class="headerlink" title="&#x6B27;&#x51E0;&#x91CC;&#x5FB7;&#x7B97;&#x6CD5;"></a>&#x6B27;&#x51E0;&#x91CC;&#x5FB7;&#x7B97;&#x6CD5;</h2><p>&#x6B27;&#x51E0;&#x91CC;&#x5FB7;&#x7B97;&#x6CD5;&#x901A;&#x8FC7;&#x8F97;&#x8F6C;&#x76F8;&#x9664;&#xFF0C;&#x8BA1;&#x7B97;&#x5F97;&#x5230;&#x6700;&#x5927;&#x516C;&#x7EA6;&#x6570;&#x3002;&#x6709;&#x9012;&#x5F52;&#x548C;&#x975E;&#x9012;&#x5F52;&#x4E24;&#x79CD;&#x5199;&#x6CD5;&#xFF1A;<br>&#x9012;&#x5F52;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">gcd</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> m)</span> </span>{</span><br><span class="line">    <span class="hljs-keyword">return</span> m == <span class="hljs-number">0</span> ? n : gcd(m, n % m);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x975E;&#x9012;&#x5F52;&#x5199;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">gcd</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> m)</span> </span>{</span><br><span class="line">    <span class="hljs-keyword">while</span>(m != <span class="hljs-number">0</span>) {</span><br><span class="line">        n = n % m;</span><br><span class="line">        swap(n, m);</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">return</span> n;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h1 id="&#x4E8C;&#x3001;&#x7EC4;&#x5408;&#x6570;&#x5B66;"><a href="#&#x4E8C;&#x3001;&#x7EC4;&#x5408;&#x6570;&#x5B66;" class="headerlink" title="&#x4E8C;&#x3001;&#x7EC4;&#x5408;&#x6570;&#x5B66;"></a>&#x4E8C;&#x3001;&#x7EC4;&#x5408;&#x6570;&#x5B66;</h1><p>&#x7EC4;&#x5408;&#x6570;&#x5B66;&#x662F;&#x6570;&#x5B66;&#x7684;&#x4E00;&#x4E2A;&#x5206;&#x652F;, &#x5728;&#x8BA1;&#x7B97;&#x673A;&#x9886;&#x57DF;&#x6709;&#x7740;&#x5E7F;&#x6CDB;&#x7684;&#x5E94;&#x7528;.</p>
+<h2 id="&#x6392;&#x5217;&#x4E0E;&#x7EC4;&#x5408;"><a href="#&#x6392;&#x5217;&#x4E0E;&#x7EC4;&#x5408;" class="headerlink" title="&#x6392;&#x5217;&#x4E0E;&#x7EC4;&#x5408;"></a>&#x6392;&#x5217;&#x4E0E;&#x7EC4;&#x5408;</h2><p>&#x6392;&#x5217;&#x4F7F;&#x7528;A(Arrangement)&#x6216;P(Permutation)&#x8868;&#x793A;&#xFF0C;&#x4ECE; n &#x4E2A;&#x6570;&#x4E2D;&#x53D6;&#x51FA; m &#x4E2A;&#x6570;&#x7684;&#x6392;&#x5217;&#x6570;&#x516C;&#x5F0F;&#xFF1A;<br>$$ A_n^m = A(n, m) = n\times (n-1) \times\cdots (n-m+1) = \frac{n!}{(n-m)!}<br>$$<br>&#x5168;&#x6392;&#x5217;&#x662F;&#x6392;&#x5217;&#x6570;&#x7684;&#x4E00;&#x79CD;&#x7279;&#x6B8A;&#x60C5;&#x51B5;&#xFF1A;$A(n,n) = n!$</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">    &#x6C42;&#x4ECE; n &#x4E2A;&#x6570;&#x4E2D;&#x53D6;&#x51FA; m &#x4E2A;&#x6570;&#x7684;&#x6392;&#x5217;&#x6570;</span></span><br><span class="line"><span class="hljs-comment">    &#x8981;&#x6C42;&#xFF1A;n &gt;= m &gt; 0</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> <span class="hljs-title">permutation</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> m)</span> </span>{</span><br><span class="line">    <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> P = n;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; m; ++i) {</span><br><span class="line">        P = P * (n-i);</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">return</span> P;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x7EC4;&#x5408;&#x4F7F;&#x7528;C(Combination)&#x8868;&#x793A;&#xFF0C;&#x4ECE;n&#x4E2A;&#x6570;&#x4E2D;&#x53D6;&#x51FA;m&#x4E2A;&#x6570;&#xFF08;$n\geq m$&#xFF09;&#x7684;&#x7EC4;&#x5408;&#x6570;&#x516C;&#x5F0F;&#xFF1A;<br>$$ C_n^m = \frac{A(n, m)}{A(m, m)} = \frac{n\times (n-1) \times\cdots (n-m+1)}{1\times 2\times\cdots m} = \frac{n!}{(n-m)!m!}$$<br>&#x4E0A;&#x9762;&#x662F;&#x7EC4;&#x5408;&#x6570;&#x7684;&#x5B9A;&#x4E49;&#x5F0F;&#x3002;&#x5728;&#x5B9E;&#x9645;&#x8FD0;&#x7B97;&#x4E2D;&#xFF0C;&#x7531;&#x4E8E;&#x8003;&#x8651;&#x5230;&#x5206;&#x5B50;&#x5206;&#x6BCD;&#x90FD;&#x53EF;&#x80FD;&#x5F88;&#x5927;&#x5B58;&#x5728;&#x6EA2;&#x51FA;&#x7684;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x901A;&#x5E38;&#x4F7F;&#x7528;&#x7EC4;&#x5408;&#x6570;&#x7684;&#x9012;&#x63A8;&#x5F0F;&#x3002;<br>&#x4ECE; n &#x4E2A;&#x6570;&#x4E2D;&#x53D6;&#x51FA; m &#x4E2A;&#x6570;&#xFF0C;&#x6309;&#x7167;&#x53D6;&#x6216;&#x4E0D;&#x53D6;&#x7B2C; m &#x4E2A;&#x6570;&#x8FDB;&#x884C;&#x8BA8;&#x8BBA;&#x3002;&#x82E5;&#x53D6;&#x7B2C; m &#x4E2A;&#x6570;&#xFF0C;&#x5219;&#x8BF4;&#x660E;&#x662F;&#x4ECE;&#x524D;&#x9762; n-1 &#x4E2A;&#x6570;&#x4E2D;&#x53D6;&#x51FA;&#x4E86; m-1 &#x4E2A;&#x6570;&#xFF0C;&#x7EC4;&#x5408;&#x6570;&#x4E3A; $C(n-1,m-1)$&#xFF1B;&#x82E5;&#x672A;&#x53D6;&#x7B2C; m &#x4E2A;&#x6570;&#xFF0C;&#x5219;&#x8BF4;&#x660E;&#x662F;&#x4ECE;&#x524D; n-1 &#x4E2A;&#x6570;&#x4E2D;&#x53D6;&#x51FA;&#x4E86; m &#x4E2A;&#x6570;&#xFF0C;&#x7EC4;&#x5408;&#x6570;&#x4E3A; $C(n-1, m)$&#x3002;&#x6240;&#x4EE5;&#x9012;&#x63A8;&#x5F0F;&#x4E3A;&#xFF1A;<br>$$ C(n,m) = C(n-1, m-1) + C(n-1, m)<br>$$<br>&#x521D;&#x59CB;&#x6761;&#x4EF6; $C(1,1) = 1, C(n,0) = 1$,&#x7279;&#x522B;&#x7684;&#xFF0C;&#x5F53; $n &lt; m$ &#x65F6; $C(n,m) = 0$ &#x3002;</p>
+<p>&#x6211;&#x4EEC;&#x4EE5; C(5,3) &#x4E3A;&#x4F8B;&#x6253;&#x8868;<br><!-- | C(5,3) |  0  |  1  |  2  |  3  |
+|:------:|:-:|:-:|:-:|:-:|
+| 0 | undefined | C(0,1)=0 | C(0,2)=0 | C(0,3)=0 |
+| 1 | C(1,0)=1 | C(1,1)=1 | C(1,2)=0 | C(1,3)=0 |
+| 2 | C(2,0)=1 | C(2,1)=C(1,0)+C(1,1)=2 | C(2,2)=C(1,1)+C(1,2)=1 | C(2,3)=0 |
+| 3 | C(3,0)=1 | C(3,1)=C(2,0)+C(2,1)=3 | C(3,2)=C(2,1)+C(2,2)=3 | C(3,3)=C(2,2)+C(2,3)=1 | --><br><img src="C53-raw.png" alt="C53&#x6253;&#x8868;.png"></p>
+<p>&#x7B97;&#x6CD5;Java&#x63CF;&#x8FF0;&#xFF1A;</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">    &#x6C42;&#x4ECE; n &#x4E2A;&#x6570;&#x4E2D;&#x53D6;&#x51FA; m &#x4E2A;&#x6570;&#x7684;&#x7EC4;&#x5408;&#x6570;</span></span><br><span class="line"><span class="hljs-comment">    &#x8981;&#x6C42;&#xFF1A;n &gt;= m &gt; 0</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">long</span> <span class="hljs-title">combination</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> m)</span> </span>{</span><br><span class="line">    <span class="hljs-keyword">long</span>[][] dp = <span class="hljs-keyword">new</span> <span class="hljs-keyword">long</span>[n+<span class="hljs-number">1</span>][m+<span class="hljs-number">1</span>];</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;=n; ++i) {</span><br><span class="line">        dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=m; ++i) {</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=i; j&lt;=n; ++j) {</span><br><span class="line">            dp[j][i] = dp[j-<span class="hljs-number">1</span>][i-<span class="hljs-number">1</span>] + dp[j-<span class="hljs-number">1</span>][i];</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">return</span> dp[n][m];</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E3A;&#x4E86;&#x5FAA;&#x73AF;&#x6C42;&#x89E3;&#x7684;&#x904D;&#x5386;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;C(0,0)&#x4E5F;&#x8BBE;&#x7F6E;&#x4E3A;1&#xFF0C;Java&#x548C;&#x4E0B;&#x9762;C++&#x7A0B;&#x5E8F;&#x7684;&#x9012;&#x63A8;&#x8BA1;&#x7B97;&#x5982;&#x56FE;&#x6240;&#x793A;&#xFF1A;<br><img src="C53-Cpp-Java.png" alt="Java&#x9012;&#x63A8;"></p>
+<p>&#x7B97;&#x6CD5;C++&#x63CF;&#x8FF0;&#xFF1A;</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">    &#x6C42;&#x4ECE; n &#x4E2A;&#x6570;&#x4E2D;&#x53D6;&#x51FA; m &#x4E2A;&#x6570;&#x7684;&#x7EC4;&#x5408;&#x6570;</span></span><br><span class="line"><span class="hljs-comment">    &#x8981;&#x6C42;&#xFF1A;n &gt;= m &gt; 0</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-function">ll <span class="hljs-title">combination</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> m)</span> </span>{</span><br><span class="line">    ll** dp = <span class="hljs-keyword">new</span> ll*[n+<span class="hljs-number">1</span>];</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;=n; ++i) {</span><br><span class="line">        dp[i] = <span class="hljs-keyword">new</span> ll[m+<span class="hljs-number">1</span>];</span><br><span class="line">        dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=m; ++i) {</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=i; j&lt;=n; ++j) {</span><br><span class="line">            dp[j][i] = dp[j<span class="hljs-number">-1</span>][i<span class="hljs-number">-1</span>] + dp[j<span class="hljs-number">-1</span>][i];</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">return</span> dp[n][m];</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x7B97;&#x6CD5;C&#x8BED;&#x8A00;&#x63CF;&#x8FF0;&#xFF1A;<br>note:&#x6CE8;&#x610F;&#x7531;&#x4E8E;C&#x8BED;&#x8A00;malloc&#x51FD;&#x6570;&#x4E0D;&#x4F1A;&#x5728;&#x521D;&#x59CB;&#x5316;&#x7684;&#x65F6;&#x5019;&#x8D4B;&#x521D;&#x503C;&#xFF0C;&#x6240;&#x4EE5;&#x9012;&#x63A8;&#x8FB9;&#x754C;&#x8FD4;&#x56DE;&#x9700;&#x8981;&#x7F29;&#x5C0F;&#x4E00;&#x4E0B;&#xFF0C;&#x4E0D;&#x8003;&#x8651;$n &lt; m$&#x9ED8;&#x8BA4;&#x4E3A;0&#x7684;&#x60C5;&#x51B5;&#x4E86;&#x3002;</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">typedef</span> <span class="hljs-keyword">long</span> <span class="hljs-keyword">long</span> ll;</span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">    &#x6C42;&#x4ECE; n &#x4E2A;&#x6570;&#x4E2D;&#x53D6;&#x51FA; m &#x4E2A;&#x6570;&#x7684;&#x7EC4;&#x5408;&#x6570;</span></span><br><span class="line"><span class="hljs-comment">    &#x8981;&#x6C42;&#xFF1A;n &gt;= m &gt; 0</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-function">ll <span class="hljs-title">combination</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> m)</span> </span>{</span><br><span class="line">    ll** dp = (ll**) <span class="hljs-built_in">malloc</span>( (n+<span class="hljs-number">1</span>)*<span class="hljs-keyword">sizeof</span>(ll*) );</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=n; ++i) {</span><br><span class="line">        dp[i] = (ll *)<span class="hljs-built_in">malloc</span>( (m+<span class="hljs-number">1</span>)*<span class="hljs-keyword">sizeof</span>(ll) );</span><br><span class="line">        dp[i][<span class="hljs-number">0</span>] = <span class="hljs-number">1</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">1</span>; i&lt;=m; ++i) {</span><br><span class="line">        dp[i][i] = <span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=i+<span class="hljs-number">1</span>; j&lt;=n; ++j) {</span><br><span class="line">            dp[j][i] = dp[j<span class="hljs-number">-1</span>][i<span class="hljs-number">-1</span>] + dp[j<span class="hljs-number">-1</span>][i];</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">return</span> dp[n][m];</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>C&#x8BED;&#x8A00;&#x7A0B;&#x5E8F;&#x6253;&#x8868;&#x5982;&#x56FE;&#x6240;&#x793A;&#xFF1A;<img src="C53-C.png" alt="C53-C.png"></p>
+<p>&#x4F8B;&#x9898;&#xFF1A;&#x8BA1;&#x849C;&#x5BA2; T1984 &#x6C42;&#x7EC4;&#x5408;&#x6570;</p>
+<p>&#x5173;&#x4E8E;&#x4E0A;&#x8FF0;&#x7279;&#x6B8A;&#x60C5;&#x51B5;&#xFF0C;&#x5373;&#x4ECE;n&#x4E2A;&#x6570;&#x4E2D;&#x53D6;0&#x4E2A;&#x6570;&#x7684;&#x60C5;&#x51B5;&#x4E3A;1&#x7684;&#x89E3;&#x91CA;&#xFF0C;&#x6765;&#x6E90;&#x4E8E;&#x4E8C;&#x9879;&#x5F0F;&#x5B9A;&#x7406;</p>
+<h3 id="&#x4E8C;&#x9879;&#x5F0F;&#x5B9A;&#x7406;"><a href="#&#x4E8C;&#x9879;&#x5F0F;&#x5B9A;&#x7406;" class="headerlink" title="&#x4E8C;&#x9879;&#x5F0F;&#x5B9A;&#x7406;"></a>&#x4E8C;&#x9879;&#x5F0F;&#x5B9A;&#x7406;</h3><p>&#x4E8C;&#x9879;&#x5F0F;&#x5B9A;&#x7406;&#x9610;&#x660E;&#x4E86;&#x5E42;&#x51FD;&#x6570;&#x5C55;&#x5F00;&#x5F0F;&#x7684;&#x7CFB;&#x6570;&#x662F;&#x7EC4;&#x5408;&#x6570;&#xFF1A;<br>$$ (a+b)^n = \sum_{i=0}^{n} C(n,i) a^{n-i}b^i<br>$$<br>&#x5982;<br>$$<br>\begin{align<em>}<br>(a+b)^3 &amp;= C(3,0)a^3 + C(3,1)a^2b + C(3,2)ab^2 + C(3,3)b^3 \<br>    &amp;= a^3 + a^2b + ab^2 + b^3<br>\end{align</em>}<br>$$<br>&#x7531;&#x6B64;&#x53EF;&#x77E5; C(3,0) = 1&#x3002;</p>
+<p>&#x5F53;&#x95EE;&#x9898;&#x7531;&#x6C42;&#x7EC4;&#x5408;&#x6570;&#x53D8;&#x4E3A;&#x6253;&#x5370;&#x51FA;&#x6240;&#x6709;&#x53EF;&#x80FD;&#x7684;&#x7EC4;&#x5408;&#x65F6;&#xFF0C;&#x52A8;&#x6001;&#x89C4;&#x5212;&#x7B97;&#x6CD5;&#x5728;&#x65F6;&#x95F4;&#x7A7A;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x65B9;&#x9762;&#x5C31;&#x6CA1;&#x6709;&#x4F18;&#x52BF;&#x4E86;&#x3002;</p>
+<p>&#x4F8B;&#x9898;&#xFF1A;Leetcode 77<br>&#x6211;&#x4EEC;&#x6765;&#x5206;&#x6790;&#x4E00;&#x4E0B;&#xFF0C;&#x52A8;&#x6001;&#x89C4;&#x5212;&#x7B97;&#x6CD5;&#x6D88;&#x8017;&#x4E86; O(n&#xD7;k&#xD7;C(n,k)) &#x7684;&#x7A7A;&#x95F4;&#xFF0C;&#x8BA1;&#x7B97;&#x9700;&#x8981; O(n*k) &#x7684;&#x590D;&#x6742;&#x5EA6;&#xFF1A;<br><img src="listC42.png" alt="listC42.png"></p>
+<p>&#x66B4;&#x529B;&#x9012;&#x5F52;&#x56DE;&#x6EAF;&#x7B97;&#x6CD5;&#x53C2;&#x89C1;&#x53E6;&#x4E00;&#x7BC7;<a href="https://billystudio.github.io/2021/03/13/2021-Mar-13th-Algorithm-recursion-and-backtracking/">&#x535A;&#x5BA2;&#x6587;&#x7AE0;</a></p>
+<h2 id="Catalan-&#x6570;"><a href="#Catalan-&#x6570;" class="headerlink" title="Catalan &#x6570;"></a>Catalan &#x6570;</h2><p>&#x5361;&#x7279;&#x5170;&#x6570;(Catalan number)&#x53C8;&#x79F0;&#x5361;&#x5854;&#x5170;&#x6570;, &#x662F;&#x7EC4;&#x5408;&#x6570;&#x5B66;&#x4E2D;&#x5E38;&#x51FA;&#x73B0;&#x7684;&#x4E00;&#x4E2A;&#x6570;&#x5217;. &#x5361;&#x7279;&#x5170;&#x6570;&#x6EE1;&#x8DB3;&#x5982;&#x4E0B;&#x9012;&#x63A8;&#x5173;&#x7CFB;:</p>
+<p>$$C_{n+1} = C_1C_n + C_2C_{n-1} + \cdots + C_nC_1<br>$$</p>
+<p>&#x5728;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x4E2D;, &#x5F53; n &#x4E2A;&#x5143;&#x7D20;&#x4EE5;&#x67D0;&#x79CD;&#x987A;&#x5E8F;&#x8FDB;&#x6808;, &#x5E76;&#x4E14;&#x53EF;&#x5728;&#x4EFB;&#x610F;&#x65F6;&#x523B;&#x51FA;&#x6808;&#x65F6;, &#x6240;&#x83B7;&#x5F97;&#x7684;&#x5143;&#x7D20;&#x6392;&#x5217;&#x7684;&#x6570;&#x76EE; N &#x6070;&#x597D;&#x6EE1;&#x8DB3;&#x5361;&#x7279;&#x5170;&#x6570;&#x7684;&#x8BA1;&#x7B97;, &#x5373;:<br>$$N = \frac{1}{n+1}C(2n, n)$$</p>
+<h1 id="&#x57FA;&#x7840;&#x6570;&#x8BBA;"><a href="#&#x57FA;&#x7840;&#x6570;&#x8BBA;" class="headerlink" title="&#x57FA;&#x7840;&#x6570;&#x8BBA;"></a>&#x57FA;&#x7840;&#x6570;&#x8BBA;</h1><p>&#x4E09;&#x4E2A;&#x540C;&#x4F59;&#x516C;&#x5F0F;&#xFF1A;<br>$$<br>\newcommand{\Mod}[1]{\ \mathrm{mod}\ #1}<br>(a+b)\Mod{n} = ((a\Mod{n}) + (b\Mod{n}))\Mod{n}\<br>(a-b)\Mod{n} = ((a\Mod{n}) - (b\Mod{n}) + n)\Mod{n}\<br>(a<em>b)\Mod{n} = ((a\Mod{n}) </em> (b\Mod{n}))\Mod{n}<br>$$</p>
+<h2 id="Mobius-&#x53CD;&#x6F14;&#x5B9A;&#x7406;"><a href="#Mobius-&#x53CD;&#x6F14;&#x5B9A;&#x7406;" class="headerlink" title="Mobius &#x53CD;&#x6F14;&#x5B9A;&#x7406;"></a>Mobius &#x53CD;&#x6F14;&#x5B9A;&#x7406;</h2><h3 id="&#x9664;&#x6CD5;&#x8868;&#x8FBE;&#x5F0F;-NYOJ-1013"><a href="#&#x9664;&#x6CD5;&#x8868;&#x8FBE;&#x5F0F;-NYOJ-1013" class="headerlink" title="&#x9664;&#x6CD5;&#x8868;&#x8FBE;&#x5F0F; NYOJ 1013"></a>&#x9664;&#x6CD5;&#x8868;&#x8FBE;&#x5F0F; NYOJ 1013</h3><p>&#x9664;&#x6CD5;&#x4E0D;&#x50CF;&#x4E58;&#x6CD5;&#xFF0C;&#x65E2;&#x6CA1;&#x6709;&#x4EA4;&#x6362;&#x5F8B;&#xFF0C;&#x4E5F;&#x6CA1;&#x6709;&#x7ED3;&#x5408;&#x5F8B;&#x3002;&#x8FDE;&#x9664;&#x7684;&#x89C4;&#x5F8B;&#x662F;&#x4E00;&#x4E2A;&#x6570;&#x8FDE;&#x7EED;&#x9664;&#x4EE5;&#x591A;&#x4E2A;&#x6570;&#x53EF;&#x4EE5;&#x770B;&#x505A;&#x8FD9;&#x4E2A;&#x6570;&#x9664;&#x4EE5;&#x540E;&#x9762;&#x6240;&#x6709;&#x6570;&#x7684;&#x4E58;&#x79EF;&#xFF0C;&#x5373;<br>$$a_1/a_2/a_3/\cdots/a_n = \frac{a_1}{a_2a_3\cdots a_n}<br>$$</p>
+<p>&#x60F3;&#x8BA9;&#x8868;&#x8FBE;&#x5F0F;&#x4E3A;&#x6574;&#x6570;&#xFF0C;&#x65E0;&#x975E;&#x5C31;&#x662F;&#x4F7F;&#x5F97;&#x5206;&#x5B50;&#x80FD;&#x7EA6;&#x6389;&#x5206;&#x6BCD;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x56E0;&#x5B50;&#x3002;&#x4E3A;&#x4E86;&#x80FD;&#x8FBE;&#x5230;&#x6211;&#x4EEC;&#x7684;&#x76EE;&#x7684;&#xFF0C;&#x5206;&#x6BCD;&#x4E2D;&#x56E0;&#x5B50;&#x5E94;&#x8BE5;&#x8D8A;&#x5C11;&#x8D8A;&#x597D;&#x3002;&#x7ECF;&#x8FC7;&#x5206;&#x6790;&#xFF0C;&#x53EF;&#x4EE5;&#x6784;&#x9020;&#x4E00;&#x4E2A;&#x5F0F;&#x5B50;&#xFF0C;&#x4F7F;&#x5F97;&#x6240;&#x6709;&#x7684;&#x6570;&#x91CC;&#x9762;&#xFF0C;&#x9664;&#x4E86;&#x7B2C;&#x4E8C;&#x4E2A;&#x6570;&#xFF0C;&#x5176;&#x4F59;&#x7684;&#x90FD;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x5206;&#x5B50;&#x3002;&#x6784;&#x9020;&#x7684;&#x5F0F;&#x5B50;&#x5982;&#x4E0B;&#xFF1A;<br>$$X_1/(X_2/X_3/\cdots/X_k) = \frac{X_1X_3\cdots X_k}{X_2}<br>$$</p>
+<p>&#x8FD9;&#x4E2A;&#x5F0F;&#x5B50;&#x662F;&#x5426;&#x4E3A;&#x6574;&#x6570;&#xFF0C;&#x662F;&#x6240;&#x7ED9;&#x9664;&#x6CD5;&#x8868;&#x8FBE;&#x5F0F;&#x662F;&#x5426;&#x80FD;&#x6784;&#x9020;&#x51FA;&#x6574;&#x6570;&#x7ED3;&#x679C;&#x7684;&#x5145;&#x5206;&#x5FC5;&#x8981;&#x6761;&#x4EF6;&#x3002;&#x6240;&#x4EE5;&#x63A5;&#x4E0B;&#x6765;&#x8981;&#x505A;&#x7684;&#x4E8B;&#x60C5;&#xFF0C;&#x5C31;&#x662F;&#x5224;&#x65AD;&#x8FD9;&#x4E2A;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x503C;&#x662F;&#x5426;&#x4E3A;&#x6574;&#x6570;&#x3002;&#x6211;&#x4EEC;&#x6CA1;&#x6709;&#x5FC5;&#x8981;&#x8BA1;&#x7B97;&#x51FA;&#x8868;&#x8FBE;&#x5F0F;&#x7684;&#x503C;&#xFF0C;&#x90A3;&#x6837;&#x65E2;&#x9EBB;&#x70E6;&#xFF0C;&#x800C;&#x4E14;&#x53EF;&#x80FD;&#x4F1A;&#x51FA;&#x73B0;&#x6570;&#x503C;&#x8D8A;&#x754C;&#x7684;&#x60C5;&#x51B5;&#x3002;</p>
+<p>&#x4E00;&#x79CD;&#x65B9;&#x6CD5;&#x662F;&#x5229;&#x7528;&#x552F;&#x4E00;&#x5206;&#x89E3;&#x5B9A;&#x7406;&#xFF0C;&#x5C06;$X_2$&#x5199;&#x6210;&#x82E5;&#x5E72;&#x7D20;&#x6570;&#x76F8;&#x4E58;&#x7684;&#x5F62;&#x5F0F;&#xFF1A;<br>$$X_2 = p_1^{\alpha_1}p_2^{\alpha_2}\cdots p_n^{\alpha_n}<br>$$<br>&#x5C06; $X_1X_3\cdots X_k$ &#x4E5F;&#x5199;&#x6210;&#x82E5;&#x5E72;&#x7D20;&#x6570;&#x76F8;&#x4E58;&#x7684;&#x5F62;&#x5F0F;&#xFF1A;<br>$$X_1X_3\cdots X_k = p_1^{\beta_1}p_2^{\beta_2}\cdots p_m^{\beta_n}<br>$$</p>
+<p>&#x82E5;&#x5BF9;&#x4E8E; $X_2$ &#x5206;&#x89E3;&#x5F0F;&#x4E2D;&#x7684;&#x6BCF;&#x4E00;&#x4E2A; $p_i^{\alpha_j}$&#xFF0C;&#x5728; $X_1X_3\cdots X_k$ &#x7684;&#x5206;&#x89E3;&#x5F0F;&#x4E2D;&#x90FD;&#x80FD;&#x627E;&#x5230; $p_i^{\beta_j}$&#xFF0C;&#x4F7F;&#x5F97; $\beta_j &gt; \alpha_j$&#xFF0C;&#x5219;&#x5F0F;&#x5B50;&#x4E3A;&#x6574;&#x6570;&#xFF0C;&#x5426;&#x5219;&#x4E0D;&#x4E3A;&#x6574;&#x6570;&#x3002;&#x4F46;&#x662F;&#x8981;&#x6CE8;&#x610F;&#x5230;&#xFF0C;&#x8FD9;&#x9053;&#x9898;&#x6570;&#x5B57;&#x7684;&#x8303;&#x56F4;&#x5728;1&#x5230;100000000(10^8)&#x4E4B;&#x95F4;&#x3002;&#x65E2;&#x7136;&#x9700;&#x8981;&#x5206;&#x89E3;&#x6210;&#x7D20;&#x6570;&#x76F8;&#x4E58;&#x7684;&#x5F62;&#x5F0F;&#xFF0C;&#x90A3;&#x5C31;&#x9700;&#x8981;&#x6784;&#x9020;&#x7D20;&#x6570;&#x8868;&#xFF0C;&#x6839;&#x636E;&#x7D20;&#x6570;&#x5B9A;&#x7406;, &#x7D20;&#x6570;&#x8868;&#x7684;&#x5927;&#x5C0F;&#x662F;$\pi (x) ~ \frac{x}{ln x}$, $\frac{10^8}{8\times ln 10}=5428681$&#xFF0C;&#x6240;&#x9700;&#x5185;&#x5B58;&#x7EA6;&#x4E3A;$4\times5\times10^6$B = 20MB, &#x6EE1;&#x8DB3;&#x5185;&#x5B58;&#x8981;&#x6C42;&#x3002;&#x4F46;&#x662F;&#x6253;&#x8868;&#x7684;&#x8FC7;&#x7A0B;&#x8981;&#x8FDB;&#x884C; 10^8 &#x6B21;&#x8FD0;&#x7B97;,&#x4F1A;&#x8D85;&#x65F6;.</p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/算法/">#算法</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/组合数学/">#组合数学</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/数学/">#数学</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/数论/">#数论</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/Sept-4th-PAT-deepest-root/">PAT 真题 | 1021 Deepest Root</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/Aug-24th-shell-fundamentals/">shell 程序设计 | shell 基础</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="notification is-danger">
+    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
+</div>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

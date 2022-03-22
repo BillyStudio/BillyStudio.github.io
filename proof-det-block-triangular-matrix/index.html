@@ -1,0 +1,449 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>线代启示录 | 关于分块上下三角矩阵一个性质的证明 - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/proof-det-block-triangular-matrix/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x4ECA;&amp;#x5929;&amp;#x5728;&amp;#x8BBA;&amp;#x6587;&amp;#x4E2D;&amp;#x770B;&amp;#x5230;&amp;#x4E00;&amp;#x53E5;&amp;#x8BDD;&amp;#xFF0C;&amp;#x201C;the determinant of a block triangular matrix is given by the product of the determinants of the">
+<meta name="keywords" content="algebra">
+<meta property="og:type" content="article">
+<meta property="og:title" content="线代启示录 | 关于分块上下三角矩阵一个性质的证明">
+<meta property="og:url" content="https://BillyStudio.github.io/proof-det-block-triangular-matrix/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x4ECA;&amp;#x5929;&amp;#x5728;&amp;#x8BBA;&amp;#x6587;&amp;#x4E2D;&amp;#x770B;&amp;#x5230;&amp;#x4E00;&amp;#x53E5;&amp;#x8BDD;&amp;#xFF0C;&amp;#x201C;the determinant of a block triangular matrix is given by the product of the determinants of the">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2020-01-10T17:33:30.742Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="线代启示录 | 关于分块上下三角矩阵一个性质的证明">
+<meta name="twitter:description" content="&amp;#x4ECA;&amp;#x5929;&amp;#x5728;&amp;#x8BBA;&amp;#x6587;&amp;#x4E2D;&amp;#x770B;&amp;#x5230;&amp;#x4E00;&amp;#x53E5;&amp;#x8BDD;&amp;#xFF0C;&amp;#x201C;the determinant of a block triangular matrix is given by the product of the determinants of the">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/proof-det-block-triangular-matrix/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/proof-det-block-triangular-matrix/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            线代启示录 | 关于分块上下三角矩阵一个性质的证明
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-05-18T09:01:29.000Z" itemprop="datePublished">May 18 2018</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            2 minutes read (About 344 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x4ECA;&#x5929;&#x5728;&#x8BBA;&#x6587;&#x4E2D;&#x770B;&#x5230;&#x4E00;&#x53E5;&#x8BDD;&#xFF0C;&#x201C;the determinant of a block triangular matrix is given by the product of the determinants of the diagonal submatrices&#x201D;&#xFF0C;&#x7FFB;&#x8BD1;&#x8FC7;&#x6765;&#x5C31;&#x662F;&#x201C;&#x5206;&#x5757;&#x4E0A;&#x4E0B;&#x4E09;&#x89D2;&#x77E9;&#x9635;&#x7684;&#x884C;&#x5217;&#x5F0F;&#x7B49;&#x4E8E;&#x5BF9;&#x89D2;&#x7EBF;&#x5B50;&#x77E9;&#x9635;&#x884C;&#x5217;&#x5F0F;&#x7684;&#x4E58;&#x79EF;&#x201D;&#x3002;<br><a id="more"></a>&#x4E3A;&#x4E86;&#x8BC1;&#x660E;&#x8FD9;&#x4E2A;&#x6027;&#x8D28;&#xFF0C;&#x6211;&#x4EEC;&#x5148;&#x6765;&#x8BC1;&#x660E;&#x884C;&#x5217;&#x5F0F;&#x7684;&#x51E0;&#x4E2A;&#x5176;&#x4ED6;&#x6027;&#x8D28;&#x3002;</p>
+<p>&#x9996;&#x5148;&#x7ED9;&#x51FA;&#x884C;&#x5217;&#x5F0F;&#x7684;&#x5B9A;&#x4E49;&#xFF0C;</p>
+<h3 id="&#x5B9A;&#x4E49;"><a href="#&#x5B9A;&#x4E49;" class="headerlink" title="&#x5B9A;&#x4E49;"></a>&#x5B9A;&#x4E49;</h3><p>n&#x9636;&#x65B9;&#x9635; \(A\) &#x7684;&#x884C;&#x5217;&#x5F0F;&#x53EF;&#x5B9A;&#x4E49;&#x4E3A;<br>$$|A|=\sum_{(i_1 i_2\cdots i_n)} (-1)^{\tau(i_1i_2\cdots i_n)}a_{i_11}a_{i_22}\cdots a_{i_nn}$$<br>&#x5176;&#x4E2D;&#xFF0C;$(i_1i_2\cdots i_n)$&#x4E3A;&#x884C;&#x6807;&#x7684;&#x67D0;&#x4E00;&#x6392;&#x5217;&#xFF0C;$\tau(\cdot)$&#x8868;&#x793A;&#x6392;&#x5217;&#x7684;&#x9006;&#x5E8F;&#x6570;&#x3002;</p>
+<p>&#x7ED9;&#x51FA;&#x77E9;&#x9635;<br>$$<br>  A = \left[<br>  \begin{matrix}<br>   a_{11} &amp; a_{12} &amp; \cdots &amp; a_{1n} \\<br>   a_{21} &amp; a_{22} &amp; \cdots &amp; a_{2n} \\<br>   \vdots &amp; \vdots &amp; \ddots &amp; \vdots \\<br>   a_{m1} &amp; a_{m2} &amp; \cdots &amp; a_{mn} \\<br>  \end{matrix}<br>  \right]<br>$$</p>
+<h3 id="&#x6027;&#x8D28;1"><a href="#&#x6027;&#x8D28;1" class="headerlink" title="&#x6027;&#x8D28;1"></a>&#x6027;&#x8D28;1</h3><p>&#x4EA4;&#x6362;&#x884C;&#x5217;&#x5F0F;&#x7684;&#x4EFB;&#x610F;&#x4E24;&#x884C;&#xFF08;&#x5217;&#xFF09;&#xFF0C;&#x884C;&#x5217;&#x5F0F;&#x7684;&#x503C;&#x53D8;&#x53F7;&#x3002;<br>&#x8BC1;&#xFF1A;<br>&#x8BBE; \(A\) &#x4E3A;n&#x9636;&#x884C;&#x5217;&#x5F0F;&#xFF0C;&#x4E0D;&#x59A8;&#x5BF9;&#x7B2C;$k$&#x5217;&#x548C;&#x7B2C;$l$&#x5217;&#x4F5C;&#x5217;&#x4EA4;&#x6362;&#xFF08;$k&lt;l$&#xFF09;&#xFF0C;&#x5F97;&#x5230; \(B\)&#xFF0C;&#x5176;&#x4E2D;<br>$$<br>  b_{ij}=\left{<br>  \begin{matrix}<br>  a_{ij} &amp; j\neq k,l \<br>  a_{ik} &amp; j=l \<br>  a_{il} &amp; j=k<br>  \end{matrix}\right.<br>$$<br>&#x7531;&#x884C;&#x5217;&#x5F0F;&#x5B9A;&#x4E49;&#xFF0C;<br>$$|A| = \sum_{(i_1 i_2\cdots i_n)} (-1)^{\tau(i_1i_2\cdots i_n)}a_{i_11}a_{i_22}\cdots a_{i_nn}$$</p>
+<h3 id="&#x6027;&#x8D28;2"><a href="#&#x6027;&#x8D28;2" class="headerlink" title="&#x6027;&#x8D28;2"></a>&#x6027;&#x8D28;2</h3><p>&#x82E5;A&#x4E2D;&#x6709;&#x76F8;&#x540C;&#x7684;&#x4E24;&#x5217;&#xFF08;&#x884C;&#xFF09;&#xFF0C;&#x5219;$det A = 0$<br>&#x8BC1;&#xFF1A;</p>
+<h3 id="&#x6027;&#x8D28;3"><a href="#&#x6027;&#x8D28;3" class="headerlink" title="&#x6027;&#x8D28;3"></a>&#x6027;&#x8D28;3</h3><p>$$\Large x=\frac{-b\pm\sqrt{b^2-4ac}}{2a}$$</p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/algebra/">#algebra</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/config-after-install-ubuntu-18/">Configuration on Windows WSL</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/Command-of-the-day-May-sixteenth-2018/">Linux command of the day</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="notification is-danger">
+    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
+</div>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

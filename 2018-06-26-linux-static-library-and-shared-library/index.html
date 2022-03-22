@@ -1,0 +1,506 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>Linux系统静态库与共享库 - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/2018-06-26-linux-static-library-and-shared-library/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="This article mainly introduces the statics library and shared library on Linux and has done some experiments for better comprehension.">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux系统静态库与共享库">
+<meta property="og:url" content="https://BillyStudio.github.io/2018-06-26-linux-static-library-and-shared-library/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="This article mainly introduces the statics library and shared library on Linux and has done some experiments for better comprehension.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://billystudio.github.io/2018-06-26-linux-static-library-and-shared-library/compile.png">
+<meta property="og:image" content="https://billystudio.github.io/2018-06-26-linux-static-library-and-shared-library/soname.png">
+<meta property="og:image" content="https://billystudio.github.io/2018-06-26-linux-static-library-and-shared-library/link.png">
+<meta property="og:image" content="https://billystudio.github.io/2018-06-26-linux-static-library-and-shared-library/first-run.png">
+<meta property="og:image" content="https://billystudio.github.io/2018-06-26-linux-static-library-and-shared-library/success.png">
+<meta property="og:image" content="https://billystudio.github.io/2018-06-26-linux-static-library-and-shared-library/ldd.png">
+<meta property="og:image" content="https://billystudio.github.io/2018-06-26-linux-static-library-and-shared-library/ldconfig-update.png">
+<meta property="og:image" content="https://billystudio.github.io/2018-06-26-linux-static-library-and-shared-library/second-success.png">
+<meta property="og:updated_time" content="2019-08-18T06:54:34.630Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux系统静态库与共享库">
+<meta name="twitter:description" content="This article mainly introduces the statics library and shared library on Linux and has done some experiments for better comprehension.">
+<meta name="twitter:image" content="https://billystudio.github.io/2018-06-26-linux-static-library-and-shared-library/compile.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2018-06-26-linux-static-library-and-shared-library/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2018-06-26-linux-static-library-and-shared-library/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Linux系统静态库与共享库
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-06-26T07:00:41.000Z" itemprop="datePublished">Jun 26 2018</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            8 minutes read (About 1234 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>This article mainly introduces the statics library and shared library on Linux and has done some experiments for better comprehension.<br><a id="more"></a></p>
+<h1 id="&#x9759;&#x6001;&#x5E93;-static-library"><a href="#&#x9759;&#x6001;&#x5E93;-static-library" class="headerlink" title="&#x9759;&#x6001;&#x5E93;(static library)"></a>&#x9759;&#x6001;&#x5E93;(static library)</h1><p>Static library&#xFF0C;&#x53C8;&#x79F0;&#x4E3A;&#x5F52;&#x6863;&#x6587;&#x4EF6;(archive). &#x5728;Linux&#x7CFB;&#x7EDF;&#x4E2D;&#x4E00;&#x822C;&#x4EE5;.a&#x4F5C;&#x4E3A;&#x540E;&#x7F00;&#x540D;.&#x7528;&#x4EE5;&#x58F0;&#x660E;&#x9664;&#x4E86;C&#x8BED;&#x8A00;&#x6807;&#x51C6;&#x5E93;&#x4E4B;&#x5916;&#x7684;&#x5E93;&#x6587;&#x4EF6;&#x7684;&#x76EE;&#x5F55;. &#x8FD9;&#x4E2A;&#x58F0;&#x660E;&#x662F;&#x9759;&#x6001;&#x7684;,&#x4E5F;&#x5C31;&#x662F;&#x8BF4;,&#x5F53;&#x8BB8;&#x591A;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;&#x540C;&#x65F6;&#x8FD0;&#x884C;&#x5E76;&#x4E14;&#x90FD;&#x662F;&#x7528;&#x6765;&#x81EA;&#x540C;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x5E93;&#x7684;&#x51FD;&#x6570;&#x65F6;,&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x5C31;&#x4F1A;&#x5B58;&#x6709;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x7684;&#x591A;&#x4EFD;&#x62F7;&#x8D1D;.&#x8FD9;&#x5C06;&#x5927;&#x91CF;&#x6D88;&#x8017;&#x5185;&#x5B58;&#x548C;&#x78C1;&#x76D8;&#x7A7A;&#x95F4;. &#x7C7B;&#x4F3C;&#x4E0E;Windows&#x4E2D;&#x7684;&#x9759;&#x6001;&#x94FE;&#x63A5;&#x5E93;.lib&#x6587;&#x4EF6;</p>
+<h1 id="&#x5171;&#x4EAB;&#x5E93;-shared-library-dynamic-library"><a href="#&#x5171;&#x4EAB;&#x5E93;-shared-library-dynamic-library" class="headerlink" title="&#x5171;&#x4EAB;&#x5E93;(shared library / dynamic library)"></a>&#x5171;&#x4EAB;&#x5E93;(shared library / dynamic library)</h1><p>&#x5171;&#x4EAB;&#x5E93;&#x514B;&#x670D;&#x4E86;&#x9759;&#x6001;&#x5E93;&#x7684;&#x4E0D;&#x8DB3;,&#x5178;&#x578B;&#x7684;&#x540E;&#x7F00;&#x540D;&#x662F;.so&#x3002;&#x7C7B;&#x4F3C;&#x4E0E;Windows&#x4E0B;&#x7684;dll&#x6587;&#x4EF6;&#x3002;</p>
+<p>In Arch Linux, the paths of shared library files are declared in <code>/etc/ld.so.conf</code>. You can add your specified path into this file and then using <code>sudo ldconfig</code> for generating their so-name files if there is update of these library files happening.</p>
+<h2 id="The-naming-suggestion-of-Linux-shared-library"><a href="#The-naming-suggestion-of-Linux-shared-library" class="headerlink" title="The naming suggestion of Linux shared library"></a>The naming suggestion of Linux shared library</h2><p>Every shared library has its filename and so-name(Short for shared Object name, &#x7B80;&#x5355;&#x5171;&#x4EAB;&#x540D;). The following naming rules are commonly obeyed:<br>filename: libname.so.x.y.z<br>so-name: libname.so.x<br>x &#x4EE3;&#x8868;&#x4E86;&#x4E3B;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x4E3B;&#x7248;&#x672C;&#x53F7;&#x4E4B;&#x95F4;&#x4E0D;&#x540C;&#x901A;&#x5E38;&#x662F;&#x65E0;&#x6CD5;&#x76F8;&#x4E92;&#x517C;&#x5BB9;&#x7684;&#x3002;<br>y &#x4EE3;&#x8868;&#x6B21;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x53EF;&#x4EE5;&#x5411;&#x4E0B;&#x517C;&#x5BB9;&#x3002;<br>z &#x4EE3;&#x8868;&#x53D1;&#x5E03;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x4E4B;&#x95F4;&#x53EF;&#x4EE5;&#x76F8;&#x4E92;&#x517C;&#x5BB9;&#x3002;</p>
+<p>&#x5F53;&#x8FD0;&#x884C; <code>ldconfig</code> &#x547D;&#x4EE4;&#x540E;&#xFF0C;&#x7CFB;&#x7EDF;&#x4F1A;&#x4E3A;&#x5236;&#x5B9A;&#x76EE;&#x5F55;&#x4E0B;&#x9762;&#x7684;&#x52A8;&#x6001;&#x5E93;&#x6587;&#x4EF6;&#x65B0;&#x5EFA;&#x4E0E; so-name &#x540C;&#x540D;&#x7684;&#x8F6F;&#x94FE;&#x63A5;&#x3002;&#x5F53;&#x7F16;&#x8BD1;&#x5B8C;&#x7A0B;&#x5E8F;&#x9700;&#x8981;&#x94FE;&#x63A5;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x67E5;&#x627E;&#x7684;&#x5C31;&#x662F;&#x8FD9;&#x4E9B;&#x5BF9;&#x5E94;&#x7684; so-name&#x3002;&#x53EF;&#x4EE5;&#x7528;&#x73AF;&#x5883;&#x53D8;&#x91CF; LD_LIBRARY_PATH &#x6307;&#x5B9A;so-name files&#x6240;&#x5728;&#x7684;&#x76EE;&#x5F55;&#x3002;</p>
+<h2 id="First-experiment"><a href="#First-experiment" class="headerlink" title="First experiment"></a>First experiment</h2><p>Supposing that we want to create a shared library for calling function <code>hello</code> declared by <code>hello.h</code>, we start by writing our code here:</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// hello.c</span></span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">hello</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* name)</span></span></span><br><span class="line"><span class="hljs-function"></span>{</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;hello %s!\n&quot;</span>, name);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// hello.h</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">hello</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* name)</span></span>;</span><br></pre></td></tr></table></figure>
+
+<p>Then we compile it by gcc to generate shared lib:</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc hello.c -fPIC -shared -Wl,-soname,libhello.so.0 -o libhello.so.0.0.1</span><br></pre></td></tr></table></figure>
+
+<p>Let me explain every option of the above command. <code>-fPIC</code> means generating position independent code, i.e., address jumping is relative rather than absolute. This option is required in generating library file because lib file usually locates at some place and is called by programs from other places, or the program is generated at some place but is moved to other path. <code>-shared -o</code> indicates a shared library file <code>.so.x.y.z</code>. And <code>-Wl,-soname,libhello.so.0</code> specifies its so-name as &#x2018;libhello.so.0&#x2019;.</p>
+<p>Now we check our files and should see a new file like this picture:<br><img src="compile.png" alt="result after compilation"></p>
+<p>Next we update by ldconfig</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ldconfig -n shared-library/</span><br></pre></td></tr></table></figure>
+
+<p>Note that <code>-n</code> specifies the dir only being processed(Because we only created one lib file under shared-library, it has no need to update all). If you have added the path into <code>/etc/ld.so.conf</code>, you can also simply run <code>sudo ldconfig</code> and see the same change:<br><img src="soname.png" alt="after ldconfig"></p>
+<p>As we can see, the so-name symbolic link has been created. Now we can test this new lib by writing a test code:</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// main.c</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;hello.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>{</span><br><span class="line">    hello(<span class="hljs-string">&quot;handy&quot;</span>);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>Then we create a symbolic link to the so-name file in order for gcc compiler specification:<br><img src="link.png" alt="create link"></p>
+<p>Now we make these three stages of shared library prepared(.so, .so.x and .so.x.y.z), then we compile and link, with relevent paths specified:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc main.c -I /home/shane/Experiments/shared-library/ -L. -lhello -o main</span><br></pre></td></tr></table></figure>
+
+<p>where <code>-I</code> specifies the path of <code>hello.h</code>, <code>-L</code> for the path of <code>libhello.so</code>.<br><img src="first-run.png" alt="first run"></p>
+<p>Since we have specified the path of so-name to gcc compiler but have not done that for Linux executer(one of the features of shared library), an error of failing to find the so-name file appears when running the program. So we use <code>LD_LIBRARY_PATH</code> to set it and run again:</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=&quot;$HOME/Experiments/shared-library/&quot;</span><br></pre></td></tr></table></figure>
+
+<p><img src="success.png" alt="specify env var"></p>
+<h3 id="More-exploration"><a href="#More-exploration" class="headerlink" title="More exploration"></a>More exploration</h3><p>&#x7528;ldd&#x67E5;&#x770B;&#x5176;&#x4F9D;&#x8D56;&#x7684;&#x52A8;&#x6001;&#x5E93;:<br><img src="ldd.png" alt="check dependents"><br>&#x6211;&#x4EEC;&#x53D1;&#x73B0;main&#x7A0B;&#x5E8F;&#x4F9D;&#x8D56;&#x7684;&#x52A8;&#x6001;&#x5E93;&#x540D;&#x5B57;&#x662F;libhello.so.0&#xFF0C;&#x65E2;&#x4E0D;&#x662F;libhello.so&#x4E5F;&#x4E0D;&#x662F;libhello.so.0.0.1&#x3002;&#x5176;&#x5B9E;&#x5728;&#x751F;&#x6210;main&#x7A0B;&#x5E8F;&#x7684;&#x8FC7;&#x7A0B;&#x6709;&#x5982;&#x4E0B;&#x51E0;&#x6B65;&#xFF1A;</p>
+<ol>
+<li>&#x94FE;&#x63A5;&#x5668;&#x901A;&#x8FC7;&#x7F16;&#x8BD1;&#x547D;&#x4EE4;-L. -lhello&#x5728;&#x5F53;&#x524D;&#x76EE;&#x5F55;&#x67E5;&#x627E;libhello.so&#x6587;&#x4EF6;</li>
+<li>&#x8BFB;&#x53D6;libhello.so&#x94FE;&#x63A5;&#x6307;&#x5411;&#x7684;&#x5B9E;&#x9645;&#x6587;&#x4EF6;&#xFF0C;&#x8FD9;&#x91CC;&#x662F;libhello.so.0.0.1</li>
+<li>&#x8BFB;&#x53D6;libhello.so.0.0.1&#x4E2D;&#x7684;SONAME&#xFF0C;&#x8FD9;&#x91CC;&#x662F;libhello.so.0</li>
+<li>&#x5C06;libhello.so.0&#x8BB0;&#x5F55;&#x5230;main&#x7A0B;&#x5E8F;&#x7684;&#x4E8C;&#x8FDB;&#x5236;&#x6570;&#x636E;&#x91CC;</li>
+</ol>
+<p>&#x6240;&#x4EE5;&#x4F60;&#x770B;&#xFF0C;&#x7A0B;&#x5E8F;&#x5E76;&#x4E0D;&#x77E5;&#x9053; so-name file &#x5728;&#x54EA;&#x91CC;&#xFF0C;&#x6211;&#x4EEC;&#x5F53;&#x7136;&#x8981;&#x5728;&#x8FD0;&#x884C;&#x7A0B;&#x5E8F;&#x524D; specify &#x4E00;&#x6CE2;&#x4E86;&#x3002;</p>
+<h2 id="Second-experiment"><a href="#Second-experiment" class="headerlink" title="Second experiment"></a>Second experiment</h2><p>Now we emulate the situation of updating lib files. Suppose that we modify our code:</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// hello.c</span></span><br><span class="line"><span class="hljs-meta"># <span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">hello</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* name)</span></span></span><br><span class="line"><span class="hljs-function"></span>{</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;hello %s, welcome to the world!\n&quot;</span>, name);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>Since the change is trivial, we keep the so-name when compiling:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">gcc hello.c -fPIC -shared -Wl,-soname,libhello.so.0 -o libhello.so.0.0.2</span><br></pre></td></tr></table></figure>
+
+<p>Now there are two versions exist, we update by ldconfig and see the change:<br><img src="ldconfig-update.png" alt="modify the code"><br>The so-name file link to the new version of lib file. And we run the program and see the immediate change:<br><img src="second-success.png" alt="change"></p>
+<p>So you see, this is the significance or the essence of so-name mechanism. We don&#x2019;t have to re-link the program after modifying the shared library code.</p>
+<h1 id="Summary"><a href="#Summary" class="headerlink" title="Summary"></a>Summary</h1><p>In practical production, the compilation and execution are usually departed. Generally:</p>
+<ol>
+<li>specify the so-name when generating shared lib files</li>
+<li>Ensure the availability of libXXX.so file by <code>-L</code> and  <code>-l</code> when linking executable program</li>
+<li>Ensure the existence of shared lib file and use <code>LD_LIBRARY_PATH</code> to specify the directory of its so-name link when running program</li>
+</ol>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p>Linux&#x7A0B;&#x5E8F;&#x7F16;&#x8BD1;&#x94FE;&#x63A5;&#x52A8;&#x6001;&#x5E93;&#x7248;&#x672C;&#x7684;&#x95EE;&#x9898;: <a href="https://blog.csdn.net/littlewhite1989/article/details/47726011" target="_blank" rel="noopener">https://blog.csdn.net/littlewhite1989/article/details/47726011</a></p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Linux/">#Linux</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2018-06-26-linux-function-execve/">Linux execve函数</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2018-06-23-hexo-next-mathjax-rendering/">Hexo Themes Configuration and Polishment</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="notification is-danger">
+    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
+</div>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

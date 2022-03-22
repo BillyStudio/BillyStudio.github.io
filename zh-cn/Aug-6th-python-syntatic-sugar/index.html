@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>Python 基础 | 语法糖和一些关键字 - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+
+
+<link href="/Aug-6th-python-syntatic-sugar/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="Python &amp;#x4E2D;&amp;#x4E00;&amp;#x5171;&amp;#x6709;33&amp;#x4E2A;&amp;#x5173;&amp;#x952E;&amp;#x5B57;&amp;#xFF0C;&amp;#x672C;&amp;#x6587;&amp;#x4ECB;&amp;#x7ECD;&amp;#x4E00;&amp;#x4E9B;&amp;#x4E0D;&amp;#x5E38;&amp;#x7528;&amp;#x7684;&amp;#x5173;&amp;#x952E;&amp;#x5B57;. Python &amp;#x4E2">
+<meta name="keywords" content="Python,语法糖">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Python 基础 | 语法糖和一些关键字">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/Aug-6th-python-syntatic-sugar/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="Python &amp;#x4E2D;&amp;#x4E00;&amp;#x5171;&amp;#x6709;33&amp;#x4E2A;&amp;#x5173;&amp;#x952E;&amp;#x5B57;&amp;#xFF0C;&amp;#x672C;&amp;#x6587;&amp;#x4ECB;&amp;#x7ECD;&amp;#x4E00;&amp;#x4E9B;&amp;#x4E0D;&amp;#x5E38;&amp;#x7528;&amp;#x7684;&amp;#x5173;&amp;#x952E;&amp;#x5B57;. Python &amp;#x4E2">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2022-03-21T08:05:22.821Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Python 基础 | 语法糖和一些关键字">
+<meta name="twitter:description" content="Python &amp;#x4E2D;&amp;#x4E00;&amp;#x5171;&amp;#x6709;33&amp;#x4E2A;&amp;#x5173;&amp;#x952E;&amp;#x5B57;&amp;#xFF0C;&amp;#x672C;&amp;#x6587;&amp;#x4ECB;&amp;#x7ECD;&amp;#x4E00;&amp;#x4E9B;&amp;#x4E0D;&amp;#x5E38;&amp;#x7528;&amp;#x7684;&amp;#x5173;&amp;#x952E;&amp;#x5B57;. Python &amp;#x4E2">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+
+
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/Aug-6th-python-syntatic-sugar/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/Aug-6th-python-syntatic-sugar/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Python 基础 | 语法糖和一些关键字
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-08-06T07:31:03.000Z" itemprop="datePublished">8月 6 2018</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            5 分钟 读完 (约 703 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>Python &#x4E2D;&#x4E00;&#x5171;&#x6709;33&#x4E2A;&#x5173;&#x952E;&#x5B57;&#xFF0C;&#x672C;&#x6587;&#x4ECB;&#x7ECD;&#x4E00;&#x4E9B;&#x4E0D;&#x5E38;&#x7528;&#x7684;&#x5173;&#x952E;&#x5B57;. Python &#x4E2D;&#x4E5F;&#x4F7F;&#x7528;&#x4E86;&#x5927;&#x91CF;&#x7684;&#x8BED;&#x6CD5;&#x7CD6;, &#x638C;&#x63E1;&#x540E;&#x5199;&#x4EE3;&#x7801;&#x65F6;&#x53EF;&#x4EE5;&#x66F4;&#x52A0;&#x4FBF;&#x6377;. <a id="more"></a></p>
+<h1 id="with&#x5173;&#x952E;&#x5B57;"><a href="#with&#x5173;&#x952E;&#x5B57;" class="headerlink" title="with&#x5173;&#x952E;&#x5B57;"></a>with&#x5173;&#x952E;&#x5B57;</h1><p>with&#x8BED;&#x53E5;&#x5728;Python&#x4E2D;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x4E0A;&#x4E0B;&#x6587;&#x7BA1;&#x7406;&#x534F;&#x8BAE;&#x3002;&#x5199;&#x6CD5;&#x8F83;try-catch-finally&#x66F4;&#x52A0;&#x7B80;&#x6D01;&#x3002;</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">with</span> context [<span class="hljs-keyword">as</span> var]</span><br><span class="line">    &#x64CD;&#x4F5C;&#x8BED;&#x53E5;</span><br></pre></td></tr></table></figure>
+
+<p>with&#x8BED;&#x53E5;&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;&#x4E0A;&#x4E0B;&#x6587;. &#x6267;&#x884C; with &#x8BED;&#x53E5;&#x65F6;, &#x9996;&#x5148;&#x8C03;&#x7528;&#x4E0A;&#x4E0B;&#x6587;&#x5BF9;&#x8C61; context &#x7684; <strong>enter</strong>(), &#x5176;&#x8FD4;&#x56DE;&#x503C;&#x8D4B;&#x503C;&#x7ED9; var; &#x79BB;&#x5F00; with &#x8BED;&#x53E5;&#x5757;&#x65F6;, &#x6700;&#x540E;&#x8C03;&#x7528; context &#x7684; <strong>exit</strong>(), &#x786E;&#x4FDD;&#x91CA;&#x653E;&#x8D44;&#x6E90;.</p>
+<p>&#x4E0B;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#x662F;&#x4E00;&#x4E2A;&#x4E3A;&#x6587;&#x672C;&#x6DFB;&#x52A0;&#x884C;&#x53F7;&#x5E76;&#x6253;&#x5370;&#x7684;&#x7A0B;&#x5E8F;:</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> sys</span><br><span class="line">filename = sys.argv[<span class="hljs-number">0</span>] <span class="hljs-comment"># &#x8BFB;&#x53D6;&#x5E76;&#x8F93;&#x51FA;&#x7684;&#x6587;&#x4EF6;&#x5C31;&#x662F;&#x672C;&#x7A0B;&#x5E8F;</span></span><br><span class="line">line_no = <span class="hljs-number">0</span></span><br><span class="line"><span class="hljs-keyword">with</span> open(filename, <span class="hljs-string">&apos;r&apos;</span>, encoding=<span class="hljs-string">&apos;utf8&apos;</span>) <span class="hljs-keyword">as</span> f:</span><br><span class="line">    <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> f:</span><br><span class="line">        line_no += <span class="hljs-number">1</span></span><br><span class="line">        print(line_no, <span class="hljs-string">&quot;:&quot;</span>, line) <span class="hljs-comment"># &#x6253;&#x5370;&#x884C;&#x53F7;&#x548C;&#x8BE5;&#x884C;&#x5185;&#x5BB9;</span></span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
+
+<h1 id="del"><a href="#del" class="headerlink" title="del"></a>del</h1><p>Python&#x4E2D;&#x7684; <code>del</code> &#x5173;&#x952E;&#x5B57;&#x4E0E; C++ &#x7684; delete &#x5E76;&#x4E0D;&#x4E00;&#x6837;. </p>
+<p>&#x7531;&#x4E8E; Python &#x4E2D;&#x6240;&#x6709;&#x7684;&#x53D8;&#x91CF;&#x90FD;&#x662F;&#x5F15;&#x7528;, &#x6240;&#x4EE5; <code>del</code> &#x5173;&#x952E;&#x5B57;&#x53EA;&#x662F;&#x5220;&#x9664;&#x4E86;&#x5F15;&#x7528;&#x7684;&#x53D8;&#x91CF;&#x540D;, &#x5E76;&#x6CA1;&#x6709;&#x5220;&#x9664;&#x6570;&#x636E;&#x771F;&#x6B63;&#x5360;&#x636E;&#x7684;&#x5185;&#x5B58;&#x7A7A;&#x95F4;. &#x6BD4;&#x5982;:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">a = 1</span><br><span class="line">b = a</span><br><span class="line">del a</span><br></pre></td></tr></table></figure>
+
+<p>&#x8FD9;&#x65F6;&#x5019;, 1&#x7684;&#x5185;&#x5B58;&#x7A7A;&#x95F4;&#x5E76;&#x672A;&#x88AB;&#x91CA;&#x653E;, b &#x4ECD;&#x7136;&#x6307;&#x5411; 1. &#x6240;&#x4EE5;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>print(b)</code> &#x6253;&#x5370;&#x51FA;&#x6765;&#x7ED3;&#x679C;&#x662F;1.</p>
+<h1 id="yield"><a href="#yield" class="headerlink" title="yield"></a>yield</h1><p>yield &#x5173;&#x952E;&#x5B57;&#x7528;&#x4E8E;&#x4EA7;&#x751F;&#x4E00;&#x4E2A;&#x8FED;&#x4EE3;&#x5668;.</p>
+<p>&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x8FED;&#x4EE3;&#x5668;&#x51FD;&#x6570;iterfun, &#x9700;&#x8981;&#x5C06;&#x5176;&#x4E2D;return&#x66FF;&#x6362;&#x4E3A;yield.</p>
+<p>&#x8C03;&#x7528;&#x65F6;&#x7684;&#x5199;&#x6CD5; <code>for i in iterfun():</code></p>
+<p><a href="https://liam0205.me/2017/06/30/understanding-yield-in-python/" target="_blank" rel="noopener">https://liam0205.me/2017/06/30/understanding-yield-in-python/</a></p>
+<h1 id="&#x5012;&#x5E8F;&#x7D22;&#x5F15;"><a href="#&#x5012;&#x5E8F;&#x7D22;&#x5F15;" class="headerlink" title="&#x5012;&#x5E8F;&#x7D22;&#x5F15;"></a>&#x5012;&#x5E8F;&#x7D22;&#x5F15;</h1><p>&#x5B9A;&#x4E49;&#x4E86;&#x4E00;&#x4E2A;&#x6570;&#x7EC4; <code>a</code>. <code>a[0]</code>&#x8868;&#x793A;&#x6B63;&#x5E8F;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;, <code>a[-1]</code> &#x8868;&#x793A;&#x5012;&#x5E8F;&#x7B2C;&#x4E00;&#x4E2A;&#x5143;&#x7D20;.</p>
+<h1 id="&#x5217;&#x8868;&#x89E3;&#x6790;&#x8868;&#x8FBE;&#x5F0F;"><a href="#&#x5217;&#x8868;&#x89E3;&#x6790;&#x8868;&#x8FBE;&#x5F0F;" class="headerlink" title="&#x5217;&#x8868;&#x89E3;&#x6790;&#x8868;&#x8FBE;&#x5F0F;"></a>&#x5217;&#x8868;&#x89E3;&#x6790;&#x8868;&#x8FBE;&#x5F0F;</h1><p>&#x5217;&#x8868;&#x89E3;&#x6790;&#x8868;&#x8FBE;&#x5F0F;&#x7528;&#x4E8E;&#x904D;&#x5386; for &#x5FAA;&#x73AF;&#x7ED3;&#x679C;</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">signal = [fun(x) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)]</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E3E;&#x4F8B;</p>
+<figure class="highlight python hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>[i**<span class="hljs-number">2</span> <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>)] <span class="hljs-comment"># &#x5E73;&#x65B9;&#x503C;</span></span><br><span class="line">[<span class="hljs-number">0</span>, <span class="hljs-number">1</span>, <span class="hljs-number">4</span>, <span class="hljs-number">9</span>, <span class="hljs-number">16</span>, <span class="hljs-number">25</span>, <span class="hljs-number">36</span>, <span class="hljs-number">49</span>, <span class="hljs-number">64</span>, <span class="hljs-number">81</span>]</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>[i <span class="hljs-keyword">for</span> i <span class="hljs-keyword">in</span> range(<span class="hljs-number">10</span>) <span class="hljs-keyword">if</span> i%<span class="hljs-number">2</span>==<span class="hljs-number">0</span>] <span class="hljs-comment"># &#x53D6;&#x5076;&#x6570;</span></span><br><span class="line">[<span class="hljs-number">0</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>, <span class="hljs-number">6</span>, <span class="hljs-number">8</span>]</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>[(x,y,x*y) <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>,<span class="hljs-number">4</span>) <span class="hljs-keyword">for</span> y <span class="hljs-keyword">in</span> range(<span class="hljs-number">1</span>,<span class="hljs-number">4</span>) <span class="hljs-keyword">if</span> x&gt;=y] <span class="hljs-comment"># &#x4E8C;&#x91CD;&#x5FAA;&#x73AF;</span></span><br><span class="line">[(<span class="hljs-number">1</span>, <span class="hljs-number">1</span>, <span class="hljs-number">1</span>), (<span class="hljs-number">2</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>), (<span class="hljs-number">2</span>, <span class="hljs-number">2</span>, <span class="hljs-number">4</span>), (<span class="hljs-number">3</span>, <span class="hljs-number">1</span>, <span class="hljs-number">3</span>), (<span class="hljs-number">3</span>, <span class="hljs-number">2</span>, <span class="hljs-number">6</span>), (<span class="hljs-number">3</span>, <span class="hljs-number">3</span>, <span class="hljs-number">9</span>)]</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>features = {<span class="hljs-string">&apos;name&apos;</span>: <span class="hljs-string">&apos;shane&apos;</span>, <span class="hljs-string">&apos;age&apos;</span>: <span class="hljs-number">23</span>, <span class="hljs-string">&apos;sex&apos;</span>: <span class="hljs-string">&apos;male&apos;</span>, <span class="hljs-string">&apos;figure&apos;</span>: <span class="hljs-string">&apos;medium&apos;</span>}</span><br><span class="line"><span class="hljs-meta">&gt;&gt;&gt; </span>{k:v <span class="hljs-keyword">for</span> k,v <span class="hljs-keyword">in</span> dict(features).items()} <span class="hljs-comment"># list all items of a dictionary</span></span><br><span class="line">{<span class="hljs-string">&apos;age&apos;</span>: <span class="hljs-number">23</span>, <span class="hljs-string">&apos;figure&apos;</span>: <span class="hljs-string">&apos;medium&apos;</span>, <span class="hljs-string">&apos;name&apos;</span>: <span class="hljs-string">&apos;shane&apos;</span>, <span class="hljs-string">&apos;sex&apos;</span>: <span class="hljs-string">&apos;male&apos;</span>} <span class="hljs-comment"># equal to features</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="&#x51FD;&#x6570;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x68C0;&#x67E5;"><a href="#&#x51FD;&#x6570;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x68C0;&#x67E5;" class="headerlink" title="&#x51FD;&#x6570;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x68C0;&#x67E5;"></a>&#x51FD;&#x6570;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x68C0;&#x67E5;</h1><p>&#x7C7B;&#x4F3C; C/C++/Java &#x5728;&#x8FDB;&#x884C;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x65F6;&#x90FD;&#x4F1A;&#x6709;&#x4E25;&#x683C;&#x7684;&#x51FD;&#x6570;&#x53C2;&#x6570;&#x7C7B;&#x578B;&#x68C0;&#x67E5;. &#x5728; <code>Python 3.5</code> &#x4EE5;&#x540E;&#x4E5F;&#x52A0;&#x5165;&#x4E86;&#x51FD;&#x6570;&#x7C7B;&#x578B;&#x5BA1;&#x67E5;&#x673A;&#x5236;, &#x5EFA;&#x8BAE;&#x4EE5;&#x540E;&#x5199;&#x51FD;&#x6570;&#x65F6;&#x52A0;&#x4E0A;. &#x6BD4;&#x5982;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def addint(num1: int, num2: int = 5):</span><br><span class="line">    print(num1+num2)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">addint(2,1)</span><br><span class="line">addint(1)</span><br><span class="line">addint(&quot;Hello&quot;)</span><br></pre></td></tr></table></figure>
+
+<p>&#x7F16;&#x8BD1;&#x5668;&#x4F1A;&#x5728;&#x6700;&#x540E;&#x4E00;&#x884C;&#x62A5;&#x9519;.</p>
+<p>&#x5BF9;&#x4E8E;&#x6709;&#x4E9B;&#x7C7B;&#x578B;, &#x4E0D;&#x592A;&#x597D;&#x9650;&#x5B9A;&#x6570;&#x636E;&#x7C7B;&#x578B;, &#x4F46;&#x662F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5B57;&#x7B26;&#x4E32;&#x8FDB;&#x884C;&#x6CE8;&#x91CA;&#x8868;&#x8FBE;&#x610F;&#x601D;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">def test_fun(end: &quot;in [&apos;pad&apos;, &apos;cut&apos;, None]&quot; = &apos;cut&apos;):</span><br><span class="line">    print(end)</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">test_fun()</span><br><span class="line">test_fun(&apos;pad&apos;)</span><br><span class="line">test_fun(10)</span><br></pre></td></tr></table></figure>
+
+<p>&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x63D0;&#x793A;&#x6211;&#x4EEC;&#x53C2;&#x6570;&#x5E94;&#x8BE5;&#x4E3A; &#x2018;pad&#x2019;, &#x2018;cut&#x2019;, &#x6216;&#x8005;&#x4E0D;&#x586B;, &#x9ED8;&#x8BA4;&#x53C2;&#x6570;&#x662F;&#x2019;cut&#x2019;. &#x4F46;&#x662F;&#x5982;&#x679C;&#x53C2;&#x6570;&#x4E0D;&#x5728;&#x8FD9;&#x4E9B;&#x8303;&#x56F4;&#x4E4B;&#x5185;, &#x51FD;&#x6570;&#x4E5F;&#x80FD;&#x8FD0;&#x884C;, &#x5E76;&#x4E14;&#x5728;&#x76EE;&#x524D;&#x7684;&#x7248;&#x672C;&#x91CC;&#x4E0D;&#x4F1A;&#x62A5;&#x9519;.</p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Python/">#Python</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/语法糖/">#语法糖</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/Aug-9th-2018-transpose-of-3d-array/">Python 科学计算 | 三维数组的转置运算</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/Aug-3rd-2018-numpy-einsum-bug-report/">Numpy中einsum函数的一个bug</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="notification is-danger">
+    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
+</div>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+    
+    
+    
+    
+<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+    
+    
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>
