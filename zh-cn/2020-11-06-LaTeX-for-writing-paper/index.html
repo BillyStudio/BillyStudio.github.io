@@ -5,7 +5,8 @@
 <title>学术论文 LaTeX 与 Word 排版 - 一典</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="css/outdatedbrowser.min.css">
 
 
 <link href="/2020-11-06-LaTeX-for-writing-paper/" rel="alternate" hreflang="en">
@@ -32,7 +33,7 @@
 <meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-11-06-LaTeX-for-writing-paper/seq-n.png">
 <meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-11-06-LaTeX-for-writing-paper/word-equation-caption.png">
 <meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-11-06-LaTeX-for-writing-paper/batch-superscript.png">
-<meta property="og:updated_time" content="2022-03-21T08:05:21.221Z">
+<meta property="og:updated_time" content="2022-03-22T15:00:10.888Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="学术论文 LaTeX 与 Word 排版">
 <meta name="twitter:description" content="&amp;#x5B66;&amp;#x672F;&amp;#x8BBA;&amp;#x6587;&amp;#x5199;&amp;#x4F5C;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E2D;&amp;#x7684;&amp;#x4E00;&amp;#x4E9B;&amp;#x7ECF;&amp;#x9A8C;&amp;#x8BB0;&amp;#x5F55;&amp;#x603B;&amp;#x7ED3;&amp;#x3002;">
@@ -46,14 +47,18 @@
 
 
 <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="css/bulma.min.css">
 
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css">
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="css/justifiedGallery.min.css">
 
 
-<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="css/atom-one-light.min.css">
 
 <link rel="stylesheet" href="/css/style.css">
 
@@ -62,12 +67,15 @@
 
     
     
+
     
     
     
     
+
     
     
+
     
     
 
@@ -171,7 +179,7 @@
         <span class="column is-narrow">
             
             
-            16 分钟 读完 (约 2349 字)
+            16 分钟 读完 (约 2398 字)
         </span>
         
     </div>
@@ -350,6 +358,7 @@
 <p>2.&#x6DFB;&#x52A0;.gitattributes&#x6587;&#x4EF6;&#x6DFB;&#x52A0;diff docx&#x6587;&#x4EF6;&#x65F6;&#x4F7F;&#x7528;pandoc</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">*.docx diff=pandoc</span><br></pre></td></tr></table></figure>
 
+<h1 id="word&#x7F16;&#x8F91;&#x64CD;&#x4F5C;"><a href="#word&#x7F16;&#x8F91;&#x64CD;&#x4F5C;" class="headerlink" title="word&#x7F16;&#x8F91;&#x64CD;&#x4F5C;"></a>word&#x7F16;&#x8F91;&#x64CD;&#x4F5C;</h1><p>&#x64A4;&#x9500;&#x4E0A;&#x6B21;&#x7F16;&#x8F91;&#x5FEB;&#x6377;&#x952E;&#x662F; &#x2018;Ctrl+Z&#x2019;&#xFF0C;&#x56DE;&#x5230;&#x4E0A;&#x4E2A;&#x5149;&#x6807;&#x4F4D;&#x7F6E;&#x662F;&#x2018;Shift+F5&#x2019;&#xFF08;&#x67E5;&#x770B;&#x4EA4;&#x53C9;&#x5F15;&#x7528;&#x540E;&#x60F3;&#x8FD4;&#x56DE;&#x65F6;&#x5F88;&#x597D;&#x7528;&#xFF09;</p>
 <p>&#x4E00;&#x4EFD;&#xFF08;&#x4E0D;&#x592A;&#xFF09;&#x7B80;&#x77ED;&#x7684;LaTeX&#x6307;&#x5357; p.63&#xFF1A; <a href="http://ctan.math.utah.edu/ctan/tex-archive/info/lshort/chinese/lshort-zh-cn.pdf" target="_blank" rel="noopener">http://ctan.math.utah.edu/ctan/tex-archive/info/lshort/chinese/lshort-zh-cn.pdf</a><br>LaTeX 2e font selection: <a href="https://www.latex-project.org/help/documentation/fntguide.pdf" target="_blank" rel="noopener">https://www.latex-project.org/help/documentation/fntguide.pdf</a><br><a href="http://ctan.mirrors.hoobly.com/macros/latex/contrib/IEEEtran/testflow/testflow_doc.pdf" target="_blank" rel="noopener">http://ctan.mirrors.hoobly.com/macros/latex/contrib/IEEEtran/testflow/testflow_doc.pdf</a><br>&#x5982;&#x4F55;&#x5B9E;&#x73B0;docx&#x6587;&#x6863;&#x7684;&#x7248;&#x672C;&#x7BA1;&#x7406;&#xFF1A;<a href="https://xiaofengwo.github.io/2018/03/18/howtotrackdocxfilewithgit/" target="_blank" rel="noopener">https://xiaofengwo.github.io/2018/03/18/howtotrackdocxfilewithgit/</a></p>
 
     
@@ -434,8 +443,10 @@
     </div>
 </footer>
 
-    <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script>
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="js/moment-with-locales.min.js"></script>
 
 <!-- test if the browser is outdated -->
 <div id="outdated">
@@ -443,7 +454,8 @@
     <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
     <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
 </div>
-<script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="js/outdatedbrowser.min.js"></script>
 <script>
     $(document).ready(function () {
         // plugin function, place inside DOM ready function
@@ -465,7 +477,8 @@
 
     
     
-<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="js/MathJax.js"></script>
 <script>
     MathJax.Hub.Config({
         "HTML-CSS": {
@@ -486,12 +499,15 @@
     });
 </script>
 
+
     
     
     
     
-<script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script>
-<script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="js/jquery.justifiedGallery.min.js"></script>
 <script>
     (function ($) {
         $(document).ready(function () {
@@ -505,9 +521,11 @@
     })(jQuery);
 </script>
 
+
     
     
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script>
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="js/clipboard.min.js"></script>
     <style>
         .hljs {
             position: relative;
@@ -570,6 +588,7 @@
       })
     </script>
 
+
     
     
 
@@ -577,6 +596,7 @@
 
 
 <script src="/js/script.js"></script>
+
 
     
     <div class="searchbox ins-search">
