@@ -26,7 +26,7 @@
 <meta property="og:description" content="&amp;#x6574;&amp;#x7406;&amp;#x8BB0;&amp;#x5F55;&amp;#x5E73;&amp;#x65F6;&amp;#x9047;&amp;#x5230;&amp;#x7684;&amp;#x4E00;&amp;#x4E9B;git&amp;#x6280;&amp;#x5DE7;">
 <meta property="og:locale" content="en">
 <meta property="og:image" content="https://billystudio.github.io/2020-10-09-Git-cheatsheet/get-remote-branch.png">
-<meta property="og:updated_time" content="2021-10-30T08:31:36.153Z">
+<meta property="og:updated_time" content="2022-03-25T08:58:40.063Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="git 操作中的一些小技巧">
 <meta name="twitter:description" content="&amp;#x6574;&amp;#x7406;&amp;#x8BB0;&amp;#x5F55;&amp;#x5E73;&amp;#x65F6;&amp;#x9047;&amp;#x5230;&amp;#x7684;&amp;#x4E00;&amp;#x4E9B;git&amp;#x6280;&amp;#x5DE7;">
@@ -172,7 +172,7 @@
         <span class="column is-narrow">
             
             
-            2 minutes read (About 241 words)
+            2 minutes read (About 289 words)
         </span>
         
     </div>
@@ -185,6 +185,10 @@
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">git fetch --all</span><br><span class="line">git checkout -b branchname origin/branchname</span><br></pre></td></tr></table></figure>
 
 <p>A successful example:<br><img src="get-remote-branch.png" alt="fetch-remote-branch"></p>
+<p><strong>TroubleShooting: Cannot git pull from github</strong></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">kex_exchange_identification: read: Connection reset by peer</span><br><span class="line">Connection reset by 20.205.243.166 port 22</span><br><span class="line">fatal: Could not read from remote repository.</span><br><span class="line"></span><br><span class="line">Please make sure you have the correct access rights</span><br><span class="line">and the repository exists.</span><br></pre></td></tr></table></figure>
+
+<p>Try <code>ssh -T git@github.com</code> and then <code>git pull</code>.</p>
 <h1 id="3-prevent-typing-password-in-http-protocol"><a href="#3-prevent-typing-password-in-http-protocol" class="headerlink" title="3. prevent typing password in http protocol"></a>3. prevent typing password in http protocol</h1><h2 id="3-1-Git-Credential-store"><a href="#3-1-Git-Credential-store" class="headerlink" title="3.1 Git Credential store"></a>3.1 Git Credential store</h2><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git config --global credential.helper store</span><br></pre></td></tr></table></figure>
 
 <p>After enabling this you will be prompted for your creds on your next commit. your token will be stored in plain text in <code>~/.git-credentials</code>.</p>
@@ -226,9 +230,8 @@
 
 <div class="sharebox">
     
-<div class="notification is-danger">
-    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
-</div>
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
 
 </div>
 

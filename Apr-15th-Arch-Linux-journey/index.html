@@ -31,7 +31,7 @@
 <meta property="og:image" content="https://billystudio.github.io/Apr-15th-Arch-Linux-journey/BaiduHelper.png">
 <meta property="og:image" content="https://billystudio.github.io/Apr-15th-Arch-Linux-journey/fceux-gamepad.png">
 <meta property="og:image" content="https://billystudio.github.io/Apr-15th-Arch-Linux-journey/fceux-scale.png">
-<meta property="og:updated_time" content="2022-03-21T09:25:34.436Z">
+<meta property="og:updated_time" content="2022-03-31T09:20:12.845Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Arch Linux journey">
 <meta name="twitter:description" content="I have long heard about the fame and reputation of Arch Linux. But not until after I have commenced to explore on this distro did I really feel the enjoyness that Linux brings to me.">
@@ -177,7 +177,7 @@
         <span class="column is-narrow">
             
             
-            38 minutes read (About 5687 words)
+            38 minutes read (About 5698 words)
         </span>
         
     </div>
@@ -469,7 +469,7 @@ export QT_IM_MODULE=&quot;fcitx&quot;
 <p>If you are using Wayland rather than X11, goldendict might not go well. Use <code>QT_QPA_PLATFORM=xcb</code> to force X11 use.</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo cp /usr/share/applications/goldendict.desktop ~/.local/share/applications</span><br><span class="line">cd ~/.local/share/applications</span><br><span class="line">sudo chown youruser:youruser goldendict.desktop</span><br></pre></td></tr></table></figure>
 
-<p>Replace <code>Exec=</code> line in goldendict.desktop with <code>goldendict.desktop</code>.<br>Refer to <a href="#References">&#x201C;goldendict&#x201D; terminated by signal SIGSEGV (Address boundary error) and segfaults</a><br>and <a href="#References">Arch Wiki Desktop entries</a></p>
+<p>Then replace <code>Exec=</code> line in goldendict.desktop with <code>Exec=env QT_QPA_PLATFORM=xcb goldendict</code>, where <code>env</code> command is like <code>export</code> in shell programming.<br>(Refer to <a href="#References">&#x201C;goldendict&#x201D; terminated by signal SIGSEGV (Address boundary error) and segfaults</a> and <a href="#References">Arch Wiki Desktop entries</a>)</p>
 <p>Generally, the dictionary will detected by it, if not, Edit -&gt; Dictionaries -&gt; Files, then add <code>/usr/share/stardict/dic</code>.</p>
 <p>My experience after using digital dictionaries under WinOS basically includes some points of view. First, it&#x2019;s of little difference if I am searching words with a web browser. Then I would like to tell some feelings of some WinOS dictionary software. Sure there are plenty of them under WinOS, but most of them carries some unwanted ads. Sometimes I just want the English meanings but they offer me Chinese meaning primarily and defaultly. Excluding those have the former two disadvantages, only <code>Lingoes</code> and <code>OALED</code> are left for choices. But a little unfortunately, <code>Lingoes</code> is huge-size and <code>OALED3</code> is too old for Win10(its pixel rendering is bad). Under Linux, I can install a clean and small interface and just install the dictionary that I want(Here I mean Merriam-Webster). It&#x2019;s a very pure experience.</p>
 <h3 id="Baidu-Netdisk-Downloader"><a href="#Baidu-Netdisk-Downloader" class="headerlink" title="Baidu Netdisk Downloader"></a>Baidu Netdisk Downloader</h3><p><code>aria2</code> backend, <code>Camtd</code> chrome extension and <code>TamperMonkey</code> are prepared.<br>Then install <code>&#x7F51;&#x76D8;&#x76F4;&#x94FE;&#x4E0B;&#x8F7D;&#x52A9;&#x624B;</code> userscript in TamperMonkey</p>
@@ -484,7 +484,8 @@ export QT_IM_MODULE=&quot;fcitx&quot;
 
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start fcron.service</span><br><span class="line">sudo systemctl enable fcron.service</span><br></pre></td></tr></table></figure>
 
-<h3 id="&#x5317;&#x90AE;&#x4EBA;-&#x7231;&#x5317;&#x79D1;"><a href="#&#x5317;&#x90AE;&#x4EBA;-&#x7231;&#x5317;&#x79D1;" class="headerlink" title="&#x5317;&#x90AE;&#x4EBA; / &#x7231;&#x5317;&#x79D1;"></a>&#x5317;&#x90AE;&#x4EBA; / &#x7231;&#x5317;&#x79D1;</h3><p>sudo pacman -S transmission-cli</p>
+<h3 id="byr-iBeike"><a href="#byr-iBeike" class="headerlink" title="byr / iBeike"></a>byr / iBeike</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -S transmission-cli</span><br></pre></td></tr></table></figure>
+
 <p><a href="http://localhost:9091" target="_blank" rel="noopener">http://localhost:9091</a></p>
 <p>Ref: <a href="https://wiki.archlinux.org/index.php/Transmission" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Transmission</a></p>
 <p>When using from other computers meeting error <em>403: Forbidden Unauthorized IP Address.</em>,<br>add your ip to <code>rpc-whitelist</code> in <code>~/.config/transmission-daemon/settings.json</code>, then restart</p>
@@ -592,7 +593,7 @@ aur install deepin-wine5
     <div class="columns is-mobile is-multiline article-nav">
         <span class="column is-12-mobile is-half-desktop  article-nav-prev">
             
-            <a href="/Apr-24th-criminal-litigation-as-opposed-to-civil-litigation/">刑事诉讼与民事诉讼的区别</a>
+            <a href="/Apr-17th-Zsh-note/">Shell Programming | Zsh</a>
             
         </span>
         <span class="column is-12-mobile is-half-desktop  article-nav-next">
@@ -607,9 +608,8 @@ aur install deepin-wine5
 
 <div class="sharebox">
     
-<div class="notification is-danger">
-    You need to set <code>install_url</code> to use ShareThis. Please set it in <code>_config.yml</code>.
-</div>
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
 
 </div>
 
