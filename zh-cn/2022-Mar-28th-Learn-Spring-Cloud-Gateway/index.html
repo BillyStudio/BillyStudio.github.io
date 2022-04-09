@@ -26,8 +26,10 @@
 <meta property="og:description" content="Spring Cloud Gateway&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;">
 <meta property="og:locale" content="zh-cn">
 <meta property="og:image" content="https://billystudio.github.io/zh-cn/2022-Mar-28th-Learn-Spring-Cloud-Gateway/redis-keys-empty.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2022-Mar-28th-Learn-Spring-Cloud-Gateway/too-many-requests.png">
 <meta property="og:image" content="https://billystudio.github.io/zh-cn/2022-Mar-28th-Learn-Spring-Cloud-Gateway/redis-keys-available.png">
-<meta property="og:updated_time" content="2022-03-31T08:15:26.662Z">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2022-Mar-28th-Learn-Spring-Cloud-Gateway/ab-result.png">
+<meta property="og:updated_time" content="2022-04-02T02:30:57.352Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Spring Cloud Gateway实验">
 <meta name="twitter:description" content="Spring Cloud Gateway&amp;#x5B66;&amp;#x4E60;&amp;#x7B14;&amp;#x8BB0;">
@@ -107,6 +109,32 @@
             </a>
             
             
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#&amp;#x4E00;&amp;#x3001;&amp;#x7F51;&amp;#x5173;&amp;#x7684;HelloWorld">1&nbsp;&nbsp;<b>&amp;amp;#x4E00;&amp;amp;#x3001;&amp;amp;#x7F51;&amp;amp;#x5173;&amp;amp;#x7684;HelloWorld</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#&amp;#x4E8C;&amp;#x3001;&amp;#x624B;&amp;#x5DE5;&amp;#x914D;&amp;#x7F6E;&amp;#x670D;&amp;#x52A1;&amp;#x6620;&amp;#x5C04;">2&nbsp;&nbsp;<b>&amp;amp;#x4E8C;&amp;amp;#x3001;&amp;amp;#x624B;&amp;amp;#x5DE5;&amp;amp;#x914D;&amp;amp;#x7F6E;&amp;amp;#x670D;&amp;amp;#x52A1;&amp;amp;#x6620;&amp;amp;#x5C04;</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#&amp;#x4E09;&amp;#x3001;&amp;#x914D;&amp;#x7F6E;&amp;#x4EE4;&amp;#x724C;&amp;#x6876;&amp;#x9650;&amp;#x6D41;&amp;#x8FC7;&amp;#x6EE4;&amp;#x5668;">3&nbsp;&nbsp;<b>&amp;amp;#x4E09;&amp;amp;#x3001;&amp;amp;#x914D;&amp;amp;#x7F6E;&amp;amp;#x4EE4;&amp;amp;#x724C;&amp;amp;#x6876;&amp;amp;#x9650;&amp;amp;#x6D41;&amp;amp;#x8FC7;&amp;amp;#x6EE4;&amp;amp;#x5668;</b></a>
+                    
+                </div>
+            </div>
+            
             
             <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
                 
@@ -169,7 +197,7 @@
         <span class="column is-narrow">
             
             
-            7 分钟 读完 (约 997 字)
+            8 分钟 读完 (约 1130 字)
         </span>
         
     </div>
@@ -206,7 +234,16 @@
 <figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">dependency</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">groupId</span>&gt;</span>org.springframework.boot<span class="hljs-tag">&lt;/<span class="hljs-name">groupId</span>&gt;</span></span><br><span class="line">  <span class="hljs-tag">&lt;<span class="hljs-name">artifactId</span>&gt;</span>spring-boot-starter-data-redis<span class="hljs-tag">&lt;/<span class="hljs-name">artifactId</span>&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure>
 
 <p>4.&#x542F;&#x52A8;redis&#xFF0C;&#x8FDB;&#x5165;<code>redis-cli</code>&#xFF0C;&#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x7F13;&#x5B58;&#x60C5;&#x51B5;&#xFF1A;<br><img src="redis-keys-empty.png" alt="Empty keys with no requests"></p>
-<p>5.&#x6A21;&#x62DF;&#x8BF7;&#x6C42;&#xFF0C;&#x518D;&#x6B21;&#x67E5;&#x770B;&#x7F13;&#x5B58;&#x60C5;&#x51B5;&#xFF1A;<br><img src="redis-keys-available.png" alt="redis-keys-available.png"></p>
+<p>5.&#x6A21;&#x62DF;&#x8BF7;&#x6C42;&#xFF0C;&#x518D;&#x6B21;&#x67E5;&#x770B;&#x7F13;&#x5B58;&#x60C5;&#x51B5;&#xFF1A;<br>&#x5148;&#x7528;curl&#x8BD5;&#x4E00;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">curl &quot;http://localhost:9999/api/v1/weather/forecast?location=Beijing&amp;time=today&quot;</span><br></pre></td></tr></table></figure>
+
+<p>&#x6CA1;&#x6709;&#x95EE;&#x9898;&#x540E;&#x6253;&#x5F00;JMeter&#xFF0C;&#x6A21;&#x62DF;&#x4E00;&#x6B21;10&#x4E2A;&#x7EBF;&#x7A0B;&#x7684;&#x8BBF;&#x95EE;&#xFF1A;<br><img src="too-many-requests.png" alt="too-many-requests.png"></p>
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x88AB;&#x62D2;&#x7EDD;&#x7684;&#x591A;&#x4F59;&#x8BF7;&#x6C42;&#xFF0C;&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x72B6;&#x6001;&#x7801;429&#x3002;&#xFF08;&#x6B63;&#x5E38;&#x8BF7;&#x6C42;&#x8FD4;&#x56DE;&#x72B6;&#x6001;&#x7801;&#x662F;200&#xFF09;</p>
+<p><img src="redis-keys-available.png" alt="redis-keys-available.png"></p>
+<p>&#x4F7F;&#x7528;ab&#x8FDB;&#x884C;&#x5E76;&#x53D1;&#x6D4B;&#x8BD5;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ab -n 10 -c 5 &quot;http://localhost:9999/api/v1/weather/forecast?location=Beijing&amp;time=tomorrow&quot;</span><br></pre></td></tr></table></figure>
+
+<p>&#x4ECE;ab&#x8FD4;&#x56DE;&#x7684;&#x7ED3;&#x679C;&#x4E2D;&#x542B;&#x6709;5&#x4E2A; &#x201C;Non-2xx responses&#x201D; &#x4E5F;&#x80FD;&#x9A8C;&#x8BC1;JMeter&#x7684;&#x7ED3;&#x679C;&#xFF1A;<br><img src="ab-result.png" alt="ab-result.png"></p>
 
     
     </div>
@@ -323,8 +360,8 @@
 
     
     
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
-<script src="/js/MathJax.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="/js/MathJax.js"></script> -->
 <script>
     MathJax.Hub.Config({
         "HTML-CSS": {

@@ -25,7 +25,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="The stochastic gradient descent method is commonly used in machine learning.">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2022-03-21T08:05:23.811Z">
+<meta property="og:updated_time" content="2022-04-08T12:07:29.674Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Stochastic gradient descent learning note">
 <meta name="twitter:description" content="The stochastic gradient descent method is commonly used in machine learning.">
@@ -108,6 +108,16 @@
             </a>
             
             
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                </div>
+            </div>
+            
             
             <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
                 
@@ -177,7 +187,9 @@
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
         <p>The stochastic gradient descent method is commonly used in machine learning. <a id="more"></a>Understanding this method well will help us betterly build a comprehensive architecture of machine learning in the brain.</p>
-<p>Considering the power of analogy, we begin with the two-dimension situation. Supposing a 2-D math function:<br>$$<br>f(x,y) = x^2 + y^2 + 1<br>$$<br>and a point $P_0(1, 2)$. We want to find the fastest degradient path from P.</p>
+<p>Considering the power of analogy, we begin with the two-dimension situation. Supposing a 2-D math function:</p>
+<p>$$f(x,y) = x^2 + y^2 + 1$$</p>
+<p>and a point $P_0(1, 2)$. We want to find the fastest degradient path from P.</p>
 <p>We frist define a unit vector $\boldsymbol{l_0} = (\cos\alpha_0, \sin\alpha_0)$ that indicates a direction.</p>
 <p>The direviative along this direction yields:</p>
 <p>$$\begin{align<em>}\displaystyle<br>\frac{\partial f}{\partial\boldsymbol{l_0}}<br>&amp; = \lim_{\left|\left|P_0P\right|\right|\to0}\frac{f(P) - f(P_0)}{\left|\left|\overrightarrow{P_0P}\right|\right|} \<br>&amp; = \lim_{\left|\left|P_0P\right|\right|\to0} \frac{\frac{\partial f}{\partial x}\Delta x + \frac{\partial f}{\partial y}\Delta y + o(\left|\left|\overrightarrow{P_0P}\right|\right|)}{\left|\left|\overrightarrow{P_0P}\right|\right|} \<br>&amp; = \frac{\partial f}{\partial x} \cos \alpha_0 + \frac{\partial f}{\partial y} \sin \alpha_0 \<br>&amp; = 3 \cos \alpha_0 + 5 \sin \alpha_0 \<br>&amp; \leq \sqrt{3^2 + 5^2} = \sqrt{34} \<br>\end{align</em>}$$</p>
@@ -315,8 +327,8 @@ while (f is decreasing)
 
     
     
-<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
-<script src="/js/MathJax.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="/js/MathJax.js"></script> -->
 <script>
     MathJax.Hub.Config({
         "HTML-CSS": {

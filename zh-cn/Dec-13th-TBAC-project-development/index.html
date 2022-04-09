@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>TBAC project development - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/Dec-13th-TBAC-project-development/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="Development of TBAC project.">
+<meta name="keywords" content="Shellchain">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TBAC project development">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/Dec-13th-TBAC-project-development/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="Development of TBAC project.">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Dec-13th-TBAC-project-development/chainsub-conf.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Dec-13th-TBAC-project-development/create-entity-http-request.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Dec-13th-TBAC-project-development/subject-issueentityfrom-input-description.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Dec-13th-TBAC-project-development/register-subject-transaction-description.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Dec-13th-TBAC-project-development/create-object-chain.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Dec-13th-TBAC-project-development/object-chain-conf.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Dec-13th-TBAC-project-development/object-chain-address.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Dec-13th-TBAC-project-development/OET-txid.png">
+<meta property="og:updated_time" content="2022-04-09T06:16:30.647Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TBAC project development">
+<meta name="twitter:description" content="Development of TBAC project.">
+<meta name="twitter:image" content="https://billystudio.github.io/zh-cn/Dec-13th-TBAC-project-development/chainsub-conf.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/index.html">Go Home</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Subject">1&nbsp;&nbsp;<b>Subject</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Build-a-subject-chain">1.1&nbsp;&nbsp;Build a subject chain</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Get-subject-chain-address">1.2&nbsp;&nbsp;Get subject chain address</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Create-a-new-entity-using-JMeter">1.3&nbsp;&nbsp;Create a new entity using JMeter</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Issue-an-entity-from-subject-chain">1.4&nbsp;&nbsp;Issue an entity from subject chain</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#&amp;#x8FD4;&amp;#x56DE;&amp;#x4E3B;&amp;#x4F53;&amp;#x4FE1;&amp;#x606F;&amp;#x7684;&amp;#x4EA4;&amp;#x6613;ID">1.5&nbsp;&nbsp;&amp;amp;#x8FD4;&amp;amp;#x56DE;&amp;amp;#x4E3B;&amp;amp;#x4F53;&amp;amp;#x4FE1;&amp;amp;#x606F;&amp;amp;#x7684;&amp;amp;#x4EA4;&amp;amp;#x6613;ID</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Regist-an-owner-of-object-on-subject-chain">1.6&nbsp;&nbsp;Regist an owner of object on subject chain</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#An-example-of-transaction-sent-to-the-request-chain">1.7&nbsp;&nbsp;An example of transaction sent to the request chain:</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Object">2&nbsp;&nbsp;<b>Object</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Create-object-chain">2.1&nbsp;&nbsp;Create object chain</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Policy-chain">3&nbsp;&nbsp;<b>Policy chain</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Create-policy-chain">3.1&nbsp;&nbsp;Create policy chain</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Regist-policy">3.2&nbsp;&nbsp;Regist policy</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Update-policy-chain">3.3&nbsp;&nbsp;Update policy chain</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Request-chain">4&nbsp;&nbsp;<b>Request chain</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Create-request-chain">4.1&nbsp;&nbsp;Create request chain</a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/Dec-13th-TBAC-project-development/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/Dec-13th-TBAC-project-development/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            TBAC project development
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-12-13T08:15:27.000Z" itemprop="datePublished">12月 13 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh-cn/categories/TBAC/">TBAC</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            7 分钟 读完 (约 1108 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>Development of TBAC project. <a id="more"></a></p>
+<h1 id="Subject"><a href="#Subject" class="headerlink" title="Subject"></a>Subject</h1><h2 id="Build-a-subject-chain"><a href="#Build-a-subject-chain" class="headerlink" title="Build a subject chain"></a>Build a subject chain</h2><figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">rm -r ~/.shellchain/chainsub</span><br><span class="line">./multichain-util create chainsub</span><br><span class="line">./multichaind chainsub</span><br></pre></td></tr></table></figure>
+
+<p>Once start this chain, the ip address and port number of <code>chainsub</code> will be shown on the terminal. The default rpc receiving port is <code>chainsub_port-1</code>.</p>
+<p>Now cancel <code>multichaind</code> process by Ctrl+D, then edit <code>~/.shellchain/subject/shellchain.conf</code>. Here, <code>chainsub</code>=4361, so <code>rpcport</code>=4360.</p>
+<p><img src="chainsub-conf.png" alt="chainsub-conf.png"></p>
+<p>Now restart <code>chainsub</code>.</p>
+<h2 id="Get-subject-chain-address"><a href="#Get-subject-chain-address" class="headerlink" title="Get subject chain address"></a>Get subject chain address</h2><figure class="highlight sh hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./multichain-cli chainsub getaddresses</span><br></pre></td></tr></table></figure>
+
+<h2 id="Create-a-new-entity-using-JMeter"><a href="#Create-a-new-entity-using-JMeter" class="headerlink" title="Create a new entity using JMeter"></a>Create a new entity using JMeter</h2><p>Params of rpc interface <code>createentity</code>:</p>
+<pre><code>params[0] is entitytype: &#x5B9E;&#x4F53;&#x7C7B;&#x578B;
+    entitytype = 1, &#x62E5;&#x6709;&#x6743;&#x9650; connect, send, receive, create, issue, mine, activate, admin
+    entitytype = 2, &#x62E5;&#x6709;&#x6743;&#x9650; connect, sned, receive, create, issue, mine, activate
+    entitytype = 3 or others, &#x62E5;&#x6709;&#x6743;&#x9650; send, receive
+params[1] is from-address: &#x521B;&#x5EFA;&#x5B9E;&#x4F53;&#x7684;&#x8C03;&#x7528;&#x5730;&#x5740;&#xFF0C;&#x8FD9;&#x91CC;&#x662F;&#x4E3B;&#x4F53;&#x94FE;&#x7684;&#x5730;&#x5740;
+</code></pre><p><img src="create-entity-http-request.png" alt="create-entity-http-request.png"></p>
+<p>Enable create-entity and disable others and run and then get the result:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">    &quot;result&quot;:{</span><br><span class="line">        &quot;pubkey&quot;:&quot;03479a7079bf4e22d3dcf087bcdfe2dc6b4124133fbaec5d14916e6f58fa941918&quot;,</span><br><span class="line">        &quot;privkey&quot;:&quot;VCEMsosr4HbwvnZ1NAJGtNWg6BuhN8tFeKpKiScQuiFGtu9q3XPf72Yp&quot;,</span><br><span class="line">        &quot;address&quot;:&quot;1WzU2fz7y78bivU36xBZsw1PCR6RUx99BNGFHt&quot;,</span><br><span class="line">        &quot;grant_tx_id&quot;:&quot;fb56c60a46b2dc10991f10ce1bb7ff05ae7ac342388f64f842023ee00c6d56fe&quot;</span><br><span class="line">    },</span><br><span class="line">    &quot;error&quot;:null,</span><br><span class="line">    &quot;id&quot;:&quot;1&quot;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h2 id="Issue-an-entity-from-subject-chain"><a href="#Issue-an-entity-from-subject-chain" class="headerlink" title="Issue an entity from subject chain"></a>Issue an entity from subject chain</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">	&quot;id&quot;: &quot;1&quot;,</span><br><span class="line">	&quot;chain_name&quot;: &quot;subject&quot;,</span><br><span class="line">	&quot;method&quot;: &quot;issueentityfrom&quot;,</span><br><span class="line">	&quot;params&quot;: [</span><br><span class="line">		&quot;1XjRwWhr93s3ZwHHE7N8QrNFrZq5s62fSMueDX&quot;, </span><br><span class="line">		&quot;1WzU2fz7y78bivU36xBZsw1PCR6RUx99BNGFHt&quot;, </span><br><span class="line">		&quot;1&quot;, </span><br><span class="line">		&quot;1231231312311313123111&quot;, </span><br><span class="line">		&quot;VCEMsosr4HbwvnZ1NAJGtNWg6BuhN8tFeKpKiScQuiFGtu9q3XPf72Yp&quot;, </span><br><span class="line">		&quot;******&quot;, </span><br><span class="line">		{</span><br><span class="line">			&quot;ver&quot;: &quot;SRT&quot;,</span><br><span class="line">			&quot;attribute&quot;: {</span><br><span class="line">				&quot;subject-id&quot;: &quot;Shane Wang&quot;,</span><br><span class="line">				&quot;age&quot;: 24,</span><br><span class="line">				&quot;faculty&quot;: &quot;master&quot;,</span><br><span class="line">				&quot;security-level&quot;: 3</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">	]</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><img src="subject-issueentityfrom-input-description.png" alt="subject-issueentityfrom-input-description.png"></p>
+<p>Enable this and disable others and run </p>
+<h2 id="&#x8FD4;&#x56DE;&#x4E3B;&#x4F53;&#x4FE1;&#x606F;&#x7684;&#x4EA4;&#x6613;ID"><a href="#&#x8FD4;&#x56DE;&#x4E3B;&#x4F53;&#x4FE1;&#x606F;&#x7684;&#x4EA4;&#x6613;ID" class="headerlink" title="&#x8FD4;&#x56DE;&#x4E3B;&#x4F53;&#x4FE1;&#x606F;&#x7684;&#x4EA4;&#x6613;ID"></a>&#x8FD4;&#x56DE;&#x4E3B;&#x4F53;&#x4FE1;&#x606F;&#x7684;&#x4EA4;&#x6613;ID</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">    &quot;result&quot;:&quot;fc13ee161a90bb49e62fe416f2dbaad75e66d580d2a991fc01f5dd6f6d9ec820&quot;,</span><br><span class="line">    &quot;error&quot;:null,</span><br><span class="line">    &quot;id&quot;:&quot;1&quot;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><img src="register-subject-transaction-description.png" alt="register-subject-transaction-description.png"></p>
+<p>Error: null suggests a successful SRT registration on subject chain.</p>
+<h2 id="Regist-an-owner-of-object-on-subject-chain"><a href="#Regist-an-owner-of-object-on-subject-chain" class="headerlink" title="Regist an owner of object on subject chain"></a>Regist an owner of object on subject chain</h2><h2 id="An-example-of-transaction-sent-to-the-request-chain"><a href="#An-example-of-transaction-sent-to-the-request-chain" class="headerlink" title="An example of transaction sent to the request chain:"></a>An example of transaction sent to the request chain:</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">	&quot;id&quot;: &quot;1&quot;,</span><br><span class="line">	&quot;chain_name&quot;: &quot;chainrequest&quot;,</span><br><span class="line">	&quot;method&quot;: &quot;sendrequestfrom&quot;,</span><br><span class="line">	&quot;params&quot;: [</span><br><span class="line">        &quot;1YjuDfXfTqtUAW6N1cttSMLStLfhUKbC3sc3nU&quot;, </span><br><span class="line">        &quot;1YjuDfXfTqtUAW6N1cttSMLStLfhUKbC3sc3nU&quot;, </span><br><span class="line">        {</span><br><span class="line">            &quot;txid&quot;: &quot;839a4ed408120fdd3d2f72a319823bf10ecf31663f21359fa4db5c881a37d9f5&quot;,</span><br><span class="line">            &quot;scriptSig&quot;: &quot;null&quot;</span><br><span class="line">        }, </span><br><span class="line">        &quot;c3662ec6779160be959d119f453d74bd38ceb2305692a5076671f85d545d8d21&quot;, </span><br><span class="line">        &quot;org. apache. pdfbox. pdfctrl# read&quot;</span><br><span class="line">    ]</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h1 id="Object"><a href="#Object" class="headerlink" title="Object"></a>Object</h1><h2 id="Create-object-chain"><a href="#Create-object-chain" class="headerlink" title="Create object chain"></a>Create object chain</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">./multichain-util create object</span><br><span class="line">./multichaind object</span><br></pre></td></tr></table></figure>
+
+<p><img src="create-object-chain.png" alt="create object chain"></p>
+<p>Then edit shellchain.conf to add rpcallowip and rpcport:<br><img src="object-chain-conf.png" alt="object-chain-conf.png"></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./multichain-cli object getaddresses</span><br></pre></td></tr></table></figure>
+
+<p><img src="object-chain-address.png" alt="object-chain-address.png"></p>
+<p>On object chain, no entity is needed so we directly send transaction to object chain for registering object.</p>
+<p>Copy ip, port, rpcuser and rpcpassword into JMeter.</p>
+<p>Send custom transaction and we will get TXID of object:<br><img src="OET-txid.png" alt="OET-txid.png"></p>
+<h1 id="Policy-chain"><a href="#Policy-chain" class="headerlink" title="Policy chain"></a>Policy chain</h1><h2 id="Create-policy-chain"><a href="#Create-policy-chain" class="headerlink" title="Create policy chain"></a>Create policy chain</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./multichain-util create policy</span><br></pre></td></tr></table></figure>
+
+<h2 id="Regist-policy"><a href="#Regist-policy" class="headerlink" title="Regist policy"></a>Regist policy</h2><p>We get an object txid in advance.<br>medica101/object.org: cbadd86ee7ace60491bb9207e28d3ac694fe36e6d656aab26d27483970970733<br>medica102/object.org: 12d77dc0297f570abef82bfcdb0f60aea25ef7ced8a348d33222319f3ed7edf4</p>
+<p>Params: from-address to-address policyid rule-combining-method</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">	&quot;id&quot;:&quot;1&quot;,</span><br><span class="line">	&quot;chain_name&quot;:&quot;policy&quot;,</span><br><span class="line">	&quot;method&quot;:&quot;registpolicy&quot;,</span><br><span class="line">	&quot;params&quot;:[</span><br><span class="line">		&quot;1AWZxmCBG18MAaMcsz9PaQ7jeLkf9TDA7pCyvc&quot;,</span><br><span class="line">		&quot;1AWZxmCBG18MAaMcsz9PaQ7jeLkf9TDA7pCyvc&quot;,</span><br><span class="line">		&quot;policy1&quot;,</span><br><span class="line">		&quot;deny_override&quot;,</span><br><span class="line">		[</span><br><span class="line">			{&quot;attr&quot;:&quot;resource-id#Obj&quot;,&quot;value&quot;:&quot;medica101/object.org&quot;}</span><br><span class="line">		],</span><br><span class="line">		[</span><br><span class="line">			{&quot;id&quot;:&quot;cond1&quot;,&quot;expr&quot;:[&quot;object-id&quot;,&quot;OP_OBJATTR&quot;,&quot;medical-record-001. pdf&quot;,&quot;OP_EQUAL&quot;]},</span><br><span class="line">		 	{&quot;id&quot;:&quot;cond2&quot;,&quot;expr&quot;:[&quot;faculty&quot;,&quot;OP_SUBATTR&quot;,&quot;doctor&quot;,&quot;OP_EQUAL&quot;]},</span><br><span class="line">			{&quot;id&quot;:&quot;cond3&quot;,&quot;expr&quot;:[&quot;action-id&quot;,&quot;OP_ACTATTR&quot;,&quot;org. apache. pdfbox. pdfctrl# read&quot;,&quot;OP_EQUAL&quot;]}</span><br><span class="line">		 ],</span><br><span class="line">		[</span><br><span class="line">			{&quot;id&quot;:&quot;rule1&quot;,&quot;effect&quot;:&quot;permit&quot;,&quot;expr&quot;:[&quot;cond1&quot; ,&quot;cond3&quot;, &quot;OP_BOOLAND&quot;,&quot;cond2&quot;,&quot;OP_BOOLOR&quot;]}</span><br><span class="line">		]</span><br><span class="line">	]</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>get return:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">{&quot;result&quot;:&quot;a9f8dcd95c120956f52c99ed4ee4067dccb467d3e4cc765df17fa4ccafc99edb&quot;,&quot;error&quot;:null,&quot;id&quot;:&quot;1&quot;}</span><br><span class="line">{&quot;result&quot;:&quot;50420654e19db96ff8a6a62e7476d36bf48ebefa1e86589b59959790b97b21e1&quot;,&quot;error&quot;:null,&quot;id&quot;:&quot;1&quot;}</span><br></pre></td></tr></table></figure>
+
+<h2 id="Update-policy-chain"><a href="#Update-policy-chain" class="headerlink" title="Update policy chain"></a>Update policy chain</h2><p>Params: from-address to-address &#x751F;&#x6210;&#x7B56;&#x7565;&#x6216;&#x4E0A;&#x4E00;&#x6B21;&#x66F4;&#x65B0;&#x7B56;&#x7565;&#x8FD4;&#x56DE;&#x7684;txid policyid rule-combing-method target condition rule state</p>
+<h1 id="Request-chain"><a href="#Request-chain" class="headerlink" title="Request chain"></a>Request chain</h1><h2 id="Create-request-chain"><a href="#Create-request-chain" class="headerlink" title="Create request chain"></a>Create request chain</h2><p>The transaction got from the request chain will be like:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">ART:</span><br><span class="line">{</span><br><span class="line">    &quot;hex&quot; : &quot;0100000001e8b60d8ea85703ffd1e8ba547856637b74fffb259282b42402030a10beaa1198000000006a47304402206669661d52e6616536ea38f86914c14321a9f4563609fff2050dc3bb0b3dd94702201642e30d94ea024abc204abe15cea99ce0db4fb4ddccb585f375d31d274a3175012103d2bf881784a2cf0bb2b56a7f4bd685900015ec742826adef3d6bb0cfc3c1447cffffffff0200000000000000001976a914ead6e273c04dd3952b003343712410ff5aca713788ac00000000000000001976a914ead6e273c04dd3952b003343712410ff5aca713788ac00000000f57b22766572223a22415254222c227375626a656374223a7b2274786964223a2238333961346564343038313230666464336432663732613331393832336266313065636633313636336632313335396661346462356338383161333764396635222c22736372697074536967223a226e756c6c227d2c226f626a6563742d74786964223a2263333636326563363737393136306265393539643131396634353364373462643338636562323330353639326135303736363731663835643534356438643231222c22616374696f6e223a226f72672e206170616368652e20706466626f782e207064666374726c232072656164227d04000000&quot;,</span><br><span class="line">    &quot;txid&quot; : &quot;21c97d586f29267d5d7c701e639d0f89a2c568577fa8247bf8f24915e788ba25&quot;,</span><br><span class="line">    &quot;version&quot; : 1,</span><br><span class="line">    &quot;locktime&quot; : 0,</span><br><span class="line">    &quot;ver&quot; : &quot;ART&quot;,</span><br><span class="line">    &quot;subject&quot; : {</span><br><span class="line">        &quot;txid&quot; : &quot;839a4ed408120fdd3d2f72a319823bf10ecf31663f21359fa4db5c881a37d9f5&quot;,</span><br><span class="line">        &quot;scriptSig&quot; : &quot;null&quot;</span><br><span class="line">    },</span><br><span class="line">    &quot;object-txid&quot; : &quot;c3662ec6779160be959d119f453d74bd38ceb2305692a5076671f85d545d8d21&quot;,</span><br><span class="line">    &quot;action&quot; : &quot;org. apache. pdfbox. pdfctrl# read&quot;,</span><br><span class="line">    &quot;vin&quot; : [</span><br><span class="line">        {</span><br><span class="line">            &quot;txid&quot; : &quot;9811aabe100a030224b4829225fbff747b63567854bae8d1ff0357a88e0db6e8&quot;,</span><br><span class="line">            &quot;vout&quot; : 0,</span><br><span class="line">            &quot;scriptSig&quot; : {</span><br><span class="line">                &quot;asm&quot; : &quot;304402206669661d52e6616536ea38f86914c14321a9f4563609fff2050dc3bb0b3dd94702201642e30d94ea024abc204abe15cea99ce0db4fb4ddccb585f375d31d274a317501 03d2bf881784a2cf0bb2b56a7f4bd685900015ec742826adef3d6bb0cfc3c1447c&quot;,</span><br><span class="line">                &quot;hex&quot; : &quot;47304402206669661d52e6616536ea38f86914c14321a9f4563609fff2050dc3bb0b3dd94702201642e30d94ea024abc204abe15cea99ce0db4fb4ddccb585f375d31d274a3175012103d2bf881784a2cf0bb2b56a7f4bd685900015ec742826adef3d6bb0cfc3c1447c&quot;</span><br><span class="line">            },</span><br><span class="line">            &quot;sequence&quot; : 4294967295</span><br><span class="line">        }</span><br><span class="line">    ],</span><br><span class="line">    &quot;vout&quot; : [</span><br><span class="line">        {</span><br><span class="line">            &quot;value&quot; : 0.00000000,</span><br><span class="line">            &quot;n&quot; : 0,</span><br><span class="line">            &quot;scriptPubKey&quot; : {</span><br><span class="line">                &quot;asm&quot; : &quot;OP_DUP OP_HASH160 ead6e273c04dd3952b003343712410ff5aca7137 OP_EQUALVERIFY OP_CHECKSIG&quot;,</span><br><span class="line">                &quot;hex&quot; : &quot;76a914ead6e273c04dd3952b003343712410ff5aca713788ac&quot;,</span><br><span class="line">                &quot;reqSigs&quot; : 1,</span><br><span class="line">                &quot;type&quot; : &quot;pubkeyhash&quot;,</span><br><span class="line">                &quot;addresses&quot; : [</span><br><span class="line">                    &quot;1YjuDfXfTqtUAW6N1cttSMLStLfhUKbC3sc3nU&quot;</span><br><span class="line">                ]</span><br><span class="line">            },</span><br><span class="line">            &quot;assets&quot; : [</span><br><span class="line">            ],</span><br><span class="line">            &quot;permissions&quot; : [</span><br><span class="line">            ],</span><br><span class="line">            &quot;items&quot; : [</span><br><span class="line">            ]</span><br><span class="line">        },</span><br><span class="line">        {</span><br><span class="line">            &quot;value&quot; : 0.00000000,</span><br><span class="line">            &quot;n&quot; : 1,</span><br><span class="line">            &quot;scriptPubKey&quot; : {</span><br><span class="line">                &quot;asm&quot; : &quot;OP_DUP OP_HASH160 ead6e273c04dd3952b003343712410ff5aca7137 OP_EQUALVERIFY OP_CHECKSIG&quot;,</span><br><span class="line">                &quot;hex&quot; : &quot;76a914ead6e273c04dd3952b003343712410ff5aca713788ac&quot;,</span><br><span class="line">                &quot;reqSigs&quot; : 1,</span><br><span class="line">                &quot;type&quot; : &quot;pubkeyhash&quot;,</span><br><span class="line">                &quot;addresses&quot; : [</span><br><span class="line">                    &quot;1YjuDfXfTqtUAW6N1cttSMLStLfhUKbC3sc3nU&quot;</span><br><span class="line">                ]</span><br><span class="line">            },</span><br><span class="line">            &quot;assets&quot; : [</span><br><span class="line">            ],</span><br><span class="line">            &quot;permissions&quot; : [</span><br><span class="line">            ],</span><br><span class="line">            &quot;items&quot; : [</span><br><span class="line">            ]</span><br><span class="line">        }</span><br><span class="line">    ],</span><br><span class="line">    &quot;data&quot; : [</span><br><span class="line">    ],</span><br><span class="line">    &quot;nType&quot; : 4,</span><br><span class="line">    &quot;blockhash&quot; : &quot;0040dd89115fb5a7599f6b01a3c54131c19b0646c0b2c09de0e9607dee6621a1&quot;,</span><br><span class="line">    &quot;confirmations&quot; : 190,</span><br><span class="line">    &quot;time&quot; : 1575293978,</span><br><span class="line">    &quot;blocktime&quot; : 1575293978</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Shellchain/">#Shellchain</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/2020-01-06-Algebra-SageMath-computing/">Algebra | SageMath computing</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/Dec-12th-Accumulation-of-English-expressions/">Accumulation of English writing by examples</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="/js/MathJax.js"></script> -->
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>
