@@ -35,7 +35,7 @@
 <meta property="og:image" content="https://billystudio.github.io/zh-cn/Oct-9th-learning-blockchain-notes/installChaincode.png">
 <meta property="og:image" content="https://billystudio.github.io/zh-cn/Oct-9th-learning-blockchain-notes/instantiateChaincode.png">
 <meta property="og:image" content="https://billystudio.github.io/zh-cn/Oct-9th-learning-blockchain-notes/example02-Init.png">
-<meta property="og:updated_time" content="2022-04-08T09:11:21.378Z">
+<meta property="og:updated_time" content="2022-05-03T13:00:15.659Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="区块链学习笔记">
 <meta name="twitter:description" content="&amp;#x672C;&amp;#x6587;&amp;#x4E3B;&amp;#x8981;&amp;#x4ECB;&amp;#x7ECD;&amp;#x533A;&amp;#x5757;&amp;#x94FE;&amp;#x57FA;&amp;#x7840;&amp;#x77E5;&amp;#x8BC6;&amp;#x4E0E;&amp;#x4E00;&amp;#x4E9B;&amp;#x4E3B;&amp;#x6D41;&amp;#x533A;&amp;#x5757;&amp;#x94FE;&amp;#x6280;&amp;#x672F;&amp;#x5E73;&amp;#x53F0;">
@@ -225,7 +225,7 @@
         <span class="column is-narrow">
             
             
-            6 分钟 读完 (约 890 字)
+            6 分钟 读完 (约 899 字)
         </span>
         
     </div>
@@ -243,7 +243,7 @@
 </li>
 </ol>
 <p>2.&#x62C9;&#x53D6;Fabric&#x6E90;&#x7801;</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd $GOPATH/src</span><br><span class="line">mkdir github.com/hyperledger</span><br><span class="line">cd github.com/hyperledger</span><br><span class="line">git clone -b release-1.0 --single-branch https://github.com/hyperledger/fabric.git</span><br><span class="line">cd fabric/common/configtx/tool/configtxgen</span><br><span class="line">go env -w GO111MODULE=auto</span><br><span class="line">go install</span><br><span class="line">cd ../../../tools/cryptogen</span><br><span class="line">go install</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">cd $GOPATH/src # &#x9ED8;&#x8BA4; $GOPATH &#x5728; $HOME/go &#x8DEF;&#x5F84;&#x4E0B;</span><br><span class="line">mkdir github.com/hyperledger</span><br><span class="line">cd github.com/hyperledger</span><br><span class="line">git clone -b release-1.0 --single-branch https://github.com/hyperledger/fabric.git</span><br><span class="line">cd fabric/common/configtx/tool/configtxgen</span><br><span class="line">go env -w GO111MODULE=auto</span><br><span class="line">go install</span><br><span class="line">cd ../../../tools/cryptogen</span><br><span class="line">go install</span><br></pre></td></tr></table></figure>
 
 <p>&#x68C0;&#x67E5; <code>$GOPATH/bin</code>&#x4E0B;&#x5DF2;&#x5B89;&#x88C5;<code>configtxgen</code>&#x548C;<code>cryptogen</code>&#x4E24;&#x4E2A;&#x5DE5;&#x5177;&#xFF1A;</p>
 <h3 id="2-2-2-&#x5EFA;&#x7ACB;&#x7B2C;&#x4E00;&#x4E2A;Fabric&#x7F51;&#x7EDC;"><a href="#2-2-2-&#x5EFA;&#x7ACB;&#x7B2C;&#x4E00;&#x4E2A;Fabric&#x7F51;&#x7EDC;" class="headerlink" title="2.2.2 &#x5EFA;&#x7ACB;&#x7B2C;&#x4E00;&#x4E2A;Fabric&#x7F51;&#x7EDC;"></a>2.2.2 &#x5EFA;&#x7ACB;&#x7B2C;&#x4E00;&#x4E2A;Fabric&#x7F51;&#x7EDC;</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">cd $GOPATH/src/github.com/hyperledger</span><br><span class="line">git clone -b release-1.0 --single-branch https://github.com/hyperledger/fabric-samples.git</span><br><span class="line">cd fabric-samples/first-network</span><br><span class="line">./byfn.sh -m generate</span><br></pre></td></tr></table></figure>
