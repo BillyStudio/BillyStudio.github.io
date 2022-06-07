@@ -18,7 +18,7 @@
 
 
     <meta name="description" content="Two ways of using KVM-based vms on Linux are introduced.">
-<meta name="keywords" content="VM,Linux,Win10,qemu,kvm">
+<meta name="keywords" content="Linux,VM,Win10,qemu,kvm">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Creating virtual machiness on Linux --- the hard way">
 <meta property="og:url" content="https://BillyStudio.github.io/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/index.html">
@@ -36,7 +36,7 @@
 <meta property="og:image" content="https://billystudio.github.io/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/afteradd.png">
 <meta property="og:image" content="https://billystudio.github.io/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/grub-edit.jpg">
 <meta property="og:image" content="https://billystudio.github.io/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/bind-adapter-addr.png">
-<meta property="og:updated_time" content="2022-03-21T08:05:25.438Z">
+<meta property="og:updated_time" content="2022-05-22T16:30:48.379Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Creating virtual machiness on Linux --- the hard way">
 <meta name="twitter:description" content="Two ways of using KVM-based vms on Linux are introduced.">
@@ -174,6 +174,10 @@
                     <a class="navbar-item" href="#II-B-d-CPU&amp;#x7ED1;&amp;#x5B9A;">2.2.4&nbsp;&nbsp;II.B.d CPU&amp;amp;#x7ED1;&amp;amp;#x5B9A;</a>
                     
                     
+                    
+                    <a class="navbar-item" href="#II-B-e-&amp;#x914D;&amp;#x7F6E;&amp;#x53CC;&amp;#x5C4F;">2.2.5&nbsp;&nbsp;II.B.e &amp;amp;#x914D;&amp;amp;#x7F6E;&amp;amp;#x53CC;&amp;amp;#x5C4F;</a>
+                    
+                    
                     <hr class="navbar-divider">
                     
                     
@@ -244,7 +248,7 @@
         <span class="column is-narrow">
             
             
-            13 分钟 读完 (约 1986 字)
+            14 分钟 读完 (约 2053 字)
         </span>
         
     </div>
@@ -355,6 +359,13 @@
 <p>&#x5C06;&#x865A;&#x62DF;&#x673A;&#x4E24;&#x4E2A;vCPU&#x5206;&#x522B;&#x7ED1;&#x5B9A;&#x5728;&#x5BBF;&#x4E3B;&#x673A;6&#x548C;7&#x53F7;CPU&#x4E0A;<br>&#x518D;&#x6B21;&#x68C0;&#x67E5;CPU&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#xFF1A;</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@xps13 wsd]# virsh vcpuinfo win10</span><br><span class="line">VCPU:           0</span><br><span class="line">CPU:            6</span><br><span class="line">State:          running</span><br><span class="line">CPU time:       165.3s</span><br><span class="line">CPU Affinity:   ------y-</span><br><span class="line"></span><br><span class="line">VCPU:           1</span><br><span class="line">CPU:            7</span><br><span class="line">State:          running</span><br><span class="line">CPU time:       105.4s</span><br><span class="line">CPU Affinity:   -------y</span><br></pre></td></tr></table></figure>
 
+<h3 id="II-B-e-&#x914D;&#x7F6E;&#x53CC;&#x5C4F;"><a href="#II-B-e-&#x914D;&#x7F6E;&#x53CC;&#x5C4F;" class="headerlink" title="II.B.e &#x914D;&#x7F6E;&#x53CC;&#x5C4F;"></a>II.B.e &#x914D;&#x7F6E;&#x53CC;&#x5C4F;</h3><p>&#x5B89;&#x88C5;virt-viewer</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu virt-viewer</span><br></pre></td></tr></table></figure>
+
+<p>&#x5728;Win10&#x865A;&#x673A;&#x914D;&#x7F6E;&#x9875;&#x65B0;&#x589E;&#x4E00;&#x4E2A;QXL Video&#xFF0C;&#x7136;&#x540E;&#x542F;&#x52A8;&#x865A;&#x673A;&#x3002;<br>&#x901A;&#x8FC7;remote-viewer&#x767B;&#x5F55;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">remote-viewer spice://localhost:5900</span><br></pre></td></tr></table></figure>
+
+<p>&#xFF08;&#x53EF;&#x80FD;&#x8FD8;&#x9700;&#x8981;&#x5728;Windows&#x7CFB;&#x7EDF;&#x4E2D;Ctrl+P&#x8BBE;&#x7F6E;&#x62D3;&#x5C55;&#x5C4F;&#xFF09;</p>
 <h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF</a></p>
 
     
@@ -362,9 +373,9 @@
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/VM/">#VM</a></span>
-    
         <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Linux/">#Linux</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/VM/">#VM</a></span>
     
         <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Win10/">#Win10</a></span>
     
