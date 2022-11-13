@@ -25,7 +25,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="The high-end(expensive) MacBooks/iMacs is not friendly on their prices for those economical young people &amp;#xFF08;unless the employee&amp;#x2019;s company give him an MBP&amp;#xFF09;, but macOS deserves a tria">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2022-01-22T08:16:20.569Z">
+<meta property="og:updated_time" content="2022-08-21T09:10:14.017Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="To-do list after installing macOS">
 <meta name="twitter:description" content="The high-end(expensive) MacBooks/iMacs is not friendly on their prices for those economical young people &amp;#xFF08;unless the employee&amp;#x2019;s company give him an MBP&amp;#xFF09;, but macOS deserves a tria">
@@ -117,21 +117,21 @@
                     
                     
                     
-                    <a class="navbar-item" href="#&amp;#x865A;&amp;#x62DF;&amp;#x673A;&amp;#x7CFB;&amp;#x7EDF;&amp;#x914D;&amp;#x7F6E;">1&nbsp;&nbsp;<b>&amp;amp;#x865A;&amp;amp;#x62DF;&amp;amp;#x673A;&amp;amp;#x7CFB;&amp;amp;#x7EDF;&amp;amp;#x914D;&amp;amp;#x7F6E;</b></a>
+                    <a class="navbar-item" href="#1-Config-for-VMWare-systems">1&nbsp;&nbsp;<b>1. Config for VMWare systems</b></a>
                     
                     
                     
-                    <a class="navbar-item" href="#&amp;#x5B89;&amp;#x88C5;VMware-Tool">1.1&nbsp;&nbsp;&amp;amp;#x5B89;&amp;amp;#x88C5;VMware Tool</a>
+                    <a class="navbar-item" href="#1-1-Install-VMware-Tool">1.1&nbsp;&nbsp;1.1 Install VMware Tool</a>
                     
                     
                     
-                    <a class="navbar-item" href="#&amp;#x8BBE;&amp;#x7F6E;&amp;#x5171;&amp;#x4EAB;&amp;#x6587;&amp;#x4EF6;&amp;#x5939;">1.2&nbsp;&nbsp;&amp;amp;#x8BBE;&amp;amp;#x7F6E;&amp;amp;#x5171;&amp;amp;#x4EAB;&amp;amp;#x6587;&amp;amp;#x4EF6;&amp;amp;#x5939;</a>
+                    <a class="navbar-item" href="#1-2-Set-shared-folders">1.2&nbsp;&nbsp;1.2 Set shared folders</a>
                     
                     
                     <hr class="navbar-divider">
                     
                     
-                    <a class="navbar-item" href="#&amp;#x64CD;&amp;#x4F5C;&amp;#x7CFB;&amp;#x7EDF;&amp;#x914D;&amp;#x7F6E;">2&nbsp;&nbsp;<b>&amp;amp;#x64CD;&amp;amp;#x4F5C;&amp;amp;#x7CFB;&amp;amp;#x7EDF;&amp;amp;#x914D;&amp;amp;#x7F6E;</b></a>
+                    <a class="navbar-item" href="#2-Config-for-macOS">2&nbsp;&nbsp;<b>2. Config for macOS</b></a>
                     
                     
                     
@@ -236,14 +236,14 @@
         <span class="column is-narrow">
             
             
-            2 minutes read (About 280 words)
+            2 minutes read (About 269 words)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
         <p>The high-end(expensive) MacBooks/iMacs is not friendly on their prices for those economical young people &#xFF08;unless the employee&#x2019;s company give him an MBP&#xFF09;, but macOS deserves a trial by installing it in a VM.<br><a id="more"></a></p>
-<h1 id="&#x865A;&#x62DF;&#x673A;&#x7CFB;&#x7EDF;&#x914D;&#x7F6E;"><a href="#&#x865A;&#x62DF;&#x673A;&#x7CFB;&#x7EDF;&#x914D;&#x7F6E;" class="headerlink" title="&#x865A;&#x62DF;&#x673A;&#x7CFB;&#x7EDF;&#x914D;&#x7F6E;"></a>&#x865A;&#x62DF;&#x673A;&#x7CFB;&#x7EDF;&#x914D;&#x7F6E;</h1><h2 id="&#x5B89;&#x88C5;VMware-Tool"><a href="#&#x5B89;&#x88C5;VMware-Tool" class="headerlink" title="&#x5B89;&#x88C5;VMware Tool"></a>&#x5B89;&#x88C5;VMware Tool</h2><h2 id="&#x8BBE;&#x7F6E;&#x5171;&#x4EAB;&#x6587;&#x4EF6;&#x5939;"><a href="#&#x8BBE;&#x7F6E;&#x5171;&#x4EAB;&#x6587;&#x4EF6;&#x5939;" class="headerlink" title="&#x8BBE;&#x7F6E;&#x5171;&#x4EAB;&#x6587;&#x4EF6;&#x5939;"></a>&#x8BBE;&#x7F6E;&#x5171;&#x4EAB;&#x6587;&#x4EF6;&#x5939;</h2><h1 id="&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x914D;&#x7F6E;"><a href="#&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x914D;&#x7F6E;" class="headerlink" title="&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x914D;&#x7F6E;"></a>&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x914D;&#x7F6E;</h1><h2 id="&#x8BBE;&#x7F6E;&#x53CC;&#x62FC;&#x81EA;&#x7136;&#x7801;&#x65B9;&#x6848;"><a href="#&#x8BBE;&#x7F6E;&#x53CC;&#x62FC;&#x81EA;&#x7136;&#x7801;&#x65B9;&#x6848;" class="headerlink" title="&#x8BBE;&#x7F6E;&#x53CC;&#x62FC;&#x81EA;&#x7136;&#x7801;&#x65B9;&#x6848;"></a>&#x8BBE;&#x7F6E;&#x53CC;&#x62FC;&#x81EA;&#x7136;&#x7801;&#x65B9;&#x6848;</h2><p>&#x6253;&#x5F00;&#x7EC8;&#x7AEF;&#x8F93;&#x5165;</p>
+<h1 id="1-Config-for-VMWare-systems"><a href="#1-Config-for-VMWare-systems" class="headerlink" title="1. Config for VMWare systems"></a>1. Config for VMWare systems</h1><h2 id="1-1-Install-VMware-Tool"><a href="#1-1-Install-VMware-Tool" class="headerlink" title="1.1 Install VMware Tool"></a>1.1 Install VMware Tool</h2><h2 id="1-2-Set-shared-folders"><a href="#1-2-Set-shared-folders" class="headerlink" title="1.2 Set shared folders"></a>1.2 Set shared folders</h2><h1 id="2-Config-for-macOS"><a href="#2-Config-for-macOS" class="headerlink" title="2. Config for macOS"></a>2. Config for macOS</h1><h2 id="&#x8BBE;&#x7F6E;&#x53CC;&#x62FC;&#x81EA;&#x7136;&#x7801;&#x65B9;&#x6848;"><a href="#&#x8BBE;&#x7F6E;&#x53CC;&#x62FC;&#x81EA;&#x7136;&#x7801;&#x65B9;&#x6848;" class="headerlink" title="&#x8BBE;&#x7F6E;&#x53CC;&#x62FC;&#x81EA;&#x7136;&#x7801;&#x65B9;&#x6848;"></a>&#x8BBE;&#x7F6E;&#x53CC;&#x62FC;&#x81EA;&#x7136;&#x7801;&#x65B9;&#x6848;</h2><p>&#x6253;&#x5F00;&#x7EC8;&#x7AEF;&#x8F93;&#x5165;</p>
 <figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 5</span><br></pre></td></tr></table></figure>
 
 <p>&#x5373;&#x53EF;</p>

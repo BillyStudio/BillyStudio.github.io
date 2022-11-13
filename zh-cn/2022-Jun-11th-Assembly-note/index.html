@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>汇编语言学习笔记 - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/2022-Jun-11th-Assembly-note/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x6C47;&amp;#x7F16;&amp;#x8BED;&amp;#x8A00;&amp;#x662F;&amp;#x4ECB;&amp;#x4E8E;&amp;#x673A;&amp;#x5668;&amp;#x4E0D;&amp;#x53EF;&amp;#x8BC6;&amp;#x522B;&amp;#x7684;&amp;#x9AD8;&amp;#x7EA7;&amp;#x8BED;&amp;#x8A00;&amp;#x4E0E;&amp;#x4EBA;&amp;#x4E0D;&amp;#x53EF;&amp;#x8BFB;&amp;#x7684;&amp;#x673A;">
+<meta name="keywords" content="汇编">
+<meta property="og:type" content="article">
+<meta property="og:title" content="汇编语言学习笔记">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/2022-Jun-11th-Assembly-note/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x6C47;&amp;#x7F16;&amp;#x8BED;&amp;#x8A00;&amp;#x662F;&amp;#x4ECB;&amp;#x4E8E;&amp;#x673A;&amp;#x5668;&amp;#x4E0D;&amp;#x53EF;&amp;#x8BC6;&amp;#x522B;&amp;#x7684;&amp;#x9AD8;&amp;#x7EA7;&amp;#x8BED;&amp;#x8A00;&amp;#x4E0E;&amp;#x4EBA;&amp;#x4E0D;&amp;#x53EF;&amp;#x8BFB;&amp;#x7684;&amp;#x673A;">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2022-Jun-11th-Assembly-note/compute-address.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2022-Jun-11th-Assembly-note/dosbox-test.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2022-Jun-11th-Assembly-note/write-display-memory.png">
+<meta property="og:updated_time" content="2022-08-21T09:10:14.033Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="汇编语言学习笔记">
+<meta name="twitter:description" content="&amp;#x6C47;&amp;#x7F16;&amp;#x8BED;&amp;#x8A00;&amp;#x662F;&amp;#x4ECB;&amp;#x4E8E;&amp;#x673A;&amp;#x5668;&amp;#x4E0D;&amp;#x53EF;&amp;#x8BC6;&amp;#x522B;&amp;#x7684;&amp;#x9AD8;&amp;#x7EA7;&amp;#x8BED;&amp;#x8A00;&amp;#x4E0E;&amp;#x4EBA;&amp;#x4E0D;&amp;#x53EF;&amp;#x8BFB;&amp;#x7684;&amp;#x673A;">
+<meta name="twitter:image" content="https://billystudio.github.io/zh-cn/2022-Jun-11th-Assembly-note/compute-address.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#&amp;#x4E00;&amp;#x3001;&amp;#x57FA;&amp;#x7840;&amp;#x77E5;&amp;#x8BC6;">1&nbsp;&nbsp;<b>&amp;amp;#x4E00;&amp;amp;#x3001;&amp;amp;#x57FA;&amp;amp;#x7840;&amp;amp;#x77E5;&amp;amp;#x8BC6;</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1-1-&amp;#x6C47;&amp;#x7F16;&amp;#x6307;&amp;#x4EE4;&amp;#x5206;&amp;#x7C7B;">1.1&nbsp;&nbsp;1.1 &amp;amp;#x6C47;&amp;amp;#x7F16;&amp;amp;#x6307;&amp;amp;#x4EE4;&amp;amp;#x5206;&amp;amp;#x7C7B;</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1-2-&amp;#x91CD;&amp;#x8981;&amp;#x5BC4;&amp;#x5B58;&amp;#x5668;">1.2&nbsp;&nbsp;1.2 &amp;amp;#x91CD;&amp;amp;#x8981;&amp;amp;#x5BC4;&amp;amp;#x5B58;&amp;amp;#x5668;</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1-3-8086CPU&amp;#x7ED9;&amp;#x51FA;&amp;#x7269;&amp;#x7406;&amp;#x5730;&amp;#x5740;&amp;#x7684;&amp;#x65B9;&amp;#x6CD5;">1.3&nbsp;&nbsp;1.3 8086CPU&amp;amp;#x7ED9;&amp;amp;#x51FA;&amp;amp;#x7269;&amp;amp;#x7406;&amp;amp;#x5730;&amp;amp;#x5740;&amp;amp;#x7684;&amp;amp;#x65B9;&amp;amp;#x6CD5;</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1-3-1-JMP&amp;#x6307;&amp;#x4EE4;">1.3.1&nbsp;&nbsp;1.3.1 JMP&amp;amp;#x6307;&amp;amp;#x4EE4;</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1-4-8086&amp;#x8BFB;&amp;#x53D6;&amp;#x5185;&amp;#x5B58;&amp;#x5355;&amp;#x5143;&amp;#x7684;&amp;#x65B9;&amp;#x6CD5;">1.4&nbsp;&nbsp;1.4 8086&amp;amp;#x8BFB;&amp;amp;#x53D6;&amp;amp;#x5185;&amp;amp;#x5B58;&amp;amp;#x5355;&amp;amp;#x5143;&amp;amp;#x7684;&amp;amp;#x65B9;&amp;amp;#x6CD5;</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1-4-1-DS&amp;#x5BC4;&amp;#x5B58;&amp;#x5668;">1.4.1&nbsp;&nbsp;1.4.1 DS&amp;amp;#x5BC4;&amp;amp;#x5B58;&amp;amp;#x5668;</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#&amp;#x4E8C;&amp;#x3001;&amp;#x5B9E;&amp;#x9A8C;">2&nbsp;&nbsp;<b>&amp;amp;#x4E8C;&amp;amp;#x3001;&amp;amp;#x5B9E;&amp;amp;#x9A8C;</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#2-1-DOSBox&amp;#x73AF;&amp;#x5883;&amp;#x548C;MASM&amp;#x7A0B;&amp;#x5E8F;&amp;#x5305;">2.1&nbsp;&nbsp;2.1 DOSBox&amp;amp;#x73AF;&amp;amp;#x5883;&amp;amp;#x548C;MASM&amp;amp;#x7A0B;&amp;amp;#x5E8F;&amp;amp;#x5305;</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#DEBUG-&amp;#x4E2D;&amp;#x547D;&amp;#x4EE4;&amp;#x53C2;&amp;#x6570;&amp;#xFF1A;">2.1.1&nbsp;&nbsp;DEBUG &amp;amp;#x4E2D;&amp;amp;#x547D;&amp;amp;#x4EE4;&amp;amp;#x53C2;&amp;amp;#x6570;&amp;amp;#xFF1A;</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#DEBUG&amp;#x8FD0;&amp;#x884C;&amp;#x6307;&amp;#x4EE4;&amp;#x4E0E;-asm&amp;#x6E90;&amp;#x7A0B;&amp;#x5E8F;&amp;#x7F16;&amp;#x8BD1;&amp;#x7684;&amp;#x8BED;&amp;#x6CD5;&amp;#x4E0D;&amp;#x540C;&amp;#x70B9;">2.2&nbsp;&nbsp;DEBUG&amp;amp;#x8FD0;&amp;amp;#x884C;&amp;amp;#x6307;&amp;amp;#x4EE4;&amp;amp;#x4E0E;.asm&amp;amp;#x6E90;&amp;amp;#x7A0B;&amp;amp;#x5E8F;&amp;amp;#x7F16;&amp;amp;#x8BD1;&amp;amp;#x7684;&amp;amp;#x8BED;&amp;amp;#x6CD5;&amp;amp;#x4E0D;&amp;amp;#x540C;&amp;amp;#x70B9;</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#&amp;#x4E09;&amp;#x3001;&amp;#x6307;&amp;#x4EE4;&amp;#x8BB2;&amp;#x89E3;">3&nbsp;&nbsp;<b>&amp;amp;#x4E09;&amp;amp;#x3001;&amp;amp;#x6307;&amp;amp;#x4EE4;&amp;amp;#x8BB2;&amp;amp;#x89E3;</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#MOV&amp;#x3001;ADD&amp;#x3001;SUB&amp;#x6307;&amp;#x4EE4;">3.1&nbsp;&nbsp;MOV&amp;amp;#x3001;ADD&amp;amp;#x3001;SUB&amp;amp;#x6307;&amp;amp;#x4EE4;</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#PUSH&amp;#x3001;POP&amp;#x6307;&amp;#x4EE4;">3.2&nbsp;&nbsp;PUSH&amp;amp;#x3001;POP&amp;amp;#x6307;&amp;amp;#x4EE4;</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#INC-&amp;#x6307;&amp;#x4EE4;">3.3&nbsp;&nbsp;INC &amp;amp;#x6307;&amp;amp;#x4EE4;</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#LOOP-&amp;#x6307;&amp;#x4EE4;">3.4&nbsp;&nbsp;LOOP &amp;amp;#x6307;&amp;amp;#x4EE4;</a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2022-Jun-11th-Assembly-note/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2022-Jun-11th-Assembly-note/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            汇编语言学习笔记
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2022-06-11T08:35:03.000Z" itemprop="datePublished">6月 11 2022</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            13 分钟 读完 (约 1967 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x6C47;&#x7F16;&#x8BED;&#x8A00;&#x662F;&#x4ECB;&#x4E8E;&#x673A;&#x5668;&#x4E0D;&#x53EF;&#x8BC6;&#x522B;&#x7684;&#x9AD8;&#x7EA7;&#x8BED;&#x8A00;&#x4E0E;&#x4EBA;&#x4E0D;&#x53EF;&#x8BFB;&#x7684;&#x673A;&#x5668;&#x4EE3;&#x7801;&#x4E4B;&#x95F4;&#x7684;&#x4E2D;&#x95F4;&#x8BED;&#x8A00;&#xFF0C;<a id="more"></a> &#x5BF9;&#x6211;&#x4EEC;&#x7406;&#x89E3;&#x8BA1;&#x7B97;&#x673A;&#x7A0B;&#x5E8F;&#x7684;&#x5E95;&#x5C42;&#x8FD0;&#x884C;&#x673A;&#x7406;&#x975E;&#x5E38;&#x6709;&#x5E2E;&#x52A9;&#x3002;</p>
+<h1 id="&#x4E00;&#x3001;&#x57FA;&#x7840;&#x77E5;&#x8BC6;"><a href="#&#x4E00;&#x3001;&#x57FA;&#x7840;&#x77E5;&#x8BC6;" class="headerlink" title="&#x4E00;&#x3001;&#x57FA;&#x7840;&#x77E5;&#x8BC6;"></a>&#x4E00;&#x3001;&#x57FA;&#x7840;&#x77E5;&#x8BC6;</h1><h2 id="1-1-&#x6C47;&#x7F16;&#x6307;&#x4EE4;&#x5206;&#x7C7B;"><a href="#1-1-&#x6C47;&#x7F16;&#x6307;&#x4EE4;&#x5206;&#x7C7B;" class="headerlink" title="1.1 &#x6C47;&#x7F16;&#x6307;&#x4EE4;&#x5206;&#x7C7B;"></a>1.1 &#x6C47;&#x7F16;&#x6307;&#x4EE4;&#x5206;&#x7C7B;</h2><p>&#x6C47;&#x7F16;&#x8BED;&#x8A00;&#x7684;&#x6838;&#x5FC3;&#x662F;&#x6C47;&#x7F16;&#x6307;&#x4EE4;&#xFF0C;&#x6309;&#x673A;&#x5668;&#x662F;&#x5426;&#x80FD;&#x7406;&#x89E3;&#x5206;&#x4E3A;&#xFF1A;<br>1.&#x6C47;&#x7F16;&#x6307;&#x4EE4;&#xFF08;&#x673A;&#x5668;&#x7801;&#x7684;&#x52A9;&#x8BB0;&#x7B26;&#xFF09;;2.&#x4F2A;&#x6307;&#x4EE4;&#xFF08;&#x7531;&#x7F16;&#x8BD1;&#x5668;&#x6267;&#x884C;&#xFF09;&#xFF1B;3.&#x5176;&#x4ED6;&#x7B26;&#x53F7;&#xFF08;&#x7531;&#x7F16;&#x8BD1;&#x5668;&#x8BC6;&#x522B;&#xFF09;</p>
+<p>&#x6309;&#x7F16;&#x7801;&#x98CE;&#x683C;&#x53EF;&#x5206;&#x4E3A; MASM &#x6C47;&#x7F16;&#x548C; NASM &#x6C47;&#x7F16;&#x3002;<br>MASM&#x4E3E;&#x4F8B;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov ax, 18      &#x5C06;18&#x5199;&#x5165;&#x5BC4;&#x5B58;&#x5668;AX</span><br><span class="line">add ax, bx      &#x5C06;AX&#xFF0C;BX&#x4E2D;&#x7684;&#x5185;&#x5BB9;&#x76F8;&#x52A0;&#xFF0C;&#x7ED3;&#x679C;&#x5B58;&#x5728;AX&#x4E2D;</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-2-&#x91CD;&#x8981;&#x5BC4;&#x5B58;&#x5668;"><a href="#1-2-&#x91CD;&#x8981;&#x5BC4;&#x5B58;&#x5668;" class="headerlink" title="1.2 &#x91CD;&#x8981;&#x5BC4;&#x5B58;&#x5668;"></a>1.2 &#x91CD;&#x8981;&#x5BC4;&#x5B58;&#x5668;</h2><p>&#x5728;8086&#x4F53;&#x7CFB;&#x4E2D;&#xFF0C;&#x53EF;&#x4EE5;&#x5C06;&#x5BC4;&#x5B58;&#x5668;&#x6309;&#x7528;&#x9014;&#x5206;&#x4E3A;&#x4EE5;&#x4E0B;4&#x5927;&#x7C7B;&#xFF1A;<br>&#x901A;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#x3001;&#x6BB5;&#x5BC4;&#x5B58;&#x5668;&#x3001;&#x6307;&#x4EE4;&#x6307;&#x9488;&#x5BC4;&#x5B58;&#x5668;&#x3001;&#x6807;&#x5FD7;&#x5BC4;&#x5B58;&#x5668;&#x3002;</p>
+<p>&#xFF08;1&#xFF09;&#x901A;&#x7528;&#x5BC4;&#x5B58;&#x5668;&#x5305;&#x62EC;AX&#x3001;BX&#x7B49;&#xFF0C;&#x4E3B;&#x8981;&#x7528;&#x4E8E;&#x5B58;&#x50A8;&#x6570;&#x636E;&#x53D8;&#x91CF;&#x3001;&#x6307;&#x9488;&#x53D8;&#x5740;&#x7B49;&#xFF0C;&#x5982;&#x679C;&#x53EA;&#x53D6;&#x4F4E;8&#x4F4D;&#xFF0C;&#x4F7F;&#x7528;AL&#x3001;BL&#x7B49;&#x8868;&#x793A;&#xFF0C;&#x53D6;&#x9AD8;8&#x4F4D;&#x4F7F;&#x7528;AH&#x3001;BH&#x8868;&#x793A;&#x3002;<br>&#xFF08;2&#xFF09;&#x6BB5;&#x5BC4;&#x5B58;&#x5668;&#x5305;&#x62EC;&#x4EE3;&#x7801;&#x6BB5;&#x5BC4;&#x5B58;&#x5668;CS&#x3001;&#x6570;&#x636E;&#x6BB5;&#x5BC4;&#x5B58;&#x5668;DS&#x7B49;&#xFF0C;&#x65B9;&#x4FBF;&#x6307;&#x793A;&#x6BCF;&#x7C7B;&#x7A0B;&#x5E8F;&#x6BB5;&#x7684;&#x57FA;&#x5730;&#x5740;&#x3002;<br>&#xFF08;3&#xFF09;&#x6307;&#x4EE4;&#x6307;&#x9488;&#x5BC4;&#x5B58;&#x5668;&#x6307;IP&#xFF08;Instruction Pointer&#xFF09;&#xFF0C;&#x7528;&#x4E8E;&#x63D0;&#x4F9B;&#x504F;&#x79FB;&#x5730;&#x5740;&#xFF0C;&#x548C;CS&#x914D;&#x5408;&#x4EE5;&#x6307;&#x793A;CPU&#x8981;&#x8BFB;&#x53D6;&#x7684;&#x4E00;&#x6761;&#x6761;&#x6307;&#x4EE4;&#x5730;&#x5740;&#x3002;<br>&#xFF08;4&#xFF09;&#x6807;&#x5FD7;&#x5BC4;&#x5B58;&#x5668;&#x5305;&#x62EC;OF&#xFF08;OverFlow Flag&#xFF09;&#x3001;SF&#xFF08;Sign Flag&#xFF09;&#x7B49;&#xFF0C;&#x7528;&#x4E8E;&#x6307;&#x793A;&#x52A0;&#x51CF;&#x8FD0;&#x7B97;&#x662F;&#x5426;&#x6709;&#x6EA2;&#x51FA;&#x3001;&#x8FD0;&#x7B97;&#x7ED3;&#x679C;&#x7684;&#x6B63;&#x8D1F;&#x7B49;&#x3002;</p>
+<h2 id="1-3-8086CPU&#x7ED9;&#x51FA;&#x7269;&#x7406;&#x5730;&#x5740;&#x7684;&#x65B9;&#x6CD5;"><a href="#1-3-8086CPU&#x7ED9;&#x51FA;&#x7269;&#x7406;&#x5730;&#x5740;&#x7684;&#x65B9;&#x6CD5;" class="headerlink" title="1.3 8086CPU&#x7ED9;&#x51FA;&#x7269;&#x7406;&#x5730;&#x5740;&#x7684;&#x65B9;&#x6CD5;"></a>1.3 8086CPU&#x7ED9;&#x51FA;&#x7269;&#x7406;&#x5730;&#x5740;&#x7684;&#x65B9;&#x6CD5;</h2><p align="center"><br><img src="compute-address.png"><br></p>
+
+<p>&#x5730;&#x5740;&#x52A0;&#x6CD5;&#x5668;&#x5408;&#x6210;&#x7269;&#x7406;&#x5730;&#x5740;&#x7684;&#x65B9;&#x6CD5;&#xFF1A;&#x7269;&#x7406;&#x5730;&#x5740; = &#x6BB5;&#x5730;&#x5740;x16 + &#x504F;&#x79FB;&#x5730;&#x5740;<br>&#x5982;&#xFF1A;&#x6BB5;&#x5730;&#x5740;&#x4E3A; 1230H&#xFF0C;&#x504F;&#x79FB;&#x5730;&#x5740;&#x4E3A;00C8H&#xFF0C;&#x5219;&#x8BA1;&#x7B97;&#x51FA;&#x7684;&#x7269;&#x7406;&#x5730;&#x5740;&#x4E3A;<br>1230H&#xD7;16+00C8H=123C8H<br>&#x76F8;&#x5F53;&#x4E8E;&#x5C06;&#x6BB5;&#x5730;&#x5740;&#x672B;&#x5C3E;&#x52A0;0,&#x518D;&#x52A0;&#x4E0A;&#x504F;&#x79FB;&#x5730;&#x5740;&#x3002;</p>
+<p>&#x6CE8;&#x610F;&#xFF1A;CPU&#x53EF;&#x4EE5;&#x6839;&#x636E;&#x4E0D;&#x540C;&#x7684;&#x6BB5;&#x5730;&#x5740;&#x548C;&#x504F;&#x79FB;&#x5730;&#x5740;&#x7EC4;&#x5408;&#xFF0C;&#x8BA1;&#x7B97;&#x51FA;&#x540C;&#x4E00;&#x4E2A;&#x7269;&#x7406;&#x5730;&#x5740;&#x3002;</p>
+<p>&#x5982;&#x679C;CPU&#x5F53;&#x524D;&#x8981;&#x83B7;&#x53D6;&#x4E0B;&#x6761;&#x6307;&#x4EE4;&#x7684;&#x7269;&#x7406;&#x5730;&#x5740;&#xFF0C;&#x90A3;&#x4E48;&#x5C06;&#x7531;CS&#x63D0;&#x4F9B;&#x4EE3;&#x7801;&#x6BB5;&#x57FA;&#x5730;&#x5740;&#xFF0C;IP&#x63D0;&#x4F9B;&#x504F;&#x79FB;&#x5730;&#x5740;&#xFF0C;&#x901A;&#x8FC7;&#x5730;&#x5740;&#x52A0;&#x6CD5;&#x5668;&#x8BA1;&#x7B97;&#x5F97;&#x5230;&#x7269;&#x7406;&#x5730;&#x5740;&#x3002;</p>
+<p>&#x5728;8086CPU&#x52A0;&#x7535;&#x542F;&#x52A8;&#x6216;&#x590D;&#x4F4D;&#x540E;&#xFF0C;CS&#x548C;IP&#x5206;&#x522B;&#x88AB;&#x8BBE;&#x7F6E;&#x4E3A;CS=FFFFH&#xFF0C;IP=0000H&#x3002;&#x56E0;&#x6B64;&#xFF0C;FFFF0H&#x5355;&#x5143;&#x4E2D;&#x7684;&#x6307;&#x4EE4;&#x662F;8086CPU&#x542F;&#x52A8;&#x540E;&#x6267;&#x884C;&#x7684;&#x7B2C;&#x4E00;&#x6761;&#x6307;&#x4EE4;&#x3002;</p>
+<h3 id="1-3-1-JMP&#x6307;&#x4EE4;"><a href="#1-3-1-JMP&#x6307;&#x4EE4;" class="headerlink" title="1.3.1 JMP&#x6307;&#x4EE4;"></a>1.3.1 JMP&#x6307;&#x4EE4;</h3><p>&#x7531;&#x4E8E;CS&#x3001;IP&#x5BC4;&#x5B58;&#x5668;&#x7684;&#x7279;&#x6B8A;&#x5730;&#x4F4D;&#xFF0C;8086CPU&#x4E0D;&#x5141;&#x8BB8;&#x7528;&#x6237;&#x4F7F;&#x7528;MOV&#x6307;&#x4EE4;&#x8BBE;&#x7F6E;&#x5B83;&#x4EEC;&#x7684;&#x503C;&#x3002;&#x7528;&#x6237;&#x82E5;&#x60F3;&#x4FEE;&#x6539;CS&#x3001;IP&#x7684;&#x503C;&#xFF0C;&#x9700;&#x4F7F;&#x7528;&#x8F6C;&#x79FB;&#x6307;&#x4EE4;&#xFF08;JMP&#xFF09;&#xFF0C;&#x6709;&#x4E24;&#x79CD;&#x6307;&#x4EE4;&#x683C;&#x5F0F;&#xFF0C;&#x7B2C;&#x4E00;&#x79CD;&#x7528;&#x6CD5;&#x662F;&#x76F4;&#x63A5;&#x6307;&#x5B9A;&#x6BB5;&#x5730;&#x5740;&#x548C;&#x504F;&#x79FB;&#x5730;&#x5740;&#xFF0C;&#x683C;&#x5F0F;&#x4E3A;&#xFF1A;<br>jmp &#x6BB5;&#x5730;&#x5740;&#xFF1A;&#x504F;&#x79FB;&#x5730;&#x5740;<br>&#x5982;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmp 2AE3:3</span><br></pre></td></tr></table></figure>
+
+<p>&#x5C06;&#x6BB5;&#x5730;&#x5740;&#x4FEE;&#x6539;&#x4E3A;<code>2AE3</code>&#xFF0C;&#x504F;&#x79FB;&#x5730;&#x5740;&#x4FEE;&#x6539;&#x4E3A;<code>3</code>&#x3002;</p>
+<p>&#x7B2C;&#x4E8C;&#x79CD;&#x7528;&#x6CD5;&#x662F;&#x901A;&#x8FC7;&#x5BC4;&#x5B58;&#x5668;&#x7684;&#x503C;&#x4EC5;&#x4FEE;&#x6539;&#x504F;&#x79FB;&#x5730;&#x5740;&#xFF0C;&#x683C;&#x5F0F;&#x4E3A;&#xFF1A;<br>jmp &#x67D0;&#x4E00;&#x5408;&#x6CD5;&#x5BC4;&#x5B58;&#x5668;<br>&#x5982;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jmp ax</span><br></pre></td></tr></table></figure>
+
+<p>&#x601D;&#x8003;&#x9898;&#xFF1A;16&#x4F4D;&#x7684;CS&#x548C;IP&#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x80FD;&#x5B58;&#x50A8;&#x7684;&#x4EE3;&#x7801;&#x6700;&#x5927;&#x5BB9;&#x91CF;&#x662F;&#x591A;&#x5C11;&#xFF1F;<br><a href="https://billystudio.github.io/zh-cn/Aug-22nd-exercises-answer">&#x7B54;&#x6848;</a></p>
+<h2 id="1-4-8086&#x8BFB;&#x53D6;&#x5185;&#x5B58;&#x5355;&#x5143;&#x7684;&#x65B9;&#x6CD5;"><a href="#1-4-8086&#x8BFB;&#x53D6;&#x5185;&#x5B58;&#x5355;&#x5143;&#x7684;&#x65B9;&#x6CD5;" class="headerlink" title="1.4 8086&#x8BFB;&#x53D6;&#x5185;&#x5B58;&#x5355;&#x5143;&#x7684;&#x65B9;&#x6CD5;"></a>1.4 8086&#x8BFB;&#x53D6;&#x5185;&#x5B58;&#x5355;&#x5143;&#x7684;&#x65B9;&#x6CD5;</h2><h3 id="1-4-1-DS&#x5BC4;&#x5B58;&#x5668;"><a href="#1-4-1-DS&#x5BC4;&#x5B58;&#x5668;" class="headerlink" title="1.4.1 DS&#x5BC4;&#x5B58;&#x5668;"></a>1.4.1 DS&#x5BC4;&#x5B58;&#x5668;</h3><p>&#x901A;&#x8FC7;DS&#x5BC4;&#x5B58;&#x5668;&#x548C;<code>[address]</code>&#x7684;&#x7EC4;&#x5408;&#xFF0C;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x8BFB;&#x53D6;&#x5185;&#x5B58;&#x5355;&#x5143;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x5982;&#xFF0C;&#x8BFB;&#x53D6;10000H&#x5355;&#x5143;&#x7684;&#x5185;&#x5BB9;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5728;debug.exe&#x7A0B;&#x5E8F;&#xFF08;&#x4F7F;&#x7528;&#x65B9;&#x6CD5;&#x53EF;&#x89C1;&#x5B9E;&#x9A8C;&#x90E8;&#x5206;&#xFF09;&#x4E2D;&#x8FD0;&#x884C;&#x5982;&#x4E0B;&#x7A0B;&#x5E8F;&#x6BB5;&#x83B7;&#x5F97;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov bx, 1000H</span><br><span class="line">mov ds, bx</span><br><span class="line">mov al, [0]</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0A;&#x8FF0;&#x6307;&#x4EE4;&#x4FBF;&#x5C06;10000H&#xFF08;1000:0&#xFF09;&#x7684;&#x5185;&#x5BB9;&#x8BFB;&#x53D6;&#x5230;&#x5BC4;&#x5B58;&#x5668;AL&#x4E2D;&#x3002;</p>
+<h1 id="&#x4E8C;&#x3001;&#x5B9E;&#x9A8C;"><a href="#&#x4E8C;&#x3001;&#x5B9E;&#x9A8C;" class="headerlink" title="&#x4E8C;&#x3001;&#x5B9E;&#x9A8C;"></a>&#x4E8C;&#x3001;&#x5B9E;&#x9A8C;</h1><h2 id="2-1-DOSBox&#x73AF;&#x5883;&#x548C;MASM&#x7A0B;&#x5E8F;&#x5305;"><a href="#2-1-DOSBox&#x73AF;&#x5883;&#x548C;MASM&#x7A0B;&#x5E8F;&#x5305;" class="headerlink" title="2.1 DOSBox&#x73AF;&#x5883;&#x548C;MASM&#x7A0B;&#x5E8F;&#x5305;"></a>2.1 DOSBox&#x73AF;&#x5883;&#x548C;MASM&#x7A0B;&#x5E8F;&#x5305;</h2><p>&#x4F7F;&#x7528;Windows&#x7CFB;&#x7EDF;&#xFF0C;&#x4ECE;&#x8FD9;&#x91CC;&#x4E0B;&#x8F7D;&#x5B89;&#x88C5;DOSBox&#x548C;MASM&#x7A0B;&#x5E8F;&#x5305;&#xFF08;&#x5305;&#x62EC;masm&#x3001;link&#x3001;debug&#x7B49;&#x547D;&#x4EE4;&#xFF09;&#xFF1A;<a href="https://github.com/xDarkLemon/DOSBox_MASM/tree/master" target="_blank" rel="noopener">https://github.com/xDarkLemon/DOSBox_MASM/tree/master</a><br>&#x5B89;&#x88C5;&#x540E;&#x53EF;&#x4EE5;&#x5C1D;&#x8BD5;&#x542F;&#x52A8;DOSBox&#xFF0C;&#x7531;&#x4E8E;&#x6B64;&#x65F6;&#x5C1A;&#x672A;&#x4F7F;&#x7528;&#xFF0C;&#x4F7F;&#x7528;&#x5F88;&#x4E0D;&#x65B9;&#x4FBF;&#xFF0C;&#x6240;&#x4EE5;&#x56DE;&#x5230;Windows&#x7CFB;&#x7EDF;&#xFF0C;&#x5728;&#x89E3;&#x538B;&#x76EE;&#x5F55;&#xFF08;&#x6211;&#x7684;&#x662F;G:\Experiments\DOSBox_MASM-master&#xFF09;&#x4E0B;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x5B58;&#x653E;&#x4EE3;&#x7801;&#x7684;&#x6587;&#x4EF6;&#x5939;dos&#xFF0C;&#x7136;&#x540E;&#x627E;&#x5230;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#xFF08;&#x6211;&#x7684;&#x662F;&#x5728;C:\Users\10769\AppData\Local\DOSBox\dosbox-0.74.conf&#xFF09;&#xFF0C;&#x5728;<code>[autoexec]</code>&#x4E00;&#x680F;&#x4E0B;&#x6DFB;&#x52A0;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mount C G:\Experiments\DOSBox_MASM-master ; &#x6302;&#x8F7D;&#x9A71;&#x52A8;&#x5668;C&#x76D8;</span><br><span class="line">path=%path%;\masm ; &#x8BBE;&#x7F6E;&#x7A0B;&#x5E8F;&#x8DEF;&#x5F84;</span><br><span class="line">C: ; &#x8FDB;&#x5165;C&#x76D8;</span><br><span class="line">cd \dos ; &#x8FDB;&#x5165;&#x5B58;&#x653E;&#x4EE3;&#x7801;&#x7684;&#x76EE;&#x6807;&#x6587;&#x4EF6;&#x5939;</span><br></pre></td></tr></table></figure>
+
+<p>&#x4FDD;&#x5B58;&#x5173;&#x95ED;&#xFF0C;&#x518D;&#x6253;&#x5F00;DOSBox&#xFF0C;&#x53D1;&#x73B0;&#x542F;&#x52A8;&#x65F6;&#x4F1A;&#x81EA;&#x52A8;&#x6267;&#x884C;&#x8FD9;&#x4E9B;&#x914D;&#x7F6E;&#xFF0C;&#x8F93;&#x5165;masm&#xFF0C;&#x5982;&#x4E0B;&#x663E;&#x793A;&#x5219;&#x8BF4;&#x660E;&#x914D;&#x7F6E;&#x6210;&#x529F;&#xFF1A;</p>
+<p align="center"><br><img src="dosbox-test.png"><br><small style="font-style:italic">&#x914D;&#x7F6E;&#x6210;&#x529F;&#x622A;&#x56FE;</small><br></p>
+
+<p>&#x4F7F;&#x7528;macOS&#x7CFB;&#x7EDF;&#x7684;&#xFF0C;&#x5148;&#x4ECE;<a href="https://www.dosbox.com/download.php?main=1" target="_blank" rel="noopener">&#x5B98;&#x7F51;</a>&#x4E0B;&#x8F7D;DosBox&#xFF0C;&#x7136;&#x540E;&#x4ECE;2.1&#x7684;github&#x94FE;&#x63A5;&#x4E2D;&#x4E0B;&#x8F7D;masm&#x7A0B;&#x5E8F;&#x5305;&#x3002;&#x914D;&#x7F6E;&#x547D;&#x4EE4;&#x7C7B;&#x4F3C;&#xFF1A;</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">mount C ~/Downloads/masm</span><br><span class="line">path=%path%;C:\</span><br><span class="line">mount D ~/Documents/dos</span><br><span class="line">D:</span><br></pre></td></tr></table></figure>
+
+<p>&#x5982;&#x679C;&#x9047;&#x5230;&#x4E0D;&#x80FD;&#x53CA;&#x65F6;&#x5237;&#x65B0;&#x6587;&#x4EF6;&#x5939;&#x6570;&#x636E;&#x7684;&#x60C5;&#x51B5;&#xFF0C;&#x5728;DOSBox&#x4E2D;&#x6267;&#x884C;Ctrl+F4&#x53EF;&#x4EE5;&#x5237;&#x65B0;&#x3002;</p>
+<h3 id="DEBUG-&#x4E2D;&#x547D;&#x4EE4;&#x53C2;&#x6570;&#xFF1A;"><a href="#DEBUG-&#x4E2D;&#x547D;&#x4EE4;&#x53C2;&#x6570;&#xFF1A;" class="headerlink" title="DEBUG &#x4E2D;&#x547D;&#x4EE4;&#x53C2;&#x6570;&#xFF1A;"></a>DEBUG &#x4E2D;&#x547D;&#x4EE4;&#x53C2;&#x6570;&#xFF1A;</h3><p>R&#xFF1A;&#x67E5;&#x770B;&#x3001;&#x6539;&#x53D8;CPU&#x5BC4;&#x5B58;&#x5668;&#x7684;&#x5185;&#x5BB9;&#xFF1B;<br>D&#xFF1A;&#x67E5;&#x770B;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x5185;&#x5BB9;&#xFF1B;<br>E&#xFF1A;&#x6539;&#x5199;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x5185;&#x5BB9;&#xFF1B;<br>U&#xFF1A;&#x5C06;&#x5185;&#x5B58;&#x4E2D;&#x7684;&#x673A;&#x5668;&#x6307;&#x4EE4;&#x7FFB;&#x8BD1;&#x6210;&#x6C47;&#x7F16;&#x6307;&#x4EE4;&#xFF1B;<br>T&#xFF1A;&#x6267;&#x884C;&#x4E00;&#x6761;&#x673A;&#x5668;&#x6307;&#x4EE4;&#xFF1B;<br>P&#xFF1A;&#x7ED3;&#x675F;&#x5355;&#x6B65;&#x6267;&#x884C; / &#x6267;&#x884C;&#x4E00;&#x4E2A;&#x5FAA;&#x73AF;&#x6307;&#x4EE4;&#x76F4;&#x5230;&#x7ED3;&#x675F;<br>A&#xFF1A;&#x4EE5;&#x6C47;&#x7F16;&#x6307;&#x4EE4;&#x7684;&#x683C;&#x5F0F;&#x5728;&#x5185;&#x5B58;&#x4E2D;&#x5199;&#x5165;&#x6307;&#x4EE4;&#x3002;<br>G&#xFF1A;&#x6267;&#x884C;&#x6307;&#x4EE4;&#x76F4;&#x5230;&#x6307;&#x5B9A;&#x7684;&#x504F;&#x79FB;&#x5730;&#x5740;&#x5904;<br>Q&#xFF1A;&#x9000;&#x51FA;DEBUG</p>
+<p>&#x975E;&#x5E38;&#x6709;&#x610F;&#x601D;&#x7684;&#x4E00;&#x6761;&#x6307;&#x4EE4;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">e b810:0 49 03 03 75 75</span><br></pre></td></tr></table></figure>
+
+<p>&#x6548;&#x679C;&#xFF1A;<br><img src="write-display-memory.png" alt="write-display-memory.png"></p>
+<h2 id="DEBUG&#x8FD0;&#x884C;&#x6307;&#x4EE4;&#x4E0E;-asm&#x6E90;&#x7A0B;&#x5E8F;&#x7F16;&#x8BD1;&#x7684;&#x8BED;&#x6CD5;&#x4E0D;&#x540C;&#x70B9;"><a href="#DEBUG&#x8FD0;&#x884C;&#x6307;&#x4EE4;&#x4E0E;-asm&#x6E90;&#x7A0B;&#x5E8F;&#x7F16;&#x8BD1;&#x7684;&#x8BED;&#x6CD5;&#x4E0D;&#x540C;&#x70B9;" class="headerlink" title="DEBUG&#x8FD0;&#x884C;&#x6307;&#x4EE4;&#x4E0E;.asm&#x6E90;&#x7A0B;&#x5E8F;&#x7F16;&#x8BD1;&#x7684;&#x8BED;&#x6CD5;&#x4E0D;&#x540C;&#x70B9;"></a>DEBUG&#x8FD0;&#x884C;&#x6307;&#x4EE4;&#x4E0E;.asm&#x6E90;&#x7A0B;&#x5E8F;&#x7F16;&#x8BD1;&#x7684;&#x8BED;&#x6CD5;&#x4E0D;&#x540C;&#x70B9;</h2><p>&#xFF08;1&#xFF09;&#x5728;debug&#x7A0B;&#x5E8F;&#x4E2D;&#xFF0C;&#x8F93;&#x5165;a&#x8FDB;&#x5165;&#x6307;&#x4EE4;&#x7F16;&#x5199;&#xFF0C;&#x7F16;&#x5199;&#x5B8C;&#x6210;&#x540E;&#x8F93;&#x5165;t&#x5355;&#x6B65;&#x6267;&#x884C;&#x6307;&#x4EE4;&#xFF1B;&#x800C;&#x5728;&#x7F16;&#x5199;asm&#x6E90;&#x7A0B;&#x5E8F;&#x65F6;&#xFF0C;&#x9700;&#x8981;&#x7528;&#x5230;&#x6587;&#x672C;&#x7F16;&#x8F91;&#x5668;&#xFF0C;&#x7F16;&#x5199;&#x4FDD;&#x5B58;&#x540E;&#x4F7F;&#x7528;masm&#x7F16;&#x8BD1;+link&#x8FDE;&#x63A5;&#xFF0C;&#x6700;&#x540E;&#x6267;&#x884C;exe&#x3002;<br>&#xFF08;2&#xFF09;debug&#x4E2D;&#x53EF;&#x4EE5;&#x76F4;&#x63A5;&#x5F00;&#x59CB;&#x6267;&#x884C;&#x6307;&#x4EE4;&#xFF1B;asm&#x6E90;&#x7A0B;&#x5E8F;&#x4E2D;&#x5FC5;&#x987B;&#x6307;&#x5B9A;&#x597D;&#x7A0B;&#x5E8F;&#x6BB5;&#xFF0C;&#x6709;&#x5F00;&#x59CB;&#x548C;&#x7ED3;&#x675F;&#x6807;&#x5FD7;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">assume cs:&#x7A0B;&#x5E8F;&#x6BB5;&#x522B;&#x540D;</span><br><span class="line">&#x7A0B;&#x5E8F;&#x6BB5;&#x522B;&#x540D; segment</span><br><span class="line">    &#x6C47;&#x7F16;&#x6307;&#x4EE4;</span><br><span class="line">    ...</span><br><span class="line">    mov ax, 4c00h</span><br><span class="line">    int 21h</span><br><span class="line">code ends</span><br><span class="line">end</span><br></pre></td></tr></table></figure>
+
+<p>&#xFF08;3&#xFF09;debug&#x4E2D;&#x7684;&#x6570;&#x503C;&#x9ED8;&#x8BA4;&#x662F;16&#x8FDB;&#x5236;&#xFF0C;&#x4E0D;&#x9700;&#x8981;&#x52A0;&#x540E;&#x7F00;H&#xFF1B;asm&#x6E90;&#x7A0B;&#x5E8F;&#x4E2D;&#x6570;&#x503C;&#x9ED8;&#x8BA4;&#x662F;&#x5341;&#x8FDB;&#x5236;&#xFF0C;&#x5BF9;16&#x8FDB;&#x5236;&#x8868;&#x793A;&#x5FC5;&#x987B;&#x52A0;H&#x540E;&#x7F00;&#xFF0C;&#x5E76;&#x4E14;&#x4E0D;&#x80FD;&#x4EE5;&#x5B57;&#x6BCD;&#x5F00;&#x5934;&#x8868;&#x793A;&#x6570;&#x636E;&#xFF0C;&#x9700;&#x8981;&#x5728;&#x524D;&#x9762;&#x8865;0&#xFF08;&#x5982;0FFFFH&#xFF09;&#x3002;<br>&#xFF08;4&#xFF09;debug&#x4E2D;&#x7684;&#x5185;&#x5B58;&#x5BFB;&#x5740;&#x53EF;&#x76F4;&#x63A5;&#x4F20;&#x5165;&#x6570;&#x503C;&#xFF0C;&#x5982;<code>mov al, [1]</code>&#xFF1B;&#x5728;asm&#x6E90;&#x7A0B;&#x5E8F;&#x4E2D;&#x5982;&#x679C;&#x76F4;&#x63A5;&#x4F20;&#x5165;&#x6570;&#x503C;&#xFF0C;&#x5219;&#x5FC5;&#x987B;&#x5728;&#x524D;&#x9762;&#x5E26;&#x4E0A;ds&#x5BC4;&#x5B58;&#x5668;&#x540D;&#x52A0;&#x5192;&#x53F7;&#xFF0C;&#x5426;&#x5219;&#x5E94;&#x901A;&#x8FC7;&#x5BC4;&#x5B58;&#x5668;&#x4F20;&#x5165;&#x6570;&#x503C;&#xFF0C;&#x5982;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mov bx, 1</span><br><span class="line">mov al, [bx] ;&#x6216; mov al, ds:[1]</span><br></pre></td></tr></table></figure>
+
+<h1 id="&#x4E09;&#x3001;&#x6307;&#x4EE4;&#x8BB2;&#x89E3;"><a href="#&#x4E09;&#x3001;&#x6307;&#x4EE4;&#x8BB2;&#x89E3;" class="headerlink" title="&#x4E09;&#x3001;&#x6307;&#x4EE4;&#x8BB2;&#x89E3;"></a>&#x4E09;&#x3001;&#x6307;&#x4EE4;&#x8BB2;&#x89E3;</h1><h2 id="MOV&#x3001;ADD&#x3001;SUB&#x6307;&#x4EE4;"><a href="#MOV&#x3001;ADD&#x3001;SUB&#x6307;&#x4EE4;" class="headerlink" title="MOV&#x3001;ADD&#x3001;SUB&#x6307;&#x4EE4;"></a>MOV&#x3001;ADD&#x3001;SUB&#x6307;&#x4EE4;</h2><p>mov&#x6307;&#x4EE4;&#x7684;6&#x79CD;&#x5F62;&#x5F0F;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">mov &#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x7ACB;&#x5373;&#x6570;</span><br><span class="line">mov &#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x5BC4;&#x5B58;&#x5668;</span><br><span class="line">mov &#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x5185;&#x5B58;&#x5355;&#x5143;</span><br><span class="line">mov &#x5185;&#x5B58;&#x5355;&#x5143;&#xFF0C;&#x5BC4;&#x5B58;&#x5668;</span><br><span class="line">mov &#x6BB5;&#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x5BC4;&#x5B58;&#x5668;</span><br><span class="line">mov &#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x6BB5;&#x5BC4;&#x5B58;&#x5668;</span><br></pre></td></tr></table></figure>
+
+<p>add&#x6307;&#x4EE4;&#x7684;4&#x79CD;&#x5F62;&#x5F0F;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">add &#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x7ACB;&#x5373;&#x6570;</span><br><span class="line">add &#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x5BC4;&#x5B58;&#x5668;</span><br><span class="line">add &#x5BC4;&#x5B58;&#x5668;&#xFF0C;&#x5185;&#x5B58;&#x5355;&#x5143;</span><br><span class="line">add &#x5185;&#x5B58;&#x5355;&#x5143;&#xFF0C;&#x5BC4;&#x5B58;&#x5668;</span><br></pre></td></tr></table></figure>
+
+<p>sub&#x6307;&#x4EE4;&#x540C;add&#x6307;&#x4EE4;</p>
+<h2 id="PUSH&#x3001;POP&#x6307;&#x4EE4;"><a href="#PUSH&#x3001;POP&#x6307;&#x4EE4;" class="headerlink" title="PUSH&#x3001;POP&#x6307;&#x4EE4;"></a>PUSH&#x3001;POP&#x6307;&#x4EE4;</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">push &#x5BC4;&#x5B58;&#x5668;</span><br><span class="line">pop &#x5BC4;&#x5B58;&#x5668;</span><br></pre></td></tr></table></figure>
+
+<p>&#x6808;&#x9876;&#x6BB5;&#x5730;&#x5740;&#x5BC4;&#x5B58;&#x5668;&#xFF1A;SS&#xFF0C;&#x6808;&#x9876;&#x504F;&#x79FB;&#x5730;&#x5740;&#x5BC4;&#x5B58;&#x5668;&#xFF1A;SP<br>&#x4EFB;&#x610F;&#x65F6;&#x523B;&#xFF0C;SS:SP&#x6307;&#x5411;&#x6808;&#x9876;&#x5143;&#x7D20;&#x3002;</p>
+<h2 id="INC-&#x6307;&#x4EE4;"><a href="#INC-&#x6307;&#x4EE4;" class="headerlink" title="INC &#x6307;&#x4EE4;"></a>INC &#x6307;&#x4EE4;</h2><p>&#x7D2F;&#x52A0;&#x6307;&#x4EE4;</p>
+<h2 id="LOOP-&#x6307;&#x4EE4;"><a href="#LOOP-&#x6307;&#x4EE4;" class="headerlink" title="LOOP &#x6307;&#x4EE4;"></a>LOOP &#x6307;&#x4EE4;</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">mov cx, 11</span><br><span class="line">s:  add ax, ax</span><br><span class="line">    loop s</span><br></pre></td></tr></table></figure>
+
+<p>&#x6BCF;&#x6B21;loop&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;cx=cx-1,&#x7136;&#x540E;&#x5224;&#x65AD;cx&#x662F;&#x5426;&#x4E3A;0&#xFF0C;&#x82E5;&#x4E3A;0&#xFF0C;&#x5219;&#x8DF3;&#x51FA;&#x5FAA;&#x73AF;&#xFF0C;&#x5426;&#x5219;&#x7EE7;&#x7EED;&#x6267;&#x884C;s&#x90E8;&#x5206;&#x3002;</p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/汇编/">#汇编</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop is-hidden-mobile article-nav-prev">
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/2022-May-11th-Design-patterns-Strategy/">设计模式 之 策略模式</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2022 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+<!-- <script src="/js/MathJax.js"></script> -->
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

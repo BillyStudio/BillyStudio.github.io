@@ -152,13 +152,13 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/Aug-9th-2018-transpose-of-3d-array/" itemprop="url">Python 科学计算 | 三维数组的转置运算</a>
+            <a href="/2018-6-6-golang-json-int64-bug/" itemprop="url">golang-json-int64-bug</a>
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <time datetime="2018-08-09T04:05:42.000Z" itemprop="datePublished">Aug 9 2018</time>
+                <time datetime="2018-06-06T16:00:00.000Z" itemprop="datePublished">Jun 7 2018</time>
             
         </span>
         
@@ -166,16 +166,17 @@
         <span class="column is-narrow">
             
             
-            a few seconds read (About 39 words)
+            a few seconds read (About 65 words)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <p>&#x5728; numpy &#x4E2D;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; transpose &#x548C; einsum &#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x8FDB;&#x884C;&#x4E09;&#x7EF4;&#x6570;&#x7EC4;&#x7684;&#x8F6C;&#x7F6E;.</p>
-        <p class="article-more-link">
-            <a href="/Aug-9th-2018-transpose-of-3d-array/#more">Read More</a>
-        </p>
+        <p>Go&#x8BED;&#x8A00;&#x5728;&#x5C06;int64&#x8FDB;&#x884C;JSON&#x89E3;&#x6790;&#x65F6;&#xFF0C;&#x4F1A;&#x51FA;&#x73B0;&#x51E0;&#x767E;&#x6216;&#x51E0;&#x5343;&#x7684;&#x5C0F;&#x7684;&#x504F;&#x79FB;&#x3002;&#x89E3;&#x51B3;&#x65B9;&#x6CD5;&#x65F6;&#x5C06;int64&#x8F6C;&#x5316;&#x6210;string&#x8868;&#x793A;&#x3002;<br>&#x6BD4;&#x5982;&#xFF0C;&#x5C06;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">controller.Data[&quot;json&quot;] = map[string]int64{&quot;MomentId&quot;: MomentId}</span><br></pre></td></tr></table></figure>
+
+<p>&#x6539;&#x4E3A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">controller.Data[&quot;json&quot;] = map[string]string{&quot;MomentId&quot;: strconv.FormatInt(MomentId, 10)}</span><br></pre></td></tr></table></figure>
     
     </div>
     
@@ -189,13 +190,13 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/Aug-6th-python-syntatic-sugar/" itemprop="url">Python 基础 | 语法糖和一些关键字</a>
+            <a href="/2018-6-2-DNS-cheating-introduction/" itemprop="url">DNS欺骗攻击</a>
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <time datetime="2018-08-06T07:31:03.000Z" itemprop="datePublished">Aug 6 2018</time>
+                <time datetime="2018-06-02T12:06:24.000Z" itemprop="datePublished">Jun 2 2018</time>
             
         </span>
         
@@ -203,16 +204,14 @@
         <span class="column is-narrow">
             
             
-            5 minutes read (About 703 words)
+            a few seconds read (About 22 words)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <p>Python &#x4E2D;&#x4E00;&#x5171;&#x6709;33&#x4E2A;&#x5173;&#x952E;&#x5B57;&#xFF0C;&#x672C;&#x6587;&#x4ECB;&#x7ECD;&#x4E00;&#x4E9B;&#x4E0D;&#x5E38;&#x7528;&#x7684;&#x5173;&#x952E;&#x5B57;. Python &#x4E2D;&#x4E5F;&#x4F7F;&#x7528;&#x4E86;&#x5927;&#x91CF;&#x7684;&#x8BED;&#x6CD5;&#x7CD6;, &#x638C;&#x63E1;&#x540E;&#x5199;&#x4EE3;&#x7801;&#x65F6;&#x53EF;&#x4EE5;&#x66F4;&#x52A0;&#x4FBF;&#x6377;.</p>
-        <p class="article-more-link">
-            <a href="/Aug-6th-python-syntatic-sugar/#more">Read More</a>
-        </p>
+        <p>DNS&#x662F;&#x6709;&#x7F13;&#x51B2;&#x533A;&#x7684;&#xFF0C;<br>&#x5229;&#x7528;&#x4E09;&#x7EA7;&#x57DF;&#x540D;&#x5B57;&#x7B26;&#x4E32;&#x6A21;&#x7CCA;&#x5339;&#x914D;&#x3002;</p>
+
     
     </div>
     
@@ -226,293 +225,224 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            <a href="/Aug-3rd-2018-numpy-einsum-bug-report/" itemprop="url">Numpy中einsum函数的一个bug</a>
+            <a href="/heap-overflow/" itemprop="url">heap-overflow</a>
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
         <span class="column is-narrow">
             
-                <time datetime="2018-08-03T07:51:43.000Z" itemprop="datePublished">Aug 3 2018</time>
-            
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            a few seconds read (About 64 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>&#x7231;&#x56E0;&#x65AF;&#x5766;&#x6C42;&#x548C;&#x975E;&#x5E38;&#x5F3A;&#x5927;.</p>
-        <p class="article-more-link">
-            <a href="/Aug-3rd-2018-numpy-einsum-bug-report/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/Aug-2nd-2018-manuscript-correlation-matrix/" itemprop="url">统计与概率 | 协方差矩阵</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            
-                <time datetime="2018-08-02T06:58:33.000Z" itemprop="datePublished">Aug 2 2018</time>
-            
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            2 minutes read (About 334 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>&#x534F;&#x65B9;&#x5DEE;&#x77E9;&#x9635;&#x53C8;&#x88AB;&#x79F0;&#x4E3A;&#x76F8;&#x5173;&#x7CFB;&#x6570;&#x77E9;&#x9635;. &#x672C;&#x6587;&#x4E3B;&#x8981;&#x4ECB;&#x7ECD;&#x534F;&#x65B9;&#x5DEE;&#x77E9;&#x9635;&#x7684;&#x6982;&#x5FF5;&#x548C;&#x5982;&#x4F55;&#x4F7F;&#x7528; numpy &#x4E2D;&#x7684; einsum &#x8FDB;&#x884C;&#x8BA1;&#x7B97;.</p>
-        <p class="article-more-link">
-            <a href="/Aug-2nd-2018-manuscript-correlation-matrix/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/Interesting-questions/" itemprop="url">Explore | 有趣的问题</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            
-                <time datetime="2018-08-01T06:19:09.000Z" itemprop="datePublished">Aug 1 2018</time>
-            
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            2 minutes read (About 244 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>&#x8BB0;&#x5F55;&#x4E00;&#x4E9B;&#x5076;&#x5C14;&#x9047;&#x5230;&#x7684;&#x5C0F;&#x95EE;&#x9898;</p>
-        <p class="article-more-link">
-            <a href="/Interesting-questions/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/Aug-1st-2018-differences-between-ndarray-and-matrix-in-numpy/" itemprop="url">Python 科学计算 | Numpy 库中 ndarray 与 matrix 类型的区别和使用注意</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            
-                <time datetime="2018-08-01T03:21:41.000Z" itemprop="datePublished">Aug 1 2018</time>
-            
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            2 minutes read (About 246 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>Python&#x79D1;&#x5B66;&#x8BA1;&#x7B97;&#x5E93;&#x4E2D;&#x6709;ndarray&#x548C;matrix&#x4E24;&#x79CD;&#x7C7B;&#x90FD;&#x53EF;&#x4EE5;&#x8868;&#x793A;&#x77E9;&#x9635;, &#x90A3;&#x4E48;&#x5B83;&#x4EEC;&#x4E4B;&#x95F4;&#x6709;&#x4EC0;&#x4E48;&#x8054;&#x7CFB;&#x548C;&#x533A;&#x522B;&#x5462;?</p>
-        <p class="article-more-link">
-            <a href="/Aug-1st-2018-differences-between-ndarray-and-matrix-in-numpy/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/July-30th-2018-wierd-C-arguments-declaration/" itemprop="url">Wierd | 不常见的C语言写法</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            
-                <time datetime="2018-07-30T03:23:57.000Z" itemprop="datePublished">Jul 30 2018</time>
-            
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            a few seconds read (About 87 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>&#x4ECA;&#x5929;&#x770B;&#x5230;&#x4E00;&#x79CD;&#x6BD4;&#x8F83;&#x53E6;&#x7C7B;&#x7684;C&#x8BED;&#x8A00;&#x51FD;&#x6570;&#x53C2;&#x6570;&#x58F0;&#x660E;&#x7684;&#x5199;&#x6CD5;, &#x7F16;&#x8BD1;&#x5C45;&#x7136;&#x80FD;&#x901A;&#x8FC7;, &#x8BB0;&#x5F55;&#x4E00;&#x4E0B;.</p>
-        <p class="article-more-link">
-            <a href="/July-30th-2018-wierd-C-arguments-declaration/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/July-26th-2018-lexicographic-sorting/" itemprop="url">PAT 真题 | 1038 Recover the Smallest Number</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            
-                <time datetime="2018-07-26T07:05:08.000Z" itemprop="datePublished">Jul 26 2018</time>
-            
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            3 minutes read (About 464 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>&#x672C;&#x9898;&#x5C5E;&#x4E8E;&#x5B57;&#x5178;&#x5E8F;&#x7684;&#x4E00;&#x9053;&#x53D8;&#x9898;&#x3002;</p>
-        <p class="article-more-link">
-            <a href="/July-26th-2018-lexicographic-sorting/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/2018-07-23-linear-prediction/" itemprop="url">线性预测模型</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            
-                <time datetime="2018-07-23T06:20:48.000Z" itemprop="datePublished">Jul 23 2018</time>
-            
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            43 minutes read (About 6428 words)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>&#x7EBF;&#x6027;&#x9884;&#x6D4B;&#x7684;&#x6570;&#x5B66;&#x6A21;&#x578B;&#x5728;&#x5F88;&#x591A;&#x9886;&#x57DF;&#x90FD;&#x6709;&#x5E94;&#x7528;, &#x5305;&#x62EC;&#x65F6;&#x95F4;&#x5E8F;&#x5217;&#x5206;&#x6790;, &#x6570;&#x5B57;&#x4FE1;&#x53F7;&#x5904;&#x7406;, &#x6700;&#x4F18;&#x5316;&#x65B9;&#x6CD5;&#x7B49;&#x7B49;.</p>
-        <p class="article-more-link">
-            <a href="/2018-07-23-linear-prediction/#more">Read More</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/2018-07-20-selection-sort/" itemprop="url">数据结构与算法笔记 | 查找与排序</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            
-                <time datetime="2018-07-20T07:37:30.000Z" itemprop="datePublished">Jul 20 2018</time>
+                <time datetime="2018-05-29T05:55:33.000Z" itemprop="datePublished">May 29 2018</time>
             
         </span>
         
         <span class="column is-narrow article-category">
             <i class="far fa-folder"></i>
-            <a class="article-category-link" href="/categories/数据结构与算法/">数据结构与算法</a>
+            <a class="article-category-link" href="/categories/C-笔记/">C++笔记</a>
         </span>
         
         
         <span class="column is-narrow">
             
             
-            11 minutes read (About 1699 words)
+            2 minutes read (About 285 words)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <p>&#x5982;&#x679C;&#x53EA;&#x8003;&#x4E00;&#x9053;&#x6700;&#x57FA;&#x672C;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x4E0E;&#x7B97;&#x6CD5;&#x9898;, &#x90A3;&#x4ED6;&#x4E00;&#x5B9A;&#x662F;&#x9053;&#x6392;&#x5E8F;&#x9898;. &#x2014; &#x9C81;&#x8FC5;</p>
+        <p>new&#x548C;malloc&#x90FD;&#x662F;&#x5206;&#x914D;&#x5730;&#x5740;&#xFF0C;&#x4E0D;&#x540C;&#x7684;&#x662F;new&#x5206;&#x914D;&#x5728;&#x5806;&#x4E2D;&#x80FD;&#x6539;&#x53D8;&#x7F13;&#x51B2;&#x533A;&#x5927;&#x5C0F;&#xFF0C;malloc&#x4E0D;&#x80FD;&#x6539;&#x53D8;&#x7F13;&#x51B2;&#x533A;&#xFF0C;&#x5206;&#x914D;&#x5728;&#x6808;&#x4E2D;&#x3002;<br></p>
         <p class="article-more-link">
-            <a href="/2018-07-20-selection-sort/#more">Read More</a>
+            <a href="/heap-overflow/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/2018-05-30-generate-reverberation-using-MATLAB-or-Python/" itemprop="url">Computer emulation of reverberation using MATLAB or Python</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-05-23T05:28:53.000Z" itemprop="datePublished">May 23 2018</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            4 minutes read (About 585 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p><strong>Abstract:</strong> Reverberation, in psychoacoustics and acoustics, is a persistence of sound after the sound is produced<sup><a href="https://books.google.com/books?id=BC9XvWUzxlkC&amp;printsec=frontcover&amp;dq=9781588905208&amp;hl=zh-CN&amp;sa=X&amp;ved=0ahUKEwiyjNyrt5vbAhVHzGMKHaFmD4EQ6AEIKDAA#v=onepage&amp;q&amp;f=false" title="Audiology: Treatment" target="_blank" rel="noopener">1</a></sup>. It is a common sense that reverberation in the nature is usually accompanyed with other forms of background noise. In order to academically analyse this phenomenon better, Methods of generating reverberation by computer techniques are explored in this article.</p>
+        <p class="article-more-link">
+            <a href="/2018-05-30-generate-reverberation-using-MATLAB-or-Python/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/matlab-conjugate-transpose/" itemprop="url">Algebra | 共轭转置与 Hermite 矩阵</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-05-21T03:47:24.000Z" itemprop="datePublished">May 21 2018</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            a minute read (About 164 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x4ECB;&#x7ECD;&#x4EE3;&#x6570;&#x4E2D;&#x5171;&#x8F6D;&#x8F6C;&#x7F6E;&#x548C; Hermite &#x77E9;&#x9635;&#x4EE5;&#x53CA;&#x5728; Python &#x548C; MATLAB &#x4E2D;&#x7684;&#x51FD;&#x6570;.</p>
+        <p class="article-more-link">
+            <a href="/matlab-conjugate-transpose/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/config-after-install-ubuntu-18/" itemprop="url">Configuration on Windows WSL</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-05-20T10:53:47.000Z" itemprop="datePublished">May 20 2018</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            2 hours read (About 16309 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>Notes includes Windows subsystem Linux, VMWare Virtual machine, remote cloud and dual system.</p>
+        <p class="article-more-link">
+            <a href="/config-after-install-ubuntu-18/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/Command-of-the-day-May-sixteenth-2018/" itemprop="url">Linux command of the day</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-05-16T09:02:38.000Z" itemprop="datePublished">May 16 2018</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Linux-shell/">Linux shell</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            8 minutes read (About 1137 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>This article lists a Linux cheatsheet including lots of tools&#x2019; commands.</p>
+        <p class="article-more-link">
+            <a href="/Command-of-the-day-May-sixteenth-2018/#more">Read More</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/MATALB-2017a-installation-guide/" itemprop="url">How to install MATALB 2017a on Windows 10</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-05-14T05:25:26.000Z" itemprop="datePublished">May 14 2018</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            3 hours read (About 31079 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>I choose the latest version of MATLAB (i.e. MATLAB 2017a) to install.<br></p>
+        <p class="article-more-link">
+            <a href="/MATALB-2017a-installation-guide/#more">Read More</a>
         </p>
     
     </div>
@@ -530,7 +460,7 @@
     <div class="pagination-previous">
         <a href="/page/12/">Prev</a>
     </div>
-    <div class="pagination-next">
+    <div class="pagination-next is-invisible is-hidden-mobile">
         <a href="/page/14/">Next</a>
     </div>
     <ul class="pagination-list is-hidden-mobile">
@@ -542,12 +472,6 @@
         <li><a class="pagination-link" href="/page/12/">12</a></li>
         
         <li><a class="pagination-link is-current" href="/page/13/">13</a></li>
-        
-        <li><a class="pagination-link" href="/page/14/">14</a></li>
-        
-        <li><a class="pagination-link" href="/page/15/">15</a></li>
-        
-        <li><a class="pagination-link" href="/page/16/">16</a></li>
         
     </ul>
 </nav>

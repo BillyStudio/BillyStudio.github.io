@@ -2,7 +2,7 @@
 <html class="has-navbar-fixed-top">
 <head><meta name="generator" content="Hexo 3.9.0">
     <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
-<title>Transfering Hexo blog files to another computer - Shane&#39;s Blog</title>
+<title>Migrating Hexo blog files to another computer - Shane&#39;s Blog</title>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
 
 <!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
@@ -20,14 +20,14 @@
     <meta name="description" content="With the time passing, we might face the issue of transfering our blog files when we change our writing computer.">
 <meta name="keywords" content="Hexo,Blog">
 <meta property="og:type" content="article">
-<meta property="og:title" content="Transfering Hexo blog files to another computer">
+<meta property="og:title" content="Migrating Hexo blog files to another computer">
 <meta property="og:url" content="https://BillyStudio.github.io/Transfering-blog-to-another-computer/index.html">
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="With the time passing, we might face the issue of transfering our blog files when we change our writing computer.">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2019-08-18T06:54:36.483Z">
+<meta property="og:updated_time" content="2022-08-21T09:10:14.023Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Transfering Hexo blog files to another computer">
+<meta name="twitter:title" content="Migrating Hexo blog files to another computer">
 <meta name="twitter:description" content="With the time passing, we might face the issue of transfering our blog files when we change our writing computer.">
 
 
@@ -115,6 +115,20 @@
                 <div class="navbar-dropdown is-right">
                     
                     
+                    
+                    
+                    <a class="navbar-item" href="#1-When-the-target-OS-is-the-same-with-source-OS">1.1&nbsp;&nbsp;1. When the target OS is the same with source OS</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#2-When-the-target-OS-is-different-from-the-source-OS">1.2&nbsp;&nbsp;2. When the target OS is different from the source OS</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Tests-after-migration">2&nbsp;&nbsp;<b>Tests after migration</b></a>
+                    
                 </div>
             </div>
             
@@ -166,7 +180,7 @@
     <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
-            Transfering Hexo blog files to another computer
+            Migrating Hexo blog files to another computer
         
     </h1>
     <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
@@ -180,14 +194,21 @@
         <span class="column is-narrow">
             
             
-            a few seconds read (About 95 words)
+            a minute read (About 188 words)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
-        <p>With the time passing, we might face the issue of transfering our blog files when we change our writing computer.<br><a id="more"></a><br>My solution is direct and simple. First install hexo. Only hexo, no need for those modules or hexo themes.</p>
-<p>Then just copy the blog files except .git and .git_deploy files to your new computer. Test its validity by <code>hexo s</code>. If it is ok, then rename this directory and git clone the blog file from github. Then move those all files back into it. Finally test by <code>hexo deploy -g</code>. That&#x2019;s all.</p>
+        <p>With the time passing, we might face the issue of transfering our blog files when we change our writing computer.<br><a id="more"></a><br>Here are my solutions:</p>
+<h2 id="1-When-the-target-OS-is-the-same-with-source-OS"><a href="#1-When-the-target-OS-is-the-same-with-source-OS" class="headerlink" title="1. When the target OS is the same with source OS"></a>1. When the target OS is the same with source OS</h2><p>If you don&#x2019;t want to upgrade your <code>Hexo</code> version, the solution is direct and simple. First install the same version of <code>nvm</code> and <code>nodejs</code>, no need for those node modules or hexo themes. Then just remotely copy the whole blog files to the destination folder.</p>
+<p>(Not suggested unless you have to) <del>If you want to upgrade Hexo version, First install nvm, nodejs, and hexo. Then use <code>hexo init</code> to create a temporary folder for storing blogs. Next git clone the blog files to the local area. <code>cd</code> Then <code>mv</code> the hexo init files back to upgrade relevant settings.</del></p>
+<h2 id="2-When-the-target-OS-is-different-from-the-source-OS"><a href="#2-When-the-target-OS-is-different-from-the-source-OS" class="headerlink" title="2. When the target OS is different from the source OS"></a>2. When the target OS is different from the source OS</h2><p>In this situation, it is suggested to use git to synchronize contents. Ensure <code>nvm</code>, <code>npm</code> and <code>node</code> are installed and configured. Then <code>cd</code> into the blog folder and type:</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install</span><br></pre></td></tr></table></figure>
+
+<p>to install dependencies.</p>
+<h1 id="Tests-after-migration"><a href="#Tests-after-migration" class="headerlink" title="Tests after migration"></a>Tests after migration</h1><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">hexo s</span><br><span class="line">hexo deploy -g</span><br></pre></td></tr></table></figure>
+
 
     
     </div>
