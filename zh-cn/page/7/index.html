@@ -152,6 +152,43 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
+            <a href="/zh-cn/Oct-26th-Raspberry-Pi-parallel-computing-and-cluster-computing-experiment/" itemprop="url">Raspberry Pi parallel computing and cluster computing experiment</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-10-26T10:02:58.000Z" itemprop="datePublished">10月 26 2019</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            3 分钟 读完 (约 377 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>We are going to use 4 Raspberry Pis to build a parallel computing cluster based on MPI protocol.</p>
+        <p class="article-more-link">
+            <a href="/zh-cn/Oct-26th-Raspberry-Pi-parallel-computing-and-cluster-computing-experiment/#more">阅读更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
             <a href="/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/" itemprop="url">Creating virtual machiness on Linux --- the hard way</a>
         
     </h1>
@@ -477,47 +514,6 @@
         <p class="article-more-link">
             <a href="/zh-cn/May-27th-gnome-shell-project-reading/#more">阅读更多</a>
         </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/zh-cn/May-16th-Understanding-pretrain-and-finetune-of-transfer-learning/" itemprop="url">Understanding pretrain and finetune of transfer learning</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            
-                <time datetime="2019-05-16T05:55:33.000Z" itemprop="datePublished">5月 16 2019</time>
-            
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            1 分钟 读完 (约 139 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>This article mainly introduces two practical concepts in transfer learning: pretraining and finetuning.</p>
-<p>Supposing that you have the experience of developping a CNN using pytorch.</p>
-<p>For example in function <code>forward</code>, you write</p>
-<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">h = self.conv1(x)</span><br><span class="line">r1 = self.pool1(h)</span><br><span class="line"></span><br><span class="line">h = self.conv2(r1)</span><br><span class="line">r2 = self.pool2(h)</span><br></pre></td></tr></table></figure>
-
-<p>Pretraining means that the 1st layer like conv1 and pool1 is done for you by the pretrained model. And the parameters of them are fixed. What you need to do is just finetuning, i.e. you input the model with x as input but the r1 is fixed so your truly take r1 as input and train the later layers&#x2019; parameters.</p>
-<p>Usually, the pretrained model is in large scale. To get the inside layers of this network, we use some functions like <code>mx.symbol.FullyConnected</code> to get the fine tuned data.</p>
-
     
     </div>
     
