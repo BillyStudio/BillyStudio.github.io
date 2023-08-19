@@ -18,7 +18,7 @@
 
 
     <meta name="description" content="&amp;#x6811;&amp;#x7ED3;&amp;#x6784;&amp;#x5728;&amp;#x6570;&amp;#x636E;&amp;#x7ED3;&amp;#x6784;&amp;#x4E2D;&amp;#x6709;&amp;#x7740;&amp;#x4E3E;&amp;#x8DB3;&amp;#x8F7B;&amp;#x91CD;&amp;#x7684;&amp;#x5730;&amp;#x4F4D;&amp;#x3002;">
-<meta name="keywords" content="数据结构,算法,树,DFS,PAT,MySQL">
+<meta name="keywords" content="算法,数据结构,树,DFS,PAT,MySQL">
 <meta property="og:type" content="article">
 <meta property="og:title" content="数据结构与算法笔记 | 树">
 <meta property="og:url" content="https://BillyStudio.github.io/zh-cn/2018-07-14-binary-tree-data-structure/index.html">
@@ -119,29 +119,29 @@
                     
                     
                     
-                    <a class="navbar-item" href="#1-&amp;#x4E8C;&amp;#x53C9;&amp;#x641C;&amp;#x7D22;&amp;#x6811;">1&nbsp;&nbsp;<b>1. &amp;amp;#x4E8C;&amp;amp;#x53C9;&amp;amp;#x641C;&amp;amp;#x7D22;&amp;amp;#x6811;</b></a>
+                    <a class="navbar-item" href="#1-二叉搜索树">1&nbsp;&nbsp;<b>1. 二叉搜索树</b></a>
                     
                     
                     
-                    <a class="navbar-item" href="#1-1-&amp;#x4E8C;&amp;#x53C9;&amp;#x641C;&amp;#x7D22;&amp;#x6811;&amp;#x7684;&amp;#x904D;&amp;#x5386;">1.1&nbsp;&nbsp;1.1 &amp;amp;#x4E8C;&amp;amp;#x53C9;&amp;amp;#x641C;&amp;amp;#x7D22;&amp;amp;#x6811;&amp;amp;#x7684;&amp;amp;#x904D;&amp;amp;#x5386;</a>
+                    <a class="navbar-item" href="#1-1-二叉搜索树的遍历">1.1&nbsp;&nbsp;1.1 二叉搜索树的遍历</a>
                     
                     
                     <hr class="navbar-divider">
                     
                     
-                    <a class="navbar-item" href="#2-&amp;#x5E73;&amp;#x8861;&amp;#x4E8C;&amp;#x53C9;&amp;#x6811;">2&nbsp;&nbsp;<b>2. &amp;amp;#x5E73;&amp;amp;#x8861;&amp;amp;#x4E8C;&amp;amp;#x53C9;&amp;amp;#x6811;</b></a>
+                    <a class="navbar-item" href="#2-平衡二叉树">2&nbsp;&nbsp;<b>2. 平衡二叉树</b></a>
                     
                     
                     
-                    <a class="navbar-item" href="#B-&amp;#x6811;">2.1&nbsp;&nbsp;B+&amp;amp;#x6811;</a>
+                    <a class="navbar-item" href="#B-树">2.1&nbsp;&nbsp;B+树</a>
                     
                     
                     
-                    <a class="navbar-item" href="#AVL&amp;#x6811;&amp;#xFF08;&amp;#x4E00;&amp;#x79CD;&amp;#x81EA;&amp;#x5E73;&amp;#x8861;&amp;#x4E8C;&amp;#x53C9;&amp;#x6811;&amp;#xFF09;">2.2&nbsp;&nbsp;AVL&amp;amp;#x6811;&amp;amp;#xFF08;&amp;amp;#x4E00;&amp;amp;#x79CD;&amp;amp;#x81EA;&amp;amp;#x5E73;&amp;amp;#x8861;&amp;amp;#x4E8C;&amp;amp;#x53C9;&amp;amp;#x6811;&amp;amp;#xFF09;</a>
+                    <a class="navbar-item" href="#AVL树（一种自平衡二叉树）">2.2&nbsp;&nbsp;AVL树（一种自平衡二叉树）</a>
                     
                     
                     
-                    <a class="navbar-item" href="#PAT-1066-Root-of-AVL-Tree&amp;#xFF08;25-&amp;#x5206;&amp;#xFF09;">2.2.1&nbsp;&nbsp;PAT 1066: Root of AVL Tree&amp;amp;#xFF08;25 &amp;amp;#x5206;&amp;amp;#xFF09;</a>
+                    <a class="navbar-item" href="#PAT-1066-Root-of-AVL-Tree（25-分）">2.2.1&nbsp;&nbsp;PAT 1066: Root of AVL Tree（25 分）</a>
                     
                     
                     
@@ -169,13 +169,13 @@
                     
                     
                     
-                    <a class="navbar-item" href="#&amp;#x9898;&amp;#x76EE;&amp;#x5206;&amp;#x6790;">2.3&nbsp;&nbsp;&amp;amp;#x9898;&amp;amp;#x76EE;&amp;amp;#x5206;&amp;amp;#x6790;</a>
+                    <a class="navbar-item" href="#题目分析">2.3&nbsp;&nbsp;题目分析</a>
                     
                     
                     <hr class="navbar-divider">
                     
                     
-                    <a class="navbar-item" href="#3-&amp;#x65E0;&amp;#x6839;&amp;#x6811;&amp;#x4E0E;&amp;#x6709;&amp;#x6839;&amp;#x6811;">3&nbsp;&nbsp;<b>3. &amp;amp;#x65E0;&amp;amp;#x6839;&amp;amp;#x6811;&amp;amp;#x4E0E;&amp;amp;#x6709;&amp;amp;#x6839;&amp;amp;#x6811;</b></a>
+                    <a class="navbar-item" href="#3-无根树与有根树">3&nbsp;&nbsp;<b>3. 无根树与有根树</b></a>
                     
                 </div>
             </div>
@@ -296,9 +296,9 @@
     
     <div class="columns is-variable is-1 is-multiline is-mobile">
     
-        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/数据结构/">#数据结构</a></span>
-    
         <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/算法/">#算法</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/数据结构/">#数据结构</a></span>
     
         <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/树/">#树</a></span>
     
@@ -355,7 +355,7 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2022 Shane Wang&nbsp;
+                &copy; 2023 Shane Wang&nbsp;
                 Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>

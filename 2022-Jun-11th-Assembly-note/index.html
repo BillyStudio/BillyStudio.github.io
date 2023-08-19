@@ -25,10 +25,12 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="As a kind of programming languages, assembly language is intermediate between higher-level languages that cannot be recognized by a machine and machine code instructions that are not friendly for huma">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2022-08-21T09:10:14.023Z">
+<meta property="og:image" content="https://billystudio.github.io/2022-Jun-11th-Assembly-note/modern-CPU-architecture.png">
+<meta property="og:updated_time" content="2023-08-19T15:23:53.073Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Learning notes of ssembly language">
 <meta name="twitter:description" content="As a kind of programming languages, assembly language is intermediate between higher-level languages that cannot be recognized by a machine and machine code instructions that are not friendly for huma">
+<meta name="twitter:image" content="https://billystudio.github.io/2022-Jun-11th-Assembly-note/modern-CPU-architecture.png">
 
 
 
@@ -121,7 +123,23 @@
                     
                     
                     
-                    <a class="navbar-item" href="#I-1-Classification-of-assembly-instructions">1.1&nbsp;&nbsp;I.1 Classification of assembly instructions</a>
+                    <a class="navbar-item" href="#I-1-Modern-CPU-architecture">1.1&nbsp;&nbsp;I.1 Modern CPU architecture</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#I-2-Registers">1.2&nbsp;&nbsp;I.2 Registers</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#I-3-Addressing-modes">1.3&nbsp;&nbsp;I.3 Addressing modes</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#DOS-Assembly">1.4&nbsp;&nbsp;DOS Assembly</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Debug-Tool">1.4.1&nbsp;&nbsp;Debug Tool</a>
                     
                 </div>
             </div>
@@ -188,14 +206,19 @@
         <span class="column is-narrow">
             
             
-            a few seconds read (About 56 words)
+            2 minutes read (About 249 words)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
         <p>As a kind of programming languages, assembly language is intermediate between higher-level languages that cannot be recognized by a machine and machine code instructions that are not friendly for human reading.<a id="more"></a> Therefore it is very helpful for us to understand the underlying mechanism of computer programs.</p>
-<h1 id="I-Basic-concepts"><a href="#I-Basic-concepts" class="headerlink" title="I. Basic concepts"></a>I. Basic concepts</h1><h2 id="I-1-Classification-of-assembly-instructions"><a href="#I-1-Classification-of-assembly-instructions" class="headerlink" title="I.1 Classification of assembly instructions"></a>I.1 Classification of assembly instructions</h2>
+<h1 id="I-Basic-concepts"><a href="#I-Basic-concepts" class="headerlink" title="I. Basic concepts"></a>I. Basic concepts</h1><h2 id="I-1-Modern-CPU-architecture"><a href="#I-1-Modern-CPU-architecture" class="headerlink" title="I.1 Modern CPU architecture"></a>I.1 Modern CPU architecture</h2><p align="center"><br><img src="modern-CPU-architecture.png"><br></p>
+
+<p>The modern CPU architecture is a mixture of classic Von Neumann computer architecture and Harvard computer architecture, generally composed of control unit(CU), arithmetic logic unit(ALU), registers, three levels of caches, memory management unit(MMU) etc. Instruction and input data, initially stayed in memory, are read into CPU through bus. They are then processed by CU and ALU in a streamline way. The result data will also be stored in registers or caches, then reused or waiting a proper time to write into memory.</p>
+<h2 id="I-2-Registers"><a href="#I-2-Registers" class="headerlink" title="I.2 Registers"></a>I.2 Registers</h2><p>Registers play a vital role in CPU as they store temporary data during instruction execution and some of those have special functionalities which are neccssary for CPU processing. Their store size is kept equal to ALU/CU input and output size in one time(i.e. on 32-bit CPU, register size shall be 32-bit). For example, program counter(PC) is a special register that always stores the address of the next instruction to be executed from memory. so some people like to category it inside CU. Common registers are variables in Assembly language.</p>
+<h2 id="I-3-Addressing-modes"><a href="#I-3-Addressing-modes" class="headerlink" title="I.3 Addressing modes"></a>I.3 Addressing modes</h2><h2 id="DOS-Assembly"><a href="#DOS-Assembly" class="headerlink" title="DOS Assembly"></a>DOS Assembly</h2><h3 id="Debug-Tool"><a href="#Debug-Tool" class="headerlink" title="Debug Tool"></a>Debug Tool</h3><p>R: look and change register&#x2019;s value</p>
+
     
     </div>
     
@@ -250,7 +273,7 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2022 Shane Wang&nbsp;
+                &copy; 2023 Shane Wang&nbsp;
                 Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>

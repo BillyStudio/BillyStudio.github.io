@@ -33,7 +33,7 @@
 <meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-07-14-Design-patterns-Dynamic-proxy/TxProcessingController.png">
 <meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-07-14-Design-patterns-Dynamic-proxy/DeployMojo.png">
 <meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-07-14-Design-patterns-Dynamic-proxy/ServiceInvocationHandler.png">
-<meta property="og:updated_time" content="2022-05-08T02:49:05.760Z">
+<meta property="og:updated_time" content="2023-08-19T15:23:53.073Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="设计模式 之 动态代理">
 <meta name="twitter:description" content="&amp;#x52A8;&amp;#x6001;&amp;#x4EE3;&amp;#x7406;&amp;#x6A21;&amp;#x5F0F;&amp;#x662F;&amp;#x6307;&amp;#x5B8C;&amp;#x5168;&amp;#x501F;&amp;#x52A9;proxy&amp;#x5BF9;&amp;#x8C61;&amp;#x6267;&amp;#x884C;&amp;#x88AB;&amp;#x4EE3;&amp;#x7406;&amp;#x5BF9;&amp;#x8C61;&amp;#x63A5;&amp;#x53E3;&amp;#x7684;&amp;#x">
@@ -126,29 +126,29 @@
                     
                     
                     
-                    <a class="navbar-item" href="#&amp;#x4E00;&amp;#x3001;JDK&amp;#x4E0B;&amp;#x7B80;&amp;#x5355;&amp;#x7684;&amp;#x52A8;&amp;#x6001;&amp;#x4EE3;&amp;#x7406;&amp;#x5B9E;&amp;#x73B0;">1&nbsp;&nbsp;<b>&amp;amp;#x4E00;&amp;amp;#x3001;JDK&amp;amp;#x4E0B;&amp;amp;#x7B80;&amp;amp;#x5355;&amp;amp;#x7684;&amp;amp;#x52A8;&amp;amp;#x6001;&amp;amp;#x4EE3;&amp;amp;#x7406;&amp;amp;#x5B9E;&amp;amp;#x73B0;</b></a>
+                    <a class="navbar-item" href="#一、JDK下简单的动态代理实现">1&nbsp;&nbsp;<b>一、JDK下简单的动态代理实现</b></a>
                     
                     
                     <hr class="navbar-divider">
                     
                     
-                    <a class="navbar-item" href="#&amp;#x4E8C;&amp;#x3001;RPC&amp;#x4E2D;&amp;#x7684;&amp;#x52A8;&amp;#x6001;&amp;#x4EE3;&amp;#x7406;&amp;#x6A21;&amp;#x5F0F;">2&nbsp;&nbsp;<b>&amp;amp;#x4E8C;&amp;amp;#x3001;RPC&amp;amp;#x4E2D;&amp;amp;#x7684;&amp;amp;#x52A8;&amp;amp;#x6001;&amp;amp;#x4EE3;&amp;amp;#x7406;&amp;amp;#x6A21;&amp;amp;#x5F0F;</b></a>
+                    <a class="navbar-item" href="#二、RPC中的动态代理模式">2&nbsp;&nbsp;<b>二、RPC中的动态代理模式</b></a>
                     
                     
                     <hr class="navbar-divider">
                     
                     
-                    <a class="navbar-item" href="#&amp;#x4E09;&amp;#x3001;Spring-AOP&amp;#x4E2D;&amp;#x7684;&amp;#x52A8;&amp;#x6001;&amp;#x4EE3;&amp;#x7406;&amp;#x6A21;&amp;#x5F0F;">3&nbsp;&nbsp;<b>&amp;amp;#x4E09;&amp;amp;#x3001;Spring AOP&amp;amp;#x4E2D;&amp;amp;#x7684;&amp;amp;#x52A8;&amp;amp;#x6001;&amp;amp;#x4EE3;&amp;amp;#x7406;&amp;amp;#x6A21;&amp;amp;#x5F0F;</b></a>
+                    <a class="navbar-item" href="#三、Spring-AOP中的动态代理模式">3&nbsp;&nbsp;<b>三、Spring AOP中的动态代理模式</b></a>
                     
                     
                     
-                    <a class="navbar-item" href="#Spring-AOP&amp;#x4F7F;&amp;#x7528;&amp;#x65B9;&amp;#x6CD5;">3.1&nbsp;&nbsp;Spring AOP&amp;amp;#x4F7F;&amp;amp;#x7528;&amp;amp;#x65B9;&amp;amp;#x6CD5;</a>
+                    <a class="navbar-item" href="#Spring-AOP使用方法">3.1&nbsp;&nbsp;Spring AOP使用方法</a>
                     
                     
                     <hr class="navbar-divider">
                     
                     
-                    <a class="navbar-item" href="#&amp;#x56DB;&amp;#x3001;JuLiuSc&amp;#x5408;&amp;#x7EA6;&amp;#x5E73;&amp;#x53F0;&amp;#x4E2D;&amp;#x7684;&amp;#x4F7F;&amp;#x7528;">4&nbsp;&nbsp;<b>&amp;amp;#x56DB;&amp;amp;#x3001;JuLiuSc&amp;amp;#x5408;&amp;amp;#x7EA6;&amp;amp;#x5E73;&amp;amp;#x53F0;&amp;amp;#x4E2D;&amp;amp;#x7684;&amp;amp;#x4F7F;&amp;amp;#x7528;</b></a>
+                    <a class="navbar-item" href="#四、JuLiuSc合约平台中的使用">4&nbsp;&nbsp;<b>四、JuLiuSc合约平台中的使用</b></a>
                     
                 </div>
             </div>
@@ -220,7 +220,7 @@
         <span class="column is-narrow">
             
             
-            13 分钟 读完 (约 1964 字)
+            13 分钟 读完 (约 1967 字)
         </span>
         
     </div>
@@ -230,6 +230,7 @@
 <ol>
 <li>&#x7F51;&#x7EDC;&#x670D;&#x52A1;&#x63A5;&#x53E3;&#x7684;&#x8C03;&#x7528;</li>
 <li>&#x5BF9;&#x4E00;&#x4E9B;&#x65B9;&#x6CD5;&#x505A;&#x7EDF;&#x4E00;&#x7684;&#x5904;&#x7406;&#x4EE5;&#x51CF;&#x5C11;&#x91CD;&#x590D;&#x4EE3;&#x7801;</li>
+<li>&#x6D4B;&#x8BD5;mock</li>
 </ol>
 <p>&#x2003;&#x2003;&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;&#x7684;&#x7279;&#x5F81;&#x662F;&#x4EE3;&#x7406;&#x7C7B;&#xFF08;ProxyClass&#xFF09;&#x548C;&#x88AB;&#x4EE3;&#x7406;&#x7C7B;&#xFF08;RealSubject&#xFF09;&#x5B9E;&#x73B0;&#x540C;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;&#xFF08;doAction&#xFF09;&#xFF0C;&#x4F7F;&#x7528;&#x8005;&#xFF08;Client&#xFF09;&#x4E0D;&#x76F4;&#x63A5;&#x8BBF;&#x95EE;&#x88AB;&#x4EE3;&#x7406;&#x7C7B;&#x7684;&#x63A5;&#x53E3;&#xFF0C;&#x800C;&#x662F;&#x501F;&#x52A9;&#x4EE3;&#x7406;&#x7C7B;&#x5B9E;&#x73B0;&#x5BF9;&#x63A5;&#x53E3;&#x7684;&#x8BBF;&#x95EE;&#x3002;</p>
 <p><div align="center"><img src="dynamic-proxy.png" title="&#x52A8;&#x6001;&#x4EE3;&#x7406;&#x6A21;&#x5F0F;&#x793A;&#x610F;&#x56FE;"></div></p>
@@ -358,7 +359,7 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2022 Shane Wang&nbsp;
+                &copy; 2023 Shane Wang&nbsp;
                 Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
