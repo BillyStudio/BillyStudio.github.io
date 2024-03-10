@@ -159,6 +159,52 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
+            <a href="/zh-cn/2023-Aug-22nd-Virtualization-on-Windows-PC/" itemprop="url">个人Windows系统下虚拟化方案调研</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2023-08-21T21:34:02.000Z" itemprop="datePublished">8月 22 2023</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            3 分钟 读完 (约 454 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <h1 id="&#x80CC;&#x666F;"><a href="#&#x80CC;&#x666F;" class="headerlink" title="&#x80CC;&#x666F;"></a>&#x80CC;&#x666F;</h1><p>&#x968F;&#x7740;&#x4ECE;&#x5B66;&#x6821;&#x8D70;&#x5411;&#x5DE5;&#x4F5C;&#x5C97;&#x4F4D;&#xFF0C;&#x4E2A;&#x4EBA;PC&#x4F7F;&#x7528;&#x7684;&#x9891;&#x7387;&#x9010;&#x6E10;&#x53D8;&#x5C11;&#x3002;&#x673A;&#x5668;&#x4E0A;&#x5B89;&#x88C5;&#x7684;Arch Linux&#x7CFB;&#x7EDF;&#x5DF2;&#x7ECF;&#x966A;&#x4F34;&#x6211;&#x8D70;&#x8FC7;&#x4E86;4&#x5E74;&#x7684;&#x65F6;&#x5149;&#x3002;&#x91CD;&#x65B0;&#x5B89;&#x88C5;Windows&#x7CFB;&#x7EDF;&#x7684;&#x9700;&#x6C42;&#x4E5F;&#x8D8A;&#x6765;&#x8D8A;&#x5F3A;&#x70C8;&#xFF0C;&#x4EE5;&#x4E0B;&#x51E0;&#x70B9;&#x539F;&#x56E0;&#xFF1A;</p>
+<ol>
+<li>&#x5F53;&#x521D;&#x5B89;&#x88C5;Linux&#x7684;&#x521D;&#x8877;&#x662F;&#x83B7;&#x5F97;&#x6C89;&#x6D78;&#x5F0F;&#x7684;Linux&#x5B66;&#x4E60;&#x73AF;&#x5883;&#xFF0C;&#x5230;&#x4ECA;&#x5929;&#x5BF9;&#x4E8E;Linux&#x7CFB;&#x7EDF;&#x5DF2;&#x7ECF;&#x6BD4;&#x8F83;&#x719F;&#x6089;&#xFF0C;&#x5176;&#x4E0B;&#x7684;&#x5F88;&#x591A;&#x8F6F;&#x4EF6;&#x4E5F;&#x4F7F;&#x7528;&#x5730;&#x6BD4;&#x8F83;&#x719F;&#x7EC3;&#x3002;&#x6362;&#x6210;Windows&#x88C5;Linux&#x865A;&#x62DF;&#x673A;&#x4E00;&#x6837;&#x719F;&#x6089;&#x91CC;&#x9762;&#x7684;&#x64CD;&#x4F5C;&#x3002;(Deny&#xFF1A;&#x4E0D;&#x6362;&#x4E5F;&#x4E0D;&#x635F;&#x5931;&#x751A;&#x4E48;)</li>
+<li>&#x4ECE;&#x5B66;&#x6821;&#x8D70;&#x5411;&#x793E;&#x4F1A;&#xFF0C;&#x8FD8;&#x662F;&#x5927;&#x4F17;&#x8F6F;&#x4EF6;&#x7684;&#x4F7F;&#x7528;&#x9700;&#x6C42;&#x66F4;&#x591A;&#x4E00;&#x4E9B;&#x4E86;&#xFF0C;&#x6BD4;&#x5982;PhotoShop&#x3001;Steam&#x3001;CAD&#x3001;&#x5FAE;&#x4FE1;&#x3001;&#x817E;&#x8BAF;&#x4F1A;&#x8BAE;&#xFF0C;&#x8FD9;&#x4E9B;&#x8F6F;&#x4EF6;&#x8FD8;&#x662F;&#x5728;Windows&#x73AF;&#x5883;&#x4E0B;&#x7684;&#x6216;&#x88C5;Win10&#x865A;&#x62DF;&#x673A;&#x91CC;&#x8DD1;&#x652F;&#x6301;&#x4E0D;&#x4E86;&#x5B83;&#x4EEC;&#x7684;&#x5185;&#x5B58;&#x548C;&#x6027;&#x80FD;&#x3002;&#xFF08;Deny&#xFF1A;PS&#x6709;Gimp&#x66FF;&#x4EE3;&#x3001;&#x53EF;&#x4EE5;&#x597D;&#x597D;&#x5B66;&#xFF09;</li>
+<li>&#x5B89;&#x88C5;Linux&#x7CFB;&#x7EDF;&#x53EF;&#x4EE5;&#x4EE5;&#x7CFB;&#x7EDF;&#x4E0D;&#x65B9;&#x4FBF;&#x4E3A;&#x7531;&#x907F;&#x5F00;&#x5947;&#x8469;&#x8001;&#x677F;&#x5404;&#x79CD;&#x5E72;&#x6D3B;&#x8981;&#x6C42;&#xFF0C;&#x73B0;&#x5728;&#x6CA1;&#x8FD9;&#x4E2A;&#x9700;&#x6C42;&#x4E86;&#x3002;&#xFF08;Deny&#xFF1A;&#x4E0D;&#x6362;&#x4E5F;&#x6CA1;&#x4EC0;&#x4E48;&#xFF0C;&#x5148;&#x5728;&#x4E5F;&#x6CA1;&#x6709;&#x5947;&#x8469;&#x8001;&#x677F;&#xFF09;</li>
+</ol>
+<p>&#x91CD;&#x65B0;&#x5B89;&#x88C5;&#x56DE;Windows&#x7CFB;&#x7EDF;&#xFF0C;&#x5931;&#x53BB;&#x4E86;&#x751A;&#x4E48;&#x5462;&#xFF1F;</p>
+<ol>
+<li>&#x6C89;&#x6D78;&#x5F0F;&#x65E0;&#x5E7F;&#x544A;&#x7684;&#x4F53;&#x9A8C;&#x3002;&#x7531;&#x4E8E;&#x662F;&#x5C0F;&#x4F17;Linux&#x7CFB;&#x7EDF;&#xFF0C;&#x53C8;&#x662F;&#x5F00;&#x6E90;&#x8F6F;&#x4EF6;&#xFF0C;&#x7CFB;&#x7EDF;&#x6216;&#x8F6F;&#x4EF6;&#x4E0A;&#x57FA;&#x672C;&#x4E0D;&#x4F1A;&#x6709;&#x5E7F;&#x544A;&#xFF0C;&#x9876;&#x591A;&#x5728;&#x6D4F;&#x89C8;&#x5668;&#x8BBF;&#x95EE;&#x7684;&#x65F6;&#x5019;&#x624D;&#x4F1A;&#x6709;&#x3002;</li>
+</ol>
+<p>&#x5728;&#x52A8;&#x624B;&#x4E4B;&#x524D;&#xFF0C;&#x8FD8;&#x9700;&#x8981;&#x505A;2&#x4E2A;&#x8C03;&#x7814;&#x3002;&#x4E00;&#x662F;Windows&#x7CFB;&#x7EDF;&#x4E0B;&#x7684;&#x865A;&#x62DF;&#x673A;&#x89E3;&#x51B3;&#x65B9;&#x6848;&#xFF0C;&#x4E8C;&#x662F;&#x539F;&#x751F;Arch Linux&#x7CFB;&#x7EDF;&#x8FC1;&#x79FB;&#x5230;&#x865A;&#x62DF;&#x673A;&#x8F6F;&#x4EF6;&#x4E2D;&#x3002;</p>
+<h1 id="Hyper-V"><a href="#Hyper-V" class="headerlink" title="Hyper V"></a>Hyper V</h1><h1 id="VMWare"><a href="#VMWare" class="headerlink" title="VMWare"></a>VMWare</h1><h1 id="QEMU"><a href="#QEMU" class="headerlink" title="QEMU"></a>QEMU</h1><p>&#x901A;&#x5E38;&#x662F;&#x5728;Linux&#x4E0B;&#x4F7F;&#x7528;&#x7684;&#xFF0C;&#x548C;Linux&#x7684;KVM&#x865A;&#x62DF;&#x5316;&#x65B9;&#x6848;&#x914D;&#x5408;&#x3002;Windows&#x4E0B;&#x73A9;QEMU&#x7684;&#x4EBA;&#x6BD4;&#x8F83;&#x5C11;&#x3002;</p>
+
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
             <a href="/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/" itemprop="url">Creating virtual machiness on Linux --- the hard way</a>
         
     </h1>
@@ -237,7 +283,7 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2023 Shane Wang&nbsp;
+                &copy; 2024 Shane Wang&nbsp;
                 Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>

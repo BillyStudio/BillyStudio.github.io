@@ -25,7 +25,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="The high-end(expensive) MacBooks/iMacs is not friendly on their prices for those economical young people &amp;#xFF08;unless the employee&amp;#x2019;s company give him an MBP&amp;#xFF09;, but macOS deserves a tria">
 <meta property="og:locale" content="en">
-<meta property="og:updated_time" content="2022-08-21T09:10:14.017Z">
+<meta property="og:updated_time" content="2023-11-26T09:26:32.894Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="To-do list after installing macOS">
 <meta name="twitter:description" content="The high-end(expensive) MacBooks/iMacs is not friendly on their prices for those economical young people &amp;#xFF08;unless the employee&amp;#x2019;s company give him an MBP&amp;#xFF09;, but macOS deserves a tria">
@@ -131,45 +131,41 @@
                     <hr class="navbar-divider">
                     
                     
-                    <a class="navbar-item" href="#2-Config-for-macOS">2&nbsp;&nbsp;<b>2. Config for macOS</b></a>
+                    <a class="navbar-item" href="#2-Configs">2&nbsp;&nbsp;<b>2. Configs</b></a>
                     
                     
                     
-                    <a class="navbar-item" href="#设置双拼自然码方案">2.1&nbsp;&nbsp;设置双拼自然码方案</a>
+                    <a class="navbar-item" href="#OS-Security-config">2.1&nbsp;&nbsp;OS Security config</a>
                     
                     
                     
-                    <a class="navbar-item" href="#操作系统安全">2.2&nbsp;&nbsp;操作系统安全</a>
+                    <a class="navbar-item" href="#Remove-login-options-for-guest-users">2.1.1&nbsp;&nbsp;Remove login options for guest users</a>
                     
                     
                     
-                    <a class="navbar-item" href="#删除其他用户的登录选项">2.2.1&nbsp;&nbsp;删除其他用户的登录选项</a>
+                    <a class="navbar-item" href="#System-optimization-and-beautification">2.2&nbsp;&nbsp;System optimization and beautification</a>
                     
                     
                     
-                    <a class="navbar-item" href="#系统优化与美化">2.3&nbsp;&nbsp;系统优化与美化</a>
-                    
-                    
-                    
-                    <a class="navbar-item" href="#加快退格键和delete键的速度">2.3.1&nbsp;&nbsp;加快退格键和delete键的速度</a>
+                    <a class="navbar-item" href="#Speed-up-‘BackSpace’-and-‘Delete’">2.2.1&nbsp;&nbsp;Speed up ‘BackSpace’ and ‘Delete’</a>
                     
                     
                     <hr class="navbar-divider">
                     
                     
-                    <a class="navbar-item" href="#编程环境配置">3&nbsp;&nbsp;<b>编程环境配置</b></a>
+                    <a class="navbar-item" href="#3-Programming-Environment-Configuration">3&nbsp;&nbsp;<b>3. Programming Environment Configuration</b></a>
                     
                     
                     
-                    <a class="navbar-item" href="#安装Xcode">3.1&nbsp;&nbsp;安装Xcode</a>
+                    <a class="navbar-item" href="#Install-Xcode">3.1&nbsp;&nbsp;Install Xcode</a>
                     
                     
                     
-                    <a class="navbar-item" href="#安装brew包管理器">3.2&nbsp;&nbsp;安装brew包管理器</a>
+                    <a class="navbar-item" href="#Install-HomeBrew-package-management-tool">3.2&nbsp;&nbsp;Install HomeBrew package management tool</a>
                     
                     
                     
-                    <a class="navbar-item" href="#安装Vim">3.3&nbsp;&nbsp;安装Vim</a>
+                    <a class="navbar-item" href="#Install-Vim">3.3&nbsp;&nbsp;Install Vim</a>
                     
                 </div>
             </div>
@@ -236,27 +232,23 @@
         <span class="column is-narrow">
             
             
-            2 minutes read (About 269 words)
+            a minute read (About 194 words)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
         <p>The high-end(expensive) MacBooks/iMacs is not friendly on their prices for those economical young people &#xFF08;unless the employee&#x2019;s company give him an MBP&#xFF09;, but macOS deserves a trial by installing it in a VM.<br><a id="more"></a></p>
-<h1 id="1-Config-for-VMWare-systems"><a href="#1-Config-for-VMWare-systems" class="headerlink" title="1. Config for VMWare systems"></a>1. Config for VMWare systems</h1><h2 id="1-1-Install-VMware-Tool"><a href="#1-1-Install-VMware-Tool" class="headerlink" title="1.1 Install VMware Tool"></a>1.1 Install VMware Tool</h2><h2 id="1-2-Set-shared-folders"><a href="#1-2-Set-shared-folders" class="headerlink" title="1.2 Set shared folders"></a>1.2 Set shared folders</h2><h1 id="2-Config-for-macOS"><a href="#2-Config-for-macOS" class="headerlink" title="2. Config for macOS"></a>2. Config for macOS</h1><h2 id="&#x8BBE;&#x7F6E;&#x53CC;&#x62FC;&#x81EA;&#x7136;&#x7801;&#x65B9;&#x6848;"><a href="#&#x8BBE;&#x7F6E;&#x53CC;&#x62FC;&#x81EA;&#x7136;&#x7801;&#x65B9;&#x6848;" class="headerlink" title="&#x8BBE;&#x7F6E;&#x53CC;&#x62FC;&#x81EA;&#x7136;&#x7801;&#x65B9;&#x6848;"></a>&#x8BBE;&#x7F6E;&#x53CC;&#x62FC;&#x81EA;&#x7136;&#x7801;&#x65B9;&#x6848;</h2><p>&#x6253;&#x5F00;&#x7EC8;&#x7AEF;&#x8F93;&#x5165;</p>
-<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">defaults write com.apple.inputmethod.CoreChineseEngineFramework shuangpinLayout 5</span><br></pre></td></tr></table></figure>
-
-<p>&#x5373;&#x53EF;</p>
-<h2 id="&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5B89;&#x5168;"><a href="#&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5B89;&#x5168;" class="headerlink" title="&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5B89;&#x5168;"></a>&#x64CD;&#x4F5C;&#x7CFB;&#x7EDF;&#x5B89;&#x5168;</h2><h3 id="&#x5220;&#x9664;&#x5176;&#x4ED6;&#x7528;&#x6237;&#x7684;&#x767B;&#x5F55;&#x9009;&#x9879;"><a href="#&#x5220;&#x9664;&#x5176;&#x4ED6;&#x7528;&#x6237;&#x7684;&#x767B;&#x5F55;&#x9009;&#x9879;" class="headerlink" title="&#x5220;&#x9664;&#x5176;&#x4ED6;&#x7528;&#x6237;&#x7684;&#x767B;&#x5F55;&#x9009;&#x9879;"></a>&#x5220;&#x9664;&#x5176;&#x4ED6;&#x7528;&#x6237;&#x7684;&#x767B;&#x5F55;&#x9009;&#x9879;</h3><p>sudo defaults write /Library/Preferences/com.apple.loginwindow SHOWOTHERUSERS_MANAGED -bool FALSE</p>
-<h2 id="&#x7CFB;&#x7EDF;&#x4F18;&#x5316;&#x4E0E;&#x7F8E;&#x5316;"><a href="#&#x7CFB;&#x7EDF;&#x4F18;&#x5316;&#x4E0E;&#x7F8E;&#x5316;" class="headerlink" title="&#x7CFB;&#x7EDF;&#x4F18;&#x5316;&#x4E0E;&#x7F8E;&#x5316;"></a>&#x7CFB;&#x7EDF;&#x4F18;&#x5316;&#x4E0E;&#x7F8E;&#x5316;</h2><h3 id="&#x52A0;&#x5FEB;&#x9000;&#x683C;&#x952E;&#x548C;delete&#x952E;&#x7684;&#x901F;&#x5EA6;"><a href="#&#x52A0;&#x5FEB;&#x9000;&#x683C;&#x952E;&#x548C;delete&#x952E;&#x7684;&#x901F;&#x5EA6;" class="headerlink" title="&#x52A0;&#x5FEB;&#x9000;&#x683C;&#x952E;&#x548C;delete&#x952E;&#x7684;&#x901F;&#x5EA6;"></a>&#x52A0;&#x5FEB;&#x9000;&#x683C;&#x952E;&#x548C;delete&#x952E;&#x7684;&#x901F;&#x5EA6;</h3><p>&#x8FDB;&#x5165; System Preferences &gt; Keyboard &gt; Key Repeat, &#x8C03;&#x5230;&#x6700;&#x5FEB;.</p>
-<h1 id="&#x7F16;&#x7A0B;&#x73AF;&#x5883;&#x914D;&#x7F6E;"><a href="#&#x7F16;&#x7A0B;&#x73AF;&#x5883;&#x914D;&#x7F6E;" class="headerlink" title="&#x7F16;&#x7A0B;&#x73AF;&#x5883;&#x914D;&#x7F6E;"></a>&#x7F16;&#x7A0B;&#x73AF;&#x5883;&#x914D;&#x7F6E;</h1><h2 id="&#x5B89;&#x88C5;Xcode"><a href="#&#x5B89;&#x88C5;Xcode" class="headerlink" title="&#x5B89;&#x88C5;Xcode"></a>&#x5B89;&#x88C5;Xcode</h2><p>&#x4ECE;AppStore&#x5B89;&#x88C5;&#x5373;&#x53EF;, &#x524D;&#x63D0;&#x662F;&#x8981;&#x6709;&#x4E00;&#x4E2A;Apple ID</p>
-<h2 id="&#x5B89;&#x88C5;brew&#x5305;&#x7BA1;&#x7406;&#x5668;"><a href="#&#x5B89;&#x88C5;brew&#x5305;&#x7BA1;&#x7406;&#x5668;" class="headerlink" title="&#x5B89;&#x88C5;brew&#x5305;&#x7BA1;&#x7406;&#x5668;"></a>&#x5B89;&#x88C5;brew&#x5305;&#x7BA1;&#x7406;&#x5668;</h2><p>&#x8FDB;&#x5165;homebrew&#x7684;&#x5B98;&#x7F51;, &#x4ECE;&#x5B98;&#x7F51;&#x4E0A;&#x7C98;&#x8D34;&#x5B89;&#x88C5;&#x547D;&#x4EE4;&#x5230;&#x7EC8;&#x7AEF;&#x4E2D;.</p>
+<h1 id="1-Config-for-VMWare-systems"><a href="#1-Config-for-VMWare-systems" class="headerlink" title="1. Config for VMWare systems"></a>1. Config for VMWare systems</h1><h2 id="1-1-Install-VMware-Tool"><a href="#1-1-Install-VMware-Tool" class="headerlink" title="1.1 Install VMware Tool"></a>1.1 Install VMware Tool</h2><h2 id="1-2-Set-shared-folders"><a href="#1-2-Set-shared-folders" class="headerlink" title="1.2 Set shared folders"></a>1.2 Set shared folders</h2><h1 id="2-Configs"><a href="#2-Configs" class="headerlink" title="2. Configs"></a>2. Configs</h1><h2 id="OS-Security-config"><a href="#OS-Security-config" class="headerlink" title="OS Security config"></a>OS Security config</h2><h3 id="Remove-login-options-for-guest-users"><a href="#Remove-login-options-for-guest-users" class="headerlink" title="Remove login options for guest users"></a>Remove login options for guest users</h3><p>sudo defaults write /Library/Preferences/com.apple.loginwindow SHOWOTHERUSERS_MANAGED -bool FALSE</p>
+<h2 id="System-optimization-and-beautification"><a href="#System-optimization-and-beautification" class="headerlink" title="System optimization and beautification"></a>System optimization and beautification</h2><h3 id="Speed-up-&#x2018;BackSpace&#x2019;-and-&#x2018;Delete&#x2019;"><a href="#Speed-up-&#x2018;BackSpace&#x2019;-and-&#x2018;Delete&#x2019;" class="headerlink" title="Speed up &#x2018;BackSpace&#x2019; and &#x2018;Delete&#x2019;"></a>Speed up &#x2018;BackSpace&#x2019; and &#x2018;Delete&#x2019;</h3><p>System Preferences &gt; Keyboard &gt; Key Repeat, Turn to fastest.</p>
+<h1 id="3-Programming-Environment-Configuration"><a href="#3-Programming-Environment-Configuration" class="headerlink" title="3. Programming Environment Configuration"></a>3. Programming Environment Configuration</h1><h2 id="Install-Xcode"><a href="#Install-Xcode" class="headerlink" title="Install Xcode"></a>Install Xcode</h2><p>Just install it from AppStore, as long as you&#x2019;ve had an Apple ID.</p>
+<h2 id="Install-HomeBrew-package-management-tool"><a href="#Install-HomeBrew-package-management-tool" class="headerlink" title="Install HomeBrew package management tool"></a>Install HomeBrew package management tool</h2><p>Go to the official website of homebrew, copy and paste the following command into your Terminal:</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">/usr/bin/ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;</span><br></pre></td></tr></table></figure>
 
-<h2 id="&#x5B89;&#x88C5;Vim"><a href="#&#x5B89;&#x88C5;Vim" class="headerlink" title="&#x5B89;&#x88C5;Vim"></a>&#x5B89;&#x88C5;Vim</h2><p>&#x4E0B;&#x8F7D;&#x6700;&#x65B0;&#x7684;VIm&#x5E76;&#x66FF;&#x6362;&#x7CFB;&#x7EDF;&#x81EA;&#x5E26;&#x7684;Vim (&#x7CFB;&#x7EDF;&#x81EA;&#x5E26;&#x7684;&#x529F;&#x80FD;&#x4E0D;&#x5168;)</p>
+<h2 id="Install-Vim"><a href="#Install-Vim" class="headerlink" title="Install Vim"></a>Install Vim</h2><p>Use homebrew install latest vim with overriding the system built-in one(as it does not provide full Vim functions)</p>
 <figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">brew install vim --with-lua --with-override-system-vim</span><br></pre></td></tr></table></figure>
 
-<p>&#x5B89;&#x88C5;&#x5B8C;&#x6BD5;&#x540E;&#x4F7F;&#x7528;vim&#x7F16;&#x8F91;&#x7F16;&#x8F91;&#x6587;&#x672C;&#x6587;&#x4EF6;. &#x5982;&#x679C;&#x4F7F;&#x7528;vi, &#x4ECD;&#x7136;&#x662F;&#x7CFB;&#x7EDF;&#x539F;&#x6765;&#x81EA;&#x5E26;&#x7684;vim</p>
+<p>Remember typing <code>vim</code> to use this vim. If you type <code>vi</code>, then the system built-in vim will be adopted.</p>
 
     
     </div>
@@ -312,7 +304,7 @@
     <div class="container">
         <div class="columns content">
             <div class="column is-narrow has-text-centered">
-                &copy; 2023 Shane Wang&nbsp;
+                &copy; 2024 Shane Wang&nbsp;
                 Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
             </div>
             <div class="column is-hidden-mobile"></div>
