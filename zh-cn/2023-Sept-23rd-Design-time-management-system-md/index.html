@@ -25,7 +25,7 @@
 <meta property="og:site_name" content="Shane&#39;s Blog">
 <meta property="og:description" content="&amp;#x7559;&amp;#x7ED9;&amp;#x6BCF;&amp;#x4E2A;&amp;#x4EBA;&amp;#x7684;&amp;#x65F6;&amp;#x95F4;&amp;#x90FD;&amp;#x662F;&amp;#x6709;&amp;#x9650;&amp;#x7684;">
 <meta property="og:locale" content="zh-cn">
-<meta property="og:updated_time" content="2024-08-23T17:35:54.123Z">
+<meta property="og:updated_time" content="2024-09-28T20:21:11.555Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="个人时间管理系统的设计与实现">
 <meta name="twitter:description" content="&amp;#x7559;&amp;#x7ED9;&amp;#x6BCF;&amp;#x4E2A;&amp;#x4EBA;&amp;#x7684;&amp;#x65F6;&amp;#x95F4;&amp;#x90FD;&amp;#x662F;&amp;#x6709;&amp;#x9650;&amp;#x7684;">
@@ -117,27 +117,49 @@
                     
                     
                     
-                    <a class="navbar-item" href="#系统设计">1&nbsp;&nbsp;<b>系统设计</b></a>
+                    <a class="navbar-item" href="#时间管理法">1&nbsp;&nbsp;<b>时间管理法</b></a>
                     
                     
                     
-                    <a class="navbar-item" href="#数据设计">1.1&nbsp;&nbsp;数据设计</a>
+                    <a class="navbar-item" href="#1-活动清单">1.1&nbsp;&nbsp;1. 活动清单</a>
                     
                     
                     
-                    <a class="navbar-item" href="#交互设计">1.2&nbsp;&nbsp;交互设计</a>
+                    <a class="navbar-item" href="#2-今日待办">1.2&nbsp;&nbsp;2. 今日待办</a>
                     
                     
                     
-                    <a class="navbar-item" href="#数据同步">1.3&nbsp;&nbsp;数据同步</a>
+                    <a class="navbar-item" href="#3-计时器">1.3&nbsp;&nbsp;3. 计时器</a>
                     
                     
                     
-                    <a class="navbar-item" href="#数据库表定义">1.3.1&nbsp;&nbsp;数据库表定义</a>
+                    <a class="navbar-item" href="#4-时间记录表">1.4&nbsp;&nbsp;4. 时间记录表</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#服务端系统设计">2&nbsp;&nbsp;<b>服务端系统设计</b></a>
                     
                     
                     
-                    <a class="navbar-item" href="#报错与解决">1.4&nbsp;&nbsp;报错与解决</a>
+                    <a class="navbar-item" href="#数据设计">2.1&nbsp;&nbsp;数据设计</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#交互设计">2.2&nbsp;&nbsp;交互设计</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#数据同步">2.3&nbsp;&nbsp;数据同步</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#数据库表定义">2.3.1&nbsp;&nbsp;数据库表定义</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#报错与解决">2.4&nbsp;&nbsp;报错与解决</a>
                     
                 </div>
             </div>
@@ -204,14 +226,29 @@
         <span class="column is-narrow">
             
             
-            2 分钟 读完 (约 255 字)
+            6 分钟 读完 (约 881 字)
         </span>
         
     </div>
     <div class="article-entry is-size-6-mobile" itemprop="articleBody">
     
         <p>&#x7559;&#x7ED9;&#x6BCF;&#x4E2A;&#x4EBA;&#x7684;&#x65F6;&#x95F4;&#x90FD;&#x662F;&#x6709;&#x9650;&#x7684;<a id="more"></a>&#xFF0C;&#x5982;&#x4F55;&#x5229;&#x7528;&#x597D;&#x65F6;&#x95F4;&#x662F;&#x503C;&#x5F97;&#x8003;&#x8651;&#x548C;&#x6DF1;&#x5165;&#x6316;&#x6398;&#x7684;&#x3002;</p>
-<h1 id="&#x7CFB;&#x7EDF;&#x8BBE;&#x8BA1;"><a href="#&#x7CFB;&#x7EDF;&#x8BBE;&#x8BA1;" class="headerlink" title="&#x7CFB;&#x7EDF;&#x8BBE;&#x8BA1;"></a>&#x7CFB;&#x7EDF;&#x8BBE;&#x8BA1;</h1><h2 id="&#x6570;&#x636E;&#x8BBE;&#x8BA1;"><a href="#&#x6570;&#x636E;&#x8BBE;&#x8BA1;" class="headerlink" title="&#x6570;&#x636E;&#x8BBE;&#x8BA1;"></a>&#x6570;&#x636E;&#x8BBE;&#x8BA1;</h2><p>&#x4E00;&#x6761;&#x8BB0;&#x5F55;&#xFF1A;startTime endTime actionDesc actionType<br>&#x6BCF;&#x5929;&#x7684;&#x65F6;&#x95F4;&#x8BB0;&#x5F55;&#x7684;&#x6700;&#x7EC6;&#x7C92;&#x5EA6;&#x4E3A;&#x534A;&#x5C0F;&#x65F6;&#x3002;</p>
+<h1 id="&#x65F6;&#x95F4;&#x7BA1;&#x7406;&#x6CD5;"><a href="#&#x65F6;&#x95F4;&#x7BA1;&#x7406;&#x6CD5;" class="headerlink" title="&#x65F6;&#x95F4;&#x7BA1;&#x7406;&#x6CD5;"></a>&#x65F6;&#x95F4;&#x7BA1;&#x7406;&#x6CD5;</h1><p>&#x53C2;&#x8003;&#x756A;&#x8304;&#x65F6;&#x949F;&#x5DE5;&#x4F5C;&#x6CD5;&#x548C;24&#x679A;&#x91D1;&#x5E01;&#x65F6;&#x95F4;&#x7BA1;&#x7406;&#x6CD5;&#xFF0C;&#x6211;&#x628A;&#x51C6;&#x5907;&#x5DE5;&#x4F5C;&#x5206;&#x4E3A;4&#x5927;&#x90E8;&#x5206;&#xFF1A;1&#x3001;&#x6D3B;&#x52A8;&#x6E05;&#x5355;&#xFF1B;2&#x3001;&#x4ECA;&#x65E5;&#x5F85;&#x529E;&#xFF1B;3&#x3001;&#x8BA1;&#x65F6;&#x5668;&#xFF1B;4&#x3001;&#x65F6;&#x95F4;&#x8BB0;&#x5F55;&#x8868;&#x3002;&#x4E0B;&#x9762;&#x5206;&#x522B;&#x8BF4;&#x660E;&#x7528;&#x9014;&#x548C;&#x7528;&#x6CD5;&#xFF1A;</p>
+<h2 id="1-&#x6D3B;&#x52A8;&#x6E05;&#x5355;"><a href="#1-&#x6D3B;&#x52A8;&#x6E05;&#x5355;" class="headerlink" title="1. &#x6D3B;&#x52A8;&#x6E05;&#x5355;"></a>1. &#x6D3B;&#x52A8;&#x6E05;&#x5355;</h2><p>&#x5373;To-do List&#x3002;&#x756A;&#x8304;&#x65F6;&#x949F;&#x5DE5;&#x4F5C;&#x6CD5;&#x5C06;todo list&#x62C6;&#x5206;&#x6210;&#x6D3B;&#x52A8;&#x6E05;&#x5355;&#x548C;&#x4ECA;&#x65E5;&#x5F85;&#x529E;&#xFF0C;&#x662F;&#x4E00;&#x4E2A;&#x5F88;&#x597D;&#x7684;&#x8BBE;&#x8BA1;&#x3002;&#x53EF;&#x4EE5;&#x7C7B;&#x6BD4;&#x4E8E;&#x8BA1;&#x7B97;&#x673A;&#x7CFB;&#x7EDF;&#x4E2D;&#x5185;&#x5B58;&#x548C;&#x78C1;&#x76D8;&#x7684;&#x8BBE;&#x8BA1;&#x3002;</p>
+<p>&#x5728;&#x6D3B;&#x52A8;&#x6E05;&#x5355;&#x4E2D;&#xFF0C;&#x7F57;&#x5217;&#x81EA;&#x5DF1;&#x8BA1;&#x5212;&#x8981;&#x505A;&#x7684;&#x4E8B;&#x60C5;&#x3002;&#x53EF;&#x4EE5;&#x5728;&#x4EFB;&#x4F55;&#x65F6;&#x95F4;&#x5199;&#x5165;1&#x6761;&#xFF0C;&#x6B63;&#x5E38;&#x662F;&#x81EA;&#x5DF1;&#x5728;&#x8BA1;&#x5212;&#x65F6;&#x5199;&#x4E0A;&#x7684;&#xFF0C;&#x5982;&#x679C;&#x662F;&#x5728;&#x756A;&#x8304;&#x65F6;&#x949F;&#x6267;&#x884C;&#x8FC7;&#x7A0B;&#x4E2D;&#x7531;&#x4E8E;&#x4E2D;&#x65AD;&#x800C;&#x5199;&#x4E0A;&#x7684;&#xFF0C;&#x5219;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x8BA1;&#x5212;&#x5916;(u)&#x7684;&#x6807;&#x8BB0;&#x3002;</p>
+<p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x5355;&#x72EC;&#x7684;&#x7EB8;&#x8BB0;&#x5F55;&#xFF0C;&#x6216;&#x8005;&#x5229;&#x7528;&#x624B;&#x5934;&#x5DF2;&#x6709;&#x7684;&#x5404;&#x7C7B;&#x8F6F;&#x4EF6;&#x5DE5;&#x5177;&#x3002;</p>
+<h2 id="2-&#x4ECA;&#x65E5;&#x5F85;&#x529E;"><a href="#2-&#x4ECA;&#x65E5;&#x5F85;&#x529E;" class="headerlink" title="2. &#x4ECA;&#x65E5;&#x5F85;&#x529E;"></a>2. &#x4ECA;&#x65E5;&#x5F85;&#x529E;</h2><p>&#x5373;&#x4ECA;&#x65E5;&#x7684;To-do List&#xFF0C;&#x548C;&#x6D3B;&#x52A8;&#x6E05;&#x5355;&#x7684;todo list&#x7684;&#x4E0D;&#x540C;&#x70B9;&#xFF1A;</p>
+<ol>
+<li>&#x8FD9;&#x91CC;&#x8BB0;&#x5F55;&#x7684;&#x662F;&#x4ECA;&#x5929;&#x8BA1;&#x5212;&#x5B8C;&#x6210;&#x7684;&#x4E8B;&#x9879;&#x548C;&#x8BA1;&#x5212;&#x5916;&#x7D27;&#x6025;&#x4E8B;&#x9879;</li>
+<li>&#x6BCF;&#x4E00;&#x9879;&#x9700;&#x9884;&#x4F30;&#x51FA;&#x6240;&#x82B1;&#x8D39;&#x7684;&#x756A;&#x8304;&#x65F6;&#x949F;&#x6570;&#xFF0C;&#x5148;&#x63D0;&#x524D;&#x6253;&#x4E0A;&#x65B9;&#x6846;&#xFF0C;&#x5728;&#x756A;&#x8304;&#x65F6;&#x949F;&#x6BCF;&#x6267;&#x884C;&#x5B8C;1&#x6B21;&#x5F53;&#x524D;&#x4E8B;&#x9879;&#x540E;&#x5728;&#x65B9;&#x6846;&#x4E2D;&#x753B;&#x53C9;&#x3002;&#x5982;&#x679C;&#x53D1;&#x73B0;&#x5B8C;&#x6210;&#x4E8B;&#x9879;&#x9884;&#x4F30;&#x7684;&#x756A;&#x8304;&#x65F6;&#x949F;&#x6570;&#x4E0D;&#x8DB3;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x6807;&#x8BB0;+&#x7684;&#x6570;&#x91CF;&#xFF1B;&#x5982;&#x679C;&#x5B8C;&#x6210;&#x4E8B;&#x9879;&#x53D1;&#x73B0;&#x9884;&#x7559;&#x7684;&#x65B9;&#x6846;&#x6CA1;&#x6709;&#x7528;&#x5C3D;&#xFF0C;&#x5219;&#x6807;&#x8BB0;-&#x7684;&#x6570;&#x91CF;&#xFF0C;&#x7528;&#x4E8E;&#x540E;&#x7EED;&#x65F6;&#x95F4;&#x8BB0;&#x5F55;&#x8868;</li>
+<li>&#x5728;&#x756A;&#x8304;&#x65F6;&#x949F;&#x5468;&#x671F;&#x5185;&#x88AB;&#x81EA;&#x6211;&#x5185;&#x90E8;&#x5C1D;&#x8BD5;&#x6253;&#x65AD;&#x7684;&#x65F6;&#x5019;&#x8BB0;&#x5F55;&#x4E00;&#x4E2A;|&#xFF0C;&#x88AB;&#x5916;&#x90E8;&#x5C1D;&#x8BD5;&#x6253;&#x65AD;&#x7684;&#x65F6;&#x5019;&#x8BB0;&#x5F55;&#x4E00;&#x4E2A;&#x2014;&#xFF1B;&#x7136;&#x540E;&#x5C06;&#x65B0;&#x589E;&#x4E8B;&#x9879;&#x8BB0;&#x5F55;&#x5230;&#x8BA1;&#x5212;&#x5916;&#x7D27;&#x6025;&#x4E8B;&#x9879;&#x6216;&#x8005;&#x6D3B;&#x52A8;&#x6E05;&#x5355;&#x7684;u&#x6807;&#x8BB0;&#x4E8B;&#x9879;&#x3002;</li>
+<li>&#x6BCF;&#x4E2A;&#x756A;&#x8304;&#x949F;&#x7684;&#x6267;&#x884C;&#x5177;&#x6709;&#x539F;&#x5B50;&#x6027;&#xFF0C;&#x5982;&#x679C;&#x771F;&#x7684;&#x53D1;&#x751F;&#x7684;&#x4E2D;&#x65AD;&#x5207;&#x6362;&#xFF0C;&#x5F53;&#x524D;&#x756A;&#x8304;&#x949F;&#x5468;&#x671F;&#x4F5C;&#x5E9F;</li>
+</ol>
+<p>&#x63A8;&#x8350;&#x4F7F;&#x7528;&#x4FBF;&#x7B7E;&#x7EB8;&#x8BB0;&#x5F55;</p>
+<h2 id="3-&#x8BA1;&#x65F6;&#x5668;"><a href="#3-&#x8BA1;&#x65F6;&#x5668;" class="headerlink" title="3. &#x8BA1;&#x65F6;&#x5668;"></a>3. &#x8BA1;&#x65F6;&#x5668;</h2><p>&#x5373;&#x756A;&#x8304;&#x65F6;&#x949F;&#x3002;&#x8BB0;&#x5F55;&#x5DE5;&#x4F5C;&#x65F6;&#x95F4;&#xFF08;25min&#xFF09;&#x3001;&#x5C0F;&#x61A9;&#x65F6;&#x95F4;&#xFF08;5min&#xFF09;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x8F6F;&#x4EF6;&#xFF08;&#x6211;&#x7528;&#x7684;&#x662F;tomatobar&#xFF09;&#x6216;&#x8005;&#x7269;&#x7406;&#x949F;&#x3002;</p>
+<h2 id="4-&#x65F6;&#x95F4;&#x8BB0;&#x5F55;&#x8868;"><a href="#4-&#x65F6;&#x95F4;&#x8BB0;&#x5F55;&#x8868;" class="headerlink" title="4. &#x65F6;&#x95F4;&#x8BB0;&#x5F55;&#x8868;"></a>4. &#x65F6;&#x95F4;&#x8BB0;&#x5F55;&#x8868;</h2><p>&#x7531;24&#x679A;&#x91D1;&#x5E01;&#x65F6;&#x95F4;&#x8BB0;&#x5F55;&#x8868;&#x548C;&#x756A;&#x8304;&#x65F6;&#x95F4;&#x5DE5;&#x4F5C;&#x6CD5;&#x7684;&#x8BB0;&#x5F55;&#x8868;&#x7ED3;&#x5408;&#x800C;&#x6765;&#x3002;</p>
+<p>&#x8BB0;&#x5F55;&#x6BCF;&#x5929;&#x505A;&#x7684;&#x4E8B;&#x60C5;&#xFF0C;&#x5B8C;&#x6210;/&#x672A;&#x5B8C;&#x6210;&#x7684;&#x756A;&#x8304;&#x949F;&#x6570;&#x91CF;&#xFF0C;&#x88AB;&#x6253;&#x7B97;&#x7684;&#x6B21;&#x6570;&#xFF0C;&#x5E73;&#x5747;&#x4EFB;&#x52A1;&#x5904;&#x7406;&#x65F6;&#x95F4;</p>
+<h1 id="&#x670D;&#x52A1;&#x7AEF;&#x7CFB;&#x7EDF;&#x8BBE;&#x8BA1;"><a href="#&#x670D;&#x52A1;&#x7AEF;&#x7CFB;&#x7EDF;&#x8BBE;&#x8BA1;" class="headerlink" title="&#x670D;&#x52A1;&#x7AEF;&#x7CFB;&#x7EDF;&#x8BBE;&#x8BA1;"></a>&#x670D;&#x52A1;&#x7AEF;&#x7CFB;&#x7EDF;&#x8BBE;&#x8BA1;</h1><h2 id="&#x6570;&#x636E;&#x8BBE;&#x8BA1;"><a href="#&#x6570;&#x636E;&#x8BBE;&#x8BA1;" class="headerlink" title="&#x6570;&#x636E;&#x8BBE;&#x8BA1;"></a>&#x6570;&#x636E;&#x8BBE;&#x8BA1;</h2><p>&#x4E00;&#x6761;&#x8BB0;&#x5F55;&#xFF1A;startTime endTime actionDesc actionType<br>&#x6BCF;&#x5929;&#x7684;&#x65F6;&#x95F4;&#x8BB0;&#x5F55;&#x7684;&#x6700;&#x7EC6;&#x7C92;&#x5EA6;&#x4E3A;&#x534A;&#x5C0F;&#x65F6;&#x3002;</p>
 <h2 id="&#x4EA4;&#x4E92;&#x8BBE;&#x8BA1;"><a href="#&#x4EA4;&#x4E92;&#x8BBE;&#x8BA1;" class="headerlink" title="&#x4EA4;&#x4E92;&#x8BBE;&#x8BA1;"></a>&#x4EA4;&#x4E92;&#x8BBE;&#x8BA1;</h2><p>&#x4F7F;&#x7528;B/S&#x67B6;&#x6784;&#x3002;</p>
 <h2 id="&#x6570;&#x636E;&#x540C;&#x6B65;"><a href="#&#x6570;&#x636E;&#x540C;&#x6B65;" class="headerlink" title="&#x6570;&#x636E;&#x540C;&#x6B65;"></a>&#x6570;&#x636E;&#x540C;&#x6B65;</h2><p>&#x652F;&#x6301;&#x6570;&#x636E;&#x5BFC;&#x51FA;&#x3001;&#x5BFC;&#x5165;&#x5408;&#x5E76;&#x3002;</p>
 <h3 id="&#x6570;&#x636E;&#x5E93;&#x8868;&#x5B9A;&#x4E49;"><a href="#&#x6570;&#x636E;&#x5E93;&#x8868;&#x5B9A;&#x4E49;" class="headerlink" title="&#x6570;&#x636E;&#x5E93;&#x8868;&#x5B9A;&#x4E49;"></a>&#x6570;&#x636E;&#x5E93;&#x8868;&#x5B9A;&#x4E49;</h3><p>&#x5148;&#x4EE5;root&#x7528;&#x6237;&#x767B;&#x9646;&#x521B;&#x5EFA;timemanage&#x6570;&#x636E;&#x5E93;&#xFF1A;</p>

@@ -152,6 +152,130 @@
         <article class="article content gallery" itemscope itemprop="blogPost">
     <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
         
+            <a href="/zh-cn/2020-07-07-Docker-cheatsheet/" itemprop="url">Docker词汇表</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2020-07-07T14:22:04.000Z" itemprop="datePublished">7月 7 2020</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            1 分钟 读完 (约 174 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x66F4;&#x6539;docker&#x955C;&#x50CF;&#x6E90;&#x4E3A;&#x963F;&#x91CC;&#x4E91;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo vim /etc/docker/daemon.json</span><br><span class="line">cat /etc/docker/daemon.json</span><br></pre></td></tr></table></figure>
+
+<p>{<br>  &#x201C;registry-mirrors&#x201D;: [&#x201C;<a href="https://gvv1xf6d.mirror.aliyuncs.com&quot;]" target="_blank" rel="noopener">https://gvv1xf6d.mirror.aliyuncs.com&quot;]</a><br>}</p>
+<p>&#x62C9;&#x53D6;&#x7CFB;&#x7EDF;&#x955C;&#x50CF;&#x5E76;&#x8FD0;&#x884C;&#xFF1A;</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">docker pull debian</span><br><span class="line">docker run -it debian bash</span><br></pre></td></tr></table></figure>
+
+<p>&#x66F4;&#x6539;debian&#x955C;&#x50CF;&#x6E90;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">cd /etc/apt</span><br><span class="line">cp sources.list sources.list.bak</span><br><span class="line">echo &quot;deb http://mirrors.tuna.tsinghua.edu.cn/debian/ buster main contrib non-free&quot; &gt; sources.list.tsinghua</span><br><span class="line">echo &quot;deb http://mirrors.tuna.tsinghua.edu.cn/debian/ buster-updates main contrib non-free&quot; &gt;&gt; sources.list.tsinghua</span><br><span class="line">echo &quot;deb http://mirrors.tuna.tsinghua.edu.cn/debian/ buster-backports main contrib non-free&quot; &gt;&gt; sources.list.tsinghua</span><br><span class="line">echo &quot;deb http://mirrors.tuna.tsinghua.edu.cn/debian-security buster/updates main contrib non-free&quot; &gt;&gt; sources.list.tsinghua</span><br><span class="line">mv sources.list.tsinghua sources.list</span><br><span class="line">apt install apt-transport-https ca-certificates</span><br><span class="line">sed -E -i &apos;s/http/https/&apos; sources.list</span><br><span class="line">apt update</span><br></pre></td></tr></table></figure>
+
+<p>docker commit e7f167a49946 wsd/testimg:1 # container id<br>docker run -it wsd/testimg:1 bash</p>
+
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/zh-cn/2020-06-28-Design-patterns-Adapter-pattern/" itemprop="url">设计模式 之 适配器</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2020-06-28T08:07:52.000Z" itemprop="datePublished">6月 28 2020</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh-cn/categories/Eureka项目/">Eureka项目</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            6 分钟 读完 (约 838 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x9002;&#x914D;&#x5668;&#x6A21;&#x5F0F;&#x662F;&#x4E00;&#x79CD;&#x5E38;&#x7528;&#x7684;&#x8BBE;&#x8BA1;&#x6A21;&#x5F0F;&#x3002;</p>
+        <p class="article-more-link">
+            <a href="/zh-cn/2020-06-28-Design-patterns-Adapter-pattern/#more">阅读更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            <a href="/zh-cn/2020-06-26-KDE-desktop-config/" itemprop="url">KDE Desktop Config</a>
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2020-06-26T05:19:12.000Z" itemprop="datePublished">6月 26 2020</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            7 分钟 读完 (约 1064 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>KDE is a highly configurable modern Linux desktop environment which is developed by OpenSUSE company.</p>
+        <p class="article-more-link">
+            <a href="/zh-cn/2020-06-26-KDE-desktop-config/#more">阅读更多</a>
+        </p>
+    
+    </div>
+    
+    
+</article>
+
+
+
+
+    
+        <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
             <a href="/zh-cn/2020-May-30-Chrome-extensions/" itemprop="url">Chrome 浏览器插件推荐</a>
         
     </h1>
@@ -413,117 +537,6 @@
 
 
     
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/zh-cn/2020-02-22-Aimi-SCI-course/" itemprop="url">Aimi SCI writing course</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            
-                <time datetime="2020-02-22T08:06:27.000Z" itemprop="datePublished">2月 22 2020</time>
-            
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            5 分钟 读完 (约 736 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>13-day course.</p>
-        <p class="article-more-link">
-            <a href="/zh-cn/2020-02-22-Aimi-SCI-course/#more">阅读更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/zh-cn/2020-01-30-VSCode-for-LeetCode/" itemprop="url">VSCode for LeetCode</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            
-                <time datetime="2020-01-30T04:14:37.000Z" itemprop="datePublished">1月 30 2020</time>
-            
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            1 分钟 读完 (约 157 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>&#x7528; VS Code &#x5237; LeetCode&#xFF1F;&#x771F;&#x9999;&#xFF01;</p>
-        <p class="article-more-link">
-            <a href="/zh-cn/2020-01-30-VSCode-for-LeetCode/#more">阅读更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
-        <article class="article content gallery" itemscope itemprop="blogPost">
-    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
-        
-            <a href="/zh-cn/2020-01-19-Wubi-Chinese-input-method/" itemprop="url">学习非主流汉字输入法</a>
-        
-    </h1>
-    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
-        <span class="column is-narrow">
-            
-                <time datetime="2020-01-19T04:57:51.000Z" itemprop="datePublished">1月 19 2020</time>
-            
-        </span>
-        
-        
-        <span class="column is-narrow">
-            
-            
-            7 分钟 读完 (约 1085 字)
-        </span>
-        
-    </div>
-    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
-    
-        <p>&#x975E;&#x4E3B;&#x6D41;&#x6C49;&#x5B57;&#x8F93;&#x5165;&#x6CD5;&#x8BA9;&#x6211;&#x5BF9;&#x6C49;&#x5B57;&#x7684;&#x7406;&#x89E3;&#x53C8;&#x52A0;&#x6DF1;&#x4E86;&#x4E00;&#x5C42;&#x3002;</p>
-        <p class="article-more-link">
-            <a href="/zh-cn/2020-01-19-Wubi-Chinese-input-method/#more">阅读更多</a>
-        </p>
-    
-    </div>
-    
-    
-</article>
-
-
-
-
-    
     
         
 <nav class="pagination is-centered is-rounded" role="navigation" aria-label="pagination">
@@ -547,7 +560,7 @@
         
         <li><span class="pagination-ellipsis">&hellip;</span></li>
         
-        <li><a class="pagination-link" href="/zh-cn/page/15/">15</a></li>
+        <li><a class="pagination-link" href="/zh-cn/page/16/">16</a></li>
         
     </ul>
 </nav>
