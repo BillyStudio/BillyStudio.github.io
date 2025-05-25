@@ -1,0 +1,668 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>Creating virtual machiness on Linux --- the hard way - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/Sept-17th-Create-vms-on-Linux-the-hard-way/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="Two ways of using KVM-based vms on Linux are introduced.">
+<meta name="keywords" content="VM,Linux,Win10,qemu,kvm">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Creating virtual machiness on Linux --- the hard way">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="Two ways of using KVM-based vms on Linux are introduced.">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/check-module.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/Screenshot-win7-activation.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/Screenshot-office16.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/before-install.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/after-install.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/libvirt-uri.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/vm-name.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/addvol.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/afteradd.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/grub-edit.jpg">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/bind-adapter-addr.png">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.710Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Creating virtual machiness on Linux --- the hard way">
+<meta name="twitter:description" content="Two ways of using KVM-based vms on Linux are introduced.">
+<meta name="twitter:image" content="https://billystudio.github.io/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/check-module.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#I-Prerequisites">1&nbsp;&nbsp;<b>I. Prerequisites</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#II-Virt-Manager">2&nbsp;&nbsp;<b>II. Virt Manager</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#II-A-Win7-VM-installation-and-usage">2.1&nbsp;&nbsp;II.A Win7 VM installation and usage</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Real-time-clock">2.1.1&nbsp;&nbsp;Real time clock</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Office-2016-pack">2.1.2&nbsp;&nbsp;Office 2016 pack</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#QXL-Acceleration">2.1.3&nbsp;&nbsp;QXL Acceleration</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#II-B-Win10-VM-Installation">2.2&nbsp;&nbsp;II.B Win10 VM Installation</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#II-B-a-Launch-VM-as-a-desktop-program">2.2.1&nbsp;&nbsp;II.B.a Launch VM as a desktop program</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#II-B-b-Expand-block-image-size">2.2.2&nbsp;&nbsp;II.B.b Expand block image size</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#II-B-c-PCI硬件设备直通">2.2.3&nbsp;&nbsp;II.B.c PCI硬件设备直通</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#II-B-d-CPU绑定">2.2.4&nbsp;&nbsp;II.B.d CPU绑定</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#II-B-e-配置双屏">2.2.5&nbsp;&nbsp;II.B.e 配置双屏</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#II-B-f-单独设置VRAM">2.2.6&nbsp;&nbsp;II.B.f 单独设置VRAM</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#References">3&nbsp;&nbsp;<b>References</b></a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/Sept-17th-Create-vms-on-Linux-the-hard-way/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/Sept-17th-Create-vms-on-Linux-the-hard-way/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Creating virtual machiness on Linux --- the hard way
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-09-17T07:27:41.000Z" itemprop="datePublished">9月 17 2019</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            14 分钟 读完 (约 2128 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>Two ways of using KVM-based vms on Linux are introduced.<a id="more"></a> One is using virt-manager GUI, another is using the raw <code>qemu-system</code>.</p>
+<h1 id="I-Prerequisites"><a href="#I-Prerequisites" class="headerlink" title="I. Prerequisites"></a>I. Prerequisites</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pacman -S qemu bridge-utils iptables dnsmasq ebtables</span><br><span class="line">pacman -S libvirt</span><br></pre></td></tr></table></figure>
+
+<p>check for module loading:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep kvm</span><br><span class="line">lsmod | grep virtio</span><br></pre></td></tr></table></figure>
+
+<p><img src="check-module.png" alt></p>
+<p>To auto load a module at boot, create a file like &#x2018;/etc/modules-load.d/virtio.conf&#x2019;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"># Load virtio at boot</span><br><span class="line">virtio</span><br></pre></td></tr></table></figure>
+
+<h1 id="II-Virt-Manager"><a href="#II-Virt-Manager" class="headerlink" title="II. Virt Manager"></a>II. Virt Manager</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">pacman -S virt-manager</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo usermod --append --groups libvirt $(whoami)</span><br><span class="line">sudo systemctl start libvirtd</span><br></pre></td></tr></table></figure>
+
+<p>check for nat:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">sudo virsh net-list --all</span><br><span class="line"># sudo virsh net-start default</span><br></pre></td></tr></table></figure>
+
+<p>Then install using GUI.<br>if you want a raw image, create the img file by yourself</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">qemu-img create -f raw imgfile 20G</span><br></pre></td></tr></table></figure>
+
+<h2 id="II-A-Win7-VM-installation-and-usage"><a href="#II-A-Win7-VM-installation-and-usage" class="headerlink" title="II.A Win7 VM installation and usage"></a>II.A Win7 VM installation and usage</h2><p>aur install virtio-win<br>pacman install dmidecode</p>
+<p>Under hard disk OS-images directory, find the file <code>windows7_Ultimate_x64.iso</code> and copy it into /var/lib/libvirt/images.<br>This is a ghost OS image with some preinstall software. I use this because the activation tool is inside.<br><img src="Screenshot-win7-activation.png" alt="Screenshot-win7-activation.png"></p>
+<p>Just put the script and <code>Windows Loader.ext</code> in the same directory and then run the script in Administrator.</p>
+<h3 id="Real-time-clock"><a href="#Real-time-clock" class="headerlink" title="Real time clock"></a>Real time clock</h3><p>In virt manager, enable XML editing.<br>Then replace <code>&lt;clock offset=&apos;utc&apos;&gt;</code> with <code>&lt;clock offset=&apos;localtime&apos;&gt;</code><br>Administrator open cmd:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bcdedit /set {default} USEPLATFORMCLOCK on</span><br></pre></td></tr></table></figure>
+
+<h3 id="Office-2016-pack"><a href="#Office-2016-pack" class="headerlink" title="Office 2016 pack"></a>Office 2016 pack</h3><p>mount the iso file: Office_2016_x64_ZH_16.0.7466.2038.iso<br>off-line installer:<br><img src="Screenshot-office16.png" alt="Screenshot-office16.png"><br>start one of the Office app<br>convert and activate</p>
+<h3 id="QXL-Acceleration"><a href="#QXL-Acceleration" class="headerlink" title="QXL Acceleration"></a>QXL Acceleration</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lsmod|grep qxl # check</span><br><span class="line">sudo modprobe qxl bochs_drm # if not mod</span><br></pre></td></tr></table></figure>
+
+<p>To auto load a module at boot, create a file like &#x2018;/etc/modules-load.d/qxl.conf&#x2019;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># Load qxl at boot</span><br><span class="line">qxl</span><br><span class="line">bochs_drm</span><br></pre></td></tr></table></figure>
+
+<p>This is not enough. Because we just build a base on the server, but do nothing on the Windows guest. Look at this:<br><img src="before-install.png" alt="before-install.png"></p>
+<p>Next install <code>spice-guest-tools-latest.exe</code> downloaded from <a href="https://www.spice-space.org/download.html" target="_blank" rel="noopener">https://www.spice-space.org/download.html</a>.</p>
+<p><img src="after-install.png" alt="done installed qxl driver"></p>
+<p>&#x6BD4;&#x8F83;&#x4E0D;&#x597D;&#x7684;&#x4E00;&#x4E2A;bug&#x662F;&#x865A;&#x62DF;&#x673A;&#x5185;&#x90E8;&#x7684;&#x590D;&#x5236;&#x7C98;&#x8D34;&#x4E0D;&#x597D;&#x7528;&#x4E86;&#xFF0C;&#x6240;&#x4EE5;&#x5BF9;&#x4E8E;&#x8DE8;&#x673A;&#x7684;&#x590D;&#x5236;&#x7C98;&#x8D34;&#xFF0C;&#x8FD8;&#x662F;&#x91C7;&#x7528;&#x539F;&#x59CB;&#x7684;&#x6587;&#x4EF6;&#x65B9;&#x5F0F;&#x6765;&#x5B9E;&#x73B0;&#x3002;</p>
+<p>make sure sshd on host is on<br>open one term on host and type <code>tty</code> to get device name&#xFF0C;say <code>/dev/pts/0</code></p>
+<p>ssh to host using PuTTY from win7 client<br><code>echo &quot;copied text&quot; &gt;&gt; /dev/pts/0</code></p>
+<p>You will see &#x201C;copied text&#x201D; on the host terminal.</p>
+<h2 id="II-B-Win10-VM-Installation"><a href="#II-B-Win10-VM-Installation" class="headerlink" title="II.B Win10 VM Installation"></a>II.B Win10 VM Installation</h2><p>Because of two bugs of Win7 VM: the first is that copy-and-pasteing for office object always throws an error in VM; the second is that Office2016 on win7 cannot open remote-location file. I change to win10 vm, and I found that&#x2019;s cool.</p>
+<h3 id="II-B-a-Launch-VM-as-a-desktop-program"><a href="#II-B-a-Launch-VM-as-a-desktop-program" class="headerlink" title="II.B.a Launch VM as a desktop program"></a>II.B.a Launch VM as a desktop program</h3><p>Go to Virt-manager &gt; Connection Details to find Libvirt URI, here mine is <code>qemu:///system</code></p>
+<p><img src="libvirt-uri.png" alt="libvirt-uri"></p>
+<p>Then open virtual machine, go to View &gt; Details to find the name of the virtual machine, here mine is <code>win10</code></p>
+<p><img src="vm-name.png" alt="vm-name"></p>
+<p>Now we can test the direct-open command:</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">virt-manager --connect qemu:///system --show-domain-console win10</span><br></pre></td></tr></table></figure>
+
+<p>Then create your desktop file under <code>~/.local/share/applications</code>:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Desktop Entry]</span><br><span class="line">Version=1.0</span><br><span class="line">Type=Application</span><br><span class="line">Name=win10</span><br><span class="line">Comment=Start Win10 VM</span><br><span class="line">Exec=virt-manager --connect qemu:///system --show-domain-console win10</span><br><span class="line">Icon=your/logo/position/windows.svg</span><br><span class="line">Terminal=false</span><br><span class="line">StartupNotify=false</span><br></pre></td></tr></table></figure>
+
+<h3 id="II-B-b-Expand-block-image-size"><a href="#II-B-b-Expand-block-image-size" class="headerlink" title="II.B.b Expand block image size"></a>II.B.b Expand block image size</h3><p>To add 5G to my win10 raw format volume, first check the state:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"># virsh list --all</span><br><span class="line"> Id   Name    State</span><br><span class="line">------------------------</span><br><span class="line"> -    win10   shut off</span><br></pre></td></tr></table></figure>
+
+<p>Then go to increase</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># cd /var/lib/libvirt/images/</span><br><span class="line"># ls -lh win10vol.img</span><br><span class="line"># qemu-img resize win10vol.img +5G</span><br></pre></td></tr></table></figure>
+
+<p>Then start win10 VM and right click &#x2018;Start Menu&#x2019; -&gt; Disk management -&gt; Extend Volumn C:\<br><img src="addvol.png" alt="addvol.png"><br>ok.<br><img src="afteradd.png" alt="afteradd.png"></p>
+<h3 id="II-B-c-PCI&#x786C;&#x4EF6;&#x8BBE;&#x5907;&#x76F4;&#x901A;"><a href="#II-B-c-PCI&#x786C;&#x4EF6;&#x8BBE;&#x5907;&#x76F4;&#x901A;" class="headerlink" title="II.B.c PCI&#x786C;&#x4EF6;&#x8BBE;&#x5907;&#x76F4;&#x901A;"></a>II.B.c PCI&#x786C;&#x4EF6;&#x8BBE;&#x5907;&#x76F4;&#x901A;</h3><p><strong>Prerequisite: Enable IOMMU(Input/Output Memory Management Unit)</strong><br>Intel CPU&#x4E0A;&#x5F00;&#x542F;IOMMU&#x9700;&#x8981;VT-d&#x7684;&#x652F;&#x6301;&#x3002;VT-d(Intel Virtualization Technology for Direct I/O)&#x662F;&#x4E00;&#x4E2A;&#x4F4D;&#x4E8E;CPU&#x3001;&#x5185;&#x5B58;&#x548C;I/O&#x8BBE;&#x5907;&#x4E4B;&#x95F4;&#x7684;&#x786C;&#x4EF6;&#x8BBE;&#x5907;&#xFF0C;&#x5B83;&#x53EF;&#x4EE5;&#x62E6;&#x622A;I/O&#x8BBE;&#x5907;&#x4EA7;&#x751F;&#x7684;&#x4E2D;&#x65AD;&#x8BF7;&#x6C42;&#x548C;&#x901A;&#x8FC7;DMA&#x65B9;&#x5F0F;&#x5BF9;&#x865A;&#x62DF;&#x673A;&#x5185;&#x5B58;&#x7684;&#x8BBF;&#x95EE;&#xFF0C;&#x7136;&#x540E;&#x91CD;&#x5B9A;&#x5411;&#x5230;&#x901A;&#x8FC7;&#x865A;&#x62DF;&#x673A;&#x76D1;&#x89C6;&#x5668;&#xFF08;VMM&#xFF09;&#x8BBE;&#x5B9A;&#x7684;&#x865A;&#x62DF;&#x673A;&#x4E2D;&#x3002;VT-d&#x6280;&#x672F;&#x652F;&#x6301;&#x4E86;&#x865A;&#x62DF;&#x673A;&#x5185;&#x90E8;&#x9A71;&#x52A8;&#x7A0B;&#x5E8F;&#x76F4;&#x63A5;&#x4E0E;&#x786C;&#x4EF6;&#x8BBE;&#x5907;&#x901A;&#x4FE1;&#xFF0C;&#x66FF;&#x4EE3;&#x4E86;&#x4F20;&#x7EDF;&#x7684;&#x8F6F;&#x4EF6;&#x6A21;&#x62DF;&#x65B9;&#x5F0F;&#xFF0C;&#x5927;&#x5927;&#x63D0;&#x5347;&#x4E86;&#x865A;&#x62DF;&#x5316;&#x7684;I/O&#x6027;&#x80FD;&#x3002;</p>
+<p>&#x5F00;&#x542F;&#x65B9;&#x5F0F;&#x53EF;&#x5206;&#x4E3A;&#x4E34;&#x65F6;&#x5F00;&#x542F;&#x548C;&#x5199;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5F00;&#x542F;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#xFF1A;<br>&#x65B9;&#x5F0F;&#x4E00;&#xFF08;&#x4E34;&#x65F6;&#x5F00;&#x542F;&#x65B9;&#x6CD5;&#xFF09;&#xFF1A;&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x542F;&#x52A8;&#x7684;grub&#x9875;&#x9762;&#x6309;e&#x8FDB;&#x5165;kernal&#x6A21;&#x5F0F;&#xFF0C;&#x5728;&#x542F;&#x52A8;vmlinuz&#x7684;&#x53C2;&#x6570;&#x540E;&#x9762;&#x6DFB;&#x52A0; intel_iommu=on &#x548C; iommu=pt<br><img src="grub-edit.jpg" alt="grub-edit.jpg"><br>&#x8FD9;&#x79CD;&#x5F00;&#x542F;&#x65B9;&#x6CD5;&#x5728;&#x91CD;&#x542F;&#x4E4B;&#x540E;&#x914D;&#x7F6E;&#x53C8;&#x4F1A;&#x53D8;&#x6210;&#x539F;&#x6765;&#x7684;&#x6837;&#x5B50;&#x3002;</p>
+<p>&#x65B9;&#x5F0F;&#x4E8C;&#xFF08;&#x5199;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x5F00;&#x542F;&#x65B9;&#x6CD5;&#xFF09;&#xFF1A;</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">su</span><br><span class="line">vim /etc/default/grub</span><br></pre></td></tr></table></figure>
+
+<p>&#x5728; <code>GRUB_CMDLINE_LINUX_DEFAULT</code> &#x53C2;&#x6570;&#x4E2D;&#x6DFB;&#x52A0; <code>intel_iommu=on iommu=pt</code></p>
+<blockquote>
+<p>GRUB_CMDLINE_LINUX_DEFAULT=&#x201D;loglevel=3 intel_iommu=on iommu=pt&#x201D;</p>
+</blockquote>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grub-mkconfig -o /boot/grub/grub.cfg</span><br></pre></td></tr></table></figure>
+
+<p><strong>1. &#x914D;&#x7F6E;&#x65E0;&#x7EBF;&#x7F51;&#x5361;&#x76F4;&#x901A;</strong><br>&#x9ED8;&#x8BA4;&#x7684;&#x865A;&#x62DF;&#x673A;&#x4F7F;&#x7528;NAT&#x6A21;&#x5F0F;&#x4E0A;&#x7F51;&#xFF0C;&#x5BF9;&#x4E00;&#x4E9B;&#x5176;&#x4ED6;&#x4E0A;&#x7F51;&#x6A21;&#x5F0F;&#x4E5F;&#x662F;&#x652F;&#x6301;&#x7684;&#x3002;&#x76EE;&#x524D;&#x6211;&#x5BF9;&#x4E8E;&#x6865;&#x63A5;&#x6A21;&#x5F0F;&#x7684;&#x914D;&#x7F6E;&#x6CA1;&#x6709;&#x6210;&#x529F;&#xFF0C;&#x6240;&#x4EE5;&#x8FD9;&#x91CC;&#x8BB0;&#x5F55;&#x53EA;&#x6210;&#x529F;&#x4E86;&#x7684;&#x7F51;&#x5361;&#x76F4;&#x901A;&#x6A21;&#x5F0F;&#x3002;<br>&#x5728;&#x8BE5;&#x6A21;&#x5F0F;&#x4E0B;&#xFF0C;&#x865A;&#x62DF;&#x673A;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x65E0;&#x7EBF;&#x7F51;&#x5361;&#x8054;&#x7F51;&#xFF0C;&#x5BBF;&#x4E3B;&#x673A;&#x53EF;&#x4EE5;&#x7528;&#x6709;&#x7EBF;&#x8FDE;&#x63A5;&#xFF0C;&#x5F53;&#x65F6;&#x914D;&#x7F6E;&#x8BE5;&#x6A21;&#x5F0F;&#x53EA;&#x662F;&#x4E3A;&#x4E86;&#x6682;&#x65F6;&#x540C;&#x6B65;&#x4E00;&#x4E0B;&#x5FAE;&#x4FE1;&#x804A;&#x5929;&#x8BB0;&#x5F55;&#xFF08;&#x56E0;&#x4E3A;&#x5FC5;&#x987B;&#x5728;&#x540C;&#x4E00;wifi&#x4E0B;&#xFF09;</p>
+<p>&#x6210;&#x529F;&#x5F00;&#x673A;&#x540E;root&#x4F7F;&#x7528;&#x4E0B;&#x9762;&#x547D;&#x4EE4;&#x68C0;&#x67E5;&#x65E0;&#x7EBF;&#x7F51;&#x5361;&#x7684;pci&#x5730;&#x5740;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">shopt -s nullglob</span><br><span class="line">for g in `find /sys/kernel/iommu_groups/* -maxdepth 0 -type d | sort -V`; do</span><br><span class="line">    echo &quot;IOMMU Group ${g##*/}:&quot;</span><br><span class="line">    for d in $g/devices/*; do</span><br><span class="line">        echo -e &quot;\t$(lspci -nns ${d##*/})&quot;</span><br><span class="line">    done;</span><br><span class="line">done;</span><br></pre></td></tr></table></figure>
+
+<p>&#x6211;&#x7684;&#x662F;</p>
+<blockquote>
+<p>IOMMU Group 15:<br>        3a:00.0 Network controller [0280]: Qualcomm Atheros QCA6174 802.11ac Wireless Network Adapter [168c:003e] (rev 32)</p>
+</blockquote>
+<p>&#x518D;&#x68C0;&#x67E5;&#x4E00;&#x4E0B;&#x5730;&#x5740;&#x662F;&#x5426;&#x6B63;&#x786E;&#x548C;&#x662F;&#x5426;&#x652F;&#x6301;iommu</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">lspci -n -s 3a:00.0</span><br><span class="line">dmesg | grep -i iommu | grep 3a:00</span><br></pre></td></tr></table></figure>
+
+<p>&#x663E;&#x793A;&#x662F;&#x652F;&#x6301;&#x7684;&#xFF1A;</p>
+<blockquote>
+<p>[    0.452590] pci 0000:3a:00.0: Adding to iommu group 15</p>
+</blockquote>
+<p>&#x5C06;&#x65E0;&#x7EBF;&#x7F51;&#x5361;&#x4E0E;&#x5BBF;&#x4E3B;&#x673A;&#x89E3;&#x7ED1;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;0000:3a:00.0&quot; &gt; /sys/bus/pci/devices/0000\:3a\:00.0/driver/unbind</span><br></pre></td></tr></table></figure>
+
+<p>&#x7136;&#x540E;&#xFF0C;&#x6253;&#x5F00;&#x865A;&#x62DF;&#x673A;&#x8F6F;&#x4EF6;&#xFF0C;&#x6DFB;&#x52A0;pci device&#xFF0C;&#x4E0E;&#x865A;&#x62DF;&#x673A;&#x7ED1;&#x5B9A;:<br><img src="bind-adapter-addr.png" alt="bind-adapter-addr.png"></p>
+<p>&#x53C2;&#x8003;&#xFF1A;<a href="https://www.cnblogs.com/xia-dong/p/11542771.html" target="_blank" rel="noopener">https://www.cnblogs.com/xia-dong/p/11542771.html</a></p>
+<p><strong>2. &#x914D;&#x7F6E;USB&#x76F4;&#x901A;</strong><br>&#x4E00;&#x822C;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;QEMU&#x7684;USB&#x8F6F;&#x4EF6;&#x91CD;&#x5B9A;&#x5411;&#x65B9;&#x5F0F;&#x53EF;&#x4EE5;&#x6EE1;&#x8DB3;U&#x76D8;&#x7B49;&#x8BBE;&#x5907;&#x7684;&#x4F7F;&#x7528;&#x9700;&#x6C42;&#xFF0C;&#x4F46;&#x662F;&#x5728;&#x4E00;&#x4E9B;&#x9700;&#x8981;&#x7279;&#x5B9A;&#x9A71;&#x52A8;&#x7684;&#x65B9;&#x5F0F;&#x4E0B;&#xFF08;&#x6BD4;&#x5982;&#x65E0;&#x7EBF;&#x6295;&#x5F71;&#x3001;USB&#x8F6C;VGA&#xFF09;&#xFF0C;&#x9700;&#x8981;&#x5F00;&#x542F;USB&#x76F4;&#x901A;&#x529F;&#x80FD;&#x3002;</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@arch wsd]# lsusb</span><br><span class="line">Bus 002 Device 001: ID 1d6b:0003 Linux Foundation 3.0 root hub</span><br><span class="line">Bus 001 Device 003: ID 0c45:670c Microdia Integrated Webcam HD</span><br><span class="line">Bus 001 Device 002: ID 0cf3:e300 Qualcomm Atheros Communications QCA61x4 Bluetooth 4.0</span><br><span class="line">Bus 001 Device 001: ID 1d6b:0002 Linux Foundation 2.0 root hub</span><br></pre></td></tr></table></figure>
+
+<p>&#x901A;&#x8FC7;<code>lsusb</code>&#x547D;&#x4EE4;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;USB&#x63A5;&#x53E3;&#x548C;&#x84DD;&#x7259;&#x3001;&#x6444;&#x50CF;&#x5934;&#x90FD;&#x6302;&#x5728;USB Bus 001&#x4E0B;&#x3002;</p>
+<p>&#x68C0;&#x67E5;USB&#x8BBE;&#x7F6E;&#x662F;&#x5426;&#x652F;&#x6301;RESET&#x529F;&#x80FD;&#xFF1A;</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">[root@arch wsd]# for iommu_group in $(find /sys/kernel/iommu_groups/ -maxdepth 1 -mindepth 1 -type d);do echo &quot;IOMMU group $(basename &quot;$iommu_group&quot;)&quot;; for device in $(\ls -1 &quot;$iommu_group&quot;/devices/); do if [[ -e &quot;$iommu_group&quot;/devices/&quot;$device&quot;/reset ]]; then echo -n &quot;[RESET]&quot;; fi; echo -n $&apos;\t&apos;;lspci -nns &quot;$device&quot;; done; done</span><br><span class="line">IOMMU group 7</span><br><span class="line">[RESET] 00:1c.4 PCI bridge [0604]: Intel Corporation Sunrise Point-LP PCI Express Root Port #5 [8086:9d14] (rev f1)</span><br><span class="line">IOMMU group 5</span><br><span class="line">        00:16.0 Communication controller [0780]: Intel Corporation Sunrise Point-LP CSME HECI #1 [8086:9d3a] (rev 21)</span><br><span class="line">IOMMU group 13</span><br><span class="line">[RESET] 3c:00.0 Non-Volatile memory controller [0108]: SK hynix PC401 NVMe Solid State Drive 256GB [1c5c:1527]</span><br><span class="line">IOMMU group 3</span><br><span class="line">        00:14.0 USB controller [0c03]: Intel Corporation Sunrise Point-LP USB 3.0 xHCI Controller [8086:9d2f] (rev 21)</span><br><span class="line">        00:14.2 Signal processing controller [1180]: Intel Corporation Sunrise Point-LP Thermal subsystem [8086:9d31] (rev 21)</span><br><span class="line">IOMMU group 11</span><br><span class="line">[RESET] 3a:00.0 Network controller [0280]: Qualcomm Atheros QCA6174 802.11ac Wireless Network Adapter [168c:003e] (rev 32)</span><br><span class="line">IOMMU group 1</span><br><span class="line">[RESET] 00:02.0 VGA compatible controller [0300]: Intel Corporation UHD Graphics 620 [8086:5917] (rev 07)</span><br><span class="line">IOMMU group 8</span><br><span class="line">[RESET] 00:1c.5 PCI bridge [0604]: Intel Corporation Sunrise Point-LP PCI Express Root Port #6 [8086:9d15] (rev f1)</span><br><span class="line">IOMMU group 6</span><br><span class="line">[RESET] 00:1c.0 PCI bridge [0604]: Intel Corporation Sunrise Point-LP PCI Express Root Port #1 [8086:9d10] (rev f1)</span><br><span class="line">IOMMU group 4</span><br><span class="line">        00:15.0 Signal processing controller [1180]: Intel Corporation Sunrise Point-LP Serial IO I2C Controller #0 [8086:9d60] (rev 21)</span><br><span class="line">        00:15.1 Signal processing controller [1180]: Intel Corporation Sunrise Point-LP Serial IO I2C Controller #1 [8086:9d61] (rev 21)</span><br><span class="line">IOMMU group 12</span><br><span class="line">[RESET] 3b:00.0 Unassigned class [ff00]: Realtek Semiconductor Co., Ltd. RTS525A PCI Express Card Reader [10ec:525a] (rev 01)</span><br><span class="line">IOMMU group 2</span><br><span class="line">        00:04.0 Signal processing controller [1180]: Intel Corporation Xeon E3-1200 v5/E3-1500 v5/6th Gen Core Processor Thermal Subsystem [8086:1903] (rev 08)</span><br><span class="line">IOMMU group 10</span><br><span class="line">        00:1f.0 ISA bridge [0601]: Intel Corporation Sunrise Point LPC Controller/eSPI Controller [8086:9d4e] (rev 21)</span><br><span class="line">        00:1f.2 Memory controller [0580]: Intel Corporation Sunrise Point-LP PMC [8086:9d21] (rev 21)</span><br><span class="line">        00:1f.3 Audio device [0403]: Intel Corporation Sunrise Point-LP HD Audio [8086:9d71] (rev 21)</span><br><span class="line">        00:1f.4 SMBus [0c05]: Intel Corporation Sunrise Point-LP SMBus [8086:9d23] (rev 21)</span><br><span class="line">IOMMU group 0</span><br><span class="line">        00:00.0 Host bridge [0600]: Intel Corporation Xeon E3-1200 v6/7th Gen Core Processor Host Bridge/DRAM Registers [8086:5914] (rev 08)</span><br><span class="line">IOMMU group 9</span><br><span class="line">[RESET] 00:1d.0 PCI bridge [0604]: Intel Corporation Sunrise Point-LP PCI Express Root Port #9 [8086:9d18] (rev f1)</span><br></pre></td></tr></table></figure>
+
+<p>&#x6BCF;&#x884C;&#x524D;&#x9762;&#x5E26;&#x6709;RESET&#x5B57;&#x6837;&#x5C31;&#x662F;&#x53EF;&#x4EE5;&#x652F;&#x6301;&#x7684;&#xFF0C;&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x201D;00:14.0 USB controller&#x201D;&#x662F;&#x4E0D;&#x652F;&#x6301;RESET&#x7684;&#x3002;</p>
+<h3 id="II-B-d-CPU&#x7ED1;&#x5B9A;"><a href="#II-B-d-CPU&#x7ED1;&#x5B9A;" class="headerlink" title="II.B.d CPU&#x7ED1;&#x5B9A;"></a>II.B.d CPU&#x7ED1;&#x5B9A;</h3><p>&#x901A;&#x8FC7; <code>virsh vcpuinfo win10</code> &#x53EF;&#x4EE5;&#x67E5;&#x770B;&#x5F53;&#x524D;&#x4F7F;&#x7528;&#x7684;CPU&#x60C5;&#x51B5;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">wsd@xps13 ~ % sudo virsh vcpuinfo win10                                                                                                                                                                         [1]</span><br><span class="line">VCPU:           0</span><br><span class="line">CPU:            5</span><br><span class="line">State:          running</span><br><span class="line">CPU time:       45.5s</span><br><span class="line">CPU Affinity:   yyyyyyyy</span><br><span class="line"></span><br><span class="line">VCPU:           1</span><br><span class="line">CPU:            1</span><br><span class="line">State:          running</span><br><span class="line">CPU time:       42.7s</span><br><span class="line">CPU Affinity:   yyyyyyyy</span><br></pre></td></tr></table></figure>
+
+<p>&#x901A;&#x8FC7;<code>virsh edit win10</code>&#xFF0C;&#x5728;<code>&lt;vcpu placement=&apos;static&apos;&gt;2&lt;/vcpu&gt;</code>&#x4E0B;&#x4E00;&#x884C;&#x6DFB;&#x52A0;&#xFF1A;</p>
+<figure class="highlight xml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">cputune</span>&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">vcpupin</span> <span class="hljs-attr">vcpu</span>=<span class="hljs-string">&apos;0&apos;</span> <span class="hljs-attr">cpuset</span>=<span class="hljs-string">&apos;6&apos;</span>/&gt;</span></span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">vcpupin</span> <span class="hljs-attr">vcpu</span>=<span class="hljs-string">&apos;1&apos;</span> <span class="hljs-attr">cpuset</span>=<span class="hljs-string">&apos;7&apos;</span>/&gt;</span></span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">cputune</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>&#x5C06;&#x865A;&#x62DF;&#x673A;&#x4E24;&#x4E2A;vCPU&#x5206;&#x522B;&#x7ED1;&#x5B9A;&#x5728;&#x5BBF;&#x4E3B;&#x673A;6&#x548C;7&#x53F7;CPU&#x4E0A;<br>&#x518D;&#x6B21;&#x68C0;&#x67E5;CPU&#x4F7F;&#x7528;&#x60C5;&#x51B5;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">[root@xps13 wsd]# virsh vcpuinfo win10</span><br><span class="line">VCPU:           0</span><br><span class="line">CPU:            6</span><br><span class="line">State:          running</span><br><span class="line">CPU time:       165.3s</span><br><span class="line">CPU Affinity:   ------y-</span><br><span class="line"></span><br><span class="line">VCPU:           1</span><br><span class="line">CPU:            7</span><br><span class="line">State:          running</span><br><span class="line">CPU time:       105.4s</span><br><span class="line">CPU Affinity:   -------y</span><br></pre></td></tr></table></figure>
+
+<h3 id="II-B-e-&#x914D;&#x7F6E;&#x53CC;&#x5C4F;"><a href="#II-B-e-&#x914D;&#x7F6E;&#x53CC;&#x5C4F;" class="headerlink" title="II.B.e &#x914D;&#x7F6E;&#x53CC;&#x5C4F;"></a>II.B.e &#x914D;&#x7F6E;&#x53CC;&#x5C4F;</h3><p>&#x5B89;&#x88C5;virt-viewer</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu virt-viewer</span><br></pre></td></tr></table></figure>
+
+<p>&#x5728;Win10&#x865A;&#x673A;&#x914D;&#x7F6E;&#x9875;&#x65B0;&#x589E;&#x4E00;&#x4E2A;QXL Video&#xFF0C;&#x7136;&#x540E;&#x542F;&#x52A8;&#x865A;&#x673A;&#x3002;<br>&#x901A;&#x8FC7;remote-viewer&#x767B;&#x5F55;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">remote-viewer spice://localhost:5900</span><br></pre></td></tr></table></figure>
+
+<p>&#xFF08;&#x53EF;&#x80FD;&#x8FD8;&#x9700;&#x8981;&#x5728;Windows&#x7CFB;&#x7EDF;&#x4E2D;Ctrl+P&#x8BBE;&#x7F6E;&#x62D3;&#x5C55;&#x5C4F;&#xFF09;</p>
+<h3 id="II-B-f-&#x5355;&#x72EC;&#x8BBE;&#x7F6E;VRAM"><a href="#II-B-f-&#x5355;&#x72EC;&#x8BBE;&#x7F6E;VRAM" class="headerlink" title="II.B.f &#x5355;&#x72EC;&#x8BBE;&#x7F6E;VRAM"></a>II.B.f &#x5355;&#x72EC;&#x8BBE;&#x7F6E;VRAM</h3><p>&#x9ED8;&#x8BA4;&#x7684;QXL&#x5185;&#x5B58;&#x5206;&#x914D;&#x662F;65535 KB&#xFF0C;&#x5373;64MB&#xFF0C;&#x5BF9;PhotoShop&#x8FD9;&#x6837;&#x7684;&#x9700;&#x8981;512MB VRAM&#x7684;&#x5E94;&#x7528;&#x6765;&#x8BF4;&#x660E;&#x663E;&#x4E0D;&#x8DB3;&#x3002;<br>&#x56E0;&#x6B64;&#x4F7F;&#x7528; <code>virsh edit win10</code> &#x624B;&#x52A8;&#x7F16;&#x8F91;&#x4E0B;ram&#x548C;vram&#x7684;&#x503C;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;video&gt;</span><br><span class="line">    &lt;model type=&apos;qxl&apos; ram=&apos;524288&apos; vram=&apos;524288&apos; vgamem=&apos;16384&apos; heads=&apos;1&apos; primary=&apos;yes&apos;/&gt;</span><br><span class="line">    &lt;address type=&apos;pci&apos; domain=&apos;0x0000&apos; bus=&apos;0x00&apos; slot=&apos;0x01&apos; function=&apos;0x0&apos;/&gt;</span><br><span class="line">&lt;/video&gt;</span><br></pre></td></tr></table></figure>
+
+<p>&#x8BBE;&#x7F6E;&#x540E;&#x76F4;&#x63A5;&#x65E0;&#x6CD5;&#x542F;&#x52A8;&#x4E86;&#xFF0C;&#x597D;&#x5947;&#x602A;&#x3002;&#x3002;</p>
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/PCI_passthrough_via_OVMF</a></p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/VM/">#VM</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Linux/">#Linux</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Win10/">#Win10</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/qemu/">#qemu</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/kvm/">#kvm</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/Oct-26th-Raspberry-Pi-parallel-computing-and-cluster-computing-experiment/">Raspberry Pi parallel computing and cluster computing experiment</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/Sept-13th-cpp-examples-of-leveldb/">C++ examples of leveldb</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

@@ -1,0 +1,645 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>OAuth 项目调研 - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/Nov-22nd-OAuth-project-research/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="OAuth 2.0 &amp;#x7684;&amp;#x534F;&amp;#x8BAE;&amp;#x6807;&amp;#x51C6; RFC 6749 &amp;#x4E8E; 2012 &amp;#x5E74; 10 &amp;#x6708;&amp;#x53D1;&amp;#x5E03;.">
+<meta name="keywords" content="Java,Spring,OAuth">
+<meta property="og:type" content="article">
+<meta property="og:title" content="OAuth 项目调研">
+<meta property="og:url" content="https://BillyStudio.github.io/Nov-22nd-OAuth-project-research/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="OAuth 2.0 &amp;#x7684;&amp;#x534F;&amp;#x8BAE;&amp;#x6807;&amp;#x51C6; RFC 6749 &amp;#x4E8E; 2012 &amp;#x5E74; 10 &amp;#x6708;&amp;#x53D1;&amp;#x5E03;.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://billystudio.github.io/Nov-22nd-OAuth-project-research/client-home.png">
+<meta property="og:image" content="https://billystudio.github.io/Nov-22nd-OAuth-project-research/redirect-9092.png">
+<meta property="og:image" content="https://billystudio.github.io/Nov-22nd-OAuth-project-research/securedPage.png">
+<meta property="og:image" content="https://billystudio.github.io/Nov-22nd-OAuth-project-research/unexpected-page.png">
+<meta property="og:image" content="https://billystudio.github.io/Nov-22nd-OAuth-project-research/RedirectBaidu.png">
+<meta property="og:image" content="https://billystudio.github.io/Nov-22nd-OAuth-project-research/auth-code.png">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.510Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="OAuth 项目调研">
+<meta name="twitter:description" content="OAuth 2.0 &amp;#x7684;&amp;#x534F;&amp;#x8BAE;&amp;#x6807;&amp;#x51C6; RFC 6749 &amp;#x4E8E; 2012 &amp;#x5E74; 10 &amp;#x6708;&amp;#x53D1;&amp;#x5E03;.">
+<meta name="twitter:image" content="https://billystudio.github.io/Nov-22nd-OAuth-project-research/client-home.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Prerequisites">1.1&nbsp;&nbsp;Prerequisites</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Create-an-OAuth-2-0-Server">2&nbsp;&nbsp;<b>Create an OAuth 2.0 Server</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Build-Your-Client-App">3&nbsp;&nbsp;<b>Build Your Client App</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Test-the-Resource-Server">4&nbsp;&nbsp;<b>Test the Resource Server</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Understand-the-code">5&nbsp;&nbsp;<b>Understand the code</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Login-with-Baidu">6&nbsp;&nbsp;<b>Login with Baidu</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#经典访问控制模型">7&nbsp;&nbsp;<b>经典访问控制模型</b></a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/Nov-22nd-OAuth-project-research/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/Nov-22nd-OAuth-project-research/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            OAuth 项目调研
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-11-22T00:52:06.000Z" itemprop="datePublished">Nov 22 2018</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            13 minutes read (About 1896 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>OAuth 2.0 &#x7684;&#x534F;&#x8BAE;&#x6807;&#x51C6; RFC 6749 &#x4E8E; 2012 &#x5E74; 10 &#x6708;&#x53D1;&#x5E03;. <a id="more"></a></p>
+<p>&#x76EE;&#x524D;&#x5DF2;&#x7ECF;&#x6709;&#x4E00;&#x4E9B;&#x6210;&#x719F;&#x7684;&#x5E94;&#x7528;&#x6846;&#x67B6;.</p>
+<p>&#x5176;&#x4E2D;, Java &#x65B9;&#x9762;<br>&#x6709;&#x57FA;&#x4E8E; Maven &#x7684; ScribeJava, &#x662F;&#x4E00;&#x4E2A; OAuth &#x5C01;&#x88C5;&#x5E93;. &#x9700;&#x8981;&#x6DFB;&#x52A0; maven &#x6765;&#x4F7F;&#x7528;, &#x96C6;&#x6210;&#x4E86;&#x5305;&#x62EC; FaceBook, Renren, Sina &#x5728;&#x5185;&#x7684;&#x4F17;&#x591A;&#x5E73;&#x53F0;, &#x4E0D;&#x8FC7;&#x6682;&#x65F6;&#x8FD8;&#x4E0D;&#x5305;&#x62EC; QQ &#x548C;&#x5FAE;&#x4FE1;.</p>
+<p>&#x6709;&#x57FA;&#x4E8E; Spring Security &#x7684; akta oauth.</p>
+<p>Next we will build an OAuth 2.0 web application and authentication server using Spring Boot and Spring Security. After that, you&#x2019;ll use Okta to get rid of your self-hosted authentication server and simplify your Spring Boot application even more.</p>
+<p>Let&#x2019;s get started!</p>
+<h2 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h2><p>JDK<br>IDE<br>Maven</p>
+<h1 id="Create-an-OAuth-2-0-Server"><a href="#Create-an-OAuth-2-0-Server" class="headerlink" title="Create an OAuth 2.0 Server"></a>Create an OAuth 2.0 Server</h1><p>Start by going to Spring Initializr and generate a Gradle project with the following settings:</p>
+<ul>
+<li>GroupId: com.okta.spring</li>
+<li>ArtifactId: authapp</li>
+<li>Add one dependency: Web</li>
+</ul>
+<p>You need to add one dependency to the <code>pom.xml</code> file:</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.security.oauth&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-security-oauth2&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><p>If you get an error about JAXB, it&#x2019;s because you&#x2019;re using Java 11 or later. To fix this, add JAXB to you pom.xml</p>
+<pre><code>implementation &apos;org.glassfish.jaxb:jaxb-runtime&apos;
+</code></pre><p>This adds in Spring&#x2019;s OAuth goodness.</p>
+<p>Update the <code>src/main/resources/application.properties</code> to match:</p>
+<pre><code>server.port=9091
+server.servlet.context-path=/auth
+user.oauth.clientId=R2dpxQ3vPrtfgF72
+user.oauth.clientSecret=fDw7Mpkk5czHNuSRtmhGmAGL42CaxQB9
+user.oauth.redirectUris=http://localhost:9092/login/oauth2/code/
+user.oauth.user.username=Shane
+user.oauth.user.password=abcd
+</code></pre><p>This sets the server port, servlet context path, and some default values forthe in-momory, ad hoc generated tokens the server is going to return to the client, as well as for our user&#x2019;s username and password. In production, you would need to have a bit more of a sophisticated back end for a real authentication server without the hard-coded redirect URIs and usernames and passwords.</p>
+<p>Update the <code>AuthServerApplication</code> class to add <code>@EnableResourceServer</code>:</p>
+<pre><code>src/main/java/com/akta/spring/authapp/AuthServerApplication.java
+</code></pre><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.akta.spring.authserver;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.security.oauth2.config.annotation.web.configuration.EnableResourceServer;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@SpringBootApplication</span></span><br><span class="line"><span class="hljs-meta">@EnableResourceServer</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AuthServerApplication</span> </span>{</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{</span><br><span class="line">		SpringApplication.run(AuthServerApplication<span class="hljs-class">.<span class="hljs-keyword">class</span>, <span class="hljs-title">args</span>)</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>Create a new class <code>AuthServerConfig</code> in the same package as your application class. This Spring configuration class enables and configures an OAuth authorization server.</p>
+<pre><code>src/main/java/com/akta/spring/authserver/AuthServerConfig.java
+</code></pre><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.akta.spring.authserver;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.security.crypto.password.PasswordEncoder;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.security.oauth2.config.annotation.configurers.ClientDetailsServiceConfigurer;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.security.oauth2.config.annotation.web.configuration.AuthorizationServerConfigurerAdapter;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.security.oauth2.config.annotation.web.configuration.EnableAuthorizationServer;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.security.oauth2.config.annotation.web.configurers.AuthorizationServerSecurityConfigurer;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@Configuration</span></span><br><span class="line"><span class="hljs-meta">@EnableAuthorizationServer</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AuthServerConfig</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">AuthorizationServerConfigurerAdapter</span> </span>{</span><br><span class="line">    <span class="hljs-meta">@Value</span>(<span class="hljs-string">&quot;${user.oauth.clientId}&quot;</span>)</span><br><span class="line">    <span class="hljs-keyword">private</span> String ClientID;</span><br><span class="line">    <span class="hljs-meta">@Value</span>(<span class="hljs-string">&quot;${user.oauth.clientSecret}&quot;</span>)</span><br><span class="line">    <span class="hljs-keyword">private</span> String ClientSecret;</span><br><span class="line">    <span class="hljs-meta">@Value</span>(<span class="hljs-string">&quot;${user.oauth.redirectUris}&quot;</span>)</span><br><span class="line">    <span class="hljs-keyword">private</span> String RedirectURLs;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> PasswordEncoder passwordEncoder;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">AuthServerConfig</span><span class="hljs-params">(PasswordEncoder passwordEncoder)</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">this</span>.passwordEncoder = passwordEncoder;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">configure</span> <span class="hljs-params">(AuthorizationServerSecurityConfigurer oauthServer)</span></span></span><br><span class="line"><span class="hljs-function">    <span class="hljs-keyword">throws</span> Exception </span>{</span><br><span class="line">        oauthServer.tokenKeyAccess(<span class="hljs-string">&quot;permitAll()&quot;</span>)</span><br><span class="line">                .checkTokenAccess(<span class="hljs-string">&quot;isAuthenticated()&quot;</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">configure</span><span class="hljs-params">(ClientDetailsServiceConfigurer clients)</span></span></span><br><span class="line"><span class="hljs-function">    <span class="hljs-keyword">throws</span> Exception </span>{</span><br><span class="line">        clients.inMemory()</span><br><span class="line">            .withClient(ClientID)</span><br><span class="line">            .secret(passwordEncoder.encode(ClientSecret))</span><br><span class="line">            .authorizedGrantTypes(<span class="hljs-string">&quot;authorization_code&quot;</span>)</span><br><span class="line">            .scopes(<span class="hljs-string">&quot;user_info&quot;</span>)</span><br><span class="line">            .autoApprove(<span class="hljs-keyword">true</span>)</span><br><span class="line">            .redirectUris(RedirectURLs);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>The <code>AuthServerConfig</code> class is the class that will create and return our JSON web tokens when the client properly authenticates.</p>
+<p>Create a <code>SecurityConfiguration</code> class:</p>
+<pre><code>src/main/java/com/akta/spring/authserver/SecurityConfiguration.java
+</code></pre><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.akta.spring.authserver;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Value;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.core.annotation.Order;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.security.config.annotation.web.builders.HttpSecurity;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@Configuration</span></span><br><span class="line"><span class="hljs-meta">@Order</span>(<span class="hljs-number">1</span>)</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SecurityConfiguration</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">WebSecurityConfigurerAdapter</span> </span>{</span><br><span class="line">    <span class="hljs-meta">@Value</span>(<span class="hljs-string">&quot;${user.oauth.user.username}&quot;</span>)</span><br><span class="line">    <span class="hljs-keyword">private</span> String username;</span><br><span class="line">    <span class="hljs-meta">@Value</span>(<span class="hljs-string">&quot;${user.oauth.user.password}&quot;</span>)</span><br><span class="line">    <span class="hljs-keyword">private</span> String password;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">configure</span><span class="hljs-params">(HttpSecurity http)</span> <span class="hljs-keyword">throws</span> Exception </span>{</span><br><span class="line">        http.requestMatchers()</span><br><span class="line">            .antMatchers(<span class="hljs-string">&quot;/login&quot;</span>, <span class="hljs-string">&quot;/oauth/authorize&quot;</span>)</span><br><span class="line">            .and()</span><br><span class="line">            .authorizeRequests()</span><br><span class="line">            .anyRequest().authenticated()</span><br><span class="line">            .and()</span><br><span class="line">            .formLogin().permitAll();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Bean</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> BCryptPasswordEncoder <span class="hljs-title">passwordEncoder</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> BCryptPasswordEncoder();</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">protected</span> <span class="hljs-keyword">void</span> <span class="hljs-title">configure</span><span class="hljs-params">(AuthenticationManagerBuilder auth)</span> <span class="hljs-keyword">throws</span> Exception </span>{</span><br><span class="line">        auth.inMemoryAuthentication()</span><br><span class="line">            .withUser(username)</span><br><span class="line">            .password(passwordEncoder().encode(password))</span><br><span class="line">            .roles(<span class="hljs-string">&quot;USER&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>The <code>SecurityConfiguration</code> class is the class that actually authenticates requests to your authorization server. Notice near the top where it&#x2019;s pulling in the username and password from the <code>application.properties</code> file.</p>
+<p>Lastly, create a Java class called <code>UserController</code>:</p>
+<pre><code>src/main/java/com/akta/spring/authserver/UserController.java
+</code></pre><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.akta.spring.authserver;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> java.security.Principal;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.GetMapping;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@RestController</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">UserController</span> </span>{</span><br><span class="line">    <span class="hljs-meta">@GetMapping</span>(<span class="hljs-string">&quot;/user/me&quot;</span>)</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Principal <span class="hljs-title">user</span><span class="hljs-params">(Principal principal)</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">return</span> principal;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>This file allows the client apps to find out more about the users that authenticate with the server.</p>
+<p>That&#x2019;s your authorization server! Not too bad. Spring Boot makes it pretty easay. Four files and a few properties. In a little bit you&#x2019;ll make it even simpler with Okta. but for the moment, move on to creating a client app you can use to test the auth server.</p>
+<p>Maven package and then start the authorization server:</p>
+<pre><code>java -jar target/authserver-0.0.1-SNAPSHOT.jar
+</code></pre><p>Wait a bit for it to finish running. The terminal should end with something like this:</p>
+<pre><code>...
+2019-11-10 19:40:31.036  INFO 24574 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9091 (http) with context path &apos;/auth&apos;
+2019-11-10 19:40:31.051  INFO 24574 --- [           main] c.a.s.authserver.AuthServerApplication   : Started AuthServerApplication in 4.772 seconds (JVM running for 5.386)
+^C2019-11-10 19:40:45.002  INFO 24574 --- [       Thread-2] o.s.s.concurrent.ThreadPoolTaskExecutor  : Shutting down ExecutorService &apos;applicationTaskExecutor&apos;
+</code></pre><h1 id="Build-Your-Client-App"><a href="#Build-Your-Client-App" class="headerlink" title="Build Your Client App"></a>Build Your Client App</h1><p>Back to use Spring Initializr to create a new Maven project with the following settings:</p>
+<ul>
+<li>Group: com.okta.spring</li>
+<li>Artifact: authclient</li>
+<li>Add three dependencies: Web, Thymeleaf, OAuth2 Client</li>
+</ul>
+<p>This time you need to add the following dependency to your <code>pom.xml</code> file:</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.thymeleaf.extras&lt;/groupId&gt;
+    &lt;artifactId&gt;thymeleaf-extras-springsecurity5&lt;/artifactId&gt;
+    &lt;version&gt;3.0.4.RELEASE&lt;/version&gt;
+&lt;/dependency&gt;
+</code></pre><p>Rename the <code>src/main/resources/application.properties</code> to <code>application.yml</code> and update it to match the YAML below:</p>
+<pre><code>src/main/resources/application.yml
+</code></pre><figure class="highlight yml hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-attr">server:</span></span><br><span class="line">  <span class="hljs-attr">port:</span> <span class="hljs-number">9092</span></span><br><span class="line">  <span class="hljs-attr">session:</span></span><br><span class="line">    <span class="hljs-attr">cookie:</span></span><br><span class="line">      <span class="hljs-attr">name:</span> <span class="hljs-string">UISESSION</span></span><br><span class="line"><span class="hljs-attr">spring:</span></span><br><span class="line">  <span class="hljs-attr">thymeleaf:</span></span><br><span class="line">    <span class="hljs-attr">cache:</span> <span class="hljs-literal">false</span></span><br><span class="line">  <span class="hljs-attr">security:</span></span><br><span class="line">    <span class="hljs-attr">oauth2:</span></span><br><span class="line">      <span class="hljs-attr">client:</span></span><br><span class="line">        <span class="hljs-attr">registration:</span></span><br><span class="line">          <span class="hljs-attr">custom-client:</span></span><br><span class="line">            <span class="hljs-attr">client-id:</span> <span class="hljs-string">R2dpxQ3vPrtfgF72</span></span><br><span class="line">            <span class="hljs-attr">client-secret:</span> <span class="hljs-string">fDw7Mpkk5czHNuSRtmhGmAGL42CaxQB9</span></span><br><span class="line">            <span class="hljs-attr">client-name:</span> <span class="hljs-string">Auth</span> <span class="hljs-string">Server</span></span><br><span class="line">            <span class="hljs-attr">scope:</span> <span class="hljs-string">user_info</span></span><br><span class="line">            <span class="hljs-attr">provider:</span> <span class="hljs-string">custom-provider</span></span><br><span class="line">            <span class="hljs-attr">redirect-uri-template:</span> <span class="hljs-string">http://localhost:9092/login/oauth2/code/</span></span><br><span class="line">            <span class="hljs-attr">client-authentication-method:</span> <span class="hljs-string">basic</span></span><br><span class="line">            <span class="hljs-attr">authorization-grant-type:</span> <span class="hljs-string">authorization_code</span></span><br><span class="line">        <span class="hljs-attr">provider:</span></span><br><span class="line">          <span class="hljs-attr">custom-provider:</span></span><br><span class="line">            <span class="hljs-attr">token-uri:</span> <span class="hljs-string">http://localhost:9091/auth/oauth/token</span></span><br><span class="line">            <span class="hljs-attr">authorization-uri:</span> <span class="hljs-string">http://localhost:9091/auth/oauth/authorize</span></span><br><span class="line">            <span class="hljs-attr">user-info-uri:</span> <span class="hljs-string">http://localhost:9091/auth/user/me</span></span><br><span class="line">            <span class="hljs-attr">user-name-attribute:</span> <span class="hljs-string">name</span></span><br></pre></td></tr></table></figure>
+
+<p>Notice that here you&#x2019;re configuring the <code>clientId</code> and <code>clientSecret</code>, as well as various URIs for your authentication server. These need to match the values in the other project.</p>
+<p>Update the <code>AuthClientApplication</code> class to match:</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.okta.spring.authclient;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@SpringBootApplication</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">AuthClientApplication</span> </span>{</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{</span><br><span class="line">		SpringApplication.run(AuthClientApplication<span class="hljs-class">.<span class="hljs-keyword">class</span>, <span class="hljs-title">args</span>)</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>Create a new Java class called <code>WebController</code>:</p>
+<pre><code>WebController.java
+</code></pre><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.okta.spring.authclient;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> java.security.Principal;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.stereotype.Controller;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.ui.Model;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@Controller</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">WebController</span> </span>{</span><br><span class="line">    <span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/securedPage&quot;</span>)</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">securedPage</span><span class="hljs-params">(Model model, Principal principal)</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;securedPage&quot;</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/&quot;</span>)</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">index</span><span class="hljs-params">(Model model, Principal principal)</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;index&quot;</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>This is the controller that maps incoming requests to your Thymeleaf template files(which you&#x2019;ll make in a sec).</p>
+<p>Create another Java class named <code>SecurityConfiguration</code>:</p>
+<pre><code>SecurityConfiguration.java
+</code></pre><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.okta.spring.authclient;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.context.annotation.Configuration;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.security.config.annotation.web.builders.HttpSecurity;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@Configuration</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">SecurityConfiguration</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">WebSecurityConfigurerAdapter</span> </span>{</span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">configure</span><span class="hljs-params">(HttpSecurity http)</span> <span class="hljs-keyword">throws</span> Exception </span>{</span><br><span class="line">        http.antMatcher(<span class="hljs-string">&quot;/**&quot;</span>).authorizeRequests()</span><br><span class="line">            .antMatchers(<span class="hljs-string">&quot;/&quot;</span>, <span class="hljs-string">&quot;/login**&quot;</span>).permitAll()</span><br><span class="line">            .anyRequest().authenticated()</span><br><span class="line">            .and()</span><br><span class="line">            .oauth2Login();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>This class defines the Spring Security configuration for your application: allowing all requests on the home path and requiring authentication for all other routes. It also sets up the Spring Boot OAuth login flow.</p>
+<p>The last files you need to add are the two Thymeleaf template files. A full look at Thymeleaf templating is well beyond the scope of this tutorial, but you can take a look at <a href="https://www.thymeleaf.org/" target="_blank" rel="noopener">their website</a> for more info.</p>
+<p>The templates go in the <code>src/main/resources/templates</code> directory. You&#x2019;ll notice in the controller above that they&#x2019;re simply returning strings for the routes. When the Thymeleaf dependencies are included the build, Spring Boot automatically assumes you&#x2019;re returning the name of the template file from the controllers, and so the app will look in <code>src/main/resources/templates</code> for a file name with the returned string plus <code>.html</code>.</p>
+<p>Create the home template: <code>src/main/resources/templates/index.html</code>:</p>
+<pre><code>index.html
+</code></pre><figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>  </span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">html</span>&gt;</span>  </span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>  </span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Home<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>  </span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;Content-Type&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;text/html; charset=UTF-8&quot;</span> /&gt;</span> </span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>  </span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span> </span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Spring Security SSO<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>  </span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">a</span> <span class="hljs-attr">href</span>=<span class="hljs-string">&quot;securedPage&quot;</span>&gt;</span>Login<span class="hljs-tag">&lt;/<span class="hljs-name">a</span>&gt;</span>  </span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>  </span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>And the secured template: <code>src/main/resources/templates/securePage.html</code>:</p>
+<pre><code>securePage.html
+</code></pre><figure class="highlight html hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">&lt;!DOCTYPE <span class="hljs-meta-keyword">html</span>&gt;</span>  </span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">html</span> <span class="hljs-attr">xmlns</span>=<span class="hljs-string">&quot;http://www.thymeleaf.org&quot;</span>&gt;</span>  </span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">head</span>&gt;</span>  </span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">title</span>&gt;</span>Secured Page<span class="hljs-tag">&lt;/<span class="hljs-name">title</span>&gt;</span>  </span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">meta</span> <span class="hljs-attr">http-equiv</span>=<span class="hljs-string">&quot;Content-Type&quot;</span> <span class="hljs-attr">content</span>=<span class="hljs-string">&quot;text/html; charset=UTF-8&quot;</span> /&gt;</span> </span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">head</span>&gt;</span>  </span><br><span class="line"><span class="hljs-tag">&lt;<span class="hljs-name">body</span>&gt;</span>  </span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">h1</span>&gt;</span>Secured Page<span class="hljs-tag">&lt;/<span class="hljs-name">h1</span>&gt;</span>  </span><br><span class="line">    <span class="hljs-tag">&lt;<span class="hljs-name">span</span> <span class="hljs-attr">th:text</span>=<span class="hljs-string">&quot;${#authentication.name}&quot;</span>&gt;</span><span class="hljs-tag">&lt;/<span class="hljs-name">span</span>&gt;</span>  </span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">body</span>&gt;</span>  </span><br><span class="line"><span class="hljs-tag">&lt;/<span class="hljs-name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>I&#x2019;ll jest point out this one line:</p>
+<pre><code>&lt;span th:text=&quot;${#authentication.name}&quot;&gt;&lt;/span&gt;
+</code></pre><p>This is the line that will insert the name of the authenticated user. This line is why you needed the <code>org.thymeleaf.extras:thymeleaf-extras-springsecurity5</code> dependency in the &#x2018;pom.xml&#x2019; file.</p>
+<p>Start the client application after successful maven package.</p>
+<pre><code>java -jar target/authclient-0.0.1-SNAPSHOT.jar
+</code></pre><p>Wait a moment for it to finish. The terminal should end with something like this:</p>
+<pre><code>2019-11-10 20:32:39.527  INFO 26402 --- [           main] o.s.b.w.embedded.tomcat.TomcatWebServer  : Tomcat started on port(s): 9092 (http) with context path &apos;&apos;
+2019-11-10 20:32:39.539  INFO 26402 --- [           main] c.o.s.authclient.AuthClientApplication   : Started AuthClientApplication in 4.586 seconds (JVM running for 5.225)
+</code></pre><h1 id="Test-the-Resource-Server"><a href="#Test-the-Resource-Server" class="headerlink" title="Test the Resource Server"></a>Test the Resource Server</h1><p>Navigate in your browser of choice to your client app at <a href="http://localhost:9092/" target="_blank" rel="noopener">http://localhost:9092/</a></p>
+<p><img src="client-home.png" alt="client-home"></p>
+<p>Click the Login link, and you&#x2019;ll be directed to the login page:</p>
+<p><img src="redirect-9092.png" alt="redirect to localhost:9092"></p>
+<p>Enter username &#x201C;Shane&#x201D; and password &#x201C;abcd&#x201D; (from the <code>application.properties</code> file of server).</p>
+<p>Click Sign In and you&#x2019;ll be taken to the super fancy <code>securePage.html</code> template that should say &#x201C;Secured Page&#x201D; and &#x201C;Shane&#x201D;.</p>
+<p><img src="securedPage.png" alt="securedPage"></p>
+<h1 id="Understand-the-code"><a href="#Understand-the-code" class="headerlink" title="Understand the code"></a>Understand the code</h1><p><img src="unexpected-page.png" alt="unexpected-page"></p>
+<h1 id="Login-with-Baidu"><a href="#Login-with-Baidu" class="headerlink" title="Login with Baidu"></a>Login with Baidu</h1><p>Create an app at Baidu Developer Center: <a href="http://developer.baidu.com/console#app/project" target="_blank" rel="noopener">http://developer.baidu.com/console#app/project</a></p>
+<p>Remember the API Key(client ID) and Secret Key.</p>
+<p>And set authorization redirect page as: <a href="https://www.baidu.com" target="_blank" rel="noopener">www.baidu.com</a></p>
+<p>Here we request:</p>
+<p><a href="https://openapi.baidu.com/oauth/2.0/authorize?client_id=R6udeb08h9FvRVNng0bKjZuY&amp;redirect_uri=https://www.baidu.com&amp;response_type=code&amp;scope=basic&amp;display=popup" target="_blank" rel="noopener">https://openapi.baidu.com/oauth/2.0/authorize?client_id=R6udeb08h9FvRVNng0bKjZuY&amp;redirect_uri=https://www.baidu.com&amp;response_type=code&amp;scope=basic&amp;display=popup</a></p>
+<p><img src="RedirectBaidu.png" alt="RedirectBaidu.png"></p>
+<p>After the user click login, authorization code will be responsed as &#x2018;code=xxx&#x2019;</p>
+<p><img src="auth-code.png" alt="auth-code.png"></p>
+<h1 id="&#x7ECF;&#x5178;&#x8BBF;&#x95EE;&#x63A7;&#x5236;&#x6A21;&#x578B;"><a href="#&#x7ECF;&#x5178;&#x8BBF;&#x95EE;&#x63A7;&#x5236;&#x6A21;&#x578B;" class="headerlink" title="&#x7ECF;&#x5178;&#x8BBF;&#x95EE;&#x63A7;&#x5236;&#x6A21;&#x578B;"></a>&#x7ECF;&#x5178;&#x8BBF;&#x95EE;&#x63A7;&#x5236;&#x6A21;&#x578B;</h1><p>RBAC&#xFF1A;&#x901A;&#x8FC7;&#x7528;&#x6237;&#x3001;&#x89D2;&#x8272;&#x3001;&#x5BA2;&#x4F53;&#x7684;&#x504F;&#x5E8F;&#x5173;&#x7CFB;&#x5B9A;&#x4E49;&#x8BBF;&#x95EE;&#x63A7;&#x5236;&#x3002;<br>&#x6570;&#x5B66;&#x4E0A;&#x901A;&#x8FC7;BLP&#x6A21;&#x578B;&#x5B9A;&#x4E49;&#x4E86;&#x4E09;&#x4E2A;&#x5B89;&#x5168;&#x6027;&#x3002;</p>
+<p>ABAC&#x91C7;&#x7528;&#x5C5E;&#x6027;&#x7EA7;&#x522B;&#x7684;&#x8BBF;&#x95EE;&#x63A7;&#x5236;&#xFF0C;&#x76EE;&#x524D;&#x4E0D;&#x5982;RBAC&#x597D;&#x7528;&#xFF0C;&#x5373;&#x6BD4;&#x8F83;&#x8003;&#x9A8C;&#x7BA1;&#x7406;&#x5458;&#x7684;&#x80FD;&#x529B;&#xFF0C;&#x4F46;&#x662F;&#x5B66;&#x672F;&#x754C;&#x6BD4;&#x8F83;&#x63A8;&#x5D07;&#x3002;</p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Java/">#Java</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Spring/">#Spring</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/OAuth/">#OAuth</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/Dec-9th-2018-Reading-Foreign-Magzines-E10/">外刊精读学习计划</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/Sep-15th-PAT-Werewolf-simple-version/">PAT 真题 | 1148 Werewolf - Simple version</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>PAT 真题 | 1021 Deepest Root - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/Sept-4th-PAT-deepest-root/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x8FD1;&amp;#x671F;&amp;#x5728;&amp;#x5237; PAT &amp;#x9898;&amp;#x5E93;&amp;#x7684;&amp;#x65F6;&amp;#x5019;&amp;#x9047;&amp;#x5230;&amp;#x4E00;&amp;#x4E2A;&amp;#x6C42;&amp;#x6811;&amp;#x7684;&amp;#x6700;&amp;#x957F;&amp;#x6839;&amp;#x7684;&amp;#x95EE;&amp;#x9898;, &amp;#x89C9;&amp;#x5F97;&amp;">
+<meta name="keywords" content="数据结构,算法,并查集,树,PAT,搜索">
+<meta property="og:type" content="article">
+<meta property="og:title" content="PAT 真题 | 1021 Deepest Root">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/Sept-4th-PAT-deepest-root/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x8FD1;&amp;#x671F;&amp;#x5728;&amp;#x5237; PAT &amp;#x9898;&amp;#x5E93;&amp;#x7684;&amp;#x65F6;&amp;#x5019;&amp;#x9047;&amp;#x5230;&amp;#x4E00;&amp;#x4E2A;&amp;#x6C42;&amp;#x6811;&amp;#x7684;&amp;#x6700;&amp;#x957F;&amp;#x6839;&amp;#x7684;&amp;#x95EE;&amp;#x9898;, &amp;#x89C9;&amp;#x5F97;&amp;">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.720Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="PAT 真题 | 1021 Deepest Root">
+<meta name="twitter:description" content="&amp;#x8FD1;&amp;#x671F;&amp;#x5728;&amp;#x5237; PAT &amp;#x9898;&amp;#x5E93;&amp;#x7684;&amp;#x65F6;&amp;#x5019;&amp;#x9047;&amp;#x5230;&amp;#x4E00;&amp;#x4E2A;&amp;#x6C42;&amp;#x6811;&amp;#x7684;&amp;#x6700;&amp;#x957F;&amp;#x6839;&amp;#x7684;&amp;#x95EE;&amp;#x9898;, &amp;#x89C9;&amp;#x5F97;&amp;">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1021-Deepest-Root（25-分）">1&nbsp;&nbsp;<b>1021 Deepest Root（25 分）</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Input-Specification">1.1&nbsp;&nbsp;Input Specification:</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Output-Specification">1.2&nbsp;&nbsp;Output Specification:</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Sample-Input-1">1.3&nbsp;&nbsp;Sample Input 1:</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Sample-Output-1">1.4&nbsp;&nbsp;Sample Output 1:</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Sample-Input-2">1.5&nbsp;&nbsp;Sample Input 2:</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Sample-Output-2">1.6&nbsp;&nbsp;Sample Output 2:</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#题目分析">2&nbsp;&nbsp;<b>题目分析</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#实例代码">3&nbsp;&nbsp;<b>实例代码</b></a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/Sept-4th-PAT-deepest-root/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/Sept-4th-PAT-deepest-root/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            PAT 真题 | 1021 Deepest Root
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-09-04T02:21:11.000Z" itemprop="datePublished">9月 4 2018</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            6 分钟 读完 (约 876 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x8FD1;&#x671F;&#x5728;&#x5237; PAT &#x9898;&#x5E93;&#x7684;&#x65F6;&#x5019;&#x9047;&#x5230;&#x4E00;&#x4E2A;&#x6C42;&#x6811;&#x7684;&#x6700;&#x957F;&#x6839;&#x7684;&#x95EE;&#x9898;, &#x89C9;&#x5F97;&#x8BC1;&#x660E;&#x633A;&#x6709;&#x610F;&#x601D;&#x7684;, &#x4E8E;&#x662F;&#x62BD;&#x7A7A;&#x8BB0;&#x5F55;&#x4E0B;&#x6765;. <a id="more"></a></p>
+<h1 id="1021-Deepest-Root&#xFF08;25-&#x5206;&#xFF09;"><a href="#1021-Deepest-Root&#xFF08;25-&#x5206;&#xFF09;" class="headerlink" title="1021 Deepest Root&#xFF08;25 &#x5206;&#xFF09;"></a>1021 Deepest Root&#xFF08;25 &#x5206;&#xFF09;</h1><p>A graph which is connected and acyclic can be considered a tree. The hight of the tree depends on the selected root. Now you are supposed to find the root that results in a highest tree. Such a root is called the <strong>deepest root</strong>.</p>
+<h2 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h2><p>Each input file contains one test case. For each case, the first line contains a positive integer N (&#x2264;10^4) which is the number of nodes, and hence the nodes are numbered from 1 to N. Then N&#x2212;1 lines follow, each describes an edge by given the two adjacent nodes&#x2019; numbers.</p>
+<h2 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h2><p>For each test case, print each of the deepest roots in a line. If such a root is not unique, print them in increasing order of their numbers. In case that the given graph is not a tree, print Error: K components where K is the number of connected components in the graph.</p>
+<h2 id="Sample-Input-1"><a href="#Sample-Input-1" class="headerlink" title="Sample Input 1:"></a>Sample Input 1:</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">1 2</span><br><span class="line">1 3</span><br><span class="line">1 4</span><br><span class="line">2 5</span><br></pre></td></tr></table></figure>
+
+<h2 id="Sample-Output-1"><a href="#Sample-Output-1" class="headerlink" title="Sample Output 1:"></a>Sample Output 1:</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td></tr></table></figure>
+
+<h2 id="Sample-Input-2"><a href="#Sample-Input-2" class="headerlink" title="Sample Input 2:"></a>Sample Input 2:</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">1 3</span><br><span class="line">1 4</span><br><span class="line">2 5</span><br><span class="line">3 4</span><br></pre></td></tr></table></figure>
+
+<h2 id="Sample-Output-2"><a href="#Sample-Output-2" class="headerlink" title="Sample Output 2:"></a>Sample Output 2:</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Error: 2 components</span><br></pre></td></tr></table></figure>
+
+<h1 id="&#x9898;&#x76EE;&#x5206;&#x6790;"><a href="#&#x9898;&#x76EE;&#x5206;&#x6790;" class="headerlink" title="&#x9898;&#x76EE;&#x5206;&#x6790;"></a>&#x9898;&#x76EE;&#x5206;&#x6790;</h1><p>&#x8FD9;&#x9053;&#x9898;&#x9996;&#x5148;&#x8981;&#x6C42;&#x6211;&#x4EEC;&#x5224;&#x65AD;&#x8F93;&#x5165;&#x7684;&#x56FE;&#x80FD;&#x5426;&#x6784;&#x6210;&#x4E00;&#x68F5;&#x6811;. &#x5982;&#x679C;&#x80FD;&#x6784;&#x6210;&#x4E00;&#x68F5;&#x6811;&#x5C31;&#x6309;&#x8282;&#x70B9;&#x5E8F;&#x53F7;&#x987A;&#x5E8F;&#x8F93;&#x51FA;&#x8FD9;&#x68F5;&#x6811;&#x7684;&#x6700;&#x957F;&#x6839;&#x8282;&#x70B9;, &#x6700;&#x957F;&#x6839;&#x8282;&#x70B9;&#x662F;&#x80FD;&#x8BA9;&#x4E00;&#x68F5;&#x6811;&#x7684;&#x6DF1;&#x5EA6;&#x8FBE;&#x5230;&#x6700;&#x5927;&#x503C;&#x7684;&#x8282;&#x70B9;. &#x5982;&#x679C;&#x4E0D;&#x80FD;&#x6784;&#x6210;&#x4E00;&#x68F5;&#x6811;&#x5C31;&#x8F93;&#x51FA;&#x9519;&#x8BEF;, &#x5E76;&#x62A5;&#x544A;&#x56FE;&#x7684;&#x8054;&#x901A;&#x90E8;&#x5206;&#x4E2A;&#x6570;.</p>
+<p>&#x5728;&#x786E;&#x5B9A;&#x80FD;&#x6784;&#x6210;&#x4E86;&#x4E00;&#x68F5;&#x6811;&#x540E;, &#x4F7F;&#x7528;&#x4E24;&#x6B21; dfs &#x6216; bfs &#x641C;&#x7D22;&#x7B97;&#x6CD5;&#x5C31;&#x80FD;&#x627E;&#x5230;&#x6240;&#x6709;&#x7684;&#x6700;&#x957F;&#x6839;&#x8282;&#x70B9;. &#x4E0B;&#x9762;&#x8BC1;&#x660E;&#x8FD9;&#x4E2A;&#x7ED3;&#x8BBA;:</p>
+<p>&#x5047;&#x8BBE;&#x6811;&#x7684;&#x6700;&#x5927;&#x6DF1;&#x5EA6;&#x4E3A; maxD. &#x9996;&#x5148;&#x4EE5;&#x4EFB;&#x610F;&#x4E00;&#x70B9;&#x4F5C;&#x4E3A;&#x6811;&#x7684;&#x6839;&#x8282;&#x70B9;, &#x5047;&#x8BBE;&#x7B2C;&#x4E00;&#x6B21;&#x641C;&#x7D22;&#x51FA;&#x7684;&#x53F6;&#x5B50;&#x8282;&#x70B9;&#x4E3A; L = {L1, L2, &#x2026;, Ln}. &#x5BF9;&#x5E94;&#x7684;&#x8282;&#x70B9;&#x6DF1;&#x5EA6;&#x4E3A; {A1, A2, &#x2026;, An}. &#x8282;&#x70B9;&#x6DF1;&#x5EA6;&#x7684;&#x6700;&#x5927;&#x503C;&#x4E3A; maxA, &#x5BF9;&#x5E94;&#x7684;&#x8282;&#x70B9;&#x96C6;&#x5408;&#x5047;&#x8BBE;&#x4E3A; {Lmax}. &#x4ECE; L &#x4E2D;&#x4EFB;&#x9009;&#x4E24;&#x4E2A;&#x53F6;&#x5B50;&#x8282;&#x70B9;&#x7684;&#x7EC4;&#x5408;, &#x6240;&#x6709;&#x7EC4;&#x5408;&#x4E4B;&#x95F4;&#x7684;&#x8DDD;&#x79BB;&#x6700;&#x5927;&#x503C;&#x5C31;&#x662F;&#x8BE5;&#x6811;&#x6240;&#x80FD;&#x8FBE;&#x5230;&#x7684;&#x6700;&#x5927;&#x6DF1;&#x5EA6; maxD.<br>&#x82E5;&#x627E;&#x5230;&#x4E86; i &#x548C; j , &#x4F7F;&#x5F97; maxD = Li &#x548C; Lj &#x5BF9;&#x5E94;&#x7684;&#x6DF1;&#x5EA6;, &#x4E0D;&#x59A8;&#x8BBE; Ai &gt;= Aj.<br>&#x82E5;Li&#x548C;Lj&#x4E0D;&#x5728;&#x540C;&#x4E00;&#x652F;&#x4E0A;, &#x5219;Li&#x548C;Lj&#x5BF9;&#x5E94;&#x7684;&#x6DF1;&#x5EA6; = Ai + Aj<br>&#x53E6;&#x4E00;&#x65B9;&#x9762;, Ai + Aj &lt;= maxA + Aj &lt;= maxD.<br>&#x6240;&#x4EE5;, Ai + Aj = maxA + Aj = maxD, maxA = Ai, Ai &#x5C5E;&#x4E8E; {Lmax}. &#x6839;&#x636E;&#x5B9A;&#x4E49;, {Lmax} &#x96C6;&#x5408;&#x4E2D;&#x7684;&#x5143;&#x7D20;&#x4E3A;&#x6700;&#x957F;&#x6839;&#x8282;&#x70B9;.</p>
+<p>&#x7B2C;&#x4E8C;&#x6B21;&#x641C;&#x7D22;&#x4ECE; {Lmax} &#x4E2D;&#x4EFB;&#x9009;&#x4E00;&#x4E2A;&#x5143;&#x7D20;, &#x5373;&#x9009;&#x62E9;&#x4E00;&#x4E2A;&#x5DF2;&#x7ECF;&#x627E;&#x5230;&#x7684;&#x6700;&#x957F;&#x6839;&#x8282;&#x70B9; D1. &#x6839;&#x636E;&#x5B9A;&#x4E49;, &#x4EE5;&#x8BE5;&#x70B9;&#x4E3A;&#x6839;&#x5F62;&#x6210;&#x7684;&#x6811;&#x7684;&#x6700;&#x5927;&#x6DF1;&#x5EA6;&#x662F; maxD. &#x5BF9;&#x5E94;&#x6700;&#x5927;&#x6DF1;&#x5EA6;&#x7684;&#x8282;&#x70B9;&#x5047;&#x8BBE;&#x4E3A; Di, &#x90A3;&#x4E48;&#x53CD;&#x8FC7;&#x6765;&#x4EE5; Di &#x4E3A;&#x6839;&#x4EA7;&#x751F;&#x7684;&#x6811;&#x7684;&#x6700;&#x5927;&#x6DF1;&#x5EA6;&#x4E5F;&#x662F; maxD. &#x6240;&#x4EE5; Di &#x4E5F;&#x662F;&#x6700;&#x957F;&#x6839;&#x8282;&#x70B9;.&#x63A5;&#x4E0B;&#x6765;&#x8FD8;&#x8981;&#x8BC1;&#x660E;&#x5DF2;&#x7ECF;&#x627E;&#x51FA;&#x4E86;&#x6240;&#x6709;&#x7684;&#x6700;&#x957F;&#x6839;&#x8282;&#x70B9;.</p>
+<h1 id="&#x5B9E;&#x4F8B;&#x4EE3;&#x7801;"><a href="#&#x5B9E;&#x4F8B;&#x4EE3;&#x7801;" class="headerlink" title="&#x5B9E;&#x4F8B;&#x4EE3;&#x7801;"></a>&#x5B9E;&#x4F8B;&#x4EE3;&#x7801;</h1><figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;stdio.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;string.h&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;vector&gt;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;set&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> For(i,n) for(int i=0; i&lt;n; ++i)</span></span><br><span class="line"><span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> maxn = <span class="hljs-number">10010</span>;</span><br><span class="line"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; G[maxn];</span><br><span class="line"><span class="hljs-keyword">int</span> root[maxn]; <span class="hljs-comment">// &#x5E76;&#x67E5;&#x96C6;</span></span><br><span class="line"><span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt; deepestroot;</span><br><span class="line"><span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt; temproot;</span><br><span class="line"><span class="hljs-keyword">bool</span> done[maxn]; <span class="hljs-comment">// dfs&#x6807;&#x8BB0;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">initSet</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>{</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= n; i++) root[i] = i;</span><br><span class="line">}</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">findSet</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>{</span><br><span class="line">    <span class="hljs-keyword">return</span> root[x] == x ? x : root[x]=findSet(root[x]);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dfs</span><span class="hljs-params">(<span class="hljs-keyword">int</span> root, <span class="hljs-keyword">int</span> height)</span></span>{</span><br><span class="line">    <span class="hljs-keyword">static</span> <span class="hljs-keyword">int</span> maxheight = <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">if</span> (done[root]) <span class="hljs-keyword">return</span> ;</span><br><span class="line">    done[root] = <span class="hljs-literal">true</span>;</span><br><span class="line">    For(i, G[root].size()){</span><br><span class="line">        dfs(G[root][i], height+<span class="hljs-number">1</span>);</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">if</span> (height &gt; maxheight){</span><br><span class="line">        maxheight = height;</span><br><span class="line">        temproot.clear();</span><br><span class="line">        temproot.insert(root);</span><br><span class="line">    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (height == maxheight){</span><br><span class="line">        temproot.insert(root);</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>{</span><br><span class="line">    <span class="hljs-keyword">int</span> N;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line">    initSet(N);</span><br><span class="line">    For(i,N<span class="hljs-number">-1</span>){</span><br><span class="line">        <span class="hljs-keyword">int</span> a,b;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>, &amp;a, &amp;b);</span><br><span class="line">        G[a].push_back(b);</span><br><span class="line">        G[b].push_back(a);</span><br><span class="line">        <span class="hljs-keyword">int</span> x = findSet(a), y = findSet(b);</span><br><span class="line">        <span class="hljs-keyword">if</span> (x != y) root[x] = y;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-built_in">set</span>&lt;<span class="hljs-keyword">int</span>&gt; components;</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = <span class="hljs-number">1</span>; i &lt;= N; ++i)</span><br><span class="line">        components.insert(findSet(i));</span><br><span class="line">    <span class="hljs-keyword">if</span> (components.size() &gt; <span class="hljs-number">1</span>){</span><br><span class="line">        <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;Error: %ld components\n&quot;</span>, components.size());</span><br><span class="line">    } <span class="hljs-keyword">else</span> {</span><br><span class="line">        <span class="hljs-built_in">memset</span>(done, <span class="hljs-literal">false</span>, <span class="hljs-keyword">sizeof</span> done);</span><br><span class="line">        dfs(<span class="hljs-number">1</span>, <span class="hljs-number">0</span>);</span><br><span class="line">        deepestroot = temproot;</span><br><span class="line">        <span class="hljs-built_in">memset</span>(done, <span class="hljs-literal">false</span>, <span class="hljs-keyword">sizeof</span> done);</span><br><span class="line">        dfs(*temproot.begin(), <span class="hljs-number">0</span>);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> it=temproot.begin(); it!=temproot.end(); ++it) deepestroot.insert(*it);</span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">auto</span> it=deepestroot.begin(); it!=deepestroot.end(); ++it) <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, *it);</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/数据结构/">#数据结构</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/算法/">#算法</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/并查集/">#并查集</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/树/">#树</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/PAT/">#PAT</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/搜索/">#搜索</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/Sep-5th-PAT-median/">PAT 真题 | 1029 Median</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/Aug-30th-combinatorial-mathematics/">数据结构与算法笔记 | 数学</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

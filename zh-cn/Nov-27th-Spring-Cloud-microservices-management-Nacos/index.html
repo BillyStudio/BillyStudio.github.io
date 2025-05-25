@@ -1,0 +1,785 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>Spring Cloud 微服务注册与发现实验 - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/Nov-27th-Spring-Cloud-microservices-management-Nacos/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="Spring Cloud Eureka &amp;#x7EC4;&amp;#x4EF6;&amp;#x8BE6;&amp;#x89E3;&amp;#x3002;">
+<meta name="keywords" content="VS Code,Spring,Spring Cloud,Microservices,Nacos">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring Cloud 微服务注册与发现实验">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/Nov-27th-Spring-Cloud-microservices-management-Nacos/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="Spring Cloud Eureka &amp;#x7EC4;&amp;#x4EF6;&amp;#x8BE6;&amp;#x89E3;&amp;#x3002;">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Nov-27th-Spring-Cloud-microservices-management-Nacos/eureka-server.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Nov-27th-Spring-Cloud-microservices-management-Nacos/git-web3.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Nov-27th-Spring-Cloud-microservices-management-Nacos/gradle-build.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Nov-27th-Spring-Cloud-microservices-management-Nacos/import-gradle2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Nov-27th-Spring-Cloud-microservices-management-Nacos/tomcat1.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Nov-27th-Spring-Cloud-microservices-management-Nacos/tomcat-vm-options.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Nov-27th-Spring-Cloud-microservices-management-Nacos/eureka-server-properties.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Nov-27th-Spring-Cloud-microservices-management-Nacos/tomcat2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Nov-27th-Spring-Cloud-microservices-management-Nacos/eureka.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Nov-27th-Spring-Cloud-microservices-management-Nacos/20200710190857142.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Nov-27th-Spring-Cloud-microservices-management-Nacos/20200716164537833.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Nov-27th-Spring-Cloud-microservices-management-Nacos/jsp-resolve.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Nov-27th-Spring-Cloud-microservices-management-Nacos/eureka-server-jar.png">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.680Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring Cloud 微服务注册与发现实验">
+<meta name="twitter:description" content="Spring Cloud Eureka &amp;#x7EC4;&amp;#x4EF6;&amp;#x8BE6;&amp;#x89E3;&amp;#x3002;">
+<meta name="twitter:image" content="https://billystudio.github.io/zh-cn/Nov-27th-Spring-Cloud-microservices-management-Nacos/eureka-server.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/index.html">Go Home</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Prerequisites">1&nbsp;&nbsp;<b>Prerequisites</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#初探：Spring-Boot-启动-Eureka-Server-和-Eureka-Client微服务">2&nbsp;&nbsp;<b>初探：Spring Boot 启动 Eureka Server 和 Eureka Client微服务</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#开启一个-Eureka-服务注册">2.1&nbsp;&nbsp;开启一个 Eureka 服务注册</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#与注册中心对话">2.2&nbsp;&nbsp;与注册中心对话</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#提供服务">2.3&nbsp;&nbsp;提供服务</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#学习：源码启动-Eureka-Server，-Eureka-Client-和微服务">3&nbsp;&nbsp;<b>学习：源码启动 Eureka Server， Eureka Client 和微服务</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#安装">3.1&nbsp;&nbsp;安装</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1-IDEA选2019-2-2020-1-的版本-；-jdk1-8-Tomcat-8-9">3.1.1&nbsp;&nbsp;1. IDEA选2019.2-2020.1 的版本 ； jdk1.8 ; Tomcat 8/9</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#2-注册码云帐号，然后克隆项目：">3.1.2&nbsp;&nbsp;2. 注册码云帐号，然后克隆项目：</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#3-配置gradle">3.1.3&nbsp;&nbsp;3. 配置gradle</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#4-配置-Tomcat">3.1.4&nbsp;&nbsp;4. 配置 Tomcat</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#6-点击启动Tomcat，会弹出eureka界面">3.1.5&nbsp;&nbsp;6. 点击启动Tomcat，会弹出eureka界面</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Eureka-源码解析">3.2&nbsp;&nbsp;Eureka 源码解析</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#获取-eureka-v2-apps-appId-下的xml解析">3.2.1&nbsp;&nbsp;获取 eureka/v2/apps/{appId} 下的xml解析</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Renew-操作">3.2.2&nbsp;&nbsp;Renew 操作</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Status-Update-操作">3.2.3&nbsp;&nbsp;Status Update 操作</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#v1-9-26-版本">3.3&nbsp;&nbsp;v1.9.26 版本</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#服务发现模块-com-netflix-discovery">3.4&nbsp;&nbsp;服务发现模块 com.netflix.discovery</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#三级缓存">3.4.1&nbsp;&nbsp;三级缓存</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#全量拉取与增量拉取">3.4.2&nbsp;&nbsp;全量拉取与增量拉取</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#整体架构设计采用-MVC-模式">3.5&nbsp;&nbsp;整体架构设计采用 MVC 模式</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#做的一些尝试（Deprecated）">3.6&nbsp;&nbsp;做的一些尝试（Deprecated）</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#多级缓存机制">3.6.1&nbsp;&nbsp;多级缓存机制</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#微服务实例对自己的四种接口操作">3.6.2&nbsp;&nbsp;微服务实例对自己的四种接口操作</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Register注册动作">3.6.3&nbsp;&nbsp;Register注册动作</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Renew-续约">3.6.4&nbsp;&nbsp;Renew 续约</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Contract-status-update-操作的算法描述">3.6.5&nbsp;&nbsp;Contract status update 操作的算法描述</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#jsp-无法识别包依赖自动补全问题">3.6.6&nbsp;&nbsp;jsp 无法识别包依赖自动补全问题</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Spring-Cloud-Eureka">4&nbsp;&nbsp;<b>Spring Cloud Eureka</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#spring-cloud-netflix-eureka-server-源码阅读">4.1&nbsp;&nbsp;spring-cloud-netflix-eureka-server 源码阅读</a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/Nov-27th-Spring-Cloud-microservices-management-Nacos/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/Nov-27th-Spring-Cloud-microservices-management-Nacos/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Spring Cloud 微服务注册与发现实验
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-11-27T03:18:43.000Z" itemprop="datePublished">11月 27 2019</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh-cn/categories/Eureka项目/">Eureka项目</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            23 分钟 读完 (约 3482 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>Spring Cloud Eureka &#x7EC4;&#x4EF6;&#x8BE6;&#x89E3;&#x3002;<a id="more"></a></p>
+<h1 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h1><p>JDK 1.8<br>IDE<br>Tomcat</p>
+<h1 id="&#x521D;&#x63A2;&#xFF1A;Spring-Boot-&#x542F;&#x52A8;-Eureka-Server-&#x548C;-Eureka-Client&#x5FAE;&#x670D;&#x52A1;"><a href="#&#x521D;&#x63A2;&#xFF1A;Spring-Boot-&#x542F;&#x52A8;-Eureka-Server-&#x548C;-Eureka-Client&#x5FAE;&#x670D;&#x52A1;" class="headerlink" title="&#x521D;&#x63A2;&#xFF1A;Spring Boot &#x542F;&#x52A8; Eureka Server &#x548C; Eureka Client&#x5FAE;&#x670D;&#x52A1;"></a>&#x521D;&#x63A2;&#xFF1A;Spring Boot &#x542F;&#x52A8; Eureka Server &#x548C; Eureka Client&#x5FAE;&#x670D;&#x52A1;</h1><p>The first one is the server which needs only Eureka Server dependency.<br>Spring Initializr &gt; (Repo location chooses: <a href="https://start.aliyun.com/" target="_blank" rel="noopener">https://start.aliyun.com/</a>) Generate a Maven Project &gt; Group: com.ustb &gt; Artifact: service-registration-and-discovery-service &gt; Dependencies: Eureka Server</p>
+<p>Then second one(a client) requires both Eureka Server and Eureka Discovery Client dependencies. </p>
+<h2 id="&#x5F00;&#x542F;&#x4E00;&#x4E2A;-Eureka-&#x670D;&#x52A1;&#x6CE8;&#x518C;"><a href="#&#x5F00;&#x542F;&#x4E00;&#x4E2A;-Eureka-&#x670D;&#x52A1;&#x6CE8;&#x518C;" class="headerlink" title="&#x5F00;&#x542F;&#x4E00;&#x4E2A; Eureka &#x670D;&#x52A1;&#x6CE8;&#x518C;"></a>&#x5F00;&#x542F;&#x4E00;&#x4E2A; Eureka &#x670D;&#x52A1;&#x6CE8;&#x518C;</h2><p><img src="eureka-server.png" alt="eureka-server.png"><br>&#x7B80;&#x5355;&#x5730;&#x4F7F;&#x7528;&#x6CE8;&#x89E3;&#x5C31;&#x53EF;&#x4EE5;&#x4E86;&#xFF0C;&#x53E6;&#x5916;&#x9700;&#x8981;&#x5728;application.properties&#x4E2D;&#x8FDB;&#x884C;&#x914D;&#x7F6E;</p>
+<h2 id="&#x4E0E;&#x6CE8;&#x518C;&#x4E2D;&#x5FC3;&#x5BF9;&#x8BDD;"><a href="#&#x4E0E;&#x6CE8;&#x518C;&#x4E2D;&#x5FC3;&#x5BF9;&#x8BDD;" class="headerlink" title="&#x4E0E;&#x6CE8;&#x518C;&#x4E2D;&#x5FC3;&#x5BF9;&#x8BDD;"></a>&#x4E0E;&#x6CE8;&#x518C;&#x4E2D;&#x5FC3;&#x5BF9;&#x8BDD;</h2><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.example.serviceregistrationanddiscoveryclient;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.cloud.client.ServiceInstance;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.cloud.client.discovery.DiscoveryClient;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.cloud.client.discovery.EnableDiscoveryClient;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.PathVariable;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@SpringBootApplication</span></span><br><span class="line"><span class="hljs-meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoApplication</span> </span>{</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{</span><br><span class="line">		SpringApplication.run(DemoApplication<span class="hljs-class">.<span class="hljs-keyword">class</span>, <span class="hljs-title">args</span>)</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@RestController</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ServiceInstanceRestController</span> </span>{</span><br><span class="line">	<span class="hljs-meta">@Autowired</span></span><br><span class="line">	<span class="hljs-keyword">private</span> DiscoveryClient discoveryClient;</span><br><span class="line"></span><br><span class="line">	<span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/service-instances/{applicationName}&quot;</span>)</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;ServiceInstance&gt; <span class="hljs-title">serviceInstancesByApplicationName</span><span class="hljs-params">(</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">		@PathVariable String applicationName)</span> </span>{</span><br><span class="line">			<span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>.discoveryClient.getInstances(applicationName);</span><br><span class="line">		}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x8FD9;&#x91CC;&#x901A;&#x8FC7;&#x6CE8;&#x89E3;EnableDiscoveryClient&#x6765;&#x7EE7;&#x627F;&#x6CE8;&#x518C;&#x5FAE;&#x670D;&#x52A1;&#x7684;&#x63A5;&#x53E3;</p>
+<p>&#x5728;&#x7C7B;&#x4E2D;&#x901A;&#x8FC7;&#x6CE8;&#x89E3;@RequestMapping(&#x201C;/service-instances/{applicationName}&#x201D;) &#x63D0;&#x4F9B;&#x8BE5;client&#x7684;&#x8BBF;&#x95EE;&#x63A5;&#x53E3;</p>
+<h2 id="&#x63D0;&#x4F9B;&#x670D;&#x52A1;"><a href="#&#x63D0;&#x4F9B;&#x670D;&#x52A1;" class="headerlink" title="&#x63D0;&#x4F9B;&#x670D;&#x52A1;"></a>&#x63D0;&#x4F9B;&#x670D;&#x52A1;</h2><p>&#x5FAE;&#x670D;&#x52A1;&#x6709;&#x4E24;&#x79CD;&#x65B9;&#x6CD5;&#x6CE8;&#x518C;&#x5230; Eureka &#x4E2D;&#x5FC3;&#xFF0C;&#x4E00;&#x79CD;&#x662F;&#x672C;&#x5730;&#x542F;&#x52A8;&#x7684;Spring Boot&#x7A0B;&#x5E8F;&#x6DFB;&#x52A0;&#x6CE8;&#x89E3; @EnableDiscoveryClient&#xFF1B;<br>&#x7B2C;&#x4E8C;&#x79CD;&#x662F;&#x5728;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x6DFB;&#x52A0; defaultZone: &#x540E;&#x52A0;Eureka&#x4E2D;&#x5FC3;&#x7684;&#x5730;&#x5740;&#xFF08;<a href="http://localhost:8761/eureka&#xFF09;" target="_blank" rel="noopener">http://localhost:8761/eureka&#xFF09;</a></p>
+<p>&#x8981;&#x60F3;&#x4ECE;Eureka&#x4E2D;&#x5FC3;&#x83B7;&#x53D6;&#x53EF;&#x7528;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#xFF0C;&#x9ED8;&#x8BA4;&#x7684;XML&#x65B9;&#x5F0F;&#x89E3;&#x6790;&#x8D77;&#x6765;&#x6BD4;&#x8F83;&#x9EBB;&#x70E6;&#x3002;&#x6211;&#x4EEC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5728;Eureka&#x91CC;&#x5199;&#x4E00;&#x4E2A; discoveryClient &#x7684; controller&#x6765;&#x5B9E;&#x73B0;&#x3002;<br>&#x914D;&#x7F6E;&#x91CC;&#x5199; eureka.client.fetch-registry=true&#x3002;<br>&#x4F46;&#x540C;&#x65F6;&#x53C8;&#x4E0D;&#x60F3; eureka server &#x81EA;&#x5DF1;&#x4E5F;&#x88AB;&#x5176;&#x4ED6;&#x670D;&#x52A1;&#x53D1;&#x73B0;&#xFF0C;&#x8FD9;&#x65F6;&#x9700;&#x8981;&#x914D;&#x7F6E; eureka.client.register-with-eureka=false</p>
+<p>&#x6CE8;&#x610F;&#xFF1A;Spring Cloud Gateway &#x4F9D;&#x8D56;&#x548C; Spring Web&#x4E0D;&#x80FD;&#x540C;&#x65F6;&#x6DFB;&#x52A0; </p>
+<h1 id="&#x5B66;&#x4E60;&#xFF1A;&#x6E90;&#x7801;&#x542F;&#x52A8;-Eureka-Server&#xFF0C;-Eureka-Client-&#x548C;&#x5FAE;&#x670D;&#x52A1;"><a href="#&#x5B66;&#x4E60;&#xFF1A;&#x6E90;&#x7801;&#x542F;&#x52A8;-Eureka-Server&#xFF0C;-Eureka-Client-&#x548C;&#x5FAE;&#x670D;&#x52A1;" class="headerlink" title="&#x5B66;&#x4E60;&#xFF1A;&#x6E90;&#x7801;&#x542F;&#x52A8; Eureka Server&#xFF0C; Eureka Client &#x548C;&#x5FAE;&#x670D;&#x52A1;"></a>&#x5B66;&#x4E60;&#xFF1A;&#x6E90;&#x7801;&#x542F;&#x52A8; Eureka Server&#xFF0C; Eureka Client &#x548C;&#x5FAE;&#x670D;&#x52A1;</h1><h2 id="&#x5B89;&#x88C5;"><a href="#&#x5B89;&#x88C5;" class="headerlink" title="&#x5B89;&#x88C5;"></a>&#x5B89;&#x88C5;</h2><h3 id="1-IDEA&#x9009;2019-2-2020-1-&#x7684;&#x7248;&#x672C;-&#xFF1B;-jdk1-8-Tomcat-8-9"><a href="#1-IDEA&#x9009;2019-2-2020-1-&#x7684;&#x7248;&#x672C;-&#xFF1B;-jdk1-8-Tomcat-8-9" class="headerlink" title="1. IDEA&#x9009;2019.2-2020.1 &#x7684;&#x7248;&#x672C; &#xFF1B; jdk1.8 ; Tomcat 8/9"></a>1. IDEA&#x9009;2019.2-2020.1 &#x7684;&#x7248;&#x672C; &#xFF1B; jdk1.8 ; Tomcat 8/9</h3><h3 id="2-&#x6CE8;&#x518C;&#x7801;&#x4E91;&#x5E10;&#x53F7;&#xFF0C;&#x7136;&#x540E;&#x514B;&#x9686;&#x9879;&#x76EE;&#xFF1A;"><a href="#2-&#x6CE8;&#x518C;&#x7801;&#x4E91;&#x5E10;&#x53F7;&#xFF0C;&#x7136;&#x540E;&#x514B;&#x9686;&#x9879;&#x76EE;&#xFF1A;" class="headerlink" title="2. &#x6CE8;&#x518C;&#x7801;&#x4E91;&#x5E10;&#x53F7;&#xFF0C;&#x7136;&#x540E;&#x514B;&#x9686;&#x9879;&#x76EE;&#xFF1A;"></a>2. &#x6CE8;&#x518C;&#x7801;&#x4E91;&#x5E10;&#x53F7;&#xFF0C;&#x7136;&#x540E;&#x514B;&#x9686;&#x9879;&#x76EE;&#xFF1A;</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">git clone -b web3 --single-branch https://gitee.com/Shane1501/eureka.git</span><br></pre></td></tr></table></figure>
+
+<p>IDEA &#x6253;&#x5F00;&#x9879;&#x76EE;&#x786E;&#x8BA4;&#x5DF2;&#x5207;&#x6362;&#x5230; web3 &#x5206;&#x652F;<br><img src="git-web3.png" alt="git-web3.png"></p>
+<h3 id="3-&#x914D;&#x7F6E;gradle"><a href="#3-&#x914D;&#x7F6E;gradle" class="headerlink" title="3. &#x914D;&#x7F6E;gradle"></a>3. &#x914D;&#x7F6E;gradle</h3><p>&#x628A;&#x9879;&#x76EE;&#x6839;&#x76EE;&#x5F55;&#x4E0B;&#x7684; build.gradle.IDEA&#x7248;&#x672C;&#x53F7;&#xFF08;&#x6211;&#x662F; build.gradle.IDEA2019.3&#xFF09; &#x62F7;&#x8D1D;&#x4E00;&#x4EFD;&#x65B0;&#x7684;&#x6539;&#x4E3A; build.gradle</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cp build.gradle.IDEA2019.3 build.gradle</span><br></pre></td></tr></table></figure>
+
+<p><img src="gradle-build.png" alt="gradle-build.png"></p>
+<p>&#xFF08;&#x53EF;&#x4EE5;&#x9009;&#x7528;&#x7528;&#x963F;&#x91CC;&#x4E91;&#x955C;&#x50CF;&#xFF0C;&#x628A;&#x4E0B;&#x9762;&#x6587;&#x4EF6;&#x4FDD;&#x5B58;&#x6210; init.gradle &#x653E;&#x5230; USER &#x76EE;&#x5F55;&#x4E0B;&#x7684; .gradle &#x6587;&#x4EF6;&#x5939;&#x91CC;&#xFF09;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">allprojects{</span><br><span class="line">    repositories {</span><br><span class="line">        def ALIYUN_REPOSITORY_URL = &apos;https://maven.aliyun.com/repository/public/&apos;</span><br><span class="line">        def ALIYUN_JCENTER_URL = &apos;https://maven.aliyun.com/repository/jcenter/&apos;</span><br><span class="line">        def ALIYUN_GOOGLE_URL = &apos;https://maven.aliyun.com/repository/google/&apos;</span><br><span class="line">        def ALIYUN_GRADLE_PLUGIN_URL = &apos;https://maven.aliyun.com/repository/gradle-plugin/&apos;</span><br><span class="line">        all { ArtifactRepository repo -&gt;</span><br><span class="line">            if(repo instanceof MavenArtifactRepository){</span><br><span class="line">                def url = repo.url.toString()</span><br><span class="line">                if (url.startsWith(&apos;https://repo1.maven.org/maven2/&apos;)) {</span><br><span class="line">                    project.logger.lifecycle &quot;Repository ${repo.url} replaced by $ALIYUN_REPOSITORY_URL.&quot;</span><br><span class="line">                    remove repo</span><br><span class="line">                }</span><br><span class="line">                if (url.startsWith(&apos;https://jcenter.bintray.com/&apos;)) {</span><br><span class="line">                    project.logger.lifecycle &quot;Repository ${repo.url} replaced by $ALIYUN_JCENTER_URL.&quot;</span><br><span class="line">                    remove repo</span><br><span class="line">                }</span><br><span class="line">                if (url.startsWith(&apos;https://dl.google.com/dl/android/maven2/&apos;)) {</span><br><span class="line">                    project.logger.lifecycle &quot;Repository ${repo.url} replaced by $ALIYUN_GOOGLE_URL.&quot;</span><br><span class="line">                    remove repo</span><br><span class="line">                }</span><br><span class="line">                if (url.startsWith(&apos;https://plugins.gradle.org/m2/&apos;)) {</span><br><span class="line">                    project.logger.lifecycle &quot;Repository ${repo.url} replaced by $ALIYUN_GRADLE_PLUGIN_URL.&quot;</span><br><span class="line">                    remove repo</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        maven { url ALIYUN_REPOSITORY_URL }</span><br><span class="line">        maven { url ALIYUN_JCENTER_URL }</span><br><span class="line">        maven { url ALIYUN_GOOGLE_URL }</span><br><span class="line">        maven { url ALIYUN_GRADLE_PLUGIN_URL }</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x5BFC;&#x5165;<br><img src="import-gradle2.png" alt="import-gradle"></p>
+<h3 id="4-&#x914D;&#x7F6E;-Tomcat"><a href="#4-&#x914D;&#x7F6E;-Tomcat" class="headerlink" title="4. &#x914D;&#x7F6E; Tomcat"></a>4. &#x914D;&#x7F6E; Tomcat</h3><p><img src="tomcat1.png" alt="/home/wsd/Clouds/Hexo-blog/source/_posts/2020-07-11-Swagger-tutorial/tomcat1.png"><br>&#x5728;Tomcat&#x542F;&#x52A8;&#x65F6;&#x6DFB;&#x52A0;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-Deureka.waitTimeInMsWhenSyncEmpty=0</span><br><span class="line">-Deureka.numberRegistrySyncRetries=0</span><br></pre></td></tr></table></figure>
+
+<p>&#x4EE5;&#x52A0;&#x5FEB; eureka &#x542F;&#x52A8;&#x901F;&#x5EA6;&#x3002;<br><img src="tomcat-vm-options.png" alt="tomcat-vm-options.png"></p>
+<p>&#x6216;&#x76F4;&#x63A5;&#x4FEE;&#x6539; eureka-server/src/main/resources/eureka-server.properties &#x6587;&#x4EF6;&#xFF0C;&#x53D6;&#x6D88;&#x914D;&#x7F6E;&#x6CE8;&#x91CA;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">eureka.waitTimeInMsWhenSyncEmpty=0</span><br><span class="line">eureka.numberRegistrySyncRetries=0</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E5F;&#x53EF;&#x8FBE;&#x5230;&#x540C;&#x6837;&#x6548;&#x679C;&#x3002;<br><img src="eureka-server-properties.png" alt="&#x4FEE;&#x6539;eureka-server.properties"></p>
+<p>&#x914D;&#x7F6E;war&#x5305;exploded&#x6A21;&#x5F0F;&#x53EF;&#x4EE5;&#x65B9;&#x4FBF;&#x8FD0;&#x884C;&#x65F6;&#x5B9E;&#x65F6;&#x66F4;&#x65B0;&#x914D;&#x7F6E;&#x3002;<br><img src="tomcat2.png" alt="/home/wsd/Clouds/Hexo-blog/source/_posts/2020-07-11-Swagger-tutorial/tomcat2.png"></p>
+<h3 id="6-&#x70B9;&#x51FB;&#x542F;&#x52A8;Tomcat&#xFF0C;&#x4F1A;&#x5F39;&#x51FA;eureka&#x754C;&#x9762;"><a href="#6-&#x70B9;&#x51FB;&#x542F;&#x52A8;Tomcat&#xFF0C;&#x4F1A;&#x5F39;&#x51FA;eureka&#x754C;&#x9762;" class="headerlink" title="6. &#x70B9;&#x51FB;&#x542F;&#x52A8;Tomcat&#xFF0C;&#x4F1A;&#x5F39;&#x51FA;eureka&#x754C;&#x9762;"></a>6. &#x70B9;&#x51FB;&#x542F;&#x52A8;Tomcat&#xFF0C;&#x4F1A;&#x5F39;&#x51FA;eureka&#x754C;&#x9762;</h3><p><img src="eureka.png" alt="/home/wsd/Clouds/Hexo-blog/source/_posts/2020-07-11-Swagger-tutorial/eureka.png"><br>&#x6E90;&#x7801;&#x7F16;&#x8BD1;&#x5373;&#x544A;&#x5B8C;&#x6210;&#x3002;</p>
+<h2 id="Eureka-&#x6E90;&#x7801;&#x89E3;&#x6790;"><a href="#Eureka-&#x6E90;&#x7801;&#x89E3;&#x6790;" class="headerlink" title="Eureka &#x6E90;&#x7801;&#x89E3;&#x6790;"></a>Eureka &#x6E90;&#x7801;&#x89E3;&#x6790;</h2><p>&#x670D;&#x52A1;&#x53D1;&#x73B0;&#x7EC4;&#x4EF6; package com.netflix.discovery</p>
+<p>v1.1&#x7248;&#x672C;<br>DiscoveryClient.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">	* Makes remote calls with the corresponding action(register,renew etc).</span></span><br><span class="line"><span class="hljs-comment">	*</span></span><br><span class="line"><span class="hljs-comment">	* <span class="hljs-doctag">@param</span> action</span></span><br><span class="line"><span class="hljs-comment">	*            the action to be performed on eureka server.</span></span><br><span class="line"><span class="hljs-comment">	*</span></span><br><span class="line"><span class="hljs-comment">	*            Try the fallback servers in case of problems communicating to</span></span><br><span class="line"><span class="hljs-comment">	*            the primary one.</span></span><br><span class="line"><span class="hljs-comment">	*</span></span><br><span class="line"><span class="hljs-comment">	* <span class="hljs-doctag">@return</span> ClientResponse the HTTP response object.</span></span><br><span class="line"><span class="hljs-comment">	* <span class="hljs-doctag">@throws</span> Throwable</span></span><br><span class="line"><span class="hljs-comment">	*             on any error.</span></span><br><span class="line"><span class="hljs-comment">	*/</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">private</span> ClientResponse <span class="hljs-title">makeRemoteCall</span><span class="hljs-params">(Action action, <span class="hljs-keyword">int</span> serviceUrlIndex)</span> <span class="hljs-keyword">throws</span> Throwable </span>{</span><br><span class="line">	......</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x63A5;&#x6536;&#x7AEF;&#xFF1A; package com.netflix.eureka;<br>RemoteRegionRegistry.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">RemoteRegionRegistry</span><span class="hljs-params">(String regionName, URL remoteRegionURL)</span> </span>{</span><br><span class="line">	......</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x90A3;&#x4E48;&#xFF0C;&#x4E00;&#x4E2A; InstanceInfo &#x5B9E;&#x4F8B;&#x662F;&#x5982;&#x4F55;&#x4EA7;&#x751F;&#x7684;&#x5462;&#xFF1F;<br>com/netflix/eureka/ExampleEurekaService.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-number">43</span>	InstanceInfo instanceInfo = <span class="hljs-keyword">new</span> EurekaConfigBasedInstanceInfoProvider(instanceConfig).get();</span><br></pre></td></tr></table></figure>
+
+<p>com/netflix/appinfo/providers/EurekaConfigBasedInstanceInfoProvider.java</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">84	builder.setNamespace(config.getNamespace())</span><br><span class="line">                    .setInstanceId(instanceId)</span><br><span class="line">                    .setAppName(config.getAppname())</span><br><span class="line">                    .setAppGroupName(config.getAppGroupName())</span><br><span class="line">                    .setDataCenterInfo(config.getDataCenterInfo())</span><br><span class="line">                    .setIPAddr(config.getIpAddress())</span><br><span class="line">                    .setHostName(defaultAddress)</span><br><span class="line">                    .setPort(config.getNonSecurePort())</span><br><span class="line">                    .enablePort(PortType.UNSECURE, config.isNonSecurePortEnabled())</span><br><span class="line">                    .setSecurePort(config.getSecurePort())</span><br><span class="line">                    .enablePort(PortType.SECURE, config.getSecurePortEnabled())</span><br><span class="line">                    .setVIPAddress(config.getVirtualHostName())</span><br><span class="line">                    .setSecureVIPAddress(config.getSecureVirtualHostName())</span><br><span class="line">                    .setHomePageUrl(config.getHomePageUrlPath(), config.getHomePageUrl())</span><br><span class="line">                    .setStatusPageUrl(config.getStatusPageUrlPath(), config.getStatusPageUrl())</span><br><span class="line">                    .setASGName(config.getASGName())</span><br><span class="line">                    .setHealthCheckUrls(config.getHealthCheckUrlPath(),</span><br><span class="line">                            config.getHealthCheckUrl(), config.getSecureHealthCheckUrl());</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">125	instanceInfo = builder.build();</span><br><span class="line">    instanceInfo.setLeaseInfo(leaseInfoBuilder.build());</span><br></pre></td></tr></table></figure>
+
+<p>&#x800C;config&#x7684;&#x6765;&#x6E90;&#x5219;&#x662F;<br>com/netflix/eureka/ExampleEurekaService.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-number">61</span> DynamicPropertyFactory configInstance = com.netflix.config.DynamicPropertyFactory.getInstance();</span><br></pre></td></tr></table></figure>
+
+<p>com/netflix/config/DynamicPropertyFactory.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-number">279</span>	initWithConfigurationSource(configFromManager);</span><br><span class="line"><span class="hljs-number">280</span>	initializedWithDefaultConfig = !ConfigurationManager.isConfigurationInstalled();</span><br></pre></td></tr></table></figure>
+
+<p>jsp&#x4FEE;&#x6539;&#x540E;&#x4E0D;&#x7ACB;&#x5373;&#x66F4;&#x65B0;&#xFF0C;&#x5E94;&#x6539;&#x4E3A;exploded war<br>&#x62A5;&#x9519;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Artifact Gradle : com.netflix.eureka : eureka-server-1.9.26-SNAPSHOT.war (exploded): Error during artifact deployment. See server log for details.</span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x83B7;&#x53D6;-eureka-v2-apps-appId-&#x4E0B;&#x7684;xml&#x89E3;&#x6790;"><a href="#&#x83B7;&#x53D6;-eureka-v2-apps-appId-&#x4E0B;&#x7684;xml&#x89E3;&#x6790;" class="headerlink" title="&#x83B7;&#x53D6; eureka/v2/apps/{appId} &#x4E0B;&#x7684;xml&#x89E3;&#x6790;"></a>&#x83B7;&#x53D6; eureka/v2/apps/{appId} &#x4E0B;&#x7684;xml&#x89E3;&#x6790;</h3><p>com.netflix.eureka.registry.ResponseCacheImpl.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">private</span> <span class="hljs-keyword">final</span> ConcurrentMap&lt;Key, Value&gt; readOnlyCacheMap</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">payload = readWriteCacheMap.get(key);</span><br><span class="line">readOnlyCacheMap.put(key, payload);</span><br></pre></td></tr></table></figure>
+
+<p>&#x5982;&#x679C;&#x60F3;&#x5F80; app &#x7684;xml&#x91CC;&#x6DFB;&#x52A0;&#x5B57;&#x6BB5;&#xFF08;&#x539F;&#x6709;&#x5B57;&#x6BB5;&#x4E3A;appName&#x548C;instances&#xFF09;&#xFF0C;&#x5373;&#x6240;&#x94FE;&#x63A5;&#x7684; &#x5408;&#x7EA6;&#x5730;&#x5740;&#x5217;&#x8868; <contracts><br>&#x9700;&#x8981;&#x4ECE; readWriteCacheMap &#x91CC;&#x8BFB;&#x53D6;&#xFF0C;&#x7136;&#x540E;&#x5F80; readOnlyCacheMap &#x91CC; put payload&#xFF08;&#x6B64;payload&#x91CC;&#x5305;&#x542B;app&#x4FE1;&#x606F;&#xFF09;</contracts></p>
+<p>generatePayload &#x91CC;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">payload = getPayLoad(key, registry.getApplication(key.getName()));</span><br></pre></td></tr></table></figure>
+
+<p>getPayLoad &#x51FD;&#x6570;&#x5BF9;&#x5BF9;&#x8C61;&#x6587;&#x4EF6;&#x505A;&#x4E00;&#x4E2A; &#x5BF9;&#x8C61; &#x5230;string&#x7684;&#x89E3;&#x6790;&#xFF0C;&#x800C;&#x89E3;&#x6790;&#x7684;&#x5BF9;&#x8C61;&#x5C31;&#x662F; registry.getApplication(key.getName())</p>
+<p>&#x91CC;&#x9762;&#x7684;&#x89E3;&#x6790;&#x7528;converter&#x5199;&#x5728;Converters.java &#x51FD;&#x6570;&#x91CC;</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment">    * Serialize/deserialize {<span class="hljs-doctag">@link</span> Applications} object types.</span></span><br><span class="line"><span class="hljs-comment">    */</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">ApplicationConverter</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">Converter</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">final</span> String ELEM_NAME = <span class="hljs-string">&quot;name&quot;</span>;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">        * (non-Javadoc)</span></span><br><span class="line"><span class="hljs-comment">        *</span></span><br><span class="line"><span class="hljs-comment">        * @see</span></span><br><span class="line"><span class="hljs-comment">        * com.thoughtworks.xstream.converters.ConverterMatcher#canConvert(java</span></span><br><span class="line"><span class="hljs-comment">        * .lang.Class)</span></span><br><span class="line"><span class="hljs-comment">        */</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">canConvert</span><span class="hljs-params">(@SuppressWarnings(<span class="hljs-string">&quot;rawtypes&quot;</span>)</span> Class clazz) </span>{</span><br><span class="line">        <span class="hljs-keyword">return</span> Application<span class="hljs-class">.<span class="hljs-keyword">class</span> </span>== clazz;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">        * (non-Javadoc)</span></span><br><span class="line"><span class="hljs-comment">        *</span></span><br><span class="line"><span class="hljs-comment">        * @see</span></span><br><span class="line"><span class="hljs-comment">        * com.thoughtworks.xstream.converters.Converter#marshal(java.lang.Object</span></span><br><span class="line"><span class="hljs-comment">        * , com.thoughtworks.xstream.io.HierarchicalStreamWriter,</span></span><br><span class="line"><span class="hljs-comment">        * com.thoughtworks.xstream.converters.MarshallingContext)</span></span><br><span class="line"><span class="hljs-comment">        */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">marshal</span><span class="hljs-params">(Object source, HierarchicalStreamWriter writer,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">                        MarshallingContext context)</span> </span>{</span><br><span class="line">        Application app = (Application) source;</span><br><span class="line"></span><br><span class="line">        writer.startNode(ELEM_NAME);</span><br><span class="line">        writer.setValue(app.getName());</span><br><span class="line">        writer.endNode();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">for</span> (InstanceInfo instanceInfo : app.getInstances()) {</span><br><span class="line">            writer.startNode(NODE_INSTANCE);</span><br><span class="line">            context.convertAnother(instanceInfo);</span><br><span class="line">            writer.endNode();</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">        * (non-Javadoc)</span></span><br><span class="line"><span class="hljs-comment">        *</span></span><br><span class="line"><span class="hljs-comment">        * @see</span></span><br><span class="line"><span class="hljs-comment">        * com.thoughtworks.xstream.converters.Converter#unmarshal(com.thoughtworks</span></span><br><span class="line"><span class="hljs-comment">        * .xstream.io.HierarchicalStreamReader,</span></span><br><span class="line"><span class="hljs-comment">        * com.thoughtworks.xstream.converters.UnmarshallingContext)</span></span><br><span class="line"><span class="hljs-comment">        */</span></span><br><span class="line">    <span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> Object <span class="hljs-title">unmarshal</span><span class="hljs-params">(HierarchicalStreamReader reader,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">                            UnmarshallingContext context)</span> </span>{</span><br><span class="line">        Application app = <span class="hljs-keyword">new</span> Application();</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">while</span> (reader.hasMoreChildren()) {</span><br><span class="line">            reader.moveDown();</span><br><span class="line"></span><br><span class="line">            String nodeName = reader.getNodeName();</span><br><span class="line"></span><br><span class="line">            <span class="hljs-keyword">if</span> (ELEM_NAME.equals(nodeName)) {</span><br><span class="line">                app.setName(reader.getValue());</span><br><span class="line">            } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (NODE_INSTANCE.equals(nodeName)) {</span><br><span class="line">                app.addInstance((InstanceInfo) context.convertAnother(app,</span><br><span class="line">                        InstanceInfo<span class="hljs-class">.<span class="hljs-keyword">class</span>))</span>;</span><br><span class="line">            }</span><br><span class="line">            reader.moveUp();</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">return</span> app;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h3 id="Renew-&#x64CD;&#x4F5C;"><a href="#Renew-&#x64CD;&#x4F5C;" class="headerlink" title="Renew &#x64CD;&#x4F5C;"></a>Renew &#x64CD;&#x4F5C;</h3><p>InstanceResource.java &#x91CC;&#x7684; Renew &#x63A5;&#x53E3;</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@PUT</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> Response <span class="hljs-title">renewLease</span><span class="hljs-params">(</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">    <span class="hljs-keyword">boolean</span> isSuccess = registry.renew(app.getName()</span>, id, isFromReplicaNode)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>PeerAwareInstanceRegistryImpl.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">renew</span><span class="hljs-params">(<span class="hljs-keyword">final</span> String appName, <span class="hljs-keyword">final</span> String id, <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> isReplication)</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">if</span> (<span class="hljs-keyword">super</span>.renew(appName, id, isReplication)) {</span><br><span class="line">            replicateToPeers(Action.Heartbeat, appName, id, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>, isReplication);</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">    }</span><br></pre></td></tr></table></figure>
+
+<p>AbstractInstanceRegistry.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">renew</span><span class="hljs-params">(String appName, String id, <span class="hljs-keyword">boolean</span> isReplication)</span> </span>{</span><br><span class="line">    ...</span><br></pre></td></tr></table></figure>
+
+<h3 id="Status-Update-&#x64CD;&#x4F5C;"><a href="#Status-Update-&#x64CD;&#x4F5C;" class="headerlink" title="Status Update &#x64CD;&#x4F5C;"></a>Status Update &#x64CD;&#x4F5C;</h3><p>InstanceResource.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@PUT</span></span><br><span class="line"><span class="hljs-meta">@Path</span>(<span class="hljs-string">&quot;status&quot;</span>)</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> Response <span class="hljs-title">statusUpdate</span><span class="hljs-params">(</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params"></span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">        <span class="hljs-keyword">boolean</span> isSuccess = registry.statusUpdate(app.getName()</span>, id,</span></span><br><span class="line"><span class="hljs-function">                    InstanceStatus.<span class="hljs-title">valueOf</span><span class="hljs-params">(newStatus)</span>, lastDirtyTimestamp,</span></span><br><span class="line"><span class="hljs-function">                    &quot;<span class="hljs-keyword">true</span>&quot;.<span class="hljs-title">equals</span><span class="hljs-params">(isReplication)</span>)</span>;</span><br></pre></td></tr></table></figure>
+
+<p>&#x76EE;&#x524D;&#x7684;&#x72B6;&#x6001;&#x6570;<br>InstanceInfo.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-keyword">enum</span> InstanceStatus {</span><br><span class="line">    UP, <span class="hljs-comment">// Ready to receive traffic</span></span><br><span class="line">    DOWN, <span class="hljs-comment">// Do not send traffic- healthcheck callback failed</span></span><br><span class="line">    STARTING, <span class="hljs-comment">// Just about starting- initializations to be done - do not</span></span><br><span class="line">    <span class="hljs-comment">// send traffic</span></span><br><span class="line">    OUT_OF_SERVICE, <span class="hljs-comment">// Intentionally shutdown for traffic</span></span><br><span class="line">    UNKNOWN;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> InstanceStatus <span class="hljs-title">toEnum</span><span class="hljs-params">(String s)</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">if</span> (s != <span class="hljs-keyword">null</span>) {</span><br><span class="line">            <span class="hljs-keyword">try</span> {</span><br><span class="line">                <span class="hljs-keyword">return</span> InstanceStatus.valueOf(s.toUpperCase());</span><br><span class="line">            } <span class="hljs-keyword">catch</span> (IllegalArgumentException e) {</span><br><span class="line">                <span class="hljs-comment">// ignore and fall through to unknown</span></span><br><span class="line">                logger.debug(<span class="hljs-string">&quot;illegal argument supplied to InstanceStatus.valueOf: {}, defaulting to {}&quot;</span>, s, UNKNOWN);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">return</span> UNKNOWN;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>PeerAwareInstanceRegistryImpl.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">statusUpdate</span><span class="hljs-params">(<span class="hljs-keyword">final</span> String appName, <span class="hljs-keyword">final</span> String id,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">                            <span class="hljs-keyword">final</span> InstanceStatus newStatus, String lastDirtyTimestamp,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">                            <span class="hljs-keyword">final</span> <span class="hljs-keyword">boolean</span> isReplication)</span> </span>{</span><br><span class="line">    <span class="hljs-keyword">if</span> (<span class="hljs-keyword">super</span>.statusUpdate(appName, id, newStatus, lastDirtyTimestamp, isReplication)) {</span><br><span class="line">        replicateToPeers(Action.StatusUpdate, appName, id, <span class="hljs-keyword">null</span>, newStatus, isReplication);</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>AbstractInstanceRegistry.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">statusUpdate</span><span class="hljs-params">(String appName, String id,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">                                InstanceStatus newStatus, String lastDirtyTimestamp,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">                                <span class="hljs-keyword">boolean</span> isReplication)</span> </span>{</span><br><span class="line">        ......</span><br></pre></td></tr></table></figure>
+
+<h2 id="v1-9-26-&#x7248;&#x672C;"><a href="#v1-9-26-&#x7248;&#x672C;" class="headerlink" title="v1.9.26 &#x7248;&#x672C;"></a>v1.9.26 &#x7248;&#x672C;</h2><h2 id="&#x670D;&#x52A1;&#x53D1;&#x73B0;&#x6A21;&#x5757;-com-netflix-discovery"><a href="#&#x670D;&#x52A1;&#x53D1;&#x73B0;&#x6A21;&#x5757;-com-netflix-discovery" class="headerlink" title="&#x670D;&#x52A1;&#x53D1;&#x73B0;&#x6A21;&#x5757; com.netflix.discovery"></a>&#x670D;&#x52A1;&#x53D1;&#x73B0;&#x6A21;&#x5757; com.netflix.discovery</h2><p>&#x670D;&#x52A1;&#x53D1;&#x73B0;&#x6A21;&#x5757;&#x901A;&#x8FC7; Jersey &#x6846;&#x67B6;&#x5B9E;&#x73B0;&#x4E86; RESTful &#x98CE;&#x683C;&#x8BBF;&#x95EE;&#x7684; http &#x5BA2;&#x6237;&#x7AEF;&#xFF0C;&#x5B9A;&#x4E49;&#x5728; <code>eureka-client/src/main/java/com/netflix/discovery/DiscoveryClient.java</code> &#x4E2D;&#x3002;</p>
+<blockquote>
+<p>RESTful(REpresentational State Transfer, &#x8868;&#x73B0;&#x5C42;&#x72B6;&#x6001;&#x8F6C;&#x79FB;) &#x662F;&#x4E00;&#x79CD;&#x67B6;&#x6784;&#x98CE;&#x683C;&#x3002;&#x5B83;&#x4E0D;&#x518D;&#x4F7F;&#x7528;&#x4EE5;&#x5F80;&#x7684; php, jsp &#x67B6;&#x6784;&#xFF0C;&#x800C;&#x662F;&#x5C06;&#x524D;&#x540E;&#x7AEF;&#x660E;&#x786E;&#x5206;&#x5DE5;&#xFF0C;&#x524D;&#x7AEF;&#xFF08;Web&#x7AEF;&#x3001;&#x5BA2;&#x6237;&#x7AEF;&#x3001;app&#x548C;&#x7B2C;&#x4E09;&#x65B9;&#x5F00;&#x53D1;&#x8005;&#xFF09;&#x8D1F;&#x8D23;&#x6E32;&#x67D3;&#x548C;&#x9644;&#x5E26;&#x5904;&#x7406;&#x7B80;&#x5355;&#x7684;&#x5546;&#x52A1;&#x903B;&#x8F91;&#xFF0C;&#x540E;&#x7AEF;&#xFF08;Server&#x7AEF;&#xFF09;&#x8D1F;&#x8D23;&#x5904;&#x7406;&#x8D44;&#x6E90;&#x548C;&#x6570;&#x636E;&#xFF0C;&#x524D;&#x540E;&#x7AEF;&#x901A;&#x8FC7;&#x7EDF;&#x4E00;&#x7684;API&#x63A5;&#x53E3;&#x8C03;&#x7528;&#x6765;&#x8FDB;&#x884C;&#x4EA4;&#x4E92;&#xFF0C;&#x63A5;&#x53E3;Uri&#x9762;&#x5411;&#x8D44;&#x6E90;&#x4E3A;&#x6838;&#x5FC3;&#x8FDB;&#x884C;&#x8BBE;&#x8BA1;&#x800C;&#x4E0D;&#x662F;&#x64CD;&#x4F5C;&#x3002;</p>
+</blockquote>
+<p><code>DiscoveryClient</code> &#x7684;&#x804C;&#x8D23;&#x4E3B;&#x8981;&#x5305;&#x62EC;&#xFF1A;<br>a) &#x6CE8;&#x518C;&#x5FAE;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x5230; Eureka Server<br>b) &#x5411; Eureka Server &#x66F4;&#x65B0;&#x5FAE;&#x670D;&#x52A1;&#x79DF;&#x7EA6;<br>c) &#x670D;&#x52A1;&#x5173;&#x95ED;&#x7684;&#x65F6;&#x5019;&#x8FDB;&#x884C;&#x79DF;&#x7EA6;&#x53D6;&#x6D88;<br>d) &#x67E5;&#x8BE2;&#x6CE8;&#x518C;&#x5230; Eureka Server &#x4E2D;&#x7684;&#x670D;&#x52A1;/&#x5B9E;&#x4F8B;&#x4FE1;&#x606F;</p>
+<p>Eureka &#x81EA;&#x8EAB;&#x662F;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A;&#x5FAE;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x6CE8;&#x518C;&#x5230;&#x81EA;&#x5DF1;&#x7684;&#x5217;&#x8868;&#x4E2D;&#x7684;&#xFF0C;&#x901A;&#x8FC7;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x9009;&#x9879;<code>eureka.client.register-with-eureka</code>&#x4E3A;<code>true</code>&#x6216;&#x8005;<code>false</code>&#x6765;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x6CE8;&#x518C;&#x5230;&#x81EA;&#x5DF1;&#x7684;&#x5217;&#x8868;&#x4E2D;&#x3002;</p>
+<h3 id="&#x4E09;&#x7EA7;&#x7F13;&#x5B58;"><a href="#&#x4E09;&#x7EA7;&#x7F13;&#x5B58;" class="headerlink" title="&#x4E09;&#x7EA7;&#x7F13;&#x5B58;"></a>&#x4E09;&#x7EA7;&#x7F13;&#x5B58;</h3><p><img src="20200710190857142.png" alt></p>
+<h3 id="&#x5168;&#x91CF;&#x62C9;&#x53D6;&#x4E0E;&#x589E;&#x91CF;&#x62C9;&#x53D6;"><a href="#&#x5168;&#x91CF;&#x62C9;&#x53D6;&#x4E0E;&#x589E;&#x91CF;&#x62C9;&#x53D6;" class="headerlink" title="&#x5168;&#x91CF;&#x62C9;&#x53D6;&#x4E0E;&#x589E;&#x91CF;&#x62C9;&#x53D6;"></a>&#x5168;&#x91CF;&#x62C9;&#x53D6;&#x4E0E;&#x589E;&#x91CF;&#x62C9;&#x53D6;</h3><p><img src="20200716164537833.png" alt></p>
+<h2 id="&#x6574;&#x4F53;&#x67B6;&#x6784;&#x8BBE;&#x8BA1;&#x91C7;&#x7528;-MVC-&#x6A21;&#x5F0F;"><a href="#&#x6574;&#x4F53;&#x67B6;&#x6784;&#x8BBE;&#x8BA1;&#x91C7;&#x7528;-MVC-&#x6A21;&#x5F0F;" class="headerlink" title="&#x6574;&#x4F53;&#x67B6;&#x6784;&#x8BBE;&#x8BA1;&#x91C7;&#x7528; MVC &#x6A21;&#x5F0F;"></a>&#x6574;&#x4F53;&#x67B6;&#x6784;&#x8BBE;&#x8BA1;&#x91C7;&#x7528; MVC &#x6A21;&#x5F0F;</h2><p>Model&#xFF1A;&#x4E1A;&#x52A1;&#x903B;&#x8F91;&#x5C42;&#xFF0C;&#x5305;&#x62EC; InstanceInfo.java EurekaServerConfig.java eureka-core&#x7684;registry&#x6587;&#x4EF6;&#x5939;&#x4E0B;&#x7684;InstanceRegistry.java<br>View&#xFF1A;bootstrap<br>Control&#xFF1A;&#x5404;&#x79CD;resource&#x6587;&#x4EF6;&#xFF0C;&#x5305;&#x62EC;Application(s)Resource.java Instance(s)Resource.java</p>
+<p>Register&#x64CD;&#x4F5C;&#x4E3A;&#x4F8B;&#xFF1A;<br>&#x63A5;&#x6536;Register&#x8BF7;&#x6C42;&#x7684;&#x5904;&#x7406;&#x7C7B;&#x6709;ApplicationResource.java&#x4E0B;&#x7684; addInstance<br>AbstractInstanceRegistry.java &#x4E0B;&#x7684; register &#x51FD;&#x6570;</p>
+<p>&#x800C;&#x53D1;&#x9001;Register&#x8BF7;&#x6C42;&#x7684;&#x662F; DiscoveryClient.java &#x4E0B;&#x7684; register</p>
+<p>873 httpResponse = eurekaTransport.registrationClient.register(instanceInfo);</p>
+<p>EurekaHttpClientDecorator.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Override</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">public</span> EurekaHttpResponse&lt;Void&gt; <span class="hljs-title">register</span><span class="hljs-params">(<span class="hljs-keyword">final</span> InstanceInfo info)</span> </span>{</span><br><span class="line">    <span class="hljs-keyword">return</span> execute(<span class="hljs-keyword">new</span> RequestExecutor&lt;Void&gt;() {</span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> EurekaHttpResponse&lt;Void&gt; <span class="hljs-title">execute</span><span class="hljs-params">(EurekaHttpClient delegate)</span> </span>{</span><br><span class="line">            <span class="hljs-keyword">return</span> delegate.register(info);</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> RequestType <span class="hljs-title">getRequestType</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">            <span class="hljs-keyword">return</span> RequestType.Register;</span><br><span class="line">        }</span><br><span class="line">    });</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x8C03;&#x7528;&#x7684;&#x662F; EurekaHttpClient &#x4E0B;&#x7684; register &#x51FD;&#x6570;&#x3002;</p>
+<p>java/com/netflix/discovery/shared/transport/jersey/AbstractJerseyEurekaHttpClient.java</p>
+<h2 id="&#x505A;&#x7684;&#x4E00;&#x4E9B;&#x5C1D;&#x8BD5;&#xFF08;Deprecated&#xFF09;"><a href="#&#x505A;&#x7684;&#x4E00;&#x4E9B;&#x5C1D;&#x8BD5;&#xFF08;Deprecated&#xFF09;" class="headerlink" title="&#x505A;&#x7684;&#x4E00;&#x4E9B;&#x5C1D;&#x8BD5;&#xFF08;Deprecated&#xFF09;"></a>&#x505A;&#x7684;&#x4E00;&#x4E9B;&#x5C1D;&#x8BD5;&#xFF08;Deprecated&#xFF09;</h2><p>&#x4E3A; Application &#x7C7B;&#x6DFB;&#x52A0;&#x4E00;&#x4E2A;&#x670D;&#x52A1;&#x63D0;&#x4F9B;&#x5546; party &#x7684;&#x6B65;&#x9AA4;</p>
+<ol>
+<li>&#x5728; com.netflix.discovery.shared.Application &#x7C7B;&#x5B9A;&#x4E49;&#x4E2D;&#x6DFB;&#x52A0; String party &#x5C5E;&#x6027;&#xFF0C;&#x5E76;&#x6DFB;&#x4E0A; getter setter toString &#x65B9;&#x6CD5;</li>
+<li>&#x5728; com.netflix.discovery.converters.EurekaJacksonCodec &#x7C7B;&#x4E2D;&#x5B9A;&#x4E49;&#x8981;&#x89E3;&#x6790;&#x7684;&#x5C5E;&#x6027;&#x540D;&#xFF1A;<br>public static final String NODE_PARTY = &#x201C;party&#x201D;;</li>
+</ol>
+<p>&#x5728; ApplicationSerializer &#x5B50;&#x7C7B;&#x4E2D;&#x6DFB;&#x52A0;&#x5BF9; party &#x5C5E;&#x6027;&#x7684;&#x5E8F;&#x5217;&#x5316;&#x5904;&#x7406;&#xFF1A;<br>jgen.writeObjectField(NODE_PARTY, value.getParty());</p>
+<p>&#x5728; ApplicationDeserializer &#x5B50;&#x7C7B;&#x4E2D;&#x6DFB;&#x52A0;&#x4ECE;json&#x5230;&#x5BF9;&#x8C61;&#x7684;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x5904;&#x7406;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">enum ApplicationField {</span><br><span class="line">    NAME(ELEM_NAME), INSTANCE(ELEM_INSTANCE), PARTY(NODE_PARTY);</span><br><span class="line">}</span><br><span class="line">case PARTY:</span><br><span class="line">    application.setParty(jp.getText());</span><br><span class="line">    break;</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>&#x5728; com.netflix.discovery.converters.Converters &#x7C7B;&#x7684; ApplicationConverter &#x5B50;&#x7C7B;&#x4E2D;&#x5B9A;&#x4E49;&#xFF1A;<br>public static final String NODE_PARTY = &#x201C;party&#x201D;;</li>
+</ol>
+<p>&#x5728; marshal &#x65B9;&#x6CD5;&#x6DFB;&#x52A0;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">writer.startNode(NODE_PARTY);</span><br><span class="line">writer.setValue(app.getParty());</span><br><span class="line">writer.endNode();</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E3A;&#x4E86; XStream &#x89E3;&#x6790;&#x5BF9;&#x8C61;&#x81F3; str &#x4F7F;&#x7528;&#x3002;</p>
+<p>unmarshal&#x65B9;&#x6CD5;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">} else if (NODE_PARTY.equals(nodeName)) {</span><br><span class="line">    app.setParty(reader.getValue());</span><br></pre></td></tr></table></figure>
+
+<p>&#x5C06; str &#x89E3;&#x6790;&#x5230;app&#x4E2D;&#x7684;&#x5BF9;&#x8C61;</p>
+<ol>
+<li>&#x5728; com.netflix.discovery.converters.jackson.serializer.ApplicationXmlDeserializer &#x7C7B;&#x4E2D; deserialize &#x65B9;&#x6CD5;&#x4E2D;&#x6DFB;&#x52A0;&#xFF1A;<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (<span class="hljs-string">&quot;party&quot;</span>.equals(fieldName)) {</span><br><span class="line">    party = jp.getValueAsString();</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>&#x5728;&#x6D4B;&#x8BD5;&#x8FC7;&#x7A0B;&#x4E2D;&#x4F7F;&#x7528;XStreamXml &#x5E8F;&#x5217;&#x5316;&#x540E; party = null&#xFF0C; JacksonXml &#x53CD;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x65F6;&#x5019;&#xFF0C;&#x7531;&#x4E8E; party &#x4E3A;&#x7A7A;&#xFF0C;<br>&#x4F20;&#x7ED9; writeText(String text, boolean isAttribute) &#x7684;&#x53C2;&#x6570; text &#x4E3A;&#x7A7A;&#xFF0C;&#x800C;&#x540E;&#x9762;&#x53C8;&#x8C03;&#x7528;<br>int length = text.length();<br>&#x5BFC;&#x81F4;&#x629B;&#x51FA; NullPointerException. &#x89E3;&#x51B3;&#x529E;&#x6CD5;&#xFF0C;&#x91CD;&#x5199;Application&#x7C7B;&#x7684;getter&#x548C;setter&#x4E3A;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">public String getParty() {</span><br><span class="line">    if (null == party) {</span><br><span class="line">        party = &quot;&quot;;</span><br><span class="line">    }</span><br><span class="line">    return party;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">public void setParty(String party) {</span><br><span class="line">    if (null == party) return ;</span><br><span class="line">    this.party = party;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x591A;&#x7EA7;&#x7F13;&#x5B58;&#x673A;&#x5236;"><a href="#&#x591A;&#x7EA7;&#x7F13;&#x5B58;&#x673A;&#x5236;" class="headerlink" title="&#x591A;&#x7EA7;&#x7F13;&#x5B58;&#x673A;&#x5236;"></a>&#x591A;&#x7EA7;&#x7F13;&#x5B58;&#x673A;&#x5236;</h3><p>Eureka Server &#x4F7F;&#x7528;<code>registry</code>, <code>readWriteCacheMap</code>, <code>readOnlyCacheMap</code> &#x4E09;&#x4E2A;&#x53D8;&#x91CF;&#x4FDD;&#x5B58;&#x670D;&#x52A1;&#x6CE8;&#x518C;&#x4FE1;&#x606F;&#x3002;&#x9ED8;&#x8BA4;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5B9A;&#x65F6;&#x4EFB;&#x52A1;&#x6BCF; 30s &#x5C06; <code>readWriteCacheMap</code> &#x540C;&#x6B65;&#x81F3; <code>readOnlyCacheMap</code>&#xFF0C;&#x6BCF; 60s &#x6E05;&#x7406;&#x6E05;&#x7406;&#x8D85;&#x8FC7; 90s &#x672A;&#x7EED;&#x7EA6;&#x7684;&#x8282;&#x70B9;&#x3002;Jsp UI &#x4ECE; <code>registry</code> &#x66F4;&#x65B0;&#x670D;&#x52A1;&#x6CE8;&#x518C;&#x4FE1;&#x606F;<br>Eureka Client &#x4F7F;&#x7528; <code>localRegionApps</code> &#x548C; <code>upServerListZoneMap</code> &#x4E24;&#x4E2A;&#x53D8;&#x91CF;&#x4FDD;&#x5B58;&#x670D;&#x52A1;&#x6CE8;&#x518C;&#x4FE1;&#x606F;&#xFF0C;&#x6BCF; 30s &#x4ECE; <code>readOnlyCacheMap</code> &#x66F4;&#x65B0;&#x670D;&#x52A1;&#x6CE8;&#x518C;&#x4FE1;&#x606F;&#x3002;</p>
+<h3 id="&#x5FAE;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x5BF9;&#x81EA;&#x5DF1;&#x7684;&#x56DB;&#x79CD;&#x63A5;&#x53E3;&#x64CD;&#x4F5C;"><a href="#&#x5FAE;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x5BF9;&#x81EA;&#x5DF1;&#x7684;&#x56DB;&#x79CD;&#x63A5;&#x53E3;&#x64CD;&#x4F5C;" class="headerlink" title="&#x5FAE;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x5BF9;&#x81EA;&#x5DF1;&#x7684;&#x56DB;&#x79CD;&#x63A5;&#x53E3;&#x64CD;&#x4F5C;"></a>&#x5FAE;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x5BF9;&#x81EA;&#x5DF1;&#x7684;&#x56DB;&#x79CD;&#x63A5;&#x53E3;&#x64CD;&#x4F5C;</h3><p>Register, Status Update, Renew &#x548C; Cancel &#x56DB;&#x79CD;&#x64CD;&#x4F5C;&#x3002;<br>&#x63A5;&#x53E3;&#x90FD;&#x5199;&#x5728; <code>eureka-core/src/main/java/com/netflix/eureka/registry/resources/InstanceResource.java</code><br>&#x56DB;&#x4E2A;&#x64CD;&#x4F5C;&#x90FD;&#x662F;&#x76F4;&#x63A5;&#x66F4;&#x65B0; <code>registry</code></p>
+<h3 id="Register&#x6CE8;&#x518C;&#x52A8;&#x4F5C;"><a href="#Register&#x6CE8;&#x518C;&#x52A8;&#x4F5C;" class="headerlink" title="Register&#x6CE8;&#x518C;&#x52A8;&#x4F5C;"></a>Register&#x6CE8;&#x518C;&#x52A8;&#x4F5C;</h3><h3 id="Renew-&#x7EED;&#x7EA6;"><a href="#Renew-&#x7EED;&#x7EA6;" class="headerlink" title="Renew &#x7EED;&#x7EA6;"></a>Renew &#x7EED;&#x7EA6;</h3><h3 id="Contract-status-update-&#x64CD;&#x4F5C;&#x7684;&#x7B97;&#x6CD5;&#x63CF;&#x8FF0;"><a href="#Contract-status-update-&#x64CD;&#x4F5C;&#x7684;&#x7B97;&#x6CD5;&#x63CF;&#x8FF0;" class="headerlink" title="Contract status update &#x64CD;&#x4F5C;&#x7684;&#x7B97;&#x6CD5;&#x63CF;&#x8FF0;"></a>Contract status update &#x64CD;&#x4F5C;&#x7684;&#x7B97;&#x6CD5;&#x63CF;&#x8FF0;</h3><p>&#x8F93;&#x5165;&#xFF1A;&#x670D;&#x52A1;&#x540D;appName&#xFF0C;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x4FE1;&#x606F;instanceInfo&#xFF0C;&#x5408;&#x7EA6;&#x53C2;&#x4E0E;&#x65B9;contractParty&#xFF0C;&#x65F6;&#x95F4;&#x6233; timestamp<br>&#x8F93;&#x51FA;&#xFF1A;true/false/&#x5F02;&#x5E38;</p>
+<ol>
+<li>&#x68C0;&#x67E5;&#x5F53;&#x524D;&#x5B9E;&#x4F8B;&#x4FE1;&#x606F;&#x7684;&#x72B6;&#x6001;status&#x662F;&#x5426;&#x4E3A; UP&#xFF0C;&#x82E5;&#x4E0D;&#x6EE1;&#x8DB3;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;false&#x9000;&#x51FA;;&#x82E5;&#x6EE1;&#x8DB3;&#x6761;&#x4EF6;&#xFF0C;&#x5219;&#x7EE7;&#x7EED;&#x4E0B;&#x4E00;&#x6B65;&#xFF1B;</li>
+<li>&#x5C06;&#x670D;&#x52A1;app&#x540D;&#x79F0;&#x4F5C;&#x4E3A; key &#x67E5;&#x627E;&#x6CE8;&#x518C;&#x4FE1;&#x606F;&#xFF0C;&#x8FD4;&#x56DE;&#x7C7B;&#x578B;&#x4E3A; Map<string, lease<instanceinfo>&gt; &#x7684;&#x670D;&#x52A1;&#x6CE8;&#x518C;&#x4FE1;&#x606F;gMap&#xFF0C;&#x5176;&#x4E2D; String &#x50A8;&#x5B58;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;id&#xFF0C;Lease<instanceinfo> &#x50A8;&#x5B58;&#x4E0A;&#x4E00;&#x6B21;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x7684;&#x79DF;&#x7EA6;&#x4FE1;&#x606F;&#xFF1B;</instanceinfo></string,></li>
+<li>&#x82E5;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x6233;&#x65E9;&#x4E8E;gMap&#x4E2D;&#x7684;&#x65F6;&#x95F4;&#x6233;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;false&#x9000;&#x51FA;&#xFF1B;&#x82E5;&#x5F53;&#x524D;&#x65F6;&#x95F4;&#x6233;&#x665A;&#x4E8E;gMap&#x4E2D;&#x7684;&#x65F6;&#x95F4;&#x6233;&#xFF0C;&#x5219;&#x7EE7;&#x7EED;&#x4E0B;&#x4E00;&#x6B65;&#xFF1B;</li>
+<li>instanceInfo &#x4E2D;&#x8BBE;&#x7F6E;&#x5408;&#x7EA6;&#x53C2;&#x4E0E;&#x65B9;&#x5C5E;&#x6027;&#x4E3A; contractParty&#xFF0C;&#x5F00;&#x542F;&#x72B6;&#x6001;&#x66F4;&#x6539;&#x52A8;&#x4F5C;&#xFF0C;&#x8BBE;&#x7F6E;&#x5373;&#x5C06;&#x66F4;&#x65B0;&#x7684;&#x72B6;&#x6001; overriddenStatus = IN_CONTRACT&#xFF1B;</li>
+<li>&#x5C06;&#x5F53;&#x524D;&#x79DF;&#x7EA6;&#x4FE1;&#x606F; lease &#x52A0;&#x5165;&#x66F4;&#x65B0;&#x961F;&#x5217;&#xFF1B;</li>
+<li>&#x66F4;&#x65B0;instanceInfo &#x4E2D;&#x7684;&#x65F6;&#x95F4;&#x6233;&#xFF1B;</li>
+<li>&#x5E7F;&#x64AD;&#x81F3;&#x5176;&#x4ED6;&#x8282;&#x70B9;&#xFF0C;&#x8FDB;&#x884C;&#x66F4;&#x65B0;&#xFF1B;&#x82E5;&#x66F4;&#x65B0;&#x51FA;&#x9519;&#xFF0C;&#x5219;&#x8FD4;&#x56DE;&#x5F02;&#x5E38;&#x4FE1;&#x606F;&#x3002;</li>
+<li>&#x8BFB;&#x53D6;&#x66F4;&#x65B0;&#x961F;&#x5217;&#xFF0C;&#x8BBE;&#x7F6E;&#x670D;&#x52A1;&#x5B9E;&#x4F8B;&#x4FE1;&#x606F;&#x4E2D; status = overriddenStatus</li>
+<li>&#x6240;&#x6709;&#x8282;&#x70B9;&#x6267;&#x884C;&#x5B8C;&#x6BD5;&#xFF0C;&#x72B6;&#x6001;&#x66F4;&#x65B0;&#x7ED3;&#x675F;&#xFF0C;&#x8FD4;&#x56DE; true</li>
+</ol>
+<h3 id="jsp-&#x65E0;&#x6CD5;&#x8BC6;&#x522B;&#x5305;&#x4F9D;&#x8D56;&#x81EA;&#x52A8;&#x8865;&#x5168;&#x95EE;&#x9898;"><a href="#jsp-&#x65E0;&#x6CD5;&#x8BC6;&#x522B;&#x5305;&#x4F9D;&#x8D56;&#x81EA;&#x52A8;&#x8865;&#x5168;&#x95EE;&#x9898;" class="headerlink" title="jsp &#x65E0;&#x6CD5;&#x8BC6;&#x522B;&#x5305;&#x4F9D;&#x8D56;&#x81EA;&#x52A8;&#x8865;&#x5168;&#x95EE;&#x9898;"></a>jsp &#x65E0;&#x6CD5;&#x8BC6;&#x522B;&#x5305;&#x4F9D;&#x8D56;&#x81EA;&#x52A8;&#x8865;&#x5168;&#x95EE;&#x9898;</h3><p><img src="jsp-resolve.png" alt="jsp-resolve.png"><br>Then invalidate caches/Restart.<br>&#x672A;&#x89E3;&#x51B3;</p>
+<h1 id="Spring-Cloud-Eureka"><a href="#Spring-Cloud-Eureka" class="headerlink" title="Spring Cloud Eureka"></a>Spring Cloud Eureka</h1><h2 id="spring-cloud-netflix-eureka-server-&#x6E90;&#x7801;&#x9605;&#x8BFB;"><a href="#spring-cloud-netflix-eureka-server-&#x6E90;&#x7801;&#x9605;&#x8BFB;" class="headerlink" title="spring-cloud-netflix-eureka-server &#x6E90;&#x7801;&#x9605;&#x8BFB;"></a>spring-cloud-netflix-eureka-server &#x6E90;&#x7801;&#x9605;&#x8BFB;</h2><p>eureka 1.0 &#x4E4B;&#x540E; Netflix &#x516C;&#x53F8;&#x7EE7;&#x7EED;&#x5F00;&#x53D1; 2.0&#x3002;<br>1.0&#x4EA4;&#x7531;&#x793E;&#x533A;&#x7EF4;&#x62A4;&#xFF0C;Spring Cloud &#x56E2;&#x961F;&#x770B;&#x5230;&#x4E86;&#x9879;&#x76EE;&#x7684;&#x4EF7;&#x503C;&#xFF0C;&#x79FB;&#x690D;&#x8FC7;&#x6765;&#x6210;&#x4E3A;&#x4E86; Spring Cloud Eureka &#x7EC4;&#x4EF6;&#x3002;</p>
+<p>&#x6839;&#x636E;&#x524D;&#x9762;&#x7684;&#x5B9E;&#x9A8C;&#x6211;&#x4EEC;&#x5DF2;&#x7ECF;&#x77E5;&#x9053;&#xFF0C;&#x5728;Spring Cloud&#x4E2D;&#x5F00;&#x542F;&#x4E00;&#x4E2A;Eureka&#x670D;&#x52A1;&#x975E;&#x5E38;&#x65B9;&#x4FBF;&#xFF0C;&#x901A;&#x8FC7;&#x6DFB;&#x52A0;&#x6CE8;&#x89E3; @EnableEurekaServer &#x5373;&#x53EF;&#x5B9E;&#x73B0;&#x3002;&#x90A3;&#x4E48;&#x5185;&#x90E8;&#x539F;&#x7406;&#x662F;&#x600E;&#x6837;&#x7684;&#x5462;&#x3002;</p>
+<p>&#x8FDB;&#x5165; EnableEurekaServer &#x6240;&#x5728;&#x7684;&#x6E90;&#x7801;jar&#x5305;&#x6211;&#x4EEC;&#x770B;&#x5230;&#xFF1A;<br>EnableEurekaServer.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Target</span>(ElementType.TYPE)</span><br><span class="line"><span class="hljs-meta">@Retention</span>(RetentionPolicy.RUNTIME)</span><br><span class="line"><span class="hljs-meta">@Documented</span></span><br><span class="line"><span class="hljs-meta">@Import</span>(EurekaServerMarkerConfiguration<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-title">public</span> @<span class="hljs-title">interface</span> <span class="hljs-title">EnableEurekaServer</span> </span>{</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>@Import &#x6CE8;&#x89E3;&#x8868;&#x793A;&#x4E00;&#x65E6;&#x6DFB;&#x52A0;&#x4E86; @EnableEurekaServer &#x6CE8;&#x89E3;&#xFF0C;&#x5C31;&#x5F80;spring&#x5BB9;&#x5668;&#x4E2D;&#x5BFC;&#x5165;&#x4E00;&#x4E2A; EurekaServerMarkerConfiguration &#x7C7B;&#x7684;bean&#xFF0C;&#x7EE7;&#x7EED;&#x770B;<br>EurekaServerMarkerConfiguration.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Configuration</span>(proxyBeanMethods = <span class="hljs-keyword">false</span>)</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EurekaServerMarkerConfiguration</span> </span>{</span><br><span class="line"></span><br><span class="line">	<span class="hljs-meta">@Bean</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> Marker <span class="hljs-title">eurekaServerMarkerBean</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">		<span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Marker();</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Marker</span> </span>{</span><br><span class="line"></span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x770B;&#x5230;&#x8FD9;&#x91CC;&#x53EF;&#x80FD;&#x4F1A;&#x89C9;&#x5F97;&#x6CA1;&#x6CD5;&#x7EE7;&#x7EED;&#x8FDB;&#x884C;&#x4E0B;&#x53BB;&#x4E86;&#x3002;<br>&#x5982;&#x679C;&#x6253;&#x5F00; EurekaServerAutoConfiguration.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@Configuration</span>(proxyBeanMethods = <span class="hljs-keyword">false</span>)</span><br><span class="line"><span class="hljs-meta">@Import</span>(EurekaServerInitializerConfiguration<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span></span><br><span class="line"><span class="hljs-class">@<span class="hljs-title">ConditionalOnBean</span>(<span class="hljs-title">EurekaServerMarkerConfiguration</span>.<span class="hljs-title">Marker</span>.<span class="hljs-title">class</span>)</span></span><br><span class="line"><span class="hljs-class">@<span class="hljs-title">EnableConfigurationProperties</span>(</span>{ EurekaDashboardProperties<span class="hljs-class">.<span class="hljs-keyword">class</span>,</span></span><br><span class="line"><span class="hljs-class">		<span class="hljs-title">InstanceRegistryProperties</span>.<span class="hljs-title">class</span> })</span></span><br><span class="line">@PropertySource(&quot;classpath:/eureka/server.properties&quot;)</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">EurekaServerAutoConfiguration</span> <span class="hljs-keyword">implements</span> <span class="hljs-title">WebMvcConfigurer</span> </span>{</span><br><span class="line">    ......</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x770B;&#x5230;&#x4E86; @ConditionalOnBean(EurekaServerMarkerConfiguration.Marker.class)&#xFF0C;&#x8C41;&#x7136;&#x5F00;&#x6717;&#x3002;</p>
+<p>&#x539F;&#x7406;&#x5C31;&#x662F;&#x901A;&#x8FC7;&#x5728;spring.factories&#x4E2D;&#x5199;&#x5165;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">org.springframework.boot.autoconfigure.EnableAutoConfiguration=\</span><br><span class="line">  org.springframework.cloud.netflix.eureka.server.EurekaServerAutoConfiguration</span><br></pre></td></tr></table></figure>
+
+<p><img src="eureka-server-jar.png" alt="eureka-server-jar.png"><br>&#x5728;&#x542F;&#x52A8;SpringBoot&#x65F6;&#x6839;&#x636E;&#x6761;&#x4EF6;&#x51B3;&#x5B9A;&#x662F;&#x5426;&#x65B0;&#x5EFA; EurekaServerAutoConfiguration &#x5BF9;&#x8C61;&#x3002;<br>&#x8BE5;&#x5BF9;&#x8C61;&#x7684;&#x521B;&#x5EFA;&#x6761;&#x4EF6;&#x662F;&#x901A;&#x8FC7; @ConditionalOnBean &#x6CE8;&#x89E3;&#x76D1;&#x542C;&#x5BB9;&#x5668;&#x4E2D;&#x662F;&#x5426;&#x5F15;&#x5165;&#x4E86; EurekaServerMarkerConfiguration.Marker &#x5BF9;&#x8C61;&#x3002;<br>&#x5982;&#x679C;spring boot&#x7A0B;&#x5E8F;&#x4E2D;&#x6DFB;&#x52A0;&#x4E86; @EnableEurekaServer &#x6CE8;&#x89E3;&#xFF0C;&#x90A3;&#x4E48;&#x6839;&#x636E; @Import(EurekaServerMarkerConfiguration.class)&#xFF0C; &#x8BE5;&#x6CE8;&#x89E3;&#x5C31;&#x4F1A;&#x6FC0;&#x6D3B; EurekaServerMarkerConfiguration &#x4E2D;&#x7684; @Bean public Marker eurekaServerMarkerBean()&#xFF0C;&#x4ECE;&#x800C;&#x8FD4;&#x56DE;&#x4E00;&#x4E2A; EurekaServerMarkerConfiguration.Marker &#x5BF9;&#x8C61;&#xFF0C;&#x8FDB;&#x800C;&#x89E6;&#x53D1; EurekaServerAutoConfiguration &#x5BF9;&#x8C61;&#x7684;&#x521B;&#x5EFA;&#x6761;&#x4EF6;&#xFF0C;&#x542F;&#x52A8;EurekaServer&#x3002;<br>&#x5982;&#x679C;spring boot&#x7A0B;&#x5E8F;&#x4E2D;&#x6CA1;&#x6709;&#x6DFB;&#x52A0; @EnableEurekaServer &#x6CE8;&#x89E3;&#xFF0C;&#x90A3;&#x4E48;EurekaServerAutoConfiguration &#x5BF9;&#x8C61;&#x7684;&#x521B;&#x5EFA;&#x6761;&#x4EF6;&#x672A;&#x88AB;&#x89E6;&#x53D1;&#xFF0C;EurekaServer&#x4E5F;&#x5C31;&#x4E0D;&#x542F;&#x52A8;&#x4E86;&#x3002;</p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/VS-Code/">#VS Code</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Spring/">#Spring</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Spring-Cloud/">#Spring Cloud</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Microservices/">#Microservices</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Nacos/">#Nacos</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/Dec-9th-Hacking-Android-by-Termux/">安卓搞机指南 - Termux</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/Nov-23rd-Translation-of-Bitcoin-notes/">Translation of Bitcoin notes</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

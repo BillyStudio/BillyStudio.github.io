@@ -1,0 +1,679 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>Linux command of the day - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/Command-of-the-day-May-sixteenth-2018/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="This article lists a Linux cheatsheet including lots of tools&amp;#x2019; commands.">
+<meta name="keywords" content="Linux">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Linux command of the day">
+<meta property="og:url" content="https://BillyStudio.github.io/Command-of-the-day-May-sixteenth-2018/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="This article lists a Linux cheatsheet including lots of tools&amp;#x2019; commands.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://billystudio.github.io/Command-of-the-day-May-sixteenth-2018/linux-cnt-processes-threads.png">
+<meta property="og:image" content="https://billystudio.github.io/Command-of-the-day-May-sixteenth-2018/win-cnt-processes-threads.png">
+<meta property="og:updated_time" content="2025-05-24T06:02:58.330Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Linux command of the day">
+<meta name="twitter:description" content="This article lists a Linux cheatsheet including lots of tools&amp;#x2019; commands.">
+<meta name="twitter:image" content="https://billystudio.github.io/Command-of-the-day-May-sixteenth-2018/linux-cnt-processes-threads.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#I-Processes-and-system-management">1&nbsp;&nbsp;<b>I. Processes and system management</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Linux-background-execute-command">1.1&nbsp;&nbsp;Linux background execute command</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#count-all-processes-and-threads-running">1.2&nbsp;&nbsp;count all processes and threads running</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#User-management">1.3&nbsp;&nbsp;User management</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#add-user">1.3.1&nbsp;&nbsp;add user</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#add-user-to-group">1.3.2&nbsp;&nbsp;add user to group</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#II-Text-manipulation">2&nbsp;&nbsp;<b>II. Text manipulation</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#sed">2.1&nbsp;&nbsp;sed</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#IV-IO">3&nbsp;&nbsp;<b>IV. IO</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#mount">3.1&nbsp;&nbsp;mount</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#USB-FAT32-filesystem">3.1.1&nbsp;&nbsp;USB FAT32 filesystem</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#NAS-NFS-filesystem">3.1.2&nbsp;&nbsp;NAS NFS filesystem</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#NAS-CIFS-filesystem">3.1.3&nbsp;&nbsp;NAS CIFS filesystem</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Mount-at-boot-up">3.1.4&nbsp;&nbsp;Mount at boot-up</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#V-Network">4&nbsp;&nbsp;<b>V. Network</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Web-Downloader">4.1&nbsp;&nbsp;Web Downloader</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#aria2">4.1.1&nbsp;&nbsp;aria2</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#wget">4.1.2&nbsp;&nbsp;wget</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#curl">4.1.3&nbsp;&nbsp;curl</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Campus-proxy">4.2&nbsp;&nbsp;Campus proxy</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Sample-configuration">4.2.1&nbsp;&nbsp;Sample configuration</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Test-and-run">4.2.2&nbsp;&nbsp;Test and run</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#How-to-Keep-user-proxy-settings-when-‘sudo’">4.2.3&nbsp;&nbsp;How to Keep user proxy settings when ‘sudo’</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#III-Applications">5&nbsp;&nbsp;<b>III. Applications</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#xdg-open-Launch-program-in-terminal">5.1&nbsp;&nbsp;xdg-open (Launch program in terminal)</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Calculator">5.2&nbsp;&nbsp;Calculator</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#bc">5.2.1&nbsp;&nbsp;bc</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#References">6&nbsp;&nbsp;<b>References</b></a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/Command-of-the-day-May-sixteenth-2018/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/Command-of-the-day-May-sixteenth-2018/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Linux command of the day
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-05-16T09:02:38.000Z" itemprop="datePublished">May 16 2018</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/Linux-shell/">Linux shell</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            8 minutes read (About 1137 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>This article lists a Linux cheatsheet including lots of tools&#x2019; commands. <a id="more"></a></p>
+<h1 id="I-Processes-and-system-management"><a href="#I-Processes-and-system-management" class="headerlink" title="I. Processes and system management"></a>I. Processes and system management</h1><h2 id="Linux-background-execute-command"><a href="#Linux-background-execute-command" class="headerlink" title="Linux background execute command"></a>Linux background execute command</h2><p>If we want to proceed our work when we&#x2019;re executing a Linux command that may spend a lot of time, I find two ways that may solve this paradox. <!-- more --></p>
+<ol>
+<li>Keep this terminal and open another one.</li>
+<li>Append a &#x2018;&amp;&#x2019; to the time-spending command and it will be excuted in the background.</li>
+</ol>
+<h2 id="count-all-processes-and-threads-running"><a href="#count-all-processes-and-threads-running" class="headerlink" title="count all processes and threads running"></a>count all processes and threads running</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ps aux | wc -l # count all processes</span><br><span class="line">ps -eo nlwp | tail -n +2 | awk &apos;{ num_threads += $1 } END { print num_threads }&apos; # count all threads</span><br></pre></td></tr></table></figure>
+
+<p><img src="linux-cnt-processes-threads.png" alt="linux count all processes and threads"></p>
+<p>For Windows, just type <code>Ctrl+Alt+Delete</code> to open Task Manager and choose the <code>performance</code> tab and see:<br><img src="win-cnt-processes-threads.png" alt="windows count all processes and threads"> </p>
+<h2 id="User-management"><a href="#User-management" class="headerlink" title="User management"></a>User management</h2><h3 id="add-user"><a href="#add-user" class="headerlink" title="add user"></a>add user</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">adduser &#x7528;&#x6237;&#x540D;</span><br></pre></td></tr></table></figure>
+
+<h3 id="add-user-to-group"><a href="#add-user-to-group" class="headerlink" title="add user to group"></a>add user to group</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">usermod -a -G &#x7EC4;&#x540D; &#x7528;&#x6237;&#x540D;</span><br></pre></td></tr></table></figure>
+
+<h1 id="II-Text-manipulation"><a href="#II-Text-manipulation" class="headerlink" title="II. Text manipulation"></a>II. Text manipulation</h1><h2 id="sed"><a href="#sed" class="headerlink" title="sed"></a>sed</h2><p>&#x5220;&#x9664; .bashrc &#x7684;&#x6700;&#x540E;&#x4E00;&#x884C;&#xFF1A;<code>sed -i &apos;$d&apos; ~/.bashrc</code></p>
+<h1 id="IV-IO"><a href="#IV-IO" class="headerlink" title="IV. IO"></a>IV. IO</h1><h2 id="mount"><a href="#mount" class="headerlink" title="mount"></a>mount</h2><p>Linux <code>mount</code> command is used for mounting filesystems to directory and <code>/etc/fstab</code> file the default mounting config file at every booting time. Surely you can alse use <code>sudo mount -a</code> to remount all filesystems in /etc/fstab</p>
+<h3 id="USB-FAT32-filesystem"><a href="#USB-FAT32-filesystem" class="headerlink" title="USB FAT32 filesystem"></a>USB FAT32 filesystem</h3><p>It&#x2019;s the easiest one:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo mkdir /mnt/usb</span><br><span class="line">lsblk</span><br><span class="line">sudo mount /dev/sdb1 /mnt/usb</span><br></pre></td></tr></table></figure>
+
+<h3 id="NAS-NFS-filesystem"><a href="#NAS-NFS-filesystem" class="headerlink" title="NAS NFS filesystem"></a>NAS NFS filesystem</h3><p><a href="https://wiki.archlinux.org/index.php/NFS" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/NFS</a></p>
+<h3 id="NAS-CIFS-filesystem"><a href="#NAS-CIFS-filesystem" class="headerlink" title="NAS CIFS filesystem"></a>NAS CIFS filesystem</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">lsmod | grep cifs</span><br><span class="line"># if not, `sudo modprobe cifs` or add `cifs` into /etc/modules-load.d/cifs.conf</span><br><span class="line">smbclient -L nas -U%</span><br><span class="line">sudo mount -t cifs //nas/wangshengdian /mnt/lab-nas-wangshengdian -o username=[your username],password=[your password],workgroup=workgroup,iocharset=utf8,uid=shane,gid=shane</span><br></pre></td></tr></table></figure>
+
+<p><code>noauto</code></p>
+<h3 id="Mount-at-boot-up"><a href="#Mount-at-boot-up" class="headerlink" title="Mount at boot-up"></a>Mount at boot-up</h3><p>/etc/fstab</p>
+<h1 id="V-Network"><a href="#V-Network" class="headerlink" title="V. Network"></a>V. Network</h1><h2 id="Web-Downloader"><a href="#Web-Downloader" class="headerlink" title="Web Downloader"></a>Web Downloader</h2><p>Downloading from the web has many choices on Linux.</p>
+<h3 id="aria2"><a href="#aria2" class="headerlink" title="aria2"></a>aria2</h3><p>For chrome extension, I use Camtd. Go to <a href="https://github.com/jae-jae/Camtd/releases" target="_blank" rel="noopener">https://github.com/jae-jae/Camtd/releases</a> and download the latest .crx file.<br>Then upload it to <a href="https://crxextractor.com/" target="_blank" rel="noopener">https://crxextractor.com/</a> for getting the .zip file and download it.<br>Then <code>unzip -d dir Camtd.zip</code>. And open chrome://extensions to load the unpacked directory.</p>
+<p>But sometimes you don&#x2019;t need a browser to download file. You can directly download from your command line. Here are they:</p>
+<h3 id="wget"><a href="#wget" class="headerlink" title="wget"></a>wget</h3><p>If you want to download a file on Github, it&#x2019;s easy to use wget. Let&#x2019;s say</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wget https://raw.githubusercontent.com/ethereum/web3.js/1.x/dist/web3.min.js</span><br></pre></td></tr></table></figure>
+
+<h3 id="curl"><a href="#curl" class="headerlink" title="curl"></a>curl</h3><h2 id="Campus-proxy"><a href="#Campus-proxy" class="headerlink" title="Campus proxy"></a>Campus proxy</h2><p>Some campus net environments have ip restrictions with a maximum number of two. <!-- more --> In order to support the network connection for more devices(including virtual machines) as well as to surpass the firewall, additional efforts seem neccessary to deploy a personal proxy server. Here I use v2ray to acomplish this goal.</p>
+<h3 id="Sample-configuration"><a href="#Sample-configuration" class="headerlink" title="Sample configuration"></a>Sample configuration</h3><p>On VPS</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  &quot;inbounds&quot;: [{</span><br><span class="line">    &quot;port&quot;: &#x76D1;&#x542C;&#x7AEF;&#x53E3;&#x53F7;,</span><br><span class="line">    &quot;protocol&quot;: &quot;vmess&quot;,</span><br><span class="line">    &quot;settings&quot;: {</span><br><span class="line">      &quot;clients&quot;: [</span><br><span class="line">        {</span><br><span class="line">          &quot;id&quot;: &quot;&#x534F;&#x5546;&#x7684;id&#x53F7;&quot;,</span><br><span class="line">          &quot;level&quot;: 1,</span><br><span class="line">          &quot;alterId&quot;: 64</span><br><span class="line">        }</span><br><span class="line">      ]</span><br><span class="line">    }</span><br><span class="line">  }],</span><br><span class="line">  &quot;outbounds&quot;: [{</span><br><span class="line">    &quot;protocol&quot;: &quot;freedom&quot;,</span><br><span class="line">    &quot;settings&quot;: {}</span><br><span class="line">  },{</span><br><span class="line">    &quot;protocol&quot;: &quot;blackhole&quot;,</span><br><span class="line">    &quot;settings&quot;: {},</span><br><span class="line">    &quot;tag&quot;: &quot;blocked&quot;</span><br><span class="line">  }],</span><br><span class="line">  &quot;routing&quot;: {</span><br><span class="line">    &quot;rules&quot;: [</span><br><span class="line">      {</span><br><span class="line">        &quot;type&quot;: &quot;field&quot;,</span><br><span class="line">        &quot;ip&quot;: [&quot;geoip:private&quot;],</span><br><span class="line">        &quot;outboundTag&quot;: &quot;blocked&quot;</span><br><span class="line">      }</span><br><span class="line">    ]</span><br><span class="line">  }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>On the desktop with an external IP address serving as a campus proxy server</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  &quot;log&quot;: {</span><br><span class="line">    &quot;loglevel&quot;: &quot;warning&quot;</span><br><span class="line">  },</span><br><span class="line">  &quot;inbounds&quot;: [{</span><br><span class="line">    &quot;port&quot;: &#x7528;&#x4E8E;&#x76D1;&#x542C;&#x7684;IP&#x7AEF;&#x53E3;,</span><br><span class="line"></span><br><span class="line">    &quot;listen&quot;: &quot;0.0.0.0&quot;,</span><br><span class="line"></span><br><span class="line">    &quot;protocol&quot;: &quot;socks&quot;,</span><br><span class="line"></span><br><span class="line">    &quot;settings&quot;: {</span><br><span class="line">      &quot;auth&quot;: &quot;noauth&quot;,</span><br><span class="line">      &quot;udp&quot;: false,</span><br><span class="line">      &quot;ip&quot;: &quot;0.0.0.0&quot;</span><br><span class="line">    },</span><br><span class="line"></span><br><span class="line">    &quot;sniffing&quot;: {</span><br><span class="line">      &quot;enabled&quot;: true,</span><br><span class="line">      &quot;destOverride&quot;: [&quot;http&quot;, &quot;tls&quot;]</span><br><span class="line">    }</span><br><span class="line">  }],</span><br><span class="line">  &quot;outbounds&quot;: [{</span><br><span class="line">    &quot;protocol&quot;: &quot;vmess&quot;,</span><br><span class="line">    &quot;settings&quot;: {</span><br><span class="line">      &quot;vnext&quot;: [{</span><br><span class="line">        &quot;address&quot;:&quot;Oerseas VPS&#x7684;IP&#x5730;&#x5740;&quot;,</span><br><span class="line">        &quot;port&quot;: &#x5B83;&#x7684;&#x7AEF;&#x53E3;&#x53F7;,</span><br><span class="line">        &quot;users&quot;: [{ </span><br><span class="line">          &quot;id&quot;: &quot;&#x534F;&#x5546;&#x7684;id&#x53F7;&#xFF0C;&#x5FC5;&#x987B;&#x4E0E;VPS inbounds &#x4E2D;&#x8BBE;&#x7F6E;&#x7684;&#x4E00;&#x81F4;&quot;,</span><br><span class="line">          &quot;security&quot;: &quot;auto&quot;,</span><br><span class="line">          &quot;level&quot;: 1,</span><br><span class="line">          &quot;alterId&quot;: 64</span><br><span class="line">        }]</span><br><span class="line">      }]</span><br><span class="line">    }</span><br><span class="line">  },{</span><br><span class="line">    &quot;protocol&quot;: &quot;freedom&quot;,</span><br><span class="line">    &quot;settings&quot;: {},</span><br><span class="line">    &quot;tag&quot;: &quot;direct&quot;</span><br><span class="line">  },{</span><br><span class="line">    &quot;protocol&quot;: &quot;blackhole&quot;,</span><br><span class="line">    &quot;settings&quot;: {},</span><br><span class="line">    &quot;tag&quot;: &quot;blocked&quot;</span><br><span class="line">  }],</span><br><span class="line"></span><br><span class="line">  &quot;routing&quot;: {</span><br><span class="line">    &quot;domainStrategy&quot;: &quot;IPOnDemand&quot;,</span><br><span class="line">    &quot;rules&quot;:[</span><br><span class="line">      {</span><br><span class="line">        &quot;type&quot;: &quot;field&quot;,</span><br><span class="line">        &quot;ip&quot;: [&quot;geoip:private&quot;],</span><br><span class="line">        &quot;outboundTag&quot;: &quot;direct&quot;</span><br><span class="line">      },</span><br><span class="line">      {</span><br><span class="line">        &quot;type&quot;: &quot;field&quot;,</span><br><span class="line">        &quot;domain&quot;: [&quot;geosite:cn&quot;],</span><br><span class="line">        &quot;outboundTag&quot;: &quot;direct&quot;</span><br><span class="line">      },</span><br><span class="line">      {</span><br><span class="line">        &quot;type&quot;: &quot;field&quot;,</span><br><span class="line">        &quot;domain&quot;: [&quot;geosite:category-ads&quot;],</span><br><span class="line">        &quot;outboundTag&quot;: &quot;blocked&quot;</span><br><span class="line">      }</span><br><span class="line">    ]</span><br><span class="line">  },</span><br><span class="line">  &quot;dns&quot;: {</span><br><span class="line">    &quot;hosts&quot;: {</span><br><span class="line">      &quot;domain:v2ray.com&quot;: &quot;www.vicemc.net&quot;,</span><br><span class="line">      &quot;domain:github.io&quot;: &quot;pages.github.com&quot;,</span><br><span class="line">      &quot;domain:wikipedia.org&quot;: &quot;www.wikimedia.org&quot;,</span><br><span class="line">      &quot;domain:shadowsocks.org&quot;: &quot;electronicsrealm.com&quot;</span><br><span class="line">    },</span><br><span class="line">    &quot;servers&quot;: [</span><br><span class="line">      {</span><br><span class="line">        &quot;address&quot;: &quot;114.114.114.114&quot;,</span><br><span class="line">        &quot;port&quot;: 53,</span><br><span class="line">        &quot;domains&quot;: [</span><br><span class="line">          &quot;geosite:cn&quot;</span><br><span class="line">        ]</span><br><span class="line">      },</span><br><span class="line">      &quot;8.8.8.8&quot;,</span><br><span class="line">      &quot;localhost&quot;</span><br><span class="line">    ]</span><br><span class="line">  },</span><br><span class="line">  &quot;policy&quot;: {</span><br><span class="line">    &quot;levels&quot;: {</span><br><span class="line">      &quot;0&quot;: {</span><br><span class="line">        &quot;uplinkOnly&quot;: 0,</span><br><span class="line">        &quot;downlinkOnly&quot;: 0</span><br><span class="line">      }</span><br><span class="line">    },</span><br><span class="line">    &quot;system&quot;: {</span><br><span class="line">      &quot;statsInboundUplink&quot;: false,</span><br><span class="line">      &quot;statsInboundDownlink&quot;: false</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  &quot;other&quot;: {}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>On the laptop client with only internal ip address</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  &quot;log&quot;: {</span><br><span class="line">    &quot;loglevel&quot;: &quot;warning&quot;</span><br><span class="line">  },</span><br><span class="line">  &quot;inbounds&quot;: [{</span><br><span class="line">    &quot;port&quot;: 1080,</span><br><span class="line"></span><br><span class="line">    &quot;listen&quot;: &quot;127.0.0.1&quot;,</span><br><span class="line"></span><br><span class="line">    &quot;protocol&quot;: &quot;socks&quot;,</span><br><span class="line"></span><br><span class="line">    &quot;settings&quot;: {</span><br><span class="line">      &quot;auth&quot;: &quot;noauth&quot;,</span><br><span class="line">      &quot;udp&quot;: false,</span><br><span class="line">      &quot;ip&quot;: &quot;127.0.0.1&quot;</span><br><span class="line">    },</span><br><span class="line"></span><br><span class="line">    &quot;sniffing&quot;: {</span><br><span class="line">      &quot;enabled&quot;: true,</span><br><span class="line">      &quot;destOverride&quot;: [&quot;http&quot;, &quot;tls&quot;]</span><br><span class="line">    }</span><br><span class="line">  }],</span><br><span class="line">  &quot;outbounds&quot;: [{</span><br><span class="line">    &quot;protocol&quot;: &quot;socks&quot;,</span><br><span class="line">    &quot;settings&quot;: {</span><br><span class="line">      &quot;servers&quot;: [{</span><br><span class="line">        &quot;address&quot;:&quot;&#x80FD;&#x8FDE;&#x5916;&#x7F51;&#x7684;&#x4E3B;&#x673A;IP&#x5730;&#x5740;&quot;,</span><br><span class="line">        &quot;port&quot;: &#x5B83;&#x7684;&#x7AEF;&#x53E3;&#x53F7;</span><br><span class="line">      }]</span><br><span class="line">    }</span><br><span class="line">  }],</span><br><span class="line"></span><br><span class="line">  &quot;routing&quot;: {</span><br><span class="line">    &quot;domainStrategy&quot;: &quot;IPOnDemand&quot;,</span><br><span class="line">    &quot;rules&quot;:[</span><br><span class="line">    ]</span><br><span class="line">  },</span><br><span class="line"></span><br><span class="line">  &quot;dns&quot;: {</span><br><span class="line">    &quot;hosts&quot;: {</span><br><span class="line">      &quot;domain:v2ray.com&quot;: &quot;www.vicemc.net&quot;,</span><br><span class="line">      &quot;domain:github.io&quot;: &quot;pages.github.com&quot;,</span><br><span class="line">      &quot;domain:wikipedia.org&quot;: &quot;www.wikimedia.org&quot;,</span><br><span class="line">      &quot;domain:shadowsocks.org&quot;: &quot;electronicsrealm.com&quot;</span><br><span class="line">    },</span><br><span class="line">    &quot;servers&quot;: [</span><br><span class="line">      {</span><br><span class="line">        &quot;address&quot;: &quot;114.114.114.114&quot;,</span><br><span class="line">        &quot;port&quot;: 53,</span><br><span class="line">        &quot;domains&quot;: [</span><br><span class="line">          &quot;geosite:cn&quot;</span><br><span class="line">        ]</span><br><span class="line">      },</span><br><span class="line">      &quot;8.8.8.8&quot;,</span><br><span class="line">      &quot;202.204.60.10&quot;,</span><br><span class="line">      &quot;202.204.48.8&quot;,</span><br><span class="line">      &quot;localhost&quot;</span><br><span class="line">    ]</span><br><span class="line">  },</span><br><span class="line"></span><br><span class="line">  &quot;policy&quot;: {</span><br><span class="line">    &quot;levels&quot;: {</span><br><span class="line">      &quot;0&quot;: {</span><br><span class="line">        &quot;uplinkOnly&quot;: 0,</span><br><span class="line">        &quot;downlinkOnly&quot;: 0</span><br><span class="line">      }</span><br><span class="line">    },</span><br><span class="line">    &quot;system&quot;: {</span><br><span class="line">      &quot;statsInboundUplink&quot;: false,</span><br><span class="line">      &quot;statsInboundDownlink&quot;: false</span><br><span class="line">    }</span><br><span class="line">  },</span><br><span class="line">  &quot;other&quot;: {}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>use <code>v2ray -test -config &#x4F60;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</code> to ensure the correctness of the configuration format. </p>
+<h3 id="Test-and-run"><a href="#Test-and-run" class="headerlink" title="Test and run"></a>Test and run</h3><p>Step 1: Login with the campus network account on the desktop to get an external ip address and do not login on the laptop. Ensure the connection availability from your laptop to the desktop, and from the desktop to VPS server.<br>Step 2: start v2ray</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo v2ray --config=&#x4F60;&#x7684;&#x914D;&#x7F6E;&#x6587;&#x4EF6;</span><br></pre></td></tr></table></figure>
+
+<p>or run in the backgroud</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo systemctl start v2ray # or sudo service start v2ray</span><br></pre></td></tr></table></figure>
+
+<h3 id="How-to-Keep-user-proxy-settings-when-&#x2018;sudo&#x2019;"><a href="#How-to-Keep-user-proxy-settings-when-&#x2018;sudo&#x2019;" class="headerlink" title="How to Keep user proxy settings when &#x2018;sudo&#x2019;"></a>How to Keep user proxy settings when &#x2018;sudo&#x2019;</h3><p>Add &#x2018;/etc/sudoers&#x2019;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Defaults env_keep += &quot;all_proxy ftp_proxy http_proxy https_proxy no_proxy&quot;</span><br></pre></td></tr></table></figure>
+
+<h1 id="III-Applications"><a href="#III-Applications" class="headerlink" title="III. Applications"></a>III. Applications</h1><h2 id="xdg-open-Launch-program-in-terminal"><a href="#xdg-open-Launch-program-in-terminal" class="headerlink" title="xdg-open (Launch program in terminal)"></a>xdg-open (Launch program in terminal)</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">xdg-open your_file</span><br></pre></td></tr></table></figure>
+
+<p>Some useful</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">xdg-mime query filetype your_file</span><br><span class="line">xdg-mime default feh.desktop image/jpeg</span><br></pre></td></tr></table></figure>
+
+<p>~/.config/mimeapps.list</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">[Default Applications]</span><br><span class="line">text/html=google-chrome.desktop</span><br><span class="line">x-scheme-handler/http=google-chrome.desktop</span><br><span class="line">x-scheme-handler/https=google-chrome.desktop</span><br><span class="line">x-scheme-handler/about=google-chrome.desktop</span><br><span class="line">x-scheme-handler/unknown=google-chrome.desktop</span><br><span class="line">application/pdf=FoxitReader.desktop</span><br><span class="line">application/ppdf=FoxitReader.desktop</span><br><span class="line">x-scheme-handler/postman=Postman.desktop</span><br></pre></td></tr></table></figure>
+
+<h2 id="Calculator"><a href="#Calculator" class="headerlink" title="Calculator"></a>Calculator</h2><h3 id="bc"><a href="#bc" class="headerlink" title="bc"></a>bc</h3><p>&#x652F;&#x6301;&#x8FD0;&#x7B97;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">+ &#x52A0;</span><br><span class="line">- &#x51CF;</span><br><span class="line">* &#x4E58;</span><br><span class="line">/ &#x9664;</span><br><span class="line">^ &#x5E42;</span><br><span class="line">% &#x53D6;&#x4F59;</span><br></pre></td></tr></table></figure>
+
+<p>&#x4F8B;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;1 + 1&quot; | bc</span><br></pre></td></tr></table></figure>
+
+<p>&#x9ED8;&#x8BA4;&#x4EC5;&#x4E3A;&#x6574;&#x6570;&#x57DF;&#x8FD0;&#x7B97;&#xFF08;&#x53C2;&#x8003;C&#x8BED;&#x8A00;&#x7684;&#x56DB;&#x5219;&#x8FD0;&#x7B97;&#xFF09;&#xFF0C;&#x82E5;&#x8981;&#x652F;&#x6301;&#x5C0F;&#x6570;&#x9700;&#x8981;&#x8BBE;&#x7F6E;scale&#x53C2;&#x6570;&#xFF0C;&#x4F7F;&#x7528;&#x5206;&#x53F7;&#x5206;&#x5272;&#x3002;&#x4F8B;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;scale=3;(0.12+0.17)*6.0/5.0&quot; | bc</span><br><span class="line">echo &quot;(0.12+0.17)*6.0/5.0&quot; | bc</span><br></pre></td></tr></table></figure>
+
+<p>bc&#x4E5F;&#x652F;&#x6301;&#x5176;&#x4ED6;&#x8FDB;&#x5236;&#x8FD0;&#x7B97;&#xFF0C;&#x4F7F;&#x7528;ibase&#x8BBE;&#x7F6E;&#x8F93;&#x5165;&#x8FDB;&#x5236;&#xFF0C;obase&#x8BBE;&#x7F6E;&#x8F93;&#x51FA;&#x8FDB;&#x5236;&#xFF0C;&#x9ED8;&#x8BA4;&#x4E3A;10&#x8FDB;&#x5236;&#x3002;&#x4F8B;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">echo &quot;obase=2;255&quot; | bc</span><br></pre></td></tr></table></figure>
+
+<p>bc &#x4E5F;&#x652F;&#x6301;&#x6587;&#x4EF6;&#x5185;&#x5BB9;&#x8FDB;&#x884C;&#x8FD0;&#x7B97;&#xFF0C;&#x65B0;&#x5EFA;&#x6587;&#x4EF6; calc.txt</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">3+2</span><br><span class="line">4+5</span><br><span class="line">8*2</span><br><span class="line">10/4</span><br></pre></td></tr></table></figure>
+
+<p>&#x8FD0;&#x884C;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bc calc.txt # &#x6216; cat calc.txt | bc</span><br></pre></td></tr></table></figure>
+
+<h1 id="References"><a href="#References" class="headerlink" title="References"></a>References</h1><p><a href="https://blog.csdn.net/liuyanfeier/article/details/62422742" target="_blank" rel="noopener">https://blog.csdn.net/liuyanfeier/article/details/62422742</a></p>
+<p><a href="https://wiki.archlinux.org/index.php/Samba" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Samba</a><br><a href="https://wiki.archlinux.org/index.php/Kernel_module" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Kernel_module</a></p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Linux/">#Linux</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/config-after-install-ubuntu-18/">Configuration on Windows WSL</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/MATALB-2017a-installation-guide/">How to install MATALB 2017a on Windows 10</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

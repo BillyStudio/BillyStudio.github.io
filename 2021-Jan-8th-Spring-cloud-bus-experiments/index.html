@@ -1,0 +1,577 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>Spring cloud 总线实验 - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/2021-Jan-8th-Spring-cloud-bus-experiments/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x5FAE;&amp;#x670D;&amp;#x52A1;&amp;#x603B;&amp;#x7EBF;&amp;#x5B9E;&amp;#x9A8C;">
+<meta name="keywords" content="Spring Cloud,Kafka,RabbitMQ">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Spring cloud 总线实验">
+<meta property="og:url" content="https://BillyStudio.github.io/2021-Jan-8th-Spring-cloud-bus-experiments/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x5FAE;&amp;#x670D;&amp;#x52A1;&amp;#x603B;&amp;#x7EBF;&amp;#x5B9E;&amp;#x9A8C;">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://billystudio.github.io/2021-Jan-8th-Spring-cloud-bus-experiments/amqp_outline.png">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.430Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Spring cloud 总线实验">
+<meta name="twitter:description" content="&amp;#x5FAE;&amp;#x670D;&amp;#x52A1;&amp;#x603B;&amp;#x7EBF;&amp;#x5B9E;&amp;#x9A8C;">
+<meta name="twitter:image" content="https://billystudio.github.io/2021-Jan-8th-Spring-cloud-bus-experiments/amqp_outline.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Prerequisites">1&nbsp;&nbsp;<b>Prerequisites</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#一、实验">2&nbsp;&nbsp;<b>一、实验</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1-1-Kafka实验">2.1&nbsp;&nbsp;1.1 Kafka实验</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1-2-RabbitMQ-C-发送接收测试">2.2&nbsp;&nbsp;1.2 RabbitMQ C 发送接收测试</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#二、-Kafka-和-RabbitMQ-的对比">3&nbsp;&nbsp;<b>二、 Kafka 和 RabbitMQ 的对比</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#2-1-AMQP协议">3.1.1&nbsp;&nbsp;2.1 AMQP协议</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#2-1-1-RoutingKey">3.1.2&nbsp;&nbsp;2.1.1 RoutingKey</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#2-2-2-Channel">3.1.3&nbsp;&nbsp;2.2.2 Channel</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#2-2-3-AMQP-消息格式">3.1.4&nbsp;&nbsp;2.2.3 AMQP 消息格式</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#如何避免消息的重复发送和重复接收">3.2&nbsp;&nbsp;如何避免消息的重复发送和重复接收</a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2021-Jan-8th-Spring-cloud-bus-experiments/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2021-Jan-8th-Spring-cloud-bus-experiments/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Spring cloud 总线实验
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2021-01-08T07:55:43.000Z" itemprop="datePublished">Jan 8 2021</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            6 minutes read (About 856 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x5FAE;&#x670D;&#x52A1;&#x603B;&#x7EBF;&#x5B9E;&#x9A8C; <a id="more"></a></p>
+<h1 id="Prerequisites"><a href="#Prerequisites" class="headerlink" title="Prerequisites"></a>Prerequisites</h1><ol>
+<li>kafka/rabbitmq</li>
+<li>jdk1.8</li>
+<li>spring: <a href="https://start.aliyun.com/" target="_blank" rel="noopener">https://start.aliyun.com/</a></li>
+</ol>
+<h1 id="&#x4E00;&#x3001;&#x5B9E;&#x9A8C;"><a href="#&#x4E00;&#x3001;&#x5B9E;&#x9A8C;" class="headerlink" title="&#x4E00;&#x3001;&#x5B9E;&#x9A8C;"></a>&#x4E00;&#x3001;&#x5B9E;&#x9A8C;</h1><h2 id="1-1-Kafka&#x5B9E;&#x9A8C;"><a href="#1-1-Kafka&#x5B9E;&#x9A8C;" class="headerlink" title="1.1 Kafka&#x5B9E;&#x9A8C;"></a>1.1 Kafka&#x5B9E;&#x9A8C;</h2><p>&#x542F;&#x52A8; Kafka &#x670D;&#x52A1;&#xFF0C;&#x9ED8;&#x8BA4;&#x7AEF;&#x53E3;9092</p>
+<h2 id="1-2-RabbitMQ-C-&#x53D1;&#x9001;&#x63A5;&#x6536;&#x6D4B;&#x8BD5;"><a href="#1-2-RabbitMQ-C-&#x53D1;&#x9001;&#x63A5;&#x6536;&#x6D4B;&#x8BD5;" class="headerlink" title="1.2 RabbitMQ C &#x53D1;&#x9001;&#x63A5;&#x6536;&#x6D4B;&#x8BD5;"></a>1.2 RabbitMQ C &#x53D1;&#x9001;&#x63A5;&#x6536;&#x6D4B;&#x8BD5;</h2><p>&#x5148;&#x542F;&#x52A8;&#x6D88;&#x8D39;&#x8005;&#x5BA2;&#x6237;&#x7AEF;&#x5F00;&#x542F;&#x76D1;&#x542C;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./examples/amqp_listen 192.168.123.1 5672 amq.direct test</span><br></pre></td></tr></table></figure>
+
+<p>&#x6267;&#x884C; <code>amqp_listen</code> &#x547D;&#x4EE4;&#x4F1A;&#x81EA;&#x52A8;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;queue&#xFF0C;&#x8FD9;&#x91CC;&#x662F;test&#xFF0C;&#x5982;&#x679C;&#x60F3;&#x76F4;&#x63A5;&#x4F7F;&#x7528;&#x5DF2;&#x6709;&#x7684;queue&#xFF0C;&#x53EF;&#x4EE5;&#x91C7;&#x7528;<code>amqp_listenq</code> &#x547D;&#x4EE4;</p>
+<p>&#x7136;&#x540E;&#x542F;&#x52A8;&#x751F;&#x4EA7;&#x8005;&#x5BA2;&#x6237;&#x7AEF;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./examples/ampq_sendstring 192.168.123.1 5672 amq.direct test &quot;some message&quot;</span><br></pre></td></tr></table></figure>
+
+<p>&#x53D1;&#x9001;&#x6210;&#x529F;&#x540E;&#x751F;&#x4EA7;&#x8005;&#x65E0;&#x8FD4;&#x56DE;&#x6D88;&#x606F;&#xFF0C;&#x6D88;&#x8D39;&#x8005;&#x5C06;&#x8FD4;&#x56DE;&#x663E;&#x793A;</p>
+<p>Note: debug listen &#x7A0B;&#x5E8F;&#x8FC7;&#x7A0B;&#x4E2D;&#x8FD4;&#x56DE; socket -9 error &#x662F;&#x8C03;&#x8BD5;&#x8D85;&#x65F6;&#x5BFC;&#x81F4;&#x7684;</p>
+<p>rabbitmq&#x670D;&#x52A1;&#x7AEF;&#x7684;log&#x663E;&#x793A;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">2021-03-30 20:11:26.678 [info] &lt;0.3044.4&gt; accepting AMQP connection &lt;0.3044.4&gt; (192.168.123.100:38380 -&gt; 192.168.123.1:5672)</span><br><span class="line">2021-03-30 20:11:28.556 [error] &lt;0.3044.4&gt; closing AMQP connection &lt;0.3044.4&gt; (192.168.123.100:38380 -&gt; 192.168.123.1:5672):</span><br><span class="line">{handshake_timeout,frame_header}</span><br></pre></td></tr></table></figure>
+
+<p>&#x6709;&#x65F6;&#x5019;frame_header&#x4F1A;&#x6539;&#x6210;handshake</p>
+<p>&#x6240;&#x4EE5;&#x4E3A;&#x4E86;&#x8C03;&#x8BD5;&#x65B9;&#x4FBF;&#xFF0C;&#x670D;&#x52A1;&#x7AEF;&#x7684;rabbitmq.conf&#x4E2D;&#x9700;&#x8981;&#x52A0;&#x5165;&#x8FD9;3&#x884C;&#x8BBE;&#x7F6E;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">handshake_timeout = 120000</span><br><span class="line">ssl_handshake_timeout = 60000</span><br><span class="line">heartbeat = 100</span><br></pre></td></tr></table></figure>
+
+<p>handshake_timeout &#x548C; ssl_handshake_timeout &#x7684;&#x5355;&#x4F4D;&#x90FD;&#x662F; ms&#xFF0C;heartbeat &#x7684;&#x5355;&#x4F4D;&#x662F; s</p>
+<h1 id="&#x4E8C;&#x3001;-Kafka-&#x548C;-RabbitMQ-&#x7684;&#x5BF9;&#x6BD4;"><a href="#&#x4E8C;&#x3001;-Kafka-&#x548C;-RabbitMQ-&#x7684;&#x5BF9;&#x6BD4;" class="headerlink" title="&#x4E8C;&#x3001; Kafka &#x548C; RabbitMQ &#x7684;&#x5BF9;&#x6BD4;"></a>&#x4E8C;&#x3001; Kafka &#x548C; RabbitMQ &#x7684;&#x5BF9;&#x6BD4;</h1><p>Kafka&#x7684;&#x8BBE;&#x8BA1;&#x521D;&#x8877;&#x662F;&#x5206;&#x5E03;&#x5F0F;&#x6D41;&#x5F0F;&#x7CFB;&#x7EDF;&#xFF0C;&#x800C;RabbitMQ&#x662F;&#x5206;&#x5E03;&#x5F0F;&#x6D88;&#x606F;&#x961F;&#x5217;&#x3002;<br>RabbitMQ&#x7684;&#x7279;&#x70B9;&#x662F;&#xFF1A;&#x4F7F;&#x7528;Erlang&#x7F16;&#x5199;&#xFF0C;&#x6D88;&#x606F;&#x5EF6;&#x8FDF;&#x7387;&#x4F4E;&#xFF08;ms&#x7EA7;&#x522B;&#xFF09;&#xFF0C;&#x4F46;&#x662F;&#x4E0D;&#x652F;&#x6301;JMS&#x901A;&#x4FE1;&#x534F;&#x8BAE;&#xFF0C;&#x5E95;&#x5C42;&#x534F;&#x8BAE;&#x4E3A;AMQP&#xFF0C;&#x6700;&#x5927;&#x7684;&#x7279;&#x70B9;&#x662F;&#x6DFB;&#x52A0;&#x5BF9;&#x4E8E;&#x4EA4;&#x6362;&#x673A;&#x7684;&#x652F;&#x6301;&#x3002;<br>&#x800C;Kafka&#x6CA1;&#x6709;&#x961F;&#x5217;&#x8FD9;&#x4E2A;&#x6982;&#x5FF5;&#xFF0C;&#x800C;&#x662F;&#x6309;&#x7167;&#x7C7B;&#x522B;&#xFF08;topic&#xFF09;&#x8FDB;&#x884C;&#x5B58;&#x50A8;&#xFF0C;&#x5C24;&#x5176;&#x64C5;&#x957F;&#x5904;&#x7406;&#x5927;&#x6570;&#x636E;&#x65E5;&#x5FD7;&#x3002;&#x5B83;&#x652F;&#x6301;&#x9AD8;&#x5E76;&#x53D1;&#x60C5;&#x51B5;&#x548C;Java Spring&#x96C6;&#x6210;&#xFF0C;&#x6301;&#x4E45;&#x5316;&#x6570;&#x636E;&#x5B58;&#x50A8;&#x4F7F;&#x7528; ZooKeeper&#xFF0C;&#x652F;&#x6301;&#x591A;topic&#x6A21;&#x5F0F;&#x7684;&#x5206;&#x5E03;&#x5F0F;&#x90E8;&#x7F72;&#xFF0C;&#x9700;&#x8981;&#x4F7F;&#x7528;Scala&#x8FDB;&#x884C;&#x7F16;&#x5199;&#x3002;</p>
+<h3 id="2-1-AMQP&#x534F;&#x8BAE;"><a href="#2-1-AMQP&#x534F;&#x8BAE;" class="headerlink" title="2.1 AMQP&#x534F;&#x8BAE;"></a>2.1 AMQP&#x534F;&#x8BAE;</h3><p><img src="amqp_outline.png" alt="amqp outline"></p>
+<h3 id="2-1-1-RoutingKey"><a href="#2-1-1-RoutingKey" class="headerlink" title="2.1.1 RoutingKey"></a>2.1.1 RoutingKey</h3><p>&#x4EA4;&#x6362;&#x673A;&#xFF08;Exchange&#xFF09;&#x53EF;&#x4EE5;&#x6839;&#x636E; RoutingKey &#x7684;&#x503C;&#x7ED1;&#x5B9A;&#x4E0D;&#x540C;&#x7684;&#x961F;&#x5217;&#x3002;<br>&#x6D88;&#x606F;&#x53D1;&#x5F80;&#x4E0D;&#x540C;&#x7684; RoutingKey &#x7684;&#x8FC7;&#x7A0B;&#x5373;&#x53D1;&#x9001;&#x4E0D;&#x540C;&#x7684;&#x6D88;&#x606F;&#x961F;&#x5217;&#x7684;&#x8FC7;&#x7A0B;&#x3002;</p>
+<h3 id="2-2-2-Channel"><a href="#2-2-2-Channel" class="headerlink" title="2.2.2 Channel"></a>2.2.2 Channel</h3><p>&#x751F;&#x4EA7;&#x8005;&#x6216;&#x6D88;&#x8D39;&#x8005;&#x4E0E;RabbitMQ&#x7684;&#x8FDE;&#x63A5;&#x901A;&#x9053;&#x79F0;&#x4E3A;Channel</p>
+<h3 id="2-2-3-AMQP-&#x6D88;&#x606F;&#x683C;&#x5F0F;"><a href="#2-2-3-AMQP-&#x6D88;&#x606F;&#x683C;&#x5F0F;" class="headerlink" title="2.2.3 AMQP &#x6D88;&#x606F;&#x683C;&#x5F0F;"></a>2.2.3 AMQP &#x6D88;&#x606F;&#x683C;&#x5F0F;</h3><ul>
+<li>&#x53D1;&#x9001;&#x6D88;&#x606F;&#x5934;&#xFF08;8&#x5B57;&#x8282;&#xFF09;&#xFF1A;AMQP0xyz&#xFF0C;AMQP&#x534F;&#x8BAE;&#x7248;&#x672C;&#x53F7;</li>
+<li>content-type: &#x6D88;&#x606F;&#x7C7B;&#x578B;</li>
+<li>content-encoding&#xFF1A; &#x6D88;&#x606F;&#x7F16;&#x7801;</li>
+<li>message-id&#xFF1A;&#x552F;&#x4E00;&#x6807;&#x8BC6;1&#x6761;&#x6D88;&#x606F;</li>
+<li>timestamp&#xFF1A;&#x6D88;&#x606F;&#x521B;&#x5EFA;&#x65F6;&#x95F4;</li>
+<li>expiration&#xFF1A;&#x6D88;&#x606F;&#x8FC7;&#x671F;&#x65F6;&#x95F4;</li>
+<li>delivery-mode&#xFF1A; &#x5728;RabbitMQ&#x4E2D;&#x8868;&#x660E;&#x5C06;&#x6D88;&#x606F;&#x5199;&#x5165;&#x78C1;&#x76D8;&#x6216;&#x8005;&#x5185;&#x5B58;&#x961F;&#x5217;</li>
+<li>app-id &#x548C; user-id&#xFF1A; &#x5E2E;&#x52A9;&#x8FFD;&#x8E2A;&#x51FA;&#x73B0;&#x95EE;&#x9898;&#x7684;&#x6D88;&#x606F;&#x53D1;&#x5E03;&#x8005;&#x5E94;&#x7528;&#x7A0B;&#x5E8F;</li>
+<li>type&#xFF1A; &#x5B9A;&#x4E49;&#x53D1;&#x5E03;&#x8005;&#x548C;&#x6D88;&#x8D39;&#x8005;&#x4E4B;&#x95F4;&#x7684;&#x5951;&#x7EA6;</li>
+<li>reply-to&#xFF1A; &#x5B9E;&#x73B0;&#x54CD;&#x5E94;&#x6D88;&#x606F;&#x7684;&#x8DEF;&#x7531;</li>
+<li>&#x6D88;&#x606F;&#x5185;&#x5BB9;&#x4F7F;&#x7528;&#x5B57;&#x8282;&#x6D41;&#x4F20;&#x8F93;</li>
+</ul>
+<h2 id="&#x5982;&#x4F55;&#x907F;&#x514D;&#x6D88;&#x606F;&#x7684;&#x91CD;&#x590D;&#x53D1;&#x9001;&#x548C;&#x91CD;&#x590D;&#x63A5;&#x6536;"><a href="#&#x5982;&#x4F55;&#x907F;&#x514D;&#x6D88;&#x606F;&#x7684;&#x91CD;&#x590D;&#x53D1;&#x9001;&#x548C;&#x91CD;&#x590D;&#x63A5;&#x6536;" class="headerlink" title="&#x5982;&#x4F55;&#x907F;&#x514D;&#x6D88;&#x606F;&#x7684;&#x91CD;&#x590D;&#x53D1;&#x9001;&#x548C;&#x91CD;&#x590D;&#x63A5;&#x6536;"></a>&#x5982;&#x4F55;&#x907F;&#x514D;&#x6D88;&#x606F;&#x7684;&#x91CD;&#x590D;&#x53D1;&#x9001;&#x548C;&#x91CD;&#x590D;&#x63A5;&#x6536;</h2><p>&#x91CD;&#x590D;&#x53D1;&#x9001;&#x95EE;&#x9898;&#x5B58;&#x5728;&#x591A;&#x79CD;&#x53EF;&#x80FD;&#x7684;&#x89E6;&#x53D1;&#x573A;&#x666F;&#xFF1A;</p>
+<ol>
+<li>&#x53D1;&#x9001;&#x65B9;&#x6210;&#x529F;&#x5C06;&#x6D88;&#x606F;&#x53D1;&#x9001;&#x7ED9;RabbitMQ&#x540E;&#xFF0C;&#x56E0;&#x4E3A;&#x7F51;&#x7EDC;&#x6216;&#x8005;&#x670D;&#x52A1;&#x5B95;&#x673A;&#x3001;&#x5BFC;&#x81F4;&#x4E2D;&#x95F4;&#x4EF6;&#x6CA1;&#x6709;&#x53CA;&#x65F6;&#x5411;&#x6D88;&#x606F;&#x53D1;&#x9001;confirm&#xFF0C;&#x89E6;&#x53D1;&#x4E86;&#x53D1;&#x9001;&#x65B9;&#x7684;&#x91CD;&#x65B0;&#x53D1;&#x9001;&#x3002;</li>
+</ol>
+<p>&#x91CD;&#x590D;&#x63A5;&#x6536;&#x95EE;&#x9898;&#x53EF;&#x80FD;&#x7684;&#x89E6;&#x53D1;&#x573A;&#x666F;&#xFF1A;</p>
+<p>&#x4E3A;&#x4E86;&#x9632;&#x6B62;&#x4E2D;&#x95F4;&#x4EF6;&#x8FDB;&#x7A0B;&#x4E2D;&#x6B62;&#x6216;&#x8005;&#x5B95;&#x673A;&#x4EA7;&#x751F;&#x4E86;&#x6D88;&#x606F;&#x7684;&#x4E22;&#x5931;&#x95EE;&#x9898;&#xFF0C;&#x9700;&#x8981;&#x914D;&#x7F6E;&#x6D88;&#x606F;&#x4E2D;&#x95F4;&#x4EF6;&#x7684;&#x6301;&#x4E45;&#x5316;&#x5B58;&#x50A8;&#xFF1A;</p>
+<ol>
+<li>&#x914D;&#x7F6E;&#x6D88;&#x606F;&#x961F;&#x5217;&#x4E3A; consistent&#xFF08;&#x6301;&#x4E45;&#x5316;&#xFF09;&#x6A21;&#x5F0F;</li>
+<li>&#x53D1;&#x9001;&#x7684;&#x6D88;&#x606F;&#x4E5F;&#x9700;&#x8981;&#x6DFB;&#x52A0; persistent=2 &#x53C2;&#x6570;&#xFF0C;&#x8868;&#x793A;&#x6D88;&#x606F;&#x9700;&#x8981;&#x6301;&#x4E45;&#x5316;&#x5B58;&#x50A8;&#x5230;&#x4E2D;&#x95F4;&#x4EF6;&#x3002;</li>
+</ol>
+<p>&#x53C2;&#x8003;&#x6587;&#x732E;&#xFF1A;</p>
+<ol>
+<li>RabbitMQ &#x914D;&#x7F6E;&#xFF1A;<a href="https://www.rabbitmq.com/configure.html" target="_blank" rel="noopener">https://www.rabbitmq.com/configure.html</a></li>
+<li><a href="https://blog.csdn.net/u010046908/article/details/95448118" target="_blank" rel="noopener">RabbitMQ&#x6D88;&#x606F;&#x6301;&#x4E45;&#x5316;</a></li>
+</ol>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Spring-Cloud/">#Spring Cloud</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Kafka/">#Kafka</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/RabbitMQ/">#RabbitMQ</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2021-Feb-4th-Spesc-JVM-language/">JVM language development</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2021-Jan-5th-Postman-testing/">Postman 使用笔记</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

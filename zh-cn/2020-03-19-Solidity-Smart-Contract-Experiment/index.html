@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>Solidity 智能合约实验 - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/2020-03-19-Solidity-Smart-Contract-Experiment/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x4EE5;&amp;#x592A;&amp;#x574A;&amp;#x5F00;&amp;#x53D1;&amp;#x56E2;&amp;#x961F;&amp;#x5F00;&amp;#x53D1;&amp;#x4E86; Remix IDE &amp;#x548C;&amp;#x914D;&amp;#x5957;&amp;#x7684; Remix &amp;#x4E00;&amp;#x7CFB;&amp;#x5217;&amp;#x63D2;&amp;#x4EF6;&amp;#x4F9B;&amp;#x667A;&amp;#x80FD;&amp;#x540">
+<meta name="keywords" content="Solidity,Ethereum,Smart Contracts,web3.js,Remix IDE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Solidity 智能合约实验">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x4EE5;&amp;#x592A;&amp;#x574A;&amp;#x5F00;&amp;#x53D1;&amp;#x56E2;&amp;#x961F;&amp;#x5F00;&amp;#x53D1;&amp;#x4E86; Remix IDE &amp;#x548C;&amp;#x914D;&amp;#x5957;&amp;#x7684; Remix &amp;#x4E00;&amp;#x7CFB;&amp;#x5217;&amp;#x63D2;&amp;#x4EF6;&amp;#x4F9B;&amp;#x667A;&amp;#x80FD;&amp;#x540">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/coding.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/compiling.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/deploy-hello-on-test-chain.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/verify-and-publish-code.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/verify-and-publish-code-success.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/read-contract.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/architecture.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/solc-version.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/web3j-version.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/infura_client.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/confirm-transaction.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/contract-deploy-success.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/transaction-with-event-logs.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/web3j-ethLogFlowable-subscribe.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/decode-events.png">
+<meta property="og:updated_time" content="2025-05-11T09:10:06.030Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Solidity 智能合约实验">
+<meta name="twitter:description" content="&amp;#x4EE5;&amp;#x592A;&amp;#x574A;&amp;#x5F00;&amp;#x53D1;&amp;#x56E2;&amp;#x961F;&amp;#x5F00;&amp;#x53D1;&amp;#x4E86; Remix IDE &amp;#x548C;&amp;#x914D;&amp;#x5957;&amp;#x7684; Remix &amp;#x4E00;&amp;#x7CFB;&amp;#x5217;&amp;#x63D2;&amp;#x4EF6;&amp;#x4F9B;&amp;#x667A;&amp;#x80FD;&amp;#x540">
+<meta name="twitter:image" content="https://billystudio.github.io/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/coding.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Installation">1.1&nbsp;&nbsp;Installation</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Procedure">2&nbsp;&nbsp;<b>Procedure</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#编写智能合约">2.1&nbsp;&nbsp;编写智能合约</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#编译智能合约">2.2&nbsp;&nbsp;编译智能合约</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Deploy-and-run-on-localhost">2.3&nbsp;&nbsp;Deploy and run on localhost</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#一些语法点">3&nbsp;&nbsp;<b>一些语法点</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#使用JavaScript开发的web3-js的一些用法">3.1&nbsp;&nbsp;使用JavaScript开发的web3.js的一些用法</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Java下的-web3j-实验">4&nbsp;&nbsp;<b>Java下的 web3j 实验</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#启动以太坊区块链">4.1&nbsp;&nbsp;启动以太坊区块链</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#geth-private-network">4.1.1&nbsp;&nbsp;geth private network</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#geth-rinkeby-test-node">4.1.2&nbsp;&nbsp;geth rinkeby test node</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Infura-remote-test-node">4.1.3&nbsp;&nbsp;Infura remote test node</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#部署智能合约">4.2&nbsp;&nbsp;部署智能合约</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Remix-IDE-部署">4.2.1&nbsp;&nbsp;Remix IDE 部署</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Java调用合约ABI程序">4.3&nbsp;&nbsp;Java调用合约ABI程序</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Java端监听合约log程序">4.4&nbsp;&nbsp;Java端监听合约log程序</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#几个问题和一些想法">5&nbsp;&nbsp;<b>几个问题和一些想法</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#References">6&nbsp;&nbsp;<b>References:</b></a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2020-03-19-Solidity-Smart-Contract-Experiment/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2020-03-19-Solidity-Smart-Contract-Experiment/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Solidity 智能合约实验
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2020-03-19T02:58:26.000Z" itemprop="datePublished">3月 19 2020</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            17 分钟 读完 (约 2540 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x4EE5;&#x592A;&#x574A;&#x5F00;&#x53D1;&#x56E2;&#x961F;&#x5F00;&#x53D1;&#x4E86; Remix IDE &#x548C;&#x914D;&#x5957;&#x7684; Remix &#x4E00;&#x7CFB;&#x5217;&#x63D2;&#x4EF6;&#x4F9B;&#x667A;&#x80FD;&#x5408;&#x7EA6;&#x5B9E;&#x9A8C;&#x7528;&#x3002;&#x5F53;&#x7136;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; Java &#x7684; web3j &#x6765;&#x5B9E;&#x73B0;&#x8FD9;&#x4E9B;&#x529F;&#x80FD; <a id="more"></a></p>
+<h2 id="Installation"><a href="#Installation" class="headerlink" title="Installation"></a>Installation</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu nvm solidity</span><br><span class="line">nvm install 8.0</span><br><span class="line">nvm use 8.0</span><br><span class="line">npm install remix-ide -g</span><br><span class="line">remix-ide</span><br></pre></td></tr></table></figure>
+
+<p>Later, every time if you want to open <code>remix</code>, just type:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvm use 8.0 # required if you installed several versions</span><br><span class="line">remix-ide</span><br></pre></td></tr></table></figure>
+
+<h1 id="Procedure"><a href="#Procedure" class="headerlink" title="Procedure"></a>Procedure</h1><h2 id="&#x7F16;&#x5199;&#x667A;&#x80FD;&#x5408;&#x7EA6;"><a href="#&#x7F16;&#x5199;&#x667A;&#x80FD;&#x5408;&#x7EA6;" class="headerlink" title="&#x7F16;&#x5199;&#x667A;&#x80FD;&#x5408;&#x7EA6;"></a>&#x7F16;&#x5199;&#x667A;&#x80FD;&#x5408;&#x7EA6;</h2><p><img src="coding.png" alt="code a contract"></p>
+<h2 id="&#x7F16;&#x8BD1;&#x667A;&#x80FD;&#x5408;&#x7EA6;"><a href="#&#x7F16;&#x8BD1;&#x667A;&#x80FD;&#x5408;&#x7EA6;" class="headerlink" title="&#x7F16;&#x8BD1;&#x667A;&#x80FD;&#x5408;&#x7EA6;"></a>&#x7F16;&#x8BD1;&#x667A;&#x80FD;&#x5408;&#x7EA6;</h2><p><img src="compiling.png" alt="compile a contract"><br>&#x5728;&#x5DE6;&#x4FA7;&#x627E;&#x5230;&#x7F16;&#x8BD1;&#x63D2;&#x4EF6;&#xFF0C;&#x5982;&#x679C;&#x6CA1;&#x6709;&#x5219;&#x9700;&#x8981;&#x5728;&#x63D2;&#x4EF6;&#x7BA1;&#x7406;&#x5904;&#x5B89;&#x88C5;Compile&#x63D2;&#x4EF6;&#x3002;<br>&#x6CE8;&#x610F;&#x7F16;&#x8BD1;&#x63D2;&#x4EF6;&#x7684;&#x7248;&#x672C;&#x9009;&#x62E9;&#x5E94;&#x548C;&#x7A0B;&#x5E8F;&#x7B2C;&#x4E00;&#x884C;&#x7684;&#x8981;&#x6C42;&#x4E00;&#x81F4;&#x3002;</p>
+<h2 id="Deploy-and-run-on-localhost"><a href="#Deploy-and-run-on-localhost" class="headerlink" title="Deploy and run on localhost"></a>Deploy and run on localhost</h2><p>Environment &#x9009;&#x62E9; Js VM, &#x8FD9;&#x662F;&#x6D4F;&#x89C8;&#x5668;&#x865A;&#x62DF;&#x51FA;&#x6765;&#x7684;&#x533A;&#x5757;&#x94FE;&#xFF0C;&#x5237;&#x65B0;&#x4E00;&#x904D;&#x540E;&#x5373;&#x6E05;&#x7A7A;</p>
+<p>After choosing JS VM, you will have five available accounts in the next account list.</p>
+<p>&#x90E8;&#x7F72;&#x548C;&#x8C03;&#x7528;store ABI&#x7684;&#x8FC7;&#x7A0B;&#x4F1A;&#x6D88;&#x8017;ether&#xFF0C;&#x4F46;&#x662F;&#x8C03;&#x7528;retrieve ABI&#x7684;&#x8FC7;&#x7A0B;&#x4E0D;&#x4F1A;&#x6D88;&#x8017;&#xFF0C;&#x5373;&#x4F7F;&#x8FC7;&#x7A0B;&#x4E2D;&#x8FDB;&#x884C;&#x4E86;&#x8FD0;&#x7B97;&#x3002;</p>
+<h1 id="&#x4E00;&#x4E9B;&#x8BED;&#x6CD5;&#x70B9;"><a href="#&#x4E00;&#x4E9B;&#x8BED;&#x6CD5;&#x70B9;" class="headerlink" title="&#x4E00;&#x4E9B;&#x8BED;&#x6CD5;&#x70B9;"></a>&#x4E00;&#x4E9B;&#x8BED;&#x6CD5;&#x70B9;</h1><p>&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x8BBE;&#x7F6E;&#x6210; view &#x4E4B;&#x540E;&#xFF0C;&#x8FD9;&#x4E2A;&#x51FD;&#x6570;&#x4E2D;&#x4E0D;&#x53EF;&#x4FEE;&#x6539;&#x5408;&#x7EA6;&#x53D8;&#x91CF;&#x7684;&#x503C;&#xFF0C;&#x5E76;&#x4E14;&#x6B64;&#x529F;&#x80FD;&#x4E0D;&#x6D88;&#x8017;eth&#x3002;</p>
+<p>&#x4E3A;&#x4E86;&#x4F7F; Solidity &#x667A;&#x80FD;&#x5408;&#x7EA6;&#x80FD;&#x591F;&#x4E0E;&#x5176;&#x4ED6;&#x7A0B;&#x5E8F;&#x4EA4;&#x4E92;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x501F;&#x52A9; web3.js</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm install web3</span><br></pre></td></tr></table></figure>
+
+<p>&#x90E8;&#x7F72;&#x5230;&#x6D4B;&#x8BD5;&#x7F51;&#x7EDC;&#x4E0A;&#xFF0C;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x5C06;&#x94B1;&#x5305;&#x5730;&#x5740;&#x53D1;&#x5230;&#x63A8;&#x7279;&#x6216;&#x8005;&#x8138;&#x4E66;&#x4E0A;&#xFF0C;&#x7136;&#x540E;&#x628A;&#x94FE;&#x63A5;&#x8D34;&#x56DE;&#x7F51;&#x5740;&#x83B7;&#x5F97;&#x4E00;&#x4E9B;&#x6D4B;&#x8BD5;&#x5E01;&#x3002;</p>
+<p><img src="deploy-hello-on-test-chain.png" alt="deploy-hello-on-test-chain.png"></p>
+<p>&#x70B9;&#x5F00; Contract &#x5BF9;&#x5E94;&#x7684;&#x5730;&#x5740;&#x7F51;&#x5740;&#xFF1A;</p>
+<p>&#x63A5;&#x4E0B;&#x6765; Verify &amp; Publish Source code<br><img src="verify-and-publish-code.png" alt="verify-and-publish-code.png"></p>
+<p>verify and publish &#x6210;&#x529F;<br><img src="verify-and-publish-code-success.png" alt="verify-and-publish-code-success.png"></p>
+<p>&#x53EF;&#x4EE5;&#x901A;&#x8FC7; read contract &#x8BFB;&#x53D6;&#x5408;&#x7EA6;&#x4E2D;&#x7684;public&#x53D8;&#x91CF;&#x503C;&#xFF1A;<br><img src="read-contract.png" alt="read-contract.png"></p>
+<p>&#x4F7F;&#x7528; Prepros &#x8F6F;&#x4EF6;&#x6216; VS Code Live Server &#x63D2;&#x4EF6;&#x5C06;&#x6587;&#x6863;&#x90E8;&#x7F72;&#x5728; localhost &#x7684;&#x67D0;&#x4E2A;&#x7AEF;&#x53E3;&#x4E0A;&#xFF08;&#x6CE8;&#x610F;&#x4E0D;&#x80FD;&#x76F4;&#x63A5;&#x4ECE;&#x672C;&#x5730;&#x7528;&#x6D4F;&#x89C8;&#x5668;&#x6253;&#x5F00;&#xFF09;</p>
+<h2 id="&#x4F7F;&#x7528;JavaScript&#x5F00;&#x53D1;&#x7684;web3-js&#x7684;&#x4E00;&#x4E9B;&#x7528;&#x6CD5;"><a href="#&#x4F7F;&#x7528;JavaScript&#x5F00;&#x53D1;&#x7684;web3-js&#x7684;&#x4E00;&#x4E9B;&#x7528;&#x6CD5;" class="headerlink" title="&#x4F7F;&#x7528;JavaScript&#x5F00;&#x53D1;&#x7684;web3.js&#x7684;&#x4E00;&#x4E9B;&#x7528;&#x6CD5;"></a>&#x4F7F;&#x7528;JavaScript&#x5F00;&#x53D1;&#x7684;web3.js&#x7684;&#x4E00;&#x4E9B;&#x7528;&#x6CD5;</h2><p>&#x6309;&#x7167;&#x6A21;&#x5757;&#x5206;</p>
+<figure class="highlight hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">eth.blockNumber</span><br><span class="line">eth.accounts # == personal.listAccounts</span><br><span class="line">eth.getBalance(arg) # arg: &#x8D26;&#x6237;&#x5730;&#x5740;</span><br><span class="line">eth.sendTransaction({from: arg0, to: arg1, value: web3.toWei(3, &apos;ether&apos;)}) # arg0&#x8D26;&#x6237;&#x5411;arg1&#x8D26;&#x6237;&#x8F6C;&#x8D26;3&#x4E2A;&#x4EE5;&#x592A;&#x5E01;</span><br><span class="line"></span><br><span class="line">personal.newAccount(arg) # arg: &#x8D26;&#x6237;&#x5BC6;&#x7801;&#x5B57;&#x7B26;&#x4E32;(123)&#xFF1B; &#x8D26;&#x6237;&#x5730;&#x5740;&#x662F;&#x968F;&#x673A;&#x751F;&#x6210;&#x7684;</span><br><span class="line">personal.unlockAccont(account, pass, duration) # &#x8D26;&#x6237;&#x5730;&#x5740;, &#x5BC6;&#x7801;&#xFF0C; &#x6301;&#x7EED;&#x65F6;&#x95F4;(&#x79D2;)</span><br><span class="line"></span><br><span class="line">miner.start(arg) # arg: &#x6316;&#x77FF;&#x7EBF;&#x7A0B;&#x6570;</span><br><span class="line">miner.stop()</span><br><span class="line"></span><br><span class="line">web3.fromWei(arg0, &apos;ether&apos;) # arg0 wei&#x6570;&#x91CF;</span><br></pre></td></tr></table></figure>
+
+<h1 id="Java&#x4E0B;&#x7684;-web3j-&#x5B9E;&#x9A8C;"><a href="#Java&#x4E0B;&#x7684;-web3j-&#x5B9E;&#x9A8C;" class="headerlink" title="Java&#x4E0B;&#x7684; web3j &#x5B9E;&#x9A8C;"></a>Java&#x4E0B;&#x7684; web3j &#x5B9E;&#x9A8C;</h1><p><img src="architecture.png" alt="architecture.png"></p>
+<p>&#x63A5;&#x7740;&#x4E0A;&#x4E00;&#x4E2A;&#x5B9E;&#x9A8C;&#xFF0C;&#x518D;&#x5B89;&#x88C5; <code>solidity</code>, <code>go-ethereum</code>, &#x4EE5;&#x53CA; <code>web3j</code> &#x7684; 3.6.0 &#x7248;&#x672C;(<a href="https://github.com/web3j/web3j/releases/tag/v3.6.0" target="_blank" rel="noopener">https://github.com/web3j/web3j/releases/tag/v3.6.0</a>)<br>&#x9996;&#x5148;&#x67E5;&#x770B; &#x7248;&#x672C;&#x53F7;<br><img src="solc-version.png" alt="solc-version.png"><br><img src="web3j-version.png" alt="web3j-version.png"></p>
+<p>&#x6839;&#x636E;&#x7248;&#x672C;&#x53F7;&#xFF0C;&#x7F16;&#x5199;&#x4E00;&#x4E2A;&#x6307;&#x5B9A;&#x4E86;&#x5BF9;&#x5E94;&#x7248;&#x672C;&#x53F7;&#x7684; Solidity &#x5408;&#x7EA6;(&#x5F53;&#x7136;&#xFF0C;&#x7A0B;&#x5E8F;&#x7B2C;&#x4E00;&#x884C;&#x4E5F;&#x53EF;&#x4EE5;&#x6307;&#x5B9A;&#x5408;&#x7EA6;&#x7248;&#x672C;&#x53F7;&#x8303;&#x56F4;&#xFF0C;&#x8FD9;&#x6837;&#x5408;&#x7EA6;&#x6587;&#x4EF6;&#x7684;&#x9002;&#x7528;&#x6027;&#x4F1A;&#x66F4;&#x597D;&#xFF0C;&#x4F46;&#x662F;&#x53EF;&#x80FD;&#x529F;&#x80FD;&#x4F1A;&#x6709;&#x6240;&#x5C40;&#x9650;&#x5728;&#x6700;&#x65E9;&#x7684;&#x7248;&#x672C;&#x3002;)</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">pragma solidity ^0.6.6;</span><br><span class="line"></span><br><span class="line">contract StorageContract {</span><br><span class="line">    mapping(string =&gt; bool) public allTokens;</span><br><span class="line">    event logToken(string token);</span><br><span class="line">    event logCheck(bool result);</span><br><span class="line">    event compute_times(int256 times);</span><br><span class="line">    </span><br><span class="line">    function sendToken(string memory token) public {</span><br><span class="line">        allTokens[token] = true;</span><br><span class="line">        emit logToken(token);</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    function checkToken(string memory token) public returns (bool result) {</span><br><span class="line">        if (allTokens[token] == true){</span><br><span class="line">            logCheck(true);</span><br><span class="line">            return true;</span><br><span class="line">        } else {</span><br><span class="line">            logCheck(false);</span><br><span class="line">            return false;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    function computeTimes(int times) public {</span><br><span class="line">        emit compute_times(times);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x7F16;&#x8BD1;&#x5408;&#x7EA6;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">solc control.sol --bin --abi --optimize -o solidity</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0A;&#x4E2A;&#x547D;&#x4EE4;&#x5C06;&#x7F16;&#x8BD1;&#x540E;&#x7684;abi&#x6587;&#x4EF6;&#x548C;bytecode&#x6587;&#x4EF6;&#x8F93;&#x51FA;&#x5230;&#x5B50;&#x6587;&#x4EF6;&#x5939;solidity/&#xFF0C;&#x5982;&#x679C;&#x8BE5;&#x5B50;&#x6587;&#x4EF6;&#x5939;&#x4E2D;&#x5DF2;&#x5B58;&#x5728;&#x540C;&#x540D;&#x6587;&#x4EF6;&#xFF0C;&#x5219;&#x9700;&#x8981;&#x6DFB;&#x52A0; <code>--overwrite</code></p>
+<p>&#x4F7F;&#x7528; web3j &#x6253;&#x5305;&#x6210; Java &#x7C7B;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">web3j solidity generate solidity/Control.bin solidity/Control.abi -o {directory/to/src/main/java} -p {com.your.packagename}</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0A;&#x9762;&#x547D;&#x4EE4;&#x5927;&#x62EC;&#x53F7;&#x4E2D;&#x5206;&#x522B;&#x4E3A;&#x8981;&#x8F93;&#x51FA;&#x7684;Java&#x4E3B;&#x76EE;&#x5F55;&#x548C;&#x8981;&#x4F7F;&#x7528;&#x8BE5;&#x7C7B;&#x7684;&#x5305;&#x540D;&#xFF0C;&#x8F93;&#x51FA;&#x7ED3;&#x679C;&#x4E3A; StorageContract.java&#x3002;&#xFF08;&#x4E5F;&#x53EF;&#x4EE5;&#x968F;&#x610F;&#x6307;&#x5B9A;&#x7136;&#x540E;&#x62F7;&#x8D1D;&#x5230;&#x9700;&#x8981;&#x7684;&#x76EE;&#x5F55;&#x4E0B;&#xFF0C;&#x8FD9;&#x79CD;&#x65B9;&#x6CD5;&#x9700;&#x8981;&#x4FEE;&#x6539;&#x5339;&#x914D;&#x5305;&#x540D;&#xFF09;</p>
+<h2 id="&#x542F;&#x52A8;&#x4EE5;&#x592A;&#x574A;&#x533A;&#x5757;&#x94FE;"><a href="#&#x542F;&#x52A8;&#x4EE5;&#x592A;&#x574A;&#x533A;&#x5757;&#x94FE;" class="headerlink" title="&#x542F;&#x52A8;&#x4EE5;&#x592A;&#x574A;&#x533A;&#x5757;&#x94FE;"></a>&#x542F;&#x52A8;&#x4EE5;&#x592A;&#x574A;&#x533A;&#x5757;&#x94FE;</h2><p>&#x542F;&#x52A8;&#x65B9;&#x6CD5;&#x6709;&#x591A;&#x79CD;&#xFF0C;&#x8FD9;&#x91CC;&#x63A8;&#x8350;&#x672C;&#x5730;&#x642D;&#x5EFA;geth private network&#x7684;&#x65B9;&#x5F0F;&#x3002;&#x56E0;&#x4E3A;&#x9664;&#x4E86;geth&#xFF0C;&#x5176;&#x4ED6;&#x7684;&#x4E00;&#x4E9B;&#x4EE5;&#x592A;&#x574A;&#x533A;&#x5757;&#x94FE;&#x540E;&#x7AEF;&#x5982; Infura, Ganache &#x7B49;&#xFF0C;&#x5BF9;&#x529F;&#x80FD;&#x8FDB;&#x884C;&#x4E86;&#x9609;&#x5272;&#x3002;&#x5BFC;&#x81F4;&#x65E0;&#x6CD5;&#x8FDB;&#x884C;&#x76D1;&#x542C;&#x7B49;&#x529F;&#x80FD;&#xFF0C;&#x6240;&#x4EE5;&#x5EFA;&#x8BAE;&#x8FD8;&#x662F;&#x8001;&#x5B9E;&#x7528;geth&#x642D;&#x4E00;&#x6761;&#x79C1;&#x94FE;&#x3002; </p>
+<h3 id="geth-private-network"><a href="#geth-private-network" class="headerlink" title="geth private network"></a>geth private network</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  &quot;config&quot;: {</span><br><span class="line">    &quot;chainId&quot;: 1,</span><br><span class="line">    &quot;homesteadBlock&quot;: 0,</span><br><span class="line">    &quot;eip150Block&quot;: 0,</span><br><span class="line">    &quot;eip155Block&quot;: 0,</span><br><span class="line">    &quot;eip158Block&quot;: 0,</span><br><span class="line">    &quot;byzantiumBlock&quot;: 0,</span><br><span class="line">    &quot;constantinopleBlock&quot;: 0,</span><br><span class="line">    &quot;petersburgBlock&quot;: 0,</span><br><span class="line">    &quot;istanbulBlock&quot;: 0</span><br><span class="line">  },</span><br><span class="line">  &quot;alloc&quot;: {},</span><br><span class="line">  &quot;coinbase&quot;: &quot;0x0000000000000000000000000000000000000000&quot;,</span><br><span class="line">  &quot;difficulty&quot;: &quot;0x20000&quot;,</span><br><span class="line">  &quot;extraData&quot;: &quot;&quot;,</span><br><span class="line">  &quot;gasLimit&quot;: &quot;0x2fefd8&quot;,</span><br><span class="line">  &quot;nonce&quot;: &quot;0x0000000000000142&quot;,</span><br><span class="line">  &quot;mixhash&quot;: &quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,</span><br><span class="line">  &quot;parentHash&quot;: &quot;0x0000000000000000000000000000000000000000000000000000000000000000&quot;,</span><br><span class="line">  &quot;timestamp&quot;: &quot;0x00&quot;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geth --datadir ./ init genesis.json</span><br></pre></td></tr></table></figure>
+
+<p>&#x8FDB;&#x5165;geth console &#x7684;&#x65B9;&#x5F0F;&#x6709;&#x4E24;&#x79CD;&#xFF0C;&#x4E00;&#x79CD;&#x662F;&#x542F;&#x52A8;geth&#x540E;&#x53F0;&#x4E4B;&#x540E;&#xFF0C;&#x901A;&#x8FC7;ipc&#x65B9;&#x5F0F;&#x8FDB;&#x5165;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geth attach ipc:./geth.ipc console</span><br></pre></td></tr></table></figure>
+
+<p>&#x53E6;&#x4E00;&#x79CD;&#x662F;&#x76F4;&#x63A5;&#x5728;&#x542F;&#x52A8;geth&#x547D;&#x4EE4;&#x4E2D;&#x52A0;&#x5165;console</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">geth</span><br><span class="line">--datadir ./ </span><br><span class="line">--rpcapi personal,eth,net,web3,txpool,debug,miner,admin -rpc </span><br><span class="line">--rpccorsdomain &quot;chrome-extension://nkbihfbeogaeaoehlefnkodbefgpgknn&quot; </span><br><span class="line">--allow-insecure-unlock </span><br><span class="line">--wsapi personal,eth,net,web3,txpool,debug,miner,admin --ws </span><br><span class="line">console</span><br><span class="line">2&gt;&gt; /tmp/eth01.log</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0A;&#x9762;&#x547D;&#x4EE4;&#x53C2;&#x6570;&#x4E00;&#x884C;&#x884C;&#x89E3;&#x91CA;<br>1&#xFF1A; &#x542F;&#x52A8; geth &#x5BA2;&#x6237;&#x7AEF;<br>2&#xFF1A; &#x6307;&#x5B9A;&#x79C1;&#x94FE;&#x5B58;&#x653E;&#x7684;&#x6570;&#x636E;&#x6587;&#x4EF6;&#x5939;&#xFF08;&#x4E4B;&#x524D;&#x5DF2; <code>geth init genesis.json --datadir ./</code>&#xFF09;<br>3&#xFF1A; enable rpc&#x63A5;&#x53E3;&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x5F00;&#x653E;&#x7684;rpcapi<br>4&#xFF1A; &#x9ED8;&#x8BA4;&#x53EA;&#x652F;&#x6301;https&#x8BBF;&#x95EE;&#xFF0C;&#x8FD9;&#x91CC;&#x5F00;&#x653E; metamask &#x63D2;&#x4EF6;&#x7684;http&#x8DE8;&#x57DF;&#x8BBF;&#x95EE;<br>5&#xFF1A; &#x5141;&#x8BB8;&#x5728; console &#x4E2D;&#x548C; http &#x8BF7;&#x6C42;&#x4E2D;&#x89E3;&#x9501; account<br>6&#xFF1A; enable websocket&#x63A5;&#x53E3;&#xFF0C;&#x5E76;&#x6307;&#x5B9A;&#x5F00;&#x653E;&#x7684; wsapi<br>7&#xFF1A; &#x5F00;&#x653E;&#x63A7;&#x5236;&#x53F0;<br>8&#xFF1A; &#x5C06;&#x4E00;&#x4E9B;&#x4E0D;&#x5FC5;&#x8981;&#x7684;log&#x8F93;&#x51FA;&#x91CD;&#x5B9A;&#x5411;&#xFF08;&#x63A7;&#x5236;&#x53F0;&#x4F1A;&#x6BD4;&#x8F83;&#x5E72;&#x51C0;&#xFF0C;&#x4E0D;&#x4F1A;&#x88AB;log&#x8F93;&#x51FA;&#x5E72;&#x6270;&#xFF09;<br>&#x4E0B;&#x9762;1&#x884C;&#x65B9;&#x4FBF;&#x590D;&#x5236;&#x7C98;&#x8D34;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">geth --datadir ./ --rpcapi personal,eth,net,web3,txpool,debug,miner,admin -rpc -rpccorsdomain &quot;*&quot; --allow-insecure-unlock --wsapi personal,eth,net,web3,txpool,debug,miner,admin --ws console 2&gt;&gt; /tmp/eth01.log</span><br></pre></td></tr></table></figure>
+
+<p>metamask &#x91CC;&#x9762;custom rpc</p>
+<p>remix ide &#x91CC;&#x9762; injected web3</p>
+<p>geth &#x91CC;&#x9762;&#x7684; keystore &#x4E0D;&#x597D;&#x83B7;&#x5F97;&#x79C1;&#x94A5;&#xFF0C;&#x6240;&#x4EE5;&#x5728;&#x8FDB;&#x884C;web3&#x5B9E;&#x9A8C;&#x7684;&#x65F6;&#x5019;&#x7528; Admin &#x6216;&#x8005; Wallet.Utils</p>
+<h3 id="geth-rinkeby-test-node"><a href="#geth-rinkeby-test-node" class="headerlink" title="geth rinkeby test node"></a>geth rinkeby test node</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ geth --rpcapi personal,db,eth,net,web3 --rpc --rinkeby</span><br></pre></td></tr></table></figure>
+
+<p>&#x8FD9;&#x4E2A;&#x5BA2;&#x6237;&#x7AEF;&#x9ED8;&#x8BA4;&#x5DE5;&#x4F5C;&#x5728; <code>localhost:8545</code></p>
+<h3 id="Infura-remote-test-node"><a href="#Infura-remote-test-node" class="headerlink" title="Infura remote test node"></a>Infura remote test node</h3><p>&#x6CE8;&#x518C;&#x4F7F;&#x7528; Infura &#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x5728;&#x7EBF;&#x8282;&#x70B9;&#xFF1A;<br><img src="infura_client.png" alt="infura_client.png"></p>
+<h2 id="&#x90E8;&#x7F72;&#x667A;&#x80FD;&#x5408;&#x7EA6;"><a href="#&#x90E8;&#x7F72;&#x667A;&#x80FD;&#x5408;&#x7EA6;" class="headerlink" title="&#x90E8;&#x7F72;&#x667A;&#x80FD;&#x5408;&#x7EA6;"></a>&#x90E8;&#x7F72;&#x667A;&#x80FD;&#x5408;&#x7EA6;</h2><p>&#x5C06;&#x7F16;&#x8BD1;&#x8FC7;&#x7684;&#x5408;&#x7EA6;&#x90E8;&#x7F72;&#x5230;&#x533A;&#x5757;&#x94FE;&#x8282;&#x70B9;&#x4E0A;&#xFF0C;&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x901A;&#x8FC7; Remix IDE, web3.js, web3j &#x7B49;&#x591A;&#x79CD;&#x65B9;&#x5F0F;&#x90E8;&#x7F72;&#x3002;</p>
+<h3 id="Remix-IDE-&#x90E8;&#x7F72;"><a href="#Remix-IDE-&#x90E8;&#x7F72;" class="headerlink" title="Remix IDE &#x90E8;&#x7F72;"></a>Remix IDE &#x90E8;&#x7F72;</h3><p>geth&#x8282;&#x70B9;&#x5F00;&#x542F;&#x6316;&#x77FF;&#x6A21;&#x5F0F;<br>&#x5982;&#x679C;&#x4F7F;&#x7528;Remix IDE&#x7684; Provided Web3&#x683C;&#x5F0F;&#xFF0C;&#x5219;&#x4E0D;&#x9700;&#x8981;&#x5BFC;&#x5165; metamask &#x94B1;&#x5305;<br>&#x70B9;&#x51FB;Deploy<br>&#x8DF3;&#x51FA;Confirm Transaction&#x7A97;&#x53E3;<br><img src="confirm-transaction.png" alt="confirm-transaction.png"></p>
+<p>&#x751F;&#x6210;&#x5408;&#x7EA6;&#x6253;&#x5305;&#x7684;&#x4EA4;&#x6613;&#x5F62;&#x5F0F;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  blockHash: &quot;0x164a207f528d564fa5bf3e265dc7886ef927e96d19556302476ef9f80569caf5&quot;,</span><br><span class="line">  blockNumber: 8343,</span><br><span class="line">  from: &quot;0xcbcb8167b1f2de05d696f041bb6c5f2e127baec5&quot;,</span><br><span class="line">  gas: 368951,</span><br><span class="line">  gasPrice: 4000000000,</span><br><span class="line">  hash: &quot;0x9de4e3a...96990f0c&quot;,</span><br><span class="line">  input: &quot;0x6080604052348015610010576...&quot;,</span><br><span class="line">  nonce: 2,</span><br><span class="line">  r: &quot;0x6d215cdb66e10cf415795b3552cf2acc58129950b53a4ba1111788b4f2504090&quot;,</span><br><span class="line">  s: &quot;0x4f29c1e7332a7945f6e10de69a09e0db89a9df51d1e24b901f0d411f77c38f89&quot;,</span><br><span class="line">  to: null,</span><br><span class="line">  transactionIndex: 0,</span><br><span class="line">  v: &quot;0x26&quot;,</span><br><span class="line">  value: 0</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x7B49;&#x5F85;&#x4E00;&#x4F1A;&#xFF0C;&#x4F1A;&#x63D0;&#x793A;&#x4EA4;&#x6613;&#x6253;&#x5305;&#x6210;&#x529F;&#xFF0C;&#x6210;&#x529F;&#x540E;&#x53EF;&#x4EE5;&#x5728; Remix &#x63A7;&#x5236;&#x53F0;&#x770B;&#x5230;&#x8F93;&#x51FA;&#x7684;&#x7ED3;&#x679C;&#xFF0C;&#x4EE5;&#x53CA;&#x5DE6;&#x680F;&#x4F1A;&#x591A;&#x51FA;&#x90E8;&#x7F72;&#x597D;&#x7684;&#x5408;&#x7EA6;&#x63A5;&#x53E3;&#x3002;<br><img src="contract-deploy-success.png" alt="contract-deploy-success.png"></p>
+<h2 id="Java&#x8C03;&#x7528;&#x5408;&#x7EA6;ABI&#x7A0B;&#x5E8F;"><a href="#Java&#x8C03;&#x7528;&#x5408;&#x7EA6;ABI&#x7A0B;&#x5E8F;" class="headerlink" title="Java&#x8C03;&#x7528;&#x5408;&#x7EA6;ABI&#x7A0B;&#x5E8F;"></a>Java&#x8C03;&#x7528;&#x5408;&#x7EA6;ABI&#x7A0B;&#x5E8F;</h2><p>Solidity &#x4E2D;&#x5F15;&#x5165;&#x4E86; event &#x673A;&#x5236;&#x7528;&#x4E8E;&#x76D1;&#x542C;&#xFF0C;&#x4F46;&#x8981;&#x6CE8;&#x610F; event &#x65E0;&#x6CD5;&#x76F4;&#x63A5;&#x4ECE;&#x5BA2;&#x6237;&#x7AEF;&#x8C03;&#x7528;&#xFF0C;&#x9700;&#x8981;&#x901A;&#x8FC7;&#x8C03;&#x7528; ABI &#x51FD;&#x6570;&#xFF0C;&#x51FD;&#x6570;&#x91CC;&#x9762; emit &#x4E00;&#x4E2A;event&#x8FD9;&#x6837;&#x624D;&#x884C;&#x3002;</p>
+<p>&#x6DFB;&#x52A0; pom.xml &#x4F9D;&#x8D56;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;dependency&gt;</span><br><span class="line">  &lt;groupId&gt;org.web3j&lt;/groupId&gt;</span><br><span class="line">  &lt;artifactId&gt;core&lt;/artifactId&gt;</span><br><span class="line">  &lt;version&gt;3.6.0&lt;/version&gt;</span><br><span class="line">&lt;/dependency&gt;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">TransactionReceipt receipt = contract.ABImethod(args).send();</span><br></pre></td></tr></table></figure>
+
+<p>&#x5728; Remix &#x63A7;&#x5236;&#x53F0;&#x4E2D;&#x663E;&#x793A;&#x4E00;&#x4E2A;&#x5E26;&#x6709;event log&#x8F93;&#x51FA;&#x7684;&#x4EA4;&#x6613;&#x5F62;&#x5F0F;&#xFF1A;<br><img src="transaction-with-event-logs.png" alt="transaction-with-event-logs.png"></p>
+<p>&#x539F;&#x59CB;&#x7684;&#x4EA4;&#x6613;&#x683C;&#x5F0F;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">  blockHash: &quot;0x5325ddcd2d4637639a947a04c71fe558bd4846b63e70b888c669fd6cb5948cea&quot;,</span><br><span class="line">  blockNumber: 8346,</span><br><span class="line">  from: &quot;0xcbcb8167b1f2de05d696f041bb6c5f2e127baec5&quot;,</span><br><span class="line">  gas: 45120,</span><br><span class="line">  gasPrice: 20000000000,</span><br><span class="line">  hash: &quot;0x2d62aa...31f2ee&quot;,</span><br><span class="line">  input: &quot;0x5ed39f42...&quot;,</span><br><span class="line">  nonce: 3,</span><br><span class="line">  r: &quot;0x85e7d979303becce39df32e0cc835aa24f7fadbd9f19016aa941bdbffcd5426f&quot;,</span><br><span class="line">  s: &quot;0x47bd134df93e5e35295fb7a67574c1ef3e31b86fbacc4cf2bd411e7c30cf9ce3&quot;,</span><br><span class="line">  to: &quot;0xdb71c8c71361d5d0b592438333a41baf6c73ead7&quot;,</span><br><span class="line">  transactionIndex: 0,</span><br><span class="line">  v: &quot;0x25&quot;,</span><br><span class="line">  value: 0</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>web3j &#x4E2D;&#x6253;&#x5370;&#x51FA;&#x7684; event log &#x5F62;&#x5F0F;&#xFF1A;<br><img src="web3j-ethLogFlowable-subscribe.png" alt="web3j-ethLogFlowable-subscribe.png"></p>
+<p>&#x4F1A;&#x53D1;&#x73B0; Remix &#x7684;&#x8F93;&#x51FA;&#x683C;&#x5F0F;&#x8FDB;&#x884C;&#x4E86;&#x4F18;&#x5316;&#xFF0C;&#x800C; web3j &#x4E2D;&#x5219;&#x662F;&#x539F;&#x6C41;&#x539F;&#x5473;&#x7684;&#x4EE5;&#x592A;&#x574A;&#x4EA4;&#x6613;&#x7684;&#x663E;&#x793A;&#x3002;&#x4F18;&#x5316;&#x7684;&#x65B9;&#x6CD5;&#x4E5F;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#xFF0C;&#x901A;&#x8FC7;&#x67E5;&#x770B;&#x6E90;&#x4EE3;&#x7801;&#xFF0C;&#x53D1;&#x73B0;remix&#x91CC;&#x8C03;&#x7528;event&#x65F6;&#x8FDB;&#x884C;&#x4E86;&#x8BB0;&#x5F55;&#xFF0C;&#x5728;&#x663E;&#x793A;log&#x7684;&#x65F6;&#x5019;&#x5D4C;&#x5165;&#x5230;&#x91CC;&#x9762;&#x4E86;&#x3002;<br>GitHub remix/remix-lib/src/execution/eventsDecoder.js<br><img src="decode-events.png" alt="decode-events.png"></p>
+<h2 id="Java&#x7AEF;&#x76D1;&#x542C;&#x5408;&#x7EA6;log&#x7A0B;&#x5E8F;"><a href="#Java&#x7AEF;&#x76D1;&#x542C;&#x5408;&#x7EA6;log&#x7A0B;&#x5E8F;" class="headerlink" title="Java&#x7AEF;&#x76D1;&#x542C;&#x5408;&#x7EA6;log&#x7A0B;&#x5E8F;"></a>Java&#x7AEF;&#x76D1;&#x542C;&#x5408;&#x7EA6;log&#x7A0B;&#x5E8F;</h2><p>&#x5728;&#x76D1;&#x542C;&#x7A0B;&#x5E8F;&#x4E2D;&#x76D1;&#x542C; log event</p>
+<p>Subscriber.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> rx.Subscription;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Subscriber</span> </span>{</span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">static</span> Web3j web3;</span><br><span class="line">    <span class="hljs-keyword">private</span> String CONTRACT_ADDRESS;</span><br><span class="line"></span><br><span class="line">    Subscriber(Web3j web3j, String contract_address) {</span><br><span class="line">        web3 = web3j;</span><br><span class="line">        CONTRACT_ADDRESS = contract_address;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">newEventLogFilter</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">        EthFilter filter = <span class="hljs-keyword">new</span> EthFilter(DefaultBlockParameterName.EARLIEST,</span><br><span class="line">                DefaultBlockParameterName.LATEST, CONTRACT_ADDRESS);</span><br><span class="line">        filter.addSingleTopic(EventEncoder.encode(StorageContract.LOGTOKEN_EVENT));</span><br><span class="line">        Subscription subscription = web3.ethLogObservable(filter).</span><br><span class="line">                subscribe(log -&gt; {</span><br><span class="line">                    System.out.println(log);</span><br><span class="line">                });</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>DemoApplication.java</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">@EnableDiscoveryClient</span></span><br><span class="line"><span class="hljs-meta">@SpringBootApplication</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">GatewayApplication</span> </span>{</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{</span><br><span class="line">		SpringApplication.run(GatewayApplication<span class="hljs-class">.<span class="hljs-keyword">class</span>, <span class="hljs-title">args</span>)</span>;</span><br><span class="line"></span><br><span class="line">		Web3j web3 = Web3j.build(<span class="hljs-keyword">new</span> HttpService());</span><br><span class="line">		String contract_address = <span class="hljs-string">&quot;0xcc87c4D1294bE775c0fD9726197F768DDCA45d56&quot;</span>;</span><br><span class="line">		Subscriber subscriber = <span class="hljs-keyword">new</span> Subscriber(web3, contract_address);</span><br><span class="line">		subscriber.newEventLogFilter();</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x5B9E;&#x9A8C;&#x89C2;&#x5BDF;&#x53EF;&#x77E5;&#xFF0C;&#x540C;&#x4E00;&#x4E2A;ABI event&#xFF0C;&#x5B83;&#x4EEC;&#x7684; topic &#x662F;&#x76F8;&#x540C;&#x7684;&#xFF0C;&#x6545;&#x53EF;&#x4EE5;&#x5C06; topic &#x548C; event name &#x4E00;&#x4E00;&#x5BF9;&#x5E94;&#x3002;&#xFF08;&#x5B9E;&#x9645;&#x4E0A;topic&#x503C;&#x662F;event name &#x7684;hash&#xFF0C;&#x53EF;&#x4EE5;&#x7528;EventEncoder.encode()&#x83B7;&#x53D6;topic&#x503C;&#xFF09;</p>
+<p>&#x63A5;&#x53E3;&#x6D4B;&#x8BD5;&#x547D;&#x4EE4;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">curl -d &quot;call_address=/home/wsd/STEM/microservices/test-data&quot; http://localhost:7901/callKmeans</span><br><span class="line">curl http://localhost:7901/getResults</span><br></pre></td></tr></table></figure>
+
+<p>&#x5047;&#x8BBE;&#x6BCF;&#x6B21;&#x6D88;&#x8D39;&#x8FC7;&#x7A0B;&#x90FD;&#x662F;&#x4E00;&#x6B21;&#x5B8C;&#x6574;&#x5408;&#x7EA6;&#x8C03;&#x7528;&#x8FC7;&#x7A0B;&#x3002;&#x4F46;&#x5DF2;&#x77E5;&#x82E5;&#x5408;&#x7EA6;&#x4EE3;&#x7801;&#x4E0D;&#x53D8;&#xFF0C;&#x5219;&#x90E8;&#x7F72;&#x7684;&#x5730;&#x5740;&#x4E5F;&#x4E0D;&#x53D8;&#x3002;</p>
+<h1 id="&#x51E0;&#x4E2A;&#x95EE;&#x9898;&#x548C;&#x4E00;&#x4E9B;&#x60F3;&#x6CD5;"><a href="#&#x51E0;&#x4E2A;&#x95EE;&#x9898;&#x548C;&#x4E00;&#x4E9B;&#x60F3;&#x6CD5;" class="headerlink" title="&#x51E0;&#x4E2A;&#x95EE;&#x9898;&#x548C;&#x4E00;&#x4E9B;&#x60F3;&#x6CD5;"></a>&#x51E0;&#x4E2A;&#x95EE;&#x9898;&#x548C;&#x4E00;&#x4E9B;&#x60F3;&#x6CD5;</h1><ol>
+<li><p>&#x5206;&#x7F51;&#x5173;&#x5916;&#x90E8;&#x548C;&#x7F51;&#x5173;&#x5185;&#x90E8;&#x6765;&#x770B; Solidity &#x667A;&#x80FD;&#x5408;&#x7EA6;&#x4E0E; Spring &#x5FAE;&#x670D;&#x52A1;&#x7684;&#x5173;&#x7CFB;<br>&#x4ECE;&#x5185;&#x90E8;&#x6765;&#x770B;&#xFF0C;&#x667A;&#x80FD;&#x5408;&#x7EA6;&#x4E0E;&#x5FAE;&#x670D;&#x52A1;&#x76F8;&#x5BF9;&#x72EC;&#x7ACB;&#xFF0C;&#x667A;&#x80FD;&#x5408;&#x7EA6;&#x66F4;&#x50CF;&#x662F;&#x4E00;&#x4E2A;&#x5E7F;&#x4E49;&#x5C42;&#x9762;&#x7684;&#x5FAE;&#x670D;&#x52A1;&#x3002;<br>&#x4ECE;&#x5916;&#x90E8;&#x6765;&#x770B;&#xFF0C;&#x5982;&#x679C;&#x5916;&#x90E8;&#x7684;&#x8C03;&#x7528;&#x8BF7;&#x6C42;&#x6BCF;&#x6B21;&#x90FD;&#x8981;&#x5148;&#x901A;&#x8FC7;&#x667A;&#x80FD;&#x5408;&#x7EA6;&#x6765;&#x4EA4;&#x4E92;&#xFF0C;&#x90A3;&#x4E48;&#x667A;&#x80FD;&#x5408;&#x7EA6;&#x66F4;&#x50CF;&#x662F;&#x5FAE;&#x670D;&#x52A1;&#x7684;&#x6574;&#x5408;&#x3002;</p>
+</li>
+<li><p>&#x8BB0;&#x5F55;&#x5728;&#x533A;&#x5757;&#x94FE;&#x7684; event log &#x6700;&#x591A;&#x5B58;&#x50A8;256&#x4F4D;&#xFF0C;&#x5982;&#x4F55;&#x89E3;&#x51B3;&#x4F20;&#x9012;&#x5927;&#x91CF;&#x6570;&#x636E;&#x7684;&#x95EE;&#x9898;<br>&#x901A;&#x8FC7;&#x5728;&#x533A;&#x5757;&#x94FE;&#x4E0A;&#x8BB0;&#x5F55;&#x6570;&#x636E;&#x5730;&#x5740;&#xFF0C;&#x518D;&#x6839;&#x636E;&#x5730;&#x5740;&#x53BB;&#x83B7;&#x53D6;&#x6570;&#x636E;&#x3002;</p>
+</li>
+<li><p>&#x5FAE;&#x670D;&#x52A1;&#x4E4B;&#x95F4;&#x901A;&#x8FC7;&#x533A;&#x5757;&#x94FE;&#x8FDB;&#x884C;&#x901A;&#x4FE1;&#x65F6;&#x95F4;&#x5F00;&#x9500;&#x6BD4;&#x8F83;&#x5927;&#x7684;&#x95EE;&#x9898;<br>&#x53EF;&#x4EE5;&#x8003;&#x8651;&#x628A;&#x4F20;&#x9012;&#x6B63;&#x786E;&#x7ED3;&#x679C;&#x7684;&#x8FC7;&#x7A0B;&#x5206;&#x6210;&#x4E24;&#x90E8;&#x5206;&#xFF0C;&#x4E00;&#x662F;&#x4F20;&#x9012;&#x7ED3;&#x679C;&#xFF0C;&#x8FD9;&#x4E00;&#x6B65;&#x9700;&#x8981;&#x63D0;&#x9AD8;&#x901F;&#x5EA6;&#x3002;&#x4E8C;&#x662F;&#x68C0;&#x9A8C;&#x7ED3;&#x679C;&#x7684;&#x6B63;&#x786E;&#x6027;&#xFF0C;&#x8FD9;&#x4E00;&#x6B65;&#x5219;&#x4FDD;&#x8BC1;&#x7ED3;&#x679C;&#x7684;&#x6B63;&#x786E;&#x6027;&#x3002;</p>
+</li>
+</ol>
+<h1 id="References"><a href="#References" class="headerlink" title="References:"></a>References:</h1><p><a href="https://remix-ide.readthedocs.io/en/latest/run.html" target="_blank" rel="noopener">https://remix-ide.readthedocs.io/en/latest/run.html</a></p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Solidity/">#Solidity</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Ethereum/">#Ethereum</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Smart-Contracts/">#Smart Contracts</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/web3-js/">#web3.js</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Remix-IDE/">#Remix IDE</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/2020-04-03-Disassembly-on-Linux/">Linux 反汇编教程</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/2020-02-22-Aimi-SCI-course/">Aimi SCI writing course</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

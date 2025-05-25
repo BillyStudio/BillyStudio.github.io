@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>JVM language development - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/2021-Feb-4th-Spesc-JVM-language/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x5F00;&amp;#x53D1;&amp;#x57FA;&amp;#x4E8E;JVM&amp;#x7684;&amp;#x58F0;&amp;#x660E;&amp;#x5F0F;&amp;#x7F16;&amp;#x7A0B;&amp;#x8BED;&amp;#x8A00;">
+<meta name="keywords" content="JVM">
+<meta property="og:type" content="article">
+<meta property="og:title" content="JVM language development">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/2021-Feb-4th-Spesc-JVM-language/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x5F00;&amp;#x53D1;&amp;#x57FA;&amp;#x4E8E;JVM&amp;#x7684;&amp;#x58F0;&amp;#x660E;&amp;#x5F0F;&amp;#x7F16;&amp;#x7A0B;&amp;#x8BED;&amp;#x8A00;">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-Feb-4th-Spesc-JVM-language/jps-jinfo.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-Feb-4th-Spesc-JVM-language/default_gc.png">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.600Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="JVM language development">
+<meta name="twitter:description" content="&amp;#x5F00;&amp;#x53D1;&amp;#x57FA;&amp;#x4E8E;JVM&amp;#x7684;&amp;#x58F0;&amp;#x660E;&amp;#x5F0F;&amp;#x7F16;&amp;#x7A0B;&amp;#x8BED;&amp;#x8A00;">
+<meta name="twitter:image" content="https://billystudio.github.io/zh-cn/2021-Feb-4th-Spesc-JVM-language/jps-jinfo.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#PreRequisites">1&nbsp;&nbsp;<b>PreRequisites</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#排错记录">1.1&nbsp;&nbsp;排错记录</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#JVM结构">2&nbsp;&nbsp;<b>JVM结构</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#垃圾回收（Garbage-Collection）">3&nbsp;&nbsp;<b>垃圾回收（Garbage Collection）</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#JVM字节码">3.1&nbsp;&nbsp;JVM字节码</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#解析一个接口">3.1.1&nbsp;&nbsp;解析一个接口</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#DUP">3.1.2&nbsp;&nbsp;DUP</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#解析一个类">3.1.3&nbsp;&nbsp;解析一个类</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#使用ASM操作字节码">4&nbsp;&nbsp;<b>使用ASM操作字节码</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#一些与标准文档的出入之处">4.1&nbsp;&nbsp;一些与标准文档的出入之处</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#实验探究-invokespecial-和-invokevirtual-的区别">4.1.1&nbsp;&nbsp;实验探究 invokespecial 和 invokevirtual 的区别</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#一些思考">5&nbsp;&nbsp;<b>一些思考</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#条款对应实现的Java数据结构是怎样的？一个函数、多个函数还是一个类">5.1.1&nbsp;&nbsp;条款对应实现的Java数据结构是怎样的？一个函数、多个函数还是一个类</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#条款中的动作参数是形参还是实参">5.1.2&nbsp;&nbsp;条款中的动作参数是形参还是实参</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#关于不支持函数重载">5.2&nbsp;&nbsp;关于不支持函数重载</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#ContractEngine-的设计">6&nbsp;&nbsp;<b>ContractEngine 的设计</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#通过学习JVM源码希望理解的一些问题">7&nbsp;&nbsp;<b>通过学习JVM源码希望理解的一些问题</b></a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2021-Feb-4th-Spesc-JVM-language/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2021-Feb-4th-Spesc-JVM-language/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            JVM language development
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2021-02-04T09:54:06.000Z" itemprop="datePublished">2月 4 2021</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh-cn/categories/JuliuSC项目/">JuliuSC项目</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            13 分钟 读完 (约 1957 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x5F00;&#x53D1;&#x57FA;&#x4E8E;JVM&#x7684;&#x58F0;&#x660E;&#x5F0F;&#x7F16;&#x7A0B;&#x8BED;&#x8A00; <a id="more"></a></p>
+<h1 id="PreRequisites"><a href="#PreRequisites" class="headerlink" title="PreRequisites"></a>PreRequisites</h1><p>antlr4<br>asm-plugin: <a href="https://github.com/kamiiel/asm-intellij-plugin/releases" target="_blank" rel="noopener">https://github.com/kamiiel/asm-intellij-plugin/releases</a><br>  Intellij IDEA Install plugin from disk</p>
+<h2 id="&#x6392;&#x9519;&#x8BB0;&#x5F55;"><a href="#&#x6392;&#x9519;&#x8BB0;&#x5F55;" class="headerlink" title="&#x6392;&#x9519;&#x8BB0;&#x5F55;"></a>&#x6392;&#x9519;&#x8BB0;&#x5F55;</h2><p>&#x7F16;&#x8BD1;&#x8FC7;&#x7A0B;&#x6CA1;&#x95EE;&#x9898;&#xFF0C;&#x6267;&#x884C;&#x65F6;&#x62A5;&#x9519;&#xFF1A;<br>Exception in thread &#x201C;main&#x201D; java.lang.ClassFormatError: Field &#x201C;out&#x201D; in class test has illegal signature &#x201C;Ljava/io/PrintStream&#x201D;</p>
+<p>&#x9519;&#x8BEF;&#x539F;&#x56E0;&#xFF1A;&#x5728;&#x4EA7;&#x751F;&#x5B57;&#x8282;&#x7801;&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#xFF0C;&#x8C03;&#x7528;PrintStream&#x5FD8;&#x8BB0;&#x52A0;&#x5206;&#x53F7;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">methodVisitor.visitFieldInsn(GETSTATIC, &quot;java/lang/System&quot;, &quot;out&quot;,</span><br><span class="line">					&quot;Ljava/io/PrintStream&quot;);</span><br></pre></td></tr></table></figure>
+
+<p>&#x5E94;&#x4E3A;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">methodVisitor.visitFieldInsn(GETSTATIC, &quot;java/lang/System&quot;, &quot;out&quot;,</span><br><span class="line">					&quot;Ljava/io/PrintStream;&quot;);</span><br></pre></td></tr></table></figure>
+
+<h1 id="JVM&#x7ED3;&#x6784;"><a href="#JVM&#x7ED3;&#x6784;" class="headerlink" title="JVM&#x7ED3;&#x6784;"></a>JVM&#x7ED3;&#x6784;</h1><p>1.&#x7C7B;&#x52A0;&#x8F7D;&#x5668;<br>2.&#x8FD0;&#x884C;&#x65F6;&#x6570;&#x636E;&#x533A;<br>3.&#x6267;&#x884C;&#x5F15;&#x64CE;<br>4.&#x672C;&#x5730;&#x65B9;&#x6CD5;&#x5E93;</p>
+<p>double&#x548C;long&#x9700;&#x8981;&#x5360;&#x636E;2&#x4E2A;slot&#xFF0C;&#x5176;&#x4F59;&#x57FA;&#x672C;&#x7C7B;&#x578B;&#x548C;&#x5F15;&#x7528;&#x90FD;&#x662F;1&#x4E2A;slot&#x3002;<br>slot&#x53EF;&#x4EE5;&#x91CD;&#x590D;&#x5229;&#x7528;</p>
+<h1 id="&#x5783;&#x573E;&#x56DE;&#x6536;&#xFF08;Garbage-Collection&#xFF09;"><a href="#&#x5783;&#x573E;&#x56DE;&#x6536;&#xFF08;Garbage-Collection&#xFF09;" class="headerlink" title="&#x5783;&#x573E;&#x56DE;&#x6536;&#xFF08;Garbage Collection&#xFF09;"></a>&#x5783;&#x573E;&#x56DE;&#x6536;&#xFF08;Garbage Collection&#xFF09;</h1><p>&#x67E5;&#x770B;Java&#x8FDB;&#x7A0B;&#x4F7F;&#x7528;&#x7684;&#x5783;&#x573E;&#x56DE;&#x6536;&#x5668;&#xFF1A;<br><img src="jps-jinfo.png" alt="jps-jinfo.png"></p>
+<p>&#x67E5;&#x770B;&#x9ED8;&#x8BA4;&#x5783;&#x573E;&#x56DE;&#x6536;&#x5668;<br><img src="default_gc.png" alt="default_gc.png"></p>
+<h2 id="JVM&#x5B57;&#x8282;&#x7801;"><a href="#JVM&#x5B57;&#x8282;&#x7801;" class="headerlink" title="JVM&#x5B57;&#x8282;&#x7801;"></a>JVM&#x5B57;&#x8282;&#x7801;</h2><h3 id="&#x89E3;&#x6790;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;"><a href="#&#x89E3;&#x6790;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;" class="headerlink" title="&#x89E3;&#x6790;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;"></a>&#x89E3;&#x6790;&#x4E00;&#x4E2A;&#x63A5;&#x53E3;</h3><p>&#x63A5;&#x53E3;&#x5B9A;&#x4E49;&#xFF1A;</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> edu.ustb.spesc.element;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">interface</span> <span class="hljs-title">InterfaceLook</span> </span>{</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>javap -v &#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">Classfile /home/wsd/STEM/Experiments/SPESC-Java-Compiler/compiler/target/test-classes/edu/ustb/spesc/element/InterfaceLook.class</span><br><span class="line">  Last modified Apr 1, 2021; size 130 bytes</span><br><span class="line">  MD5 checksum 849d09ca95f1ed5733cca527dce9ed9c</span><br><span class="line">  Compiled from &quot;InterfaceLook.java&quot;</span><br><span class="line">public interface edu.ustb.spesc.element.InterfaceLook</span><br><span class="line">  minor version: 0</span><br><span class="line">  major version: 52</span><br><span class="line">  flags: ACC_PUBLIC, ACC_INTERFACE, ACC_ABSTRACT</span><br><span class="line">Constant pool:</span><br><span class="line">  #1 = Class              #5              // edu/ustb/spesc/element/InterfaceLook</span><br><span class="line">  #2 = Class              #6              // java/lang/Object</span><br><span class="line">  #3 = Utf8               SourceFile</span><br><span class="line">  #4 = Utf8               InterfaceLook.java</span><br><span class="line">  #5 = Utf8               edu/ustb/spesc/element/InterfaceLook</span><br><span class="line">  #6 = Utf8               java/lang/Object</span><br><span class="line">{</span><br><span class="line">}</span><br><span class="line">SourceFile: &quot;InterfaceLook.java&quot;</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E00;&#x4E9B;&#x64CD;&#x4F5C;&#x7801;&#x52A9;&#x8BB0;&#x7B26;&#xFF1A;&#x9664;&#x4E86;&#x6BD4;&#x8F83;&#x5BB9;&#x6613;&#x8BB0;&#x4F4F;&#x7684; i=int, l=long, s=short, b=byte, c=char, f=float, d=double,<br>&#x8FD8;&#x6709; z=boolean, a=reference</p>
+<h3 id="DUP"><a href="#DUP" class="headerlink" title="DUP"></a>DUP</h3><p>&#x8FD9;&#x662F;&#x4E00;&#x6761;&#x76F4;&#x63A5;&#x64CD;&#x4F5C;&#x64CD;&#x4F5C;&#x6570;&#x6808;&#x7684;&#x6307;&#x4EE4;&#xFF0C;&#x8868;&#x793A;&#x590D;&#x5236;&#x64CD;&#x4F5C;&#x6570;&#x6808;&#x6808;&#x9876;&#x7684;&#x503C;&#xFF0C;&#x5E76;&#x63D2;&#x5165;&#x5230;&#x6808;&#x9876;<br>&#x6BD4;&#x5982;&#x6700;&#x5E38;&#x89C1;&#x7684;&#xFF1A;</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function">Object <span class="hljs-title">create</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">  <span class="hljs-keyword">return</span> <span class="hljs-keyword">new</span> Object();</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x7F16;&#x8BD1;&#x540E;&#x5B57;&#x8282;&#x7801;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Method java.lang.Object create()</span><br><span class="line"> 0 new #1 // Class java.lang.Object</span><br><span class="line"> 3 dup</span><br><span class="line"> 4 invokespecial #4 // Method java.lang.Object.&lt;init&gt;()V</span><br><span class="line"> 7 areturn</span><br></pre></td></tr></table></figure>
+
+<p>&#x7B2C;0&#x884C;&#x901A;&#x8FC7;new&#x521B;&#x5EFA;&#x4E86;&#x4E00;&#x4E2A;Object&#x7C7B;&#x578B;&#x7684;&#x5BF9;&#x8C61;&#xFF0C;&#x5E76;&#x5C06;&#x5176;&#x5F15;&#x7528;&#x538B;&#x5165;&#x6808;&#x9876;<br>&#x7B2C;3&#x884C;&#x590D;&#x5236;&#x6808;&#x9876;&#x7684;&#x5F15;&#x7528;&#x4E00;&#x4EFD;<br>&#x7B2C;4&#x884C;&#x8C03;&#x7528;invokespecial&#x4E3A;Object&#x7684;&#x6784;&#x9020;&#x51FD;&#x6570;&#xFF0C;&#x8FD9;&#x91CC;&#x4F1A;&#x6D88;&#x8017;&#x4E00;&#x4E2A;&#x5F15;&#x7528;<br>&#x6240;&#x4EE5;&#x7B2C;3&#x884C;&#x9700;&#x8981;&#x590D;&#x5236;&#x4E00;&#x4EFD;&#xFF0C;&#x4E0D;&#x7136;&#x8C03;&#x7528;invokespecial&#x540E;&#x4F1A;&#x5BFC;&#x81F4;&#x65E0;&#x6CD5;&#x8FD4;&#x56DE;&#x5B9E;&#x4F8B;&#x5F15;&#x7528;</p>
+<h3 id="&#x89E3;&#x6790;&#x4E00;&#x4E2A;&#x7C7B;"><a href="#&#x89E3;&#x6790;&#x4E00;&#x4E2A;&#x7C7B;" class="headerlink" title="&#x89E3;&#x6790;&#x4E00;&#x4E2A;&#x7C7B;"></a>&#x89E3;&#x6790;&#x4E00;&#x4E2A;&#x7C7B;</h3><p>&#x7C7B;&#x5B9A;&#x4E49;&#xFF1A;</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> edu.ustb.spesc;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">bytecodeTest</span> </span>{</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>javap -v &#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">Classfile /home/wsd/STEM/Experiments/SPESC-Java-Compiler/compiler/target/test-classes/edu/ustb/spesc/bytecodeTest.class</span><br><span class="line">  Last modified Apr 1, 2021; size 291 bytes</span><br><span class="line">  MD5 checksum 58439c875ed1b27cf7a5a68507efbf13</span><br><span class="line">  Compiled from &quot;bytecodeTest.java&quot;</span><br><span class="line">public class edu.ustb.spesc.bytecodeTest</span><br><span class="line">  minor version: 0</span><br><span class="line">  major version: 52</span><br><span class="line">  flags: ACC_PUBLIC, ACC_SUPER</span><br><span class="line">Constant pool:</span><br><span class="line">   #1 = Methodref          #3.#13         // java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">   #2 = Class              #14            // edu/ustb/spesc/bytecodeTest</span><br><span class="line">   #3 = Class              #15            // java/lang/Object</span><br><span class="line">   #4 = Utf8               &lt;init&gt;</span><br><span class="line">   #5 = Utf8               ()V</span><br><span class="line">   #6 = Utf8               Code</span><br><span class="line">   #7 = Utf8               LineNumberTable</span><br><span class="line">   #8 = Utf8               LocalVariableTable</span><br><span class="line">   #9 = Utf8               this</span><br><span class="line">  #10 = Utf8               Ledu/ustb/spesc/bytecodeTest;</span><br><span class="line">  #11 = Utf8               SourceFile</span><br><span class="line">  #12 = Utf8               bytecodeTest.java</span><br><span class="line">  #13 = NameAndType        #4:#5          // &quot;&lt;init&gt;&quot;:()V</span><br><span class="line">  #14 = Utf8               edu/ustb/spesc/bytecodeTest</span><br><span class="line">  #15 = Utf8               java/lang/Object</span><br><span class="line">{</span><br><span class="line">  public edu.ustb.spesc.bytecodeTest();</span><br><span class="line">    descriptor: ()V</span><br><span class="line">    flags: ACC_PUBLIC</span><br><span class="line">    Code:</span><br><span class="line">      stack=1, locals=1, args_size=1</span><br><span class="line">         0: aload_0</span><br><span class="line">         1: invokespecial #1                  // Method java/lang/Object.&quot;&lt;init&gt;&quot;:()V</span><br><span class="line">         4: return</span><br><span class="line">      LineNumberTable:</span><br><span class="line">        line 3: 0</span><br><span class="line">      LocalVariableTable:</span><br><span class="line">        Start  Length  Slot  Name   Signature</span><br><span class="line">            0       5     0  this   Ledu/ustb/spesc/bytecodeTest;</span><br><span class="line">}</span><br><span class="line">SourceFile: &quot;bytecodeTest.java&quot;</span><br></pre></td></tr></table></figure>
+
+<p>&#x7531;&#x4E8E;JVM&#x89E3;&#x6790;Java&#x6587;&#x4EF6;&#x662F;&#x6309;&#x7167;&#x884C;&#x6765;&#x89E3;&#x6790;&#x7684;&#xFF0C;&#x4E00;&#x884C;Java&#x4EE3;&#x7801;&#x53EF;&#x80FD;&#x5BF9;&#x5E94;&#x591A;&#x884C;&#x5B57;&#x8282;&#x7801;&#xFF0C;&#x6240;&#x4EE5;&#x8BBE;&#x7F6E; LineNumberTable &#x8FD9;&#x4E2A;&#x5C5E;&#x6027;&#x5C31;&#x662F;&#x8868;&#x793A;java&#x6587;&#x4EF6;&#x7684;&#x67D0;&#x884C;&#x4E0E;&#x5B57;&#x8282;&#x7801;&#x67D0;&#x884C;&#x7684;&#x5BF9;&#x5E94;&#x5173;&#x7CFB;&#x3002;<br>&#x6BD4;&#x5982;&#x4E0A;&#x9762;&#x7684;&#x663E;&#x793A; line 3: 0 &#x5C31;&#x8868;&#x793A;bytecodeTest.java&#x7684;&#x7B2C;3&#x884C;&#x5BF9;&#x5E94;&#x89E3;&#x6790;&#x5230;jvm&#x5B57;&#x8282;&#x7801;&#x7684;&#x7B2C;0&#x884C;&#x5373; aload_0<br>Slot&#x662F;&#x5B57;&#x8282;&#x7801;&#x4E2D;&#x7684;&#x5B58;&#x50A8;&#x5355;&#x4F4D;&#xFF0C;1&#x4E2A;Slot&#x5927;&#x5C0F;&#x4E3A;32bit&#xFF08;4 bytes&#xFF09;</p>
+<h1 id="&#x4F7F;&#x7528;ASM&#x64CD;&#x4F5C;&#x5B57;&#x8282;&#x7801;"><a href="#&#x4F7F;&#x7528;ASM&#x64CD;&#x4F5C;&#x5B57;&#x8282;&#x7801;" class="headerlink" title="&#x4F7F;&#x7528;ASM&#x64CD;&#x4F5C;&#x5B57;&#x8282;&#x7801;"></a>&#x4F7F;&#x7528;ASM&#x64CD;&#x4F5C;&#x5B57;&#x8282;&#x7801;</h1><p>methodVisitor.visitMethodInsn&#x4E94;&#x4E2A;&#x53C2;&#x6570;</p>
+<ol>
+<li>INVOKE</li>
+<li>&#x8C03;&#x7528;&#x51FD;&#x6570;&#x7684;&#x5185;&#x90E8;&#x5168;&#x7C7B;&#x540D;</li>
+<li>&#x51FD;&#x6570;&#x540D;</li>
+<li>&#x8FD4;&#x56DE;&#x7C7B;&#x578B;</li>
+<li>&#x662F;&#x5426;&#x63A5;&#x53E3;&#x8C03;&#x7528;</li>
+</ol>
+<h2 id="&#x4E00;&#x4E9B;&#x4E0E;&#x6807;&#x51C6;&#x6587;&#x6863;&#x7684;&#x51FA;&#x5165;&#x4E4B;&#x5904;"><a href="#&#x4E00;&#x4E9B;&#x4E0E;&#x6807;&#x51C6;&#x6587;&#x6863;&#x7684;&#x51FA;&#x5165;&#x4E4B;&#x5904;" class="headerlink" title="&#x4E00;&#x4E9B;&#x4E0E;&#x6807;&#x51C6;&#x6587;&#x6863;&#x7684;&#x51FA;&#x5165;&#x4E4B;&#x5904;"></a>&#x4E00;&#x4E9B;&#x4E0E;&#x6807;&#x51C6;&#x6587;&#x6863;&#x7684;&#x51FA;&#x5165;&#x4E4B;&#x5904;</h2><p>3.1 .&#x7528;&#x4F5C;&#x7ED3;&#x6784;&#x4F53;&#x8BBF;&#x95EE;&#x7684;&#x64CD;&#x4F5C;&#x7B26;&#xFF0C;&#x7528;&#x505A;&#x7ED3;&#x675F;&#x7B26;&#x4F1A;&#x51B2;&#x7A81;<br>6.3 &#x5F53;&#x4E8B;&#x4EBA;&#x63CF;&#x8FF0;&#x4E2D;&#x7684; field &#x4E0D;&#x6B62;&#x5C5E;&#x4E8E;&#x5F53;&#x4E8B;&#x4EBA;&#xFF0C;&#x8FD8;&#x53EF;&#x4EE5;&#x4F5C;&#x4E3A;&#x5408;&#x7EA6;&#x7684;&#x5168;&#x5C40;&#x53D8;&#x91CF;<br>&#x53E6;&#x5916;&#xFF0C;&#x5728;filed&#x5B9A;&#x4E49;&#x4E2D;  attribute : (constant | type)<br>&#x5B9E;&#x9645;&#x5339;&#x914D;&#x8FC7;&#x7A0B;&#x5E94;&#x8BE5;&#x662F;&#x5148;&#x5339;&#x914D;type&#xFF0C;&#x518D;&#x5339;&#x914D;constant&#x3002;&#x5426;&#x5219;&#x5982;&#x679C;&#x51FA;&#x73B0;&#x7C7B;&#x4F3C; name : String &#x4F1A;&#x5C06;&#x5176;&#x5339;&#x914D;&#x5230;constant<br>&#x6240;&#x4EE5;&#x7A0B;&#x5E8F;&#x4E2D;&#x4F7F;&#x7528; name : (type | value) &#x7684;&#x65B9;&#x5F0F;&#x5339;&#x914D;<br>name : IDENTIFIER<br>type : BOOLEAN (&#x2018;[&#x2018; &#x2018;]&#x2019;)<em><br>        | INTEGER (&#x2018;[&#x2018; &#x2018;]&#x2019;)</em> ;<br>value : NUMBER | STRING ;<br>&#x5176;&#x4E2D;&#xFF0C;(&#x2018;[&#x2018; &#x2018;]&#x2019;)*&#x7528;&#x4E8E;&#x5339;&#x914D;&#x6570;&#x7EC4;</p>
+<p>6.8 &#x6709;&#x5173;&#x7CFB;&#x7B26;&#x53F7;&#xFF0C;&#x4F46;&#x7F3A;&#x5C11;&#x5173;&#x7CFB;&#x8868;&#x8FBE;&#x5F0F;<br>&#x5173;&#x7CFB;&#x8868;&#x8FBE;&#x5F0F;&#x5C5E;&#x4E8E;&#x8C13;&#x8BCD;&#xFF0C;&#x53EF;&#x8FD4;&#x56DE;Yes,No,Unknown<br>&#x5173;&#x7CFB;&#x8868;&#x8FBE;&#x5F0F;&#x4E2D;&#x53EF;&#x518D;&#x5206;&#x6240;&#x5C5E;&#x5173;&#x7CFB;&#x548C;&#x6BD4;&#x8F83;&#x5173;&#x7CFB;&#xFF0C;&#x6240;&#x5C5E;&#x5173;&#x7CFB;&#x7684;&#x5173;&#x952E;&#x8BCD;&#x662F;belongsTo&#xFF0C;&#x6BD4;&#x8F83;&#x5173;&#x7CFB;&#x7684;&#x5173;&#x952E;&#x8BCD;&#x6709; &gt; &gt;= &lt; &lt;= == !=<br>&#x6240;&#x4EE5;&#x5728;&#x89C4;&#x5219;&#x4E2D;&#x6DFB;&#x52A0;&#x4E86;relationalExpression</p>
+<h3 id="&#x5B9E;&#x9A8C;&#x63A2;&#x7A76;-invokespecial-&#x548C;-invokevirtual-&#x7684;&#x533A;&#x522B;"><a href="#&#x5B9E;&#x9A8C;&#x63A2;&#x7A76;-invokespecial-&#x548C;-invokevirtual-&#x7684;&#x533A;&#x522B;" class="headerlink" title="&#x5B9E;&#x9A8C;&#x63A2;&#x7A76; invokespecial &#x548C; invokevirtual &#x7684;&#x533A;&#x522B;"></a>&#x5B9E;&#x9A8C;&#x63A2;&#x7A76; invokespecial &#x548C; invokevirtual &#x7684;&#x533A;&#x522B;</h3><figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">LibSayHello</span> </span>{</span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">sayHello</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">		System.out.println(<span class="hljs-string">&quot;Hello&quot;</span>);</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>bytecode&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">public sayHello()V</span><br><span class="line">  L0</span><br><span class="line">  LINENUMBER 5 L0</span><br><span class="line">  GETSTATIC java/lang/System.out : Ljava/io/PrintStream;</span><br><span class="line">  LDC &quot;Hello&quot;</span><br><span class="line">  INVOKEVIRTUAL java/io/PrintStream.println (Ljava/lang/String;)V</span><br><span class="line">  L1</span><br><span class="line">  LINENUMBER 6 L1</span><br><span class="line">  RETURN</span><br><span class="line">  L2</span><br><span class="line">  LOCALVARIABLE this Ledu/ustb/spesc/LibSayHello; L0 L2 0</span><br><span class="line">  MAXSTACK = 2</span><br><span class="line">  MAXLOCALS = 1</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">MainTest</span> </span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{</span><br><span class="line">        LibSayHello testObj = <span class="hljs-keyword">new</span> LibSayHello();</span><br><span class="line">        testObj.sayHello();</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>bytecode&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public static main([Ljava/lang/String;)V</span><br><span class="line">  L0</span><br><span class="line">  LINENUMBER 5 L0</span><br><span class="line">  NEW edu/ustb/spesc/LibSayHello</span><br><span class="line">  DUP</span><br><span class="line">  INVOKESPECIAL edu/ustb/spesc/LibSayHello.&lt;init&gt; ()V</span><br><span class="line">  ASTORE 1</span><br><span class="line">  L1</span><br><span class="line">  LINENUMBER 6 L1</span><br><span class="line">  ALOAD 1</span><br><span class="line">  INVOKEVIRTUAL edu/ustb/spesc/LibSayHello.sayHello ()V</span><br><span class="line">  L2</span><br><span class="line">  LINENUMBER 7 L2</span><br><span class="line">  RETURN</span><br><span class="line">  L3</span><br><span class="line">  LOCALVARIABLE args [Ljava/lang/String; L0 L3 0</span><br><span class="line">  LOCALVARIABLE testObj Ledu/ustb/spesc/LibSayHello; L1 L3 1</span><br><span class="line">  MAXSTACK = 2</span><br><span class="line">  MAXLOCALS = 2</span><br></pre></td></tr></table></figure>
+
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#xFF0C;init&#x6784;&#x9020;&#x51FD;&#x6570;&#x4F7F;&#x7528;&#x7684;&#x662F;INVOKESPECIAL&#xFF0C;&#x666E;&#x901A;&#x65B9;&#x6CD5;sayHello&#x4F7F;&#x7528;&#x7684;&#x662F;INVOKEVIRTUAL</p>
+<p>&#x518D;&#x6765;&#x8FDB;&#x884C;&#x4E00;&#x5C42;&#x62BD;&#x8C61;&#xFF0C;&#x5C06;LibHello&#x5199;&#x6210;&#x63A5;&#x53E3;&#x7684;&#x5F62;&#x5F0F;&#xFF0C;&#x7C7B;LibHelloImpl&#x7528;&#x4E8E;&#x5B9E;&#x73B0;&#xFF0C;&#x6B64;&#x65F6;&#x6D4B;&#x8BD5;main&#x51FD;&#x6570;&#x7684;bytecode&#x53D8;&#x4E3A;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">public static main([Ljava/lang/String;)V</span><br><span class="line">  L0</span><br><span class="line">  LINENUMBER 5 L0</span><br><span class="line">  NEW edu/ustb/spesc/LibHelloImpl</span><br><span class="line">  DUP</span><br><span class="line">  INVOKESPECIAL edu/ustb/spesc/LibHelloImpl.&lt;init&gt; ()V</span><br><span class="line">  ASTORE 1</span><br><span class="line">  L1</span><br><span class="line">  LINENUMBER 6 L1</span><br><span class="line">  ALOAD 1</span><br><span class="line">  INVOKEINTERFACE edu/ustb/spesc/LibHello.sayHello ()V (itf)</span><br><span class="line">  L2</span><br><span class="line">  LINENUMBER 7 L2</span><br><span class="line">  RETURN</span><br><span class="line">  L3</span><br><span class="line">  LOCALVARIABLE args [Ljava/lang/String; L0 L3 0</span><br><span class="line">  LOCALVARIABLE testObj Ledu/ustb/spesc/LibHello; L1 L3 1</span><br><span class="line">  MAXSTACK = 2</span><br><span class="line">  MAXLOCALS = 2</span><br></pre></td></tr></table></figure>
+
+<p>&#x53EF;&#x4EE5;&#x770B;&#x5230;&#x5BF9;sayHello&#x7684;&#x8C03;&#x7528;&#x7531;&#x539F;&#x6765;&#x7684;invokespecial&#x53D8;&#x6210;&#x4E86;invokeinterface</p>
+<p>&#x5047;&#x5982;LibHello&#x662F;abstract&#x7C7B;&#x5462;&#xFF1F;<br>&#x5B9E;&#x9A8C;&#x540E;&#x53EF;&#x4EE5;&#x53D1;&#x73B0;&#xFF0C;&#x4E0D;&#x7BA1;LibHelloImpl&#x662F;&#x5426;&#x91CD;&#x5199;hello&#x65B9;&#x6CD5;&#xFF0C;&#x5BF9;sayHello&#x7684;&#x8C03;&#x7528;&#x90FD;&#x53D8;&#x56DE;&#x4E86;invokevirtual<br>&#x5E76;&#x4E14;&#x53EA;&#x8981;LibHello&#x4E0D;&#x53D8;&#xFF0C;&#x5373;&#x4F7F;&#x6539;&#x53D8;&#x4E86;LibHelloImpl&#xFF0C;&#x4E5F;&#x4E0D;&#x4F1A;&#x89E6;&#x53D1;&#x5BF9;&#x4E8E;MainTest&#x7684;&#x5B57;&#x8282;&#x7801;&#x91CD;&#x65B0;&#x7F16;&#x8BD1;</p>
+<h1 id="&#x4E00;&#x4E9B;&#x601D;&#x8003;"><a href="#&#x4E00;&#x4E9B;&#x601D;&#x8003;" class="headerlink" title="&#x4E00;&#x4E9B;&#x601D;&#x8003;"></a>&#x4E00;&#x4E9B;&#x601D;&#x8003;</h1><h3 id="&#x6761;&#x6B3E;&#x5BF9;&#x5E94;&#x5B9E;&#x73B0;&#x7684;Java&#x6570;&#x636E;&#x7ED3;&#x6784;&#x662F;&#x600E;&#x6837;&#x7684;&#xFF1F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x3001;&#x591A;&#x4E2A;&#x51FD;&#x6570;&#x8FD8;&#x662F;&#x4E00;&#x4E2A;&#x7C7B;"><a href="#&#x6761;&#x6B3E;&#x5BF9;&#x5E94;&#x5B9E;&#x73B0;&#x7684;Java&#x6570;&#x636E;&#x7ED3;&#x6784;&#x662F;&#x600E;&#x6837;&#x7684;&#xFF1F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x3001;&#x591A;&#x4E2A;&#x51FD;&#x6570;&#x8FD8;&#x662F;&#x4E00;&#x4E2A;&#x7C7B;" class="headerlink" title="&#x6761;&#x6B3E;&#x5BF9;&#x5E94;&#x5B9E;&#x73B0;&#x7684;Java&#x6570;&#x636E;&#x7ED3;&#x6784;&#x662F;&#x600E;&#x6837;&#x7684;&#xFF1F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x3001;&#x591A;&#x4E2A;&#x51FD;&#x6570;&#x8FD8;&#x662F;&#x4E00;&#x4E2A;&#x7C7B;"></a>&#x6761;&#x6B3E;&#x5BF9;&#x5E94;&#x5B9E;&#x73B0;&#x7684;Java&#x6570;&#x636E;&#x7ED3;&#x6784;&#x662F;&#x600E;&#x6837;&#x7684;&#xFF1F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x3001;&#x591A;&#x4E2A;&#x51FD;&#x6570;&#x8FD8;&#x662F;&#x4E00;&#x4E2A;&#x7C7B;</h3><p>&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x8868;&#x8FBE;&#x4E0D;&#x51FA;&#x6761;&#x6B3E;&#x7684;&#x610F;&#x601D;<br>&#x591A;&#x4E2A;&#x51FD;&#x6570;&#x65B9;&#x6848;&#x53EF;&#x4EE5;&#x5C06;when&#xFF0C;while&#xFF0C;where&#x5206;&#x522B;&#x5BF9;&#x5E94;&#x5230;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#xFF0C;&#x4E0D;&#x8FC7;&#x96BE;&#x4EE5;&#x7EDF;&#x4E00;&#x5224;&#x65AD;&#x6761;&#x6B3E;&#x7684;&#x53C2;&#x4E0E;&#x65B9;party&#xFF0C;&#x9700;&#x8981;&#x6BCF;&#x4E2A;&#x51FD;&#x6570;&#x524D;&#x9762;&#x90FD;&#x52A0;&#x4E00;&#x4E2A;&#x5224;&#x65AD;&#x3002;<br>&#x4E00;&#x4E2A;&#x7C7B;&#x7684;&#x65B9;&#x6848;&#x76EE;&#x524D;&#x8FD8;&#x6CA1;&#x9047;&#x5230;&#x95EE;&#x9898;&#x3002;</p>
+<h3 id="&#x6761;&#x6B3E;&#x4E2D;&#x7684;&#x52A8;&#x4F5C;&#x53C2;&#x6570;&#x662F;&#x5F62;&#x53C2;&#x8FD8;&#x662F;&#x5B9E;&#x53C2;"><a href="#&#x6761;&#x6B3E;&#x4E2D;&#x7684;&#x52A8;&#x4F5C;&#x53C2;&#x6570;&#x662F;&#x5F62;&#x53C2;&#x8FD8;&#x662F;&#x5B9E;&#x53C2;" class="headerlink" title="&#x6761;&#x6B3E;&#x4E2D;&#x7684;&#x52A8;&#x4F5C;&#x53C2;&#x6570;&#x662F;&#x5F62;&#x53C2;&#x8FD8;&#x662F;&#x5B9E;&#x53C2;"></a>&#x6761;&#x6B3E;&#x4E2D;&#x7684;&#x52A8;&#x4F5C;&#x53C2;&#x6570;&#x662F;&#x5F62;&#x53C2;&#x8FD8;&#x662F;&#x5B9E;&#x53C2;</h3><p>&#x4F7F;&#x7528;&#x5F62;&#x53C2;parametersList&#x3002;&#x56E0;&#x4E3A;&#x6761;&#x6B3E;&#x91CC;&#x7684;&#x52A8;&#x4F5C;&#x76F8;&#x5F53;&#x4E8E;AOP&#x4E2D;&#x7684;PointCut&#xFF0C;&#x5B9A;&#x4E49;&#x4E3A;ActionSignature<br>&#x4E0E;&#x6B64;&#x533A;&#x5206;&#xFF0C;test&#x51FD;&#x6570;&#x91CC;&#x7684;action&#x8C03;&#x7528;&#x5B9A;&#x4E49;&#x4E3A; functionCall&#xFF0C;&#x4F7F;&#x7528;&#x5B9E;&#x53C2;argumentList</p>
+<h2 id="&#x5173;&#x4E8E;&#x4E0D;&#x652F;&#x6301;&#x51FD;&#x6570;&#x91CD;&#x8F7D;"><a href="#&#x5173;&#x4E8E;&#x4E0D;&#x652F;&#x6301;&#x51FD;&#x6570;&#x91CD;&#x8F7D;" class="headerlink" title="&#x5173;&#x4E8E;&#x4E0D;&#x652F;&#x6301;&#x51FD;&#x6570;&#x91CD;&#x8F7D;"></a>&#x5173;&#x4E8E;&#x4E0D;&#x652F;&#x6301;&#x51FD;&#x6570;&#x91CD;&#x8F7D;</h2><p>&#x4E00;&#x822C;&#x8BF4;&#x6765;&#xFF0C;&#x867D;&#x7136;Action&#x4E2D;&#x652F;&#x6301;&#x5B9A;&#x4E49;&#x53C2;&#x6570;&#xFF0C;&#x4F46;&#x662F;&#x6211;&#x4EEC;&#x4E00;&#x822C;&#x4E0D;&#x4F7F;&#x7528;&#x540C;&#x540D;&#x4E0D;&#x540C;&#x53C2;&#x6765;&#x8FDB;&#x884C;&#x51FD;&#x6570;&#x91CD;&#x8F7D;&#xFF08;&#x5373;&#x4E0D;&#x652F;&#x6301;&#x51FD;&#x6570;&#x91CD;&#x8F7D;&#xFF09;<br>&#x539F;&#x56E0;&#x662F;&#x6211;&#x4EEC;&#x4F7F;&#x7528;&#x7684;&#x662F;&#x65B9;&#x6CD5;&#x540D;&#x4F5C;&#x4E3A;&#x552F;&#x4E00;&#x6807;&#x793A;&#x53BB;&#x67E5;&#x627E;&#x548C;&#x5224;&#x5B9A;&#x7684;&#x3002;&#x4E3A;&#x4EC0;&#x4E48;&#x4E0D;&#x7528;Method&#xFF1F;<br>&#x56E0;&#x4E3A; Method &#x4E0D;&#x652F;&#x6301; Berkeley DB&#x6301;&#x4E45;&#x5316;&#x5B58;&#x50A8;&#x3002;</p>
+<h1 id="ContractEngine-&#x7684;&#x8BBE;&#x8BA1;"><a href="#ContractEngine-&#x7684;&#x8BBE;&#x8BA1;" class="headerlink" title="ContractEngine &#x7684;&#x8BBE;&#x8BA1;"></a>ContractEngine &#x7684;&#x8BBE;&#x8BA1;</h1><p>&#x6839;&#x636E;Action&#x662F;&#x7531;&#x81EA;&#x4E3B;&#x89E6;&#x53D1;&#x8FD8;&#x662F;AOP&#x5916;&#x90E8;&#x89E6;&#x53D1;&#x5C06;&#x5DE5;&#x4F5C;&#x6A21;&#x5F0F;&#x5206;&#x4E3A;&#x81EA;&#x5B9E;&#x73B0;&#x548C;AOP&#x4E24;&#x79CD;&#x3002;</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">&#x81EA;&#x5B9E;&#x73B0;</th>
+<th style="text-align:center">AOP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">handleAction&#x89E6;&#x53D1;&#xFF0C;&#x5185;&#x90E8;&#x8C03;&#x7528;method.invoke&#x6267;&#x884C;&#x52A8;&#x4F5C;</td>
+<td style="text-align:center">Spring Bean&#x4E2D;&#x65B9;&#x6CD5;&#x6267;&#x884C;&#x52A8;&#x4F5C;&#xFF0C;@Pointcut&#x62E6;&#x622A;&#x89E6;&#x53D1;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&#x4E24;&#x79CD;&#x6A21;&#x5F0F;&#x5BF9;&#x4E8E;duty&#x7684;&#x5904;&#x7406;:</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Duty</th>
+<th style="text-align:center">&#x81EA;&#x5B9E;&#x73B0;</th>
+<th style="text-align:center">AOP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">can</td>
+<td style="text-align:center">&#x901A;&#x8FC7;&#x8C03;&#x7528;handleAction&#x89E6;&#x53D1;</td>
+<td style="text-align:center">&#x62E6;&#x622A;&#x5916;&#x90E8;&#x8C03;&#x7528;&#x540E;&#x68C0;&#x67E5;termObj, termObj.when &#x901A;&#x8FC7;&#x540E;&#x6267;&#x884C;</td>
+</tr>
+<tr>
+<td style="text-align:center">must</td>
+<td style="text-align:center">runMustActions &#x4E2D;&#x89E6;&#x53D1;&#x8C03;&#x7528;must&#x52A8;&#x4F5C;</td>
+<td style="text-align:center">&#x548C;can&#x5BF9;&#x5F85;&#x662F;&#x4E00;&#x6837;&#x7684;&#x3002;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x53E6;&#x5199;breach term&#x5904;&#x7406;must&#x52A8;&#x4F5C;&#x5982;&#x679C;&#x4E00;&#x76F4;&#x4E0D;&#x89E6;&#x53D1;&#x7684;&#x60C5;&#x51B5;</td>
+</tr>
+<tr>
+<td style="text-align:center">cannot</td>
+<td style="text-align:center">handleAction&#x4E2D;&#x68C0;&#x67E5;&#x51FA;&#x6765;&#xFF0C;&#x5219;&#x4E0D;&#x53D1;&#x751F;&#x52A8;&#x4F5C;&#x6267;&#x884C;</td>
+<td style="text-align:center">termObj.when &#x901A;&#x8FC7;&#x540E;&#xFF0C;&#x5219;&#x4E0D;&#x6267;&#x884C;pjp.proceed</td>
+</tr>
+</tbody>
+</table>
+</div>
+<p>&#x4E24;&#x79CD;&#x6A21;&#x5F0F;&#x5BF9;&#x4E8E;&#x6761;&#x4EF6;&#x7684;&#x5904;&#x7406;&#xFF1A;</p>
+<div class="table-container">
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Condition</th>
+<th style="text-align:center">&#x81EA;&#x5B9E;&#x73B0;</th>
+<th style="text-align:center">AOP</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">when</td>
+<td style="text-align:center">termObj.when</td>
+<td style="text-align:center">&#x548C;&#x81EA;&#x5B9E;&#x73B0;&#x4E00;&#x6837;</td>
+</tr>
+<tr>
+<td style="text-align:center">while</td>
+<td style="text-align:center">termObj.while&#xFF0C;&#x548C;method.invoke &#x5E76;&#x5217;&#x6267;&#x884C;</td>
+<td style="text-align:center">termObj.while&#xFF0C;&#x548C; pjp.proceed &#x5E76;&#x5217;&#x6267;&#x884C;</td>
+</tr>
+<tr>
+<td style="text-align:center">where</td>
+<td style="text-align:center">termObj.where</td>
+<td style="text-align:center">&#x548C;&#x81EA;&#x5B9E;&#x73B0;&#x4E00;&#x6837;</td>
+</tr>
+</tbody>
+</table>
+</div>
+<h1 id="&#x901A;&#x8FC7;&#x5B66;&#x4E60;JVM&#x6E90;&#x7801;&#x5E0C;&#x671B;&#x7406;&#x89E3;&#x7684;&#x4E00;&#x4E9B;&#x95EE;&#x9898;"><a href="#&#x901A;&#x8FC7;&#x5B66;&#x4E60;JVM&#x6E90;&#x7801;&#x5E0C;&#x671B;&#x7406;&#x89E3;&#x7684;&#x4E00;&#x4E9B;&#x95EE;&#x9898;" class="headerlink" title="&#x901A;&#x8FC7;&#x5B66;&#x4E60;JVM&#x6E90;&#x7801;&#x5E0C;&#x671B;&#x7406;&#x89E3;&#x7684;&#x4E00;&#x4E9B;&#x95EE;&#x9898;"></a>&#x901A;&#x8FC7;&#x5B66;&#x4E60;JVM&#x6E90;&#x7801;&#x5E0C;&#x671B;&#x7406;&#x89E3;&#x7684;&#x4E00;&#x4E9B;&#x95EE;&#x9898;</h1><p>&#x4E3A;&#x4EC0;&#x4E48;&#x9759;&#x6001;&#x65B9;&#x6CD5;&#x4E0D;&#x80FD;&#x88AB;&#x5B50;&#x7C7B;&#x91CD;&#x5199;&#xFF08;Override&#xFF09;</p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/JVM/">#JVM</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/2021-Feb-18th-Design-patterns-Visitor/">设计模式 之 访问者模式</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/2021-Jan-8th-Spring-cloud-bus-experiments/">Spring cloud 总线实验</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

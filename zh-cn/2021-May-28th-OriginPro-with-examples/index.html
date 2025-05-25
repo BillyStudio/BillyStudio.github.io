@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>通过案例学习OriginPro绘图 - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/2021-May-28th-OriginPro-with-examples/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x5B66;&amp;#x4E60;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E2D;&amp;#x7528;&amp;#x5230;&amp;#x7684;&amp;#x82E5;&amp;#x5E72;&amp;#x6848;&amp;#x4F8B;&amp;#x8BE6;&amp;#x7EC6;&amp;#x7ED8;&amp;#x56FE;&amp;#x8FC7;&amp;#x7A0B;">
+<meta name="keywords" content="OriginPro,绘图">
+<meta property="og:type" content="article">
+<meta property="og:title" content="通过案例学习OriginPro绘图">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x5B66;&amp;#x4E60;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E2D;&amp;#x7528;&amp;#x5230;&amp;#x7684;&amp;#x82E5;&amp;#x5E72;&amp;#x6848;&amp;#x4F8B;&amp;#x8BE6;&amp;#x7EC6;&amp;#x7ED8;&amp;#x56FE;&amp;#x8FC7;&amp;#x7A0B;">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/step4.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/select-data.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/create-layer2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/two-y.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/layer-properties.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/show-top-x.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/layer1-delete-l&r-y.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/no-minus-sign.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/top-y-major-labels.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/vertical-major-grids.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/layer1-step3.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/errorbar-red.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/column-spacing-gap.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/step4.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s1.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s1-2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s2-2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s2-3.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s3.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s3-2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s4.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s4-2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s5-1.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s3-3.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s5-2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s3-4.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s5-4.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s5-5.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s6.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s5.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s6-2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s7.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s7-2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s7-3.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s7-4.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s7-5.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2-s7-6.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex3.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex3-s1.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex3-s1-1.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex3-s1-2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex3-s2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex3-s2-1.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex3-s2-2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex3-s3.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex3-s4.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex3-s4-1.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex3-s5.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex3-s5-2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex3-s6.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex3-s6-2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/origin-ex3.png">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.610Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="通过案例学习OriginPro绘图">
+<meta name="twitter:description" content="&amp;#x5B66;&amp;#x4E60;&amp;#x8FC7;&amp;#x7A0B;&amp;#x4E2D;&amp;#x7528;&amp;#x5230;&amp;#x7684;&amp;#x82E5;&amp;#x5E72;&amp;#x6848;&amp;#x4F8B;&amp;#x8BE6;&amp;#x7EC6;&amp;#x7ED8;&amp;#x56FE;&amp;#x8FC7;&amp;#x7A0B;">
+<meta name="twitter:image" content="https://billystudio.github.io/zh-cn/2021-May-28th-OriginPro-with-examples/step4.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#案例1：绘制一张带正负双轴和ErrorBar的Bar图">1&nbsp;&nbsp;<b>案例1：绘制一张带正负双轴和ErrorBar的Bar图</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#案例2：在案例1基础上，正负轴的scale不一样">1.1&nbsp;&nbsp;案例2：在案例1基础上，正负轴的scale不一样</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#案例3：栅图-组图">1.2&nbsp;&nbsp;案例3：栅图+组图</a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2021-May-28th-OriginPro-with-examples/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2021-May-28th-OriginPro-with-examples/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            通过案例学习OriginPro绘图
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2021-05-28T06:22:53.000Z" itemprop="datePublished">5月 28 2021</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            11 分钟 读完 (约 1615 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x5B66;&#x4E60;&#x8FC7;&#x7A0B;&#x4E2D;&#x7528;&#x5230;&#x7684;&#x82E5;&#x5E72;&#x6848;&#x4F8B;&#x8BE6;&#x7EC6;&#x7ED8;&#x56FE;&#x8FC7;&#x7A0B; <a id="more"></a></p>
+<h2 id="&#x6848;&#x4F8B;1&#xFF1A;&#x7ED8;&#x5236;&#x4E00;&#x5F20;&#x5E26;&#x6B63;&#x8D1F;&#x53CC;&#x8F74;&#x548C;ErrorBar&#x7684;Bar&#x56FE;"><a href="#&#x6848;&#x4F8B;1&#xFF1A;&#x7ED8;&#x5236;&#x4E00;&#x5F20;&#x5E26;&#x6B63;&#x8D1F;&#x53CC;&#x8F74;&#x548C;ErrorBar&#x7684;Bar&#x56FE;" class="headerlink" title="&#x6848;&#x4F8B;1&#xFF1A;&#x7ED8;&#x5236;&#x4E00;&#x5F20;&#x5E26;&#x6B63;&#x8D1F;&#x53CC;&#x8F74;&#x548C;ErrorBar&#x7684;Bar&#x56FE;"></a>&#x6848;&#x4F8B;1&#xFF1A;&#x7ED8;&#x5236;&#x4E00;&#x5F20;&#x5E26;&#x6B63;&#x8D1F;&#x53CC;&#x8F74;&#x548C;ErrorBar&#x7684;Bar&#x56FE;</h2><p><img src="step4.png" alt></p>
+<p>&#x6CE8;&#x610F;Bar&#x6570;&#x636E;&#x7684;x&#x8F74;&#x662F;&#x7EB5;&#x8F74;&#xFF0C;y&#x8F74;&#x662F;&#x6A2A;&#x8F74;&#x3002;</p>
+<p><strong>Step 1</strong>&#xFF1A;&#x586B;&#x5145;&#x6570;&#x636E;<br>&#x8BBE;&#x7F6E;&#x670D;&#x52A1;&#x540D;&#x79F0;(service)&#x3001;&#x6761;&#x6B3E;&#x540D;&#x79F0;(term)&#x3001;&#x5408;&#x7EA6;&#x6761;&#x6B3E;&#x6267;&#x884C;&#x65F6;&#x95F4;&#x53CA;&#x6B63;&#x8D1F;&#x8BEF;&#x5DEE;&#xFF08;95%&#x7F6E;&#x4FE1;&#x533A;&#x95F4;&#xFF09;&#x3001;&#x670D;&#x52A1;&#x63A5;&#x53E3;&#x6267;&#x884C;&#x65F6;&#x95F4;&#x53CA;&#x6B63;&#x8D1F;&#x8BEF;&#x5DEE;&#xFF08;95%&#x7F6E;&#x4FE1;&#x533A;&#x95F4;&#xFF09;<br><img src="select-data.png" alt></p>
+<p><strong>Step 2</strong>&#xFF1A;&#x9009;&#x4E2D;&#x6570;&#x636E;&#x751F;&#x6210;Bar&#xFF0C;&#x7136;&#x540E;&#x8BBE;&#x7F6E;ErrorBar&#x548C;Overlap</p>
+<p>&#x6309;&#x7406;&#x6765;&#x8BF4;&#xFF0C;&#x4E24;&#x5957;&#x6570;&#x636E;&#x6700;&#x597D;&#x4F7F;&#x7528;&#x4E24;&#x4E2A;&#x56FE;&#x5C42;&#xFF0C;&#x4F46;&#x662F;OriginPro&#x5BF9;&#x4E8E;&#x7B2C;&#x4E8C;&#x56FE;&#x5C42;&#x7684;bar&#x663E;&#x793A;&#x6709;&#x95EE;&#x9898;&#xFF0C;&#x6240;&#x4EE5;&#x5C06;&#x6570;&#x636E;&#x90FD;&#x653E;&#x5230;&#x4E00;&#x4E2A;&#x56FE;&#x5C42;&#x3002;</p>
+<p><strong>Step 3</strong>&#xFF1A;&#x8BBE;&#x7F6E;&#x56DB;&#x4E2A;&#x65B9;&#x5411;&#x7684;&#x8FB9;&#x6846;<br>&#x8FD9;&#x91CC;&#x7531;&#x4E8E;&#x5DE6;Y&#x5F62;&#x6210;&#x4E86;&#x4E2D;&#x95F4;&#x6846;&#xFF0C;&#x6240;&#x4EE5;&#x9700;&#x8981;&#x65B0;&#x5EFA;&#x4E00;&#x4E2A;&#x56FE;&#x5C42;&#x6765;&#x753B;&#x51FA;&#x5DE6;Y.<br>&#x65B0;&#x5EFA;&#x56FE;&#x5C42;&#xFF1A;&#x53F3;&#x952E; &gt; New Layer(Axis) &gt; Left-Y&#xFF0C;&#x7136;&#x540E;&#x9690;&#x85CF;&#x56FE;&#x5C42;1<br><img src="create-layer2.png" alt="create-layer2.png"><br>&#x53CC;&#x51FB;&#x5750;&#x6807;&#x8F74;&#x53EF;&#x4EE5;&#x8BBE;&#x7F6E;&#x5DE6;&#x53F3;&#x4E24;&#x4E2A;Y&#x5982;&#x4E0B;&#x56FE;&#x6240;&#x793A;<br><img src="two-y.png" alt><br>&#x7136;&#x540E;&#x9690;&#x85CF;&#x56FE;&#x5C42;2&#xFF0C;&#x6253;&#x5F00;&#x56FE;&#x5C42;1&#x5220;&#x6389;&#x5DE6;&#x53F3;Y</p>
+<p>&#x8BBE;&#x7F6E;&#x56FE;&#x5C42;&#x4E4B;&#x95F4;&#x7684;&#x5750;&#x6807;&#x8F74;&#x5173;&#x8054;&#xFF08;&#x540C;x&#x8F74;&#x6216;&#x540C;y&#x8F74;&#xFF09;&#xFF1A;&#x53F3;&#x952E; &gt; New Layer(Axis) &gt; Right Y &#x6216;&#x8005; Left Y</p>
+<p>&#x5EFA;&#x7ACB;&#x4E4B;&#x540E;&#x53EF;&#x4EE5;&#x53F3;&#x952E;&#x56FE;&#x5C42;&#x6570;&#x5B57;&gt;Layer Properties &#x67E5;&#x770B;<br><img src="layer-properties.png" alt="&#x8BBE;&#x7F6E;&#x56FE;&#x5C42;&#x5750;&#x6807;&#x8F74;scale&#x76F8;&#x540C;"></p>
+<p>Top X &#x7684;&#x751F;&#x6210;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x53CC;&#x51FB;&#x5750;&#x6807;&#x8F74;&#xFF0C;&#x8FDB;&#x5165; &#x201C;Title &amp; Format&#x201D; &#x90E8;&#x5206;&#x627E;&#x5230;<br><img src="show-top-x.png" alt></p>
+<p><img src="layer1-delete-l&amp;r-y.png" alt></p>
+<p>&#x8FD9;&#x91CC;&#x6709;&#x4E2A;&#x5C0F;&#x6280;&#x5DE7;&#x662F;&#x6570;&#x636E;&#x8BBE;&#x7F6E;&#x6B63;&#x8D1F;&#x503C;&#x6765;&#x533A;&#x5206;&#x65B9;&#x5411;&#x3002;&#x73B0;&#x5728;&#xFF0C;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5C06;&#x8D1F;&#x503C;&#x663E;&#x793A;&#x4E3A;&#x6B63;&#x503C;&#xFF1A;<br><img src="no-minus-sign.png" alt></p>
+<p>&#x4EE5;&#x53CA;&#x6DFB;&#x52A0;Top X&#x7684;&#x6570;&#x503C;&#x663E;&#x793A;<br><img src="top-y-major-labels.png" alt="show top x"></p>
+<p>&#x6DFB;&#x52A0;&#x5BF9;&#x9F50;&#x865A;&#x7EBF;<br><img src="vertical-major-grids.png" alt></p>
+<p>&#x76EE;&#x524D;&#x7684;Layer1&#xFF1A;<br><img src="layer1-step3.png" alt></p>
+<p>Step 4: &#x5408;&#x5E76;&#x56FE;&#x5C42;&#xFF0C;&#x7EC6;&#x8C03;<br>&#x53CC;&#x51FB;errorBar&#xFF0C;&#x8C03;&#x8282;&#x989C;&#x8272;&#x4E3A;&#x7EA2;&#x8272;<br><img src="errorbar-red.png" alt></p>
+<p>&#x5C06;column&#x5BBD;&#x5EA6;&#x8C03;&#x7EC6;&#x4E00;&#x4E9B;<br><img src="column-spacing-gap.png" alt><br>&#x8C03;&#x6574;&#x4E00;&#x4E0B;&#x5750;&#x6807;&#x8F74;&#x8BF4;&#x660E;&#xFF0C;&#x6548;&#x679C;&#x56FE;&#xFF1A;<br><img src="step4.png" alt></p>
+<p>&#x8C03;&#x8282;&#x4E00;&#x4E0B;&#x5B57;&#x4F53;</p>
+<p>&#x88C1;&#x8FB9;&#xFF0C;&#x53F3;&#x952E;&gt;Fit Page To Layers ,&#x8BBE;&#x7F6E;border width&#x4E3A;2&#x6216;3</p>
+<h3 id="&#x6848;&#x4F8B;2&#xFF1A;&#x5728;&#x6848;&#x4F8B;1&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x6B63;&#x8D1F;&#x8F74;&#x7684;scale&#x4E0D;&#x4E00;&#x6837;"><a href="#&#x6848;&#x4F8B;2&#xFF1A;&#x5728;&#x6848;&#x4F8B;1&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x6B63;&#x8D1F;&#x8F74;&#x7684;scale&#x4E0D;&#x4E00;&#x6837;" class="headerlink" title="&#x6848;&#x4F8B;2&#xFF1A;&#x5728;&#x6848;&#x4F8B;1&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x6B63;&#x8D1F;&#x8F74;&#x7684;scale&#x4E0D;&#x4E00;&#x6837;"></a>&#x6848;&#x4F8B;2&#xFF1A;&#x5728;&#x6848;&#x4F8B;1&#x57FA;&#x7840;&#x4E0A;&#xFF0C;&#x6B63;&#x8D1F;&#x8F74;&#x7684;scale&#x4E0D;&#x4E00;&#x6837;</h3><p><img src="origin-ex2.png" alt="Example 2"><br>&#x8FD9;&#x6B21;&#x6211;&#x4EEC;&#x9700;&#x8981;&#x5C06;&#x4E24;&#x5957;&#x6570;&#x636E;&#x753B;&#x5728;&#x4E24;&#x4E2A;&#x56FE;&#x5C42;&#x4E0A;&#x4E86;&#xFF0C;&#x5E76;&#x4E14;&#x5728;&#x7528;&#x4E0A;2021&#x65B0;&#x7248;&#x7684;OriginPro&#x540E;&#xFF0C;&#x539F;&#x6765;Column&#x5168;&#x90E8;&#x4ECE;&#x5E95;&#x90E8;&#x6D82;&#x8272;&#x7684;bug&#x4E5F;&#x6D88;&#x5931;&#x4E86;&#xFF5E;</p>
+<p><strong>Step 1:</strong> &#x9009;&#x4E2D;&#x5DE6;&#x8FB9;&#x7684;&#x6570;&#x636E;&#xFF08;&#x5408;&#x7EA6;&#x6761;&#x6B3E;&#x8BA1;&#x65F6;&#xFF09;<br><img src="origin-ex2-s1.png" alt></p>
+<p>Plot &gt; &#x7ED8;&#x5236;bar&#x56FE;<br><img src="origin-ex2-s1-2.png" alt></p>
+<p><strong>Step 2:</strong> &#x6DFB;&#x52A0;&#x65B0;&#x56FE;&#x5C42;: New Layer(Axes) &gt; Open Dialog<br>&#x81EA;&#x5B9A;&#x4E49;&#x5750;&#x6807;&#x8F74;&#xFF0C;Left&#x548C;Buttom&#x4E0D;&#x52FE;&#x9009;<br><img src="origin-ex2-s2.png" alt></p>
+<p>&#x9690;&#x85CF;&#x56FE;&#x5C42;1&#x3002;&#x4E4B;&#x540E;&#x9009;&#x4E2D;&#x53F3;&#x8FB9;&#x6570;&#x636E;&#xFF0C;&#x70B9;&#x51FB;&#x5F53;&#x524D;&#x56FE;&#x7247;&#x7A97;&#x53E3;&#xFF0C;&#x7136;&#x540E;&#x70B9;&#x51FB;Insert &gt; Plot to Layer &gt; &#x7ED8;&#x5236;column&#x5373;&#x53EF;<br><img src="origin-ex2-s2-2.png" alt="Add column"></p>
+<p>&#x56E0;&#x4E3A;Origin&#x4E2D;column&#x548C;bar&#x7684;&#x533A;&#x522B;&#x53EA;&#x662F;&#x5728;&#x4E8E;X-Y&#x5750;&#x6807;&#x8F74;&#x7684;&#x4F4D;&#x7F6E;&#x4E92;&#x6362;&#x3002;&#x5C06;column&#x53D8;&#x6210;bar&#x53EA;&#x9700;&#x8981;&#x70B9;&#x51FB;&#x83DC;&#x5355; &gt; Graph&#xFF0C;&#x9009;&#x4E2D; Exchange X-Y Axes<br><img src="origin-ex2-s2-3.png" alt="Exchange xy"></p>
+<p><strong>Step 3:</strong> &#x7EDF;&#x4E00;&#x5750;&#x6807;&#x8F74;<br><img src="origin-ex2-s3.png" alt="Scale "></p>
+<p>&#x53EA;&#x8981;&#x5C06;&#x5750;&#x6807;&#x8F74;&#x7684;&#x6B63;&#x8D1F;&#x7EDD;&#x5BF9;&#x503C;&#x8BBE;&#x7F6E;&#x76F8;&#x7B49;&#xFF0C;&#x5C31;&#x53EF;&#x4EE5;&#x4FDD;&#x6301;x&#x8F74;&#xFF08;&#x5782;&#x76F4;&#xFF09;&#x7684;&#x91CD;&#x5408;&#xFF1A;<br><img src="origin-ex2-s3-2.png" alt="Overlap"></p>
+<p><strong>Step 4:</strong> &#x8BBE;&#x7F6E;ErrorBar<br>&#x53CC;&#x51FB;Error Bar&#xFF0C;&#x8BBE;&#x7F6E;&#x4E00;&#x6B63;&#x4E00;&#x8D1F;&#xFF08;&#x5BF9;&#x4E8E;&#x6B63;&#x6001;&#x5206;&#x5E03;&#xFF0C;&#x6B63;&#x8D1F;&#x8BEF;&#x5DEE;&#x76F8;&#x7B49;&#xFF09;&#xFF0C;&#x5E76;&#x66FF;&#x6362;&#x989C;&#x8272;&#x4E3A;&#x7EA2;&#x8272;&#xFF0C;&#x589E;&#x52A0;bar&#x4E24;&#x5934;&#x7684;&#x5BBD;&#x5EA6;&#xFF08;Cap&#x503C;&#xFF09;<br><img src="origin-ex2-s4.png" alt="plus error"></p>
+<p>&#x5BF9;&#x4E8E;Layer&#x7684;ErrorBar&#x4E5F;&#x662F;&#x540C;&#x7406;&#x64CD;&#x4F5C;&#xFF1A;<br><img src="origin-ex2-s4-2.png" alt="error bar"></p>
+<p><strong>Step 5:</strong> : Label&#x503C;&#x8BBE;&#x5B9A;<br>Layer1 x&#x8F74;(&#x5782;&#x76F4;)&#x6807;&#x7B7E;&#x503C;&#x52A0;&#x524D;&#x7F00;Term&#xFF0C;&#x65CB;&#x8F6C;45&#x5EA6;&#xFF0C;&#x4E4B;&#x540E;&#x53EF;&#x53BB;&#x6389;&#x6807;&#x9898;&#x201D;term&#x201D;&#x3002;<br><img src="origin-ex2-s5-1.png" alt="term x"></p>
+<p>Layer2 x&#x8F74;(&#x5782;&#x76F4;)&#x7684;&#x6807;&#x7B7E;&#x6570;&#x636E;&#x6765;&#x6E90;&#x8BBE;&#x7F6E;&#x4E3A;service&#x5217;<br><img src="origin-ex2-s3-3.png" alt="set Tick labels from dataset"></p>
+<p>&#x4EA6;&#x8BBE;&#x7F6E;&#x683C;&#x5F0F;&#x65CB;&#x8F6C;45&#x5EA6;&#xFF1A;<br><img src="origin-ex2-s5-2.png" alt="set tick labels"></p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x8BBE;&#x7F6E;y&#x8F74;&#x7684;tick labels&#x3002;&#x53CC;&#x51FB;y&#x8F74;&#xFF08;Top &#x6C34;&#x5E73;&#x8F74;&#xFF09;&#x6570;&#x636E;&#x70B9;&#xFF0C;&#x4ECE;&#x81EA;&#x5B9A;&#x4E49;dataset&#xFF08;&#x65B0;&#x5EFA;&#x7684;Sheet2&#xFF09;&#x4E2D;&#x83B7;&#x53D6;<br><img src="origin-ex2-s3-4.png" alt="tick-indexed dataset"></p>
+<p>&#x8C03;&#x6574;dataset&#x4E2D;&#x7684;&#x503C;&#xFF0C;&#x4F7F;&#x4E4B;&#x4E0E;&#x539F;&#x6765;&#x7684;&#x523B;&#x5EA6;&#x6C34;&#x5E73;&#x5339;&#x914D;&#xFF1A;<br><img src="origin-ex2-s5-4.png" alt="match scale and label"></p>
+<p>&#x63A5;&#x7740;&#xFF0C;&#x9690;&#x85CF;layer1&#x7684;bottom line&#x548C;tick labels&#xFF0C;&#x5C06;layer2 top&#x7684;&#x6570;&#x636E;&#x590D;&#x5236;&#x5230;bottom&#x663E;&#x793A;&#x51FA;&#x6765;&#x3002;&#x590D;&#x5236;&#x7C98;&#x8D34;&#x5750;&#x6807;&#x8F74;&#x6807;&#x9898;&#x5339;&#x914D;&#x5BF9;&#x5E94;&#x90E8;&#x5206;&#xFF1A;<br><img src="origin-ex2-s5-5.png" alt="self-defined tick labels"></p>
+<p><strong>Step 6:</strong> Update legends<br>&#x53F3;&#x952E;&#x56FE;&#x4F8B;&#x66F4;&#x65B0;&#xFF0C;<br><img src="origin-ex2-s6.png" alt="update legend"></p>
+<p>&#x9009;&#x62E9; Reconstruct &#x548C; One Legend for Whole Page<br><img src="origin-ex2-s5.png" alt="update legends for whole graph"></p>
+<p><img src="origin-ex2-s6-2.png" alt="new legend"></p>
+<p><strong>Step 7:</strong> &#x7F8E;&#x5316;<br>&#x4FEE;&#x6539;&#x5BBD;&#x5EA6;<br><img src="origin-ex2-s7.png" alt="change width"></p>
+<p>&#x4FEE;&#x6539;&#x989C;&#x8272;<br><img src="origin-ex2-s7-2.png" alt="change color"></p>
+<p>&#x8BBE;&#x7F6E;Layer1&#x548C;2&#x7684;x&#x8F74;&#xFF08;&#x5782;&#x76F4;&#x8F74;&#xFF09;&#x7684;minor ticks&#x548C;minor grids&#x4E3A;none&#xFF1B;&#x8BBE;&#x7F6E;y&#x8F74;&#xFF08;&#x6C34;&#x5E73;&#x8F74;&#xFF09;&#x7684;major grids&#x548C;minor grids<br><img src="origin-ex2-s7-3.png" alt="change grids"></p>
+<p>&#x53F3;&#x952E;&#x56FE;&#x4F8B;&gt;Properties, &#x8BBE;&#x7F6E;frame&#x7684;border&#x4E3A;none<br><img src="origin-ex2-s7-4.png" alt="legend frame border"></p>
+<p>Preferences &gt; Text Fonts&#x4FEE;&#x6539;&#x9ED8;&#x8BA4;&#x5B57;&#x4F53;&#x4E3A;Times New Roman&#xFF0C;Axis&gt;Unit Display for Axis Title &#x4FEE;&#x6539;&#x5355;&#x4F4D;&#x663E;&#x793A;&#x4E3A; <code>/&lt;U&gt;</code><br><img src="origin-ex2-s7-5.png" alt="axis unit display"></p>
+<p>&#x8C03;&#x8282;&#x5B57;&#x4F53;&#x4E3A;Times New Roman&#xFF0C;&#x5927;&#x5C0F;&#x4E3A;18/20<br><img src="origin-ex2-s7-6.png" alt="change font"></p>
+<p>&#x88C1;&#x8FB9;:&#x53F3;&#x952E;&gt;Fit Layers to Page&#x2026;<br><img src="origin-ex2.png" alt="example 2"></p>
+<h3 id="&#x6848;&#x4F8B;3&#xFF1A;&#x6805;&#x56FE;-&#x7EC4;&#x56FE;"><a href="#&#x6848;&#x4F8B;3&#xFF1A;&#x6805;&#x56FE;-&#x7EC4;&#x56FE;" class="headerlink" title="&#x6848;&#x4F8B;3&#xFF1A;&#x6805;&#x56FE;+&#x7EC4;&#x56FE;"></a>&#x6848;&#x4F8B;3&#xFF1A;&#x6805;&#x56FE;+&#x7EC4;&#x56FE;</h3><p><img src="origin-ex3.png" alt="result"><br>&#x6211;&#x4EEC;&#x5148;&#x7ED8;&#x5236;&#x6BD4;&#x8F83;&#x7B80;&#x5355;&#x7684;&#x6563;&#x70B9;&#x56FE;&#x90E8;&#x5206;<br><strong>Step 1:</strong> &#x9009;&#x4E2D;&#x524D;&#x4E24;&#x5217;&#x7684;&#x6570;&#x636E;&#xFF0C;&#x7ED8;&#x5236;&#x6563;&#x70B9;&#x56FE;<br><img src="origin-ex3-s1.png" alt></p>
+<p>&#x70B9;&#x51FB;&#x83DC;&#x5355;&#x680F; Plot &gt; Scatter<br><img src="origin-ex3-s1-1.png" alt="basic symbol + line"></p>
+<p>&#x4FEE;&#x6539;&#x5750;&#x6807;&#x8F74;&#xFF0C;&#x6DFB;&#x52A0;grids&#xFF0C;&#x5B57;&#x4F53;&#x7EDF;&#x4E00; Times New Roman 24&#x53F7;<br><img src="origin-ex3-s1-2.png" alt="finish first"></p>
+<p><strong>Step 2:</strong> &#x590D;&#x5236;<br>Graph&#x7A97;&#x53E3;&#x53F3;&#x952E;&gt;Duplicate</p>
+<p><img src="origin-ex3-s2.png" alt="copy"><br>&#x7136;&#x540E;&#x53F3;&#x952E;copy Graph &gt; Properties&#xFF0C;&#x53BB;&#x6389;Long Name</p>
+<p>&#x63A5;&#x7740;&#x53F3;&#x952E;&#x56FE;&#x5C42;1 &gt; Plot setup&#xFF0C;&#x9009;&#x62E9;&#x65B0;&#x7684;X&#x548C;Y&#x8F74;&#x6570;&#x636E;&#xFF0C;&#x70B9;&#x51FB;Replace<br><img src="origin-ex3-s2-1.png" alt="new graph"></p>
+<p>&#x540C;&#x7406;&#x7ED8;&#x5236;&#x51FA;&#x7B2C;3&#x5F20;&#x6563;&#x70B9;&#x56FE;<br><img src="origin-ex3-s2-2.png" alt="3rd graph"></p>
+<p>3&#x5F20;&#x56FE;&#x90FD;&#x51FA;&#x6765;&#x540E;&#xFF0C;&#x7EDF;&#x4E00;&#x4E00;&#x4E0B;&#x5927;&#x5C0F;&#x683C;&#x5F0F;</p>
+<p><strong>Step 3:</strong> &#x9009;&#x4E2D;&#x5DE6;&#x8FB9;&#x6570;&#x636E;&#xFF0C;&#x70B9;&#x51FB;  Trellis<br>Trellis&#x56FE;&#x662F;Origin2017&#x540E;&#x63D0;&#x4F9B;&#x7684;&#x65B0;&#x529F;&#x80FD;&#xFF0C;&#x6211;&#x4EEC;&#x7528;&#x5B83;&#x6765;&#x5236;&#x4F5C;Before-After&#x56FE;<br><img src="origin-ex3-s3.png" alt="trellis"></p>
+<p>&#x5728;&#x5F39;&#x51FA;&#x7A97;&#x53E3;&#x8BBE;&#x7F6E;&#x4E2D;&#x52A0;&#x5165;C&#x5217;Action Name&#xFF0C;&#x4F5C;&#x4E3A;Panel&#x7684;&#x5206;&#x7C7B;&#x4F9D;&#x636E;&#xFF1A;<br><img src="origin-ex3-s4.png" alt="multi panels"></p>
+<p><strong>Step 4:</strong> &#x4FEE;&#x6B63;&#x5750;&#x6807;&#x8F74;<br><img src="origin-ex3-s4-1.png" alt="multi panels"></p>
+<p><strong>Step 5:</strong> &#x4E3A;&#x7EBF;&#x6BB5;&#x6DFB;&#x52A0;&#x6587;&#x672C;<br><img src="origin-ex3-s5.png" alt="add text"></p>
+<p>&#x8BBE;&#x7F6E;&#x989C;&#x8272;&#x5728;panel&#x5185;&#x90E8;&#x9012;&#x589E;&#xFF1A;<br><img src="origin-ex3-s5-2.png" alt="add color"></p>
+<p><strong>Step 6:</strong> &#x5408;&#x5E76;</p>
+<p><img src="origin-ex3-s6.png" alt="Merge"><br>&#x6211;&#x4EEC;&#x7ED9;&#x6BCF;&#x5F20;&#x56FE;&#x6807;&#x4E0A;&#x5E8F;&#x53F7;&#xFF0C;&#x7136;&#x540E;&#x70B9;&#x51FB;&#x67D0;&#x4E00;&#x4E2A;Graph&#xFF0C;&#x8BB0;&#x4F4F;&#x8981;&#x6392;&#x5217;&#x7684;&#x56FE;&#x7247;&#x5E8F;&#x53F7;&#xFF0C;&#x7136;&#x540E;&#x8FDB;&#x5165;Merge Graph Windows Dialog&#x2026;</p>
+<p><img src="origin-ex3-s6-2.png" alt="merge setting"><br>&#x4E0D;&#x7528;&#x7684;&#x56FE;&#x7247;&#x53BB;&#x6389;&#xFF0C; Margin&#x8C03;&#x6574;&#x4E3A;1</p>
+<p><img src="origin-ex3.png" alt="result"></p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/OriginPro/">#OriginPro</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/绘图/">#绘图</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/2021-July-11th-Processes-threads-and-coroutines/">进程、线程和协程</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/2021-May-8th-Psychological-effect-in-living/">心理学效应在生活中的应用</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

@@ -1,0 +1,534 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>数据结构与算法笔记 | 动态规划 - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/2021-Mar-20th-Algorithm-Dynamic-programming/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x52A8;&amp;#x6001;&amp;#x89C4;&amp;#x5212;&amp;#x7B97;&amp;#x6CD5;&amp;#x7684;&amp;#x4E24;&amp;#x5927;&amp;#x7279;&amp;#x5F81;&amp;#x662F;&amp;#x9012;&amp;#x63A8;&amp;#x516C;&amp;#x5F0F;&amp;#x548C;&amp;#x8BB0;&amp;#x5FC6;&amp;#x6570;&amp;#x7EC4;&amp;#x3002;&amp;#x6839;&amp;#x636E;&amp;#x9012;">
+<meta name="keywords" content="算法,动态规划">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法笔记 | 动态规划">
+<meta property="og:url" content="https://BillyStudio.github.io/2021-Mar-20th-Algorithm-Dynamic-programming/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x52A8;&amp;#x6001;&amp;#x89C4;&amp;#x5212;&amp;#x7B97;&amp;#x6CD5;&amp;#x7684;&amp;#x4E24;&amp;#x5927;&amp;#x7279;&amp;#x5F81;&amp;#x662F;&amp;#x9012;&amp;#x63A8;&amp;#x516C;&amp;#x5F0F;&amp;#x548C;&amp;#x8BB0;&amp;#x5FC6;&amp;#x6570;&amp;#x7EC4;&amp;#x3002;&amp;#x6839;&amp;#x636E;&amp;#x9012;">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.430Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法笔记 | 动态规划">
+<meta name="twitter:description" content="&amp;#x52A8;&amp;#x6001;&amp;#x89C4;&amp;#x5212;&amp;#x7B97;&amp;#x6CD5;&amp;#x7684;&amp;#x4E24;&amp;#x5927;&amp;#x7279;&amp;#x5F81;&amp;#x662F;&amp;#x9012;&amp;#x63A8;&amp;#x516C;&amp;#x5F0F;&amp;#x548C;&amp;#x8BB0;&amp;#x5FC6;&amp;#x6570;&amp;#x7EC4;&amp;#x3002;&amp;#x6839;&amp;#x636E;&amp;#x9012;">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#一、动态规划与字符串结合">1&nbsp;&nbsp;<b>一、动态规划与字符串结合</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#二、背包问题">2&nbsp;&nbsp;<b>二、背包问题</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#01背包">2.1&nbsp;&nbsp;01背包</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#一些一维DP问题">3&nbsp;&nbsp;<b>一些一维DP问题</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#丑数">3.1&nbsp;&nbsp;丑数</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#分析">3.1.1&nbsp;&nbsp;分析</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#前缀和">3.2&nbsp;&nbsp;前缀和</a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2021-Mar-20th-Algorithm-Dynamic-programming/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2021-Mar-20th-Algorithm-Dynamic-programming/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            数据结构与算法笔记 | 动态规划
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2021-03-20T11:04:56.000Z" itemprop="datePublished">Mar 20 2021</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/数据结构与算法/">数据结构与算法</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            4 minutes read (About 623 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x52A8;&#x6001;&#x89C4;&#x5212;&#x7B97;&#x6CD5;&#x7684;&#x4E24;&#x5927;&#x7279;&#x5F81;&#x662F;&#x9012;&#x63A8;&#x516C;&#x5F0F;&#x548C;&#x8BB0;&#x5FC6;&#x6570;&#x7EC4;&#x3002;&#x6839;&#x636E;&#x9012;&#x63A8;&#x516C;&#x5F0F;&#xFF0C;&#x5927;&#x95EE;&#x9898;&#x5206;&#x89E3;&#x4E3A;&#x91CD;&#x53E0;&#x5B50;&#x95EE;&#x9898;&#xFF08;overlap sub-problem&#xFF09;&#xFF0C;&#x5B50;&#x95EE;&#x9898;&#x7684;&#x89E3;&#x50A8;&#x5B58;&#x8D77;&#x6765;&#x5F62;&#x6210;&#x8BB0;&#x5FC6;&#x3002;<a id="more"></a><br>&#x52A8;&#x6001;&#x89C4;&#x5212;&#x7B97;&#x6CD5;&#x7684;&#x5E94;&#x7528;&#x573A;&#x666F;&#x5F88;&#x591A;&#xFF0C;&#x5177;&#x4F53;&#x6784;&#x9020;&#x4E5F;&#x975E;&#x5E38;&#x7075;&#x6D3B;&#x3002;</p>
+<h1 id="&#x4E00;&#x3001;&#x52A8;&#x6001;&#x89C4;&#x5212;&#x4E0E;&#x5B57;&#x7B26;&#x4E32;&#x7ED3;&#x5408;"><a href="#&#x4E00;&#x3001;&#x52A8;&#x6001;&#x89C4;&#x5212;&#x4E0E;&#x5B57;&#x7B26;&#x4E32;&#x7ED3;&#x5408;" class="headerlink" title="&#x4E00;&#x3001;&#x52A8;&#x6001;&#x89C4;&#x5212;&#x4E0E;&#x5B57;&#x7B26;&#x4E32;&#x7ED3;&#x5408;"></a>&#x4E00;&#x3001;&#x52A8;&#x6001;&#x89C4;&#x5212;&#x4E0E;&#x5B57;&#x7B26;&#x4E32;&#x7ED3;&#x5408;</h1><p><a href="https://www.nowcoder.com/practice/28970c15befb4ff3a264189087b99ad4?tpId=13&amp;tqId=11205&amp;rp=1&amp;ru=%2Fta%2Fcoding-interviews&amp;qru=%2Fta%2Fcoding-interviews%2Fquestion-ranking&amp;tab=answerKey" target="_blank" rel="noopener">&#x5251;&#x6307;Offer - &#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x5339;&#x914D;</a><br>&#x8FD9;&#x9053;&#x9898;&#x7684;&#x8F93;&#x5165;&#x662F;&#x5B57;&#x7B26;&#x4E32;str&#x548C;&#x5339;&#x914D;&#x6A21;&#x5F0F;&#x4E32;pattern&#xFF0C;&#x5B57;&#x7B26;&#x4E32;&#x201D;aaa&#x201D;&#x53EF;&#x4EE5;&#x5339;&#x914D;&#x6A21;&#x5F0F;&#x201D;a.a&#x201D;&#x548C;&#x201D;ab<em>ac</em>a&#x201D;&#xFF0C;&#x6A21;&#x5F0F;&#x4E2D;&#x7684;&#x901A;&#x914D;&#x7B26;&#x53EA;&#x6709; &#x2018;.&#x2019; &#x548C; &#x2018;<em>&#x2018; &#x4E24;&#x79CD;&#xFF0C;&#x548C;&#x6B63;&#x5219;&#x8868;&#x8FBE;&#x5F0F;&#x6807;&#x51C6;&#x6240;&#x4E0D;&#x540C;&#x7684;&#x662F;&#xFF0C;&#x2019;</em>&#x2018;&#x8868;&#x793A;&#x5B83;&#x524D;&#x9762;&#x7684;&#x5B57;&#x7B26;&#x53EF;&#x4EE5;&#x51FA;&#x73B0;&#x4EFB;&#x610F;&#x6B21;&#xFF0C;&#x800C;&#x4E0D;&#x662F;&#x5339;&#x914D;&#x4EFB;&#x610F;&#x957F;&#x5EA6;&#x7684;&#x5B57;&#x7B26;&#x3002;</p>
+<p>&#x5047;&#x8BBE;&#x5E03;&#x5C14;&#x578B; dp[m][n] &#x8868;&#x793A;&#x957F;&#x5EA6;&#x4ECE;1&#x81F3;m&#x7684;&#x5B57;&#x7B26;&#x4E32;&#x548C;&#x957F;&#x5EA6;&#x4ECE;1&#x81F3;n&#x7684;&#x6A21;&#x5F0F;&#x662F;&#x5426;&#x5339;&#x914D;&#xFF0C;&#x90A3;&#x4E48;&#x5F53;&#x9012;&#x63A8;&#x5230; dp[str.length][pattern.length]&#x5373;&#x4E3A;&#x6240;&#x6C42;&#x3002;</p>
+<p>dp[1][1] &#x8868;&#x793A;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#x662F;&#x5426;&#x5339;&#x914D;&#x3002;<br>&#x5982;&#x679C; <code>pattern[2]==&apos;.&apos; || str[2] == pattern[2]</code>&#xFF0C;&#x5219; <code>dp[2][2] = dp[1][1]</code>&#xFF0C;&#x5426;&#x5219;&#x9700;&#x8981;&#x8003;&#x8651;&#x901A;&#x914D;&#x7B26;<em>&#xFF08;&#x6BD4;&#x5982;&#x5B57;&#x7B26;&#x4E32;<code>&quot;0ab&quot;</code>&#x4E0E;&#x6A21;&#x5F0F;`&#x201D;0a</em>b&#x201D;<code>&#x5339;&#x914D;&#xFF0C;&#x5B57;&#x7B26;&#x4E32;</code>&#x201C;0ab&#x201D;<code>&#x4E0E;&#x6A21;&#x5F0F;</code>&#x201C;0a*c&#x201D;`&#x4E0D;&#x5339;&#x914D;&#xFF09;<br>&#x53EF;&#x4EE5;&#x6709;&#x5982;&#x4E0B;&#x51E0;&#x79CD;&#x60C5;&#x51B5;&#x8003;&#x8651;</p>
+<ol>
+<li>&#x5339;&#x914D;&#x6389;&#x53CC;&#x65B9;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#xFF0C;&#x5982;<code>abc</code>&#x548C;<code>a*bc</code>&#x5339;&#x914D;&#x5269;&#x4E0B;&#xFF1A;<code>bc</code> &#x548C; <code>bc</code></li>
+<li>&#x5339;&#x914D;&#x6389;&#x5B57;&#x7B26;&#x4E32;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x5B57;&#x7B26;&#xFF0C;&#x5982;<code>aabc</code>&#x548C;<code>a*bc</code>&#x5339;&#x914D;&#x5269;&#x4E0B;&#xFF1A;<code>abc</code> &#x548C; <code>a*bc</code></li>
+<li>&#x5339;&#x914D;&#x6389;&#x6A21;&#x5F0F;&#x7684;&#x4E24;&#x4E2A;&#x5B57;&#x7B26;&#xFF0C;&#x5982;<code>bc</code>&#x548C;<code>a*bc</code>&#x5339;&#x914D;&#x5269;&#x4E0B;&#xFF1A;<code>bc</code>&#x548C;<code>bc</code><br>&#x4E0A;&#x8FF0;&#x51E0;&#x79CD;&#x8003;&#x8651;&#x7F16;&#x5199;&#x4EE3;&#x7801;&#x6BB5;&#x5982;&#x4E0B;&#xFF1A;<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span>(pattern[<span class="hljs-number">2</span>] == <span class="hljs-string">&apos;.&apos;</span> || str[<span class="hljs-number">2</span>] == pattern[<span class="hljs-number">2</span>]) {</span><br><span class="line">    dp[<span class="hljs-number">2</span>][<span class="hljs-number">2</span>] = dp[<span class="hljs-number">1</span>][<span class="hljs-number">1</span>]; <span class="hljs-comment">// &#x7B2C;1&#x79CD;&#x60C5;&#x51B5;</span></span><br><span class="line">} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(pattern[<span class="hljs-number">2</span>] == <span class="hljs-string">&apos;*&apos;</span>) {</span><br><span class="line">    <span class="hljs-keyword">if</span>(dp[<span class="hljs-number">2</span>][<span class="hljs-number">0</span>] == <span class="hljs-keyword">true</span>) {</span><br><span class="line">        dp[<span class="hljs-number">2</span>][<span class="hljs-number">2</span>] = <span class="hljs-keyword">true</span>;    <span class="hljs-comment">// &#x7B2C;3&#x79CD;&#x60C5;&#x51B5;</span></span><br><span class="line">    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(pattern[<span class="hljs-number">1</span>]==<span class="hljs-string">&apos;.&apos;</span> || pattern[<span class="hljs-number">1</span>]==str[<span class="hljs-number">2</span>]) {</span><br><span class="line">        dp[<span class="hljs-number">2</span>][<span class="hljs-number">2</span>] = dp[<span class="hljs-number">1</span>][<span class="hljs-number">2</span>]; <span class="hljs-comment">// &#x7B2C;2&#x79CD;&#x60C5;&#x51B5;</span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<h1 id="&#x4E8C;&#x3001;&#x80CC;&#x5305;&#x95EE;&#x9898;"><a href="#&#x4E8C;&#x3001;&#x80CC;&#x5305;&#x95EE;&#x9898;" class="headerlink" title="&#x4E8C;&#x3001;&#x80CC;&#x5305;&#x95EE;&#x9898;"></a>&#x4E8C;&#x3001;&#x80CC;&#x5305;&#x95EE;&#x9898;</h1><p>&#x80CC;&#x5305;&#x95EE;&#x9898;&#x7684;&#x76EE;&#x6807;&#x662F;&#x5C06;&#x603B;&#x4EF7;&#x503C;&#x5C3D;&#x53EF;&#x80FD;&#x9AD8;&#x7684;&#x7269;&#x54C1;&#x585E;&#x5230;&#x80CC;&#x5305;&#x4E2D;&#xFF0C;&#x6709;&#x4EE5;&#x4E0B;&#x51E0;&#x7C7B;&#x5E38;&#x8003;&#x95EE;&#x9898;&#xFF1A;</p>
+<h2 id="01&#x80CC;&#x5305;"><a href="#01&#x80CC;&#x5305;" class="headerlink" title="01&#x80CC;&#x5305;"></a>01&#x80CC;&#x5305;</h2><p>&#x6709;N&#x4EF6;&#x5546;&#x54C1;&#x548C;&#x5BB9;&#x91CF;&#x4E3A;V&#x7684;&#x80CC;&#x5305;&#xFF0C;&#x7B2C;<code>i(0&lt;=i&lt;N)</code>&#x4EF6;&#x5546;&#x54C1;&#x7684;&#x4F53;&#x79EF;&#x662F; <code>c[i]</code>&#xFF0C;&#x4EF7;&#x503C;&#x662F; <code>w[i]</code>&#xFF0C;&#x6BCF;&#x4EF6;&#x5546;&#x54C1;&#x6700;&#x591A;&#x53EA;&#x80FD;&#x7528;1&#x6B21;&#x3002;&#x6C42;&#x89E3;&#x5C06;&#x54EA;&#x4E9B;&#x5546;&#x54C1;&#x653E;&#x5165;&#x80CC;&#x5305;&#x4E2D;&#x53EF;&#x5728;&#x4E0D;&#x8D85;&#x8FC7;&#x80CC;&#x5305;&#x5BB9;&#x91CF;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#x4F7F;&#x603B;&#x4EF7;&#x503C;&#x8FBE;&#x5230;&#x6700;&#x5927;&#x3002;<br>&#x6211;&#x4EEC;&#x8BBE; <code>dp[i][j]</code> &#x4E3A;&#x8003;&#x8651;&#x524D; <code>i</code> &#x4EF6;&#x5546;&#x54C1;&#x7684;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5BB9;&#x91CF;&#x4E0D;&#x8D85;&#x8FC7; <code>j</code> &#x7684;&#x6700;&#x5927;&#x4EF7;&#x503C;&#xFF0C;&#x5219; <code>dp[N][V]</code> &#x5373;&#x4E3A;&#x6240;&#x6C42;&#x3002;<br>&#x521D;&#x59CB;&#x503C; <code>dp[0][j]=0, dp[i][0]=0</code>&#xFF0C;<br>&#x8003;&#x8651;&#x7B2C; <code>i</code> &#x4EF6;&#x5546;&#x54C1;&#x653E;&#x6216;&#x8005;&#x4E0D;&#x653E;&#xFF0C;&#x5982;&#x679C;&#x653E;&#xFF0C;&#x90A3;&#x4E48;&#x524D;<code>i-1</code>&#x4EF6;&#x5546;&#x54C1;&#x7684;&#x5141;&#x8BB8;&#x5BB9;&#x91CF;&#x4F1A;&#x51CF;&#x5C0F;<code>c[i]</code>&#xFF0C;&#x4EF7;&#x503C;&#x4F1A;&#x52A0;&#x4E0A;&#x7B2C;<code>i</code>&#x4EF6;&#x5546;&#x54C1;&#x7684;&#x4EF7;&#x503C;<code>w[i]</code>&#xFF0C;&#x6B64;&#x65F6; <code>dp[i][j] = dp[i-1][j-c[i]] + w[i]</code>&#xFF1B;&#x5982;&#x679C;&#x4E0D;&#x653E;&#xFF0C;&#x90A3;&#x4E48;&#x7B49;&#x4EF7;&#x4E8E;&#x524D;<code>i-1</code>&#x4EF6;&#x5546;&#x54C1;&#x4E0D;&#x8D85;&#x8FC7;&#x5BB9;&#x91CF;<code>j</code>&#x7684;&#x6700;&#x5927;&#x4EF7;&#x503C;&#xFF0C;&#x6B64;&#x65F6; <code>dp[i][j] = dp[i-1][j]</code>&#xFF0C;&#x6545;&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x9012;&#x63A8;&#x516C;&#x5F0F;&#xFF1A;</p>
+<script type="math/tex; mode=display">
+dp[i][j] = max(dp[i-1][j-c[i]] + w[i], dp[i-1][j])</script><p>&#x6CE8;&#x610F;01&#x80CC;&#x5305;&#x95EE;&#x9898;&#x4E0D;&#x80FD;&#x4F7F;&#x7528;&#x8D2A;&#x5FC3;&#x601D;&#x60F3;&#x6C42;&#x89E3;&#xFF0C;&#x770B;&#x4E0B;&#x9762;&#x7684;&#x4F8B;&#x5B50;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#x5BB9;&#x91CF; V = 5</span><br><span class="line">3&#x4EF6;&#x5546;&#x54C1;&#xFF1A;</span><br><span class="line">(&#x4F53;&#x79EF;=1, &#x4EF7;&#x503C;=2) &#x5355;&#x4F4D;&#x4F53;&#x79EF;&#x4EF7;&#x503C;=2</span><br><span class="line">(&#x4F53;&#x79EF;=2, &#x4EF7;&#x503C;=4) &#x5355;&#x4F4D;&#x4F53;&#x79EF;&#x4EF7;&#x503C;=2</span><br><span class="line">(&#x4F53;&#x79EF;=3, &#x4EF7;&#x503C;=3) &#x5355;&#x4F4D;&#x4F53;&#x79EF;&#x4EF7;&#x503C;=1</span><br></pre></td></tr></table></figure>
+
+<p>&#x5982;&#x679C;&#x91C7;&#x7528;&#x8D2A;&#x5FC3;&#x601D;&#x60F3;&#xFF0C;&#x90A3;&#x4E48;&#x5148;&#x653E;&#x4F53;&#x79EF;&#x4E3A;1&#x548C;2&#x7684;&#x7269;&#x54C1;&#xFF0C;&#x6B64;&#x65F6;&#x603B;&#x4EF7;&#x503C;&#x8FBE;&#x5230;6&#x3002;&#x5269;&#x4F59;&#x4F53;&#x79EF;&#x4E3A;2,&#x653E;&#x4E0D;&#x4E0B;&#x4F53;&#x79EF;&#x4E3A;3&#x7684;&#x5546;&#x54C1;&#x4E86;&#x3002;<br>&#x800C;&#x6211;&#x4EEC;&#x77E5;&#x9053;&#x6700;&#x4F18;&#x89E3;&#x662F;&#x653E;&#x4F53;&#x79EF;&#x4E3A;2&#x548C;3&#x7684;&#x5546;&#x54C1;&#xFF0C;&#x603B;&#x4EF7;&#x503C;&#x4E3A;7&#x3002;&#x6240;&#x4EE5;&#x8FC7;&#x5EA6;&#x8D2A;&#x5FC3;&#xFF0C;&#x5C06;&#x4F1A;&#x5BFC;&#x81F4;&#x80F8;&#x6000;&#x4E0D;&#x591F;&#x5927;&#xFF0C;&#x770B;&#x4E0D;&#x5230;&#x5168;&#x5C40;&#x6700;&#x4F18;&#x89E3;&#x3002;</p>
+<p>&#x4F8B;&#x9898;&#xFF1A;<a href="https://leetcode-cn.com/problems/partition-equal-subset-sum/" target="_blank" rel="noopener">&#x5206;&#x5272;&#x7B49;&#x548C;&#x5B50;&#x96C6;</a></p>
+<h1 id="&#x4E00;&#x4E9B;&#x4E00;&#x7EF4;DP&#x95EE;&#x9898;"><a href="#&#x4E00;&#x4E9B;&#x4E00;&#x7EF4;DP&#x95EE;&#x9898;" class="headerlink" title="&#x4E00;&#x4E9B;&#x4E00;&#x7EF4;DP&#x95EE;&#x9898;"></a>&#x4E00;&#x4E9B;&#x4E00;&#x7EF4;DP&#x95EE;&#x9898;</h1><h2 id="&#x4E11;&#x6570;"><a href="#&#x4E11;&#x6570;" class="headerlink" title="&#x4E11;&#x6570;"></a>&#x4E11;&#x6570;</h2><p>&#x5B9A;&#x4E49;&#x4E11;&#x6570;&#x4E3A;&#x8D28;&#x56E0;&#x5B50;&#x53EA;&#x5305;&#x542B;2&#x3001;3&#x3001;5&#x7684;&#x6570;&#xFF0C;&#x7ED9;&#x4F60;&#x4E00;&#x4E2A;&#x6B63;&#x6574;&#x6570;n&#xFF0C;&#x627E;&#x51FA;&#x7B2C;n&#x4E2A;&#x4E11;&#x6570;<br>&#x901A;&#x5E38;&#x8BA4;&#x4E3A;&#xFF0C;&#x7B2C;&#x4E00;&#x4E2A;&#x4E11;&#x6570;&#x4E3A;1&#x3002;</p>
+<h3 id="&#x5206;&#x6790;"><a href="#&#x5206;&#x6790;" class="headerlink" title="&#x5206;&#x6790;"></a>&#x5206;&#x6790;</h3><p>&#x9664;&#x4E86;1&#x4E4B;&#x5916;&#xFF0C;&#x7B2C;n&#x4E2A;&#x4E11;&#x6570;&#x53EA;&#x80FD;&#x662F;&#x524D;&#x9762;&#x67D0;&#x4E2A;&#x4E11;&#x6570;&#x4E58;2&#x6216;&#x4E58;3&#x6216;&#x4E58;5&#x5F97;&#x5230;&#x7684;&#x7ED3;&#x679C;&#x3002;&#x4EE4;p2,p3,p5&#x50A8;&#x5B58;&#x524D;&#x9762;&#x67D0;&#x4E2A;&#x4E11;&#x6570;&#x7684;&#x4E0B;&#x6807;&#xFF0C;&#x90A3;&#x4E48;&#x7B2C;i&#x4E2A;&#x4E11;&#x6570;&#x5E94;&#x4E3A; <code>dp[p2]*2,dp[p3]*3,dp[p5]*5</code> &#x7684;&#x6700;&#x5C0F;&#x503C;&#x3002;<br>&#x7279;&#x5F81;&#x662F;&#x5047;&#x5982;&#x7B2C;i&#x4E2A;&#x65B0;&#x4E11;&#x6570;&#x662F;&#x7B2C;p2&#x4E2A;&#x4E11;&#x6570;&#x4E58;2&#x5F97;&#x5230;&#x7684;&#xFF0C;&#x5219;&#x4E0B;&#x6807;p2+1&#xFF0C;&#x7B2C;i+1&#x4E2A;&#x4E11;&#x6570;&#x4E3A; <code>dp[p2+1]*2,dp[p3]*3,dp[p5]*5</code> &#x6700;&#x5C0F;&#x503C;&#xFF1B;<br>&#x7B2C;p3&#x4E2A;&#x4E11;&#x6570;&#x4E58;3&#x5F97;&#x5230;&#x7684;&#x7B2C;i&#x4E2A;&#x4E11;&#x6570;&#x5219;&#x4E0B;&#x6807;p3+1&#xFF0C;&#x7B2C;i+1&#x4E2A;&#x4E11;&#x6570;&#x4E3A; <code>dp[p2]*2,dp[p3+1]*3,dp[p5]*5</code> &#x6700;&#x5C0F;&#x503C;&#xFF1B;<br>&#x7B2C;p5&#x4E2A;&#x4E11;&#x6570;&#x4E58;5&#x5F97;&#x5230;&#x7684;&#x5219;&#x4E0B;&#x6807;p5+1&#xFF0C;&#x7B2C;i+1&#x4E2A;&#x4E11;&#x6570;&#x4E3A;<code>dp[p2]*2,dp[p3]*3,dp[p5+1]*5</code> &#x6700;&#x5C0F;&#x503C;&#x3002;</p>
+<h2 id="&#x524D;&#x7F00;&#x548C;"><a href="#&#x524D;&#x7F00;&#x548C;" class="headerlink" title="&#x524D;&#x7F00;&#x548C;"></a>&#x524D;&#x7F00;&#x548C;</h2><p>&#x524D;&#x7F00;&#x548C;&#x6570;&#x7EC4;&#x7EC6;&#x5206;&#x6709;&#x4E24;&#x79CD;&#xFF1A;<br>&#x5982;&#x679C;preSum[i]&#x8BB0;&#x5F55;&#x4ECE;0&#x7D2F;&#x52A0;&#x5230;i&#x7684;&#x548C;&#xFF0C;&#x90A3;&#x4E48;&#x8BA1;&#x7B97;&#x6570;&#x7EC4;&#x7B2C;i&#x5230;j&#x4E2A;&#x5143;&#x7D20;&#x7684;&#x7D2F;&#x52A0;&#x548C;&#x5373;&#x4E3A; preSum[j]-preSum[i]+arr[i]<br>&#x5982;&#x679C;preSum[i]&#xFF08;i&gt;0&#xFF09;&#x8BB0;&#x5F55;&#x4ECE;&#x4E0B;&#x6807;0&#x7D2F;&#x52A0;&#x5230;&#x4E0B;&#x6807;i-1&#x7684;&#x548C;&#xFF0C;preSum[0]=0&#xFF0C;&#x90A3;&#x4E48;&#x8BA1;&#x7B97;&#x6570;&#x7EC4;&#x4E0B;&#x6807;i&#x5230;j&#x7684;&#x5143;&#x7D20;&#x7D2F;&#x52A0;&#x548C;&#x5373;&#x4E3A; preSum[j+1]-preSum[i]</p>
+<p>&#x4F8B;&#x9898;&#xFF1A;<a href="https://billystudio.github.io/2018/08/22/Aug-22nd-exercises-answer/#leetcode1588">&#x6240;&#x6709;&#x5947;&#x6570;&#x957F;&#x5EA6;&#x5B50;&#x6570;&#x7EC4;&#x7684;&#x548C;</a></p>
+<p>&#x5229;&#x7528;&#x524D;&#x7F00;&#x548C;&#x8FD8;&#x53EF;&#x4EE5;&#x6784;&#x9020;&#x5DEE;&#x5206;&#x6570;&#x7EC4;&#xFF0C;&#x4F8B;&#x9898;&#xFF1A;<a href="https://leetcode-cn.com/problems/corporate-flight-bookings/" target="_blank" rel="noopener">&#x822A;&#x73ED;&#x9884;&#x8BA2;&#x7EDF;&#x8BA1;</a></p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/算法/">#算法</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/动态规划/">#动态规划</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2021-Mar-27th-MySQL-Query-and-Optimization/">Advanced MySQL and Database Optimization</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2021-Mar-13th-Algorithm-recursion-and-backtracking/">数据结构与算法笔记 | 递归与回溯</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

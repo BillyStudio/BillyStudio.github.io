@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>音频算法中的声学基础 - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/2018-06-27-sound-physics-basics/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x7406;&amp;#x8BBA;&amp;#x662F;&amp;#x6280;&amp;#x672F;&amp;#x7684;&amp;#x57FA;&amp;#x77F3;&amp;#xFF0C;&amp;#x800C;&amp;#x57FA;&amp;#x672C;&amp;#x6982;&amp;#x5FF5;&amp;#x548C;&amp;#x5B9A;&amp;#x4E49;&amp;#x662F;&amp;#x7406;&amp;#x8BBA;&amp;#x7684;&amp;#x57FA;&amp;#x77F3;&amp;#x3002;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="音频算法中的声学基础">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/2018-06-27-sound-physics-basics/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x7406;&amp;#x8BBA;&amp;#x662F;&amp;#x6280;&amp;#x672F;&amp;#x7684;&amp;#x57FA;&amp;#x77F3;&amp;#xFF0C;&amp;#x800C;&amp;#x57FA;&amp;#x672C;&amp;#x6982;&amp;#x5FF5;&amp;#x548C;&amp;#x5B9A;&amp;#x4E49;&amp;#x662F;&amp;#x7406;&amp;#x8BBA;&amp;#x7684;&amp;#x57FA;&amp;#x77F3;&amp;#x3002;">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.550Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="音频算法中的声学基础">
+<meta name="twitter:description" content="&amp;#x7406;&amp;#x8BBA;&amp;#x662F;&amp;#x6280;&amp;#x672F;&amp;#x7684;&amp;#x57FA;&amp;#x77F3;&amp;#xFF0C;&amp;#x800C;&amp;#x57FA;&amp;#x672C;&amp;#x6982;&amp;#x5FF5;&amp;#x548C;&amp;#x5B9A;&amp;#x4E49;&amp;#x662F;&amp;#x7406;&amp;#x8BBA;&amp;#x7684;&amp;#x57FA;&amp;#x77F3;&amp;#x3002;">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#一些声学中概念">1&nbsp;&nbsp;<b>一些声学中概念</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#响度">1.1&nbsp;&nbsp;响度</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#声级">1.2&nbsp;&nbsp;声级</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#复数的欧拉公式">1.3&nbsp;&nbsp;复数的欧拉公式</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#从卷积展开来">2&nbsp;&nbsp;<b>从卷积展开来</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#傅里叶变换">2.1&nbsp;&nbsp;傅里叶变换</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Z变换">2.2&nbsp;&nbsp;Z变换</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#EDC">2.3&nbsp;&nbsp;EDC</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#混响时间">2.4&nbsp;&nbsp;混响时间</a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2018-06-27-sound-physics-basics/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2018-06-27-sound-physics-basics/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            音频算法中的声学基础
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-06-27T06:46:33.000Z" itemprop="datePublished">6月 27 2018</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            1 分钟 读完 (约 170 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x7406;&#x8BBA;&#x662F;&#x6280;&#x672F;&#x7684;&#x57FA;&#x77F3;&#xFF0C;&#x800C;&#x57FA;&#x672C;&#x6982;&#x5FF5;&#x548C;&#x5B9A;&#x4E49;&#x662F;&#x7406;&#x8BBA;&#x7684;&#x57FA;&#x77F3;&#x3002;<a id="more"></a></p>
+<h1 id="&#x4E00;&#x4E9B;&#x58F0;&#x5B66;&#x4E2D;&#x6982;&#x5FF5;"><a href="#&#x4E00;&#x4E9B;&#x58F0;&#x5B66;&#x4E2D;&#x6982;&#x5FF5;" class="headerlink" title="&#x4E00;&#x4E9B;&#x58F0;&#x5B66;&#x4E2D;&#x6982;&#x5FF5;"></a>&#x4E00;&#x4E9B;&#x58F0;&#x5B66;&#x4E2D;&#x6982;&#x5FF5;</h1><h2 id="&#x54CD;&#x5EA6;"><a href="#&#x54CD;&#x5EA6;" class="headerlink" title="&#x54CD;&#x5EA6;"></a>&#x54CD;&#x5EA6;</h2><h2 id="&#x58F0;&#x7EA7;"><a href="#&#x58F0;&#x7EA7;" class="headerlink" title="&#x58F0;&#x7EA7;"></a>&#x58F0;&#x7EA7;</h2><h2 id="&#x590D;&#x6570;&#x7684;&#x6B27;&#x62C9;&#x516C;&#x5F0F;"><a href="#&#x590D;&#x6570;&#x7684;&#x6B27;&#x62C9;&#x516C;&#x5F0F;" class="headerlink" title="&#x590D;&#x6570;&#x7684;&#x6B27;&#x62C9;&#x516C;&#x5F0F;"></a>&#x590D;&#x6570;&#x7684;&#x6B27;&#x62C9;&#x516C;&#x5F0F;</h2><script type="math/tex; mode=display">e^{ix} = \cos(x) + i*\sin(x)</script><h1 id="&#x4ECE;&#x5377;&#x79EF;&#x5C55;&#x5F00;&#x6765;"><a href="#&#x4ECE;&#x5377;&#x79EF;&#x5C55;&#x5F00;&#x6765;" class="headerlink" title="&#x4ECE;&#x5377;&#x79EF;&#x5C55;&#x5F00;&#x6765;"></a>&#x4ECE;&#x5377;&#x79EF;&#x5C55;&#x5F00;&#x6765;</h1><p>&#x8BBE; $s$ &#x4E3A;&#x58F0;&#x6E90;&#x4FE1;&#x53F7;, $H$ &#x4E3A;&#x623F;&#x95F4;&#x51B2;&#x6FC0;&#x54CD;&#x5E94;&#x51FD;&#x6570;, &#x4ED6;&#x4EEC;&#x505A;&#x5377;&#x79EF;&#x7684;&#x7ED3;&#x679C;&#x662F;</p>
+<script type="math/tex; mode=display">y[k] = \sum_{i=0}^k s[i] H[k-i]</script><h2 id="&#x5085;&#x91CC;&#x53F6;&#x53D8;&#x6362;"><a href="#&#x5085;&#x91CC;&#x53F6;&#x53D8;&#x6362;" class="headerlink" title="&#x5085;&#x91CC;&#x53F6;&#x53D8;&#x6362;"></a>&#x5085;&#x91CC;&#x53F6;&#x53D8;&#x6362;</h2><p>&#x6709;&#x4E86;&#x590D;&#x6570;&#x7684;&#x6B27;&#x62C9;&#x516C;&#x5F0F;&#xFF0C;&#x6211;&#x4EEC;&#x5C06;&#x8F93;&#x5165;&#x4FE1;&#x53F7;&#x8868;&#x793A;&#x4E3A;</p>
+<script type="math/tex; mode=display">x[n] = e^{j\omega n}</script><p>&#x6240;&#x4EE5;</p>
+<script type="math/tex; mode=display">y[n] = \sum_k h[k]x[n-k]</script><h2 id="Z&#x53D8;&#x6362;"><a href="#Z&#x53D8;&#x6362;" class="headerlink" title="Z&#x53D8;&#x6362;"></a>Z&#x53D8;&#x6362;</h2><h2 id="EDC"><a href="#EDC" class="headerlink" title="EDC"></a>EDC</h2><p>Energy Decay Curve&#xFF0C;&#x80FD;&#x91CF;&#x8870;&#x51CF;&#x66F2;&#x7EBF;&#x3002;</p>
+<script type="math/tex; mode=display">EDC(t)=\int_t^\infinity h^2(\tau)d \tau</script><h2 id="&#x6DF7;&#x54CD;&#x65F6;&#x95F4;"><a href="#&#x6DF7;&#x54CD;&#x65F6;&#x95F4;" class="headerlink" title="&#x6DF7;&#x54CD;&#x65F6;&#x95F4;"></a>&#x6DF7;&#x54CD;&#x65F6;&#x95F4;</h2><p>EDC&#x964D;&#x5230;60&#x5206;&#x8D1D;&#x7684;&#x65F6;&#x95F4;</p>
+
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/2018-06-27-mathcad-15-installation-manual/">Win10 安装 Mathcad 15.0 笔记</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/2018-06-26-linux-function-execve/">Linux execve函数</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

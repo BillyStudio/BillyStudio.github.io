@@ -1,0 +1,609 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>Building personal budgets and bills database against consumerism - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/Nov-12th-2019-Building-personal-budgets-and-bills-database-against-consumerism/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x5F53;&amp;#x524D;&amp;#x5E02;&amp;#x9762;&amp;#x4E0A;&amp;#x7684;&amp;#x8BB0;&amp;#x8D26;&amp;#x5DE5;&amp;#x5177;&amp;#x90FD;&amp;#x53EA;&amp;#x662F;&amp;#x8BB0;&amp;#x5F55;&amp;#x4E86;&amp;#x82B1;&amp;#x94B1;&amp;#x4E0E;&amp;#x6D88;&amp;#x8D39;&amp;#xFF0C;&amp;#x800C;&amp;#x5E76;&amp;#x6CA1;">
+<meta name="keywords" content="SQL,consumerism,MariaDB">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Building personal budgets and bills database against consumerism">
+<meta property="og:url" content="https://BillyStudio.github.io/Nov-12th-2019-Building-personal-budgets-and-bills-database-against-consumerism/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x5F53;&amp;#x524D;&amp;#x5E02;&amp;#x9762;&amp;#x4E0A;&amp;#x7684;&amp;#x8BB0;&amp;#x8D26;&amp;#x5DE5;&amp;#x5177;&amp;#x90FD;&amp;#x53EA;&amp;#x662F;&amp;#x8BB0;&amp;#x5F55;&amp;#x4E86;&amp;#x82B1;&amp;#x94B1;&amp;#x4E0E;&amp;#x6D88;&amp;#x8D39;&amp;#xFF0C;&amp;#x800C;&amp;#x5E76;&amp;#x6CA1;">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.510Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Building personal budgets and bills database against consumerism">
+<meta name="twitter:description" content="&amp;#x5F53;&amp;#x524D;&amp;#x5E02;&amp;#x9762;&amp;#x4E0A;&amp;#x7684;&amp;#x8BB0;&amp;#x8D26;&amp;#x5DE5;&amp;#x5177;&amp;#x90FD;&amp;#x53EA;&amp;#x662F;&amp;#x8BB0;&amp;#x5F55;&amp;#x4E86;&amp;#x82B1;&amp;#x94B1;&amp;#x4E0E;&amp;#x6D88;&amp;#x8D39;&amp;#xFF0C;&amp;#x800C;&amp;#x5E76;&amp;#x6CA1;">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#消费时刻表">1.1&nbsp;&nbsp;消费时刻表</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#item">1.1.1&nbsp;&nbsp;item</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#category">1.1.2&nbsp;&nbsp;category</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#description">1.1.3&nbsp;&nbsp;description</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#expense">1.1.4&nbsp;&nbsp;expense</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#moment">1.1.5&nbsp;&nbsp;moment</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#使用时间表">1.2&nbsp;&nbsp;使用时间表</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#item-id">1.2.1&nbsp;&nbsp;item-id</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#description-1">1.2.2&nbsp;&nbsp;description</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#check-point">1.2.3&nbsp;&nbsp;check-point</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#check-flag">1.2.4&nbsp;&nbsp;check flag</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Mariadb-installation">1.3&nbsp;&nbsp;Mariadb installation</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Selecting-a-database">1.3.1&nbsp;&nbsp;Selecting a database</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Access-using-Apache-phpMyAdmin">1.4&nbsp;&nbsp;Access using Apache phpMyAdmin</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Create-a-table">1.4.1&nbsp;&nbsp;Create a table</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Insert-item">1.4.2&nbsp;&nbsp;Insert item</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Query">1.4.3&nbsp;&nbsp;Query</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#一些SQL技巧">1.5&nbsp;&nbsp;一些SQL技巧</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#实现列的累加功能">1.5.1&nbsp;&nbsp;实现列的累加功能</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#JDBC">1.6&nbsp;&nbsp;JDBC</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Data-Analizing">2&nbsp;&nbsp;<b>Data Analizing</b></a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/Nov-12th-2019-Building-personal-budgets-and-bills-database-against-consumerism/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/Nov-12th-2019-Building-personal-budgets-and-bills-database-against-consumerism/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Building personal budgets and bills database against consumerism
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2019-11-12T07:45:53.000Z" itemprop="datePublished">Nov 12 2019</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            5 minutes read (About 805 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x5F53;&#x524D;&#x5E02;&#x9762;&#x4E0A;&#x7684;&#x8BB0;&#x8D26;&#x5DE5;&#x5177;&#x90FD;&#x53EA;&#x662F;&#x8BB0;&#x5F55;&#x4E86;&#x82B1;&#x94B1;&#x4E0E;&#x6D88;&#x8D39;&#xFF0C;&#x800C;&#x5E76;&#x6CA1;&#x6709;&#x5173;&#x6CE8;&#x8FD9;&#x7B14;&#x94B1;&#x82B1;&#x7684;&#x5230;&#x5E95;&#x503C;&#x4E0D;&#x503C;&#x3002;<a id="more"></a><br>&#x672C;&#x6587;&#x63D0;&#x51FA;&#x4E86;&#x4E00;&#x79CD;&#x4EF7;&#x503C;&#x7684;&#x5EA6;&#x91CF;&#xFF0C;&#x5373;&#x5355;&#x4F4D;&#x65F6;&#x95F4;&#x4EF7;&#x503C;=&#x603B;&#x6D88;&#x8D39;/&#x603B;&#x6709;&#x6548;&#x65F6;&#x95F4;&#x3002;&#x56E0;&#x4E3A;&#x6D88;&#x8D39;&#x884C;&#x4E3A;&#x5177;&#x6709;&#x77AC;&#x65F6;&#x6027;&#xFF0C;&#x800C;&#x4F7F;&#x7528;&#x884C;&#x4E3A;&#x5177;&#x6709;&#x5EF6;&#x65F6;&#x6027;&#x3002;&#x9700;&#x8981;&#x6570;&#x636E;&#x5E93;&#x5EFA;&#x7ACB;&#x8FD9;&#x4E24;&#x4E2A;&#x8868;&#x683C;&#x3002;</p>
+<h2 id="&#x6D88;&#x8D39;&#x65F6;&#x523B;&#x8868;"><a href="#&#x6D88;&#x8D39;&#x65F6;&#x523B;&#x8868;" class="headerlink" title="&#x6D88;&#x8D39;&#x65F6;&#x523B;&#x8868;"></a>&#x6D88;&#x8D39;&#x65F6;&#x523B;&#x8868;</h2><h3 id="item"><a href="#item" class="headerlink" title="item"></a>item</h3><p>&#x8FD9;&#x4E2A;&#x662F; ID<br>&#x8868;&#x793A;&#x7684;&#x662F;&#x6D88;&#x8D39;&#x9879;&#xFF0C;&#x6BD4;&#x5982; &#x201C;iPhone 5&#x201D;</p>
+<p>&#x8BF4;&#x660E;&#xFF1A;&#x6BD4;&#x5982;&#x79DF;&#x623F;&#xFF0C;&#x6BD5;&#x4E1A;&#x524D;&#x6691;&#x5047;&#x79DF;&#x623F;item&#x548C;&#x6BD5;&#x4E1A;&#x540E;&#x79DF;&#x623F;item&#x5C5E;&#x4E8E;&#x4E0D;&#x540C;&#x7684;item</p>
+<h3 id="category"><a href="#category" class="headerlink" title="category"></a>category</h3><p>&#x6240;&#x5C5E;&#x7C7B;&#x522B;&#xFF0C;&#x6BD4;&#x5982; &#x201C;&#x901A;&#x8BAF;&#x5DE5;&#x5177;&#x201D; &#x6216; &#x201C;&#x7535;&#x5B50;&#x4EA7;&#x54C1;&#x201D;</p>
+<h3 id="description"><a href="#description" class="headerlink" title="description"></a>description</h3><h3 id="expense"><a href="#expense" class="headerlink" title="expense"></a>expense</h3><p>&#x6D88;&#x8D39;&#x91D1;&#x989D;</p>
+<h3 id="moment"><a href="#moment" class="headerlink" title="moment"></a>moment</h3><p>&#x6D88;&#x8D39;&#x53D1;&#x751F;&#x7684;&#x65F6;&#x95F4;</p>
+<h2 id="&#x4F7F;&#x7528;&#x65F6;&#x95F4;&#x8868;"><a href="#&#x4F7F;&#x7528;&#x65F6;&#x95F4;&#x8868;" class="headerlink" title="&#x4F7F;&#x7528;&#x65F6;&#x95F4;&#x8868;"></a>&#x4F7F;&#x7528;&#x65F6;&#x95F4;&#x8868;</h2><h3 id="item-id"><a href="#item-id" class="headerlink" title="item-id"></a>item-id</h3><p>&#x94FE;&#x63A5;&#x5230; item</p>
+<h3 id="description-1"><a href="#description-1" class="headerlink" title="description"></a>description</h3><h3 id="check-point"><a href="#check-point" class="headerlink" title="check-point"></a>check-point</h3><p>&#x8BB0;&#x5F55;&#x65F6;&#x7684;&#x5B9E;&#x9645;&#x6709;&#x6548;&#x4F7F;&#x7528;&#x65F6;&#x95F4;&#x3002;</p>
+<p>&#x4E5F;&#x53EF;&#x518D;&#x7EC6;&#x5206;&#x4E3A;&#x8F7B;&#x5EA6;&#x4F7F;&#x7528;&#x3001;&#x4E2D;&#x5EA6;&#x4F7F;&#x7528;&#x548C;&#x91CD;&#x5EA6;&#x4F7F;&#x7528;&#x3002;</p>
+<p>&#x540E;&#x671F;&#x8003;&#x8651;&#x52A0;&#x5165;&#x901A;&#x8D27;&#x81A8;&#x80C0;&#x7387;&#x6216;&#x5C45;&#x6C11;&#x7269;&#x4EF7;&#x589E;&#x957F;&#x6307;&#x6570;</p>
+<h3 id="check-flag"><a href="#check-flag" class="headerlink" title="check flag"></a>check flag</h3><p>0: normal<br>1: end</p>
+<h2 id="Mariadb-installation"><a href="#Mariadb-installation" class="headerlink" title="Mariadb installation"></a>Mariadb installation</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu mariadb</span><br><span class="line">su</span><br><span class="line">mariadb-install-db --user=mysql --basedir=/usr --datadir=/var/lib/mysql</span><br></pre></td></tr></table></figure>
+
+<p>to install MariaDB/MySQL system tables in /var/lib/mysql</p>
+<p>Two all-privilege accounts were created.<br>One is root@localhost, it has no password, but you need to be system &#x2018;root&#x2019; user to connect. Use, for example, <code>sudo mysql</code>.<br>The second is mysql@localhost, it has no password either, but you need to be the system &#x2018;mysql&#x2019; user to connect.<br>After connecting you can set the password, if you would need to be able to connect as any of these users with a password and without sudo.</p>
+<p>You can start the MariaDB daemon with:<br>cd &#x2018;/usr&#x2019; ; /usr/bin/mysqld_safe &#x2014;datadir=&#x2019;/var/lib/mysql&#x2019;</p>
+<p>You can test the MariaDB daemon with mysql-test-run.pl<br>cd &#x2018;/usr/mysql-test&#x2019; ; perl mysql-test-run.pl</p>
+<figure class="highlight bash hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">systemctl <span class="hljs-built_in">enable</span> mariadb.service</span><br><span class="line">systemctl start mariadb.service</span><br><span class="line">mysql</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">create</span> <span class="hljs-keyword">user</span> <span class="hljs-string">&apos;wsd&apos;</span>@<span class="hljs-string">&apos;localhost&apos;</span> <span class="hljs-keyword">identified</span> <span class="hljs-keyword">by</span> <span class="hljs-string">&apos;190701&apos;</span>;</span><br><span class="line"><span class="hljs-keyword">create</span> <span class="hljs-keyword">database</span> consumption;</span><br><span class="line"><span class="hljs-keyword">grant</span> <span class="hljs-keyword">all</span> <span class="hljs-keyword">privileges</span> <span class="hljs-keyword">on</span> consumption.* <span class="hljs-keyword">to</span> <span class="hljs-string">&apos;wsd&apos;</span>@<span class="hljs-string">&apos;localhost&apos;</span>;</span><br><span class="line"><span class="hljs-keyword">flush</span> <span class="hljs-keyword">privileges</span>;</span><br><span class="line">quit;</span><br></pre></td></tr></table></figure>
+
+<p>then you can use common to login</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysql [-u wsd] -p # [] can be dismissed is your current user is wsd</span><br></pre></td></tr></table></figure>
+
+<h3 id="Selecting-a-database"><a href="#Selecting-a-database" class="headerlink" title="Selecting a database"></a>Selecting a database</h3><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">use</span> consumption</span><br></pre></td></tr></table></figure>
+
+<h2 id="Access-using-Apache-phpMyAdmin"><a href="#Access-using-Apache-phpMyAdmin" class="headerlink" title="Access using Apache phpMyAdmin"></a>Access using Apache phpMyAdmin</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo pacman -Syu php apache php-apache phpmyadmin</span><br></pre></td></tr></table></figure>
+
+<p>Make sure php can be run on Apache:<br><a href="https://wiki.archlinux.org/index.php/Apache_HTTP_Server#PHP" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/Apache_HTTP_Server#PHP</a></p>
+<p>Then add phpmyadmin to Apche:<br><a href="https://wiki.archlinux.org/index.php/PhpMyAdmin#Apache" target="_blank" rel="noopener">https://wiki.archlinux.org/index.php/PhpMyAdmin#Apache</a></p>
+<h3 id="Create-a-table"><a href="#Create-a-table" class="headerlink" title="Create a table"></a>Create a table</h3><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">`consumption`</span>.<span class="hljs-string">`ItemInfo`</span> ( <span class="hljs-string">`item`</span> <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">100</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> , <span class="hljs-string">`category`</span> <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">1</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> , PRIMARY <span class="hljs-keyword">KEY</span> (<span class="hljs-string">`item`</span>(<span class="hljs-number">100</span>))) <span class="hljs-keyword">ENGINE</span> = <span class="hljs-keyword">InnoDB</span> <span class="hljs-keyword">COMMENT</span> = <span class="hljs-string">&apos;Table recording items information&apos;</span>;</span><br><span class="line"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-string">`consumption`</span>.<span class="hljs-string">`SpendingMoment`</span> ( <span class="hljs-string">`id`</span> <span class="hljs-built_in">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> AUTO_INCREMENT , <span class="hljs-string">`item_name`</span> <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">100</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> , <span class="hljs-string">`category`</span> <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">1</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> , <span class="hljs-string">`description`</span> <span class="hljs-built_in">TEXT</span> <span class="hljs-literal">NULL</span> , <span class="hljs-string">`expense`</span> <span class="hljs-built_in">DECIMAL</span>(<span class="hljs-number">10</span>, <span class="hljs-number">2</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> , <span class="hljs-string">`moment`</span> <span class="hljs-built_in">DATE</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span> , PRIMARY <span class="hljs-keyword">KEY</span> (<span class="hljs-string">`id`</span>)) <span class="hljs-keyword">ENGINE</span> = <span class="hljs-keyword">InnoDB</span> <span class="hljs-keyword">COMMENT</span> = <span class="hljs-string">&apos;Table logging the moments of expenses&apos;</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="Insert-item"><a href="#Insert-item" class="headerlink" title="Insert item"></a>Insert item</h3><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> <span class="hljs-string">`UsageDuration`</span> (<span class="hljs-string">`id`</span>, <span class="hljs-string">`item_name`</span>, <span class="hljs-string">`description`</span>, <span class="hljs-string">`effective_time`</span>, <span class="hljs-string">`check_time`</span>) <span class="hljs-keyword">VALUES</span> (<span class="hljs-literal">NULL</span>, <span class="hljs-string">&apos;renting room&apos;</span>, <span class="hljs-string">&apos;9&#x6708;&#x4F4F;&#x4E86;5&#x5929;&apos;</span>, <span class="hljs-string">&apos;120:00:00.000000&apos;</span>, <span class="hljs-string">&apos;2019-09-09&apos;</span>);</span><br></pre></td></tr></table></figure>
+
+<h3 id="Query"><a href="#Query" class="headerlink" title="Query"></a>Query</h3><figure class="highlight sql hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">1. <span class="hljs-keyword">select</span> item_name <span class="hljs-keyword">from</span> item_info</span><br><span class="line"><span class="hljs-number">2.</span> <span class="hljs-keyword">select</span> <span class="hljs-keyword">sum</span>(<span class="hljs-keyword">hour</span>(effective_time)) <span class="hljs-keyword">from</span> UsageDuration <span class="hljs-keyword">where</span> item_name=<span class="hljs-string">&quot;1.&quot;</span></span><br><span class="line"><span class="hljs-number">3.</span> <span class="hljs-keyword">select</span> <span class="hljs-keyword">sum</span>(expense) <span class="hljs-keyword">from</span> SpendingMoment <span class="hljs-keyword">where</span> item_name=<span class="hljs-string">&quot;1.&quot;</span></span><br><span class="line"><span class="hljs-number">4.</span> <span class="hljs-number">3.</span>/<span class="hljs-number">2.</span> <span class="hljs-keyword">where</span> item_name=<span class="hljs-number">1.</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-number">5.</span> <span class="hljs-keyword">select</span> <span class="hljs-keyword">sum</span>(<span class="hljs-number">4.</span>) <span class="hljs-keyword">from</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="&#x4E00;&#x4E9B;SQL&#x6280;&#x5DE7;"><a href="#&#x4E00;&#x4E9B;SQL&#x6280;&#x5DE7;" class="headerlink" title="&#x4E00;&#x4E9B;SQL&#x6280;&#x5DE7;"></a>&#x4E00;&#x4E9B;SQL&#x6280;&#x5DE7;</h2><h3 id="&#x5B9E;&#x73B0;&#x5217;&#x7684;&#x7D2F;&#x52A0;&#x529F;&#x80FD;"><a href="#&#x5B9E;&#x73B0;&#x5217;&#x7684;&#x7D2F;&#x52A0;&#x529F;&#x80FD;" class="headerlink" title="&#x5B9E;&#x73B0;&#x5217;&#x7684;&#x7D2F;&#x52A0;&#x529F;&#x80FD;"></a>&#x5B9E;&#x73B0;&#x5217;&#x7684;&#x7D2F;&#x52A0;&#x529F;&#x80FD;</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [test]&gt; select * from exam;</span><br><span class="line">+-------+-----+</span><br><span class="line">| grade | num |</span><br><span class="line">+-------+-----+</span><br><span class="line">| A     |   2 |</span><br><span class="line">| B     |   4 |</span><br><span class="line">| C     |   2 |</span><br><span class="line">| D     |   6 |</span><br><span class="line">+-------+-----+</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">MariaDB [test]&gt; select row_number() over(order by grade) row_num,</span><br><span class="line">    -&gt; grade,</span><br><span class="line">    -&gt; sum(num) over(order by grade)</span><br><span class="line">    -&gt; from exam</span><br><span class="line">    -&gt; group by grade;</span><br><span class="line">+---------+-------+-------------------------------+</span><br><span class="line">| row_num | grade | sum(num) over(order by grade) |</span><br><span class="line">+---------+-------+-------------------------------+</span><br><span class="line">|       1 | A     |                             2 |</span><br><span class="line">|       2 | B     |                             6 |</span><br><span class="line">|       3 | C     |                             8 |</span><br><span class="line">|       4 | D     |                            14 |</span><br><span class="line">+---------+-------+-------------------------------+</span><br></pre></td></tr></table></figure>
+
+<h2 id="JDBC"><a href="#JDBC" class="headerlink" title="JDBC"></a>JDBC</h2><p>After installing mariadb-jdbc from aur,</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ln -s /usr/share/java/mariadb-jdbc/mariadb-java-client.jar /usr/lib/jvm/default-runtime/lib/</span><br></pre></td></tr></table></figure>
+
+<h1 id="Data-Analizing"><a href="#Data-Analizing" class="headerlink" title="Data Analizing"></a>Data Analizing</h1><p>&#x4E3B;&#x8981;&#x7ED8;&#x5236;&#x4E00;&#x5F20;&#x8868;&#x548C;&#x4E00;&#x5F20;&#x56FE;<br>&#x8868;&#x662F;&#x5728;&#x67D0;&#x4E2A;&#x65F6;&#x95F4;&#x70B9;&#x4E0B;&#x5404; item &#x4E0E;&#x5176; &#x5355;&#x4F4D;&#x6709;&#x6548;&#x65F6;&#x95F4;&#x82B1;&#x8D39;<br>&#x56FE;&#x662F;&#x5728;&#x67D0;&#x4E2A;&#x65F6;&#x95F4;&#x70B9;&#x4E0B;&#x5404; &#x5927;&#x7C7B;&#x7684; &#x603B;&#x5355;&#x4F4D;&#x6709;&#x6548;&#x65F6;&#x95F4;&#x82B1;&#x8D39;</p>
+<p>&#x53C2;&#x8003;&#x6587;&#x7AE0;&#xFF1A;</p>
+<ol>
+<li>&#xFF08;&#x8D85;&#x8BE6;&#x7EC6;&#x4E00;&#x6587;&#x770B;&#x61C2;&#xFF09;MySQL&#x7D2F;&#x8BA1;&#x6C42;&#x548C;&#x95EE;&#x9898;&#x53CA;&#x7A97;&#x53E3;&#x51FD;&#x6570;order by&#x7684;&#x539F;&#x7406;(<a href="https://blog.csdn.net/dhr223/article/details/107413344" target="_blank" rel="noopener">https://blog.csdn.net/dhr223/article/details/107413344</a>)</li>
+</ol>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/SQL/">#SQL</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/consumerism/">#consumerism</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/MariaDB/">#MariaDB</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/Nov-27th-Spring-Cloud-microservices-management-Nacos/">Spring Cloud microservices registration and discovery</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/Nov-8th-Serving-Web-Content-with-Spring-MVC/">Serving Web Content with Spring MVC</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

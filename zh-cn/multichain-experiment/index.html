@@ -1,0 +1,944 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>Shellchain experiment - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/multichain-experiment/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="Basic experiment docs">
+<meta name="keywords" content="Smart Contracts,Shellchain,Blockchain">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shellchain experiment">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/multichain-experiment/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="Basic experiment docs">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/util-create-chain1.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/chain1-daemon.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/cli-chain1-stop.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/listpermissions-issue.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/newaddress.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/listunspent.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/gettxout.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/16.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/3.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/4.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/5.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/6.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/7.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/8.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/9.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/getnewaddress.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/10.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/11.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/12.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/13.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/14.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/15.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/workflow.png">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.720Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shellchain experiment">
+<meta name="twitter:description" content="Basic experiment docs">
+<meta name="twitter:image" content="https://billystudio.github.io/zh-cn/multichain-experiment/util-create-chain1.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Download-and-install">1&nbsp;&nbsp;<b>Download and install</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Experiment-1-单机实验">2&nbsp;&nbsp;<b>Experiment 1: 单机实验</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#start">2.1.1&nbsp;&nbsp;start</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Raw-transactions-原始交易">2.1.2&nbsp;&nbsp;Raw transactions: 原始交易</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Round-robin-consensus">2.1.3&nbsp;&nbsp;Round-robin consensus</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Experiment-2-双机实验">3&nbsp;&nbsp;<b>Experiment 2: 双机实验</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Streams-流">3.1.1&nbsp;&nbsp;Streams: 流</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Assets">3.1.2&nbsp;&nbsp;Assets</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Issuing-assets">3.1.3&nbsp;&nbsp;Issuing assets</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Combining-assets-and-streams-流与资产的结合">3.1.4&nbsp;&nbsp;Combining assets and streams: 流与资产的结合</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#源码阅读">4&nbsp;&nbsp;<b>源码阅读</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#交易的序列化存储与反序列化恢复">4.1&nbsp;&nbsp;交易的序列化存储与反序列化恢复</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#RPC请求接收">4.2&nbsp;&nbsp;RPC请求接收</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#查看-LogPrintf">4.2.1&nbsp;&nbsp;查看 LogPrintf</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#在配置文件中添加自定义配置">4.3&nbsp;&nbsp;在配置文件中添加自定义配置</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#DIY：魔改代码">5&nbsp;&nbsp;<b>DIY：魔改代码</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#自定义交易格式">5.1&nbsp;&nbsp;自定义交易格式</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1-定义合约字段">5.1.1&nbsp;&nbsp;1.定义合约字段</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#2-添加编译选项">5.1.2&nbsp;&nbsp;2. 添加编译选项</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#3-添加交易自定义字段">5.1.3&nbsp;&nbsp;3. 添加交易自定义字段</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#4-修改发送交易的调用函数参数">5.1.4&nbsp;&nbsp;4. 修改发送交易的调用函数参数</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#5-BuildAssetTransaction">5.1.5&nbsp;&nbsp;5. BuildAssetTransaction</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#6-拓展交易检查函数">5.1.6&nbsp;&nbsp;6. 拓展交易检查函数</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#7-编写合约数据库">5.1.7&nbsp;&nbsp;7. 编写合约数据库</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#8-编写-rpc-接口函数支持">5.1.8&nbsp;&nbsp;8. 编写 rpc 接口函数支持</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#9-添加对于-rawtransaction-的解析支持">5.1.9&nbsp;&nbsp;9. 添加对于 rawtransaction 的解析支持</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#添加自定义接口">5.2&nbsp;&nbsp;添加自定义接口</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#根据公钥-pkey-获取地址：">5.2.1&nbsp;&nbsp;根据公钥 pkey 获取地址：</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#根据地址获取公钥脚本：">5.2.2&nbsp;&nbsp;根据地址获取公钥脚本：</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#根据-scriptPubKey-获取-pubkey">5.2.3&nbsp;&nbsp;根据 scriptPubKey 获取 pubkey</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#CMutableTransaction-转-CWalletTx">5.2.4&nbsp;&nbsp;CMutableTransaction 转 CWalletTx</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#测试createcontract">5.2.5&nbsp;&nbsp;测试createcontract</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#测试-callcontract">5.2.6&nbsp;&nbsp;测试 callcontract</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#系列测试">5.3&nbsp;&nbsp;系列测试</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1">5.3.1&nbsp;&nbsp;1</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#2">5.3.2&nbsp;&nbsp;2</a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/multichain-experiment/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/multichain-experiment/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Shellchain experiment
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-09-08T07:32:02.000Z" itemprop="datePublished">9月 8 2018</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh-cn/categories/JuliuSC项目/">JuliuSC项目</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            1 小时 读完 (约 6676 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>Basic experiment docs <a id="more"></a></p>
+<h1 id="Download-and-install"><a href="#Download-and-install" class="headerlink" title="Download and install"></a>Download and install</h1><p><a href="https://github.com/USTB-InternetSecurityLab/Shellchain" target="_blank" rel="noopener">https://github.com/USTB-InternetSecurityLab/Shellchain</a></p>
+<p>&#x9879;&#x76EE;&#x4EE3;&#x7801;&#x91CF;17&#x4F59;&#x4E07;&#x884C;&#xFF0C;&#x57FA;&#x4E8E;multichain&#x5F00;&#x53D1;&#xFF0C;&#x6700;&#x8FD1;&#x7684;&#x5206;&#x652F;&#xFF1A; springboot-contract</p>
+<p>VSCode&#x914D;&#x7F6E;config.json&#x4E3E;&#x4F8B;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">    // Use IntelliSense to learn about possible attributes.</span><br><span class="line">    // Hover to view descriptions of existing attributes.</span><br><span class="line">    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387</span><br><span class="line">    &quot;version&quot;: &quot;0.2.0&quot;,</span><br><span class="line">    &quot;configurations&quot;: [</span><br><span class="line">        {</span><br><span class="line">            &quot;name&quot;: &quot;(gdb) Launch&quot;,</span><br><span class="line">            &quot;type&quot;: &quot;cppdbg&quot;,</span><br><span class="line">            &quot;request&quot;: &quot;launch&quot;,</span><br><span class="line">            &quot;program&quot;: &quot;${workspaceRoot}/src/multichaind&quot;,</span><br><span class="line">            &quot;args&quot;: [&quot;shellchain&quot;],</span><br><span class="line">            &quot;stopAtEntry&quot;: false,</span><br><span class="line">            &quot;cwd&quot;: &quot;${workspaceRoot}&quot;,</span><br><span class="line">            &quot;environment&quot;: [],</span><br><span class="line">            &quot;externalConsole&quot;: false,</span><br><span class="line">            &quot;MIMode&quot;: &quot;gdb&quot;</span><br><span class="line">            &quot;setupCommands&quot;: [</span><br><span class="line">               {</span><br><span class="line">                   &quot;description&quot;: &quot;Enable pretty-printing for gdb&quot;,</span><br><span class="line">                   &quot;text&quot;: &quot;-enable-pretty-printing&quot;,</span><br><span class="line">                   &quot;ignoreFailures&quot;: true</span><br><span class="line">               }</span><br><span class="line">            ]</span><br><span class="line">        }</span><br><span class="line">    ]</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h1 id="Experiment-1-&#x5355;&#x673A;&#x5B9E;&#x9A8C;"><a href="#Experiment-1-&#x5355;&#x673A;&#x5B9E;&#x9A8C;" class="headerlink" title="Experiment 1: &#x5355;&#x673A;&#x5B9E;&#x9A8C;"></a>Experiment 1: &#x5355;&#x673A;&#x5B9E;&#x9A8C;</h1><h3 id="start"><a href="#start" class="headerlink" title="start"></a>start</h3><p>&#x521B;&#x5EFA;&#x4E00;&#x6761;&#x65B0;&#x94FE;&#xFF0C;&#x8FD9;&#x91CC;&#x7684;&#x94FE;&#x540D;&#x4E3A;chain1&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ shellchain-util create chain1</span><br></pre></td></tr></table></figure>
+
+<p><img src="util-create-chain1.png" alt="./src/shellchain-util create chain1"></p>
+<p>&#x67E5;&#x770B;&#x94FE;&#x521D;&#x59CB;&#x5316;&#x6570;&#x636E;&#xFF0C;&#x542F;&#x52A8;&#x94FE;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ cat ~/.shellchain/chain1/params.dat</span><br><span class="line">wsd@ubuntu_1:~$ shellchaind chain1 -daemon</span><br></pre></td></tr></table></figure>
+
+<p><img src="chain1-daemon.png" alt="shellchaind chain1 -daemon"></p>
+<p>&#x5173;&#x95ED;&#x94FE;<br><img src="cli-chain1-stop.png" alt="shellchain-cli chain1 stop"></p>
+<h3 id="Raw-transactions-&#x539F;&#x59CB;&#x4EA4;&#x6613;"><a href="#Raw-transactions-&#x539F;&#x59CB;&#x4EA4;&#x6613;" class="headerlink" title="Raw transactions: &#x539F;&#x59CB;&#x4EA4;&#x6613;"></a>Raw transactions: &#x539F;&#x59CB;&#x4EA4;&#x6613;</h3><p>&#x67E5;&#x770B;&#x6709;&#x6388;&#x6743;&#x8D44;&#x683C;&#x7684;&#x8D26;&#x6237;&#x5E76;&#x521B;&#x5EFA;&#x4E00;&#x7B14;&#x7528;&#x4E8E;&#x8F6C;&#x8D26;&#x7684;&#x8D44;&#x4EA7;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">listpermissions issue</span><br><span class="line">issue 15dCVacyUcLD22yX3EeoYAecfwqdRZhfedTPT7 asset1 100 0.1</span><br></pre></td></tr></table></figure>
+
+<p>(If multiple addresses are displayed, use the getaddresses true command to see which addresses belong to the local wallet.)</p>
+<p>&#x8FD4;&#x56DE;&#x8D44;&#x4EA7;&#x521B;&#x5EFA;&#x7684;&#x4EA4;&#x6613;id<br><img src="listpermissions-issue.png" alt="list accounts of issue permission"></p>
+<p>&#x521B;&#x5EFA;&#x65B0;&#x7684;&#x5730;&#x5740;&#x7528;&#x4E8E;&#x8F6C;&#x8D26;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">getnewaddress</span><br></pre></td></tr></table></figure>
+
+<p>&#x7ED9;&#x4E88;&#x65B0;&#x5730;&#x5740;&#x4EA4;&#x6613;&#x6743;&#x9650;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">grant 1CQ9gPjQLUnebtZh73hZv7uNDx1ihtQRUxVt5L receive,send</span><br></pre></td></tr></table></figure>
+
+<p>&#x8FD4;&#x56DE;&#x4EA4;&#x6613;&#x6388;&#x6743;&#x5730;&#x5740;<br><img src="newaddress.png" alt="newaddress"></p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x6211;&#x4EEC;&#x770B;&#x4E00;&#x770B;&#x4EA4;&#x6613;&#x683C;&#x5F0F;&#xFF1A;<code>gettransaction c20cc3707c00402ba1365a49c373483b5ae55e42055e7717d65d61bfc77243df</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">    &quot;amount&quot; : 0.00000000,</span><br><span class="line">    &quot;fee&quot; : 0.00000000,</span><br><span class="line">    &quot;confirmations&quot; : 6,</span><br><span class="line">    &quot;blockhash&quot; : &quot;001ceed2e7cc61a635a4bfa81a091d53d38695b5f5068102c9d5cf8513afa95c&quot;,</span><br><span class="line">    &quot;blockindex&quot; : 1,</span><br><span class="line">    &quot;blocktime&quot; : 1599743510,</span><br><span class="line">    &quot;txid&quot; : &quot;c20cc3707c00402ba1365a49c373483b5ae55e42055e7717d65d61bfc77243df&quot;,</span><br><span class="line">    &quot;walletconflicts&quot; : [</span><br><span class="line">    ],</span><br><span class="line">    &quot;valid&quot; : true,</span><br><span class="line">    &quot;time&quot; : 1599743493,</span><br><span class="line">    &quot;timereceived&quot; : 1599743493,</span><br><span class="line">    &quot;details&quot; : [</span><br><span class="line">        {</span><br><span class="line">            &quot;account&quot; : &quot;&quot;,</span><br><span class="line">            &quot;address&quot; : &quot;1CQ9gPjQLUnebtZh73hZv7uNDx1ihtQRUxVt5L&quot;,</span><br><span class="line">            &quot;category&quot; : &quot;send&quot;,</span><br><span class="line">            &quot;amount&quot; : 0.00000000,</span><br><span class="line">            &quot;vout&quot; : 0,</span><br><span class="line">            &quot;fee&quot; : 0.00000000</span><br><span class="line">        },</span><br><span class="line">        {</span><br><span class="line">            &quot;account&quot; : &quot;&quot;,</span><br><span class="line">            &quot;address&quot; : &quot;15dCVacyUcLD22yX3EeoYAecfwqdRZhfedTPT7&quot;,</span><br><span class="line">            &quot;category&quot; : &quot;send&quot;,</span><br><span class="line">            &quot;amount&quot; : 0.00000000,</span><br><span class="line">            &quot;vout&quot; : 1,</span><br><span class="line">            &quot;fee&quot; : 0.00000000</span><br><span class="line">        },</span><br><span class="line">        {</span><br><span class="line">            &quot;account&quot; : &quot;&quot;,</span><br><span class="line">            &quot;address&quot; : &quot;1CQ9gPjQLUnebtZh73hZv7uNDx1ihtQRUxVt5L&quot;,</span><br><span class="line">            &quot;category&quot; : &quot;receive&quot;,</span><br><span class="line">            &quot;amount&quot; : 0.00000000,</span><br><span class="line">            &quot;vout&quot; : 0</span><br><span class="line">        },</span><br><span class="line">        {</span><br><span class="line">            &quot;account&quot; : &quot;&quot;,</span><br><span class="line">            &quot;address&quot; : &quot;15dCVacyUcLD22yX3EeoYAecfwqdRZhfedTPT7&quot;,</span><br><span class="line">            &quot;category&quot; : &quot;receive&quot;,</span><br><span class="line">            &quot;amount&quot; : 0.00000000,</span><br><span class="line">            &quot;vout&quot; : 1</span><br><span class="line">        }</span><br><span class="line">    ],</span><br><span class="line">    &quot;hex&quot; : &quot;0100000001013e4affbd34ee58e69c34f910ba77f9bf363577fb93bbe1a2189ed656ce2640020000006a4730440220095458a6032aa1d445500b3a1321f4e4ee58c00d267b89b1c2b3d0bb427b36cc02202b4f3020dd094055a83cf859ebe0621c2c64f2ac015cf16ea331de55e168d7a7012103be0316aba83fd1a42cee503b706072c1d0db81990d3ad5589ad56eeb407d489affffffff0200000000000000002f76a9145457615fc1c97532c1927ad664d49f373c6d6e6d88ac1473706b700600000000000000ffffffff05265a5f7500000000000000001976a9142236a285f892a2049c22dacae972fb0ecb4e2a7688ac00000000027b7d00000000&quot;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./src/multichain-cli chain1 decoderawtransaction 0100000001013e4affbd34ee58e69c34f910ba77f9bf363577fb93bbe1a2189ed656ce2640020000006a4730440220095458a6032aa1d445500b3a1321f4e4ee58c00d267b89b1c2b3d0bb427b36cc02202b4f3020dd094055a83cf859ebe0621c2c64f2ac015cf16ea331de55e168d7a7012103be0316aba83fd1a42cee503b706072c1d0db81990d3ad5589ad56eeb407d489affffffff0200000000000000002f76a9145457615fc1c97532c1927ad664d49f373c6d6e6d88ac1473706b700600000000000000ffffffff05265a5f7500000000000000001976a9142236a285f892a2049c22dacae972fb0ecb4e2a7688ac00000000027b7d00000000</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">    &quot;txid&quot; : &quot;c20cc3707c00402ba1365a49c373483b5ae55e42055e7717d65d61bfc77243df&quot;,</span><br><span class="line">    &quot;version&quot; : 1,</span><br><span class="line">    &quot;locktime&quot; : 0,</span><br><span class="line">    &quot;vin&quot; : [</span><br><span class="line">        {</span><br><span class="line">            &quot;txid&quot; : &quot;4026ce56d69e18a2e1bb93fb773536bff977ba10f9349ce658ee34bdff4a3e01&quot;,</span><br><span class="line">            &quot;vout&quot; : 2,</span><br><span class="line">            &quot;scriptSig&quot; : {</span><br><span class="line">                &quot;asm&quot; : &quot;30440220095458a6032aa1d445500b3a1321f4e4ee58c00d267b89b1c2b3d0bb427b36cc02202b4f3020dd094055a83cf859ebe0621c2c64f2ac015cf16ea331de55e168d7a701 03be0316aba83fd1a42cee503b706072c1d0db81990d3ad5589ad56eeb407d489a&quot;,</span><br><span class="line">                &quot;hex&quot; : &quot;4730440220095458a6032aa1d445500b3a1321f4e4ee58c00d267b89b1c2b3d0bb427b36cc02202b4f3020dd094055a83cf859ebe0621c2c64f2ac015cf16ea331de55e168d7a7012103be0316aba83fd1a42cee503b706072c1d0db81990d3ad5589ad56eeb407d489a&quot;</span><br><span class="line">            },</span><br><span class="line">            &quot;sequence&quot; : 4294967295</span><br><span class="line">        }</span><br><span class="line">    ],</span><br><span class="line">    &quot;vout&quot; : [</span><br><span class="line">        {</span><br><span class="line">            &quot;value&quot; : 0.00000000,</span><br><span class="line">            &quot;n&quot; : 0,</span><br><span class="line">            &quot;scriptPubKey&quot; : {</span><br><span class="line">                &quot;asm&quot; : &quot;OP_DUP OP_HASH160 5457615fc1c97532c1927ad664d49f373c6d6e6d OP_EQUALVERIFY OP_CHECKSIG 73706b700600000000000000ffffffff05265a5f OP_DROP&quot;,</span><br><span class="line">                &quot;hex&quot; : &quot;76a9145457615fc1c97532c1927ad664d49f373c6d6e6d88ac1473706b700600000000000000ffffffff05265a5f75&quot;,</span><br><span class="line">                &quot;reqSigs&quot; : 1,</span><br><span class="line">                &quot;type&quot; : &quot;pubkeyhash&quot;,</span><br><span class="line">                &quot;addresses&quot; : [</span><br><span class="line">                    &quot;1CQ9gPjQLUnebtZh73hZv7uNDx1ihtQRUxVt5L&quot;</span><br><span class="line">                ]</span><br><span class="line">            },</span><br><span class="line">            &quot;assets&quot; : [</span><br><span class="line">            ],</span><br><span class="line">            &quot;permissions&quot; : [</span><br><span class="line">                {</span><br><span class="line">                    &quot;for&quot; : null,</span><br><span class="line">                    &quot;connect&quot; : false,</span><br><span class="line">                    &quot;send&quot; : true,</span><br><span class="line">                    &quot;receive&quot; : true,</span><br><span class="line">                    &quot;create&quot; : false,</span><br><span class="line">                    &quot;issue&quot; : false,</span><br><span class="line">                    &quot;mine&quot; : false,</span><br><span class="line">                    &quot;admin&quot; : false,</span><br><span class="line">                    &quot;activate&quot; : false,</span><br><span class="line">                    &quot;startblock&quot; : 0,</span><br><span class="line">                    &quot;endblock&quot; : 4294967295,</span><br><span class="line">                    &quot;timestamp&quot; : 1599743493</span><br><span class="line">                }</span><br><span class="line">            ],</span><br><span class="line">            &quot;items&quot; : [</span><br><span class="line">            ]</span><br><span class="line">        },</span><br><span class="line">        {</span><br><span class="line">            &quot;value&quot; : 0.00000000,</span><br><span class="line">            &quot;n&quot; : 1,</span><br><span class="line">            &quot;scriptPubKey&quot; : {</span><br><span class="line">                &quot;asm&quot; : &quot;OP_DUP OP_HASH160 2236a285f892a2049c22dacae972fb0ecb4e2a76 OP_EQUALVERIFY OP_CHECKSIG&quot;,</span><br><span class="line">                &quot;hex&quot; : &quot;76a9142236a285f892a2049c22dacae972fb0ecb4e2a7688ac&quot;,</span><br><span class="line">                &quot;reqSigs&quot; : 1,</span><br><span class="line">                &quot;type&quot; : &quot;pubkeyhash&quot;,</span><br><span class="line">                &quot;addresses&quot; : [</span><br><span class="line">                    &quot;15dCVacyUcLD22yX3EeoYAecfwqdRZhfedTPT7&quot;</span><br><span class="line">                ]</span><br><span class="line">            },</span><br><span class="line">            &quot;assets&quot; : [</span><br><span class="line">            ],</span><br><span class="line">            &quot;permissions&quot; : [</span><br><span class="line">            ],</span><br><span class="line">            &quot;items&quot; : [</span><br><span class="line">            ]</span><br><span class="line">        }</span><br><span class="line">    ],</span><br><span class="line">    &quot;data&quot; : [</span><br><span class="line">    ],</span><br><span class="line">    &quot;nType&quot; : 0</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><code>./src/multichain-cli chain1 getwallettransaction 20cc3707c00402ba1365a49c373483b5ae55e42055e7717d65d61bfc77243df</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">    &quot;balance&quot; : {</span><br><span class="line">        &quot;amount&quot; : 0.00000000,</span><br><span class="line">        &quot;assets&quot; : [</span><br><span class="line">        ]</span><br><span class="line">    },</span><br><span class="line">    &quot;myaddresses&quot; : [</span><br><span class="line">        &quot;1CQ9gPjQLUnebtZh73hZv7uNDx1ihtQRUxVt5L&quot;,</span><br><span class="line">        &quot;15dCVacyUcLD22yX3EeoYAecfwqdRZhfedTPT7&quot;</span><br><span class="line">    ],</span><br><span class="line">    &quot;addresses&quot; : [</span><br><span class="line">    ],</span><br><span class="line">    &quot;permissions&quot; : [</span><br><span class="line">        {</span><br><span class="line">            &quot;for&quot; : null,</span><br><span class="line">            &quot;connect&quot; : false,</span><br><span class="line">            &quot;send&quot; : true,</span><br><span class="line">            &quot;receive&quot; : true,</span><br><span class="line">            &quot;create&quot; : false,</span><br><span class="line">            &quot;issue&quot; : false,</span><br><span class="line">            &quot;mine&quot; : false,</span><br><span class="line">            &quot;admin&quot; : false,</span><br><span class="line">            &quot;activate&quot; : false,</span><br><span class="line">            &quot;startblock&quot; : 0,</span><br><span class="line">            &quot;endblock&quot; : 4294967295,</span><br><span class="line">            &quot;timestamp&quot; : 1599743493,</span><br><span class="line">            &quot;addresses&quot; : [</span><br><span class="line">                &quot;1CQ9gPjQLUnebtZh73hZv7uNDx1ihtQRUxVt5L&quot;</span><br><span class="line">            ]</span><br><span class="line">        }</span><br><span class="line">    ],</span><br><span class="line">    &quot;items&quot; : [</span><br><span class="line">    ],</span><br><span class="line">    &quot;data&quot; : [</span><br><span class="line">    ],</span><br><span class="line">    &quot;confirmations&quot; : 11,</span><br><span class="line">    &quot;blockhash&quot; : &quot;001ceed2e7cc61a635a4bfa81a091d53d38695b5f5068102c9d5cf8513afa95c&quot;,</span><br><span class="line">    &quot;blockindex&quot; : 1,</span><br><span class="line">    &quot;blocktime&quot; : 1599743510,</span><br><span class="line">    &quot;txid&quot; : &quot;c20cc3707c00402ba1365a49c373483b5ae55e42055e7717d65d61bfc77243df&quot;,</span><br><span class="line">    &quot;valid&quot; : true,</span><br><span class="line">    &quot;time&quot; : 1599743493,</span><br><span class="line">    &quot;timereceived&quot; : 1599743493</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x5217;&#x51FA;&#x8BE5;&#x5730;&#x5740;&#x4E0B; 0 &#x5230; 9999 &#x8303;&#x56F4;&#x5185;&#x672A;&#x88AB;&#x4F7F;&#x7528;&#x7684;&#x8D44;&#x4EA7;&#xFF08;UTXO&#xFF09;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">listunspent 0 9999 &apos;[&quot;15dCVacyUcLD22yX3EeoYAecfwqdRZhfedTPT7&quot;]&apos;</span><br></pre></td></tr></table></figure>
+
+<p><img src="listunspent.png" alt="listunspent.png"></p>
+<p>&#x83B7;&#x53D6;&#x8D44;&#x4EA7;&#x6240;&#x5728;&#x7684;&#x4EA4;&#x6613;id&#x4EE5;&#x53CA;vout&#x5E8F;&#x53F7;&#xFF0C;&#x901A;&#x8FC7; <code>gettxout</code> &#x547D;&#x4EE4;&#x518D;&#x6B21;&#x68C0;&#x67E5;&#xFF1A;<br><img src="gettxout.png" alt="gettxout.png"></p>
+<p>&#x73B0;&#x5728;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x547D;&#x4EE4;&#x884C;&#x521B;&#x5EFA;&#x4E00;&#x4E2A;&#x8F6C;&#x8D26;20&#x5355;&#x4F4D;asset1&#x7684;&#x539F;&#x59CB;&#x4EA4;&#x6613;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">createrawtransaction &apos;[{&quot;txid&quot;:&quot;4026ce56d69e18a2e1bb93fb773536bff977ba10f9349ce658ee34bdff4a3e01&quot;,&quot;vout&quot;:0}]&apos; &apos;{&quot;1CQ9gPjQLUnebtZh73hZv7uNDx1ihtQRUxVt5L&quot;:{&quot;asset1&quot;:20}}&apos;</span><br></pre></td></tr></table></figure>
+
+<p>&#x53EF;&#x4EE5;&#x4F7F;&#x7528; <code>decoderawtransaction</code> &#x5BF9;&#x5F97;&#x5230;&#x7684;hex&#x4E32;&#x8FDB;&#x884C;&#x89E3;&#x6790;&#x3002;</p>
+<p>&#x7531;&#x4E8E;&#x6BCF;&#x4E2A;&#x4EA4;&#x6613;&#x7684;txin&#x6BB5;&#x548C;txout&#x6BB5;&#x8981;&#x6C42;&#x7684;&#x4EA4;&#x6613;&#x6570;&#x91CF;&#x603B;&#x6570;&#x5E94;&#x8BE5;&#x76F8;&#x7B49;&#xFF0C;&#x5728;&#x8F6C;&#x51FA;&#x4E00;&#x7B14;20&#x5355;&#x4F4D;&#x7684;out&#x4E4B;&#x540E;&#x8FD8;&#x9700;&#x8981;&#x8865;&#x5145;&#x4E00;&#x7B14;80&#x5355;&#x4F4D;&#x7684;out&#x5B57;&#x6BB5;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appendrawchange [hex-blob] 15dCVacyUcLD22yX3EeoYAecfwqdRZhfedTPT7</span><br></pre></td></tr></table></figure>
+
+<p>&#x6267;&#x884C;&#x6210;&#x529F;&#x540E;&#x5F97;&#x5230;&#x4E00;&#x4E32;&#x66F4;&#x957F;&#x7684;hex&#xFF0C;&#x89E3;&#x6790;&#x6B64;&#x4E32;&#x53EF;&#x4EE5;&#x5F97;&#x5230;&#x5B8C;&#x6574;&#x7684;txin&#x3001;txout&#x5B57;&#x6BB5;&#x3002;&#x53EF;&#x4EE5;&#x7EE7;&#x7EED;&#x6DFB;&#x52A0;&#x4E00;&#x4E9B;16&#x8FDB;&#x5236;&#x4FE1;&#x606F;&#xFF08;&#x5982; abcd1234 &#xFF09;&#x4F5C;&#x4E3A;data&#x5B57;&#x6BB5;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">appendrawdata [paste-longer-hex-blob] abcd1234</span><br></pre></td></tr></table></figure>
+
+<h3 id="Round-robin-consensus"><a href="#Round-robin-consensus" class="headerlink" title="Round-robin consensus"></a>Round-robin consensus</h3><p>Definition for Round-robin consensus: Multiple nodes play a key role in validating and voting for transactions, doesn&#x2019;t depend on a single participant for block validation.</p>
+<p>In this secion we&#x2019;ll start collaborative block validation between the nodes. Note that, in the case of a permissioned Multichain blockchain, consensus is based on block signature and a customizable round-robin consensus scheme, rather than proof-of-work as in bitcoin.</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 grant 1R6jUNxTqx6bJetkv5ZkLXLub1nsNwC95gurf6 mine</span><br></pre></td></tr></table></figure>
+
+<p>(Even though the permission is called mine note that there is no real &#x201C;mining&#x201D; taking place, in the sense of proof-of-work.)</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_2:~$ multichain-cli chain1 listpermissions mine</span><br></pre></td></tr></table></figure>
+
+<p><img src="16.png" alt="list-mine-permissions"></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 setruntimeparam miningturnover 1</span><br><span class="line">wsd@ubuntu_2:~$ multichain-cli chain1 setruntimeparam miningturnover 1</span><br></pre></td></tr></table></figure>
+
+<p>Now wait for a couple of minutes, so that a few blocks are added. (This assumes you left the block time on the default of 15 seconds.) Check the creators of the last few blocks:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 listblocks -10</span><br><span class="line">wsd@ubuntu_2:~$ multichain-cli chain1 listblocks -10</span><br></pre></td></tr></table></figure>
+
+<p>The address of the validator of each block is in the miner field of each element of the response.</p>
+<h1 id="Experiment-2-&#x53CC;&#x673A;&#x5B9E;&#x9A8C;"><a href="#Experiment-2-&#x53CC;&#x673A;&#x5B9E;&#x9A8C;" class="headerlink" title="Experiment 2: &#x53CC;&#x673A;&#x5B9E;&#x9A8C;"></a>Experiment 2: &#x53CC;&#x673A;&#x5B9E;&#x9A8C;</h1><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_2:~$ multichaind chain1@192.168.122.168:2911</span><br></pre></td></tr></table></figure>
+
+<p><img src="2.png" alt="second server first try"></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 grant 1R6jUNxTqx6bJetkv5ZkLXLub1nsNwC95gurf6 connect</span><br><span class="line">wsd@ubuntu_2:~$ multichaind chain1 -daemon</span><br></pre></td></tr></table></figure>
+
+<p><img src="3.png" alt="second try is ok after server 1 grants the previlege"></p>
+<p>In case that the interactive mode of multichain-cli doesn&#x2019;t support backspace, you can wrap the cli command with <code>multichain-cli chain1</code>.</p>
+<h3 id="Streams-&#x6D41;"><a href="#Streams-&#x6D41;" class="headerlink" title="Streams: &#x6D41;"></a>Streams: &#x6D41;</h3><p>&#x6D41;&#x53EF;&#x4EE5;&#x7528;&#x6765;&#x5B58;&#x50A8;&#x548C;&#x4F20;&#x9012;&#x4E00;&#x822C;&#x4FE1;&#x606F;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">create stream stream1 true</span><br></pre></td></tr></table></figure>
+
+<p>&#x53D1;&#x5E03;&#x4E00;&#x4E2A;&#x5185;&#x5BB9;&#x9879;&#x4E0A;&#x53BB;&#xFF0C;&#x53E3;&#x4EE4;&#x4E3A; key1 &#xFF08;&#x6CE8;&#x610F;&#x5185;&#x5BB9;&#x683C;&#x5F0F;&#x5FC5;&#x987B;&#x4E3A;16&#x8FDB;&#x5236;&#x4E32;&#xFF0C;&#x4E0D;&#x7136;&#x4F1A;&#x62A5;&#x9519;&#xFF1A;-8&#xFF0C;Item data should be hexadecimal string&#xFF09;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">publish stream1 key1 1234abcd</span><br></pre></td></tr></table></figure>
+
+<p>&#x8FD4;&#x56DE;&#x7684;&#x662F;&#x4EA4;&#x6613;ID</p>
+<p>&#x68C0;&#x67E5;&#x8BE5;&#x94FE;&#x4E0A;&#x6240;&#x6709;&#x7684;&#x6D41;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">liststreams</span><br></pre></td></tr></table></figure>
+
+<p>&#x81F3;&#x5C11;&#x53EF;&#x4EE5;&#x770B;&#x5230;stream1&#x548C;&#x9ED8;&#x8BA4;&#x7684;root&#x4E24;&#x4E2A;&#x6D41;</p>
+<p>&#x8BA2;&#x9605;stream1&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">liststreamitems stream1</span><br><span class="line">subscribe stream1</span><br><span class="line">liststreamitems stream1</span><br></pre></td></tr></table></figure>
+
+<p>&#x7EE7;&#x7EED;&#x53D1;&#x5E03;&#x4E00;&#x4E9B;&#x5185;&#x5BB9;&#x9879;&#x5230;&#x6D41;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">publish stream1 key1 1234567890</span><br><span class="line">publish stream1 key1 abcdef</span><br></pre></td></tr></table></figure>
+
+<p>&#x83B7;&#x53D6;&#x6D41;&#x4E2D;&#x7684;&#x5185;&#x5BB9;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">liststreamitems stream1 # should show 3 items</span><br></pre></td></tr></table></figure>
+
+<p>You should see 3 items in the output because the first server has published two strings to key1, and published one string to key2.</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 liststreamkeys stream1 # 2 keys</span><br></pre></td></tr></table></figure>
+
+<p><img src="4.png" alt></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 liststreamkeyitems stream1 key1 # 2 items with the key</span><br><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 liststreampublishers stream1 # 2 publishers: first server and second server</span><br></pre></td></tr></table></figure>
+
+<p><img src="5.png" alt="two-publishers"></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 liststreampublisheritems stream1 1R6jUNxTqx6bJetkv5ZkLXLub1nsNwC95gurf6 # two items by this publisher</span><br></pre></td></tr></table></figure>
+
+<h3 id="Assets"><a href="#Assets" class="headerlink" title="Assets"></a>Assets</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 listpermissions issue</span><br></pre></td></tr></table></figure>
+
+<p><img src="6.png" alt="permissions-to-create-assets"></p>
+<p>copy the address in the list so that an asset with 1000 units can be created on this node.</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 issue 1LWwPw3x9ocBkqTLkFGdqJqK3y6S8T3aLc7ZMg asset1 1000 0.01</span><br><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 listassets</span><br></pre></td></tr></table></figure>
+
+<p>On both servers, you can verify asset1.<br><img src="7.png" alt="asset1"></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 gettotalbalances</span><br><span class="line">wsd@ubuntu_2:~$ multichain-cli chain1 gettotalbalances</span><br></pre></td></tr></table></figure>
+
+<p><img src="8.png" alt="server-1-balance"><br><img src="9.png" alt="server-2-balance"></p>
+<p>If the addresses are not enough( &lt;= 2), run <code>getnewaddress</code> to create new address for receiving assets:<br><img src="getnewaddress.png" alt="getnewaddress"><br>(If multiple addresses are displayed, use the getaddresses true command to see which addresses belong to the local wallet.)</p>
+<p>Now we&#x2019;re going to build a new transaction which sends some of the newly created assets from the current holding addresses to the newly created addresses:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">./src/multichain-cli chain1 listunspent 0 9999 &apos;[&quot;15dCVacyUcLD22yX3EeoYAecfwqdRZhfedTPT7&quot;]&apos;</span><br></pre></td></tr></table></figure>
+
+<p>Now try to send 50 units of the assets from first server&#x2019;s wallet to second server&#x2019;s.</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 sendasset 1R6jUNxTqx6bJetkv5ZkLXLub1nsNwC95gurf6 asset1 100</span><br></pre></td></tr></table></figure>
+
+<p>An error showing &#x2018;Destination address doesn&#x2019;t have receive permission&#x2019; will appear. So it&#x2019;s time to add receive permissions</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 grant 1R6jUNxTqx6bJetkv5ZkLXLub1nsNwC95gurf6 receive</span><br></pre></td></tr></table></figure>
+
+<p>try sending asset again</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 sendasset 1R6jUNxTqx6bJetkv5ZkLXLub1nsNwC95gurf6 asset1 100</span><br></pre></td></tr></table></figure>
+
+<p><img src="10.png" alt="send-asset"></p>
+<p>Now check the asset balances on each server, including transactions with zero confirmations.</p>
+<p><img src="11.png" alt="balance-on-first-server"><br><img src="12.png" alt="balance-on-second-server"></p>
+<p>You can also view the transaction on each node and see how it affected their balances:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 listwallettransactions 1</span><br><span class="line">wsd@ubuntu_2:~$ multichain-cli chain1 listwallettransactions 1</span><br></pre></td></tr></table></figure>
+
+<h3 id="Issuing-assets"><a href="#Issuing-assets" class="headerlink" title="Issuing assets"></a>Issuing assets</h3><p>&#x53D1;&#x5E03;&#x8D44;&#x4EA7;</p>
+<h3 id="Combining-assets-and-streams-&#x6D41;&#x4E0E;&#x8D44;&#x4EA7;&#x7684;&#x7ED3;&#x5408;"><a href="#Combining-assets-and-streams-&#x6D41;&#x4E0E;&#x8D44;&#x4EA7;&#x7684;&#x7ED3;&#x5408;" class="headerlink" title="Combining assets and streams: &#x6D41;&#x4E0E;&#x8D44;&#x4EA7;&#x7684;&#x7ED3;&#x5408;"></a>Combining assets and streams: &#x6D41;&#x4E0E;&#x8D44;&#x4EA7;&#x7684;&#x7ED3;&#x5408;</h3><p>&#x672C;&#x90E8;&#x5206;&#x5C06;&#x521B;&#x5EFA;&#x4E00;&#x7B14;125&#x5355;&#x4F4D;&#x7684;&#x8F6C;&#x8D26;&#x4EA4;&#x6613;&#xFF0C;&#x5E76;&#x5199;&#x5165;&#x9644;&#x5E26;&#x4FE1;&#x606F;&#x5230;&#x6D41;&#x4E2D;&#x3002;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 sendwithdata 1R6jUNxTqx6bJetkv5ZkLXLub1nsNwC95gurf6 &apos;{&quot;asset1&quot;:125}&apos; &apos;{&quot;for&quot;:&quot;stream1&quot;,&quot;key&quot;:&quot;transfer&quot;,&quot;data&quot;:&quot;486921&quot;}&apos;</span><br></pre></td></tr></table></figure>
+
+<p><img src="13.png" alt="transaction-id"></p>
+<p>Now this transaction can be examined on the second server as below:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_2:~$ multichain-cli chain1 getwallettransaction 60e98d2eb2133e1757af056e99207255a00f0d4845e6451e319774dafe20b560</span><br></pre></td></tr></table></figure>
+
+<p>In the output from this command, you should see the balance field showing the incoming &#x201C;qty&#x201D; is 125 units of asset1 and the items field containing the stream item that was added. You can also view this item directly within the stream:</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu_1:~$ multichain-cli chain1 liststreamitems stream1</span><br><span class="line">wsd@ubuntu_2:~$ multichain-cli chain1 liststreamitems stream1</span><br></pre></td></tr></table></figure>
+
+<p><img src="14.png" alt="list-streamitem-stream1-on-first-server"><br><img src="15.png" alt="list-streamitem-stream1-on-second-server"></p>
+<h1 id="&#x6E90;&#x7801;&#x9605;&#x8BFB;"><a href="#&#x6E90;&#x7801;&#x9605;&#x8BFB;" class="headerlink" title="&#x6E90;&#x7801;&#x9605;&#x8BFB;"></a>&#x6E90;&#x7801;&#x9605;&#x8BFB;</h1><p>&#x53D1;&#x5E03;&#x4EA4;&#x6613;&#x7684;&#x51FD;&#x6570;&#x662F; SendMoneyToSeveralAddresses(addresses, nAmount,wtx, lpScript, CScript(),addresses,txInfo.formatTx(),txInfo.ntype); &#x51E0;&#x4E2A;&#x53C2;&#x6570;&#x7684;&#x89E3;&#x91CA;&#x5206;&#x522B;&#x4E3A;&#xFF0C;&#x63A5;&#x6536;&#x65B9;&#x5730;&#x5740;&#x5217;&#x8868;addresses&#xFF0C;&#x8F6C;&#x8D26;&#x6570;&#x989D;nAmount&#xFF0C;&#x63A5;&#x6536;&#x4EA4;&#x6613;&#x6307;&#x9488;wtx&#xFF0C;&#x811A;&#x672C;&#x89E3;&#x91CA;&#x5668;&#x6307;&#x9488;lpScript&#xFF0C;&#x65B0;&#x5EFA;&#x811A;&#x672C;&#x89E3;&#x91CA;&#x5668;&#x5BF9;&#x8C61;CScript()&#xFF0C;&#x53D1;&#x9001;&#x65B9;&#x5730;&#x5740;&#x5217;&#x8868;addresses&#xFF0C;&#x4F20;&#x5165;&#x7684;&#x4EA4;&#x6613;&#x4FE1;&#x606F;txInfo.formatTx()&#xFF0C;&#x4F20;&#x5165;&#x7684;&#x4EA4;&#x6613;&#x7C7B;&#x578B;txInfo.ntype</p>
+<p>&#x83B7;&#x53D6;&#x4EA4;&#x6613;ID&#xFF1A; string txid= wtx.GetHash().GetHex();<br>&#x83B7;&#x53D6;userResult&#xFF1A;txInfo.userResult.c_str()</p>
+<pre><code>//&#x83B7;&#x53D6;&#x4F7F;&#x7528;&#x65B9;&#x5730;&#x5740;&#xFF0C;&#x5E76;&#x5224;&#x65AD;&#x8BE5;&#x5730;&#x5740;&#x662F;&#x5426;&#x5B58;&#x5728;&#x4EE5;&#x53CA;&#x62E5;&#x6709;&#x63A5;&#x6536;&#x6743;&#x529B;
+vector&lt;CTxDestination&gt; addresses;
+contractInformation txInfo = contractInformation();
+//&#x4EA4;&#x6613;&#x7684;&#x90E8;&#x5206;&#x53C2;&#x6570;&#x521D;&#x59CB;&#x5316;
+CAmount nAmount=0;
+CWalletTx wtx;
+mc_Script *lpScript=mc_gState-&gt;m_TmpBuffers-&gt;m_RpcScript3;
+lpScript-&gt;Clear();
+</code></pre><p>&#x66F4;&#x65B0;multichain&#x6E90;&#x4ED3;&#x5E93;&#x4EE3;&#x7801;<br>shellchain.conf&#x6587;&#x4EF6;&#x540D;&#x7684;&#x4EA7;&#x751F;&#x5199;&#x5728; chainparams/buildgenesis.cpp &#x91CC;&#x7684; mc_GenerateConfFiles &#x51FD;&#x6570;&#x4E2D;</p>
+<p>rpc/rpchelp.cpp &#x91CC;&#x6DFB;&#x52A0;&#x5E2E;&#x52A9;&#x6587;&#x6863;<br>rpc/rpclist.cpp &#x91CC;&#x6DFB;&#x52A0;&#x4E86;cli&#x547D;&#x4EE4;&#x548C;&#x51FD;&#x6570;&#x540D;&#x7684;&#x5BF9;&#x5E94;<br>rpc/rpcrawtransaction.cpp TxToJSON&#x51FD;&#x6570;&#x6DFB;&#x52A0;&#x81EA;&#x5B9A;&#x4E49;&#x4EA4;&#x6613;&#x5B57;&#x6BB5;&#x5230;json&#x7684;&#x89E3;&#x6790;&#xFF0C;&#x5728;decoderawtransaction&#x51FD;&#x6570;&#x4E2D;&#x4F1A;&#x7528;&#x5230;<br>rpc/rpcserver.h &#x4E2D;&#x6DFB;&#x52A0;&#x5BF9;&#x4E8E;&#x81EA;&#x5B9A;&#x4E49;&#x4EA4;&#x6613;&#x51FD;&#x6570;&#x7684;&#x58F0;&#x660E;<br>rpc/rpcwalletutils.cpp SendMoneyToSeveralAddresses &#x4E2D;&#x6DFB;&#x52A0;&#x5BF9; opcustom &#x7684;&#x811A;&#x672C;&#x89E3;&#x91CA;&#x5668;&#x68C0;&#x67E5;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">std:vector&lt;CScript&gt; scriptOpReturns;</span><br><span class="line">if(scriptOpReturn.size()){</span><br><span class="line">    scriptOpReturns.push_back(scriptOpReturn);</span><br><span class="line">}</span><br><span class="line">if(scriptOpCustom.size()){</span><br><span class="line">    scriptOpReturns.push_back(scriptOpCustom);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>rpc/rpcwalletsend.cpp &#x6DFB;&#x52A0;&#x4E3B;&#x4F53;&#x5BA2;&#x4F53;&#x6CE8;&#x518C;rpc&#x51FD;&#x6570;&#x548C;&#x53D1;&#x9001;&#x81EA;&#x5B9A;&#x4E49;&#x4EA4;&#x6613;&#x51FD;&#x6570;<br>rpc/rpcclient.cpp vRPCConvertParams &#x4E2D;&#x6DFB;&#x52A0;&#x9700;&#x8981;&#x5B57;&#x7B26;&#x4E32;&#x8F6C;json&#x7684;&#x53C2;&#x6570;index&#xFF0C;&#x65B9;&#x6CD5;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;index&#x4E3A;0</p>
+<p>script/script.cpp GetOpName&#x4E2D;&#x548C;script.h opcodetype&#x4E2D; &#x52A0;&#x5165;&#x72B6;&#x6001;&#x7801; OP_CUSTOMDATA<br>script/standard.cpp IsStandardCustomData &#x52A0;&#x5165;&#x5BF9;&#x81EA;&#x5B9A;&#x4E49;&#x811A;&#x672C;&#x7684;&#x68C0;&#x67E5;</p>
+<p>secp256k1/ecdsa_impl.h &#x4E2D;&#x6DFB;&#x52A0;&#x5BF9;&#x4E8E; 256 &#x4F4D;&#x692D;&#x5706;&#x66F2;&#x7EBF;&#x7684;&#x52A0;&#x89E3;&#x5BC6;&#x51FD;&#x6570;&#xFF0C;&#x5934;&#x6587;&#x4EF6;&#x5728; ecdsa.h &#x4E2D;<br>secp256k1/ecmult_impl.h &#x4E2D;&#x6DFB;&#x52A0;&#x692D;&#x5706;&#x66F2;&#x7EBF;&#x70B9;&#x4E58;&#x7684;&#x64CD;&#x4F5C;<br>secp256k1/secp256k1.c &#x4E2D;&#x6DFB;&#x52A0;&#x52A0;&#x89E3;&#x5BC6;&#x51FD;&#x6570;<br>secp256k1/tests.c &#x6DFB;&#x52A0;&#x52A0;&#x89E3;&#x5BC6;&#x6D4B;&#x8BD5;</p>
+<p>utils/serialize.h &#x4E2D;&#x6DFB;&#x52A0;&#x5BF9;&#x4E8E;json&#x53C2;&#x6570;&#x7684;&#x5E8F;&#x5217;&#x5316;&#x548C;&#x53CD;&#x5E8F;&#x5217;&#x5316; stream &#x64CD;&#x4F5C;<br>utils/util.cpp &#x4E2D;&#x6DFB;&#x52A0;&#x5BF9;&#x4E8E; .shellchain &#x76EE;&#x5F55;&#x7684;&#x521B;&#x5EFA;</p>
+<p>wallet/wallet_ismine.h &#x4E2D;&#x5B9A;&#x4E49; enum customdatatype<br>wallet/walletcoins.cpp &#x4E2D;BuildAssetTransaction&#x51FD;&#x6570;&#x3001;CreateAssetGroupingTransaction&#x51FD;&#x6570;&#x6DFB;&#x52A0;&#x751F;&#x6210;&#x4EA4;&#x6613;&#x662F;&#x81EA;&#x5B9A;&#x4E49;&#x5B57;&#x6BB5;&#x7684;&#x5904;&#x7406;</p>
+<p>wallet/wallettxs.cpp &#x7B2C; 2051 &#x884C; for(i=0;i&lt;(int)tx.vout.size();i++) // Checking that tx has long OP_RETURN&#xFF0C;&#x6B64;&#x5904;&#x53EF;&#x80FD;&#x9700;&#x8981;&#x6DFB;&#x52A0;&#x5BF9;op_custom&#x7684;&#x652F;&#x6301;,&#x907F;&#x514D;&#x5B57;&#x6BB5;&#x8FC7;&#x5927;&#x5BF9;&#x6027;&#x80FD;&#x7684;&#x5F71;&#x54CD;<br>    &#x5176;&#x4E2D;CustomTxNotify&#x51FD;&#x6570;&#x6CA1;&#x641E;&#x6E05;&#x529F;&#x80FD;&#x662F;&#x5565;</p>
+<p>net/rest.cpp &#x8D1F;&#x8D23;&#x63D0;&#x4F9B;rest&#x63A5;&#x53E3;</p>
+<p>structs/amount.h CAmount &#x7C7B;&#x578B;&#x5373; int64_t&#x7C7B;&#x578B;</p>
+<p>&#x9605;&#x8BFB; createrawtransaction 1416-1576</p>
+<h2 id="&#x4EA4;&#x6613;&#x7684;&#x5E8F;&#x5217;&#x5316;&#x5B58;&#x50A8;&#x4E0E;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x6062;&#x590D;"><a href="#&#x4EA4;&#x6613;&#x7684;&#x5E8F;&#x5217;&#x5316;&#x5B58;&#x50A8;&#x4E0E;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x6062;&#x590D;" class="headerlink" title="&#x4EA4;&#x6613;&#x7684;&#x5E8F;&#x5217;&#x5316;&#x5B58;&#x50A8;&#x4E0E;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x6062;&#x590D;"></a>&#x4EA4;&#x6613;&#x7684;&#x5E8F;&#x5217;&#x5316;&#x5B58;&#x50A8;&#x4E0E;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x6062;&#x590D;</h2><p>&#x5E8F;&#x5217;&#x5316;&#x91C7;&#x7528;&#x5C06;&#x5BF9;&#x8C61;&#x5199;&#x5165;&#x6D41;&#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x5728;bitcoinconsensus.cpp &#x4E2D;&#x5B9A;&#x4E49;&#x4E86;&#x7528;&#x4E8E;&#x5E8F;&#x5217;&#x5316;&#x7684;&#x6D41; <code>TxInputStream</code>&#xFF0C;&#x4EC5;&#x5728;&#x51FD;&#x6570;bitcoinconsensus_verify_script &#x4E2D;&#x8C03;&#x7528;&#x3002;</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/** A class that deserializes a single CTransaction one time. */</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">TxInputStream</span></span></span><br><span class="line"><span class="hljs-class">{</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    TxInputStream(<span class="hljs-keyword">int</span> nTypeIn, <span class="hljs-keyword">int</span> nVersionIn, <span class="hljs-keyword">const</span> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span> *txTo, <span class="hljs-keyword">size_t</span> txToLen) :</span><br><span class="line">    m_type(nTypeIn),</span><br><span class="line">    m_version(nVersionIn),</span><br><span class="line">    m_data(txTo),</span><br><span class="line">    m_remaining(txToLen)</span><br><span class="line">    {}</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">TxInputStream&amp; <span class="hljs-title">read</span><span class="hljs-params">(<span class="hljs-keyword">char</span>* pch, <span class="hljs-keyword">size_t</span> nSize)</span></span></span><br><span class="line"><span class="hljs-function">    </span>{</span><br><span class="line">        <span class="hljs-keyword">if</span> (nSize &gt; m_remaining)</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-built_in">std</span>::ios_base::failure(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>(__func__) + <span class="hljs-string">&quot;: end of data&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> (pch == <span class="hljs-literal">NULL</span>)</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-built_in">std</span>::ios_base::failure(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>(__func__) + <span class="hljs-string">&quot;: bad destination buffer&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">if</span> (m_data == <span class="hljs-literal">NULL</span>)</span><br><span class="line">            <span class="hljs-keyword">throw</span> <span class="hljs-built_in">std</span>::ios_base::failure(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>(__func__) + <span class="hljs-string">&quot;: bad source buffer&quot;</span>);</span><br><span class="line"></span><br><span class="line">        <span class="hljs-built_in">memcpy</span>(pch, m_data, nSize);</span><br><span class="line">        m_remaining -= nSize;</span><br><span class="line">        m_data += nSize;</span><br><span class="line">        <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;</span><br><span class="line">    TxInputStream&amp; <span class="hljs-keyword">operator</span>&gt;&gt;(T&amp; obj)</span><br><span class="line">    {</span><br><span class="line">        ::Unserialize(*<span class="hljs-keyword">this</span>, obj, m_type, m_version);</span><br><span class="line">        <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">private</span>:</span><br><span class="line">    <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> m_type;</span><br><span class="line">    <span class="hljs-keyword">const</span> <span class="hljs-keyword">int</span> m_version;</span><br><span class="line">    <span class="hljs-keyword">const</span> <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>* m_data;</span><br><span class="line">    <span class="hljs-keyword">size_t</span> m_remaining;</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+
+<p>nTypeIn &#x53D6;&#x503C;&#x7C7B;&#x578B;&#x4E3A; enum{SER_NETWORK=1,SER_DISK=2,SER_GETHASH=4,} &#x4E2D;&#x7684;&#x4E00;&#x79CD;&#xFF0C;&#x7528;&#x4E8E;&#x5177;&#x4F53;&#x5B9E;&#x73B0;&#x67D0;&#x79CD;&#x5E8F;&#x5217;&#x5316;&#x64CD;&#x4F5C;</p>
+<h2 id="RPC&#x8BF7;&#x6C42;&#x63A5;&#x6536;"><a href="#RPC&#x8BF7;&#x6C42;&#x63A5;&#x6536;" class="headerlink" title="RPC&#x8BF7;&#x6C42;&#x63A5;&#x6536;"></a>RPC&#x8BF7;&#x6C42;&#x63A5;&#x6536;</h2><p>&#x9996;&#x5148;&#xFF0C;server&#x5728;&#x542F;&#x52A8;&#x7684;&#x65F6;&#x5019;&#x8C03;&#x7528;&#x4E86; <code>StartRPCThreads(string&amp; strError)</code> &#x51FD;&#x6570;&#xFF0C;&#x5728;&#x8BE5;&#x51FD;&#x6570;&#x4E2D;&#x8C03;&#x7528;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">RPCListen(acceptor, *rpc_io_service, *rpc_ssl_context, fUseSSL);</span><br></pre></td></tr></table></figure>
+
+<p>RPCListen &#x7684;&#x51FD;&#x6570;&#x4F53;&#xFF1A;</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> Protocol&gt;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">RPCListen</span><span class="hljs-params">(boost::<span class="hljs-built_in">shared_ptr</span>&lt; basic_socket_acceptor&lt;Protocol&gt; &gt; acceptor,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">        io_service&amp; service,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">        ssl::context&amp; context,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">        <span class="hljs-keyword">const</span> <span class="hljs-keyword">bool</span> fUseSSL)</span></span></span><br><span class="line"><span class="hljs-function"></span>{</span><br><span class="line">    <span class="hljs-function">boost::<span class="hljs-built_in">shared_ptr</span>&lt; AcceptedConnectionImpl&lt;Protocol&gt; &gt; <span class="hljs-title">conn</span><span class="hljs-params">(<span class="hljs-keyword">new</span> AcceptedConnectionImpl&lt;Protocol&gt;(service, context, fUseSSL))</span></span>;</span><br><span class="line"></span><br><span class="line">    acceptor-&gt;async_accept(</span><br><span class="line">        conn-&gt;sslStream.lowest_layer(),</span><br><span class="line">        conn-&gt;peer,</span><br><span class="line">        boost::bind(&amp;RPCAcceptHandler&lt;Protocol&gt;,</span><br><span class="line">                acceptor,</span><br><span class="line">                boost::ref(service),</span><br><span class="line">                boost::ref(context),</span><br><span class="line">                fUseSSL,</span><br><span class="line">                conn,</span><br><span class="line">                _1));</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x8BE5;&#x51FD;&#x6570;&#x63A5;&#x6536;&#x6CDB;&#x578B;Protocol&#xFF0C;&#x7528;&#x5728;acceptor&#x4E2D;&#xFF0C;<br>&#x800C;&#x8C03;&#x7528;&#x8BE5;&#x51FD;&#x6570;&#x7684;accepter&#x58F0;&#x660E;&#x53EA;&#x6709;&#x4E00;&#x5904;&#xFF0C;&#x4F4D;&#x4E8E; <code>rpcserver.cpp</code> &#x7684; <code>StartRPCThreads</code> &#x51FD;&#x6570;&#x4E2D;&#xFF0C;&#x58F0;&#x660E;&#x5982;&#x4E0B;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">boost::shared_ptr&lt;ip::tcp::acceptor&gt; acceptor(new ip::tcp::acceptor(*rpc_io_service));</span><br></pre></td></tr></table></figure>
+
+<p>boost::shared_ptr &#x662F;&#x4E00;&#x4E2A;&#x53EF;&#x4EE5;&#x5171;&#x4EAB;&#x6240;&#x6709;&#x6743;&#x7684;&#x667A;&#x80FD;&#x6307;&#x9488;<br>ip::tcp::acceptor &#x91CD;&#x547D;&#x540D;&#x4E8E; boost::asio::basic_socket_acceptor<boost::asio::ip::tcp><br>&#x6240;&#x4EE5;&#x6CDB;&#x578B;Protocol&#x5728;&#x8FD9;&#x91CC;&#x5C31;&#x662F;boost::asio::ip::tcp</boost::asio::ip::tcp></p>
+<p>&#x63A5;&#x4E0B;&#x6765;&#x91CD;&#x70B9;&#x89E3;&#x91CA;&#x4E00;&#x4E0B; acceptor-&gt;async_accept()&#x51FD;&#x6570;&#x3002;<br>&#x8BE5;&#x51FD;&#x6570;&#x7528;&#x6765;&#x5F02;&#x6B65;&#x63A5;&#x6536;&#x4E00;&#x4E2A;rpc&#x8BF7;&#x6C42;&#x5230;socket&#xFF0C;&#x5E76;&#x83B7;&#x53D6;&#x8FDC;&#x7A0B;tcp&#x7AEF;&#x53E3;&#x3002;&#x51FD;&#x6570;&#x58F0;&#x660E;&#x4E3A;&#xFF1A;</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">template</span> &lt;<span class="hljs-keyword">typename</span> Executor1, BOOST_ASIO_COMPLETION_TOKEN_FOR(<span class="hljs-keyword">void</span> (boost::system::error_code)) <span class="hljs-function">AcceptHandler <span class="hljs-title">BOOST_ASIO_DEFAULT_COMPLETION_TOKEN_TYPE</span><span class="hljs-params">(executor_type)</span>&gt;</span></span><br><span class="line"><span class="hljs-function">  <span class="hljs-title">BOOST_ASIO_INITFN_AUTO_RESULT_TYPE</span><span class="hljs-params">(AcceptHandler,<span class="hljs-keyword">void</span> (boost::system::error_code))</span> <span class="hljs-title">async_accept</span><span class="hljs-params">(basic_socket&lt;protocol_type, Executor1&gt;&amp; peer,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">      endpoint_type&amp; peer_endpoint,</span></span></span><br><span class="line"><span class="hljs-function"><span class="hljs-params">      BOOST_ASIO_MOVE_ARG(AcceptHandler) handler BOOST_ASIO_DEFAULT_COMPLETION_TOKEN(executor_type))</span></span></span><br></pre></td></tr></table></figure>
+
+<p>&#x5176;&#x4E2D;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570; peer &#x5C31;&#x662F;&#x8FDE;&#x63A5;&#x5C06;&#x88AB;&#x63A5;&#x6536;&#x8FDB;&#x7684;socket&#xFF0C;&#x7B2C;&#x4E8C;&#x4E2A;&#x53C2;&#x6570; peer_endpoint &#x6307;&#x4E0E;&#x8FDC;&#x7A0B;tcp&#x8FDE;&#x63A5;&#x5BF9;&#x5E94;&#x7684;&#x7AEF;&#x53E3;&#x5BF9;&#x8C61;&#xFF0C;&#x7B2C;&#x4E09;&#x4E2A;&#x53C2;&#x6570; handler &#x6307;&#x63A5;&#x6536;&#x5B8C;&#x6210;&#x540E;&#x5BF9;&#x5E94;&#x8C03;&#x7528;&#x7684;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#x3002;<br>boost::bind &#x8FD4;&#x56DE;&#x503C;&#x5C31;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x5BF9;&#x8C61;&#xFF0C;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#x662F;&#x51FD;&#x6570;&#x58F0;&#x660E;&#x6307;&#x9488;&#xFF0C;&#x540E;&#x9762;&#x7684;&#x5BF9;&#x5E94;&#x8BE5;&#x51FD;&#x6570;&#x8C03;&#x7528;&#x53C2;&#x6570;&#x3002;<br><code>RPCAcceptHandler</code> &#x63A5;&#x6536;6&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x524D;5&#x4E2A;&#x53C2;&#x6570;&#x5728;&#x8FD9;&#x91CC;&#x90FD;&#x786E;&#x5B9A;&#x4E86;&#xFF0C;&#x7B2C;6&#x4E2A;&#x53C2;&#x6570; error_code &#x6BCF;&#x6B21;&#x5B9E;&#x9645;&#x8C03;&#x7528;&#x90FD;&#x4E0D;&#x540C;&#xFF0C;&#x8FD9;&#x91CC; <code>_1</code> &#x8868;&#x793A;&#x5B9E;&#x9645;&#x8C03;&#x7528;&#x65F6;&#x7684;&#x53C2;&#x6570;&#x5217;&#x8868;&#x7684;&#x7B2C;&#x4E00;&#x4E2A;&#x53C2;&#x6570;&#xFF0C;&#x5373;&#x4F20;&#x9012;&#x8FDB;&#x6765;&#x7684; error_code&#x3002;</p>
+<h3 id="&#x67E5;&#x770B;-LogPrintf"><a href="#&#x67E5;&#x770B;-LogPrintf" class="headerlink" title="&#x67E5;&#x770B; LogPrintf"></a>&#x67E5;&#x770B; LogPrintf</h3><p>&#x8FDB;&#x5165;chain&#x7684;&#x5B58;&#x50A8;&#x76EE;&#x5F55;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tail -f debug.log</span><br></pre></td></tr></table></figure>
+
+<h2 id="&#x5728;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x6DFB;&#x52A0;&#x81EA;&#x5B9A;&#x4E49;&#x914D;&#x7F6E;"><a href="#&#x5728;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x6DFB;&#x52A0;&#x81EA;&#x5B9A;&#x4E49;&#x914D;&#x7F6E;" class="headerlink" title="&#x5728;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x6DFB;&#x52A0;&#x81EA;&#x5B9A;&#x4E49;&#x914D;&#x7F6E;"></a>&#x5728;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x4E2D;&#x6DFB;&#x52A0;&#x81EA;&#x5B9A;&#x4E49;&#x914D;&#x7F6E;</h2><p>&#x8BFB;&#x53D6;&#x914D;&#x7F6E;&#x6587;&#x4EF6;&#x7684;&#x4EE3;&#x7801;&#x5199;&#x5728; <code>utils/utilwrapper.cpp</code> &#x7684; <code>mc_ReadConfigFile</code> &#x51FD;&#x6570;&#x4E2D;&#xFF1A;</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// &#x901A;&#x8FC7;&#x4E00;&#x4E2A;for&#x5FAA;&#x73AF;&#x4ECE;streamConfig&#x7684;&#x6587;&#x4EF6;&#x6D41;&#x4E2D;&#x4E0D;&#x65AD;&#x8BFB;&#x53D6;key=val&#x7684;&#x914D;&#x7F6E;</span></span><br><span class="line"><span class="hljs-keyword">for</span> (boost::program_options::detail::config_file_iterator it(streamConfig, setOptions), end; it != end; ++it)</span><br><span class="line">{</span><br><span class="line">    <span class="hljs-comment">// Don&apos;t overwrite existing settings so command line settings override bitcoin.conf</span></span><br><span class="line">    </span><br><span class="line">    <span class="hljs-built_in">string</span> strKey = it-&gt;string_key;</span><br><span class="line">    strKey.erase(<span class="hljs-built_in">std</span>::remove(strKey.begin(), strKey.end(), <span class="hljs-string">&apos;-&apos;</span>), strKey.end()); <span class="hljs-comment">// &#x5220;&#x9664;key&#x4E2D;&#x7684;-</span></span><br><span class="line">    strKey.erase(<span class="hljs-built_in">std</span>::remove(strKey.begin(), strKey.end(), <span class="hljs-string">&apos;_&apos;</span>), strKey.end()); <span class="hljs-comment">// &#x5220;&#x9664;key&#x4E2D;&#x7684;_</span></span><br><span class="line">    </span><br><span class="line">    strKey = <span class="hljs-built_in">string</span>(prefix) + strKey;   <span class="hljs-comment">// key&#x524D;&#x9762;&#x6DFB;&#x52A0; -</span></span><br><span class="line">    <span class="hljs-keyword">if</span> ((*mapSettingsRet).count(strKey) == <span class="hljs-number">0</span>)</span><br><span class="line">    {</span><br><span class="line">        (*mapSettingsRet)[strKey] = it-&gt;value[<span class="hljs-number">0</span>];</span><br><span class="line">        <span class="hljs-comment">// interpret nofoo=1 as foo=0 (and nofoo=0 as foo=1) as long as foo not set)</span></span><br><span class="line">        mc_InterpretNegativeSetting(strKey, *mapSettingsRet);</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">if</span>(mapMultiSettingsRet)</span><br><span class="line">    {</span><br><span class="line">        (*mapMultiSettingsRet)[strKey].push_back(it-&gt;value[<span class="hljs-number">0</span>]);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x914D;&#x7F6E;&#x5185;&#x5BB9;&#x5199;&#x5165; <code>mapSettingsRet</code> &#x548C; <code>mapMultiSettingsRet</code></p>
+<h1 id="DIY&#xFF1A;&#x9B54;&#x6539;&#x4EE3;&#x7801;"><a href="#DIY&#xFF1A;&#x9B54;&#x6539;&#x4EE3;&#x7801;" class="headerlink" title="DIY&#xFF1A;&#x9B54;&#x6539;&#x4EE3;&#x7801;"></a>DIY&#xFF1A;&#x9B54;&#x6539;&#x4EE3;&#x7801;</h1><h2 id="&#x81EA;&#x5B9A;&#x4E49;&#x4EA4;&#x6613;&#x683C;&#x5F0F;"><a href="#&#x81EA;&#x5B9A;&#x4E49;&#x4EA4;&#x6613;&#x683C;&#x5F0F;" class="headerlink" title="&#x81EA;&#x5B9A;&#x4E49;&#x4EA4;&#x6613;&#x683C;&#x5F0F;"></a>&#x81EA;&#x5B9A;&#x4E49;&#x4EA4;&#x6613;&#x683C;&#x5F0F;</h2><p>&#x4E3B;&#x8981;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<ol>
+<li>&#x5B9A;&#x4E49;&#x5408;&#x7EA6;&#x5B57;&#x6BB5; MutableContractInfo&#xFF0C;&#x7EE7;&#x627F;&#x4E8E; CObjectInfo</li>
+<li>&#x6DFB;&#x52A0;&#x7F16;&#x8BD1;&#x9009;&#x9879;&#xFF0C;&#x7F16;&#x8BD1;&#x6D4B;&#x8BD5;</li>
+<li>&#x5728; transaction.h &#x7684;&#x4EA4;&#x6613;&#x5B9A;&#x4E49;&#x4E2D;&#x6DFB;&#x52A0; contract_in, contract_out &#x5B57;&#x6BB5;&#x7C7B;&#x578B;<br>&#x6DFB;&#x52A0;&#x5B57;&#x6BB5;&#x7684;&#x5E8F;&#x5217;&#x5316;&#x4E0E;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x64CD;&#x4F5C;&#xFF0C;&#x5728;rpcutils.h&#x4E2D;&#x5B9A;&#x4E49;&#xFF0C;&#x5728;rpcutils.cpp&#x4E2D;&#x5B9E;&#x73B0;</li>
+<li>&#x5728;&#x53D1;&#x9001;&#x4EA4;&#x6613;&#x7684;&#x94FE;&#x6761;&#x4E2D;&#x6DFB;&#x52A0;&#x5408;&#x7EA6;&#x5B57;&#x6BB5;&#x548C;&#x4EA4;&#x6613;&#x7C7B;&#x578B;&#x5B57;&#x6BB5;</li>
+</ol>
+<h3 id="1-&#x5B9A;&#x4E49;&#x5408;&#x7EA6;&#x5B57;&#x6BB5;"><a href="#1-&#x5B9A;&#x4E49;&#x5408;&#x7EA6;&#x5B57;&#x6BB5;" class="headerlink" title="1.&#x5B9A;&#x4E49;&#x5408;&#x7EA6;&#x5B57;&#x6BB5;"></a>1.&#x5B9A;&#x4E49;&#x5408;&#x7EA6;&#x5B57;&#x6BB5;</h3><p>contracts&#x6587;&#x4EF6;&#x5939;&#x4E2D;&#x65B0;&#x5EFA; contractinfo.h</p>
+<figure class="highlight c hljs"><figcaption><span>contractinfo.h</span><a href="https://billystudio.github.io/2018/09/08/multichain-experiment/contractinfo.h">code</a></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">ifndef</span> _CONTRACT_INFO_H</span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> _CONTRACT_INFO_H</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;json/json_spirit.h&quot;</span></span></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span> <span class="hljs-meta-string">&quot;core/main.h&quot;</span></span></span><br><span class="line"></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">MutableContractInfo</span></span></span><br><span class="line"><span class="hljs-class">{</span></span><br><span class="line">    <span class="hljs-keyword">int</span> ntype;              <span class="hljs-comment">// &#x5408;&#x7EA6;&#x72B6;&#x6001;&#x7C7B;&#x578B;&#x7801; enum::customdatatype</span></span><br><span class="line">    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> address;  <span class="hljs-comment">// &#x5408;&#x7EA6;&#x5730;&#x5740; 40 bytes</span></span><br><span class="line">    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> lastTxid; <span class="hljs-comment">// &#x4E0A;&#x6B21;&#x5408;&#x7EA6;&#x6267;&#x884C;&#x7ED3;&#x679C;&#x6240;&#x5728;&#x4EA4;&#x6613;&#x53F7;</span></span><br><span class="line">    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> partySig;   <span class="hljs-comment">// &#x52A8;&#x4F5C;&#x6267;&#x884C;&#x65B9;&#x7B7E;&#x540D;</span></span><br><span class="line">    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> actionName; <span class="hljs-comment">// &#x52A8;&#x4F5C;&#x540D;&#x79F0;</span></span><br><span class="line">    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> actionParams;  <span class="hljs-comment">// &#x52A8;&#x4F5C;&#x53C2;&#x6570;</span></span><br><span class="line">    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> partyPubkey;    <span class="hljs-comment">// &#x52A8;&#x4F5C;&#x6267;&#x884C;&#x65B9;&#x516C;&#x94A5;</span></span><br><span class="line">    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> contractData;   <span class="hljs-comment">// &#x5408;&#x7EA6;&#x6267;&#x884C;&#x7ED3;&#x679C;</span></span><br><span class="line">    <span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> hashcode;</span><br><span class="line"></span><br><span class="line">    ContractInfo() : ntype(<span class="hljs-number">-1</span>) {}</span><br><span class="line">    ContractInfo(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> str_txid);</span><br><span class="line">    ContractInfo(<span class="hljs-keyword">const</span> CObjectInfo&amp; tx);</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">check</span><span class="hljs-params">(<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>&amp; error)</span></span>;</span><br><span class="line">    <span class="hljs-function">Object <span class="hljs-title">formatTx</span><span class="hljs-params">()</span></span>;</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span> <span class="hljs-comment">//_CONTRACT_INFO_H</span></span></span><br></pre></td></tr></table></figure>
+<p>&#x5408;&#x7EA6;&#x5730;&#x5740;&#x50A8;&#x5B58;&#x5728;BerkeleyDB&#x4E2D;&#xFF0C;&#x5176;&#x4E2D;&#x8BB0;&#x5F55;&#x53D1;&#x5E03;&#x65B9;&#x8D26;&#x6237;&#x5730;&#x5740;fromAddress&#xFF0C;&#x6BCF;&#x6B21;&#x6267;&#x884C;&#x5408;&#x7EA6;&#x7684;&#x4EA4;&#x6613;&#x53F7;&#x53CA;&#x5B83;&#x4EEC;&#x7684;&#x7D22;&#x5F15;&#xFF0C;&#x5408;&#x7EA6;&#x540D;&#x79F0;&#x3001;SPESC&#x4EE3;&#x7801;&#x3001;Java&#x7A0B;&#x5E8F;&#x4EE3;&#x7801;</p>
+<p>&#x5728; contractinfo.cc &#x4E2D;&#x7F16;&#x5199;&#x58F0;&#x660E;&#x7684;&#x51FD;&#x6570;&#x5B9E;&#x73B0;</p>
+<h3 id="2-&#x6DFB;&#x52A0;&#x7F16;&#x8BD1;&#x9009;&#x9879;"><a href="#2-&#x6DFB;&#x52A0;&#x7F16;&#x8BD1;&#x9009;&#x9879;" class="headerlink" title="2. &#x6DFB;&#x52A0;&#x7F16;&#x8BD1;&#x9009;&#x9879;"></a>2. &#x6DFB;&#x52A0;&#x7F16;&#x8BD1;&#x9009;&#x9879;</h3><p>&#x5728; src/Makefile.am &#x4E2D;&#x7684; <code>libbitcoin_wallet_a_SOURCES</code> &#x9009;&#x9879;&#x4E2D;&#x6DFB;&#x52A0; <code>contracts/contractinfo.cpp</code>, <code>contracts/contractinfo.h</code><br>&#x901A;&#x8FC7; <code>autogen.sh</code>, <code>configure CFLAGS=&quot;-g -O0&quot; CXXFLAGS=&quot;-g -O0&quot; JFALGS=&quot;-g -O0&quot; FFLAGS=&quot;-g -O0&quot; CPPFLAGS=&quot;-g -O0&quot; --enable-debug</code>, <code>make</code> &#x4E09;&#x6B65;&#x8FDB;&#x884C;&#x6D4B;&#x8BD5;</p>
+<h3 id="3-&#x6DFB;&#x52A0;&#x4EA4;&#x6613;&#x81EA;&#x5B9A;&#x4E49;&#x5B57;&#x6BB5;"><a href="#3-&#x6DFB;&#x52A0;&#x4EA4;&#x6613;&#x81EA;&#x5B9A;&#x4E49;&#x5B57;&#x6BB5;" class="headerlink" title="3. &#x6DFB;&#x52A0;&#x4EA4;&#x6613;&#x81EA;&#x5B9A;&#x4E49;&#x5B57;&#x6BB5;"></a>3. &#x6DFB;&#x52A0;&#x4EA4;&#x6613;&#x81EA;&#x5B9A;&#x4E49;&#x5B57;&#x6BB5;</h3><p>&#x5728; CTransaction &#x548C; CMutableTransaction &#x4E0B;&#x6DFB;&#x52A0;&#x5B9A;&#x4E49;</p>
+<p>&#x7531;&#x4E8E;&#x6839;&#x636E;&#x516C;&#x94A5;&#x662F;&#x53EF;&#x4EE5;&#x83B7;&#x5F97;&#x5730;&#x5740;&#x7684;&#xFF0C;&#x6240;&#x4EE5;out&#x7AEF;&#x8BB0;&#x5F55;&#x5408;&#x7EA6;&#x516C;&#x94A5;</p>
+<h3 id="4-&#x4FEE;&#x6539;&#x53D1;&#x9001;&#x4EA4;&#x6613;&#x7684;&#x8C03;&#x7528;&#x51FD;&#x6570;&#x53C2;&#x6570;"><a href="#4-&#x4FEE;&#x6539;&#x53D1;&#x9001;&#x4EA4;&#x6613;&#x7684;&#x8C03;&#x7528;&#x51FD;&#x6570;&#x53C2;&#x6570;" class="headerlink" title="4. &#x4FEE;&#x6539;&#x53D1;&#x9001;&#x4EA4;&#x6613;&#x7684;&#x8C03;&#x7528;&#x51FD;&#x6570;&#x53C2;&#x6570;"></a>4. &#x4FEE;&#x6539;&#x53D1;&#x9001;&#x4EA4;&#x6613;&#x7684;&#x8C03;&#x7528;&#x51FD;&#x6570;&#x53C2;&#x6570;</h3><p>SendMoneyToSeveralAddress &#x5E7F;&#x64AD;&#x4EA4;&#x6613; &gt; walletcoins.cpp &#x7684; BuildAssetTransaction &#x51FD;&#x6570;&#x4E2D;&#x521B;&#x5EFA;&#x4EA4;&#x6613;&#x5B57;&#x6BB5; vin_contract &#x548C; vout_contract</p>
+<h3 id="5-BuildAssetTransaction"><a href="#5-BuildAssetTransaction" class="headerlink" title="5. BuildAssetTransaction"></a>5. BuildAssetTransaction</h3><p>&#x901A;&#x8FC7;&#x83B7;&#x53D6;json&#x4E32;&#x4E2D;&#x7684; contract_in &#x548C; contract_out &#x5B57;&#x6BB5;&#xFF0C;&#x5728;&#x4E34;&#x65F6;&#x4EA4;&#x6613;txNew&#x4E2D;&#x6DFB;&#x52A0;ContractIn&#x548C;ContractOut<br>&#x4EA4;&#x6613;&#x5927;&#x6982;&#x957F;&#x4E0B;&#x9762;&#x8FD9;&#x6837;&#xFF1A;</p>
+<figure class="highlight json hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">    <span class="hljs-attr">&quot;txid&quot;</span> : <span class="hljs-string">&quot;91c743e88e50be7b36843a108b2316af9d549a9fb7c94fa320d5bd3e5d28dfa2&quot;</span>,</span><br><span class="line">    <span class="hljs-attr">&quot;version&quot;</span> : <span class="hljs-number">1</span>,</span><br><span class="line">    <span class="hljs-attr">&quot;locktime&quot;</span> : <span class="hljs-number">0</span>,</span><br><span class="line">    <span class="hljs-attr">&quot;contract_in&quot;</span> : {</span><br><span class="line">        <span class="hljs-attr">&quot;lastTxid&quot;</span> : <span class="hljs-string">&quot;4026ce56d69e18a2e1bb93fb773536bff977ba10f9349ce658ee34bdff4a3e01&quot;</span>,</span><br><span class="line">        <span class="hljs-attr">&quot;partySig&quot;</span> : <span class="hljs-string">&quot;733c3bd75...be1d598470bd&quot;</span>,</span><br><span class="line">        <span class="hljs-attr">&quot;actionName&quot;</span> : <span class="hljs-string">&quot;Delegate&quot;</span>,</span><br><span class="line">        <span class="hljs-attr">&quot;actionParams&quot;</span> : [<span class="hljs-string">&quot;Platform&quot;</span>, <span class="hljs-string">&quot;OrderTicket&quot;</span>],</span><br><span class="line">        <span class="hljs-attr">&quot;invokeTerms&quot;</span> : [<span class="hljs-number">1</span>]</span><br><span class="line">    },</span><br><span class="line">    <span class="hljs-attr">&quot;contract_out&quot;</span> : {</span><br><span class="line">        <span class="hljs-attr">&quot;contractData&quot;</span> : <span class="hljs-string">&quot;004e3981e...92451a855511c49&quot;</span>,</span><br><span class="line">        <span class="hljs-attr">&quot;contractPubkey&quot;</span> : <span class="hljs-string">&quot;02b95dc6db0...9fdc3cd2af&quot;</span></span><br><span class="line">    },</span><br><span class="line">    <span class="hljs-attr">&quot;vin&quot;</span> : [</span><br><span class="line">        ...</span><br><span class="line">    ],</span><br><span class="line">    <span class="hljs-attr">&quot;vout&quot;</span> : [</span><br><span class="line">        ...</span><br><span class="line">    ],</span><br><span class="line">    <span class="hljs-attr">&quot;nType&quot;</span> : <span class="hljs-number">100</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x77FF;&#x5DE5;&#x63A5;&#x6536;&#x8BF7;&#x6C42;&#x540E;</p>
+<ol>
+<li>&#x63A5;&#x6536;&#x5230;&#x7F13;&#x51B2;&#x6C60;MemoryPool&#x4E2D;&#xFF0C;&#x91CD;&#x5199; AcceptToMemoryPool &#x51FD;&#x6570;&#xFF0C;&#x6DFB;&#x52A0;<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">ifdef</span> __ENABLE_CONTRACT</span></span><br><span class="line">        <span class="hljs-keyword">if</span>(tx.nType &gt; <span class="hljs-number">99</span> &amp;&amp; tx.nType &lt; <span class="hljs-number">200</span>) {</span><br><span class="line">            <span class="hljs-keyword">if</span>(!AcceptContract(tx,reason))</span><br><span class="line">            {</span><br><span class="line">                <span class="hljs-keyword">return</span> state.DoS(<span class="hljs-number">0</span>,</span><br><span class="line">                                 error(<span class="hljs-string">&quot;AcceptToMemoryPool: : AcceptContract failed %s : %s&quot;</span>, hash.ToString(),reason),</span><br><span class="line">                                 REJECT_NONSTANDARD, reason);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span></span><br></pre></td></tr></table></figure>
+
+</li>
+</ol>
+<p>&#x5728; protocol/multichaintx.cpp &#x4E2D;&#x6DFB;&#x52A0; AcceptContract &#x51FD;&#x6570;&#x7684;&#x5B9E;&#x73B0;</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">AcceptContract</span><span class="hljs-params">(<span class="hljs-keyword">const</span> CTransaction&amp; tx, <span class="hljs-built_in">string</span>&amp; reason)</span></span></span><br><span class="line"><span class="hljs-function"></span>{</span><br><span class="line">    <span class="hljs-comment">//contract field check</span></span><br><span class="line">    MutableContractInfo info = MutableContractInfo(tx.info);</span><br><span class="line">    <span class="hljs-comment">// if((reason = info.GetContractError()) != &quot;&quot;) {</span></span><br><span class="line">    <span class="hljs-comment">//     return false;</span></span><br><span class="line">    <span class="hljs-comment">// }</span></span><br><span class="line">    <span class="hljs-built_in">string</span> txid = tx.GetHash().GetHex();</span><br><span class="line">    <span class="hljs-keyword">switch</span>(tx.nType)</span><br><span class="line">    {</span><br><span class="line">        <span class="hljs-keyword">case</span> CONTRACT_DEPLOY:</span><br><span class="line">        {</span><br><span class="line">            ContractsDBRow contracts = ContractsDBRow();</span><br><span class="line">            <span class="hljs-comment">// contracts.setAddress(info.address.c_str(),info.address.length());</span></span><br><span class="line">            <span class="hljs-comment">// contracts.setLatestCodeId(txid.data(),txid.size());</span></span><br><span class="line">            <span class="hljs-comment">// contracts.setState(1);</span></span><br><span class="line">            <span class="hljs-comment">// contracts.setName(info.contractName.data(),info.contractName.size());</span></span><br><span class="line">            mc_gState-&gt;m_Contracts-&gt;InsertItem(contracts);</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">case</span> CONTRACT_INIT:</span><br><span class="line">        {</span><br><span class="line">            mc_gState-&gt;m_Contracts-&gt;updateLatestExeId(info.address.data(), txid.data());</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">case</span> CONTRACT_EXECUTE:</span><br><span class="line">        {</span><br><span class="line">            mc_gState-&gt;m_Contracts-&gt;updateLatestExeId(info.address.data(), txid.data());</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-comment">// case CONTRACT_UPDATE:</span></span><br><span class="line">        <span class="hljs-comment">// {</span></span><br><span class="line">        <span class="hljs-comment">//     mc_gState-&gt;m_Contracts-&gt;updateLatestCodeId(info.address.data(), txid.data());</span></span><br><span class="line">        <span class="hljs-comment">//     break;</span></span><br><span class="line">        <span class="hljs-comment">// }</span></span><br><span class="line">        <span class="hljs-comment">// case CONTRACT_DESTROY:</span></span><br><span class="line">        <span class="hljs-comment">// {</span></span><br><span class="line">        <span class="hljs-comment">//     mc_gState-&gt;m_Contracts-&gt;updateState(info.address.data(), 0);</span></span><br><span class="line">        <span class="hljs-comment">//     break;</span></span><br><span class="line">        <span class="hljs-comment">// }</span></span><br><span class="line">        <span class="hljs-keyword">default</span>:</span><br><span class="line">        {</span><br><span class="line">            <span class="hljs-keyword">break</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li>&#x62D3;&#x5C55;&#x4EA4;&#x6613;&#x68C0;&#x67E5;&#x51FD;&#x6570; <code>CheckInputs</code></li>
+</ol>
+<h3 id="6-&#x62D3;&#x5C55;&#x4EA4;&#x6613;&#x68C0;&#x67E5;&#x51FD;&#x6570;"><a href="#6-&#x62D3;&#x5C55;&#x4EA4;&#x6613;&#x68C0;&#x67E5;&#x51FD;&#x6570;" class="headerlink" title="6. &#x62D3;&#x5C55;&#x4EA4;&#x6613;&#x68C0;&#x67E5;&#x51FD;&#x6570;"></a>6. &#x62D3;&#x5C55;&#x4EA4;&#x6613;&#x68C0;&#x67E5;&#x51FD;&#x6570;</h3><p>main.cpp &#x4E0B;&#x7684; <code>CheckInputs</code> &#x51FD;&#x6570;</p>
+<h3 id="7-&#x7F16;&#x5199;&#x5408;&#x7EA6;&#x6570;&#x636E;&#x5E93;"><a href="#7-&#x7F16;&#x5199;&#x5408;&#x7EA6;&#x6570;&#x636E;&#x5E93;" class="headerlink" title="7. &#x7F16;&#x5199;&#x5408;&#x7EA6;&#x6570;&#x636E;&#x5E93;"></a>7. &#x7F16;&#x5199;&#x5408;&#x7EA6;&#x6570;&#x636E;&#x5E93;</h3><p>&#x5408;&#x7EA6;&#x6570;&#x636E;&#x5E93;&#x4EE5;contractAddress&#x4F5C;&#x4E3A;key&#xFF0C;<br>&#x5B58;&#x50A8;&#x4E86;&#x53D1;&#x5E03;&#x65B9;address&#xFF0C;&#x6BCF;&#x6B21;&#x6267;&#x884C;&#x7684;&#x6267;&#x884C;&#x65B9;&#x5404;&#x4EA4;&#x6613;&#x53F7;&#xFF0C;SPESC&#x5408;&#x7EA6;&#x4FE1;&#x606F;&#xFF0C;Java&#x7A0B;&#x5E8F;&#x4EE3;&#x7801;&#x3002;<br>&#x5206;&#x5E03;&#x5F0F;&#x73AF;&#x5883;&#x4E0B;&#xFF0C;&#x5408;&#x7EA6;&#x4EE3;&#x7801;&#x53EF;&#x5229;&#x7528;multichain stream&#x529F;&#x80FD;&#x4F20;&#x9012;&#x3002;<br>&#x5408;&#x7EA6;&#x6570;&#x636E;&#x5E93;&#x4F7F;&#x7528;BerkeleyDB&#xFF0C;&#x662F;&#x53EF;&#x4EE5;&#x548C;Java&#x7AEF;&#x8C03;&#x7528;&#x7684;BerkeleyDB&#x7ED3;&#x5408;&#x7684;&#xFF08;&#x975E;JE&#x7248;&#x672C;&#x53EF;&#x4E92;&#x901A;&#xFF0C;JE&#x7248;&#x672C;&#x4EC5;&#x7528;&#x4E8E;Java&#x7AEF;&#xFF09;&#xFF0C;</p>
+<h3 id="8-&#x7F16;&#x5199;-rpc-&#x63A5;&#x53E3;&#x51FD;&#x6570;&#x652F;&#x6301;"><a href="#8-&#x7F16;&#x5199;-rpc-&#x63A5;&#x53E3;&#x51FD;&#x6570;&#x652F;&#x6301;" class="headerlink" title="8. &#x7F16;&#x5199; rpc &#x63A5;&#x53E3;&#x51FD;&#x6570;&#x652F;&#x6301;"></a>8. &#x7F16;&#x5199; rpc &#x63A5;&#x53E3;&#x51FD;&#x6570;&#x652F;&#x6301;</h3><p>&#x7F16;&#x5199; <code>rpccontract.cc</code></p>
+<h3 id="9-&#x6DFB;&#x52A0;&#x5BF9;&#x4E8E;-rawtransaction-&#x7684;&#x89E3;&#x6790;&#x652F;&#x6301;"><a href="#9-&#x6DFB;&#x52A0;&#x5BF9;&#x4E8E;-rawtransaction-&#x7684;&#x89E3;&#x6790;&#x652F;&#x6301;" class="headerlink" title="9. &#x6DFB;&#x52A0;&#x5BF9;&#x4E8E; rawtransaction &#x7684;&#x89E3;&#x6790;&#x652F;&#x6301;"></a>9. &#x6DFB;&#x52A0;&#x5BF9;&#x4E8E; rawtransaction &#x7684;&#x89E3;&#x6790;&#x652F;&#x6301;</h3><p>rpcrawtransaction.cpp &#x4E2D;&#x7684; TxToJSON &#x51FD;&#x6570;&#x4E2D;&#x6DFB;&#x52A0;&#x5BF9;&#x4E8E;&#x81EA;&#x5B9A;&#x4E49;&#x4EA4;&#x6613;&#x7684;&#x8F6C;json&#x4E32;&#x529F;&#x80FD;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"></span><br></pre></td></tr></table></figure>
+
+<p><img src="workflow.png" alt="workflow.png"></p>
+<p>&#x518D;&#x8FD0;&#x884C;&#x4E00;&#x6B21;&#x547D;&#x4EE4;<br>./multichain-cli shellchain executecontract 1Ln9Tp1FCnKwSHw75BYBs74fyvp4LoaxzcHiqP addT 10</p>
+<figure class="highlight json hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">    <span class="hljs-attr">&quot;systemInput&quot;</span>:{</span><br><span class="line">        <span class="hljs-attr">&quot;contractData&quot;</span>:<span class="hljs-string">&quot;aced00057372000f637573746f6d2e436f6e74726163745e7698d0be7e2a1a02000249000574696d65734c00046e616d657400124c6a6176612f6c616e672f537472696e673b7872001d7368656c6c436861696e2e5368656c6c436861696e436f6e7472616374e96530aec4a7108902000078700000000a7400263141633177415a41336a554833537964735435444b67697a41774e6f364d6e42437871365732&quot;</span>,</span><br><span class="line">        <span class="hljs-attr">&quot;fromAddress&quot;</span>:<span class="hljs-string">&quot;1Ac1wAZA3jUH3SydsT5DKgizAwNo6MnBCxq6W2&quot;</span>,</span><br><span class="line">        <span class="hljs-attr">&quot;funName&quot;</span>:<span class="hljs-string">&quot;addT&quot;</span></span><br><span class="line">    },</span><br><span class="line">    <span class="hljs-attr">&quot;contractParams&quot;</span>:{</span><br><span class="line">        <span class="hljs-attr">&quot;signature&quot;</span>:<span class="hljs-string">&quot;&quot;</span>,</span><br><span class="line">        <span class="hljs-attr">&quot;partyForm&quot;</span>:<span class="hljs-string">&quot;&quot;</span>,</span><br><span class="line">        <span class="hljs-attr">&quot;userParams&quot;</span>:[<span class="hljs-string">&quot;10&quot;</span>]</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h2 id="&#x6DFB;&#x52A0;&#x81EA;&#x5B9A;&#x4E49;&#x63A5;&#x53E3;"><a href="#&#x6DFB;&#x52A0;&#x81EA;&#x5B9A;&#x4E49;&#x63A5;&#x53E3;" class="headerlink" title="&#x6DFB;&#x52A0;&#x81EA;&#x5B9A;&#x4E49;&#x63A5;&#x53E3;"></a>&#x6DFB;&#x52A0;&#x81EA;&#x5B9A;&#x4E49;&#x63A5;&#x53E3;</h2><p>&#x4E3B;&#x8981;&#x6B65;&#x9AA4;&#xFF1A;</p>
+<p>&#x6BD4;&#x5982;&#x73B0;&#x5728;&#x6211;&#x73B0;&#x5728;&#x6DFB;&#x52A0;4&#x4E2A;&#x6709;&#x5173;&#x5408;&#x7EA6;&#x7684;&#x81EA;&#x5B9A;&#x4E49;&#x63A5;&#x53E3;&#xFF1A;<code>sendcontract</code>, <code>sendcontractfrom</code>, <code>getcontract</code>, <code>getcontractfrom</code><br>rpcserver.h &#x91CC;&#x58F0;&#x660E;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">extern json_spirit::Value sendcontract(const json_spirit::Array&amp; params, bool fHelp);</span><br><span class="line">extern json_spirit::Value sendcontractfrom(const json_spirit::Array&amp; params, bool fHelp);</span><br><span class="line"></span><br><span class="line">extern json_spirit::Value getcontract(const json_spirit::Array&amp; params, bool fHelp);</span><br><span class="line">extern json_spirit::Value getcontractfrom(const json_spirit::Array&amp; params, bool fHelp);</span><br></pre></td></tr></table></figure>
+
+<p>rpclist.cpp &#x91CC;&#x5B9A;&#x4E49;map&#x7684;cli&#x547D;&#x4EE4;</p>
+<p>&#x5982;&#x679C;&#x9700;&#x8981;json&#x8F6C;&#x79FB;&#xFF0C;&#x5219;&#x5728; rpcclient.cpp &#x4E2D;&#x7684; vRPCConvertParams &#x4E2D;&#x5B9A;&#x4E49;</p>
+<p>&#x63A5;&#x53E3;&#x6D4B;&#x8BD5;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sendcontract &apos;[{&quot;txid&quot;:&quot;4026ce56d69e18a2e1bb93fb773536bff977ba10f9349ce658ee34bdff4a3e01&quot;,&quot;vout&quot;:0}]&apos; &apos;{&quot;1CQ9gPjQLUnebtZh73hZv7uNDx1ihtQRUxVt5L&quot;:{&quot;asset1&quot;:20}}&apos; &apos;{&quot;contractid&quot;:&quot;abcd1234&quot;, &quot;action&quot;:{&quot;name&quot;:&quot;publishservice&quot;,&quot;args&quot;:[1]}, &quot;state&quot;:{&quot;data&quot;:&quot;somedata&quot;}}&apos;</span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x6839;&#x636E;&#x516C;&#x94A5;-pkey-&#x83B7;&#x53D6;&#x5730;&#x5740;&#xFF1A;"><a href="#&#x6839;&#x636E;&#x516C;&#x94A5;-pkey-&#x83B7;&#x53D6;&#x5730;&#x5740;&#xFF1A;" class="headerlink" title="&#x6839;&#x636E;&#x516C;&#x94A5; pkey &#x83B7;&#x53D6;&#x5730;&#x5740;&#xFF1A;"></a>&#x6839;&#x636E;&#x516C;&#x94A5; pkey &#x83B7;&#x53D6;&#x5730;&#x5740;&#xFF1A;</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">info.fromAddress = CBitcoinAddress(pkey.GetID()).ToString();</span><br><span class="line">fromaddresses=ParseAddresses(info.fromAddress,false,true);</span><br><span class="line">addresses.push_back(fromaddresses[0]);</span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x6839;&#x636E;&#x5730;&#x5740;&#x83B7;&#x53D6;&#x516C;&#x94A5;&#x811A;&#x672C;&#xFF1A;"><a href="#&#x6839;&#x636E;&#x5730;&#x5740;&#x83B7;&#x53D6;&#x516C;&#x94A5;&#x811A;&#x672C;&#xFF1A;" class="headerlink" title="&#x6839;&#x636E;&#x5730;&#x5740;&#x83B7;&#x53D6;&#x516C;&#x94A5;&#x811A;&#x672C;&#xFF1A;"></a>&#x6839;&#x636E;&#x5730;&#x5740;&#x83B7;&#x53D6;&#x516C;&#x94A5;&#x811A;&#x672C;&#xFF1A;</h3><p>GetScriptForDestination</p>
+<h3 id="&#x6839;&#x636E;-scriptPubKey-&#x83B7;&#x53D6;-pubkey"><a href="#&#x6839;&#x636E;-scriptPubKey-&#x83B7;&#x53D6;-pubkey" class="headerlink" title="&#x6839;&#x636E; scriptPubKey &#x83B7;&#x53D6; pubkey"></a>&#x6839;&#x636E; scriptPubKey &#x83B7;&#x53D6; pubkey</h3><h3 id="CMutableTransaction-&#x8F6C;-CWalletTx"><a href="#CMutableTransaction-&#x8F6C;-CWalletTx" class="headerlink" title="CMutableTransaction &#x8F6C; CWalletTx"></a>CMutableTransaction &#x8F6C; CWalletTx</h3><p>walletcoins.cpp 1808&#x884C;&#xFF1A; <em>static_cast&lt;CTransaction</em>&gt;(&amp;wtxNew) = CTransaction(txNew);</p>
+<p>walletcoins.cpp 2743&#x884C; CreateAndCommitOptimizeTransaction &#x53EF;&#x4EE5;&#x5229;&#x7528;&#x4E00;&#x4E0B;</p>
+<h3 id="&#x6D4B;&#x8BD5;createcontract"><a href="#&#x6D4B;&#x8BD5;createcontract" class="headerlink" title="&#x6D4B;&#x8BD5;createcontract"></a>&#x6D4B;&#x8BD5;createcontract</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">wsd@ubuntu-16-LTS-Server:~/JoToChain$ ./src/multichain-cli contractchain createcontract contract_name ~/contract_path</span><br><span class="line">{&quot;method&quot;:&quot;createcontract&quot;,&quot;params&quot;:[&quot;contract_name&quot;,&quot;/home/wsd/contract_path&quot;],&quot;id&quot;:&quot;68243892-1600005106&quot;,&quot;chain_name&quot;:&quot;contractchain&quot;}</span><br><span class="line"></span><br><span class="line">{</span><br><span class="line">    &quot;address&quot; : &quot;1DpHe374npo7eotqMpcWT3DRW7m3Gdt577QrMZ&quot;,</span><br><span class="line">    &quot;txid&quot; : &quot;91c743e88e50be7b36843a108b2316af9d549a9fb7c94fa320d5bd3e5d28dfa2&quot;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">{    </span><br><span class="line">    &quot;address&quot; : &quot;1P3xtepz7jubi9bgXuUkPFmq1aKwajoxjPPDbt&quot;,</span><br><span class="line">    &quot;txid&quot; : &quot;37a6156e39f50219b9868817be80ddb5425f10afe0c0878b7ea2103acc1240de&quot;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>Commit &#x8FC7;&#x7A0B;&#x4E2D;&#x62A5;&#x9519;&#xFF1A;Error: The transaction was rejected: 16: ConnectInputs failed: wrong-contract-deploy-output-information<br>&#x62A5;&#x9519;&#xFF1A; CommitTransaction() : Error: Transaction not valid: 16: ConnectInputs failed: contract-deploy-input: address or actionName is null&#x3002;&#x8003;&#x8651;&#x539F;&#x56E0;&#x53EF;&#x80FD;&#x662F;CreateTransaction&#x7684;&#x8FC7;&#x7A0B;&#x4E2D;&#x6CA1;&#x6709;&#x52A0;&#x5165;contractInfo</p>
+<p>walletcoins.cpp 1564&#x884C;&#xFF1A;txNew.info.add(Others); &#x5B58;&#x7591;&#x3002;&#x662F;&#x5426;&#x6709;&#x5B58;&#x5728;&#x7684;&#x5FC5;&#x8981;&#xFF1F;</p>
+<p>multichaintx.cpp &#x91CC;&#x7684; AcceptContract &#x51FD;&#x6570;&#x7528;&#x4E8E; main.cpp &#x4E2D;&#xFF0C;&#x4F5C;&#x7528;&#x662F;&#x518D;&#x6B21;&#x68C0;&#x67E5;&#x5408;&#x7EA6;&#x683C;&#x5F0F;&#xFF0C;&#x5E76;&#x52A0;&#x5165;&#x5230;&#x5408;&#x7EA6;&#x6570;&#x636E;&#x5E93;&#x5185;&#x5B58;&#x6C60;&#x4E2D;&#x3002;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br></pre></td><td class="code"><pre><span class="line">./src/multichain-cli contractchain gettransaction 91c743e88e50be7b36843a108b2316af9d549a9fb7c94fa320d5bd3e5d28dfa2</span><br><span class="line">{</span><br><span class="line">    &quot;amount&quot; : 0.00000000,</span><br><span class="line">    &quot;fee&quot; : 0.00000000,</span><br><span class="line">    &quot;confirmations&quot; : 4,</span><br><span class="line">    &quot;blockhash&quot; : &quot;008abd8b88150757c1f2bdd4cd6ccdc7c829c698d0a084bcbff9685df729b890&quot;,</span><br><span class="line">    &quot;blockindex&quot; : 1,</span><br><span class="line">    &quot;blocktime&quot; : 1600222168,</span><br><span class="line">    &quot;txid&quot; : &quot;91c743e88e50be7b36843a108b2316af9d549a9fb7c94fa320d5bd3e5d28dfa2&quot;,</span><br><span class="line">    &quot;walletconflicts&quot; : [</span><br><span class="line">    ],</span><br><span class="line">    &quot;valid&quot; : true,</span><br><span class="line">    &quot;time&quot; : 1600222168,</span><br><span class="line">    &quot;timereceived&quot; : 1600222168,</span><br><span class="line">    &quot;details&quot; : [</span><br><span class="line">        {</span><br><span class="line">            &quot;account&quot; : &quot;&quot;,</span><br><span class="line">            &quot;address&quot; : &quot;1DpHe374npo7eotqMpcWT3DRW7m3Gdt577QrMZ&quot;,</span><br><span class="line">            &quot;category&quot; : &quot;send&quot;,</span><br><span class="line">            &quot;amount&quot; : 0.00000000,</span><br><span class="line">            &quot;vout&quot; : 0,</span><br><span class="line">            &quot;fee&quot; : 0.00000000</span><br><span class="line">        }</span><br><span class="line">    ],</span><br><span class="line">    &quot;hex&quot; : &quot;...&quot;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x89E3;&#x6790;hex</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br></pre></td><td class="code"><pre><span class="line">./src/multichain-cli contractchain decoderawtransaction 010000000172e4398b34b340c2d369c53bab6bd81bb3b2f2312ce5ffdfdab510216296f0b6000000006a473044022014153ed4e56ca6d2eeed9a58357fca9f35b3e39b70a949b771b7b8f752fdbab202206c51bf6af4120f1c32430bd10fe17b034d5f7fc7eabb66bcf4b39a6ed5d143530121027f51366ead7860f7a76ec288dcefa2c1af3b1e649f548a2d3999e73da1f5f6c0ffffffff737b2261646472657373223a2231447048653337346e706f37656f74714d7063575433445257376d3347647435373751724d5a222c2274786964223a22222c22616374696f6e4e616d65223a225f696e6974222c22616374696f6e506172616d73223a22222c227061727479536967223a22227d0200000000000000001976a9145ed1c347df506af7d9cb66877bc2b2f58789909288ac027b7d00000000000000001976a914a06beee2be7d64b78fe0af0fa3e22ac64a85ec3888ac667b22636f6e747261637444617461223a22222c2270617274795075626b6579223a22303262393564633664623037333363336264373562653164353938343730626439666463336330303465333938316539323435316138353535313163343964326166227d0000000064000000</span><br><span class="line"></span><br><span class="line">{</span><br><span class="line">    &quot;txid&quot; : &quot;91c743e88e50be7b36843a108b2316af9d549a9fb7c94fa320d5bd3e5d28dfa2&quot;,</span><br><span class="line">    &quot;version&quot; : 1,</span><br><span class="line">    &quot;locktime&quot; : 0,</span><br><span class="line">    &quot;vin&quot; : [</span><br><span class="line">        {</span><br><span class="line">            &quot;txid&quot; : &quot;b6f096622110b5dadfffe52c31f2b2b31bd86bab3bc569d3c240b3348b39e472&quot;,</span><br><span class="line">            &quot;vout&quot; : 0,</span><br><span class="line">            &quot;scriptSig&quot; : {</span><br><span class="line">                &quot;asm&quot; : &quot;3044022014153ed4e56ca6d2eeed9a58357fca9f35b3e39b70a949b771b7b8f752fdbab202206c51bf6af4120f1c32430bd10fe17b034d5f7fc7eabb66bcf4b39a6ed5d1435301 027f51366ead7860f7a76ec288dcefa2c1af3b1e649f548a2d3999e73da1f5f6c0&quot;,</span><br><span class="line">                &quot;hex&quot; : &quot;473044022014153ed4e56ca6d2eeed9a58357fca9f35b3e39b70a949b771b7b8f752fdbab202206c51bf6af4120f1c32430bd10fe17b034d5f7fc7eabb66bcf4b39a6ed5d143530121027f51366ead7860f7a76ec288dcefa2c1af3b1e649f548a2d3999e73da1f5f6c0&quot;</span><br><span class="line">            },</span><br><span class="line">            &quot;vin_contract&quot; : {</span><br><span class="line">                &quot;address&quot; : &quot;1DpHe374npo7eotqMpcWT3DRW7m3Gdt577QrMZ&quot;,</span><br><span class="line">                &quot;txid&quot; : &quot;&quot;,</span><br><span class="line">                &quot;actionName&quot; : &quot;_init&quot;,</span><br><span class="line">                &quot;actionParams&quot; : &quot;&quot;,</span><br><span class="line">                &quot;partySig&quot; : &quot;&quot;</span><br><span class="line">            },</span><br><span class="line">            &quot;sequence&quot; : 4294967295</span><br><span class="line">        }</span><br><span class="line">    ],</span><br><span class="line">    &quot;vout&quot; : [</span><br><span class="line">        {</span><br><span class="line">            &quot;value&quot; : 0.00000000,</span><br><span class="line">            &quot;n&quot; : 0,</span><br><span class="line">            &quot;scriptPubKey&quot; : {</span><br><span class="line">                &quot;asm&quot; : &quot;OP_DUP OP_HASH160 5ed1c347df506af7d9cb66877bc2b2f587899092 OP_EQUALVERIFY OP_CHECKSIG&quot;,</span><br><span class="line">                &quot;hex&quot; : &quot;76a9145ed1c347df506af7d9cb66877bc2b2f58789909288ac&quot;,</span><br><span class="line">                &quot;reqSigs&quot; : 1,</span><br><span class="line">                &quot;type&quot; : &quot;pubkeyhash&quot;,</span><br><span class="line">                &quot;addresses&quot; : [</span><br><span class="line">                    &quot;1DpHe374npo7eotqMpcWT3DRW7m3Gdt577QrMZ&quot;</span><br><span class="line">                ]</span><br><span class="line">            }</span><br><span class="line">        },</span><br><span class="line">        {</span><br><span class="line">            &quot;value&quot; : 0.00000000,</span><br><span class="line">            &quot;n&quot; : 1,</span><br><span class="line">            &quot;scriptPubKey&quot; : {</span><br><span class="line">                &quot;asm&quot; : &quot;OP_DUP OP_HASH160 a06beee2be7d64b78fe0af0fa3e22ac64a85ec38 OP_EQUALVERIFY OP_CHECKSIG&quot;,</span><br><span class="line">                &quot;hex&quot; : &quot;76a914a06beee2be7d64b78fe0af0fa3e22ac64a85ec3888ac&quot;,</span><br><span class="line">                &quot;reqSigs&quot; : 1,</span><br><span class="line">                &quot;type&quot; : &quot;pubkeyhash&quot;,</span><br><span class="line">                &quot;addresses&quot; : [</span><br><span class="line">                    &quot;1NgYPRT6AQjSgRsiShStsiWsbfPQ15sugh3bXS&quot;</span><br><span class="line">                ]</span><br><span class="line">            },</span><br><span class="line">            &quot;vout_contract&quot; : {</span><br><span class="line">                &quot;contractData&quot; : &quot;&quot;,</span><br><span class="line">                &quot;partyPubkey&quot; : &quot;02b95dc6db0733c3bd75be1d598470bd9fdc3c004e3981e92451a855511c49d2af&quot;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    ],</span><br><span class="line">    &quot;nType&quot; : 100</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x6D4B;&#x8BD5;-callcontract"><a href="#&#x6D4B;&#x8BD5;-callcontract" class="headerlink" title="&#x6D4B;&#x8BD5; callcontract"></a>&#x6D4B;&#x8BD5; callcontract</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">callcontract &apos;{&quot;address&quot;:&quot;1XK3LDVyRStHaXThmJP1awHsrm2u8ovS8DXMbe&quot;, &quot;txid&quot;:&quot;78a50477408c82831c941e576fd41b55e7e7a73e7388375e6d576004ea12f98d&quot;, &quot;partySig&quot;:&quot;sign_partyA&quot;, &quot;actionName&quot;:&quot;publishservice&quot;, &quot;actionParams&quot;:&quot;service A, 1&quot;}&apos; &apos;{&quot;contractData&quot;:&quot;abcdef1234567890&quot;, &quot;partyPubkey&quot;:&quot;partyA&quot;}&apos; &apos;[{&quot;txid&quot;:&quot;4026ce56d69e18a2e1bb93fb773536bff977ba10f9349ce658ee34bdff4a3e01&quot;,&quot;vout&quot;:0}]&apos; &apos;{&quot;1CQ9gPjQLUnebtZh73hZv7uNDx1ihtQRUxVt5L&quot;:{&quot;asset1&quot;:20}}&apos;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">callcontract &apos;{&quot;address&quot;:&quot;1DpHe374npo7eotqMpcWT3DRW7m3Gdt577QrMZ&quot;, &quot;txid&quot;:&quot;91c743e88e50be7b36843a108b2316af9d549a9fb7c94fa320d5bd3e5d28dfa2&quot;, &quot;partySig&quot;:&quot;sign_partyA&quot;, &quot;actionName&quot;:&quot;publishservice&quot;, &quot;actionParams&quot;:&quot;service A, 1&quot;}&apos; &apos;{&quot;contractData&quot;:&quot;abcdef1234567890&quot;, &quot;partyPubkey&quot;:&quot;partyA&quot;}&apos;</span><br></pre></td></tr></table></figure>
+
+<p>&#x62A5;&#x9519;&#xFF1A;Insufficient funds<br>Coin selection: No unspent outputs are available. Please send a transaction, with zero amount, to this node or address first and wait for its confirmation.</p>
+<p>&#x62A5;&#x9519;&#x539F;&#x56E0;&#x5728; wallet/wallet.cpp SelectMultiChainCoins&#x51FD;&#x6570;&#x4E2D;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">int preferred_row=in_preferred_row;</span><br><span class="line">for(int attempt=0;attempt&lt;2;attempt++)</span><br><span class="line">{</span><br><span class="line">    if((SelectMultiChainCoinsMinConf(nTargetValue, 1, 6, vCoins, in_map, in_amounts, in_selected_row, in_asset_row, preferred_row, setCoinsRet, nValueRet) ||</span><br><span class="line">        SelectMultiChainCoinsMinConf(nTargetValue, 1, 1, vCoins, in_map, in_amounts, in_selected_row, in_asset_row, preferred_row, setCoinsRet, nValueRet) ||</span><br><span class="line">        (bSpendZeroConfChange &amp;&amp; SelectMultiChainCoinsMinConf(nTargetValue, 0, 1, vCoins, in_map, in_amounts, in_selected_row, in_asset_row, preferred_row, setCoinsRet, nValueRet))))</span><br><span class="line">    {</span><br><span class="line">        return true;</span><br><span class="line">    }</span><br><span class="line">    if(in_preferred_row == 0)</span><br><span class="line">    {</span><br><span class="line">        return false;</span><br><span class="line">    }</span><br><span class="line">    preferred_row=0;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line">return false;</span><br></pre></td></tr></table></figure>
+
+<p>&#x8BE5;&#x5FAA;&#x73AF;&#x8FDB;&#x884C;&#x4E86;&#x4E24;&#x6B21;attemp&#x90FD;&#x6CA1;&#x6709;&#x8FD4;&#x56DE;true&#xFF0C;&#x6700;&#x7EC8;&#x8FD4;&#x56DE;&#x4E86;false</p>
+<p>&#x51FD;&#x6570;&#x8C03;&#x7528;&#x6808;&#xFF1A;<br>wallet/wallet.cpp 3124<br>wallet/walletcoins.cpp 1370<br>wallet/walletcoins.cpp 2187<br>wallet/walletcoins.cpp 2412<br>wallet/wallet.cpp 2691<br>rpc/rpcsmartcontract.cpp 376</p>
+<p>&#x539F;&#x56E0;&#xFF1A;&#x4F20;&#x5165;&#x7684; scriptPubkeys &#x4E3A;&#x7A7A;&#xFF1F;<br><code>callcontractfrom</code> &#x51FD;&#x6570;&#x4E2D;&#x52A0;&#x5165;&#x5408;&#x7EA6;&#x516C;&#x94A5; scriptPubKeys.push_back(GetScriptForDestination(CBitcoinAddress(contractInfo.address).Get()));</p>
+<p>wallet.cpp 2841&#x884C;&#x4E2D;&#x4F1A;&#x5BF9;in&#x3001;out&#x5B57;&#x6BB5;&#x987A;&#x5E8F;&#x8FDB;&#x884C;&#x6D17;&#x724C;&#x7B97;&#x6CD5;&#xFF0C;&#x6240;&#x4EE5;&#x68C0;&#x6D4B;&#x5408;&#x7EA6;&#x5B57;&#x6BB5;&#x8FD8;&#x5E94;&#x8BE5;&#x4F7F;&#x7528; size()&gt;0 &#x7684;&#x65B9;&#x5F0F;&#xFF0C;&#x7528; index=size()-1 &#x4E0D;&#x9760;&#x8C31;&#x3002;</p>
+<p>setFromAddresses &#x91CC;&#x6CA1;&#x6709;&#x586B;&#x5145;&#x503C;</p>
+<p>&#x6D4B;&#x8BD5;&#x6210;&#x529F;&#x7ED3;&#x679C;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">{</span><br><span class="line">    &quot;txid&quot; : &quot;0d33b3e18ed1bcbfabce46e10e7ec4ce60a7d3a7c686e1ff58b94c22005bbd9d&quot;,</span><br><span class="line">    &quot;version&quot; : 1,</span><br><span class="line">    &quot;locktime&quot; : 0,</span><br><span class="line">    &quot;vin&quot; : [</span><br><span class="line">        {</span><br><span class="line">            &quot;txid&quot; : &quot;37a6156e39f50219b9868817be80ddb5425f10afe0c0878b7ea2103acc1240de&quot;,</span><br><span class="line">            &quot;vout&quot; : 1,</span><br><span class="line">            &quot;scriptSig&quot; : {</span><br><span class="line">                &quot;asm&quot; : &quot;3045022100de1bfae39330545ca5f52455b203dde11292ff9e759425803fb429191ef7690802205d86108f9c43ce5923b78c03d4f35ac7234eca5ef6ce2cb1be26034a1fd7b6b001 027f51366ead7860f7a76ec288dcefa2c1af3b1e649f548a2d3999e73da1f5f6c0&quot;,</span><br><span class="line">                &quot;hex&quot; : &quot;483045022100de1bfae39330545ca5f52455b203dde11292ff9e759425803fb429191ef7690802205d86108f9c43ce5923b78c03d4f35ac7234eca5ef6ce2cb1be26034a1fd7b6b00121027f51366ead7860f7a76ec288dcefa2c1af3b1e649f548a2d3999e73da1f5f6c0&quot;</span><br><span class="line">            },</span><br><span class="line">            &quot;vin_contract&quot; : {</span><br><span class="line">                &quot;address&quot; : &quot;1P3xtepz7jubi9bgXuUkPFmq1aKwajoxjPPDbt&quot;,</span><br><span class="line">                &quot;txid&quot; : &quot;37a6156e39f50219b9868817be80ddb5425f10afe0c0878b7ea2103acc1240de&quot;,</span><br><span class="line">                &quot;actionName&quot; : &quot;publishservice&quot;,</span><br><span class="line">                &quot;actionParams&quot; : &quot;service A, 1&quot;,</span><br><span class="line">                &quot;partySig&quot; : &quot;sign_partyA&quot;</span><br><span class="line">            },</span><br><span class="line">            &quot;sequence&quot; : 4294967295</span><br><span class="line">        }</span><br><span class="line">    ],</span><br><span class="line">    &quot;vout&quot; : [</span><br><span class="line">        {</span><br><span class="line">            &quot;value&quot; : 0.00000000,</span><br><span class="line">            &quot;n&quot; : 0,</span><br><span class="line">            &quot;scriptPubKey&quot; : {</span><br><span class="line">                &quot;asm&quot; : &quot;OP_DUP OP_HASH160 a32788bf5f608fe791c5104773d0caa1711b12ef OP_EQUALVERIFY OP_CHECKSIG&quot;,</span><br><span class="line">                &quot;hex&quot; : &quot;76a914a32788bf5f608fe791c5104773d0caa1711b12ef88ac&quot;,</span><br><span class="line">                &quot;reqSigs&quot; : 1,</span><br><span class="line">                &quot;type&quot; : &quot;pubkeyhash&quot;,</span><br><span class="line">                &quot;addresses&quot; : [</span><br><span class="line">                    &quot;1P3xtepz7jubi9bgXuUkPFmq1aKwajoxjPPDbt&quot;</span><br><span class="line">                ]</span><br><span class="line">            }</span><br><span class="line">        },</span><br><span class="line">        {</span><br><span class="line">            &quot;value&quot; : 0.00000000,</span><br><span class="line">            &quot;n&quot; : 1,</span><br><span class="line">            &quot;scriptPubKey&quot; : {</span><br><span class="line">                &quot;asm&quot; : &quot;OP_CUSTOMDATA 0061626364656631323334353637383930&quot;,</span><br><span class="line">                &quot;hex&quot; : &quot;ba110061626364656631323334353637383930&quot;,</span><br><span class="line">                &quot;type&quot; : &quot;nulldata&quot;</span><br><span class="line">            }</span><br><span class="line">        },</span><br><span class="line">        {</span><br><span class="line">            &quot;value&quot; : 0.00000000,</span><br><span class="line">            &quot;n&quot; : 2,</span><br><span class="line">            &quot;scriptPubKey&quot; : {</span><br><span class="line">                &quot;asm&quot; : &quot;OP_DUP OP_HASH160 a06beee2be7d64b78fe0af0fa3e22ac64a85ec38 OP_EQUALVERIFY OP_CHECKSIG&quot;,</span><br><span class="line">                &quot;hex&quot; : &quot;76a914a06beee2be7d64b78fe0af0fa3e22ac64a85ec3888ac&quot;,</span><br><span class="line">                &quot;reqSigs&quot; : 1,</span><br><span class="line">                &quot;type&quot; : &quot;pubkeyhash&quot;,</span><br><span class="line">                &quot;addresses&quot; : [</span><br><span class="line">                    &quot;1NgYPRT6AQjSgRsiShStsiWsbfPQ15sugh3bXS&quot;</span><br><span class="line">                ]</span><br><span class="line">            },</span><br><span class="line">            &quot;vout_contract&quot; : {</span><br><span class="line">                &quot;contractData&quot; : &quot;abcdef1234567890&quot;,</span><br><span class="line">                &quot;partyPubkey&quot; : &quot;partyA&quot;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    ],</span><br><span class="line">    &quot;nType&quot; : 4294967295</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x9A8C;&#x8BC1;&#x7ED3;&#x70B9;&#x7684;&#x5408;&#x7EA6;&#x53EF;&#x901A;&#x8FC7;stream&#x8BA2;&#x9605;&#x901A;&#x77E5;</p>
+<h2 id="&#x7CFB;&#x5217;&#x6D4B;&#x8BD5;"><a href="#&#x7CFB;&#x5217;&#x6D4B;&#x8BD5;" class="headerlink" title="&#x7CFB;&#x5217;&#x6D4B;&#x8BD5;"></a>&#x7CFB;&#x5217;&#x6D4B;&#x8BD5;</h2><h3 id="1"><a href="#1" class="headerlink" title="1"></a>1</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">./src/multichain-cli contractchain createcontract test_name1 test_path1</span><br><span class="line">{</span><br><span class="line">    &quot;address&quot; : &quot;1J4f7mRLLbTUcq7qCdBepp14vKPGi1wUib7BgM&quot;,</span><br><span class="line">    &quot;txid&quot; : &quot;7665e9cd7aaa1e38682a36872d04f80b09c7a00f15c27f8775e44b6029325a6a&quot;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">./src/multichain-cli contractchain callcontract &apos;{&quot;address&quot;:&quot;1J4f7mRLLbTUcq7qCdBepp14vKPGi1wUib7BgM&quot;, &quot;txid&quot;:&quot;7665e9cd7aaa1e38682a36872d04f80b09c7a00f15c27f8775e44b6029325a6a&quot;, &quot;partySig&quot;:&quot;sign_partyA&quot;, &quot;actionName&quot;:&quot;publishservice&quot;, &quot;actionParams&quot;:&quot;service A, 1&quot;}&apos; &apos;{&quot;contractData&quot;:&quot;abcdef1234567890&quot;, &quot;partyPubkey&quot;:&quot;partyA&quot;}&apos;</span><br><span class="line"></span><br><span class="line">c01076277d5e9af42b23e94d4f13e637dd828842fb315606b02175ed63031f64</span><br><span class="line"></span><br><span class="line">./src/multichain-cli contractchain grant 1J4f7mRLLbTUcq7qCdBepp14vKPGi1wUib7BgM receive,send</span><br><span class="line"></span><br><span class="line">abc4698943ce8dc7ebaacab56ea3e1836b857acce3ea858dcd704c31814a6f82</span><br><span class="line"></span><br><span class="line">./src/multichain-cli contractchain issue 1NgYPRT6AQjSgRsiShStsiWsbfPQ15sugh3bXS money 100 0.01</span><br><span class="line"></span><br><span class="line">b0aa46fb512ea4845596dbf6847cda43415e89479c80100427f59702b14bd161</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">./src/multichain-cli contractchain callcontract &apos;{&quot;address&quot;:&quot;1J4f7mRLLbTUcq7qCdBepp14vKPGi1wUib7BgM&quot;, &quot;txid&quot;:&quot;c01076277d5e9af42b23e94d4f13e637dd828842fb315606b02175ed63031f64&quot;, &quot;partySig&quot;:&quot;sign_partyA&quot;, &quot;actionName&quot;:&quot;payContract&quot;, &quot;actionParams&quot;:&quot;10&quot;}&apos; &apos;{&quot;contractData&quot;:&quot;1234567890abcdef&quot;, &quot;partyPubkey&quot;:&quot;partyA&quot;}&apos; &apos;[{&quot;txid&quot;:&quot;b0aa46fb512ea4845596dbf6847cda43415e89479c80100427f59702b14bd161&quot;,&quot;vout&quot;:0}]&apos; &apos;{&quot;1J4f7mRLLbTUcq7qCdBepp14vKPGi1wUib7BgM&quot;:{&quot;money&quot;:10}}&apos;</span><br><span class="line"></span><br><span class="line">e769977d0cf2d272c34ab75e93705795634447acfb7b3552c124b1d4b45e15db</span><br></pre></td></tr></table></figure>
+
+<h3 id="2"><a href="#2" class="headerlink" title="2"></a>2</h3><ol>
+<li><p>&#x521B;&#x5EFA;&#x5408;&#x7EA6;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">./src/multichain-cli contractchain createcontract test_name2 test_path2</span><br><span class="line"></span><br><span class="line">{</span><br><span class="line">    &quot;address&quot; : &quot;144Z8njQaUejZTviipyNaP5MirxVgYidW73xmK&quot;,</span><br><span class="line">    &quot;txid&quot; : &quot;b13c36a69a49d413978e1a76ceaae77a40c2b909751b3877cb27b6151346990a&quot;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x521D;&#x59CB;&#x5316;&#x5408;&#x7EA6;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">./src/multichain-cli contractchain callcontract &apos;{&quot;address&quot;:&quot;144Z8njQaUejZTviipyNaP5MirxVgYidW73xmK&quot;, &quot;txid&quot;:&quot;b13c36a69a49d413978e1a76ceaae77a40c2b909751b3877cb27b6151346990a&quot;, &quot;partySig&quot;:&quot;sign_partyA&quot;, &quot;actionName&quot;:&quot;publishservice&quot;, &quot;actionParams&quot;:&quot;service A, 1&quot;}&apos; &apos;{&quot;contractData&quot;:&quot;abcdef1234567890&quot;, &quot;partyPubkey&quot;:&quot;partyA&quot;}&apos;</span><br><span class="line"></span><br><span class="line">e14b40448c7961509f5a00abe366a804ba02e7b704d67d1d13f98a4aad61ea27</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x521B;&#x5EFA;&#x8D44;&#x4EA7;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">./src/multichain-cli contractchain listpermissions issue</span><br><span class="line"></span><br><span class="line">[</span><br><span class="line">    {</span><br><span class="line">        &quot;address&quot; : &quot;1NgYPRT6AQjSgRsiShStsiWsbfPQ15sugh3bXS&quot;,</span><br><span class="line">        &quot;for&quot; : null,</span><br><span class="line">        &quot;type&quot; : &quot;issue&quot;,</span><br><span class="line">        &quot;startblock&quot; : 0,</span><br><span class="line">        &quot;endblock&quot; : 4294967295</span><br><span class="line">    }</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line">./src/multichain-cli contractchain issue 1NgYPRT6AQjSgRsiShStsiWsbfPQ15sugh3bXS money2 100 0.01</span><br><span class="line"></span><br><span class="line">1298afdfd8146c2e95cbbbc524f7d69e4540a8ccc27079ab08a61c53ee924d93</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>&#x5408;&#x7EA6;&#x8F6C;&#x79FB;&#x8D44;&#x4EA7;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">./src/multichain-cli contractchain grant 144Z8njQaUejZTviipyNaP5MirxVgYidW73xmK receive,send</span><br><span class="line"></span><br><span class="line">8a7c066b680b2620671605f6de5e9560c050c65c2fdfeb21fa9eda513c23d71c</span><br><span class="line"></span><br><span class="line">./src/multichain-cli contractchain callcontract &apos;{&quot;address&quot;:&quot;144Z8njQaUejZTviipyNaP5MirxVgYidW73xmK&quot;, &quot;txid&quot;:&quot;e14b40448c7961509f5a00abe366a804ba02e7b704d67d1d13f98a4aad61ea27&quot;, &quot;partySig&quot;:&quot;sign_partyA&quot;, &quot;actionName&quot;:&quot;payContract&quot;, &quot;actionParams&quot;:&quot;30&quot;}&apos; &apos;{&quot;contractData&quot;:&quot;1234567890abcdef&quot;, &quot;partyPubkey&quot;:&quot;partyA&quot;}&apos; &apos;[{&quot;txid&quot;:&quot;1298afdfd8146c2e95cbbbc524f7d69e4540a8ccc27079ab08a61c53ee924d93&quot;,&quot;vout&quot;:0}]&apos; &apos;{&quot;144Z8njQaUejZTviipyNaP5MirxVgYidW73xmK&quot;:{&quot;money2&quot;:30}}&apos;</span><br><span class="line"></span><br><span class="line">df6a461259f37ffff4d9625bae73c06d393aea11a738b6cfe02a796b81f2abd7</span><br></pre></td></tr></table></figure></li>
+</ol>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Smart-Contracts/">#Smart Contracts</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Shellchain/">#Shellchain</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Blockchain/">#Blockchain</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/Sep-15th-PAT-Werewolf-simple-version/">PAT 真题 | 1148 Werewolf - Simple version</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/Sep-7th-PAT-1057/">PAT 真题 | 1057 Stack</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

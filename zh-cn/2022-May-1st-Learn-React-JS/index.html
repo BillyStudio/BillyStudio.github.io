@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>React从零基础入门 - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/2022-May-1st-Learn-React-JS/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x5B66;&amp;#x4E60;&amp;#x524D;&amp;#x7AEF;3&amp;#x5927;&amp;#x6846;&amp;#x67B6;&amp;#x4E4B;&amp;#x4E00;&amp;#x7684; React">
+<meta name="keywords" content="React">
+<meta property="og:type" content="article">
+<meta property="og:title" content="React从零基础入门">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/2022-May-1st-Learn-React-JS/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x5B66;&amp;#x4E60;&amp;#x524D;&amp;#x7AEF;3&amp;#x5927;&amp;#x6846;&amp;#x67B6;&amp;#x4E4B;&amp;#x4E00;&amp;#x7684; React">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.630Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="React从零基础入门">
+<meta name="twitter:description" content="&amp;#x5B66;&amp;#x4E60;&amp;#x524D;&amp;#x7AEF;3&amp;#x5927;&amp;#x6846;&amp;#x67B6;&amp;#x4E4B;&amp;#x4E00;&amp;#x7684; React">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#准备工作">1&nbsp;&nbsp;<b>准备工作</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#在脚手架中使用-React">2&nbsp;&nbsp;<b>在脚手架中使用 React</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#JSX-的基本使用">3&nbsp;&nbsp;<b>JSX 的基本使用</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#为什么在js中可以使用-JSX-语法？">3.1&nbsp;&nbsp;为什么在js中可以使用 JSX 语法？</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#如何在-JSX-中引用-JavaScript-对象？">3.2&nbsp;&nbsp;如何在 JSX 中引用 JavaScript 对象？</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#条件渲染">3.3&nbsp;&nbsp;条件渲染</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#列表渲染">3.4&nbsp;&nbsp;列表渲染</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#样式处理">3.5&nbsp;&nbsp;样式处理</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#React-组件学习">4&nbsp;&nbsp;<b>React 组件学习</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1-使用函数创建组件">4.1&nbsp;&nbsp;1. 使用函数创建组件</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#2-使用class创建组件">4.2&nbsp;&nbsp;2. 使用class创建组件</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#React事件处理">5&nbsp;&nbsp;<b>React事件处理</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1-React事件绑定">5.1&nbsp;&nbsp;1. React事件绑定</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#使用类组件">5.1.1&nbsp;&nbsp;使用类组件</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#使用函数组件">5.1.2&nbsp;&nbsp;使用函数组件</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#2-事件对象">5.2&nbsp;&nbsp;2. 事件对象</a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2022-May-1st-Learn-React-JS/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2022-May-1st-Learn-React-JS/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            React从零基础入门
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2022-05-01T03:44:48.000Z" itemprop="datePublished">5月 1 2022</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            8 分钟 读完 (约 1201 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x5B66;&#x4E60;&#x524D;&#x7AEF;3&#x5927;&#x6846;&#x67B6;&#x4E4B;&#x4E00;&#x7684; React <a id="more"></a></p>
+<h1 id="&#x51C6;&#x5907;&#x5DE5;&#x4F5C;"><a href="#&#x51C6;&#x5907;&#x5DE5;&#x4F5C;" class="headerlink" title="&#x51C6;&#x5907;&#x5DE5;&#x4F5C;"></a>&#x51C6;&#x5907;&#x5DE5;&#x4F5C;</h1><p>React&#x811A;&#x624B;&#x67B6;&#x521D;&#x59CB;&#x5316;&#x9879;&#x76EE;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">nvm use 14</span><br><span class="line">npx create-react-app my-app</span><br></pre></td></tr></table></figure>
+
+<p>&#x542F;&#x52A8;&#x9879;&#x76EE;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm start # yarn start</span><br></pre></td></tr></table></figure>
+
+<h1 id="&#x5728;&#x811A;&#x624B;&#x67B6;&#x4E2D;&#x4F7F;&#x7528;-React"><a href="#&#x5728;&#x811A;&#x624B;&#x67B6;&#x4E2D;&#x4F7F;&#x7528;-React" class="headerlink" title="&#x5728;&#x811A;&#x624B;&#x67B6;&#x4E2D;&#x4F7F;&#x7528; React"></a>&#x5728;&#x811A;&#x624B;&#x67B6;&#x4E2D;&#x4F7F;&#x7528; React</h1><p>1.&#x5BFC;&#x5165;react&#x548C;react-dom&#x4E24;&#x4E2A;&#x5305;</p>
+<figure class="highlight javascript hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span></span><br><span class="line"><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react-dom&apos;</span></span><br></pre></td></tr></table></figure>
+
+<p>2.&#x8C03;&#x7528; <code>React.createElement()</code> &#x65B9;&#x6CD5;&#x521B;&#x5EFA; react &#x5143;&#x7D20;</p>
+<p>3.&#x8C03;&#x7528; <code>ReactDOM.render()</code> &#x65B9;&#x6CD5;&#x6E32;&#x67D3; react &#x5143;&#x7D20;&#x5230;&#x9875;&#x9762;&#x4E2D;</p>
+<h1 id="JSX-&#x7684;&#x57FA;&#x672C;&#x4F7F;&#x7528;"><a href="#JSX-&#x7684;&#x57FA;&#x672C;&#x4F7F;&#x7528;" class="headerlink" title="JSX &#x7684;&#x57FA;&#x672C;&#x4F7F;&#x7528;"></a>JSX &#x7684;&#x57FA;&#x672C;&#x4F7F;&#x7528;</h1><p>JSX&#x7684;&#x51FA;&#x73B0;&#x662F;&#x4E3A;&#x4E86;&#x89E3;&#x51B3; <code>createElement()</code> &#x51FD;&#x6570;&#x521B;&#x5EFA; react &#x5143;&#x7D20;&#x7684;&#x75DB;&#x70B9;&#x95EE;&#x9898;&#xFF1A;<br>1.&#x7E41;&#x7410;&#x4E0D;&#x7B80;&#x6D01;<br>2.&#x4E0D;&#x76F4;&#x89C2;&#xFF0C;&#x65E0;&#x6CD5;&#x4E00;&#x773C;&#x770B;&#x51FA;&#x6240;&#x63CF;&#x8FF0;&#x7684;&#x7ED3;&#x6784;<br>3.&#x4E0D;&#x4F18;&#x96C5;&#xFF0C;&#x7A0B;&#x5E8F;&#x5458;&#x4F53;&#x9A8C;&#x4E0D;&#x723D;</p>
+<p>JSX &#x662F; JavaScript XML &#x7684;&#x7B80;&#x5199;&#xFF0C;&#x5373;&#x5728;JavaScript&#x4EE3;&#x7801;&#x4E2D;&#x5199; XML(HTML) &#x683C;&#x5F0F;&#x4EE3;&#x7801;&#x3002;&#x5176;&#x4F18;&#x70B9;&#x5728;&#x4E8E;&#x58F0;&#x660E;&#x5F0F;&#x8BED;&#x6CD5;&#x66F4;&#x52A0;&#x76F4;&#x89C2;&#x3001;&#x4E0E;HTML&#x8BED;&#x6CD5;&#x7ED3;&#x6784;&#x76F8;&#x540C;&#xFF0C;&#x964D;&#x4F4E;&#x4E86;&#x5B66;&#x4E60;&#x6210;&#x672C;&#x3001;&#x63D0;&#x9AD8;&#x4E86;&#x5F00;&#x53D1;&#x6548;&#x7387;&#x3002;</p>
+<h2 id="&#x4E3A;&#x4EC0;&#x4E48;&#x5728;js&#x4E2D;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;-JSX-&#x8BED;&#x6CD5;&#xFF1F;"><a href="#&#x4E3A;&#x4EC0;&#x4E48;&#x5728;js&#x4E2D;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;-JSX-&#x8BED;&#x6CD5;&#xFF1F;" class="headerlink" title="&#x4E3A;&#x4EC0;&#x4E48;&#x5728;js&#x4E2D;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; JSX &#x8BED;&#x6CD5;&#xFF1F;"></a>&#x4E3A;&#x4EC0;&#x4E48;&#x5728;js&#x4E2D;&#x53EF;&#x4EE5;&#x4F7F;&#x7528; JSX &#x8BED;&#x6CD5;&#xFF1F;</h2><p>&#x56E0;&#x4E3A;&#x4F7F;&#x7528;&#x4E86; babel &#x8FDB;&#x884C;&#x8BED;&#x6CD5;&#x89E3;&#x6790;&#x7684;&#x8F6C;&#x5316;&#x3002;<br>&#x5728; js &#x4E2D;&#x63D2;&#x5165; jsx &#x4EE3;&#x7801;&#x6BB5;&#x5EFA;&#x8BAE;&#x7528;&#x5C0F;&#x62EC;&#x53F7;&#x5ED3;&#x8D77;&#x6765;&#xFF0C;&#x4F46;&#x4E5F;&#x53EF;&#x4EE5;&#x4E0D;&#x7528;&#x3002;</p>
+<h2 id="&#x5982;&#x4F55;&#x5728;-JSX-&#x4E2D;&#x5F15;&#x7528;-JavaScript-&#x5BF9;&#x8C61;&#xFF1F;"><a href="#&#x5982;&#x4F55;&#x5728;-JSX-&#x4E2D;&#x5F15;&#x7528;-JavaScript-&#x5BF9;&#x8C61;&#xFF1F;" class="headerlink" title="&#x5982;&#x4F55;&#x5728; JSX &#x4E2D;&#x5F15;&#x7528; JavaScript &#x5BF9;&#x8C61;&#xFF1F;"></a>&#x5982;&#x4F55;&#x5728; JSX &#x4E2D;&#x5F15;&#x7528; JavaScript &#x5BF9;&#x8C61;&#xFF1F;</h2><p>&#x4F7F;&#x7528;&#x5927;&#x62EC;&#x53F7;&#x5C06;&#x5BF9;&#x8C61;&#x653E;&#x5728;&#x5185;&#xFF1A;</p>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">JSX &#x4E2D;&#x4F7F;&#x7528; JavaScript &#x8868;&#x8FBE;&#x5F0F;</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-keyword">const</span> name = <span class="hljs-string">&apos;Alice&apos;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> title = (</span><br><span class="line">    &lt;h1&gt;Hello JSX, {name}&lt;<span class="hljs-regexp">/h1&gt;</span></span><br><span class="line"><span class="hljs-regexp">)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="&#x6761;&#x4EF6;&#x6E32;&#x67D3;"><a href="#&#x6761;&#x4EF6;&#x6E32;&#x67D3;" class="headerlink" title="&#x6761;&#x4EF6;&#x6E32;&#x67D3;"></a>&#x6761;&#x4EF6;&#x6E32;&#x67D3;</h2><p>&#x901A;&#x8FC7;&#x6761;&#x4EF6;&#x51FD;&#x6570;&#x51B3;&#x5B9A;&#x6E32;&#x67D3;&#x4E0D;&#x540C;&#x7684;JSX&#x4EE3;&#x7801;</p>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">    &#x6761;&#x4EF6;&#x6E32;&#x67D3;</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-keyword">const</span> isLoading = <span class="hljs-literal">false</span></span><br><span class="line"><span class="hljs-keyword">const</span> loadData = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> {</span><br><span class="line">    <span class="hljs-keyword">if</span>(isLoading) {</span><br><span class="line">        <span class="hljs-keyword">return</span> (<span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>loading...<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>)</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">return</span> (<span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#x6570;&#x636E;&#x52A0;&#x8F7D;&#x5B8C;&#x6210;&#xFF0C;&#x6B64;&#x5904;&#x663E;&#x793A;&#x52A0;&#x8F7D;&#x540E;&#x7684;&#x6570;&#x636E;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span>)</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> title = (</span><br><span class="line">    &lt;h1&gt;&#x6761;&#x4EF6;&#x6E32;&#x67D3;&#xFF1A;</span><br><span class="line">        {loadData()}</span><br><span class="line">    &lt;<span class="hljs-regexp">/h1&gt;</span></span><br><span class="line"><span class="hljs-regexp">)</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="&#x5217;&#x8868;&#x6E32;&#x67D3;"><a href="#&#x5217;&#x8868;&#x6E32;&#x67D3;" class="headerlink" title="&#x5217;&#x8868;&#x6E32;&#x67D3;"></a>&#x5217;&#x8868;&#x6E32;&#x67D3;</h2><p>&#x4F7F;&#x7528;js&#x6570;&#x7EC4;&#x7684;map&#x65B9;&#x6CD5;</p>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">    &#x5217;&#x8868;&#x6E32;&#x67D3;</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-keyword">const</span> songs = [</span><br><span class="line">    {<span class="hljs-attr">id</span>: <span class="hljs-number">1</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&apos;&#x542C;&#x6211;&#x8BF4;&#x8C22;&#x8C22;&#x4F60;&apos;</span>},</span><br><span class="line">    {<span class="hljs-attr">id</span>: <span class="hljs-number">2</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&apos;&#x4E00;&#x8DEF;&#x5411;&#x5317;&apos;</span>},</span><br><span class="line">    {<span class="hljs-attr">id</span>: <span class="hljs-number">3</span>, <span class="hljs-attr">name</span>: <span class="hljs-string">&apos;&#x5357;&#x5C71;&#x5357;&apos;</span>}</span><br><span class="line">]</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">const</span> list = (</span><br><span class="line">    &lt;ul&gt;</span><br><span class="line">        {songs.map(<span class="hljs-function"><span class="hljs-params">item</span> =&gt;</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">li</span>&gt;</span>{item.name}<span class="hljs-tag">&lt;/<span class="hljs-name">li</span>&gt;</span></span>)}</span><br><span class="line">    &lt;<span class="hljs-regexp">/ul&gt;</span></span><br><span class="line"><span class="hljs-regexp">)</span></span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0A;&#x8FF0;&#x4EE3;&#x7801;&#x867D;&#x7136;&#x80FD;&#x663E;&#x793A;&#xFF0C;&#x4F46;&#x662F;&#x5728;&#x63A7;&#x5236;&#x53F0;&#x4E2D;&#x4F1A;&#x62A5;&#x544A;&#x4E00;&#x4E2A;&#x8B66;&#x544A;&#xFF1A;</p>
+<blockquote>
+<p>Warning: Each child in a list should have a unique &#x201C;key&#x201D; prop.</p>
+</blockquote>
+<p>&#x610F;&#x601D;&#x662F;&#x5EFA;&#x8BAE;&#x6BCF;&#x4E2A; <code>&lt;li&gt;</code> &#x5143;&#x7D20;key&#x5C5E;&#x6027;&#x5E94;&#x4FDD;&#x6301;&#x552F;&#x4E00;&#xFF0C;&#x4E8E;&#x662F;&#x5728;li&#x6807;&#x7B7E;&#x4E2D;&#x6DFB;&#x52A0;key&#x5C5E;&#x6027;&#x4E3A;item.id&#xFF1A;</p>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;li key={item.id}&gt;{item.name}&lt;<span class="hljs-regexp">/li&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h2 id="&#x6837;&#x5F0F;&#x5904;&#x7406;"><a href="#&#x6837;&#x5F0F;&#x5904;&#x7406;" class="headerlink" title="&#x6837;&#x5F0F;&#x5904;&#x7406;"></a>&#x6837;&#x5F0F;&#x5904;&#x7406;</h2><p>1.&#x884C;&#x5185;&#x6837;&#x5F0F;&#x2014;&#x2014;style</p>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 style = {{<span class="hljs-attr">color</span>: <span class="hljs-string">&apos;red&apos;</span>, <span class="hljs-attr">backgroundColor</span>: <span class="hljs-string">&apos;skyblue&apos;</span>}}&gt;</span><br><span class="line">    JSX&#x7684;&#x6837;&#x5F0F;&#x5904;&#x7406;</span><br><span class="line">&lt;<span class="hljs-regexp">/h1&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>&#x8FD9;&#x91CC;&#x89E3;&#x91CA;&#x4E00;&#x4E0B;&#x53CC;&#x5927;&#x62EC;&#x53F7;&#x7684;&#x5FC5;&#x8981;&#x6027;&#xFF0C;&#x5916;&#x5C42;&#x5927;&#x62EC;&#x53F7;&#x8868;&#x793A;&#x5728;JSX&#x4E2D;&#x5F15;&#x5165;JavaScript&#x5BF9;&#x8C61;&#xFF0C;&#x5185;&#x5C42;&#x5927;&#x62EC;&#x53F7;&#x8868;&#x793A;JavaScript&#x5BF9;&#x8C61;&#x4E3A;&#x4E00;&#x4E2A;&#x952E;&#x503C;&#x5BF9;&#x7C7B;&#x578B;</p>
+<p>2.&#x7C7B;&#x540D;&#x2014;&#x2014;className(&#x63A8;&#x8350;)</p>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">//&#x5F15;&#x5165;css</span></span><br><span class="line"><span class="hljs-keyword">import</span> <span class="hljs-string">&apos;./index.css&apos;</span></span><br><span class="line"></span><br><span class="line">&lt;h1 className = <span class="hljs-string">&quot;title&quot;</span>&gt;</span><br><span class="line">    JSX&#x7684;&#x6837;&#x5F0F;&#x5904;&#x7406;</span><br><span class="line">&lt;<span class="hljs-regexp">/h1&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="React-&#x7EC4;&#x4EF6;&#x5B66;&#x4E60;"><a href="#React-&#x7EC4;&#x4EF6;&#x5B66;&#x4E60;" class="headerlink" title="React &#x7EC4;&#x4EF6;&#x5B66;&#x4E60;"></a>React &#x7EC4;&#x4EF6;&#x5B66;&#x4E60;</h1><p>&#x7EC4;&#x4EF6;&#x662F;React&#x7684;&#x4E00;&#x7B49;&#x516C;&#x6C11;&#x3002;&#x4E00;&#x4E2A;&#x7EC4;&#x4EF6;&#x8868;&#x793A;&#x9875;&#x9762;&#x4E2D;&#x7684;&#x90E8;&#x5206;&#x529F;&#x80FD;&#xFF0C;&#x7EC4;&#x5408;&#x591A;&#x4E2A;&#x7EC4;&#x4EF6;&#x53EF;&#x4EE5;&#x5B9E;&#x73B0;&#x5B8C;&#x6574;&#x7684;&#x9875;&#x9762;&#x529F;&#x80FD;&#x3002;</p>
+<h2 id="1-&#x4F7F;&#x7528;&#x51FD;&#x6570;&#x521B;&#x5EFA;&#x7EC4;&#x4EF6;"><a href="#1-&#x4F7F;&#x7528;&#x51FD;&#x6570;&#x521B;&#x5EFA;&#x7EC4;&#x4EF6;" class="headerlink" title="1. &#x4F7F;&#x7528;&#x51FD;&#x6570;&#x521B;&#x5EFA;&#x7EC4;&#x4EF6;"></a>1. &#x4F7F;&#x7528;&#x51FD;&#x6570;&#x521B;&#x5EFA;&#x7EC4;&#x4EF6;</h2><p>&#x51FD;&#x6570;&#x7EC4;&#x4EF6;&#xFF1A;&#x4F7F;&#x7528;JS&#x7684;&#x51FD;&#x6570;&#xFF08;&#x6216;Lambda&#x51FD;&#x6570;&#xFF09;&#x521B;&#x5EFA;&#x7684;&#x7EC4;&#x4EF6;<br>&#x7EA6;&#x5B9A;&#xFF1A;1. &#x51FD;&#x6570;&#x540D;&#x79F0;&#x5FC5;&#x987B;&#x4EE5;&#x5927;&#x5199;&#x5B57;&#x6BCD;&#x5F00;&#x5934;&#xFF1B;2. &#x51FD;&#x6570;&#x7EC4;&#x4EF6;&#x5FC5;&#x987B;&#x6709;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x8868;&#x793A;&#x6539;&#x7EC4;&#x4EF6;&#x7684;&#x7ED3;&#x6784;</p>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">    &#x4F7F;&#x7528;&#x51FD;&#x6570;&#x521B;&#x5EFA;&#x7EC4;&#x4EF6;</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Hello</span>(<span class="hljs-params"></span>) </span>{</span><br><span class="line">    <span class="hljs-keyword">return</span> (</span><br><span class="line">        &lt;div&gt;&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x7EC4;&#x4EF6;&#xFF01;&lt;<span class="hljs-regexp">/div&gt;</span></span><br><span class="line"><span class="hljs-regexp">    )</span></span><br><span class="line"><span class="hljs-regexp">}</span></span><br><span class="line"><span class="hljs-regexp"></span></span><br><span class="line"><span class="hljs-regexp">/</span><span class="hljs-regexp">/ 3 &#x6E32;&#x67D3; react &#x5143;&#x7D20;&#x5230; Web &#x9875;&#x9762;</span></span><br><span class="line"><span class="hljs-regexp">ReactDOM.render(&lt;Hello /</span>&gt;, <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&apos;root&apos;</span>))</span><br></pre></td></tr></table></figure>
+
+<p>&#x7B80;&#x6D01;&#x4E00;&#x70B9;&#xFF0C;&#x4F7F;&#x7528;Lambda&#x51FD;&#x6570;&#x4E5F;&#x662F;&#x53EF;&#x4EE5;&#x7684;&#xFF1A;</p>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">const</span> Hello = <span class="hljs-function"><span class="hljs-params">()</span> =&gt;</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x51FD;&#x6570;&#x7EC4;&#x4EF6;&#xFF01;<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br></pre></td></tr></table></figure>
+
+<h2 id="2-&#x4F7F;&#x7528;class&#x521B;&#x5EFA;&#x7EC4;&#x4EF6;"><a href="#2-&#x4F7F;&#x7528;class&#x521B;&#x5EFA;&#x7EC4;&#x4EF6;" class="headerlink" title="2. &#x4F7F;&#x7528;class&#x521B;&#x5EFA;&#x7EC4;&#x4EF6;"></a>2. &#x4F7F;&#x7528;class&#x521B;&#x5EFA;&#x7EC4;&#x4EF6;</h2><p>&#x7C7B;&#x7EC4;&#x4EF6;&#xFF1A;&#x4F7F;&#x7528;ES6&#x7684;class&#x521B;&#x5EFA;&#x7684;&#x7EC4;&#x4EF6;&#x3002;<br>&#x7EA6;&#x5B9A;&#xFF1A; 1.&#x7C7B;&#x540D;&#x79F0;&#x4E5F;&#x5FC5;&#x987B;&#x4EE5;&#x5927;&#x5199;&#x5B57;&#x6BCD;&#x5F00;&#x5934;&#xFF1B;<br>2.&#x7C7B;&#x7EC4;&#x4EF6;&#x5E94;&#x8BE5;&#x7EE7;&#x627F; React.Component &#x7236;&#x7C7B;<br>3.&#x7C7B;&#x7EC4;&#x4EF6;&#x5FC5;&#x987B;&#x91CD;&#x5199; render() &#x65B9;&#x6CD5;<br>4.render() &#x65B9;&#x6CD5;&#x5FC5;&#x987B;&#x6709;&#x8FD4;&#x56DE;&#x503C;&#xFF0C;&#x4EE5;&#x8868;&#x793A;&#x8BE5;&#x7EC4;&#x4EF6;&#x7684;&#x7ED3;&#x6784;</p>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Hello</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{</span><br><span class="line">    render() {</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>Hello, Class Component.<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x9879;&#x76EE;&#x4E2D;&#x7684;&#x7EC4;&#x4EF6;&#x591A;&#x4E86;&#x4E4B;&#x540E;&#xFF0C;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x591A;&#x6587;&#x4EF6;&#x7ED3;&#x6784;&#x7EC4;&#x7EC7;&#x8FD9;&#x4E9B;&#x7EC4;&#x4EF6;&#x3002;<br>1.&#x521B;&#x5EFA;Hello.jsx<br>2.&#x5728;Hello.jsx&#x4E2D;&#x5BFC;&#x5165;React<br>3.&#x521B;&#x5EFA;&#x7EC4;&#x4EF6;&#xFF08;&#x51FD;&#x6570;&#x7EC4;&#x4EF6;&#x6216;&#x7C7B;&#x7EC4;&#x4EF6;&#xFF09;<br>4.&#x5BFC;&#x51FA;&#x7EC4;&#x4EF6;<br>5.&#x5728;&#x4F7F;&#x7528;&#x5904;&#x5BFC;&#x5165;Hello&#x7EC4;&#x4EF6;<br>6.&#x6E32;&#x67D3; react &#x5143;&#x7D20;</p>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// 1 Hello.jsx</span></span><br><span class="line"><span class="hljs-comment">// 2 &#x5BFC;&#x5165; react</span></span><br><span class="line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 3 &#x521B;&#x5EFA; react &#x7EC4;&#x4EF6;</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Hello</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{</span><br><span class="line">    render() {</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">div</span>&gt;</span>&#x8FD9;&#x662F;&#x4E00;&#x4E2A;&#x62BD;&#x79BB;&#x5230;jsx&#x6587;&#x4EF6;&#x4E2D;&#x7684;&#x7EC4;&#x4EF6;.<span class="hljs-tag">&lt;/<span class="hljs-name">div</span>&gt;</span></span></span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 4 &#x5BFC;&#x51FA;&#x7EC4;&#x4EF6;</span></span><br><span class="line"><span class="hljs-keyword">export</span> <span class="hljs-keyword">default</span> Hello</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight js hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> React <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react&apos;</span></span><br><span class="line"><span class="hljs-keyword">import</span> ReactDOM <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;react-dom&apos;</span></span><br><span class="line"><span class="hljs-comment">// 5 &#x5728;&#x4F7F;&#x7528;&#x5904;&#x5BFC;&#x5165;Hello&#x7EC4;&#x4EF6;</span></span><br><span class="line"><span class="hljs-keyword">import</span> Hello <span class="hljs-keyword">from</span> <span class="hljs-string">&apos;./Hello&apos;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">// 6 &#x6E32;&#x67D3; react &#x5143;&#x7D20;</span></span><br><span class="line">ReactDOM.render(<span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">Hello</span> /&gt;</span></span>, <span class="hljs-built_in">document</span>.getElementById(<span class="hljs-string">&apos;root&apos;</span>))</span><br></pre></td></tr></table></figure>
+
+<h1 id="React&#x4E8B;&#x4EF6;&#x5904;&#x7406;"><a href="#React&#x4E8B;&#x4EF6;&#x5904;&#x7406;" class="headerlink" title="React&#x4E8B;&#x4EF6;&#x5904;&#x7406;"></a>React&#x4E8B;&#x4EF6;&#x5904;&#x7406;</h1><h2 id="1-React&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;"><a href="#1-React&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;" class="headerlink" title="1. React&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;"></a>1. React&#x4E8B;&#x4EF6;&#x7ED1;&#x5B9A;</h2><p>&#x901A;&#x7528;&#x683C;&#x5F0F;: on+&#x4E8B;&#x4EF6;&#x540D;&#x79F0;={&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;}<br>&#x6CE8;&#x610F;React&#x4E8B;&#x4EF6;&#x91C7;&#x7528;&#x9A7C;&#x5CF0;&#x547D;&#x540D;&#x6CD5;&#xFF0C;&#x6545;&#x4E8B;&#x4EF6;&#x540D;&#x79F0;&#x5355;&#x8BCD;&#x5B57;&#x6BCD;&#x5E94;&#x5927;&#x5199;&#x3002;</p>
+<h3 id="&#x4F7F;&#x7528;&#x7C7B;&#x7EC4;&#x4EF6;"><a href="#&#x4F7F;&#x7528;&#x7C7B;&#x7EC4;&#x4EF6;" class="headerlink" title="&#x4F7F;&#x7528;&#x7C7B;&#x7EC4;&#x4EF6;"></a>&#x4F7F;&#x7528;&#x7C7B;&#x7EC4;&#x4EF6;</h3><figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Hello</span> <span class="hljs-keyword">extends</span> <span class="hljs-title">React</span>.<span class="hljs-title">Component</span> </span>{</span><br><span class="line">    <span class="hljs-comment">// &#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;</span></span><br><span class="line">    handleClick() {</span><br><span class="line">        alert(<span class="hljs-string">&apos;&#x5355;&#x51FB;&#x4E8B;&#x4EF6;&#x51FA;&#x53D1;&#x4E86;&apos;</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    render() {</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{this.handleClick}</span>&gt;</span>&#x70B9;&#x6211;&#xFF0C;&#x70B9;&#x6211;<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span></span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x4F7F;&#x7528;&#x51FD;&#x6570;&#x7EC4;&#x4EF6;"><a href="#&#x4F7F;&#x7528;&#x51FD;&#x6570;&#x7EC4;&#x4EF6;" class="headerlink" title="&#x4F7F;&#x7528;&#x51FD;&#x6570;&#x7EC4;&#x4EF6;"></a>&#x4F7F;&#x7528;&#x51FD;&#x6570;&#x7EC4;&#x4EF6;</h3><figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">Hello</span>(<span class="hljs-params"></span>) </span>{</span><br><span class="line">    <span class="hljs-comment">// &#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleClick</span>(<span class="hljs-params"></span>) </span>{</span><br><span class="line">        alert(<span class="hljs-string">&apos;&#x5355;&#x51FB;&#x4E8B;&#x4EF6;&#x89E6;&#x53D1;&#x4E86;&apos;</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-xml"><span class="hljs-tag">&lt;<span class="hljs-name">button</span> <span class="hljs-attr">onClick</span>=<span class="hljs-string">{handleClick}</span>&gt;</span>&#x70B9;&#x6211;&#xFF0C;&#x70B9;&#x6211;<span class="hljs-tag">&lt;/<span class="hljs-name">button</span>&gt;</span></span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x6CE8;&#x610F;&#x51FD;&#x6570;&#x7EC4;&#x4EF6;&#x4E2D;&#x8C03;&#x7528;&#x51FD;&#x6570;&#x4E0D;&#x9700;&#x8981;&#x4F7F;&#x7528;<code>this.</code>&#x5173;&#x952E;&#x5B57;&#x3002;</p>
+<h2 id="2-&#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;"><a href="#2-&#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;" class="headerlink" title="2. &#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;"></a>2. &#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;</h2><p>&#x901A;&#x8FC7;&#x7ED9;&#x4E8B;&#x4EF6;&#x5904;&#x7406;&#x7A0B;&#x5E8F;&#xFF08;<code>handleClick</code>&#xFF09;&#x6DFB;&#x52A0;&#x53C2;&#x6570;&#x53EF;&#x4EE5;&#x83B7;&#x53D6;&#x5230;&#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;&#x3002;&#x5728;React&#x4E2D;&#xFF0C;&#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;&#x53C8;&#x53EB;&#x505A;&#x5408;&#x6210;&#x4E8B;&#x4EF6;&#xFF08;&#x5BF9;&#x8C61;&#xFF09;</p>
+<figure class="highlight jsx hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">function</span> <span class="hljs-title">handleClick</span>(<span class="hljs-params">e</span>) </span>{</span><br><span class="line">    e.preventDefault()</span><br><span class="line">    <span class="hljs-built_in">console</span>.log(<span class="hljs-string">&apos;&#x4E8B;&#x4EF6;&#x5BF9;&#x8C61;&apos;</span>, e)</span><br><span class="line">}</span><br><span class="line">&lt;a onClick={handleClick}&gt;&#x70B9;&#x6211;&#xFF0C;&#x4E0D;&#x4F1A;&#x8DF3;&#x8F6C;&#x9875;&#x9762;&lt;<span class="hljs-regexp">/a&gt;</span></span><br></pre></td></tr></table></figure>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/React/">#React</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/2022-May-8th-Design-patterns-Composite-md/">设计模式 之 组合模式</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/2022-Mar-30th-SpringBoot-Appication-Metrics-Visualization/">Spring Boot Appication 监控记录可视化</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

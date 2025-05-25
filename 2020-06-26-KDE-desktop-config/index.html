@@ -1,0 +1,575 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>KDE Desktop Config - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/2020-06-26-KDE-desktop-config/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="KDE is a highly configurable modern Linux desktop environment which is developed by OpenSUSE company.">
+<meta name="keywords" content="Linux,KDE">
+<meta property="og:type" content="article">
+<meta property="og:title" content="KDE Desktop Config">
+<meta property="og:url" content="https://BillyStudio.github.io/2020-06-26-KDE-desktop-config/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="KDE is a highly configurable modern Linux desktop environment which is developed by OpenSUSE company.">
+<meta property="og:locale" content="en">
+<meta property="og:image" content="https://billystudio.github.io/2020-06-26-KDE-desktop-config/hide-titlebar-when-maximized.png">
+<meta property="og:image" content="https://billystudio.github.io/2020-06-26-KDE-desktop-config/cancel-top-hot-corner.png">
+<meta property="og:image" content="https://billystudio.github.io/2020-06-26-KDE-desktop-config/chrome-panel-window-can-hover.png">
+<meta property="og:image" content="https://billystudio.github.io/2020-06-26-KDE-desktop-config/firefox-panel-always-visible.png">
+<meta property="og:image" content="https://billystudio.github.io/2020-06-26-KDE-desktop-config/McMojave-plasma-style.png">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.410Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="KDE Desktop Config">
+<meta name="twitter:description" content="KDE is a highly configurable modern Linux desktop environment which is developed by OpenSUSE company.">
+<meta name="twitter:image" content="https://billystudio.github.io/2020-06-26-KDE-desktop-config/hide-titlebar-when-maximized.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#I-Installing-KDE">1&nbsp;&nbsp;<b>I. Installing KDE</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#II-Configure-KDE">2&nbsp;&nbsp;<b>II. Configure KDE</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Disable-kde-wallet-whenever-I-start-Chromium-Chrome">2.1.1&nbsp;&nbsp;Disable kde wallet whenever I start Chromium/Chrome</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Disable-Meta-key-for-virtual-machine-windows">2.1.2&nbsp;&nbsp;Disable Meta key for virtual machine windows</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#几种-Linux-桌面的比较">2.1.3&nbsp;&nbsp;几种 Linux 桌面的比较</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#II-1-Configure-macOS-like-themes">2.2&nbsp;&nbsp;II.1. Configure macOS-like themes</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#II-1-a-Global-menu">2.2.1&nbsp;&nbsp;II.1.a. Global menu</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#II-1-b-Window-decorations">2.2.2&nbsp;&nbsp;II.1.b. Window decorations</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#II-1-c-dock">2.2.3&nbsp;&nbsp;II.1.c. dock</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#II-1-d-Fonts">2.2.4&nbsp;&nbsp;II.1.d. Fonts</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#II-1-f-Plasma-Style-and-cursors">2.2.5&nbsp;&nbsp;II.1.f. Plasma Style and cursors</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#II-2-具体应用场景下的配置修正">2.3&nbsp;&nbsp;II.2. 具体应用场景下的配置修正</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#III-Restart-KDE-plasma">3&nbsp;&nbsp;<b>III. Restart KDE plasma</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#References">3.1&nbsp;&nbsp;References</a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2020-06-26-KDE-desktop-config/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2020-06-26-KDE-desktop-config/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            KDE Desktop Config
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2020-06-26T05:19:12.000Z" itemprop="datePublished">Jun 26 2020</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            7 minutes read (About 1064 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>KDE is a highly configurable modern Linux desktop environment which is developed by OpenSUSE company. <a id="more"></a></p>
+<p>Plasma is the version alias of KDE5.</p>
+<h1 id="I-Installing-KDE"><a href="#I-Installing-KDE" class="headerlink" title="I. Installing KDE"></a>I. Installing KDE</h1><p>I install it on my Arch Linux, so</p>
+<figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">pacman -S plasma # kde plasma desktop group</span><br><span class="line">pacman -S dolphin # file manager</span><br></pre></td></tr></table></figure>
+
+<h1 id="II-Configure-KDE"><a href="#II-Configure-KDE" class="headerlink" title="II. Configure KDE"></a>II. Configure KDE</h1><h3 id="Disable-kde-wallet-whenever-I-start-Chromium-Chrome"><a href="#Disable-kde-wallet-whenever-I-start-Chromium-Chrome" class="headerlink" title="Disable kde wallet whenever I start Chromium/Chrome"></a>Disable kde wallet whenever I start Chromium/Chrome</h3><p>Edit <code>~/.config/kwalletrc</code>, and add</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[Wallet]</span><br><span class="line">Enabled=false</span><br></pre></td></tr></table></figure>
+
+<h3 id="Disable-Meta-key-for-virtual-machine-windows"><a href="#Disable-Meta-key-for-virtual-machine-windows" class="headerlink" title="Disable Meta key for virtual machine windows"></a>Disable Meta key for virtual machine windows</h3><p>Alt+F3 &gt; More Actions &gt; Configure special window settings &gt; Add property &gt; Disable global shortcuts</p>
+<h3 id="&#x51E0;&#x79CD;-Linux-&#x684C;&#x9762;&#x7684;&#x6BD4;&#x8F83;"><a href="#&#x51E0;&#x79CD;-Linux-&#x684C;&#x9762;&#x7684;&#x6BD4;&#x8F83;" class="headerlink" title="&#x51E0;&#x79CD; Linux &#x684C;&#x9762;&#x7684;&#x6BD4;&#x8F83;"></a>&#x51E0;&#x79CD; Linux &#x684C;&#x9762;&#x7684;&#x6BD4;&#x8F83;</h3><p>&#x4F7F;&#x7528; Gnome &#x7F3A;&#x70B9;&#xFF1A;<br>&#x6CA1;&#x6CD5;&#x4F7F;&#x7528; KDE &#x4E0B;&#x4E00;&#x4E9B;&#x8F6F;&#x4EF6;&#xFF0C;&#x6BD4;&#x5982;&#x89C6;&#x9891;&#x526A;&#x8F91;&#x8F6F;&#x4EF6; kdenlive</p>
+<h2 id="II-1-Configure-macOS-like-themes"><a href="#II-1-Configure-macOS-like-themes" class="headerlink" title="II.1. Configure macOS-like themes"></a>II.1. Configure macOS-like themes</h2><p>&#x5173;&#x4E8E;&#x4E3B;&#x9898;&#x914D;&#x7F6E;&#x591A;&#x8BF4;&#x4E00;&#x5634;&#xFF0C;&#x5F88;&#x591A;&#x521D;&#x5B66;&#x8005;&#x64B8; Linux &#x65F6;&#x9177;&#x7231;&#x6298;&#x817E; macOS-like &#x4E3B;&#x9898;&#xFF0C;&#x6211;&#x8FD9;&#x4E2A;&#x83DC;&#x9E1F;&#x4E5F;&#x4E0D;&#x4F8B;&#x5916;&#x3002;&#x4F46;&#x662F;&#x7ECF;&#x8FC7;&#x82E5;&#x5E72;&#x5E74;&#x7684;&#x6298;&#x817E;&#xFF0C;&#x6211;&#x5F97;&#x51FA;&#x7684;&#x7ED3;&#x8BBA;&#x662F;&#xFF1A;&#x4E0D;&#x7BA1;GNOME&#x8FD8;&#x662F;KDE&#xFF0C;&#x90FD;&#x6CA1;&#x6CD5;&#x914D;&#x7F6E;&#x7684;&#x548C; macOS &#x4E00;&#x6A21;&#x4E00;&#x6837;&#x3002;<br>&#x7B80;&#x7B80;&#x5355;&#x5355;&#x4E00;&#x4E2A;&#x6700;&#x5927;&#x5316;&#x5C31;&#x80FD;&#x770B;&#x51FA;&#x7AEF;&#x502A;&#x3002;&#x4E09;&#x4E2A;&#x7279;&#x5F81;&#xFF1A; 1.&#x6700;&#x5927;&#x5316;&#x540E;&#x662F;&#x5426;&#x80FD;&#x9690;&#x85CF;&#x6389; topbar&#xFF0C;&#x5E76;&#x65B0;&#x5F00;&#x4E00;&#x4E2A;workspace&#xFF1F; 2.&#x9000;&#x51FA;&#x5168;&#x5C4F;&#x540E;&#x80FD;&#x5426;&#x518D;&#x56DE;&#x5230;&#x539F;&#x6765;&#x7684;workspace&#xFF1F; 3.&#x6700;&#x5927;&#x5316;&#x540E;&#x662F;&#x5426;&#x6709;&#x5168;&#x5C40;&#x83DC;&#x5355;&#xFF1F;&#x4E8B;&#x5B9E;&#x4E0A;&#xFF0C;macOS&#x684C;&#x9762;&#x7684;&#x5168;&#x5C40;&#x83DC;&#x5355;&#x5F88;&#x9E21;&#x808B;&#xFF0C;&#x56E0;&#x4E3A;&#x9700;&#x8981;&#x5C06;&#x9F20;&#x6807;&#x9891;&#x7E41;&#x79FB;&#x52A8;&#x5230;&#x684C;&#x9762;&#x8FB9;&#x7F18;&#x3002;mbp&#x8FD9;&#x4E48;&#x8BBE;&#x8BA1;&#x4F9D;&#x8D56;&#x4E8E;&#x975E;&#x5E38;&#x5927;&#x7684;&#x89E6;&#x63A7;&#x677F;&#x3002;&#x5BF9;&#x4E8E;&#x7EDD;&#x5927;&#x591A;&#x6570;&#x975E;mbp&#x7B14;&#x8BB0;&#x672C;&#x7528;&#x6237;&#xFF0C;&#x89E6;&#x63A7;&#x677F;&#x9762;&#x79EF;&#x6709;&#x9650;&#xFF0C;&#x9891;&#x7E41;&#x79FB;&#x52A8;&#x9F20;&#x6807;&#x5230;&#x8FB9;&#x7F18;&#x7684;&#x6548;&#x7387;&#x4F4E;&#x3002;&#x5BF9;&#x4E8E;&#x8FFD;&#x6C42;&#x9AD8;&#x6548;&#x7684;&#x7A0B;&#x5E8F;&#x5458;&#x6765;&#x8BF4;&#xFF0C;&#x4E00;&#x4E9B;&#x64CD;&#x4F5C;&#x80FD;&#x7528;&#x952E;&#x76D8;&#x6700;&#x597D;&#xFF0C;&#x7528;&#x9F20;&#x6807;&#x4E5F;&#x662F;&#x6700;&#x597D;&#x96C6;&#x4E2D;&#x5728;&#x975E;&#x5C4F;&#x5E55;&#x8FB9;&#x7F18;&#x533A;&#x57DF;&#x3002;<br>&#x597D;&#x597D;&#x6DF1;&#x5165;&#x5B66;&#x4E60;&#x6280;&#x672F;&#xFF0C;&#x9760;&#x81EA;&#x5DF1;&#x7684;&#x52AA;&#x529B;&#x4E0A;&#x624B;&#x4E00;&#x53F0;&#x771F;MacBook&#x5427;&#xFF01;&#xFF08;&#x4E0D;&#x7BA1;&#x662F;&#x81EA;&#x5DF1;&#x6323;&#x5927;&#x94B1;&#x4E70;&#x6216;&#x8005;&#x516C;&#x53F8;&#x53D1;&#xFF09;</p>
+<h3 id="II-1-a-Global-menu"><a href="#II-1-a-Global-menu" class="headerlink" title="II.1.a. Global menu"></a>II.1.a. Global menu</h3><p>Add Widgets: global menu<br>For VScode-like electron apps, pacman -S libdbusmenu-glib<br>For Firefox, pacman -S appmenu-gtk-module<br>For Chrome, uncheck &#x201C;Use system titlebar and borders&#x201D;</p>
+<p>For features like macOS-like buttons, hiding title bar when maximized, we have two choices now:</p>
+<h4 id="Choice-1-Recommended-for-KDE-version-gt-5-22-Window-Button-Window-Title-Window-AppMenu"><a href="#Choice-1-Recommended-for-KDE-version-gt-5-22-Window-Button-Window-Title-Window-AppMenu" class="headerlink" title="Choice 1: (Recommended for KDE version &gt; 5.22) Window Button + Window Title + Window AppMenu"></a>Choice 1: (Recommended for KDE version &gt; 5.22) Window Button + Window Title + Window AppMenu</h4><h4 id="Hiding-titlebar-when-maximizing-window-for-AppMenu-lt-v0-10"><a href="#Hiding-titlebar-when-maximizing-window-for-AppMenu-lt-v0-10" class="headerlink" title="Hiding titlebar when maximizing window for AppMenu &lt; v0.10"></a>Hiding titlebar when maximizing window for AppMenu &lt; v0.10</h4><p><img src="hide-titlebar-when-maximized.png" alt="hide-titlebar-when-maximized.png"></p>
+<h4 id="Hiding-titlebar-when-maximizing-window-for-Latte-Dock-gt-v0-10-amp-amp-AppMenu-gt-v0-10"><a href="#Hiding-titlebar-when-maximizing-window-for-Latte-Dock-gt-v0-10-amp-amp-AppMenu-gt-v0-10" class="headerlink" title="Hiding titlebar when maximizing window for Latte Dock &gt;= v0.10 &amp;&amp; AppMenu &gt;= v0.10"></a>Hiding titlebar when maximizing window for Latte Dock &gt;= v0.10 &amp;&amp; AppMenu &gt;= v0.10</h4><p>In Latte Dock settings, enable &#x201C;Support borderless maximized windows in different layouts&#x201D; and then check &#x201C;Borderless&#x201D; in Layouts editor:<br><img src="cancel-top-hot-corner.png" alt="cancel-top-hot-corner.png"></p>
+<h4 id="Hiding-titlebar-when-maximizing-window-AppMenu-gt-v0-10-amp-amp-without-Latte-Dock-installed-ref-1"><a href="#Hiding-titlebar-when-maximizing-window-AppMenu-gt-v0-10-amp-amp-without-Latte-Dock-installed-ref-1" class="headerlink" title="Hiding titlebar when maximizing window AppMenu &gt;= v0.10 &amp;&amp; without Latte Dock installed ref 1"></a>Hiding titlebar when maximizing window AppMenu &gt;= v0.10 &amp;&amp; without Latte Dock installed <a href="## References">ref 1</a></h4><figure class="highlight shell hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">kwriteconfig5 --file ~/.config/kwinrc --group Windows --key BorderlessMaximizedWindows true</span><br><span class="line">qdbus org.kde.KWin /KWin reconfigure</span><br></pre></td></tr></table></figure>
+
+<h4 id="Choice-2-Active-window-control"><a href="#Choice-2-Active-window-control" class="headerlink" title="Choice 2: Active window control"></a>Choice 2: Active window control</h4><p>&#x9009;&#x62E9;breezmite&#x7684;svg&#x56FE;&#x6807;<br>/home/wsd/.local/share/aurorae/themes/Breezemite</p>
+<p>Chrome &#x8BBE;&#x7F6E;&#x4E2D;&#x5173;&#x95ED; <code>Use system title bar and borders</code>&#xFF0C;&#x5728; panel &#x53EF;&#x9690;&#x85CF;&#x6A21;&#x5F0F;&#x4E2D;&#x4F7F;&#x7528;&#x3002;<br><img src="chrome-panel-window-can-hover.png" alt="Chrome buttons when window can hover panel"><br>Firefox &#x9700;&#x5378;&#x8F7D;&#x9ED8;&#x8BA4;&#x7248;&#x672C;&#x8F6C;&#x800C;aur&#x5B89;&#x88C5;<code>firefox-appmenu-bin</code>&#xFF0C;&#x8BBE;&#x7F6E; Mojave Theme&#xFF0C;&#x542F;&#x52A8; Title bar&#x3002;&#x5728; panel always visible &#x6A21;&#x5F0F;&#x4E2D;&#x4F7F;&#x7528;<br><img src="firefox-panel-always-visible.png" alt="Firefox buttons when panel is always visible"></p>
+<h3 id="II-1-b-Window-decorations"><a href="#II-1-b-Window-decorations" class="headerlink" title="II.1.b. Window decorations"></a>II.1.b. Window decorations</h3><p>clone <a href="https://github.com/kay0u/SierraBreeze" target="_blank" rel="noopener">SierraBreeze</a> from github and manually install.<br>System Settings &gt; Appearance &gt; Window decorations &gt; Theme &gt; Sierra Breeze:<br>Then go to <code>titlebar buttons</code> frame and drag &#x2018;close&#x2019;, &#x2018;minimize&#x2019;, &#x2018;maximize&#x2019; buttons onto left side of titlebar.</p>
+<h3 id="II-1-c-dock"><a href="#II-1-c-dock" class="headerlink" title="II.1.c. dock"></a>II.1.c. dock</h3><p><code>pacman -S latte-dock</code> and launch it from applications.</p>
+<h3 id="II-1-d-Fonts"><a href="#II-1-d-Fonts" class="headerlink" title="II.1.d. Fonts"></a>II.1.d. Fonts</h3><p>sf-pro</p>
+<h3 id="II-1-f-Plasma-Style-and-cursors"><a href="#II-1-f-Plasma-Style-and-cursors" class="headerlink" title="II.1.f. Plasma Style and cursors"></a>II.1.f. Plasma Style and cursors</h3><p>System Settings &gt; Appearance &gt; Plasma Style &gt; Get New Plasma Styles:<br>Download McMojave and set:<br><img src="McMojave-plasma-style.png" alt="McMojave-plasma-style.png"><br>Go to <code>Cursors</code> tab and choose <code>McMojave-circle</code> as the cursor style.</p>
+<h2 id="II-2-&#x5177;&#x4F53;&#x5E94;&#x7528;&#x573A;&#x666F;&#x4E0B;&#x7684;&#x914D;&#x7F6E;&#x4FEE;&#x6B63;"><a href="#II-2-&#x5177;&#x4F53;&#x5E94;&#x7528;&#x573A;&#x666F;&#x4E0B;&#x7684;&#x914D;&#x7F6E;&#x4FEE;&#x6B63;" class="headerlink" title="II.2. &#x5177;&#x4F53;&#x5E94;&#x7528;&#x573A;&#x666F;&#x4E0B;&#x7684;&#x914D;&#x7F6E;&#x4FEE;&#x6B63;"></a>II.2. &#x5177;&#x4F53;&#x5E94;&#x7528;&#x573A;&#x666F;&#x4E0B;&#x7684;&#x914D;&#x7F6E;&#x4FEE;&#x6B63;</h2><p>I have three main usages:</p>
+<ol>
+<li>&#x7B14;&#x8BB0;&#x672C;&#x5355;&#x5C4F;&#x5E55;&#x684C;&#x9762;&#xFF0C;&#x62E5;&#x6709;&#x952E;&#x9F20;+Touchpad</li>
+<li>&#x7B14;&#x8BB0;&#x672C;&#x5408;&#x4E0A;&#x5C4F;&#x5E55;&#x4F5C;&#x4E3A;&#x4E3B;&#x673A;&#xFF0C;&#x5916;&#x63A5;&#x663E;&#x793A;&#x5C4F;+&#x952E;&#x9F20;&#xFF0C;&#x65E0;Touchpad</li>
+<li>&#x7B14;&#x8BB0;&#x672C;&#x5916;&#x63A5;&#x5C4F;&#x5E55;&#x4F5C;&#x4E3A;&#x62D3;&#x5C55;&#x5C4F;</li>
+</ol>
+<p>&#x7B2C;1&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x914D;&#x7F6E;Panel&#x4E3A; <code>Window can hover</code>&#xFF0C;&#x6700;&#x5927;&#x5316;13&#x5BF8;&#x5C0F;&#x5C4F;&#x5E55;&#xFF1B;&#x4F7F;&#x7528; Touchpad &#x56DB;&#x6307;&#x6ED1;&#x52A8;&#x6765;&#x56DE;&#x5207;&#x6362;win10&#x865A;&#x62DF;&#x673A;&#x6240;&#x5728;&#x684C;&#x9762;&#x3002;&#x9009;&#x62E9;Chrome&#x4F5C;&#x4E3A;&#x4E3B;&#x6D4F;&#x89C8;&#x5668;&#x3002;<br>&#x7B2C;2&#x79CD;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x5916;&#x63A5;&#x5C4F;&#x5E55;&#x8DB3;&#x591F;&#x5927;&#xFF0C;&#x800C;&#x4E14;&#x65E0;Touchpad&#xFF0C;&#x6240;&#x4EE5;&#x914D;&#x7F6E;Panel&#x4E3A; <code>Always Visible</code>&#xFF0C;&#x4F7F;&#x7528;&#x9F20;&#x6807;&#x70B9;&#x51FB;panel &#x4E2D;&#x7684; Desktop &#x6765;&#x5207;&#x6362;&#x865A;&#x62DF;&#x673A;&#x684C;&#x9762;&#x548C;KDE&#x684C;&#x9762;&#x3002;&#x7531;&#x4E8E;Active Window Control&#x548C;Chrome&#x7684;&#x517C;&#x5BB9;&#x95EE;&#x9898;&#xFF0C;&#x9009;&#x62E9; Firefox &#x4F5C;&#x4E3A;&#x4E3B;&#x6D4F;&#x89C8;&#x5668;&#x3002;<br>&#x7B2C;3&#x4E2D;&#x60C5;&#x51B5;&#x4E0B;&#x6709;&#x4E24;&#x5757;&#x5C4F;&#x5E55;&#xFF0C;&#x914D;&#x7F6E;&#x5916;&#x63A5;&#x5C4F;&#x5E55;&#x4E3A; Always Visible &#x5373;&#x53EF;&#xFF0C;&#x652F;&#x6301;Touchpad&#x548C;&#x9F20;&#x6807;&#x70B9;&#x51FB;&#x4E24;&#x79CD;&#x65B9;&#x5F0F;&#x5207;&#x6362;&#x684C;&#x9762;</p>
+<h1 id="III-Restart-KDE-plasma"><a href="#III-Restart-KDE-plasma" class="headerlink" title="III. Restart KDE plasma"></a>III. Restart KDE plasma</h1><p>type <code>Ctrl+Alt+F2</code> into a new shell, then type</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">killall plasmashell &amp;&amp; kstart plasmashell</span><br></pre></td></tr></table></figure>
+
+<p>or</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">plasmashell --replace</span><br></pre></td></tr></table></figure>
+
+<h2 id="References"><a href="#References" class="headerlink" title="References"></a>References</h2>
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Linux/">#Linux</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/KDE/">#KDE</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2020-06-28-Design-patterns-Adapter-pattern/">设计模式 之 适配器</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2020-May-30-Chrome-extensions/">Chrome 浏览器插件推荐</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

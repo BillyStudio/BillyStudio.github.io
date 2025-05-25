@@ -1,0 +1,585 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>数据结构与算法笔记 | 树 - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/2018-07-14-binary-tree-data-structure/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x6811;&amp;#x7ED3;&amp;#x6784;&amp;#x5728;&amp;#x6570;&amp;#x636E;&amp;#x7ED3;&amp;#x6784;&amp;#x4E2D;&amp;#x6709;&amp;#x7740;&amp;#x4E3E;&amp;#x8DB3;&amp;#x8F7B;&amp;#x91CD;&amp;#x7684;&amp;#x5730;&amp;#x4F4D;&amp;#x3002;">
+<meta name="keywords" content="数据结构,算法,树,DFS,PAT,MySQL">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法笔记 | 树">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/2018-07-14-binary-tree-data-structure/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x6811;&amp;#x7ED3;&amp;#x6784;&amp;#x5728;&amp;#x6570;&amp;#x636E;&amp;#x7ED3;&amp;#x6784;&amp;#x4E2D;&amp;#x6709;&amp;#x7740;&amp;#x4E3E;&amp;#x8DB3;&amp;#x8F7B;&amp;#x91CD;&amp;#x7684;&amp;#x5730;&amp;#x4F4D;&amp;#x3002;">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2018-07-14-binary-tree-data-structure/figure.png">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.550Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法笔记 | 树">
+<meta name="twitter:description" content="&amp;#x6811;&amp;#x7ED3;&amp;#x6784;&amp;#x5728;&amp;#x6570;&amp;#x636E;&amp;#x7ED3;&amp;#x6784;&amp;#x4E2D;&amp;#x6709;&amp;#x7740;&amp;#x4E3E;&amp;#x8DB3;&amp;#x8F7B;&amp;#x91CD;&amp;#x7684;&amp;#x5730;&amp;#x4F4D;&amp;#x3002;">
+<meta name="twitter:image" content="https://billystudio.github.io/zh-cn/2018-07-14-binary-tree-data-structure/figure.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1-二叉搜索树">1&nbsp;&nbsp;<b>1. 二叉搜索树</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1-1-二叉搜索树的遍历">1.1&nbsp;&nbsp;1.1 二叉搜索树的遍历</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#2-平衡二叉树">2&nbsp;&nbsp;<b>2. 平衡二叉树</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#B-树">2.1&nbsp;&nbsp;B+树</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#AVL树（一种自平衡二叉树）">2.2&nbsp;&nbsp;AVL树（一种自平衡二叉树）</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#PAT-1066-Root-of-AVL-Tree（25-分）">2.2.1&nbsp;&nbsp;PAT 1066: Root of AVL Tree（25 分）</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Input-Specification">2.2.2&nbsp;&nbsp;Input Specification:</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Output-Specification">2.2.3&nbsp;&nbsp;Output Specification:</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Sample-Input-1">2.2.4&nbsp;&nbsp;Sample Input 1:</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Sample-Output-1">2.2.5&nbsp;&nbsp;Sample Output 1:</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Sample-Input-2">2.2.6&nbsp;&nbsp;Sample Input 2:</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Sample-Output-2">2.2.7&nbsp;&nbsp;Sample Output 2:</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#题目分析">2.3&nbsp;&nbsp;题目分析</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#3-无根树与有根树">3&nbsp;&nbsp;<b>3. 无根树与有根树</b></a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2018-07-14-binary-tree-data-structure/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2018-07-14-binary-tree-data-structure/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            数据结构与算法笔记 | 树
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-07-14T14:16:16.000Z" itemprop="datePublished">7月 14 2018</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh-cn/categories/数据结构与算法/">数据结构与算法</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            10 分钟 读完 (约 1522 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x6811;&#x7ED3;&#x6784;&#x5728;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x4E2D;&#x6709;&#x7740;&#x4E3E;&#x8DB3;&#x8F7B;&#x91CD;&#x7684;&#x5730;&#x4F4D;&#x3002; <a id="more"></a></p>
+<h1 id="1-&#x4E8C;&#x53C9;&#x641C;&#x7D22;&#x6811;"><a href="#1-&#x4E8C;&#x53C9;&#x641C;&#x7D22;&#x6811;" class="headerlink" title="1. &#x4E8C;&#x53C9;&#x641C;&#x7D22;&#x6811;"></a>1. &#x4E8C;&#x53C9;&#x641C;&#x7D22;&#x6811;</h1><p>&#x4E8C;&#x53C9;&#x641C;&#x7D22;&#x6811;&#x88AB;&#x8A89;&#x4E3A;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x4E2D;&#x7684; &#x201C;Hello World&#x201D;&#xFF0C;&#x53C8;&#x88AB;&#x79F0;&#x4E3A;&#x4E8C;&#x53C9;&#x6392;&#x5E8F;&#x6811;&#x6216;&#x4E8C;&#x53C9;&#x67E5;&#x627E;&#x6811;&#x3002;</p>
+<p>&#x4E8C;&#x53C9;&#x641C;&#x7D22;&#x6811;&#x6307;&#x7684;&#x662F;&#x6811;&#x4E2D;&#x7ED3;&#x70B9;&#x7684;&#x952E;&#x6309;&#x4E00;&#x5B9A;&#x987A;&#x5E8F;&#x6392;&#x5217;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x3002;&#x5B83;&#x6216;&#x8005;&#x662F;&#x4E00;&#x68F5;&#x7A7A;&#x6811;&#xFF0C;&#x6216;&#x8005;&#x662F;&#x5177;&#x6709;&#x4E0B;&#x5217;&#x6027;&#x8D28;&#x7684;&#x4E8C;&#x53C9;&#x6811;&#xFF1A; &#x82E5;&#x5B83;&#x7684;&#x5DE6;&#x5B50;&#x6811;&#x4E0D;&#x7A7A;&#xFF0C;&#x5219;&#x5DE6;&#x5B50;&#x6811;&#x4E0A;&#x6240;&#x6709;&#x7ED3;&#x70B9;&#x7684;&#x503C;&#x5747;&#x5C0F;&#x4E8E;&#x5B83;&#x7684;&#x6839;&#x7ED3;&#x70B9;&#x7684;&#x503C;&#xFF1B;&#x82E5;&#x5B83;&#x7684;&#x53F3;&#x5B50;&#x6811;&#x4E0D;&#x7A7A;&#xFF0C;&#x5219;&#x53F3;&#x5B50;&#x6811;&#x4E0A;&#x6240;&#x6709;&#x7ED3;&#x70B9;&#x7684;&#x503C;&#x5747;&#x5927;&#x4E8E;&#x5B83;&#x7684;&#x6839;&#x7ED3;&#x70B9;&#x7684;&#x503C;&#x3002;<br>&#x5B83;&#x7684;&#x5DE6;&#x3001;&#x53F3;&#x5B50;&#x6811;&#x4E5F;&#x5206;&#x522B;&#x4E3A;&#x4E8C;&#x53C9;&#x6392;&#x5E8F;&#x6811;&#x3002;<br>&#x5B83;&#x6CA1;&#x6709;&#x952E;&#x503C;&#x76F8;&#x7B49;&#x7684;&#x8282;&#x70B9;&#x3002;</p>
+<p>&#x4E8C;&#x53C9;&#x67E5;&#x627E;&#x6811;&#x76F8;&#x6BD4;&#x4E8E;&#x5176;&#x4ED6;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x7684;&#x4F18;&#x52BF;&#x5728;&#x4E8E;&#x67E5;&#x627E;&#x3001;&#x63D2;&#x5165;&#x7684;&#x65F6;&#x95F4;&#x590D;&#x6742;&#x5EA6;&#x8F83;&#x4F4E;,&#x5747;&#x4E3A;O(log n)&#x3002;<br>&#x4E8C;&#x53C9;&#x67E5;&#x627E;&#x6811;&#x662F;&#x57FA;&#x7840;&#x6027;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x7528;&#x4E8E;&#x6784;&#x5EFA;&#x66F4;&#x4E3A;&#x62BD;&#x8C61;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#xFF0C;&#x5982;&#x96C6;&#x5408;&#x3001;multiset&#x3001;&#x5173;&#x8054;&#x6570;&#x7EC4;&#x7B49;&#x3002;</p>
+<h2 id="1-1-&#x4E8C;&#x53C9;&#x641C;&#x7D22;&#x6811;&#x7684;&#x904D;&#x5386;"><a href="#1-1-&#x4E8C;&#x53C9;&#x641C;&#x7D22;&#x6811;&#x7684;&#x904D;&#x5386;" class="headerlink" title="1.1 &#x4E8C;&#x53C9;&#x641C;&#x7D22;&#x6811;&#x7684;&#x904D;&#x5386;"></a>1.1 &#x4E8C;&#x53C9;&#x641C;&#x7D22;&#x6811;&#x7684;&#x904D;&#x5386;</h2><p>&#x7531;&#x4E8E;&#xFF0C;&#x5DE6;&#x5B50;&#x6811;&#x7684;&#x6240;&#x6709;&#x8282;&#x70B9;&#x503C;&lt;&#x6839;&#x8282;&#x70B9;&#x7684;&#x503C;&lt;&#x53F3;&#x5B50;&#x6811;&#x7684;&#x6240;&#x6709;&#x8282;&#x70B9;&#x503C;&#xFF0C;&#x6240;&#x4EE5;&#x4E8C;&#x53C9;&#x641C;&#x7D22;&#x6811;&#x7684;&#x904D;&#x5386;&#x91C7;&#x7528;DFS&#x8F83;&#x591A;<br>&#x524D;&#x5E8F;&#x904D;&#x5386;&#xFF1A;&#x6839;&#x8282;&#x70B9;-&gt;&#x5DE6;&#x5B50;&#x8282;&#x70B9;-&gt;&#x53F3;&#x5B50;&#x8282;&#x70B9;<br>&#x4E2D;&#x5E8F;&#x904D;&#x5386;&#xFF1A;&#x5DE6;&#x5B50;&#x8282;&#x70B9;-&gt;&#x6839;&#x8282;&#x70B9;-&gt;&#x53F3;&#x5B50;&#x8282;&#x70B9;<br>&#x540E;&#x5E8F;&#x904D;&#x5386;&#xFF1A;&#x5DE6;&#x5B50;&#x8282;&#x70B9;-&gt;&#x53F3;&#x5B50;&#x8282;&#x70B9;-&gt;&#x6839;&#x8282;&#x70B9;</p>
+<p>&#x8FD9;&#x91CC;&#x91CD;&#x70B9;&#x8BB2;&#x4E00;&#x4E0B;&#x540E;&#x5E8F;&#x904D;&#x5386;&#xFF0C;&#x7531;&#x4E8E;&#x6811;&#x90FD;&#x662F;&#x4ECE;&#x6839;&#x5230;&#x5B50;&#x6811;&#x7684;&#x987A;&#x5E8F;&#x5F00;&#x59CB;&#x8BBF;&#x95EE;&#x7684;&#xFF0C;&#x4F46;&#x662F;&#x540E;&#x7EED;&#x904D;&#x5386;&#x9700;&#x8981;&#x5C06;&#x6839;&#x8282;&#x70B9;&#x653E;&#x5728;&#x6700;&#x540E;&#x8BBF;&#x95EE;&#x3002;</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span> </span>{</span><br><span class="line">    <span class="hljs-keyword">int</span> val;</span><br><span class="line">    Node left;</span><br><span class="line">    Node right;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>{</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">// &#x5DE6;&#x3001;&#x53F3;&#x3001;&#x6839;</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">postTraverse</span><span class="hljs-params">(Node root)</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">if</span>(root == <span class="hljs-keyword">null</span>) {</span><br><span class="line">            <span class="hljs-keyword">return</span> ;</span><br><span class="line">        }</span><br><span class="line">        Stack&lt;Node&gt; path = <span class="hljs-keyword">new</span> Stack&lt;Node&gt;();</span><br><span class="line">        path.push(root);</span><br><span class="line">        <span class="hljs-keyword">while</span>(!path.isEmpty()) {</span><br><span class="line">            Node node = path.pop();</span><br><span class="line">            <span class="hljs-keyword">while</span>(node.left != <span class="hljs-keyword">null</span>) {</span><br><span class="line">                path.push(node.left);</span><br><span class="line">                node = node.left;</span><br><span class="line">            }</span><br><span class="line">            <span class="hljs-keyword">if</span>(node == <span class="hljs-keyword">null</span> &amp;&amp; !path.isEmpty()) {</span><br><span class="line">                node = path.pop();</span><br><span class="line">            }</span><br><span class="line">            <span class="hljs-keyword">if</span>(node.right != <span class="hljs-keyword">null</span>) {</span><br><span class="line">                path.push(node.right);</span><br><span class="line">                <span class="hljs-keyword">continue</span> ;</span><br><span class="line">            }</span><br><span class="line">            print(node);</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">return</span> ;</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{</span><br><span class="line">        <span class="hljs-comment">//Scanner in = new Scanner(System.in);</span></span><br><span class="line">        <span class="hljs-comment">//int a = in.nextInt();</span></span><br><span class="line">        <span class="hljs-comment">//System.out.println(a);</span></span><br><span class="line">        System.out.println(<span class="hljs-string">&quot;Hello World!&quot;</span>);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x65E2;&#x7136;&#x8FD9;&#x91CC;&#x90FD;&#x5DF2;&#x7ECF;&#x7528;&#x5230;&#x6808;&#x7ED3;&#x6784;&#x4E86;&#xFF0C;&#x5982;&#x679C;&#x6539;&#x6210;&#x4E0D;&#x7528;&#x975E;&#x9012;&#x5F52;&#x65B9;&#x5F0F;&#x7684;&#x8BBF;&#x95EE;&#x5462;&#xFF1F;</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">import</span> java.util.*;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Node</span> </span>{</span><br><span class="line">    <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> value;</span><br><span class="line">    <span class="hljs-keyword">public</span> Node left;</span><br><span class="line">    <span class="hljs-keyword">public</span> Node right;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Main</span> </span>{</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-comment">// &#x5DE6;&#x3001;&#x53F3;&#x3001;&#x6839;</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> List&lt;Integer&gt; <span class="hljs-title">postTraverse</span><span class="hljs-params">(TreeNode root)</span> </span>{</span><br><span class="line">		List&lt;Integer&gt; result = <span class="hljs-keyword">new</span> LinkedList&lt;&gt;();</span><br><span class="line">		<span class="hljs-keyword">if</span>(root == <span class="hljs-keyword">null</span>) {</span><br><span class="line">			<span class="hljs-keyword">return</span> result;</span><br><span class="line">		}</span><br><span class="line">		Stack&lt;TreeNode&gt; stack = <span class="hljs-keyword">new</span> Stack&lt;&gt;();</span><br><span class="line">		TreeNode currentNode = root;</span><br><span class="line">		stack.push(currentNode);</span><br><span class="line">		TreeNode previousNode = <span class="hljs-keyword">null</span>;</span><br><span class="line">		<span class="hljs-keyword">while</span>(!stack.isEmpty()) {</span><br><span class="line">			previousNode = currentNode;</span><br><span class="line">			currentNode = stack.pop();</span><br><span class="line">			<span class="hljs-comment">/* &#x4E09;&#x79CD;&#x60C5;&#x51B5;&#xFF1A; 1. &#x5DE6;&#x53F3;&#x5B50;&#x6811;&#x5747;&#x672A;&#x8BBF;&#x95EE;&#xFF1B;2.&#x5DE6;&#x5B50;&#x6811;&#x8BBF;&#x95EE;&#x5B8C;&#xFF0C;&#x53F3;&#x5B50;&#x6811;&#x6CA1;&#x8BBF;&#x95EE;&#xFF1B;3. &#x5DE6;&#x53F3;&#x5B50;&#x6811;&#x5747;&#x5DF2;&#x8BBF;&#x95EE;</span></span><br><span class="line"><span class="hljs-comment">			&#x5BF9;&#x7B2C;1&#x79CD;&#x60C5;&#x51B5;&#xFF0C;currentNode&#x5728;&#x4E0B;&#xFF0C;previousNode&#x5728;&#x4E0A;</span></span><br><span class="line"><span class="hljs-comment">			&#x5BF9;&#x7B2C;2&#x79CD;&#x60C5;&#x51B5;&#xFF0C;previousNode&#x5728;&#x4E0B;&#xFF0C;&#x4E3A;currentNode&#x7684;&#x5DE6;&#x5B50;&#x6811;</span></span><br><span class="line"><span class="hljs-comment">			&#x5BF9;&#x7B2C;3&#x79CD;&#x60C5;&#x51B5;&#xFF0C;previousNode&#x5728;&#x4E0B;&#xFF0C;&#x4E3A;currentNode&#x7684;&#x53F3;&#x5B50;&#x6811;</span></span><br><span class="line"><span class="hljs-comment">			 */</span></span><br><span class="line">			<span class="hljs-keyword">if</span>(currentNode.left != previousNode &amp;&amp; currentNode.right != previousNode) {</span><br><span class="line">				<span class="hljs-comment">// &#x7B2C;1&#x79CD;&#x60C5;&#x51B5;&#xFF0C;&#x5F00;&#x59CB;&#x4E0D;&#x65AD;&#x8BBF;&#x95EE;&#x5DE6;&#x5B50;&#x6811;&#xFF0C;&#x76F4;&#x81F3;&#x53F6;&#x5B50;&#x8282;&#x70B9;</span></span><br><span class="line">				<span class="hljs-keyword">while</span>(currentNode.left != <span class="hljs-keyword">null</span>) {</span><br><span class="line">					stack.push(currentNode);</span><br><span class="line">					previousNode = currentNode;</span><br><span class="line">					currentNode = currentNode.left;</span><br><span class="line">				}</span><br><span class="line">				<span class="hljs-comment">// &#x6B64;&#x65F6;currentNode&#x5373;&#x5DE6;&#x8282;&#x70B9;</span></span><br><span class="line">			} <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (currentNode.right == previousNode){ <span class="hljs-comment">// &#x7B2C;3&#x79CD;&#x60C5;&#x51B5;</span></span><br><span class="line">				result.add(currentNode.val);</span><br><span class="line">				<span class="hljs-keyword">continue</span>;</span><br><span class="line">			}</span><br><span class="line">			<span class="hljs-comment">/* &#x4E24;&#x79CD;&#x60C5;&#x51B5;&#xFF1A; 1.currentNode&#x4E3A;&#x5DE6;&#x8282;&#x70B9;&#xFF0C;&#x5B58;&#x5728;&#x8FD8;&#x6CA1;&#x8BBF;&#x95EE;&#x7684;&#x53F3;&#x5B50;&#x6811;&#xFF1B; 2.&#x5DE6;&#x5B50;&#x6811;&#x8BBF;&#x95EE;&#x5B8C;&#xFF0C;&#x65E0;&#x53F3;&#x5B50;&#x6811;,currentNode&#x5747;&#x4E0D;&#x5728;&#x6808;&#x4E2D;</span></span><br><span class="line"><span class="hljs-comment">			&#x5BF9;&#x7B2C;1&#x79CD;&#x60C5;&#x51B5;&#xFF0C;previousNode&#x5728;&#x4E0A;&#xFF0C;currentNode&#x5728;&#x4E0B;&#xFF0C;previousNode.left = currentNode</span></span><br><span class="line"><span class="hljs-comment">			&#x5BF9;&#x7B2C;2&#x79CD;&#x60C5;&#x51B5;&#xFF0C;currentNode.left = previousNode</span></span><br><span class="line"><span class="hljs-comment">			 */</span></span><br><span class="line">			<span class="hljs-keyword">if</span>(currentNode.right != <span class="hljs-keyword">null</span> &amp;&amp; currentNode.right != previousNode) { <span class="hljs-comment">// &#x53F3;&#x5B50;&#x6811;&#x5B58;&#x5728;&#x4E14;&#x8FD8;&#x6CA1;&#x8BBF;&#x95EE;</span></span><br><span class="line">				stack.push(currentNode);</span><br><span class="line">				<span class="hljs-comment">// &#x53F3;&#x5B50;&#x6811;&#x7684;&#x6839;&#x8282;&#x70B9;&#x538B;&#x6808;</span></span><br><span class="line">				stack.push(currentNode.right);</span><br><span class="line">			} <span class="hljs-keyword">else</span> { <span class="hljs-comment">// &#x5DE6;&#x53F3;&#x5B50;&#x6811;&#x5747;&#x5DF2;&#x8BBF;&#x95EE;</span></span><br><span class="line">				result.add(currentNode.val);</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		<span class="hljs-keyword">return</span> result;</span><br><span class="line">	}</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{</span><br><span class="line">		Integer[] input = {<span class="hljs-number">5</span>, <span class="hljs-number">4</span>, <span class="hljs-number">7</span>, <span class="hljs-number">0</span>, <span class="hljs-number">3</span>, <span class="hljs-number">6</span>, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>, <span class="hljs-keyword">null</span>, <span class="hljs-number">1</span>, <span class="hljs-number">2</span>};</span><br><span class="line">		TreeNode[] nodes = <span class="hljs-keyword">new</span> TreeNode[input.length];</span><br><span class="line">		<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i = input.length-<span class="hljs-number">1</span>; i &gt;= <span class="hljs-number">0</span>; --i) {</span><br><span class="line">			<span class="hljs-keyword">if</span>(input[i] != <span class="hljs-keyword">null</span>) {</span><br><span class="line">				nodes[i] = <span class="hljs-keyword">new</span> TreeNode(input[i]);</span><br><span class="line">				<span class="hljs-keyword">if</span>(<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span> &lt; input.length) {</span><br><span class="line">					nodes[i].left = nodes[<span class="hljs-number">2</span>*i+<span class="hljs-number">1</span>];</span><br><span class="line">				}</span><br><span class="line">				<span class="hljs-keyword">if</span>(<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span> &lt; input.length) {</span><br><span class="line">					nodes[i].right = nodes[<span class="hljs-number">2</span>*i+<span class="hljs-number">2</span>];</span><br><span class="line">				}</span><br><span class="line">			}</span><br><span class="line">		}</span><br><span class="line">		TreeNodeTests test = <span class="hljs-keyword">new</span> TreeNodeTests();</span><br><span class="line">		List&lt;Integer&gt; result = test.postTraverse(nodes[<span class="hljs-number">0</span>]);</span><br><span class="line">		System.out.println(result.stream().map(Objects::toString).collect(Collectors.joining(<span class="hljs-string">&quot;,&quot;</span>)));</span><br><span class="line">	}</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x4F8B;&#x9898;&#xFF1A;<a href="https://leetcode.com/problems/validate-binary-search-tree/" target="_blank" rel="noopener">Leetcode 98: Validate Binary Search Tree</a></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Definition for a binary tree node.</span></span><br><span class="line"><span class="hljs-comment"> * public class TreeNode {</span></span><br><span class="line"><span class="hljs-comment"> *     int val;</span></span><br><span class="line"><span class="hljs-comment"> *     TreeNode left;</span></span><br><span class="line"><span class="hljs-comment"> *     TreeNode right;</span></span><br><span class="line"><span class="hljs-comment"> *     TreeNode() {}</span></span><br><span class="line"><span class="hljs-comment"> *     TreeNode(int val) { this.val = val; }</span></span><br><span class="line"><span class="hljs-comment"> *     TreeNode(int val, TreeNode left, TreeNode right) {</span></span><br><span class="line"><span class="hljs-comment"> *         this.val = val;</span></span><br><span class="line"><span class="hljs-comment"> *         this.left = left;</span></span><br><span class="line"><span class="hljs-comment"> *         this.right = right;</span></span><br><span class="line"><span class="hljs-comment"> *     }</span></span><br><span class="line"><span class="hljs-comment"> * }</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{</span><br><span class="line">    Integer prev_val;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">isValidBST</span><span class="hljs-params">(TreeNode root)</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">if</span>(root == <span class="hljs-keyword">null</span>) {</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">if</span> (isValidBST(root.left) == <span class="hljs-keyword">false</span>){</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">if</span> (prev_val != <span class="hljs-keyword">null</span> &amp;&amp; prev_val &gt;= root.val) {</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">        }</span><br><span class="line">        prev_val = root.val;</span><br><span class="line">        <span class="hljs-keyword">return</span> isValidBST(root.right);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x4F8B;&#x9898;&#xFF1A;<a href="https://www.nowcoder.com/practice/a861533d45854474ac791d90e447bafd?tpId=13&amp;tqId=11176&amp;tPage=1&amp;rp=1&amp;ru=/ta/coding-interviews&amp;qru=/ta/coding-interviews/question-ranking&amp;from=cyc_github" target="_blank" rel="noopener">&#x725B;&#x5BA2;&#x7F51;: &#x4E8C;&#x53C9;&#x641C;&#x7D22;&#x6811;&#x7684;&#x540E;&#x5E8F;&#x904D;&#x5386;&#x5E8F;&#x5217;</a></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">VerifySquenceOfBST</span><span class="hljs-params">(<span class="hljs-keyword">int</span> [] sequence)</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">if</span>(sequence.length == <span class="hljs-number">0</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>; </span><br><span class="line">        <span class="hljs-keyword">if</span>(sequence.length&lt;=<span class="hljs-number">2</span>) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">        <span class="hljs-keyword">boolean</span> res = verify(sequence, <span class="hljs-number">0</span>, sequence.length-<span class="hljs-number">1</span>);</span><br><span class="line">        <span class="hljs-keyword">return</span> res;</span><br><span class="line">    }</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">verify</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] s, <span class="hljs-keyword">int</span> st, <span class="hljs-keyword">int</span> end)</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">if</span>(st &gt;= end) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">        <span class="hljs-keyword">int</span> i=st;</span><br><span class="line">        <span class="hljs-keyword">while</span>(s[i] &lt; s[end])</span><br><span class="line">            ++i;</span><br><span class="line">        <span class="hljs-keyword">int</span> pivot = i;</span><br><span class="line">        <span class="hljs-keyword">for</span>(; i&lt;end; ++i) {</span><br><span class="line">            <span class="hljs-keyword">if</span>(s[i] &lt; s[end])</span><br><span class="line">                <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">return</span> verify(s, st, pivot-<span class="hljs-number">1</span>) &amp; verify(s, pivot+<span class="hljs-number">1</span>, end);</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h1 id="2-&#x5E73;&#x8861;&#x4E8C;&#x53C9;&#x6811;"><a href="#2-&#x5E73;&#x8861;&#x4E8C;&#x53C9;&#x6811;" class="headerlink" title="2. &#x5E73;&#x8861;&#x4E8C;&#x53C9;&#x6811;"></a>2. &#x5E73;&#x8861;&#x4E8C;&#x53C9;&#x6811;</h1><h2 id="B-&#x6811;"><a href="#B-&#x6811;" class="headerlink" title="B+&#x6811;"></a>B+&#x6811;</h2><p>MySQL&#x4E2D;&#x4F7F;&#x7528;B+&#x6811;&#x5EFA;&#x7ACB;&#x7D22;&#x5F15;&#x3002;<br>B+&#x6811;&#x6BD4;&#x7EA2;&#x9ED1;&#x6811;&#x5C42;&#x6570;&#x66F4;&#x5C11;&#xFF0C;&#x67E5;&#x627E;&#x901F;&#x5EA6;&#x66F4;&#x5FEB;&#xFF0C;&#x6240;&#x4EE5;&#x9002;&#x5408;&#x7528;&#x6765;&#x4F5C;&#x4E3A;&#x6570;&#x636E;&#x5E93;&#x7D22;&#x5F15;&#x7684;&#x6570;&#x636E;&#x7ED3;&#x6784;&#x3002;</p>
+<h2 id="AVL&#x6811;&#xFF08;&#x4E00;&#x79CD;&#x81EA;&#x5E73;&#x8861;&#x4E8C;&#x53C9;&#x6811;&#xFF09;"><a href="#AVL&#x6811;&#xFF08;&#x4E00;&#x79CD;&#x81EA;&#x5E73;&#x8861;&#x4E8C;&#x53C9;&#x6811;&#xFF09;" class="headerlink" title="AVL&#x6811;&#xFF08;&#x4E00;&#x79CD;&#x81EA;&#x5E73;&#x8861;&#x4E8C;&#x53C9;&#x6811;&#xFF09;"></a>AVL&#x6811;&#xFF08;&#x4E00;&#x79CD;&#x81EA;&#x5E73;&#x8861;&#x4E8C;&#x53C9;&#x6811;&#xFF09;</h2><h3 id="PAT-1066-Root-of-AVL-Tree&#xFF08;25-&#x5206;&#xFF09;"><a href="#PAT-1066-Root-of-AVL-Tree&#xFF08;25-&#x5206;&#xFF09;" class="headerlink" title="PAT 1066: Root of AVL Tree&#xFF08;25 &#x5206;&#xFF09;"></a>PAT 1066: Root of AVL Tree&#xFF08;25 &#x5206;&#xFF09;</h3><p>An AVL tree is a self-balancing binary search tree. In an AVL tree, the heights of the two child subtrees of any node differ by at most one; if at any time they differ by more than one, rebalancing is done to restore this property. Figures 1-4 illustrate the rotation rules.</p>
+<p><img src="figure.png" alt="&#x793A;&#x610F;&#x56FE;" title="&#x793A;&#x610F;&#x56FE;"></p>
+<p>Now given a sequence of insertions, you are supposed to tell the root of the resulting AVL tree.</p>
+<h3 id="Input-Specification"><a href="#Input-Specification" class="headerlink" title="Input Specification:"></a>Input Specification:</h3><p>Each input file contains one test case. For each case, the first line contains a positive integer N (&#x2264;20) which is the total number of keys to be inserted. Then N distinct integer keys are given in the next line. All the numbers in a line are separated by a space.</p>
+<h3 id="Output-Specification"><a href="#Output-Specification" class="headerlink" title="Output Specification:"></a>Output Specification:</h3><p>For each test case, print the root of the resulting AVL tree in one line.</p>
+<h3 id="Sample-Input-1"><a href="#Sample-Input-1" class="headerlink" title="Sample Input 1:"></a>Sample Input 1:</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">5</span><br><span class="line">88 70 61 96 120</span><br></pre></td></tr></table></figure>
+
+<h3 id="Sample-Output-1"><a href="#Sample-Output-1" class="headerlink" title="Sample Output 1:"></a>Sample Output 1:</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">70</span><br></pre></td></tr></table></figure>
+
+<h3 id="Sample-Input-2"><a href="#Sample-Input-2" class="headerlink" title="Sample Input 2:"></a>Sample Input 2:</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">7</span><br><span class="line">88 70 61 96 120 90 65</span><br></pre></td></tr></table></figure>
+
+<h3 id="Sample-Output-2"><a href="#Sample-Output-2" class="headerlink" title="Sample Output 2:"></a>Sample Output 2:</h3><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">88</span><br></pre></td></tr></table></figure>
+
+<h2 id="&#x9898;&#x76EE;&#x5206;&#x6790;"><a href="#&#x9898;&#x76EE;&#x5206;&#x6790;" class="headerlink" title="&#x9898;&#x76EE;&#x5206;&#x6790;"></a>&#x9898;&#x76EE;&#x5206;&#x6790;</h2><p>&#x8FD9;&#x9053;&#x9898;&#x8981;&#x6C42;&#x6839;&#x636E;&#x8F93;&#x5165;&#x6570;&#x636E;&#x6784;&#x9020;&#x4E00;&#x4E2A; AVL &#x6811;. &#x6700;&#x540E;&#x8F93;&#x51FA;&#x6811;&#x7684;&#x6839;&#x6240;&#x4FDD;&#x5B58;&#x7684;&#x5143;&#x7D20;. &#x6CA1;&#x6709;&#x4EC0;&#x4E48;&#x6280;&#x5DE7;, &#x8981;&#x6C42;&#x4F1A; AVL &#x7684;&#x5EFA;&#x7ACB;&#x8FC7;&#x7A0B;&#x624D;&#x884C;. &#x96BE;&#x70B9;&#x5728;&#x4E8E;&#x63D2;&#x5165;&#x6570;&#x636E;&#x540E;&#x4E0D;&#x6EE1;&#x8DB3;&#x5E73;&#x8861;&#x6761;&#x4EF6;&#x65F6;&#x6811;&#x7684;&#x65CB;&#x8F6C;.</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">include</span><span class="hljs-meta-string">&lt;bits/stdc++.h&gt;</span></span></span><br><span class="line"><span class="hljs-keyword">using</span> <span class="hljs-keyword">namespace</span> <span class="hljs-built_in">std</span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> For(i,n) for(int i=0;i&lt;n;i++)</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">struct</span> <span class="hljs-title">Node</span>{</span></span><br><span class="line">    <span class="hljs-keyword">int</span> value;</span><br><span class="line">    Node *left, *right;</span><br><span class="line">    Node(<span class="hljs-keyword">int</span> v) : value(v) {</span><br><span class="line">        left = right = <span class="hljs-literal">NULL</span>;</span><br><span class="line">    }</span><br><span class="line">};</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">getHeight</span><span class="hljs-params">(Node *root)</span></span>{</span><br><span class="line">    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> max(getHeight(root-&gt;left), getHeight(root-&gt;right))+<span class="hljs-number">1</span>;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Node *<span class="hljs-title">rotateLeft</span><span class="hljs-params">(Node *root)</span></span>{</span><br><span class="line">    Node *t = root-&gt;right;</span><br><span class="line">    root-&gt;right = t-&gt;left;</span><br><span class="line">    t-&gt;left = root;</span><br><span class="line">    <span class="hljs-keyword">return</span> t;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Node *<span class="hljs-title">rotateRight</span><span class="hljs-params">(Node *root)</span></span>{</span><br><span class="line">    Node *t = root-&gt;left;</span><br><span class="line">    root-&gt;left = t-&gt;right;</span><br><span class="line">    t-&gt;right = root;</span><br><span class="line">    <span class="hljs-keyword">return</span> t;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Node *<span class="hljs-title">rotateLeftRight</span><span class="hljs-params">(Node *root)</span></span>{</span><br><span class="line">    root-&gt;left = rotateLeft(root-&gt;left);</span><br><span class="line">    <span class="hljs-keyword">return</span> rotateRight(root);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Node *<span class="hljs-title">rotateRightLeft</span><span class="hljs-params">(Node *root)</span></span>{</span><br><span class="line">    root-&gt;right = rotateRight(root-&gt;right);</span><br><span class="line">    <span class="hljs-keyword">return</span> rotateLeft(root);</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-function">Node *<span class="hljs-title">insert</span><span class="hljs-params">(Node* root, <span class="hljs-keyword">int</span> val)</span></span>{</span><br><span class="line">    <span class="hljs-keyword">if</span> (root == <span class="hljs-literal">NULL</span>){</span><br><span class="line">        root = <span class="hljs-keyword">new</span> Node(val);</span><br><span class="line">    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span> (val &lt; root-&gt;value){</span><br><span class="line">        root-&gt;left = insert(root-&gt;left, val);</span><br><span class="line">        <span class="hljs-keyword">if</span> (getHeight(root-&gt;left)-getHeight(root-&gt;right) == <span class="hljs-number">2</span>){</span><br><span class="line">            root = val &lt; root-&gt;left-&gt;value ? rotateRight(root) : rotateLeftRight(root);</span><br><span class="line">        }</span><br><span class="line">    } <span class="hljs-keyword">else</span> {</span><br><span class="line">        root-&gt;right = insert(root-&gt;right, val);</span><br><span class="line">        <span class="hljs-keyword">if</span> (getHeight(root-&gt;right)-getHeight(root-&gt;left) == <span class="hljs-number">2</span>){</span><br><span class="line">            root = val &lt; root-&gt;right-&gt;value ? rotateRightLeft(root) : rotateLeft(root);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">return</span> root;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">main</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function"></span>{</span><br><span class="line">    <span class="hljs-keyword">int</span> N;</span><br><span class="line">    <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;N);</span><br><span class="line">    Node *root = <span class="hljs-literal">NULL</span>;</span><br><span class="line">    For(i,N){</span><br><span class="line">        <span class="hljs-keyword">int</span> val;</span><br><span class="line">        <span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d&quot;</span>, &amp;val);</span><br><span class="line">        root = insert(root, val);</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-built_in">printf</span>(<span class="hljs-string">&quot;%d\n&quot;</span>, root-&gt;value);</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h1 id="3-&#x65E0;&#x6839;&#x6811;&#x4E0E;&#x6709;&#x6839;&#x6811;"><a href="#3-&#x65E0;&#x6839;&#x6811;&#x4E0E;&#x6709;&#x6839;&#x6811;" class="headerlink" title="3. &#x65E0;&#x6839;&#x6811;&#x4E0E;&#x6709;&#x6839;&#x6811;"></a>3. &#x65E0;&#x6839;&#x6811;&#x4E0E;&#x6709;&#x6839;&#x6811;</h1><p>&#x6765;&#x770B;&#x4E00;&#x9053;&#x65E0;&#x6839;&#x6811;&#x7684;&#x9898;&#x76EE;.<br>Centroid (SGU 134), &#x94FE;&#x63A5;:<a href="https://cn.vjudge.net/problem/SGU-134" target="_blank" rel="noopener">https://cn.vjudge.net/problem/SGU-134</a></p>
+<p>&#x8FD9;&#x9053;&#x9898;&#x7ED9;&#x4E86;&#x4E00;&#x4E2A;&#x6811;&#x7684;&#x91CD;&#x5FC3;&#x7684;&#x5B9A;&#x4E49;. &#x5C06;&#x8FD9;&#x68F5;&#x6811;&#x4E0A;&#x5220;&#x9664;&#x6389;&#x91CD;&#x5FC3;&#x7684;&#x65F6;&#x5019;, &#x5269;&#x4F59;&#x5B50;&#x6811;&#x7684;&#x8282;&#x70B9;&#x6570;&#x6700;&#x5927;&#x503C;&#x662F;&#x6700;&#x5C0F;&#x7684;, &#x6362;&#x4E2A;&#x8868;&#x8FF0;&#x4E5F;&#x5C31;&#x662F;&#x8BF4;&#x5269;&#x4E0B;&#x7684;&#x5B50;&#x6811;&#x4E4B;&#x95F4;&#x662F;&#x5E73;&#x8861;&#x7684;.</p>
+<p>&#x6211;&#x4EEC;&#x4F7F;&#x7528; dfs &#x6765;&#x627E;&#x51FA;&#x5404;&#x4E2A;&#x5B50;&#x6811;&#x7684;&#x8282;&#x70B9;&#x6570;&#x548C;&#x8282;&#x70B9;&#x6570;&#x6700;&#x5927;&#x7684;&#x5B50;&#x6811;. &#x4EFB;&#x610F;&#x627E;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x4F5C;&#x4E3A;&#x6839;&#x8282;&#x70B9;, &#x904D;&#x5386;&#x4E00;&#x904D;&#x5C31;&#x53EF;&#x4EE5;. &#x63A5;&#x4E0B;&#x6765;&#x6C42;&#x89E3;&#x5269;&#x4F59;&#x5B50;&#x6811;&#x7684;&#x8282;&#x70B9;&#x6570;&#x6700;&#x5927;&#x503C;&#x5C31;&#x53EF;&#x4EE5;&#x8F6C;&#x5316;&#x4E3A;&#x6C42;&#x5728;&#x8FD9;&#x79CD;&#x6811;&#x7684;&#x6784;&#x9020;&#x4E0B;, &#x4EE5;&#x67D0;&#x4E2A;&#x8282;&#x70B9;&#x4E3A;&#x7236;&#x8282;&#x70B9;&#x7684;&#x6240;&#x6709;&#x5B50;&#x6811;&#x4E2D;&#x8282;&#x70B9;&#x6570;&#x7684;&#x6700;&#x5927;&#x503C;&#x548C;&#x9664;&#x53BB;&#x8BE5;&#x8282;&#x70B9;&#x548C;&#x8FD9;&#x4E9B;&#x5B50;&#x6811;&#x5916;&#x5269;&#x4F59;&#x7684;&#x6240;&#x6709;&#x8282;&#x70B9;&#x7684;&#x4E2A;&#x6570;&#x76F8;&#x6BD4;&#x8F83;&#x7684;&#x6700;&#x5927;&#x503C;, &#x5373; <code>value = max(val[i], n-size[i])</code>.</p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/数据结构/">#数据结构</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/算法/">#算法</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/树/">#树</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/DFS/">#DFS</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/PAT/">#PAT</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/MySQL/">#MySQL</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/2018-07-15-OOP-note-1/">面向对象程序设计笔记整理-1</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/2018-07-07-string-problems/">数据结构与算法笔记 | 字符串</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

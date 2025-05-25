@@ -1,0 +1,482 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>Shellchain笔记：序列化与反序列化 - Shane&#39;s Blog</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/zh-cn/2020-Dec-7th-Shellchain-note-serialize-unserialize/" rel="alternate" hreflang="zh-CN">
+    
+
+
+
+
+
+
+    <meta name="description" content="leveldb&amp;#x7684;&amp;#x50A8;&amp;#x5B58;&amp;#x4EC5;&amp;#x652F;&amp;#x6301;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x548C;leveldb&amp;#x5207;&amp;#x7247;&amp;#xFF08;&amp;#x5373;bytes&amp;#xFF09;&amp;#xFF0C;&amp;#x4EA4;&amp;#x6613;&amp;#x4F5C;&amp;#x4E3A;&amp;#x81EA;&amp;#x5B9A;&amp;#x4E">
+<meta name="keywords" content="Shellchain,Blockchain">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shellchain笔记：序列化与反序列化">
+<meta property="og:url" content="https://BillyStudio.github.io/2020-Dec-7th-Shellchain-note-serialize-unserialize/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="leveldb&amp;#x7684;&amp;#x50A8;&amp;#x5B58;&amp;#x4EC5;&amp;#x652F;&amp;#x6301;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x548C;leveldb&amp;#x5207;&amp;#x7247;&amp;#xFF08;&amp;#x5373;bytes&amp;#xFF09;&amp;#xFF0C;&amp;#x4EA4;&amp;#x6613;&amp;#x4F5C;&amp;#x4E3A;&amp;#x81EA;&amp;#x5B9A;&amp;#x4E">
+<meta property="og:locale" content="en">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.420Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shellchain笔记：序列化与反序列化">
+<meta name="twitter:description" content="leveldb&amp;#x7684;&amp;#x50A8;&amp;#x5B58;&amp;#x4EC5;&amp;#x652F;&amp;#x6301;&amp;#x5B57;&amp;#x7B26;&amp;#x4E32;&amp;#x548C;leveldb&amp;#x5207;&amp;#x7247;&amp;#xFF08;&amp;#x5373;bytes&amp;#xFF09;&amp;#xFF0C;&amp;#x4EA4;&amp;#x6613;&amp;#x4F5C;&amp;#x4E3A;&amp;#x81EA;&amp;#x5B9A;&amp;#x4E">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/categories">Categories</a>
+            
+            <a class="navbar-item " href="/tags">Tags</a>
+            
+            <a class="navbar-item " href="/about">About</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="Search" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="Table of Contents">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>English</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2020-Dec-7th-Shellchain-note-serialize-unserialize/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2020-Dec-7th-Shellchain-note-serialize-unserialize/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            Shellchain笔记：序列化与反序列化
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2020-12-07T03:26:17.000Z" itemprop="datePublished">Dec 7 2020</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/categories/JuliuSC项目/">JuliuSC项目</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            6 minutes read (About 953 words)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>leveldb&#x7684;&#x50A8;&#x5B58;&#x4EC5;&#x652F;&#x6301;&#x5B57;&#x7B26;&#x4E32;&#x548C;leveldb&#x5207;&#x7247;&#xFF08;&#x5373;bytes&#xFF09;&#xFF0C;&#x4EA4;&#x6613;&#x4F5C;&#x4E3A;&#x81EA;&#x5B9A;&#x4E49;&#x7C7B;&#x578B;&#xFF0C;&#x5B58;&#x50A8;&#x5230;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x9700;&#x8981;&#x8FDB;&#x884C;&#x5E8F;&#x5217;&#x5316;&#xFF0C;&#x4ECE;&#x6570;&#x636E;&#x5E93;&#x4E2D;&#x6062;&#x590D;&#x9700;&#x8981;&#x53CD;&#x5E8F;&#x5217;&#x5316;&#x3002;<a id="more"></a></p>
+<p>&#x5728; streams.h &#x4E2D;&#x4E5F;&#x6709;&#x5B9A;&#x4E49; CDataStream&#xFF1A;</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br><span class="line">144</span><br><span class="line">145</span><br><span class="line">146</span><br><span class="line">147</span><br><span class="line">148</span><br><span class="line">149</span><br><span class="line">150</span><br><span class="line">151</span><br><span class="line">152</span><br><span class="line">153</span><br><span class="line">154</span><br><span class="line">155</span><br><span class="line">156</span><br><span class="line">157</span><br><span class="line">158</span><br><span class="line">159</span><br><span class="line">160</span><br><span class="line">161</span><br><span class="line">162</span><br><span class="line">163</span><br><span class="line">164</span><br><span class="line">165</span><br><span class="line">166</span><br><span class="line">167</span><br><span class="line">168</span><br><span class="line">169</span><br><span class="line">170</span><br><span class="line">171</span><br><span class="line">172</span><br><span class="line">173</span><br><span class="line">174</span><br><span class="line">175</span><br><span class="line">176</span><br><span class="line">177</span><br><span class="line">178</span><br><span class="line">179</span><br><span class="line">180</span><br><span class="line">181</span><br><span class="line">182</span><br><span class="line">183</span><br><span class="line">184</span><br><span class="line">185</span><br><span class="line">186</span><br><span class="line">187</span><br><span class="line">188</span><br><span class="line">189</span><br><span class="line">190</span><br><span class="line">191</span><br><span class="line">192</span><br><span class="line">193</span><br><span class="line">194</span><br><span class="line">195</span><br><span class="line">196</span><br><span class="line">197</span><br><span class="line">198</span><br><span class="line">199</span><br><span class="line">200</span><br><span class="line">201</span><br><span class="line">202</span><br><span class="line">203</span><br><span class="line">204</span><br><span class="line">205</span><br><span class="line">206</span><br><span class="line">207</span><br><span class="line">208</span><br><span class="line">209</span><br><span class="line">210</span><br><span class="line">211</span><br><span class="line">212</span><br><span class="line">213</span><br><span class="line">214</span><br><span class="line">215</span><br><span class="line">216</span><br><span class="line">217</span><br><span class="line">218</span><br><span class="line">219</span><br><span class="line">220</span><br><span class="line">221</span><br><span class="line">222</span><br><span class="line">223</span><br><span class="line">224</span><br><span class="line">225</span><br><span class="line">226</span><br><span class="line">227</span><br><span class="line">228</span><br><span class="line">229</span><br><span class="line">230</span><br><span class="line">231</span><br><span class="line">232</span><br><span class="line">233</span><br><span class="line">234</span><br><span class="line">235</span><br><span class="line">236</span><br><span class="line">237</span><br><span class="line">238</span><br><span class="line">239</span><br><span class="line">240</span><br><span class="line">241</span><br><span class="line">242</span><br><span class="line">243</span><br><span class="line">244</span><br><span class="line">245</span><br><span class="line">246</span><br><span class="line">247</span><br><span class="line">248</span><br><span class="line">249</span><br><span class="line">250</span><br><span class="line">251</span><br><span class="line">252</span><br><span class="line">253</span><br><span class="line">254</span><br><span class="line">255</span><br><span class="line">256</span><br><span class="line">257</span><br><span class="line">258</span><br><span class="line">259</span><br><span class="line">260</span><br><span class="line">261</span><br><span class="line">262</span><br><span class="line">263</span><br><span class="line">264</span><br><span class="line">265</span><br><span class="line">266</span><br><span class="line">267</span><br><span class="line">268</span><br><span class="line">269</span><br><span class="line">270</span><br><span class="line">271</span><br><span class="line">272</span><br><span class="line">273</span><br><span class="line">274</span><br><span class="line">275</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/** Double ended buffer combining vector and stream-like interfaces.</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * &gt;&gt; and &lt;&lt; read and write unformatted data using the above serialization templates.</span></span><br><span class="line"><span class="hljs-comment"> * Fills with data in linear time; some stringstream implementations take N^2 time.</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">CDataStream</span></span></span><br><span class="line"><span class="hljs-class">{</span></span><br><span class="line"><span class="hljs-keyword">protected</span>:</span><br><span class="line">    <span class="hljs-keyword">typedef</span> CSerializeData vector_type;</span><br><span class="line">    vector_type vch;</span><br><span class="line">    <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> nReadPos;</span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-keyword">int</span> nType;</span><br><span class="line">    <span class="hljs-keyword">int</span> nVersion;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">typedef</span> vector_type::allocator_type   allocator_type;</span><br><span class="line">    <span class="hljs-keyword">typedef</span> vector_type::size_type        size_type;</span><br><span class="line">    <span class="hljs-keyword">typedef</span> vector_type::difference_type  difference_type;</span><br><span class="line">    <span class="hljs-keyword">typedef</span> vector_type::reference        reference;</span><br><span class="line">    <span class="hljs-keyword">typedef</span> vector_type::const_reference  const_reference;</span><br><span class="line">    <span class="hljs-keyword">typedef</span> vector_type::value_type       value_type;</span><br><span class="line">    <span class="hljs-keyword">typedef</span> vector_type::iterator         iterator;</span><br><span class="line">    <span class="hljs-keyword">typedef</span> vector_type::const_iterator   const_iterator;</span><br><span class="line">    <span class="hljs-keyword">typedef</span> vector_type::reverse_iterator reverse_iterator;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">explicit</span> <span class="hljs-title">CDataStream</span><span class="hljs-params">(<span class="hljs-keyword">int</span> nTypeIn, <span class="hljs-keyword">int</span> nVersionIn)</span></span></span><br><span class="line"><span class="hljs-function">    </span>{</span><br><span class="line">        Init(nTypeIn, nVersionIn);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    CDataStream(const_iterator pbegin, const_iterator pend, <span class="hljs-keyword">int</span> nTypeIn, <span class="hljs-keyword">int</span> nVersionIn) : vch(pbegin, pend)</span><br><span class="line">    {</span><br><span class="line">        Init(nTypeIn, nVersionIn);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> !defined(_MSC_VER) || _MSC_VER &gt;= 1300</span></span><br><span class="line">    CDataStream(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* pbegin, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* pend, <span class="hljs-keyword">int</span> nTypeIn, <span class="hljs-keyword">int</span> nVersionIn) : vch(pbegin, pend)</span><br><span class="line">    {</span><br><span class="line">        Init(nTypeIn, nVersionIn);</span><br><span class="line">    }</span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    CDataStream(<span class="hljs-keyword">const</span> vector_type&amp; vchIn, <span class="hljs-keyword">int</span> nTypeIn, <span class="hljs-keyword">int</span> nVersionIn) : vch(vchIn.begin(), vchIn.end())</span><br><span class="line">    {</span><br><span class="line">        Init(nTypeIn, nVersionIn);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    CDataStream(<span class="hljs-keyword">const</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">char</span>&gt;&amp; vchIn, <span class="hljs-keyword">int</span> nTypeIn, <span class="hljs-keyword">int</span> nVersionIn) : vch(vchIn.begin(), vchIn.end())</span><br><span class="line">    {</span><br><span class="line">        Init(nTypeIn, nVersionIn);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    CDataStream(<span class="hljs-keyword">const</span> <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">char</span>&gt;&amp; vchIn, <span class="hljs-keyword">int</span> nTypeIn, <span class="hljs-keyword">int</span> nVersionIn) : vch(vchIn.begin(), vchIn.end())</span><br><span class="line">    {</span><br><span class="line">        Init(nTypeIn, nVersionIn);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Init</span><span class="hljs-params">(<span class="hljs-keyword">int</span> nTypeIn, <span class="hljs-keyword">int</span> nVersionIn)</span></span></span><br><span class="line"><span class="hljs-function">    </span>{</span><br><span class="line">        nReadPos = <span class="hljs-number">0</span>;</span><br><span class="line">        nType = nTypeIn;</span><br><span class="line">        nVersion = nVersionIn;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    CDataStream&amp; <span class="hljs-keyword">operator</span>+=(<span class="hljs-keyword">const</span> CDataStream&amp; b)</span><br><span class="line">    {</span><br><span class="line">        vch.insert(vch.end(), b.begin(), b.end());</span><br><span class="line">        <span class="hljs-keyword">return</span> *<span class="hljs-keyword">this</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">friend</span> CDataStream <span class="hljs-keyword">operator</span>+(<span class="hljs-keyword">const</span> CDataStream&amp; a, <span class="hljs-keyword">const</span> CDataStream&amp; b)</span><br><span class="line">    {</span><br><span class="line">        CDataStream ret = a;</span><br><span class="line">        ret += b;</span><br><span class="line">        <span class="hljs-keyword">return</span> (ret);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span> <span class="hljs-title">str</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span></span></span><br><span class="line"><span class="hljs-function">    </span>{</span><br><span class="line">        <span class="hljs-keyword">return</span> (<span class="hljs-built_in">std</span>::<span class="hljs-built_in">string</span>(begin(), end()));</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">//</span></span><br><span class="line">    <span class="hljs-comment">// Vector subset</span></span><br><span class="line">    <span class="hljs-comment">//</span></span><br><span class="line">    <span class="hljs-function">const_iterator <span class="hljs-title">begin</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span>                     </span>{ <span class="hljs-keyword">return</span> vch.begin() + nReadPos; }</span><br><span class="line">    <span class="hljs-function">iterator <span class="hljs-title">begin</span><span class="hljs-params">()</span>                                 </span>{ <span class="hljs-keyword">return</span> vch.begin() + nReadPos; }</span><br><span class="line">    <span class="hljs-function">const_iterator <span class="hljs-title">end</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span>                       </span>{ <span class="hljs-keyword">return</span> vch.end(); }</span><br><span class="line">    <span class="hljs-function">iterator <span class="hljs-title">end</span><span class="hljs-params">()</span>                                   </span>{ <span class="hljs-keyword">return</span> vch.end(); }</span><br><span class="line">    <span class="hljs-function">size_type <span class="hljs-title">size</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span>                           </span>{ <span class="hljs-keyword">return</span> vch.size() - nReadPos; }</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">empty</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span>                               </span>{ <span class="hljs-keyword">return</span> vch.size() == nReadPos; }</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">resize</span><span class="hljs-params">(size_type n, value_type c=<span class="hljs-number">0</span>)</span>         </span>{ vch.resize(n + nReadPos, c); }</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">reserve</span><span class="hljs-params">(size_type n)</span>                        </span>{ vch.reserve(n + nReadPos); }</span><br><span class="line">    const_reference <span class="hljs-keyword">operator</span>[](size_type pos) <span class="hljs-keyword">const</span>  { <span class="hljs-keyword">return</span> vch[pos + nReadPos]; }</span><br><span class="line">    reference <span class="hljs-keyword">operator</span>[](size_type pos)              { <span class="hljs-keyword">return</span> vch[pos + nReadPos]; }</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">clear</span><span class="hljs-params">()</span>                                     </span>{ vch.clear(); nReadPos = <span class="hljs-number">0</span>; }</span><br><span class="line">    <span class="hljs-function">iterator <span class="hljs-title">insert</span><span class="hljs-params">(iterator it, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>&amp; x=<span class="hljs-keyword">char</span>())</span> </span>{ <span class="hljs-keyword">return</span> vch.insert(it, x); }</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(iterator it, size_type n, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>&amp; x)</span> </span>{ vch.insert(it, n, x); }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(iterator it, <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">char</span>&gt;::const_iterator first, <span class="hljs-built_in">std</span>::<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">char</span>&gt;::const_iterator last)</span></span></span><br><span class="line"><span class="hljs-function">    </span>{</span><br><span class="line">        assert(last - first &gt;= <span class="hljs-number">0</span>);</span><br><span class="line">        <span class="hljs-keyword">if</span> (it == vch.begin() + nReadPos &amp;&amp; (<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span>)(last - first) &lt;= nReadPos)</span><br><span class="line">        {</span><br><span class="line">            <span class="hljs-comment">// special case for inserting at the front when there&apos;s room</span></span><br><span class="line">            nReadPos -= (last - first);</span><br><span class="line">            <span class="hljs-built_in">memcpy</span>(&amp;vch[nReadPos], &amp;first[<span class="hljs-number">0</span>], last - first);</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            vch.insert(it, first, last);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">if</span> !defined(_MSC_VER) || _MSC_VER &gt;= 1300</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">insert</span><span class="hljs-params">(iterator it, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* first, <span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* last)</span></span></span><br><span class="line"><span class="hljs-function">    </span>{</span><br><span class="line">        assert(last - first &gt;= <span class="hljs-number">0</span>);</span><br><span class="line">        <span class="hljs-keyword">if</span> (it == vch.begin() + nReadPos &amp;&amp; (<span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span>)(last - first) &lt;= nReadPos)</span><br><span class="line">        {</span><br><span class="line">            <span class="hljs-comment">// special case for inserting at the front when there&apos;s room</span></span><br><span class="line">            nReadPos -= (last - first);</span><br><span class="line">            <span class="hljs-built_in">memcpy</span>(&amp;vch[nReadPos], &amp;first[<span class="hljs-number">0</span>], last - first);</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            vch.insert(it, first, last);</span><br><span class="line">    }</span><br><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">endif</span></span></span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">iterator <span class="hljs-title">erase</span><span class="hljs-params">(iterator it)</span></span></span><br><span class="line"><span class="hljs-function">    </span>{</span><br><span class="line">        <span class="hljs-keyword">if</span> (it == vch.begin() + nReadPos)</span><br><span class="line">        {</span><br><span class="line">            <span class="hljs-comment">// special case for erasing from the front</span></span><br><span class="line">            <span class="hljs-keyword">if</span> (++nReadPos &gt;= vch.size())</span><br><span class="line">            {</span><br><span class="line">                <span class="hljs-comment">// whenever we reach the end, we take the opportunity to clear the buffer</span></span><br><span class="line">                nReadPos = <span class="hljs-number">0</span>;</span><br><span class="line">                <span class="hljs-keyword">return</span> vch.erase(vch.begin(), vch.end());</span><br><span class="line">            }</span><br><span class="line">            <span class="hljs-keyword">return</span> vch.begin() + nReadPos;</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            <span class="hljs-keyword">return</span> vch.erase(it);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">iterator <span class="hljs-title">erase</span><span class="hljs-params">(iterator first, iterator last)</span></span></span><br><span class="line"><span class="hljs-function">    </span>{</span><br><span class="line">        <span class="hljs-keyword">if</span> (first == vch.begin() + nReadPos)</span><br><span class="line">        {</span><br><span class="line">            <span class="hljs-comment">// special case for erasing from the front</span></span><br><span class="line">            <span class="hljs-keyword">if</span> (last == vch.end())</span><br><span class="line">            {</span><br><span class="line">                nReadPos = <span class="hljs-number">0</span>;</span><br><span class="line">                <span class="hljs-keyword">return</span> vch.erase(vch.begin(), vch.end());</span><br><span class="line">            }</span><br><span class="line">            <span class="hljs-keyword">else</span></span><br><span class="line">            {</span><br><span class="line">                nReadPos = (last - vch.begin());</span><br><span class="line">                <span class="hljs-keyword">return</span> last;</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">else</span></span><br><span class="line">            <span class="hljs-keyword">return</span> vch.erase(first, last);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">inline</span> <span class="hljs-keyword">void</span> <span class="hljs-title">Compact</span><span class="hljs-params">()</span></span></span><br><span class="line"><span class="hljs-function">    </span>{</span><br><span class="line">        vch.erase(vch.begin(), vch.begin() + nReadPos);</span><br><span class="line">        nReadPos = <span class="hljs-number">0</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">Rewind</span><span class="hljs-params">(size_type n)</span></span></span><br><span class="line"><span class="hljs-function">    </span>{</span><br><span class="line">        <span class="hljs-comment">// Rewind by n characters if the buffer hasn&apos;t been compacted yet</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (n &gt; nReadPos)</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-literal">false</span>;</span><br><span class="line">        nReadPos -= n;</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-literal">true</span>;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">    <span class="hljs-comment">//</span></span><br><span class="line">    <span class="hljs-comment">// Stream subset</span></span><br><span class="line">    <span class="hljs-comment">//</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">eof</span><span class="hljs-params">()</span> <span class="hljs-keyword">const</span>             </span>{ <span class="hljs-keyword">return</span> size() == <span class="hljs-number">0</span>; }</span><br><span class="line">    <span class="hljs-function">CDataStream* <span class="hljs-title">rdbuf</span><span class="hljs-params">()</span>         </span>{ <span class="hljs-keyword">return</span> <span class="hljs-keyword">this</span>; }</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">in_avail</span><span class="hljs-params">()</span>               </span>{ <span class="hljs-keyword">return</span> size(); }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetType</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span>          </span>{ nType = n; }</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">GetType</span><span class="hljs-params">()</span>                </span>{ <span class="hljs-keyword">return</span> nType; }</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">SetVersion</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span>       </span>{ nVersion = n; }</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">GetVersion</span><span class="hljs-params">()</span>             </span>{ <span class="hljs-keyword">return</span> nVersion; }</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">ReadVersion</span><span class="hljs-params">()</span>           </span>{ *<span class="hljs-keyword">this</span> &gt;&gt; nVersion; }</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">WriteVersion</span><span class="hljs-params">()</span>          </span>{ *<span class="hljs-keyword">this</span> &lt;&lt; nVersion; }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">CDataStream&amp; <span class="hljs-title">read</span><span class="hljs-params">(<span class="hljs-keyword">char</span>* pch, <span class="hljs-keyword">size_t</span> nSize)</span></span></span><br><span class="line"><span class="hljs-function">    </span>{</span><br><span class="line">        <span class="hljs-comment">// Read from the beginning of the buffer</span></span><br><span class="line">        <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> nReadPosNext = nReadPos + nSize;</span><br><span class="line">        <span class="hljs-keyword">if</span> (nReadPosNext &gt;= vch.size())</span><br><span class="line">        {</span><br><span class="line">            <span class="hljs-keyword">if</span> (nReadPosNext &gt; vch.size())</span><br><span class="line">            {</span><br><span class="line">                <span class="hljs-keyword">throw</span> <span class="hljs-built_in">std</span>::ios_base::failure(<span class="hljs-string">&quot;CDataStream::read() : end of data&quot;</span>);</span><br><span class="line">            }</span><br><span class="line">            <span class="hljs-built_in">memcpy</span>(pch, &amp;vch[nReadPos], nSize);</span><br><span class="line">            nReadPos = <span class="hljs-number">0</span>;</span><br><span class="line">            vch.clear();</span><br><span class="line">            <span class="hljs-keyword">return</span> (*<span class="hljs-keyword">this</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-built_in">memcpy</span>(pch, &amp;vch[nReadPos], nSize);</span><br><span class="line">        nReadPos = nReadPosNext;</span><br><span class="line">        <span class="hljs-keyword">return</span> (*<span class="hljs-keyword">this</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">CDataStream&amp; <span class="hljs-title">ignore</span><span class="hljs-params">(<span class="hljs-keyword">int</span> nSize)</span></span></span><br><span class="line"><span class="hljs-function">    </span>{</span><br><span class="line">        <span class="hljs-comment">// Ignore from the beginning of the buffer</span></span><br><span class="line">        assert(nSize &gt;= <span class="hljs-number">0</span>);</span><br><span class="line">        <span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> nReadPosNext = nReadPos + nSize;</span><br><span class="line">        <span class="hljs-keyword">if</span> (nReadPosNext &gt;= vch.size())</span><br><span class="line">        {</span><br><span class="line">            <span class="hljs-keyword">if</span> (nReadPosNext &gt; vch.size())</span><br><span class="line">                <span class="hljs-keyword">throw</span> <span class="hljs-built_in">std</span>::ios_base::failure(<span class="hljs-string">&quot;CDataStream::ignore() : end of data&quot;</span>);</span><br><span class="line">            nReadPos = <span class="hljs-number">0</span>;</span><br><span class="line">            vch.clear();</span><br><span class="line">            <span class="hljs-keyword">return</span> (*<span class="hljs-keyword">this</span>);</span><br><span class="line">        }</span><br><span class="line">        nReadPos = nReadPosNext;</span><br><span class="line">        <span class="hljs-keyword">return</span> (*<span class="hljs-keyword">this</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function">CDataStream&amp; <span class="hljs-title">write</span><span class="hljs-params">(<span class="hljs-keyword">const</span> <span class="hljs-keyword">char</span>* pch, <span class="hljs-keyword">size_t</span> nSize)</span></span></span><br><span class="line"><span class="hljs-function">    </span>{</span><br><span class="line">        <span class="hljs-comment">// Write to the end of the buffer</span></span><br><span class="line">        vch.insert(vch.end(), pch, pch + nSize);</span><br><span class="line">        <span class="hljs-keyword">return</span> (*<span class="hljs-keyword">this</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> Stream&gt;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">Serialize</span><span class="hljs-params">(Stream&amp; s, <span class="hljs-keyword">int</span> nType, <span class="hljs-keyword">int</span> nVersion)</span> <span class="hljs-keyword">const</span></span></span><br><span class="line"><span class="hljs-function">    </span>{</span><br><span class="line">        <span class="hljs-comment">// Special case: stream &lt;&lt; stream concatenates like stream += stream</span></span><br><span class="line">        <span class="hljs-keyword">if</span> (!vch.empty())</span><br><span class="line">            s.write((<span class="hljs-keyword">char</span>*)&amp;vch[<span class="hljs-number">0</span>], vch.size() * <span class="hljs-keyword">sizeof</span>(vch[<span class="hljs-number">0</span>]));</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">unsigned</span> <span class="hljs-keyword">int</span> <span class="hljs-title">GetSerializeSize</span><span class="hljs-params">(<span class="hljs-keyword">const</span> T&amp; obj)</span></span></span><br><span class="line"><span class="hljs-function">    </span>{</span><br><span class="line">        <span class="hljs-comment">// Tells the size of the object if serialized to this stream</span></span><br><span class="line">        <span class="hljs-keyword">return</span> ::GetSerializeSize(obj, nType, nVersion);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;</span><br><span class="line">    CDataStream&amp; <span class="hljs-keyword">operator</span>&lt;&lt;(<span class="hljs-keyword">const</span> T&amp; obj)</span><br><span class="line">    {</span><br><span class="line">        <span class="hljs-comment">// Serialize to this stream</span></span><br><span class="line">        ::Serialize(*<span class="hljs-keyword">this</span>, obj, nType, nVersion);</span><br><span class="line">        <span class="hljs-keyword">return</span> (*<span class="hljs-keyword">this</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">template</span>&lt;<span class="hljs-keyword">typename</span> T&gt;</span><br><span class="line">    CDataStream&amp; <span class="hljs-keyword">operator</span>&gt;&gt;(T&amp; obj)</span><br><span class="line">    {</span><br><span class="line">        <span class="hljs-comment">// Unserialize from this stream</span></span><br><span class="line">        ::Unserialize(*<span class="hljs-keyword">this</span>, obj, nType, nVersion);</span><br><span class="line">        <span class="hljs-keyword">return</span> (*<span class="hljs-keyword">this</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">GetAndClear</span><span class="hljs-params">(CSerializeData &amp;data)</span> </span>{</span><br><span class="line">        data.insert(data.end(), begin(), end());</span><br><span class="line">        clear();</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Shellchain/">#Shellchain</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/tags/Blockchain/">#Blockchain</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/2020-12-16-Cpp-notes-Function-pointers/">C++ Notes --- Function Pointers</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/2020-11-06-LaTeX-for-writing-paper/">On Typesetting a Thesis by Using Either LaTeX or Word</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">Comments</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("en-AU");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="Type something...">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            CONTENT_URL: '/content.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

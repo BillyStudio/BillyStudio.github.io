@@ -1,0 +1,512 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>数据结构与算法笔记 | 递归与回溯 - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/2021-Mar-13th-Algorithm-recursion-and-backtracking/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x9012;&amp;#x5F52;&amp;#x90E8;&amp;#x5206;&amp;#x7CBE;&amp;#x9AD3;&amp;#x5728;&amp;#x4E8E;&amp;#xFF1A;">
+<meta name="keywords" content="数据结构,算法">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法笔记 | 递归与回溯">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/2021-Mar-13th-Algorithm-recursion-and-backtracking/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x9012;&amp;#x5F52;&amp;#x90E8;&amp;#x5206;&amp;#x7CBE;&amp;#x9AD3;&amp;#x5728;&amp;#x4E8E;&amp;#xFF1A;">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-Mar-13th-Algorithm-recursion-and-backtracking/before-reverse.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2021-Mar-13th-Algorithm-recursion-and-backtracking/after-reverse.png">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.600Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法笔记 | 递归与回溯">
+<meta name="twitter:description" content="&amp;#x9012;&amp;#x5F52;&amp;#x90E8;&amp;#x5206;&amp;#x7CBE;&amp;#x9AD3;&amp;#x5728;&amp;#x4E8E;&amp;#xFF1A;">
+<meta name="twitter:image" content="https://billystudio.github.io/zh-cn/2021-Mar-13th-Algorithm-recursion-and-backtracking/before-reverse.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#反转链表">1&nbsp;&nbsp;<b>反转链表</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#找出所有可能的组合">2&nbsp;&nbsp;<b>找出所有可能的组合</b></a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2021-Mar-13th-Algorithm-recursion-and-backtracking/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2021-Mar-13th-Algorithm-recursion-and-backtracking/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            数据结构与算法笔记 | 递归与回溯
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2021-03-13T14:28:51.000Z" itemprop="datePublished">3月 13 2021</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh-cn/categories/数据结构与算法/">数据结构与算法</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            6 分钟 读完 (约 842 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x9012;&#x5F52;&#x90E8;&#x5206;&#x7CBE;&#x9AD3;&#x5728;&#x4E8E;&#xFF1A; <a id="more"></a><br>&#x4E00;&#x3001;&#x628A;&#x91CD;&#x590D;&#x64CD;&#x4F5C;&#x7684;&#x5B50;&#x95EE;&#x9898;&#x63D0;&#x53D6;&#x51FA;&#x6765;&#x3002;<br>&#x4E8C;&#x3001;&#x627E;&#x5230;&#x8DF3;&#x51FA;&#x9012;&#x5F52;&#x6761;&#x4EF6;</p>
+<h3 id="&#x53CD;&#x8F6C;&#x94FE;&#x8868;"><a href="#&#x53CD;&#x8F6C;&#x94FE;&#x8868;" class="headerlink" title="&#x53CD;&#x8F6C;&#x94FE;&#x8868;"></a>&#x53CD;&#x8F6C;&#x94FE;&#x8868;</h3><p>&#x5047;&#x5982;&#x5C06;&#x8282;&#x70B9;head&#x7684;&#x540E;&#x7EED;&#x90E8;&#x5206;&#x770B;&#x4F5C;&#x5DF2;&#x7ECF;&#x8C03;&#x6574;&#x597D;&#x987A;&#x5E8F;&#x7684;&#x53CD;&#x5411;&#x94FE;&#x8868;&#xFF0C;&#x5934;&#x90E8;&#x4E3A;newHead&#xFF0C;&#x5C3E;&#x90E8;&#x4E3A;next&#xFF0C;next.next=null<br>&#x90A3;&#x4E48;&#x53CD;&#x8F6C;&#x64CD;&#x4F5C;&#x5C31;&#x53D8;&#x6210;&#x4E24;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x53CD;&#x8F6C;&#x4E86;&#xFF1A;<br><img src="before-reverse.png" alt="&#x64CD;&#x4F5C;&#x524D;"></p>
+<p><center>&#x64CD;&#x4F5C;&#x524D;</center></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">newHead = reverseList(next); <span class="hljs-comment">// &#x91CD;&#x590D;&#x5B50;&#x95EE;&#x9898;</span></span><br><span class="line">next.next = head;</span><br><span class="line">head.next = <span class="hljs-keyword">null</span>;</span><br></pre></td></tr></table></figure>
+
+<p>&#x7ECF;&#x8FC7;&#x4EE3;&#x7801;&#x64CD;&#x4F5C;&#x540E;&#xFF1A;<br><img src="after-reverse.png" alt="&#x64CD;&#x4F5C;&#x540E;"></p>
+<p>&#x5F39;&#x51FA;&#x6761;&#x4EF6;&#x5219;&#x662F;&#x5F53;&#x9012;&#x5F52;&#x5230;&#x539F;&#x94FE;&#x8868;&#x7684;&#x5E95;&#x90E8;&#x65F6;</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">if</span>(head.next == <span class="hljs-keyword">null</span>) {</span><br><span class="line">    <span class="hljs-keyword">return</span> head;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><a href="https://leetcode-cn.com/problems/reverse-linked-list/description/" target="_blank" rel="noopener">&#x4F8B;&#x9898;&#x94FE;&#x63A5; @Leetcode-cn</a><br><a href="https://raw.githubusercontent.com/WuHang108/petit-a-petit/master/6-Recursion%26Backtracking/ReverseLinkedList.java" target="_blank" rel="noopener">AC&#x4EE3;&#x7801;</a></p>
+<p>&#x8FD9;&#x9053;&#x9898;&#x4E5F;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x4E34;&#x65F6;&#x7ED3;&#x70B9;&#x548C;&#x591A;&#x6307;&#x9488;&#x6765;&#x5B8C;&#x6210;&#xFF0C;<a href="https://raw.githubusercontent.com/WuHang108/petit-a-petit/master/leetcode/206.reverse-linked-list.java" target="_blank" rel="noopener">&#x4EE3;&#x7801;&#x94FE;&#x63A5;</a></p>
+<h3 id="&#x627E;&#x51FA;&#x6240;&#x6709;&#x53EF;&#x80FD;&#x7684;&#x7EC4;&#x5408;"><a href="#&#x627E;&#x51FA;&#x6240;&#x6709;&#x53EF;&#x80FD;&#x7684;&#x7EC4;&#x5408;" class="headerlink" title="&#x627E;&#x51FA;&#x6240;&#x6709;&#x53EF;&#x80FD;&#x7684;&#x7EC4;&#x5408;"></a>&#x627E;&#x51FA;&#x6240;&#x6709;&#x53EF;&#x80FD;&#x7684;&#x7EC4;&#x5408;</h3><p>&#x4F8B;&#x9898;&#xFF1A;Leetcode 77</p>
+<p>&#x6211;&#x4EEC;&#x5BF9; 1&#x2026;n &#x7684;&#x6570;&#x6807;&#x8BB0;&#x662F;&#x5426;&#x53D6;&#x5230;&#xFF0C;&#x5F53;&#x9012;&#x5F52;&#x5230;&#x957F;&#x5EA6;&#x4E3A; k &#x65F6;&#x8BF4;&#x660E;&#x5230;&#x8FBE;&#x4E86;&#x9012;&#x5F52;&#x8FB9;&#x754C;&#x3002;<br>&#x82E5;&#x8FD8;&#x672A;&#x5230;&#x8FBE;&#x9012;&#x5F52;&#x8FB9;&#x754C;&#x5219;&#x7EE7;&#x7EED;&#x6309;&#x987A;&#x5E8F;&#x52A0;&#x5165;&#x6807;&#x8BB0;&#x6570;&#x7EC4;&#xFF0C;&#x8FDB;&#x884C;&#x9012;&#x5F52;&#x3002;&#x9012;&#x5F52;&#x540E;&#x8BB0;&#x5F97;&#x53D6;&#x6D88;&#x6807;&#x8BB0;&#x5B8C;&#x6210;&#x56DE;&#x6EAF;&#x64CD;&#x4F5C;&#x3002;<br>&#x7B97;&#x6CD5;Java&#x8BED;&#x8A00;&#x63CF;&#x8FF0;</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">    &#x7ED9;&#x5B9A;&#x4E24;&#x4E2A;&#x6574;&#x6570; n &#x548C; k (0 &lt;= k &lt;= n)</span></span><br><span class="line"><span class="hljs-comment">    &#x8FD4;&#x56DE; 1 ... n &#x4E2D;&#x6240;&#x6709;&#x53EF;&#x80FD;&#x7684; k &#x4E2A;&#x6570;&#x7684;&#x7EC4;&#x5408;</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line">List&lt;List&lt;Integer&gt;&gt; combine(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> k) {</span><br><span class="line">    <span class="hljs-keyword">boolean</span>[] flags = <span class="hljs-keyword">new</span> <span class="hljs-keyword">boolean</span>[n+<span class="hljs-number">1</span>];</span><br><span class="line">    List&lt;List&lt;Integer&gt;&gt; res = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    findCombination(res, flags, k, <span class="hljs-keyword">new</span> ArrayList&lt;&gt;(), <span class="hljs-number">1</span>);</span><br><span class="line">    <span class="hljs-keyword">return</span> res;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">    res: &#x50A8;&#x5B58;&#x6240;&#x6709;&#x53EF;&#x80FD;&#x7684;&#x7EC4;&#x5408;&#x7ED3;&#x679C;</span></span><br><span class="line"><span class="hljs-comment">    flags: &#x6807;&#x8BB0;1...n&#x662F;&#x5426;&#x88AB;&#x53D6;</span></span><br><span class="line"><span class="hljs-comment">    k: &#x5269;&#x4F59;&#x8FD8;&#x9700;&#x52A0;&#x8FDB;comb&#x7684;&#x6570;</span></span><br><span class="line"><span class="hljs-comment">    n: &#x6570;&#x636E;&#x603B;&#x6570;</span></span><br><span class="line"><span class="hljs-comment">    comb: &#x8BB0;&#x5F55;&#x5F53;&#x524D;&#x7684;&#x7EC4;&#x5408;</span></span><br><span class="line"><span class="hljs-comment">    i: &#x6307;&#x9488;&#x5728;1...n&#x7684;&#x4F4D;&#x7F6E;</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">findCombination</span><span class="hljs-params">(List&lt;List&lt;Integer&gt;&gt; res, <span class="hljs-keyword">boolean</span>[] flags, <span class="hljs-keyword">int</span> k, List&lt;Integer&gt; comb, <span class="hljs-keyword">int</span> i)</span> </span>{</span><br><span class="line">    <span class="hljs-keyword">if</span>(k == <span class="hljs-number">0</span>) {</span><br><span class="line">        res.add(<span class="hljs-keyword">new</span> ArrayList&lt;&gt;(comb));</span><br><span class="line">        <span class="hljs-keyword">return</span> ;</span><br><span class="line">    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(i == flags.length) {</span><br><span class="line">        <span class="hljs-keyword">return</span> ;</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-comment">// &#x9012;&#x5F52;</span></span><br><span class="line">    comb.add(i);</span><br><span class="line">    flags[i] = <span class="hljs-keyword">true</span>;</span><br><span class="line">    findCombination(res, flags, k-<span class="hljs-number">1</span>, comb, i+<span class="hljs-number">1</span>);   <span class="hljs-comment">// &#x53D6;</span></span><br><span class="line">    <span class="hljs-comment">// &#x56DE;&#x6EAF;</span></span><br><span class="line">    flags[i] = <span class="hljs-keyword">false</span>;</span><br><span class="line">    comb.remove(comb.size()-<span class="hljs-number">1</span>);</span><br><span class="line">    findCombination(res, flags, k, comb, i+<span class="hljs-number">1</span>);   <span class="hljs-comment">// &#x4E0D;&#x53D6;</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x7B97;&#x6CD5;C++&#x8BED;&#x8A00;&#x63CF;&#x8FF0;&#xFF1A;</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">    &#x7ED9;&#x5B9A;&#x4E24;&#x4E2A;&#x6574;&#x6570; n &#x548C; k (0 &lt;= k &lt;= n)</span></span><br><span class="line"><span class="hljs-comment">    &#x8FD4;&#x56DE; 1 ... n &#x4E2D;&#x6240;&#x6709;&#x53EF;&#x80FD;&#x7684; k &#x4E2A;&#x6570;&#x7684;&#x7EC4;&#x5408;</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; <span class="hljs-title">combine</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> k)</span> </span>{</span><br><span class="line">    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt; res = <span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt;();</span><br><span class="line">    <span class="hljs-keyword">bool</span>* flags = <span class="hljs-keyword">new</span> <span class="hljs-keyword">bool</span>[n];</span><br><span class="line">    <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt; comb = <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;();</span><br><span class="line">    findComb(res, n, flags, k, comb, <span class="hljs-number">0</span>);</span><br><span class="line">    <span class="hljs-keyword">return</span> res;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment">    res: &#x50A8;&#x5B58;&#x6240;&#x6709;&#x53EF;&#x80FD;&#x7684;&#x7EC4;&#x5408;&#x7ED3;&#x679C;</span></span><br><span class="line"><span class="hljs-comment">    n: 1...n&#x7684;&#x957F;&#x5EA6;</span></span><br><span class="line"><span class="hljs-comment">    flags: &#x6807;&#x8BB0;1...n&#x662F;&#x5426;&#x88AB;&#x53D6;</span></span><br><span class="line"><span class="hljs-comment">    remain&#xFF1A;&#x5269;&#x4F59;&#x9700;&#x8981;&#x7684;&#x4E2A;&#x6570;</span></span><br><span class="line"><span class="hljs-comment">    comb&#xFF1A;&#x4E00;&#x4E2A;&#x53EF;&#x80FD;&#x7684;&#x7EC4;&#x5408;</span></span><br><span class="line"><span class="hljs-comment">    i&#xFF1A;&#x904D;&#x5386;&#x6307;&#x9488;</span></span><br><span class="line"><span class="hljs-comment">*/</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">findComb</span><span class="hljs-params">(<span class="hljs-built_in">vector</span>&lt;<span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&gt;&amp; res, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">bool</span> flags[], <span class="hljs-keyword">int</span> remain, <span class="hljs-built_in">vector</span>&lt;<span class="hljs-keyword">int</span>&gt;&amp; comb, <span class="hljs-keyword">int</span> i)</span> </span>{</span><br><span class="line">    <span class="hljs-keyword">if</span>(remain == <span class="hljs-number">0</span>) {</span><br><span class="line">        res.push_back(comb);</span><br><span class="line">        <span class="hljs-keyword">return</span> ;</span><br><span class="line">    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(i == n) {</span><br><span class="line">        <span class="hljs-keyword">return</span> ;</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-comment">// &#x9012;&#x5F52;</span></span><br><span class="line">    comb.push_back(i+<span class="hljs-number">1</span>);</span><br><span class="line">    flags[i] = <span class="hljs-literal">true</span>;</span><br><span class="line">    findComb(res, n, flags, remain<span class="hljs-number">-1</span>, comb, i+<span class="hljs-number">1</span>); <span class="hljs-comment">// &#x53D6;i</span></span><br><span class="line">    <span class="hljs-comment">// &#x56DE;&#x6EAF;</span></span><br><span class="line">    comb.pop_back();</span><br><span class="line">    flags[i] = <span class="hljs-literal">false</span>;</span><br><span class="line">    findComb(res, n, flags, remain, comb, i+<span class="hljs-number">1</span>);   <span class="hljs-comment">// &#x4E0D;&#x53D6;i</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x7B97;&#x6CD5;C&#x8BED;&#x8A00;&#x63CF;&#x8FF0;&#xFF1A;</p>
+<figure class="highlight c hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-meta">#<span class="hljs-meta-keyword">define</span> MAX_N 10001</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">int</span>** ans;</span><br><span class="line"><span class="hljs-keyword">int</span> ans_size;</span><br><span class="line"><span class="hljs-keyword">int</span> temp_size;</span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">findComb</span><span class="hljs-params">(<span class="hljs-keyword">int</span>** ans, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> k, <span class="hljs-keyword">int</span>* temp, <span class="hljs-keyword">int</span> i)</span></span>;</span><br><span class="line"></span><br><span class="line"><span class="hljs-comment">/**</span></span><br><span class="line"><span class="hljs-comment"> * Return an array of arrays of size *returnSize.</span></span><br><span class="line"><span class="hljs-comment"> * The sizes of the arrays are returned as *returnColumnSizes array.</span></span><br><span class="line"><span class="hljs-comment"> * Note: Both returned array and *columnSizes array must be malloced, assume caller calls free().</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span>** <span class="hljs-title">combine</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> k, <span class="hljs-keyword">int</span>* returnSize, <span class="hljs-keyword">int</span>** returnColumnSizes)</span></span>{</span><br><span class="line">    ans = <span class="hljs-built_in">malloc</span>(MAX_N * <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>*));</span><br><span class="line">    <span class="hljs-keyword">int</span>* tmp = <span class="hljs-built_in">malloc</span>(k * <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>));</span><br><span class="line">    ans_size = temp_size = <span class="hljs-number">0</span>;</span><br><span class="line">    findComb(ans, n, k, tmp, <span class="hljs-number">0</span>);</span><br><span class="line">    *returnSize = ans_size;</span><br><span class="line">    *returnColumnSizes = <span class="hljs-built_in">malloc</span>(ans_size * <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>));</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;ans_size; ++i) {</span><br><span class="line">        (*returnColumnSizes)[i] = k;</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">return</span> ans;</span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">findComb</span><span class="hljs-params">(<span class="hljs-keyword">int</span>** ans, <span class="hljs-keyword">int</span> n, <span class="hljs-keyword">int</span> k, <span class="hljs-keyword">int</span>* temp, <span class="hljs-keyword">int</span> i)</span> </span>{</span><br><span class="line">    <span class="hljs-keyword">if</span> (temp_size == k)</span><br><span class="line">    {</span><br><span class="line">        <span class="hljs-keyword">int</span>* comb = <span class="hljs-built_in">malloc</span>(k * <span class="hljs-keyword">sizeof</span>(<span class="hljs-keyword">int</span>));</span><br><span class="line">        <span class="hljs-comment">// memcpy(comb, temp, k * sizeof(int));</span></span><br><span class="line">        <span class="hljs-keyword">for</span> (<span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>; i &lt; k; i++) {</span><br><span class="line">            comb[i] = temp[i];</span><br><span class="line">        }</span><br><span class="line">        ans[ans_size++] = comb;</span><br><span class="line">        <span class="hljs-keyword">return</span> ;</span><br><span class="line">    } <span class="hljs-keyword">else</span> <span class="hljs-keyword">if</span>(i == n) {</span><br><span class="line">        <span class="hljs-keyword">return</span> ;</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-comment">// &#x9012;&#x5F52;</span></span><br><span class="line">    temp[temp_size++] = i+<span class="hljs-number">1</span>;</span><br><span class="line">    findComb(ans, n, k, temp, i+<span class="hljs-number">1</span>); <span class="hljs-comment">// &#x53D6;</span></span><br><span class="line">    <span class="hljs-comment">// &#x56DE;&#x6EAF;</span></span><br><span class="line">    temp_size--;</span><br><span class="line">    findComb(ans, n, k, temp, i+<span class="hljs-number">1</span>);</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/数据结构/">#数据结构</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/算法/">#算法</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/2021-Mar-20th-Algorithm-Dynamic-programming/">数据结构与算法笔记 | 动态规划</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/2021-Mar-12th-Data-structure-stack-and-queue/">数据结构与算法笔记 | 栈和队列</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

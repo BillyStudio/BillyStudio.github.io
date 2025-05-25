@@ -1,0 +1,556 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>创建第一个 Spring Boot 项目 - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/Dec-10th-First-Spring-Boot-Project/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="Create Spring Boot project">
+<meta name="keywords" content="Java,Spring Boot">
+<meta property="og:type" content="article">
+<meta property="og:title" content="创建第一个 Spring Boot 项目">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/Dec-10th-First-Spring-Boot-Project/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="Create Spring Boot project">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Dec-10th-First-Spring-Boot-Project/snapshot1.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Dec-10th-First-Spring-Boot-Project/snapshot2.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Dec-10th-First-Spring-Boot-Project/result.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Dec-10th-First-Spring-Boot-Project/curl-str.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Dec-10th-First-Spring-Boot-Project/before-actuator.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Dec-10th-First-Spring-Boot-Project/after-actuator.png">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/Dec-10th-First-Spring-Boot-Project/actuator-web.png">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.670Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="创建第一个 Spring Boot 项目">
+<meta name="twitter:description" content="Create Spring Boot project">
+<meta name="twitter:image" content="https://billystudio.github.io/zh-cn/Dec-10th-First-Spring-Boot-Project/snapshot1.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#使用-IDEA">1&nbsp;&nbsp;<b>使用 IDEA</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#使用-VSCode">2&nbsp;&nbsp;<b>使用 VSCode</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#A-simple-Spring-Boot-Web-application">3&nbsp;&nbsp;<b>A simple Spring Boot Web application</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Add-Unit-Test">3.1&nbsp;&nbsp;Add Unit Test</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#随机端口测试">3.2&nbsp;&nbsp;随机端口测试</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#Add-production-grade-services">4&nbsp;&nbsp;<b>Add production-grade services</b></a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/Dec-10th-First-Spring-Boot-Project/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/Dec-10th-First-Spring-Boot-Project/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            创建第一个 Spring Boot 项目
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-12-10T01:06:52.000Z" itemprop="datePublished">12月 10 2018</time>
+            
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            5 分钟 读完 (约 711 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>Create Spring Boot project <a id="more"></a><br>&#x4F7F;&#x7528;&#x5230;&#x7684;&#x76F8;&#x5173;&#x7248;&#x672C;:<br>jdk 1.8<br>IDE(VSCode or IDEA)<br>Spring Boot 2.1.1</p>
+<h1 id="&#x4F7F;&#x7528;-IDEA"><a href="#&#x4F7F;&#x7528;-IDEA" class="headerlink" title="&#x4F7F;&#x7528; IDEA"></a>&#x4F7F;&#x7528; IDEA</h1><p>&#x65B0;&#x5EFA; Spring Initializr &#x9879;&#x76EE;</p>
+<p>packing &#x8981;&#x9009; jar</p>
+<p>&#x52FE;&#x9009; Web MySQL MyBatis &#x4F9D;&#x8D56;</p>
+<p><img src="snapshot1.png" alt="pic1"></p>
+<p><img src="snapshot2.png" alt="pic2"></p>
+<h1 id="&#x4F7F;&#x7528;-VSCode"><a href="#&#x4F7F;&#x7528;-VSCode" class="headerlink" title="&#x4F7F;&#x7528; VSCode"></a>&#x4F7F;&#x7528; VSCode</h1><p>Install Extension: Java Development pack.</p>
+<p>Press Ctrl+Shift+P to call Spring Initializer. It will automatically guide you to set ArtifactId, GroupId, package name, etc. Here I use Maven and set groupId &#x201C;com.wsd&#x201D;, artifactId &#x201C;springweb&#x201D; and the default name is &#x201C;demo&#x201D;.</p>
+<h1 id="A-simple-Spring-Boot-Web-application"><a href="#A-simple-Spring-Boot-Web-application" class="headerlink" title="A simple Spring Boot Web application"></a>A simple Spring Boot Web application</h1><p>You will see <code>src/java/com/wsd/springweb/DemoApplication.java</code>, Edit it:</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.wsd.springweb;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> java.util.Arrays;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.CommandLineRunner;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.SpringApplication;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.autoconfigure.SpringBootApplication;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.context.ApplicationContext;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.context.annotation.Bean;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@SpringBootApplication</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoApplication</span> </span>{</span><br><span class="line"></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">static</span> <span class="hljs-keyword">void</span> <span class="hljs-title">main</span><span class="hljs-params">(String[] args)</span> </span>{</span><br><span class="line">		SpringApplication.run(DemoApplication<span class="hljs-class">.<span class="hljs-keyword">class</span>, <span class="hljs-title">args</span>)</span>;</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">	<span class="hljs-meta">@Bean</span></span><br><span class="line">	<span class="hljs-function"><span class="hljs-keyword">public</span> CommandLineRunner <span class="hljs-title">commandLineRunner</span><span class="hljs-params">(ApplicationContext ctx)</span> </span>{</span><br><span class="line">		<span class="hljs-keyword">return</span> args -&gt; {</span><br><span class="line">			System.out.println(<span class="hljs-string">&quot;Let&apos;s inspect the beans provided by Spring Boot&quot;</span>);</span><br><span class="line"></span><br><span class="line">			String[] beanNames = ctx.getBeanDefinitionNames();</span><br><span class="line">			Arrays.sort(beanNames);</span><br><span class="line">			<span class="hljs-keyword">for</span> (String beanName : beanNames) {</span><br><span class="line">				System.out.println(beanName);</span><br><span class="line">			}</span><br><span class="line">		};</span><br><span class="line">	}</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>JavaBean &#x51FD;&#x6570; commandLineRunner &#x7684;&#x4F5C;&#x7528;&#x662F;&#x901A;&#x8FC7;&#x8FD0;&#x884C;&#x4E00;&#x4E2A;&#x533F;&#x540D;&#x51FD;&#x6570;&#xFF0C;&#x8F93;&#x5165;Application&#x4E2D;&#x6240;&#x6709;&#x7684; Bean&#xFF08;&#x5305;&#x62EC;&#x7531;&#x5F53;&#x524D;App&#x751F;&#x6210;&#x7684;&#x548C;&#x81EA;&#x52A8;&#x6DFB;&#x52A0;&#x5230;Spring Boot&#x4E2D;&#x53BB;&#x7684;&#xFF09;</p>
+<p><code>src/java/com/wsd/springweb/DemoController.java</code></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.wsd.springweb;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RequestMapping;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.web.bind.annotation.RestController;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@RestController</span></span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoController</span> </span>{</span><br><span class="line">    <span class="hljs-meta">@RequestMapping</span>(<span class="hljs-string">&quot;/&quot;</span>)</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> String <span class="hljs-title">index</span><span class="hljs-params">()</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-string">&quot;Greetings from Spring Boot!&quot;</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p><code>src/java/com/wsd/springweb/application.properties</code></p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">server.port=8501</span><br></pre></td></tr></table></figure>
+
+<p>Maven compile and package</p>
+<p>Run the .jar</p>
+<p><img src="result.png" alt="result"></p>
+<p>And you can retrive the string by visiting the webpage</p>
+<p><img src="curl-str.png" alt="web"></p>
+<h2 id="Add-Unit-Test"><a href="#Add-Unit-Test" class="headerlink" title="Add Unit Test"></a>Add Unit Test</h2><p><code>src/java/com/wsd/springweb/DemoControllerTest.java</code></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.wsd.springweb;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> org.hamcrest.Matchers.equalTo;</span><br><span class="line"><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;</span><br><span class="line"><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;</span><br><span class="line"><span class="hljs-keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="hljs-keyword">import</span> org.junit.runner.RunWith;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.http.MediaType;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.test.context.junit4.SpringRunner;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.test.web.servlet.MockMvc;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.test.web.servlet.request.MockMvcRequestBuilders;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@RunWith</span>(SpringRunner<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span></span><br><span class="line"><span class="hljs-class">@<span class="hljs-title">SpringBootTest</span></span></span><br><span class="line"><span class="hljs-class">@<span class="hljs-title">AutoConfigureMockMvc</span></span></span><br><span class="line"><span class="hljs-class"><span class="hljs-title">public</span> <span class="hljs-title">class</span> <span class="hljs-title">DemoControllerTest</span> </span>{</span><br><span class="line">    <span class="hljs-meta">@Autowired</span></span><br><span class="line">    <span class="hljs-keyword">private</span> MockMvc mvc;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getHello</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>{</span><br><span class="line">        mvc.perform(MockMvcRequestBuilders.get(<span class="hljs-string">&quot;/&quot;</span>).accept(MediaType.APPLICATION_JSON))</span><br><span class="line">            .andExpect(status().isOk())</span><br><span class="line">            .andExpect(content().string(equalTo(<span class="hljs-string">&quot;Greetings from Spring Boot!&quot;</span>)));</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>a MockMvc object will mimic a mvc controller accessing the specified URL, then check whether the result is right.</p>
+<p>&#x6CE8;&#x89E3; @RunWith(SpringRunner.class) &#x5F00;&#x542F;&#x4E86; Run Test &#x529F;&#x80FD;&#x3002;<br>&#x6CE8;&#x89E3; @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT) &#x642D;&#x5EFA;&#x51FA;&#x4E86;&#x7F51;&#x7EDC;&#x73AF;&#x5883;</p>
+<h2 id="&#x968F;&#x673A;&#x7AEF;&#x53E3;&#x6D4B;&#x8BD5;"><a href="#&#x968F;&#x673A;&#x7AEF;&#x53E3;&#x6D4B;&#x8BD5;" class="headerlink" title="&#x968F;&#x673A;&#x7AEF;&#x53E3;&#x6D4B;&#x8BD5;"></a>&#x968F;&#x673A;&#x7AEF;&#x53E3;&#x6D4B;&#x8BD5;</h2><p><code>src/java/com/wsd/springweb/DemoControllerIT.java</code></p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">package</span> com.wsd.springweb;</span><br><span class="line"></span><br><span class="line"><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> org.hamcrest.Matchers.equalTo;</span><br><span class="line"><span class="hljs-keyword">import</span> <span class="hljs-keyword">static</span> org.junit.Assert.*;</span><br><span class="line"><span class="hljs-keyword">import</span> java.net.URL;</span><br><span class="line"><span class="hljs-keyword">import</span> org.junit.Before;</span><br><span class="line"><span class="hljs-keyword">import</span> org.junit.Test;</span><br><span class="line"><span class="hljs-keyword">import</span> org.junit.runner.RunWith;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.beans.factory.annotation.Autowired;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.test.context.SpringBootTest;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.test.web.client.TestRestTemplate;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.boot.web.server.LocalServerPort;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.http.ResponseEntity;</span><br><span class="line"><span class="hljs-keyword">import</span> org.springframework.test.context.junit4.SpringRunner;</span><br><span class="line"></span><br><span class="line"><span class="hljs-meta">@RunWith</span>(SpringRunner<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span></span><br><span class="line"><span class="hljs-class">@<span class="hljs-title">SpringBootTest</span>(<span class="hljs-title">webEnvironment</span> </span>= SpringBootTest.WebEnvironment.RANDOM_PORT)</span><br><span class="line"><span class="hljs-keyword">public</span> <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">DemoControllerIT</span> </span>{</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@LocalServerPort</span></span><br><span class="line">    <span class="hljs-keyword">private</span> <span class="hljs-keyword">int</span> port;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-keyword">private</span> URL base;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Autowired</span></span><br><span class="line">    <span class="hljs-keyword">private</span> TestRestTemplate template;</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Before</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">setUp</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>{</span><br><span class="line">        <span class="hljs-keyword">this</span>.base = <span class="hljs-keyword">new</span> URL(<span class="hljs-string">&quot;http://localhost:&quot;</span> + port + <span class="hljs-string">&quot;/&quot;</span>);</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-meta">@Test</span></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">void</span> <span class="hljs-title">getHello</span><span class="hljs-params">()</span> <span class="hljs-keyword">throws</span> Exception </span>{</span><br><span class="line">        ResponseEntity&lt;String&gt; response = template.getForEntity(base.toString(), String<span class="hljs-class">.<span class="hljs-keyword">class</span>)</span>;</span><br><span class="line">        assertThat(response.getBody(), equalTo(<span class="hljs-string">&quot;Greetings from Spring Boot!&quot;</span>));</span><br><span class="line">    }</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h1 id="Add-production-grade-services"><a href="#Add-production-grade-services" class="headerlink" title="Add production-grade services"></a>Add production-grade services</h1><p>Before adding</p>
+<p><img src="before-actuator.png" alt="before-actuator"></p>
+<p>After adding</p>
+<pre><code>&lt;dependency&gt;
+    &lt;groupId&gt;org.springframework.boot&lt;/groupId&gt;
+    &lt;artifactId&gt;spring-boot-starter-actuator&lt;/artifactId&gt;
+&lt;/dependency&gt;
+</code></pre><p>into pom.xml file</p>
+<p><img src="after-actuator.png" alt="after-actuator"></p>
+<p>&#x591A;&#x4E86;&#x4E00;&#x884C;</p>
+<pre><code>2019-11-08 21:10:31.858  INFO 104665 --- [main] o.s.b.a.e.web.EndpointLinksResolver :
+Exposing 2 endpoint(s) beneath base path &apos;/actuator&apos;
+</code></pre><p>&#x63A5;&#x4E0B;&#x6765;&#x4FBF;&#x53EF;&#x4EE5;&#x8BBF;&#x95EE; <a href="http://localhost:8501/actuator" target="_blank" rel="noopener">http://localhost:8501/actuator</a></p>
+<p><img src="actuator-web.png" alt="actuator-web"></p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Java/">#Java</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/Spring-Boot/">#Spring Boot</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/Dec-10th-Image-Processing-Research/">数字图像处理项目调研</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/Dec-9th-2018-Reading-Foreign-Magzines-E10/">外刊精读学习计划</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>

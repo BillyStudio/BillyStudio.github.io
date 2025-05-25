@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html class="has-navbar-fixed-top">
+<head><meta name="generator" content="Hexo 3.9.0">
+    <!-- hexo-inject:begin --><!-- hexo-inject:end --><meta charset="utf-8">
+<title>数据结构与算法笔记 | 图 - 一典</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.css"> -->
+<link rel="stylesheet" href="/css/outdatedbrowser.min.css">
+
+
+<link href="/2017-07-17-minimal-spanning-tree/" rel="alternate" hreflang="en">
+    
+
+
+
+
+
+
+    <meta name="description" content="&amp;#x5728;&amp;#x8BA1;&amp;#x7B97;&amp;#x673A;&amp;#x79D1;&amp;#x5B66;&amp;#x4E2D;&amp;#xFF0C;&amp;#x4E00;&amp;#x4E2A;&amp;#x56FE;&amp;#x5C31;&amp;#x662F;&amp;#x4E00;&amp;#x4E9B;&amp;#x9876;&amp;#x70B9;&amp;#x7684;&amp;#x96C6;&amp;#x5408;&amp;#xFF0C;&amp;#x8FD9;&amp;#x4E9B;&amp;#x9876;&amp;#x70B9;">
+<meta name="keywords" content="数据结构,算法,最小生成树,MST,ACM,并查集,cpp">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构与算法笔记 | 图">
+<meta property="og:url" content="https://BillyStudio.github.io/zh-cn/2017-07-17-minimal-spanning-tree/index.html">
+<meta property="og:site_name" content="Shane&#39;s Blog">
+<meta property="og:description" content="&amp;#x5728;&amp;#x8BA1;&amp;#x7B97;&amp;#x673A;&amp;#x79D1;&amp;#x5B66;&amp;#x4E2D;&amp;#xFF0C;&amp;#x4E00;&amp;#x4E2A;&amp;#x56FE;&amp;#x5C31;&amp;#x662F;&amp;#x4E00;&amp;#x4E9B;&amp;#x9876;&amp;#x70B9;&amp;#x7684;&amp;#x96C6;&amp;#x5408;&amp;#xFF0C;&amp;#x8FD9;&amp;#x4E9B;&amp;#x9876;&amp;#x70B9;">
+<meta property="og:locale" content="zh-cn">
+<meta property="og:image" content="https://billystudio.github.io/zh-cn/2017-07-17-minimal-spanning-tree/graph-ex1.png">
+<meta property="og:updated_time" content="2024-10-20T05:05:44.540Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构与算法笔记 | 图">
+<meta name="twitter:description" content="&amp;#x5728;&amp;#x8BA1;&amp;#x7B97;&amp;#x673A;&amp;#x79D1;&amp;#x5B66;&amp;#x4E2D;&amp;#xFF0C;&amp;#x4E00;&amp;#x4E2A;&amp;#x56FE;&amp;#x5C31;&amp;#x662F;&amp;#x4E00;&amp;#x4E9B;&amp;#x9876;&amp;#x70B9;&amp;#x7684;&amp;#x96C6;&amp;#x5408;&amp;#xFF0C;&amp;#x8FD9;&amp;#x4E9B;&amp;#x9876;&amp;#x70B9;">
+<meta name="twitter:image" content="https://billystudio.github.io/zh-cn/2017-07-17-minimal-spanning-tree/graph-ex1.png">
+
+
+
+
+
+<link rel="icon" href="/favicon.png">
+
+
+<link rel="stylesheet" href="//fonts.googleapis.com/css?family=Ovo|Source+Code+Pro">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bulma/0.6.2/css/bulma.min.css"> -->
+<link rel="stylesheet" href="/css/bulma.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/css/lightgallery.min.css"> -->
+<link rel="stylesheet" href="/css/lightgallery.min.css">
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/css/justifiedGallery.min.css"> -->
+<link rel="stylesheet" href="/css/justifiedGallery.min.css">
+
+
+<!-- <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/atom-one-light.min.css"> -->
+<link rel="stylesheet" href="/css/atom-one-light.min.css">
+
+<link rel="stylesheet" href="/css/style.css">
+
+<script defer src="//use.fontawesome.com/releases/v5.0.8/js/all.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
+
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    
+
+    
+    
+
+    
+
+
+</head>
+<body>
+    
+<!-- hexo-inject:begin --><!-- hexo-inject:end --><nav class="navbar is-transparent is-fixed-top navbar-main" role="navigation" aria-label="main navigation">
+    <div class="container">
+        <div class="navbar-brand">
+            <a class="navbar-item navbar-logo" href="/zh-cn">
+                
+                <img src="/images/logo.png" alt height="28">
+                
+            </a>
+            <div class="navbar-burger">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <div class="navbar-menu navbar-start">
+            
+            <a class="navbar-item " href="/zh-cn/categories">分类</a>
+            
+            <a class="navbar-item " href="/zh-cn/tags">标记</a>
+            
+            <a class="navbar-item " href="/zh-cn/about">关于</a>
+            
+        </div>
+        
+        <div class="navbar-menu navbar-end">
+            
+            <a class="navbar-item search" title="搜索" href="javascript:;">
+                <i class="fas fa-search"></i>
+            </a>
+            
+            
+            <div class="navbar-item is-hoverable has-dropdown is-hidden-mobile is-hidden-tablet-only toc">
+                <a class="navbar-item" title="目录">
+                    <i class="fa fa-list"></i>
+                </a>
+                <div class="navbar-dropdown is-right">
+                    
+                    
+                    
+                    
+                    <a class="navbar-item" href="#一、图的表示法">1&nbsp;&nbsp;<b>一、图的表示法</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1-1-邻接矩阵">1.1&nbsp;&nbsp;1.1 邻接矩阵</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1-2-邻接表">1.2&nbsp;&nbsp;1.2 邻接表</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#1-3-边集">1.3&nbsp;&nbsp;1.3 边集</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#二、最短路问题">2&nbsp;&nbsp;<b>二、最短路问题</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Dijkstra-算法与优先队列">2.1&nbsp;&nbsp;Dijkstra 算法与优先队列</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#priority-queue">2.1.1&nbsp;&nbsp;priority_queue</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#一些特殊案例">2.1.2&nbsp;&nbsp;一些特殊案例</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#三、最小生成树-minimal-spanning-tree">3&nbsp;&nbsp;<b>三、最小生成树 (minimal spanning tree)</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#Kruskal-算法与并查集">3.1&nbsp;&nbsp;Kruskal 算法与并查集</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#并查集-union-find-set">3.1.1&nbsp;&nbsp;并查集 (union-find set)</a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#四、深度优先搜索与广度有限搜索">4&nbsp;&nbsp;<b>四、深度优先搜索与广度有限搜索</b></a>
+                    
+                    
+                    <hr class="navbar-divider">
+                    
+                    
+                    <a class="navbar-item" href="#五、拓扑排序">5&nbsp;&nbsp;<b>五、拓扑排序</b></a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#4-1-拓扑排序判断是否有环">5.1&nbsp;&nbsp;4.1 拓扑排序判断是否有环</a>
+                    
+                    
+                    
+                    <a class="navbar-item" href="#4-2-拓扑排序的遍历顺序">5.2&nbsp;&nbsp;4.2 拓扑排序的遍历顺序</a>
+                    
+                </div>
+            </div>
+            
+            
+            <a class="navbar-item" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                
+                <i class="fab fa-github"></i>
+                
+            </a>
+               
+            
+	    
+<div class="column is-narrow has-text-centered">
+    <div class="dropdown is-up is-right is-hoverable" style="margin-top: -0.2em;">
+        <div class="dropdown-trigger">
+            <button class="button is-small" aria-haspopup="true" aria-controls="dropdown-menu7">
+                <span class="icon">
+                    <i class="fas fa-globe"></i>
+                </span>
+                <span>简体中文</span>
+                <span class="icon is-small">
+            <i class="fas fa-angle-down" aria-hidden="true"></i>
+          </span>
+            </button>
+        </div>
+        <div class="dropdown-menu has-text-left" role="menu" style="top:100%">
+            <div class="dropdown-content">
+            
+                <a href="/2017-07-17-minimal-spanning-tree/" class="dropdown-item">
+                    English
+                </a>
+            
+                <a href="/zh-cn/2017-07-17-minimal-spanning-tree/" class="dropdown-item">
+                    简体中文
+                </a>
+            
+            </div>
+        </div>
+    </div>
+</div>
+
+
+        </div>
+    </div>
+</nav>
+
+    <section class="section">
+    <div class="container">
+    <article class="article content gallery" itemscope itemprop="blogPost">
+    <h1 class="article-title is-size-3 is-size-4-mobile" itemprop="name">
+        
+            数据结构与算法笔记 | 图
+        
+    </h1>
+    <div class="article-meta columns is-variable is-1 is-multiline is-mobile is-size-7-mobile">
+        <span class="column is-narrow">
+            
+                <time datetime="2018-07-17T11:59:59.000Z" itemprop="datePublished">7月 17 2018</time>
+            
+        </span>
+        
+        <span class="column is-narrow article-category">
+            <i class="far fa-folder"></i>
+            <a class="article-category-link" href="/zh-cn/categories/数据结构与算法/">数据结构与算法</a>
+        </span>
+        
+        
+        <span class="column is-narrow">
+            
+            
+            19 分钟 读完 (约 2793 字)
+        </span>
+        
+    </div>
+    <div class="article-entry is-size-6-mobile" itemprop="articleBody">
+    
+        <p>&#x5728;&#x8BA1;&#x7B97;&#x673A;&#x79D1;&#x5B66;&#x4E2D;&#xFF0C;&#x4E00;&#x4E2A;&#x56FE;&#x5C31;&#x662F;&#x4E00;&#x4E9B;&#x9876;&#x70B9;&#x7684;&#x96C6;&#x5408;&#xFF0C;&#x8FD9;&#x4E9B;&#x9876;&#x70B9;&#x901A;&#x8FC7;&#x4E00;&#x7CFB;&#x5217;&#x8FB9;&#x7ED3;&#x5BF9;&#xFF08;&#x8FDE;&#x63A5;&#xFF09;&#x3002;<a id="more"></a> &#x9876;&#x70B9;&#x7528;&#x5706;&#x5708;&#x8868;&#x793A;&#xFF0C;&#x9876;&#x70B9;&#x7684;&#x96C6;&#x5408;&#x53EF;&#x4EE5;&#x4F7F;&#x7528;V&#x8868;&#x793A;&#x3002;&#x8FB9;&#x5C31;&#x662F;&#x8FD9;&#x4E9B;&#x5706;&#x5708;&#x4E4B;&#x95F4;&#x7684;&#x8FDE;&#x7EBF;&#xFF0C;&#x6BCF;&#x4E00;&#x6761;&#x8FB9;&#x53EF;&#x4EE5;&#x7528;&#x4E00;&#x4E2A;&#x70B9;&#x5BF9; $(v,w)$ &#x8868;&#x793A;&#xFF0C;&#x5176;&#x4E2D;$v,w \in V$&#x3002;<br>&#x5982;&#x679C;&#x70B9;&#x5BF9;&#x987A;&#x5E8F;&#x65E0;&#x5173;&#xFF0C;&#x5373;$(v,w)$&#x548C;$(w,v)$&#x662F;&#x540C;&#x4E00;&#x6761;&#x8FB9;&#xFF0C;&#x90A3;&#x4E48;&#x6B64;&#x56FE;&#x5C31;&#x88AB;&#x79F0;&#x4E3A;&#x65E0;&#x5411;&#x56FE;&#xFF1B;&#x53CD;&#x4E4B;&#x5982;&#x679C;&#x70B9;&#x5BF9;&#x6709;&#x5E8F;&#xFF0C;&#x76F8;&#x5F53;&#x4E8E;&#x8FB9;&#x6709;&#x7BAD;&#x5934;&#x6307;&#x5411;&#xFF0C;&#x90A3;&#x4E48;&#x6B64;&#x56FE;&#x5C31;&#x88AB;&#x79F0;&#x4E3A;&#x6709;&#x5411;&#x56FE;&#x3002;</p>
+<h1 id="&#x4E00;&#x3001;&#x56FE;&#x7684;&#x8868;&#x793A;&#x6CD5;"><a href="#&#x4E00;&#x3001;&#x56FE;&#x7684;&#x8868;&#x793A;&#x6CD5;" class="headerlink" title="&#x4E00;&#x3001;&#x56FE;&#x7684;&#x8868;&#x793A;&#x6CD5;"></a>&#x4E00;&#x3001;&#x56FE;&#x7684;&#x8868;&#x793A;&#x6CD5;</h1><p><img src="graph-ex1.png" alt="graph-ex1.png"><br>&#x4EE5;&#x4E00;&#x4E2A;&#x65E0;&#x5411;&#x56FE;&#x4E3A;&#x4F8B;&#xFF0C;&#x5C55;&#x793A;&#x4E09;&#x79CD;&#x56FE;&#x7684;&#x8868;&#x793A;&#x6CD5;</p>
+<h2 id="1-1-&#x90BB;&#x63A5;&#x77E9;&#x9635;"><a href="#1-1-&#x90BB;&#x63A5;&#x77E9;&#x9635;" class="headerlink" title="1.1 &#x90BB;&#x63A5;&#x77E9;&#x9635;"></a>1.1 &#x90BB;&#x63A5;&#x77E9;&#x9635;</h2><figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[[0, 1, 1, 1, 1],</span><br><span class="line">[1, 0, Inf, Inf, Inf],</span><br><span class="line">[1, Inf, 0, Inf, Inf],</span><br><span class="line">[1, Inf, Inf, 0, Inf],</span><br><span class="line">[1, Inf, Inf, Inf, 0]]</span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0A;&#x9762;&#x77E9;&#x9635;&#x6570;&#x503C;&#x4E3A;0&#x8868;&#x793A;&#x540C;&#x4E00;&#x4E2A;&#x70B9;&#xFF0C;&#x4E3A;1&#x8868;&#x793A;&#x6709;&#x8FB9;&#x76F8;&#x8FDE;&#xFF08;&#x8FB9;&#x957F;&#x9ED8;&#x8BA4;1&#xFF09;&#xFF0C;Inf&#xFF08;&#x4E00;&#x4E2A;&#x5F88;&#x5927;&#x7684;&#x6570;&#xFF09;&#x8868;&#x793A;&#x4E0D;&#x53EF;&#x8FBE;</p>
+<h2 id="1-2-&#x90BB;&#x63A5;&#x8868;"><a href="#1-2-&#x90BB;&#x63A5;&#x8868;" class="headerlink" title="1.2 &#x90BB;&#x63A5;&#x8868;"></a>1.2 &#x90BB;&#x63A5;&#x8868;</h2><p>&#x4F7F;&#x7528;&#x94FE;&#x8868;&#x8BB0;&#x5F55;&#x76F8;&#x90BB;&#x70B9;&#x96C6;&#x5408;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">0: [1, 2, 3, 4]</span><br><span class="line">1: [0]</span><br><span class="line">2: [0]</span><br><span class="line">3: [0]</span><br><span class="line">4: [0]</span><br></pre></td></tr></table></figure>
+
+<h2 id="1-3-&#x8FB9;&#x96C6;"><a href="#1-3-&#x8FB9;&#x96C6;" class="headerlink" title="1.3 &#x8FB9;&#x96C6;"></a>1.3 &#x8FB9;&#x96C6;</h2><p>&#x5C06;&#x56FE;&#x4E2D;4&#x6761;&#x8FB9;&#x8BB0;&#x5F55;&#x4E0B;&#x6765;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">[(0,1), (0,2), (0,3), (0,4)]</span><br></pre></td></tr></table></figure>
+
+<h1 id="&#x4E8C;&#x3001;&#x6700;&#x77ED;&#x8DEF;&#x95EE;&#x9898;"><a href="#&#x4E8C;&#x3001;&#x6700;&#x77ED;&#x8DEF;&#x95EE;&#x9898;" class="headerlink" title="&#x4E8C;&#x3001;&#x6700;&#x77ED;&#x8DEF;&#x95EE;&#x9898;"></a>&#x4E8C;&#x3001;&#x6700;&#x77ED;&#x8DEF;&#x95EE;&#x9898;</h1><p>&#x5728;&#x4E00;&#x4E2A;&#x8FDE;&#x901A;&#x56FE;&#x4E2D;, &#x5982;&#x4F55;&#x6C42;&#x89E3;&#x4ECE;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x5230;&#x53E6;&#x4E00;&#x4E2A;&#x8282;&#x70B9;&#x7684;&#x6700;&#x77ED;&#x8DEF;&#x5F84;, &#x79F0;&#x4E3A;&#x6700;&#x77ED;&#x8DEF;&#x95EE;&#x9898;&#x3002;<br>Dijkstra &#x7B97;&#x6CD5;&#x662F;&#x89E3;&#x51B3;&#x5355;&#x6E90;&#x6700;&#x77ED;&#x8DEF;&#x95EE;&#x9898;&#x7684;&#x7ECF;&#x5178;&#x7B97;&#x6CD5;&#xFF0C;&#x9002;&#x7528;&#x4E8E;&#x8FB9;&#x957F;&#x4E3A;&#x975E;&#x8D1F;&#x503C;&#x7684;&#x5927;&#x591A;&#x6570;&#x60C5;&#x51B5;&#x3002;</p>
+<h2 id="Dijkstra-&#x7B97;&#x6CD5;&#x4E0E;&#x4F18;&#x5148;&#x961F;&#x5217;"><a href="#Dijkstra-&#x7B97;&#x6CD5;&#x4E0E;&#x4F18;&#x5148;&#x961F;&#x5217;" class="headerlink" title="Dijkstra &#x7B97;&#x6CD5;&#x4E0E;&#x4F18;&#x5148;&#x961F;&#x5217;"></a>Dijkstra &#x7B97;&#x6CD5;&#x4E0E;&#x4F18;&#x5148;&#x961F;&#x5217;</h2><p><em>&#x7B2C;&#x4E00;&#x6B65;</em>&#xFF1A;&#x4F7F;&#x7528;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;<code>dist</code>&#x50A8;&#x5B58;&#x4ECE;&#x539F;&#x70B9;&#x5230;&#x8BE5;&#x70B9;&#x7684;&#x6700;&#x77ED;&#x8DDD;&#x79BB;, &#x539F;&#x70B9;&#x521D;&#x59CB;&#x5316;&#x4E3A;0, &#x5176;&#x4F59;&#x5168;&#x90E8;&#x521D;&#x59CB;&#x5316;&#x4E3A;&#x4E0D;&#x53EF;&#x8FBE;&#xFF1B;&#x53E6;&#x7528;&#x4E00;&#x4E2A;&#x6570;&#x7EC4;<code>used</code>&#x6807;&#x8BB0;&#x67D0;&#x70B9;&#x662F;&#x5426;&#x5DF2;&#x8BBF;&#x95EE;&#x3002;&#x76EE;&#x6807;&#x70B9;<code>point</code>&#x548C;&#x539F;&#x70B9;&#x5230;&#x5176;&#x6700;&#x77ED;&#x8DDD;&#x79BB;<code>dist[point]</code>&#x4F5C;&#x4E3A;&#x4E00;&#x4E2A; pair &#x52A0;&#x5165;&#x4F18;&#x5148;&#x961F;&#x5217;, &#x4F18;&#x5148;&#x961F;&#x5217;&#x6309;&#x7167;&#x6700;&#x77ED;&#x8DDD;&#x79BB;&#x7684;&#x5927;&#x5C0F;&#x9006;&#x5E8F;&#x6392;&#x5217;.<br>&#x7B2C;&#x4E8C;&#x6B65;&#xFF1A;&#x82E5;&#x4F18;&#x5148;&#x961F;&#x5217;&#x4E3A;&#x7A7A;&#xFF0C;&#x5219;&#x9000;&#x51FA;&#x5FAA;&#x73AF;&#xFF1B;&#x5426;&#x5219;&#x4ECE;&#x4F18;&#x5148;&#x961F;&#x5217;&#x4E2D;&#x53D6;&#x51FA;&#x4E00;&#x6761;&#x6700;&#x77ED;&#x8FB9;&#xFF0C;&#x904D;&#x5386;&#x6700;&#x77ED;&#x8FB9;&#x5BF9;&#x5E94;&#x76EE;&#x6807;&#x70B9;&#x7684;&#x6240;&#x6709;&#x76F8;&#x90BB;&#x8282;&#x70B9;&#xFF08;&#x6545;&#x4F7F;&#x7528;Dijkstra&#x7B97;&#x6CD5;&#x65F6;&#x5B9C;&#x91C7;&#x7528;&#x4E34;&#x63A5;&#x8868;&#x5F62;&#x5F0F;&#x6765;&#x8868;&#x793A;&#x56FE;&#xFF09;&#xFF0C;<br>&#x82E5;&#x901A;&#x8FC7;&#x76EE;&#x6807;&#x70B9;&#x5230;&#x8FBE;&#x5176;&#x76F8;&#x90BB;&#x8282;&#x70B9;&#x7684;&#x8DEF;&#x5F84;&#x6BD4;&#x539F;&#x8DEF;&#x5F84;&#x66F4;&#x77ED;, &#x5219;&#x66F4;&#x65B0;dist&#x8DEF;&#x5F84;.<br>&#x7B2C;&#x4E09;&#x6B65;&#xFF1A;&#x9009;&#x51FA;used&#x6570;&#x7EC4;&#x4E2D;&#x6807;&#x8BB0;&#x7684;&#x672A;&#x8BBF;&#x95EE;&#x7684;&#x8282;&#x70B9;&#x4E2D;dist&#x6700;&#x5C0F;&#x7684;&#x8282;&#x70B9;next&#xFF0C;&#x5C06;<code>pair&lt;next, dist[next]&gt;</code>&#x52A0;&#x5165;&#x4F18;&#x5148;&#x961F;&#x5217;&#x3002;&#x8FD4;&#x56DE;&#x7B2C;&#x4E8C;&#x6B65;&#x3002;</p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int</span> dist[maxn]; <span class="hljs-comment">// dist[i] &#x66F4;&#x65B0;&#x4ECE;&#x539F;&#x70B9;&#x5230; i &#x70B9;&#x7684;&#x6700;&#x77ED;&#x8DDD;&#x79BB;</span></span><br><span class="line"><span class="hljs-keyword">typedef</span> pair&lt;<span class="hljs-keyword">int</span>, <span class="hljs-keyword">int</span>&gt; P; <span class="hljs-comment">// first &#x8868;&#x793A;&#x8DDD;&#x79BB;, second &#x8868;&#x793A;&#x76EE;&#x6807;&#x70B9;</span></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">dijkstra</span><span class="hljs-params">(<span class="hljs-keyword">int</span> source)</span> </span>{</span><br><span class="line">    priority_queue&lt;P, <span class="hljs-built_in">vector</span>&lt;P&gt;, greater&lt;P&gt; &gt; pq;   <span class="hljs-comment">// &#x5B9A;&#x4E49;&#x8DDD;&#x79BB;&#x8D8A;&#x5C0F;&#x8D8A;&#x9760;&#x524D;&#x7684;&#x4F18;&#x5148;&#x961F;&#x5217;</span></span><br><span class="line">    <span class="hljs-built_in">memset</span>(dist, <span class="hljs-number">0xff</span>, <span class="hljs-keyword">sizeof</span> dist);    <span class="hljs-comment">// &#x539F;&#x70B9;&#x5230;&#x5404;&#x70B9;&#x521D;&#x59CB;&#x5316;&#x4E3A;&#x4E0D;&#x53EF;&#x8FBE;</span></span><br><span class="line">    dist[source] = <span class="hljs-number">0</span>;   <span class="hljs-comment">// &#x539F;&#x70B9;&#x5230;&#x539F;&#x70B9;&#x521D;&#x59CB;&#x5316;&#x8DDD;&#x79BB;&#x4E3A;0</span></span><br><span class="line">    qp.push(<span class="hljs-number">0</span>, source);</span><br><span class="line">    <span class="hljs-keyword">while</span>(!pq.empty()) {</span><br><span class="line">        P pair = pq.top(); pq.pop();   <span class="hljs-comment">// &#x5F39;&#x51FA;&#x5230;&#x672A;&#x8BBF;&#x95EE;&#x8282;&#x70B9;&#x7684;&#x6700;&#x77ED;pair</span></span><br><span class="line">        <span class="hljs-keyword">int</span> shortest = p.first, <span class="hljs-built_in">point</span> = pair.second;</span><br><span class="line">        <span class="hljs-keyword">if</span> (shortest &gt; dist[<span class="hljs-built_in">point</span>]) <span class="hljs-keyword">continue</span>;     <span class="hljs-comment">// &#x51CF;&#x679D;&#xFF0C;&#x53BB;&#x9664;&#x5F39;&#x51FA;&#x6700;&#x77ED;&#x8FB9;&#x6BD4;&#x6682;&#x5B58;&#x6700;&#x77ED;&#x8FB9;&#x8FD8;&#x957F;&#x7684;&#x60C5;&#x51B5;</span></span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">auto</span> &amp;e : graph[<span class="hljs-built_in">point</span>]) {</span><br><span class="line">            <span class="hljs-keyword">int</span> next = e.second, dist_update = dist[<span class="hljs-built_in">point</span>] + e.first;</span><br><span class="line">            <span class="hljs-keyword">if</span>(dist_update &lt; dist[next]) {</span><br><span class="line">                dist[next] = dist_update;</span><br><span class="line">                pq.push(dist_update, next);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h3 id="priority-queue"><a href="#priority-queue" class="headerlink" title="priority_queue"></a>priority_queue</h3><p>C++ &#x4E2D;&#x7684;&#x4F18;&#x5148;&#x961F;&#x5217;&#x662F;&#x4E00;&#x4E2A;&#x5BB9;&#x5668;, &#x63D2;&#x5165;&#x65F6;&#x4E3A;&#x5BF9;&#x6570;&#x65F6;&#x95F4;&#x7684;&#x590D;&#x6742;&#x5EA6;, &#x8BFB;&#x53D6;&#x6700;&#x5927;&#x503C;&#x6216;&#x6700;&#x5C0F;&#x503C;&#x4E3A;&#x5E38;&#x6570;&#x65F6;&#x95F4;&#x7684;&#x590D;&#x6742;&#x5EA6;.</p>
+<p>&#x4F7F;&#x7528; STL &#x4E2D;&#x7684; <code>std::priority_queue</code> &#x9700;&#x8981;&#x5305;&#x542B;&#x5934;&#x6587;&#x4EF6; <code>queue</code>.</p>
+<p>&#x9ED8;&#x8BA4;&#x662F;&#x4ECE;&#x5927;&#x5230;&#x5C0F;&#x6392;&#x5E8F;, &#x4E5F;&#x53EF;&#x4EE5;&#x901A;&#x8FC7;&#x6307;&#x5B9A; <code>greater&lt;T&gt;</code> &#x53C2;&#x6570;&#x8FDB;&#x884C;&#x4ECE;&#x5C0F;&#x5230;&#x5927;&#x6392;&#x5E8F;. &#x5982;&#x679C;&#x81EA;&#x5B9A;&#x4E49;&#x6BD4;&#x8F83;&#x65B9;&#x6CD5;&#x7684;&#x4E00;&#x5B9A;&#x8981;&#x6CE8;&#x610F;, &#x8FD9;&#x91CC;&#x9700;&#x8981;&#x5B9A;&#x4E49;&#x4E00;&#x4E2A;&#x6BD4;&#x8F83; type &#x800C;&#x4E0D;&#x662F;&#x6BD4;&#x8F83;&#x51FD;&#x6570;. &#x5728;&#x7528;&#x4E8E;&#x6BD4;&#x8F83;&#x7684;&#x7C7B;&#x578B;(struct&#x6216;class)&#x4E2D;&#x91CD;&#x5199; <code>operator()</code> &#x800C;&#x4E0D;&#x662F; <code>operator&lt;</code>.</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Cmp</span>{</span></span><br><span class="line"><span class="hljs-keyword">public</span>:</span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">bool</span> <span class="hljs-title">operator</span><span class="hljs-params">()</span> <span class="hljs-params">(<span class="hljs-keyword">const</span> Tri&amp; t1, <span class="hljs-keyword">const</span> Tri&amp; t2)</span> <span class="hljs-keyword">const</span></span>{</span><br><span class="line">        <span class="hljs-keyword">if</span>(t1.time == t2.time){</span><br><span class="line">            <span class="hljs-keyword">if</span>(t1.send == t2.send){</span><br><span class="line">                <span class="hljs-keyword">return</span> t1.receive &lt; t2.receive;</span><br><span class="line">            }</span><br><span class="line">            <span class="hljs-keyword">else</span> <span class="hljs-keyword">return</span> t1.send &lt; t2.send;</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">return</span> t1.time &lt; t2.time;</span><br><span class="line">    }</span><br><span class="line">};</span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x4E00;&#x4E9B;&#x7279;&#x6B8A;&#x6848;&#x4F8B;"><a href="#&#x4E00;&#x4E9B;&#x7279;&#x6B8A;&#x6848;&#x4F8B;" class="headerlink" title="&#x4E00;&#x4E9B;&#x7279;&#x6B8A;&#x6848;&#x4F8B;"></a>&#x4E00;&#x4E9B;&#x7279;&#x6B8A;&#x6848;&#x4F8B;</h3><p>&#x6CE8;&#x610F;&#x6709;&#x4E9B;&#x60C5;&#x51B5;&#x4E0B;&#xFF0C;&#x6BD4;&#x5982;&#x5B58;&#x5728;&#x591A;&#x4E2A;source&#x548C;target&#x503C;&#x7684;&#x60C5;&#x51B5;&#xFF0C;Dijkstra&#x9700;&#x8981;&#x90FD;&#x52A0;&#x5165;&#xFF1A;<br>&#x5982;&#x679C;&#x4E0B;&#x9762;&#x8FD9;&#x9898;&#x4F7F;&#x7528;&#x56FE;&#x7684;&#x6700;&#x77ED;&#x8DEF;&#x7B97;&#x6CD5;</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment"> * @lc app=leetcode id=815 lang=java</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * [815] Bus Routes</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">import</span> java.util.*;</span><br><span class="line"><span class="hljs-comment">// @lc code=start</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{</span><br><span class="line">    HashMap&lt;Integer, ArrayList&lt;Integer&gt;&gt; graph = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    HashMap&lt;Integer, Boolean&gt; searched = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pair</span></span>{</span><br><span class="line">        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> k;</span><br><span class="line">        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> v;</span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Pair</span><span class="hljs-params">(<span class="hljs-keyword">int</span> point, <span class="hljs-keyword">int</span> dist)</span> </span>{</span><br><span class="line">            k = point;</span><br><span class="line">            v = dist;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    PriorityQueue&lt;Pair&gt; pq = <span class="hljs-keyword">new</span> PriorityQueue&lt;Pair&gt;(<span class="hljs-keyword">new</span> Comparator&lt;Pair&gt;(){</span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(Pair o1, Pair o2)</span> </span>{</span><br><span class="line">            <span class="hljs-keyword">return</span> o1.v - o2.v;</span><br><span class="line">        }</span><br><span class="line">    });</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">numBusesToDestination</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] routes, <span class="hljs-keyword">int</span> source, <span class="hljs-keyword">int</span> target)</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;routes.length; ++i) {</span><br><span class="line">            ArrayList&lt;Integer&gt; ring = <span class="hljs-keyword">new</span> ArrayList&lt;Integer&gt;(routes[i].length);</span><br><span class="line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>; j&lt;routes[i].length; ++j) {</span><br><span class="line">                ring.add(routes[i][j]);</span><br><span class="line">            }</span><br><span class="line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>; j&lt;routes[i].length; ++j) {</span><br><span class="line">                <span class="hljs-keyword">if</span>(graph.get(routes[i][j]) == <span class="hljs-keyword">null</span>) {</span><br><span class="line">                    graph.put(routes[i][j], <span class="hljs-keyword">new</span> ArrayList&lt;Integer&gt;());</span><br><span class="line">                    searched.put(routes[i][j], <span class="hljs-keyword">false</span>);</span><br><span class="line">                }</span><br><span class="line">                ArrayList&lt;Integer&gt; neighbors = graph.get(routes[i][j]);</span><br><span class="line">                neighbors.addAll(ring);</span><br><span class="line">                neighbors.remove(neighbors.indexOf(routes[i][j]));</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        Pair pair = <span class="hljs-keyword">new</span> Pair(source, <span class="hljs-number">0</span>);</span><br><span class="line">        searched.put(source, <span class="hljs-keyword">true</span>);</span><br><span class="line">        pq.add(pair);</span><br><span class="line">        <span class="hljs-keyword">while</span>(!pq.isEmpty()) {</span><br><span class="line">            Pair out = pq.poll();</span><br><span class="line">            searched.put(out.k, <span class="hljs-keyword">true</span>);</span><br><span class="line">            <span class="hljs-keyword">if</span>(out.k == target) {</span><br><span class="line">                <span class="hljs-keyword">return</span> out.v;</span><br><span class="line">            }</span><br><span class="line">            ArrayList&lt;Integer&gt; neighbors = graph.get(out.k);</span><br><span class="line">            <span class="hljs-keyword">int</span> dist = out.v;</span><br><span class="line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> point : neighbors) <span class="hljs-keyword">if</span>(!searched.get(point)) {</span><br><span class="line">                pq.add(<span class="hljs-keyword">new</span> Pair(point, dist+<span class="hljs-number">1</span>)); <span class="hljs-comment">// &#x51CF;&#x679D;</span></span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="hljs-comment">// @lc code=end</span></span><br></pre></td></tr></table></figure>
+
+<p>&#x4E0A;&#x8FF0;&#x89E3;&#x7B54;&#x4F1A;&#x5728;&#x8FD9;&#x4E2A;&#x7528;&#x4F8B;&#x8D85;&#x65F6;&#xFF1A;</p>
+<figure class="highlight plain hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">[[0,1,2, ..., 90000]]</span><br><span class="line">0</span><br><span class="line">900</span><br></pre></td></tr></table></figure>
+
+<p>&#x5224;&#x5B9A;&#x662F;&#x5426;&#x8FDE;&#x63A5;&#x7684;&#x65B9;&#x6CD5;&#x53EF;&#x4EE5;&#x662F;&#x5C06;&#x516C;&#x4EA4;&#x8DEF;&#x7EBF;&#x653E;&#x5728;&#x96C6;&#x5408;&#x4E2D;&#xFF0C;&#x68C0;&#x67E5;&#x4E24;&#x4E2A;&#x96C6;&#x5408;&#x7684;&#x4EA4;&#x96C6;&#x662F;&#x5426;&#x4E3A;&#x7A7A;&#xFF1B;&#x6216;&#x8005;&#x5C06;&#x516C;&#x4EA4;&#x8DEF;&#x7EBF;&#x4E2D;&#x7684;&#x8F66;&#x7AD9;&#x8FDB;&#x884C;&#x9012;&#x589E;&#x6392;&#x5E8F;&#xFF0C;&#x5E76;&#x4F7F;&#x7528;&#x53CC;&#x6307;&#x9488;&#x7684;&#x65B9;&#x6CD5;&#x68C0;&#x67E5;&#x662F;&#x5426;&#x6709;&#x76F8;&#x540C;&#x7684;&#x8F66;&#x7AD9;&#x3002;</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">/*</span></span><br><span class="line"><span class="hljs-comment"> * @lc app=leetcode id=815 lang=java</span></span><br><span class="line"><span class="hljs-comment"> *</span></span><br><span class="line"><span class="hljs-comment"> * [815] Bus Routes</span></span><br><span class="line"><span class="hljs-comment"> */</span></span><br><span class="line"><span class="hljs-keyword">import</span> java.util.*;</span><br><span class="line"><span class="hljs-comment">// @lc code=start</span></span><br><span class="line"><span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Solution</span> </span>{</span><br><span class="line">    HashMap&lt;Integer, ArrayList&lt;Integer&gt;&gt; graph = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    HashMap&lt;Integer, Boolean&gt; searched = <span class="hljs-keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="hljs-class"><span class="hljs-keyword">class</span> <span class="hljs-title">Pair</span></span>{</span><br><span class="line">        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> k;</span><br><span class="line">        <span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> v;</span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-title">Pair</span><span class="hljs-params">(<span class="hljs-keyword">int</span> point, <span class="hljs-keyword">int</span> dist)</span> </span>{</span><br><span class="line">            k = point;</span><br><span class="line">            v = dist;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    PriorityQueue&lt;Pair&gt; pq = <span class="hljs-keyword">new</span> PriorityQueue&lt;Pair&gt;(<span class="hljs-keyword">new</span> Comparator&lt;Pair&gt;(){</span><br><span class="line">        <span class="hljs-meta">@Override</span></span><br><span class="line">        <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">compare</span><span class="hljs-params">(Pair o1, Pair o2)</span> </span>{</span><br><span class="line">            <span class="hljs-keyword">return</span> o1.v - o2.v;</span><br><span class="line">        }</span><br><span class="line">    });</span><br><span class="line">    </span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">int</span> <span class="hljs-title">numBusesToDestination</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] routes, <span class="hljs-keyword">int</span> source, <span class="hljs-keyword">int</span> target)</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">if</span>(source == target) <span class="hljs-keyword">return</span> <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;routes.length; ++i) {</span><br><span class="line">            graph.put(i, <span class="hljs-keyword">new</span> ArrayList&lt;Integer&gt;());</span><br><span class="line">            searched.put(i, <span class="hljs-keyword">false</span>);</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;routes.length; ++i) {</span><br><span class="line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> j=<span class="hljs-number">0</span>; j&lt;routes.length; ++j) {</span><br><span class="line">                <span class="hljs-keyword">if</span>(intersect(routes[i], routes[j])) {</span><br><span class="line">                    graph.get(i).add(j);</span><br><span class="line">                    graph.get(j).add(i);</span><br><span class="line">                }</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="hljs-comment">// find route of source and target</span></span><br><span class="line">        <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;routes.length; ++i) {</span><br><span class="line">            <span class="hljs-keyword">if</span>(Arrays.binarySearch(routes[i], source)&gt;=<span class="hljs-number">0</span>) {</span><br><span class="line">                Pair pair = <span class="hljs-keyword">new</span> Pair(i, <span class="hljs-number">0</span>);</span><br><span class="line">                searched.put(i, <span class="hljs-keyword">true</span>);</span><br><span class="line">                pq.add(pair);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line"></span><br><span class="line">        <span class="hljs-keyword">int</span> min = Integer.MAX_VALUE;</span><br><span class="line">        <span class="hljs-keyword">while</span>(!pq.isEmpty()) {</span><br><span class="line">            Pair out = pq.poll();</span><br><span class="line">            searched.put(out.k, <span class="hljs-keyword">true</span>);</span><br><span class="line">            <span class="hljs-keyword">if</span>(Arrays.binarySearch(routes[out.k], target)&gt;=<span class="hljs-number">0</span>) {</span><br><span class="line">                min = Math.min(min, out.v+<span class="hljs-number">1</span>);</span><br><span class="line">            }</span><br><span class="line">            ArrayList&lt;Integer&gt; neighbors = graph.get(out.k);</span><br><span class="line">            <span class="hljs-keyword">int</span> dist = out.v;</span><br><span class="line">            <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> route : neighbors) <span class="hljs-keyword">if</span>(!searched.get(route)) {</span><br><span class="line">                pq.add(<span class="hljs-keyword">new</span> Pair(route, dist+<span class="hljs-number">1</span>));</span><br><span class="line">                searched.put(route, <span class="hljs-keyword">true</span>);</span><br><span class="line">            }</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">if</span>(min == Integer.MAX_VALUE) <span class="hljs-keyword">return</span> -<span class="hljs-number">1</span>;</span><br><span class="line">        <span class="hljs-keyword">return</span> min;</span><br><span class="line">    }</span><br><span class="line"></span><br><span class="line">    <span class="hljs-function"><span class="hljs-keyword">public</span> <span class="hljs-keyword">boolean</span> <span class="hljs-title">intersect</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[] A, <span class="hljs-keyword">int</span>[] B)</span> </span>{</span><br><span class="line">        <span class="hljs-keyword">int</span> i = <span class="hljs-number">0</span>, j = <span class="hljs-number">0</span>;</span><br><span class="line">        <span class="hljs-keyword">while</span> (i &lt; A.length &amp;&amp; j &lt; B.length) {</span><br><span class="line">            <span class="hljs-keyword">if</span> (A[i] == B[j]) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">            <span class="hljs-keyword">if</span> (A[i] &lt; B[j]) i++; <span class="hljs-keyword">else</span> j++;</span><br><span class="line">        }</span><br><span class="line">        <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">    }</span><br><span class="line">}</span><br><span class="line"><span class="hljs-comment">// @lc code=end</span></span><br></pre></td></tr></table></figure>
+
+<h1 id="&#x4E09;&#x3001;&#x6700;&#x5C0F;&#x751F;&#x6210;&#x6811;-minimal-spanning-tree"><a href="#&#x4E09;&#x3001;&#x6700;&#x5C0F;&#x751F;&#x6210;&#x6811;-minimal-spanning-tree" class="headerlink" title="&#x4E09;&#x3001;&#x6700;&#x5C0F;&#x751F;&#x6210;&#x6811; (minimal spanning tree)"></a>&#x4E09;&#x3001;&#x6700;&#x5C0F;&#x751F;&#x6210;&#x6811; (minimal spanning tree)</h1><p>&#x5728;&#x5B9E;&#x9645;&#x5E94;&#x7528;&#x4E2D;, &#x6211;&#x4EEC;&#x7ECF;&#x5E38;&#x4F1A;&#x9047;&#x5230;&#x6C42;&#x89E3;&#x6700;&#x5C0F;&#x751F;&#x6210;&#x6811;&#x7684;&#x95EE;&#x9898;&#xFF0C;&#x6BD4;&#x5982;&#x57CE;&#x5E02;&#x4E4B;&#x95F4;&#x7684;&#x901A;&#x4FE1;&#x7BA1;&#x9053;&#x94FA;&#x8BBE;&#x8981;&#x6C42;&#x603B;&#x957F;&#x6700;&#x77ED;&#x3002;<br>&#x7531;&#x4E8E;&#x6811;&#x53EF;&#x770B;&#x4F5C;&#x4E00;&#x79CD;&#x4E0D;&#x5F62;&#x6210;&#x73AF;&#x7684;&#x65E0;&#x5411;&#x8FDE;&#x901A;&#x56FE;&#xFF0C;&#x5BF9;&#x4E8E;&#x4E00;&#x4E2A;&#x5E26;&#x6743;&#x65E0;&#x5411;&#x8FDE;&#x901A;&#x56FE;&#xFF0C;&#x6700;&#x5C0F;&#x751F;&#x6210;&#x6811;&#x5C31;&#x662F;&#x56FE;&#x4E2D;&#x8FB9;&#x7684;&#x4E00;&#x4E2A;&#x5B50;&#x96C6;&#xFF0C;&#x8BE5;&#x5B50;&#x96C6;&#x8FDE;&#x63A5;&#x4E86;&#x56FE;&#x4E2D;&#x7684;&#x6240;&#x6709;&#x70B9;&#xFF0C;&#x5E76;&#x4E14;&#x6743;&#x503C;&#x548C;&#x6700;&#x5C0F;&#x3002;</p>
+<h2 id="Kruskal-&#x7B97;&#x6CD5;&#x4E0E;&#x5E76;&#x67E5;&#x96C6;"><a href="#Kruskal-&#x7B97;&#x6CD5;&#x4E0E;&#x5E76;&#x67E5;&#x96C6;" class="headerlink" title="Kruskal &#x7B97;&#x6CD5;&#x4E0E;&#x5E76;&#x67E5;&#x96C6;"></a>Kruskal &#x7B97;&#x6CD5;&#x4E0E;&#x5E76;&#x67E5;&#x96C6;</h2><p>&#x8BE5;&#x7B97;&#x6CD5;&#x7684;&#x76EE;&#x7684;&#x662F;&#x627E;&#x51FA;&#x4E00;&#x4E2A;&#x56FE;&#x4E2D;&#x7684;&#x6700;&#x5C0F;&#x751F;&#x6210;&#x6811;&#x3002;&#x5177;&#x4F53;&#x505A;&#x6CD5;&#x5982;&#x4E0B;&#xFF1A;</p>
+<ol>
+<li>&#x521D;&#x59CB;&#x5316;&#x6700;&#x5C0F;&#x751F;&#x6210;&#x6811;&#x7684;&#x8FB9;&#x7684;&#x96C6;&#x5408;S&#x3002;&#x5C06;&#x6240;&#x6709;&#x7684;&#x8FB9;&#x6309;&#x7167;&#x5347;&#x5E8F;&#x6392;&#x5217;&#xFF0C;&#x4F9D;&#x6B21;&#x53D6;&#x51FA;&#x957F;&#x5EA6;&#x6700;&#x5C0F;&#x7684;&#x8FB9;&#x3002;</li>
+<li>&#x5224;&#x65AD;&#x53D6;&#x51FA;&#x8FB9;&#x6240;&#x8FDE;&#x63A5;&#x7684;&#x4E24;&#x70B9;&#x662F;&#x5426;&#x8FDE;&#x901A;&#xFF0C;&#x5982;&#x679C;&#x5DF2;&#x7ECF;&#x8FDE;&#x901A;&#xFF0C;&#x8BF4;&#x660E;&#x8FD9;&#x4E24;&#x70B9;&#x5DF2;&#x7ECF;&#x6784;&#x6210;&#x4E86;&#x6700;&#x5C0F;&#x751F;&#x6210;&#x6811;&#xFF0C;&#x5219;&#x4E0D;&#x505A;&#x5904;&#x7406;&#xFF1B;&#x82E5;&#x672A;&#x8FDE;&#x901A;&#xFF0C;&#x5219;&#x5C06;&#x4E24;&#x70B9;&#x901A;&#x8FC7;&#x5E76;&#x67E5;&#x96C6;&#x8FDE;&#x63A5;&#xFF0C;&#x5E76;&#x5C06;&#x8FD9;&#x4E2A;&#x8FB9;&#x52A0;&#x5165;&#x96C6;&#x5408;S&#x4E2D;&#xFF1B;</li>
+<li>&#x5F53;&#x904D;&#x5386;&#x5B8C;&#x6240;&#x6709;&#x8FB9;&#x540E;&#xFF0C;&#x8FD4;&#x56DE;&#x96C6;&#x5408;S&#xFF0C;&#x5373;&#x4E3A;&#x6700;&#x5C0F;&#x751F;&#x6210;&#x6811;&#x7684;&#x8FB9;&#x7684;&#x96C6;&#x5408;</li>
+</ol>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-comment">// edges[i] = {index, from, to}</span></span><br><span class="line"><span class="hljs-function">List&lt;Integer&gt; <span class="hljs-title">kruskal</span><span class="hljs-params">(<span class="hljs-keyword">int</span>[][] edges)</span> </span>{</span><br><span class="line">    Arrays.sort(edges, comparator);</span><br><span class="line">    List&lt;Integer&gt; MST = <span class="hljs-keyword">new</span> ArrayList&lt;&gt;();</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span>[] edge : edges) {</span><br><span class="line">        <span class="hljs-keyword">if</span>(findPar(edge[<span class="hljs-number">1</span>]) != findPar(edge[<span class="hljs-number">2</span>])) {</span><br><span class="line">            union(edge[<span class="hljs-number">1</span>], edge[<span class="hljs-number">2</span>]);</span><br><span class="line">            MST.add(edge[<span class="hljs-number">0</span>]);</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    <span class="hljs-keyword">return</span> MST;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<h3 id="&#x5E76;&#x67E5;&#x96C6;-union-find-set"><a href="#&#x5E76;&#x67E5;&#x96C6;-union-find-set" class="headerlink" title="&#x5E76;&#x67E5;&#x96C6; (union-find set)"></a>&#x5E76;&#x67E5;&#x96C6; (union-find set)</h3><p>&#x5E76;&#x67E5;&#x96C6;&#x662F;&#x4E00;&#x79CD;&#x7279;&#x6B8A;&#x7684;&#x6811;&#x72B6;&#x7ED3;&#x6784;, &#x7528;&#x6BCF;&#x4E00;&#x68F5;&#x6811;&#x6765;&#x8868;&#x793A;&#x4E00;&#x4E2A;&#x96C6;&#x5408;. &#x4F7F;&#x7528;&#x8DEF;&#x5F84;&#x538B;&#x7F29;&#x65B9;&#x6CD5;&#x5C06;&#x6811;&#x538B;&#x7F29;&#x4E3A;&#x4E24;&#x5C42;, &#x56E0;&#x6B64;&#x67E5;&#x627E;&#x6548;&#x7387;&#x975E;&#x5E38;&#x9AD8;. &#x5047;&#x5982;&#x5206;&#x7C7B;&#x7528;&#x6574;&#x578B;&#x8FDE;&#x7EED;&#x6807;&#x8BB0;, &#x67E5;&#x627E;&#x51FD;&#x6570;&#x53EF;&#x4EE5;&#x5199;&#x6210;&#x4E0B;&#x9762;&#x8FD9;&#x6837;:</p>
+<figure class="highlight c++ hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-keyword">int</span> par[maxn]; <span class="hljs-comment">// &#x8BB0;&#x5F55;&#x6240;&#x5C5E;&#x7684;&#x7236;&#x4EB2;&#x8282;&#x70B9;</span></span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">int</span> <span class="hljs-title">findPar</span><span class="hljs-params">(<span class="hljs-keyword">int</span> x)</span></span>{</span><br><span class="line">    <span class="hljs-keyword">if</span> (par[x] == x) <span class="hljs-keyword">return</span> x;</span><br><span class="line">    <span class="hljs-keyword">return</span> par[x] = findPar(par[x]);   <span class="hljs-comment">// &#x8DEF;&#x5F84;&#x538B;&#x7F29;</span></span><br><span class="line">}</span><br><span class="line"></span><br><span class="line"><span class="hljs-function"><span class="hljs-keyword">void</span> <span class="hljs-title">init</span><span class="hljs-params">(<span class="hljs-keyword">int</span> n)</span></span>{</span><br><span class="line">    <span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> i=<span class="hljs-number">0</span>; i&lt;n; ++i) par[i] = i;  <span class="hljs-comment">// &#x6BCF;&#x4E2A;&#x5143;&#x7D20;&#x5404;&#x81EA;&#x521D;&#x59CB;&#x5316;&#x4E3A;&#x4E00;&#x7C7B;</span></span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x5728;&#x4F7F;&#x7528;&#x7684;&#x65F6;&#x5019;, &#x8FDB;&#x884C;&#x5408;&#x5E76;&#x64CD;&#x4F5C;:</p>
+<figure class="highlight cpp hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-built_in">scanf</span>(<span class="hljs-string">&quot;%d%d&quot;</span>, &amp;a, &amp;b);</span><br><span class="line"><span class="hljs-keyword">int</span> x = par[a], y = par[b];</span><br><span class="line"><span class="hljs-keyword">if</span> (x != y) par[x] = y;</span><br></pre></td></tr></table></figure>
+
+<p>&#x5E76;&#x67E5;&#x96C6;&#x63D0;&#x9AD8;&#x4E86;&#x67E5;&#x627E;&#x7684;&#x901F;&#x5EA6;&#xFF0C;&#x4F46;&#x662F;&#x4E5F;&#x6709;&#x5176;&#x5C40;&#x9650;&#x6027;&#x3002;&#x6BD4;&#x5982;&#x5E76;&#x67E5;&#x96C6;&#x5224;&#x65AD;&#x56FE;&#x4E2D;&#x662F;&#x5426;&#x6709;&#x8FDE;&#x901A;&#x73AF;&#xFF0C;&#x53EA;&#x80FD;&#x9488;&#x5BF9;&#x4E00;&#x4E2A;&#x56FE;&#x4E0B;&#x3002;&#x6765;&#x770B; LeetCode[785] Is Graph Bipartite&#xFF0C;&#x8FD9;&#x9053;&#x9898;&#x5C31;&#x4E0D;&#x80FD;&#x7528;&#x5E76;&#x67E5;&#x96C6;&#x505A;&#xFF0C;&#x56E0;&#x4E3A;&#x4E24;&#x4E2A;&#x4E0D;&#x8FDE;&#x901A;&#x6709;&#x73AF;&#x56FE;&#x56FE;&#x548C;&#x4E00;&#x4E2A;&#x5355;&#x7EBF;&#x7684;&#x65E0;&#x73AF;&#x56FE;&#xFF0C;&#x4ED6;&#x4EEC;&#x7684;&#x5E76;&#x67E5;&#x96C6;&#x7ED3;&#x679C;&#x90FD;&#x662F;2,&#x65E0;&#x6CD5;&#x533A;&#x5206;&#x3002;</p>
+<p>&#x6240;&#x4EE5;&#x8FD9;&#x9053;&#x9898;&#x8981;&#x68C0;&#x67E5;&#x56FE;&#x4E2D;&#x662F;&#x5426;&#x5B58;&#x5728;&#x73AF;&#xFF0C;&#x53EA;&#x80FD;&#x4F7F;&#x7528;&#x6DF1;&#x5EA6;&#x4F18;&#x5148;&#x641C;&#x7D22;&#xFF1A;</p>
+<figure class="highlight java hljs"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="hljs-function"><span class="hljs-keyword">boolean</span> <span class="hljs-title">isCycle</span><span class="hljs-params">(<span class="hljs-keyword">int</span> course)</span> </span>{</span><br><span class="line">    <span class="hljs-keyword">if</span>(localMarked[course]) <span class="hljs-keyword">return</span> <span class="hljs-keyword">true</span>;</span><br><span class="line">    <span class="hljs-keyword">if</span>(globalMarked[course]) <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">    globalMarked[course] = <span class="hljs-keyword">true</span>;</span><br><span class="line">    localMarked[course] = <span class="hljs-keyword">true</span>;</span><br><span class="line">    <span class="hljs-keyword">if</span>(graph[course]!=<span class="hljs-keyword">null</span>)<span class="hljs-keyword">for</span>(<span class="hljs-keyword">int</span> pre : graph[course]) {</span><br><span class="line">        <span class="hljs-keyword">if</span>(isCycle(pre)) {</span><br><span class="line">            <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">        }</span><br><span class="line">    }</span><br><span class="line">    localMarked[course] = <span class="hljs-keyword">false</span>;</span><br><span class="line">    <span class="hljs-keyword">return</span> <span class="hljs-keyword">false</span>;</span><br><span class="line">}</span><br></pre></td></tr></table></figure>
+
+<p>&#x4F8B;&#x9898;&#xFF1A;LeetCode 1489&#xFF1A;&#x627E;&#x5230;&#x6700;&#x5C0F;&#x751F;&#x6210;&#x6811;&#x91CC;&#x7684;&#x5173;&#x952E;&#x8FB9;&#x548C;&#x4F2A;&#x5173;&#x952E;&#x8FB9;<br>&#x5148;&#x627E;&#x5173;&#x952E;&#x8FB9;&#xFF0C;&#x518D;&#x627E;&#x4F2A;&#x5173;&#x952E;&#x8FB9;&#xFF0C;&#x5269;&#x4E0B;&#x7684;&#x90FD;&#x662F;&#x975E;&#x5173;&#x952E;&#x8FB9;&#x3002;<br>&#x5173;&#x952E;&#x8FB9;&#x662F;&#x6240;&#x6709;&#x6700;&#x5C0F;&#x751F;&#x6210;&#x6811;&#x8FB9;&#x96C6;&#x5408;&#x7684;&#x4EA4;&#x96C6;&#xFF0C;&#x5982;&#x679C;&#x88AB;&#x53BB;&#x6389;&#x4E86;&#xFF0C;&#x5219;&#x6700;&#x5C0F;&#x751F;&#x6210;&#x6811;&#x7684;&#x6743;&#x503C;&#x548C;&#x4F1A;&#x589E;&#x52A0;&#x3002;<br>&#x4F2A;&#x5173;&#x952E;&#x8FB9;&#x662F;&#x6240;&#x6709;&#x6700;&#x5C0F;&#x751F;&#x6210;&#x6811;&#x8FB9;&#x96C6;&#x5408;-&#x5173;&#x952E;&#x8FB9;&#x96C6;&#x5408;&#x7684;&#x7ED3;&#x679C;&#x3002;&#x5224;&#x65AD;&#x4F2A;&#x5173;&#x952E;&#x8FB9;&#x7684;&#x65B9;&#x6CD5;&#x662F;&#xFF1A;</p>
+<ol>
+<li>&#x5982;&#x679C;&#x6B64;&#x8FB9;&#x662F;&#x5173;&#x952E;&#x8FB9;&#xFF0C;&#x5219;&#x5176;&#x4E0D;&#x662F;&#x4F2A;&#x5173;&#x952E;&#x8FB9;&#xFF1B;</li>
+<li>&#x5426;&#x5219;&#xFF0C;&#x5982;&#x679C;&#x63D0;&#x524D;&#x5C06;&#x5173;&#x952E;&#x8FB9;&#x7684;&#x4E24;&#x70B9;&#x8FDE;&#x901A;&#xFF0C;&#x4E4B;&#x540E;&#x8BA1;&#x7B97;&#x51FA;&#x7684;&#x6700;&#x5C0F;&#x751F;&#x6210;&#x6811;&#x6743;&#x503C;&#x5982;&#x4E0D;&#x53D8;&#xFF0C;&#x5219;&#x8BF4;&#x660E;&#x662F;&#x4F2A;&#x5173;&#x952E;&#x8FB9;&#xFF0C;&#x82E5;&#x53D8;&#x5316;&#xFF08;&#x589E;&#x5927;&#xFF09;&#xFF0C;&#x5219;&#x8BF4;&#x660E;&#x662F;&#x975E;&#x5173;&#x952E;&#x8FB9;&#x3002;</li>
+</ol>
+<h1 id="&#x56DB;&#x3001;&#x6DF1;&#x5EA6;&#x4F18;&#x5148;&#x641C;&#x7D22;&#x4E0E;&#x5E7F;&#x5EA6;&#x6709;&#x9650;&#x641C;&#x7D22;"><a href="#&#x56DB;&#x3001;&#x6DF1;&#x5EA6;&#x4F18;&#x5148;&#x641C;&#x7D22;&#x4E0E;&#x5E7F;&#x5EA6;&#x6709;&#x9650;&#x641C;&#x7D22;" class="headerlink" title="&#x56DB;&#x3001;&#x6DF1;&#x5EA6;&#x4F18;&#x5148;&#x641C;&#x7D22;&#x4E0E;&#x5E7F;&#x5EA6;&#x6709;&#x9650;&#x641C;&#x7D22;"></a>&#x56DB;&#x3001;&#x6DF1;&#x5EA6;&#x4F18;&#x5148;&#x641C;&#x7D22;&#x4E0E;&#x5E7F;&#x5EA6;&#x6709;&#x9650;&#x641C;&#x7D22;</h1><h1 id="&#x4E94;&#x3001;&#x62D3;&#x6251;&#x6392;&#x5E8F;"><a href="#&#x4E94;&#x3001;&#x62D3;&#x6251;&#x6392;&#x5E8F;" class="headerlink" title="&#x4E94;&#x3001;&#x62D3;&#x6251;&#x6392;&#x5E8F;"></a>&#x4E94;&#x3001;&#x62D3;&#x6251;&#x6392;&#x5E8F;</h1><h2 id="4-1-&#x62D3;&#x6251;&#x6392;&#x5E8F;&#x5224;&#x65AD;&#x662F;&#x5426;&#x6709;&#x73AF;"><a href="#4-1-&#x62D3;&#x6251;&#x6392;&#x5E8F;&#x5224;&#x65AD;&#x662F;&#x5426;&#x6709;&#x73AF;" class="headerlink" title="4.1 &#x62D3;&#x6251;&#x6392;&#x5E8F;&#x5224;&#x65AD;&#x662F;&#x5426;&#x6709;&#x73AF;"></a>4.1 &#x62D3;&#x6251;&#x6392;&#x5E8F;&#x5224;&#x65AD;&#x662F;&#x5426;&#x6709;&#x73AF;</h2><p>&#x4F7F;&#x7528;&#x62D3;&#x6251;&#x6392;&#x5E8F;&#x53EF;&#x4EE5;&#x5224;&#x65AD;&#x6709;&#x5411;&#x56FE;&#x548C;&#x65E0;&#x5411;&#x56FE;&#x4E2D;&#x662F;&#x5426;&#x6709;&#x73AF;&#x3002;</p>
+<ol>
+<li><p>&#x5224;&#x65AD;&#x6709;&#x5411;&#x56FE;&#x662F;&#x5426;&#x6709;&#x73AF;&#x7684;&#x6B65;&#x9AA4;&#xFF1A;<br>Step 1&#xFF1A;&#x6C42;&#x51FA;&#x56FE;&#x4E2D;&#x6240;&#x6709;&#x7ED3;&#x70B9;&#x7684;&#x5165;&#x5EA6;<br>Step 2&#xFF1A;&#x5C06;&#x6240;&#x6709;&#x5165;&#x5EA6;=0&#x7684;&#x7ED3;&#x70B9;&#x5165;&#x961F;<br>Step 3&#xFF1A;&#x5F53;&#x961F;&#x5217;&#x4E0D;&#x4E3A;&#x7A7A;&#x65F6;&#xFF0C;&#x4E0D;&#x65AD;&#x5F39;&#x51FA;&#x961F;&#x9996;&#x5143;&#x7D20;&#x3002;&#x5C06;&#x961F;&#x9996;&#x5143;&#x7D20;&#x6307;&#x5411;&#x7684;&#x76F8;&#x90BB;&#x8282;&#x70B9;&#x7684;&#x5165;&#x5EA6;-1&#xFF08;&#x76F8;&#x5F53;&#x4E8E;&#x4ECE;&#x56FE;&#x4E2D;&#x53BB;&#x6389;&#x8FD9;&#x4E2A;&#x7ED3;&#x70B9;&#x548C;&#x5B83;&#x7684;&#x6240;&#x6709;&#x51FA;&#x5EA6;&#xFF09;&#xFF0C;&#x5F53;&#x76F8;&#x90BB;&#x8282;&#x70B9;&#x7684;&#x5165;&#x5EA6;&#x51CF;&#x81F3;0&#x65F6;&#xFF0C;&#x5C06;&#x8BE5;&#x76F8;&#x90BB;&#x7ED3;&#x70B9;&#x5165;&#x961F;&#x3002;<br>Step 4&#xFF1A;&#x5FAA;&#x73AF;&#x7ED3;&#x675F;&#x65F6;&#x5224;&#x65AD;&#x5DF2;&#x7ECF;&#x8BBF;&#x95EE;&#x7684;&#x7ED3;&#x70B9;&#x6570;&#x662F;&#x5426;&#x7B49;&#x4E8E;n&#x3002;&#x5982;&#x679C;&#x7B49;&#x4E8E;&#x5219;&#x8BF4;&#x660E;&#x6240;&#x6709;&#x7ED3;&#x70B9;&#x90FD;&#x88AB;&#x53BB;&#x6389;&#x4E86;&#xFF0C;&#x56FE;&#x4E2D;&#x4E0D;&#x5B58;&#x5728;&#x73AF;;&#x53CD;&#x4E4B;&#xFF0C;&#x8BF4;&#x660E;&#x5B58;&#x5728;&#x73AF;&#x3002;</p>
+</li>
+<li><p>&#x5224;&#x65AD;&#x65E0;&#x5411;&#x56FE;&#x662F;&#x5426;&#x6709;&#x73AF;&#x7684;&#x6B65;&#x9AA4;&#xFF1A;<br>Step 1&#xFF1A;&#x6C42;&#x51FA;&#x56FE;&#x4E2D;&#x6240;&#x6709;&#x8282;&#x70B9;&#x7684;&#x5EA6;<br>Step 2&#xFF1A;&#x5C06;&#x6240;&#x6709;&#x5EA6;&lt;=1&#x7684;&#x7ED3;&#x70B9;&#x5165;&#x961F;&#xFF08;&#x72EC;&#x7ACB;&#x7ED3;&#x70B9;&#x7684;&#x5EA6;&#x4E3A;0&#xFF09;<br>Step 3&#xFF1A;&#x5F53;&#x961F;&#x5217;&#x4E0D;&#x4E3A;&#x7A7A;&#x65F6;&#xFF0C;&#x5F39;&#x51FA;&#x961F;&#x9996;&#x5143;&#x7D20;&#x3002;&#x5C06;&#x4E0E;&#x961F;&#x9996;&#x5143;&#x7D20;&#x76F8;&#x90BB;&#x8282;&#x70B9;&#x7684;&#x5EA6;-1&#xFF08;&#x76F8;&#x5F53;&#x4E8E;&#x4ECE;&#x56FE;&#x4E2D;&#x53BB;&#x6389;&#x8FD9;&#x4E2A;&#x7ED3;&#x70B9;&#x548C;&#x5B83;&#x7684;&#x76F8;&#x90BB;&#x8FB9;&#xFF09;&#xFF0C;&#x5982;&#x679C;&#x76F8;&#x90BB;&#x8282;&#x70B9;&#x7684;&#x5EA6;&#x53D8;&#x4E3A;1,&#x5219;&#x5C06;&#x76F8;&#x90BB;&#x7ED3;&#x70B9;&#x5165;&#x961F;&#x3002;<br>Step 4&#xFF1A;&#x5FAA;&#x73AF;&#x7ED3;&#x675F;&#x65F6;&#x5224;&#x65AD;&#x5DF2;&#x7ECF;&#x8BBF;&#x95EE;&#x7684;&#x7ED3;&#x70B9;&#x6570;&#x662F;&#x5426;&#x7B49;&#x4E8E;n&#x3002;&#x5982;&#x679C;&#x7B49;&#x4E8E;&#x5219;&#x8BF4;&#x660E;&#x6240;&#x6709;&#x7ED3;&#x70B9;&#x90FD;&#x88AB;&#x53BB;&#x6389;&#x4E86;&#xFF0C;&#x56FE;&#x4E2D;&#x4E0D;&#x5B58;&#x5728;&#x73AF;&#xFF1B;&#x53CD;&#x4E4B;&#xFF0C;&#x8BF4;&#x660E;&#x5B58;&#x5728;&#x73AF;&#x3002;</p>
+</li>
+</ol>
+<p>&#x4F8B;&#x9898;&#xFF1A; <a href="https://leetcode-cn.com/problems/course-schedule/submissions/" target="_blank" rel="noopener">LC 207 &#x8BFE;&#x7A0B;&#x8868;</a></p>
+<h2 id="4-2-&#x62D3;&#x6251;&#x6392;&#x5E8F;&#x7684;&#x904D;&#x5386;&#x987A;&#x5E8F;"><a href="#4-2-&#x62D3;&#x6251;&#x6392;&#x5E8F;&#x7684;&#x904D;&#x5386;&#x987A;&#x5E8F;" class="headerlink" title="4.2 &#x62D3;&#x6251;&#x6392;&#x5E8F;&#x7684;&#x904D;&#x5386;&#x987A;&#x5E8F;"></a>4.2 &#x62D3;&#x6251;&#x6392;&#x5E8F;&#x7684;&#x904D;&#x5386;&#x987A;&#x5E8F;</h2><p>&#x62D3;&#x6251;&#x6392;&#x5E8F;&#x7684;&#x904D;&#x5386;&#x987A;&#x5E8F;&#x4E0D;&#x6B62;&#x4E00;&#x79CD;&#xFF0C;&#x6240;&#x4EE5;&#x8FD4;&#x56DE;&#x5176;&#x4E2D;&#x4E00;&#x4E2A;&#x5373;&#x53EF;&#x3002;&#x4F7F;&#x7528;bfs&#x7B97;&#x6CD5;&#x8FDB;&#x884C;&#x904D;&#x5386;&#xFF0C;&#x8FD4;&#x56DE;&#x5B58;&#x50A8;&#x5728;&#x6570;&#x7EC4;&#x4E2D;&#x7684;&#x8BBF;&#x95EE;&#x8DEF;&#x5F84;&#x3002;</p>
+
+    
+    </div>
+    
+    <div class="columns is-variable is-1 is-multiline is-mobile">
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/数据结构/">#数据结构</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/算法/">#算法</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/最小生成树/">#最小生成树</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/MST/">#MST</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/ACM/">#ACM</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/并查集/">#并查集</a></span>
+    
+        <span class="column is-narrow"><a class="tag is-light article-tag" href="/zh-cn/tags/cpp/">#cpp</a></span>
+    
+    </div>
+    
+    
+    <div class="columns is-mobile is-multiline article-nav">
+        <span class="column is-12-mobile is-half-desktop  article-nav-prev">
+            
+            <a href="/zh-cn/2018-07-20-selection-sort/">数据结构与算法笔记 | 查找与排序</a>
+            
+        </span>
+        <span class="column is-12-mobile is-half-desktop  article-nav-next">
+            
+            <a href="/zh-cn/2018-07-16-OJ-nasty-problems/">数据结构与算法笔记 | 杂项</a>
+            
+        </span>
+    </div>
+    
+</article>
+
+
+<div class="sharebox">
+    
+<div class="addthis_inline_share_toolbox"></div>
+<script type="text/javascript" src="//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-6245c10135f53567"></script>
+
+</div>
+
+
+
+<div class="comments">
+    <h3 class="title is-4">评论</h3>
+    
+<div id="disqus_thread">
+    
+    <div class="notification is-danger">
+        You forgot to set the <code>shortname</code> for Disqus. Please set it in <code>_config.yml</code>.
+    </div>
+    
+    <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+</div>
+</div>
+
+    </div>
+</section>
+    <footer class="footer">
+    <div class="container">
+        <div class="columns content">
+            <div class="column is-narrow has-text-centered">
+                &copy; 2025 Shane Wang&nbsp;
+                Powered by <a href="http://hexo.io/" target="_blank">Hexo</a> & <a href="http://github.com/ppoffice/hexo-theme-minos">Minos</a>
+            </div>
+            <div class="column is-hidden-mobile"></div>
+
+            
+            <div class="column is-narrow">
+                <div class="columns is-mobile is-multiline is-centered">
+                
+                    
+                <a class="column is-narrow has-text-black" title="GitHub" href="https://github.com/ppoffice/hexo-theme-minos">
+                    
+                    GitHub
+                    
+                </a>
+                
+                </div>
+            </div>
+            
+        </div>
+    </div>
+</footer>
+<script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8571410903510418" crossorigin="anonymous"></script>
+
+    <!-- <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> -->
+<script src="/js/jquery.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.22.2/moment-with-locales.min.js"></script> -->
+<script src="/js/moment-with-locales.min.js"></script>
+
+<!-- test if the browser is outdated -->
+<div id="outdated">
+    <h6>Your browser is out-of-date!</h6>
+    <p>Update your browser to view this website correctly. <a id="btnUpdateBrowser" href="http://outdatedbrowser.com/">Update my browser now </a></p>
+    <p class="last"><a href="#" id="btnCloseUpdateBrowser" title="Close">&times;</a></p>
+</div>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/outdated-browser/1.1.5/outdatedbrowser.min.js"></script> -->
+<script src="/js/outdatedbrowser.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // plugin function, place inside DOM ready function
+        outdatedBrowser({
+            bgColor: '#f25648',
+            color: '#ffffff',
+            lowerThan: 'flex'
+        })
+    });
+</script>
+
+<script>
+    window.FontAwesomeConfig = {
+        searchPseudoElements: true
+    }
+    moment.locale("zh-CN");
+</script>
+
+
+    
+    
+<!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.4/MathJax.js?config=TeX-MML-AM_CHTML"></script> -->
+<script src="/js/MathJax.js"></script>
+<script>
+    MathJax.Hub.Config({
+        "HTML-CSS": {
+            matchFontHeight: false
+        },
+        SVG: {
+            matchFontHeight: false
+        },
+        CommonHTML: {
+            matchFontHeight: false
+        },
+        tex2jax: {
+            inlineMath: [
+                ['$','$'],
+                ['\\(','\\)']
+            ]
+        }
+    });
+</script>
+
+
+    
+    
+    
+    
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/lightgallery/1.6.8/js/lightgallery-all.min.js"></script> -->
+<script src="/js/lightgallery-all.min.js"></script>
+<!-- <script src="//cdnjs.cloudflare.com/ajax/libs/justifiedGallery/3.6.5/js/jquery.justifiedGallery.min.js"></script> -->
+<script src="/js/jquery.justifiedGallery.min.js"></script>
+<script>
+    (function ($) {
+        $(document).ready(function () {
+            if (typeof($.fn.lightGallery) === 'function') {
+                $('.article.gallery').lightGallery({ selector: '.gallery-item' });
+            }
+            if (typeof($.fn.justifiedGallery) === 'function') {
+                $('.justified-gallery').justifiedGallery();
+            }
+        });
+    })(jQuery);
+</script>
+
+
+    
+    
+    <!-- <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.0/clipboard.min.js"></script> -->
+    <script src="/js/clipboard.min.js"></script>
+    <style>
+        .hljs {
+            position: relative;
+        }
+
+        .hljs .clipboard-btn {
+            float: right;
+            color: #9a9a9a;
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+
+        .hljs .clipboard-btn:hover {
+          color: #8a8a8a;
+        }
+
+        .hljs > .clipboard-btn {
+            display: none;
+            position: absolute;
+            right: 4px;
+            top: 4px;
+        }
+
+        .hljs:hover > .clipboard-btn {
+            display: inline;
+        }
+
+        .hljs > figcaption > .clipboard-btn {
+            margin-right: 4px;
+        }
+    </style>
+    <script>
+      $(document).ready(function () {
+        $('figure.hljs').each(function(i, figure) {
+          var codeId = 'code-' + i;
+          var code = figure.querySelector('.code');
+          var copyButton = $('<button>Copy <i class="far fa-clipboard"></i></button>');
+          code.id = codeId;
+          copyButton.addClass('clipboard-btn');
+          copyButton.attr('data-clipboard-target-id', codeId);
+
+          var figcaption = figure.querySelector('figcaption');
+
+          if (figcaption) {
+            figcaption.append(copyButton[0]);
+          } else {
+            figure.prepend(copyButton[0]);
+          }
+        })
+
+        var clipboard = new ClipboardJS('.clipboard-btn', {
+          target: function(trigger) {
+            return document.getElementById(trigger.getAttribute('data-clipboard-target-id'));
+          }
+        });
+        clipboard.on('success', function(e) {
+          e.clearSelection();
+        })
+      })
+    </script>
+
+
+    
+    
+
+    
+
+
+<script src="/js/script.js"></script>
+
+
+    
+    <div class="searchbox ins-search">
+    <div class="searchbox-mask"></div>
+    <div class="searchbox-container ins-search-container">
+        <div class="searchbox-input-wrapper">
+            <input type="text" class="searchbox-input ins-search-input" placeholder="站内搜索">
+            <span class="searchbox-close ins-close ins-selectable"><i class="fa fa-times-circle"></i></span>
+        </div>
+        <div class="searchbox-result-wrapper ins-section-wrapper">
+            <div class="ins-section-container"></div>
+        </div>
+    </div>
+</div>
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: '文章',
+                PAGES: '页面',
+                CATEGORIES: '分类',
+                TAGS: '标签',
+                UNTITLED: '(无标题)',
+            },
+            CONTENT_URL: '/content.zh-cn.json',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script src="/js/insight.js"></script><!-- hexo-inject:begin --><!-- Begin: Injected MathJax -->
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({"tex2jax":{"inlineMath":[["$","$"],["\\(","\\)"]],"skipTags":["script","noscript","style","textarea","pre","code"],"processEscapes":true},"TeX":{"equationNumbers":{"autoNumber":"AMS"}}});
+</script>
+
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for(i=0; i < all.length; i += 1) {
+      all[i].SourceElement().parentNode.className += ' has-jax';
+    }
+  });
+</script>
+
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.1/MathJax.js">
+</script>
+<!-- End: Injected MathJax -->
+<!-- hexo-inject:end -->
+    
+</body>
+</html>
